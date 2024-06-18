@@ -1,0 +1,28 @@
+.google_connect {
+  background-color: black;
+}
+
+.qd_connect {
+  background-color: #00babc;
+}
+
+.signup {
+  display: none;
+  /*visibility: hidden;*/
+}
+
+.lottie-bg {
+  position: absolute;
+  z-index: -1;
+  width: 80%;
+  height: 100%;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+body {
+  overflow: hidden;
+}
+
