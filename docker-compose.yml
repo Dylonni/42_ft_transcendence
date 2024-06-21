@@ -13,6 +13,9 @@ services:
     ports:
       - "8080:80"
       - "8443:443"
+    volumes:
+      - static:/usr/share/nginx/html/static
+      - templates:/usr/share/nginx/html/templates
 
   django:
     build: ./django
@@ -23,7 +26,10 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - ./django:/django
+      - ./django/accounts:/django/accounts
+      - ./django/pong:/django/pong
+      - static:/django/static
+      - templates:/django/templates
     depends_on:
       postgres:
         condition: service_healthy
@@ -45,3 +51,7 @@ services:
 volumes:
   pg-data:
     name: pg-data
+  static:
+    name: static
+  templates:
+    name: templates
