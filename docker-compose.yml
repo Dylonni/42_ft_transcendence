@@ -3,6 +3,17 @@ networks:
     name: backend
 
 services:
+  nginx:
+    build: ./nginx
+    container_name: nginx
+    depends_on:
+      - django
+    networks:
+      - backend
+    ports:
+      - "8080:80"
+      - "8443:443"
+
   django:
     build: ./django
     container_name: django

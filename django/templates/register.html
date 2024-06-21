@@ -1,0 +1,27 @@
+{% load static %}
+{% block content %}
+<div class="container">
+	<div class="row d-flex justify-content-center">
+		<div class="col-md-6 col-xl-4" style="filter: blur(0px);">
+			<div class="card mb-5">
+				<div class="card-body d-flex flex-column align-items-center" style="filter: blur(0px);">
+					<form class="text-center" method="post">
+						{% csrf_token %}
+						<h2 style="padding-bottom: 20px;">Register</h2>
+						<div class="mb-3 form-floating"><input class="form-control form-control form-control" type="text" id="floatingUser-register" maxlength="64" minlength="4" name="email" pattern="^[a-zA-Z0-9_.-]*$" placeholder=" " required=""><label class="form-label" for="floatingUser-register">Username</label></div>
+						<div class="mb-3 form-floating"><input class="form-control form-control form-control" type="email" id="floatingMail-register" name="email" placeholder=" " required=""><label class="form-label" for="floatingMail-register">Email</label></div>
+						<div class="mb-3 form-floating"><input class="form-control form-control form-control" type="password" id="floatingPassword-register" maxlength="254" minlength="6" name="password" pattern="^[\w\W]{6,254}$" placeholder=" " required="" title="Password must include at least 6 Characters long"><label class="form-label" for="floatingMail-register">Password</label>
+							<div class="form-check" style="width: 110.078px;margin-left: 0px;margin-bottom: 0px;height: 29px;padding-top: 2px;"><input class="form-check-input" type="checkbox" id="formCheck-3" style="margin-left: -23px;width: 16px;margin-right: 0px;margin-top: 5px;"><label class="form-check-label" for="formCheck-3" style="margin-left: 0px;font-size: 12px;margin-top: 0px;margin-bottom: 5px;">Show password</label></div>
+						</div>
+						<div style="border-radius: 97px;height: 80.8125px;width: 207px;margin-top: 0px;padding-top: 10px;">
+							<p id="password-strength-text" style="margin-bottom: 0px;"></p><meter id="password-strength-meter" max="4"></meter>
+						</div>
+						<div class="mb-3"><button class="btn btn-primary d-block w-100" type="submit">Register</button></div>
+						<p class="text-muted">Already Registered ?&nbsp;<a href="/login">Sign in here</a></p>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
