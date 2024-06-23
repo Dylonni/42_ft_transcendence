@@ -1,36 +1,103 @@
 document.addEventListener("DOMContentLoaded", () => {
     const appDiv = document.getElementById('content');
-
+    
     const originalPushState = history.pushState;
     history.pushState = function () {
         originalPushState.apply(history, arguments);
         fireStateEvent('pushState', arguments);
     };
-
+    
     const originalReplaceState = history.replaceState;
     history.replaceState = function () {
         originalReplaceState.apply(history, arguments);
         fireStateEvent('replaceState', arguments);
     };
-
+    
     const fireStateEvent = (type, args) => {
         const event = new Event(type);
         event.arguments = args;
         window.dispatchEvent(event);
     };
-
+    
     const navigateTo = (url) => {
         history.pushState(null, null, url);
-        renderPage();
     };
-
+    
+    const isTokenExpired = (token) => {
+        if (!token) return true;
+        const payload = JSON.parse(atob(token.split('.')[1]));
+        const exp = payload.exp;
+        const now = Math.floor(Date.now() / 1000);
+        return exp < now;
+    };
+    
+    const refreshToken = () => {
+        const refreshToken = sessionStorage.getItem('refresh_token');
+        if (!refreshToken) {
+            console.warn('No refresh token found in sessionStorage.');
+            return;
+        }
+        fetch('/api/accounts/token/refresh/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ refresh: refreshToken }),
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to refresh token');
+            }
+            return response.json();
+        })
+        .then(data => {
+            sessionStorage.setItem('access_token', data.access);
+            return data.access;
+        })
+        .catch(error => {
+            console.error('Error refreshing token:', error);
+            return;
+        });
+    };
+    
+    const validateToken = () => {
+        const accessToken = sessionStorage.getItem('access_token');
+        if (!accessToken || isTokenExpired(accessToken)) {
+            console.warn('No access token found in sessionStorage.');
+            refreshToken();
+            return;
+        }
+        fetch('/api/accounts/token/verify/', {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${accessToken}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ token: accessToken }),
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to validate token');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Token validation successful!');
+        })
+        .catch(error => {
+            console.error('Error validating token:', error);
+            return;
+        });
+    };
+    
     const renderPage = () => {
+        validateToken();
         let path = window.location.pathname;
         console.log(path);
         if (path.localeCompare("/") == 0) {
             path = "/login";
         }
-        fetch(`/api${path}`, {
+        fetch(`${path}`, {
             headers: {
                 'X-Requested-With': 'XMLHttpRequest',
             },
@@ -42,7 +109,7 @@ document.addEventListener("DOMContentLoaded", () => {
         })
         .catch(error => console.error('Error fetching content:', error));
     };
-
+    
     const attachHandlers = () => {
         document.querySelectorAll('a').forEach(anchor => {
             anchor.addEventListener('click', (event) => {
@@ -50,7 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 navigateTo(anchor.href);
             });
         });
-
+        
         document.querySelectorAll('form').forEach(form => {
             form.addEventListener('submit', (event) => {
                 event.preventDefault();
@@ -64,13 +131,19 @@ document.addEventListener("DOMContentLoaded", () => {
                 })
                 .then(response => response.json())
                 .then(data => {
-                    if (data.redirect) {
-                        navigateTo(data.redirect);
-                    } else if (data.html) {
-                        appDiv.innerHTML = data.html;
-                        attachHandlers();
+                    if (data.status == 'Authentication successful!') {
+                        sessionStorage.setItem('access_token', data.access);
+                        sessionStorage.setItem('refresh_token', data.refresh);
+                        if (data.redirect) {
+                            navigateTo(data.redirect);
+                        }
                     } else {
-                        console.error('Unexpected response format:', data);
+                        sessionStorage.removeItem('access_token');
+                        sessionStorage.removeItem('refresh_token');
+                        if (data.html) {
+                            appDiv.innerHTML = data.html;
+                            attachHandlers();
+                        }
                     }
                 })
                 .catch(error => console.error('Error submitting form:', error));

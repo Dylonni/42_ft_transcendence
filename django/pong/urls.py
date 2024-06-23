@@ -17,11 +17,23 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path, re_path
 from django.shortcuts import render
+from django.utils.translation import gettext_lazy as _
 from . import views
+
+apipatterns = [
+    path('accounts/', include('accounts.urls')),
+]
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('accounts.urls')),
+    path('api/', include((apipatterns, 'api'), namespace='api')),
+    
+    re_path(_(r'^login/?$'), views.login, name='login'),
+    re_path(_(r'^register/?$'), views.register, name='register'),
+    
+    path('', views.index, name='index'),
+]
 
-    re_path(r'^.*$', views.index),
+urlpatterns += [
+    path('<path:path>', views.index),
 ]

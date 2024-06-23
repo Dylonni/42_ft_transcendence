@@ -1,4 +1,22 @@
+from django.http import HttpResponse
 from django.shortcuts import render
+from django.template.loader import render_to_string
+from django.utils.translation import gettext as _
 
 def index(request):
-	return render(request, 'index.html')
+    context = {'title': _('Transcendence')}
+    return render(request, 'index.html', context)
+
+def login(request):
+    if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+        context = {'title': _('Login')}
+        html = render_to_string('accounts/login.html', context, request)
+        return HttpResponse(html)
+    return index(request)
+
+def register(request):
+    if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+        context = {'title': _('Register')}
+        html = render_to_string('accounts/register.html', context, request)
+        return HttpResponse(html)
+    return index(request)
