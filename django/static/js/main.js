@@ -112,10 +112,12 @@ document.addEventListener("DOMContentLoaded", () => {
     
     const attachHandlers = () => {
         document.querySelectorAll('a').forEach(anchor => {
-            anchor.addEventListener('click', (event) => {
-                event.preventDefault();
-                navigateTo(anchor.href);
-            });
+            if (anchor.target != '_blank') {
+                anchor.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    navigateTo(anchor.href);
+                });
+            }
         });
         
         document.querySelectorAll('form').forEach(form => {

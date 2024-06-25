@@ -1,4 +1,4 @@
-FROM python:3.10-bookworm
+FROM python:3.10.14-alpine3.20
 
 RUN mkdir -p /django
 WORKDIR /django

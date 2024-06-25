@@ -33,7 +33,3 @@ urlpatterns = [
     
     path('', views.index, name='index'),
 ]
-
-urlpatterns += [
-    path('<path:path>', views.index),
-]
