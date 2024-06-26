@@ -1,4 +1,5 @@
 COMPOSE_FILE 	:= ./docker-compose.yml
+COMPOSE_CMD		:= docker compose -f $(COMPOSE_FILE)
 
 .PHONY: all
 all:
@@ -7,23 +8,27 @@ all:
 
 .PHONY: build
 build:
-	@docker compose -f $(COMPOSE_FILE) build
+	@$(COMPOSE_CMD) build
 
 .PHONY: up
 up:
-	@docker compose -f $(COMPOSE_FILE) up -d
+	@$(COMPOSE_CMD) up -d
 
 .PHONY: down
 down:
-	@docker compose -f $(COMPOSE_FILE) down
+	@$(COMPOSE_CMD) down
 
 .PHONY: ps
 ps:
-	@docker compose -f $(COMPOSE_FILE) ps
+	@$(COMPOSE_CMD) ps -a
 
 .PHONY: logs
 logs:
-	@docker compose -f $(COMPOSE_FILE) logs -f -t -n 100
+	@$(COMPOSE_CMD) logs -ftn 100 $(ARGS)
+
+.PHONY: exec
+exec: 
+	@$(COMPOSE_CMD) exec -it $(ARGS) sh
 
 .PHONY: restart
 restart:
@@ -37,6 +42,9 @@ fclean: down
 	# Check if 'pg-data' exists
 	@if docker volume ls | grep -q 'pg-data'; then \
 		docker volume rm pg-data; \
+	fi
+	@if docker volume ls | grep -q 'elk-data'; then \
+		docker volume rm elk-data; \
 	fi
 
 .PHONY: re

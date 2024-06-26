@@ -12,8 +12,10 @@ from .serializers import (
     UserLoginSerializer,
     UserUpdateEmailSerializer,
 )
+import logging
 
 CustomUser = get_user_model()
+logger = logging.getLogger('django')
 
 
 class UserRegisterView(generics.CreateAPIView):
@@ -23,6 +25,7 @@ class UserRegisterView(generics.CreateAPIView):
     
     @method_decorator(ensure_csrf_cookie)
     def post(self, request, *args, **kwargs):
+        logger.info('User attempt registration')
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
@@ -41,6 +44,7 @@ class UserLoginView(generics.GenericAPIView):
     
     @method_decorator(ensure_csrf_cookie)
     def post(self, request, *args, **kwargs):
+        logger.info('User attempt login')
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data['user']

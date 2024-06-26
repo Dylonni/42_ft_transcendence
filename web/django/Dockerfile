@@ -1,5 +1,7 @@
 FROM python:3.10.14-alpine3.20
 
+RUN apk add curl
+
 RUN mkdir -p /django
 WORKDIR /django
 

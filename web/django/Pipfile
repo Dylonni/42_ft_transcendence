@@ -8,6 +8,8 @@ django = "*"
 djangorestframework = "*"
 psycopg = {extras = ["binary"], version = "*"}
 djangorestframework-simplejwt = "*"
+django-prometheus = "*"
+logstash-formatter = "*"
 
 [dev-packages]
 

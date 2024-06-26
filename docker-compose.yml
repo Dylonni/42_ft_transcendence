@@ -1,10 +1,13 @@
 networks:
   backend:
     name: backend
+  elk:
+    name: elk
 
 services:
+# CYBERSECURITY
   nginx-modsec:
-    build: ./nginx-modsec
+    build: ./cybersec/nginx-modsec
     container_name: nginx-modsec
     env_file: .env
     depends_on:
@@ -15,21 +18,44 @@ services:
       - "8080:8080"
       - "8443:8443"
 
+  vault:
+    build: ./cybersec/vault
+    container_name: vault
+    env_file: .env
+    networks:
+      - backend
+    cap_add:
+      - IPC_LOCK
+    ports:
+      - "8200:8200"
+    healthcheck:
+      test: ["CMD-SHELL", "vault status | grep 'Sealed.*false' && test -f /vault/output/initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+# WEB
   django:
-    build: ./django
+    build: ./web/django
     container_name: django
     env_file: .env
     networks:
       - backend
     volumes:
-      - ./django/accounts:/django/accounts
-      - ./django/pong:/django/pong
+      - ./web/django/accounts:/django/accounts
+      - ./web/django/pong:/django/pong
+      - elk-data:/logstash
     depends_on:
       postgres:
         condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "localhost:8000"]
+      interval: 5s
+      timeout: 5s
+      retries: 4
 
   postgres:
-    build: ./postgres
+    build: ./web/postgres
     container_name: postgres
     env_file: .env
     networks:
@@ -39,9 +65,100 @@ services:
     healthcheck:
       test: pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}
       interval: 5s
-      timeout: 3s
-      retries: 5
+      timeout: 5s
+      retries: 4
+    depends_on:
+      vault:
+        condition: service_healthy
+
+# MONITORING
+  postgres_exporter:
+    build: ./devops/mon/postgres_exporter
+    container_name: postgres_exporter
+    env_file: .env
+    ports:
+      - "9187:9187"
+    networks:
+      - backend
+
+  prometheus:
+    build: ./devops/mon/prometheus
+    container_name: prometheus
+    depends_on:
+      django:
+        condition: service_healthy
+    networks:
+      - backend
+    ports:
+      - "9090:9090"
+
+  grafana:
+    build: ./devops/mon/grafana
+    container_name: grafana
+    env_file:
+      - .env
+    depends_on:
+      - prometheus
+    networks:
+      - backend
+    ports:
+      - "3000:3000"
+
+# ELK STACK
+  elasticsearch:
+    build:
+      context: ./devops/elk/elasticsearch
+      args:
+        ELK_STACK_VERSION: ${ELK_STACK_VERSION}
+    container_name: elasticsearch
+    environment:
+      node.name: elasticsearch
+      discovery.type: single-node
+      ES_JAVA_OPTS: -Xms512m -Xmx512m
+      ELASTIC_PASSWORD: ${ELASTIC_PASSWORD:-}
+    networks:
+      - backend
+      - elk
+    ports:
+      - "9200:9200"
+
+  logstash:
+    build:
+      context: ./devops/elk/logstash
+      args:
+        ELK_STACK_VERSION: ${ELK_STACK_VERSION}
+    container_name: logstash
+    environment:
+      LS_JAVA_OPTS: -Xms256m -Xmx256m
+      LOGSTASH_INTERNAL_PASSWORD: ${LOGSTASH_INTERNAL_PASSWORD:-}
+    depends_on:
+      - elasticsearch
+    networks:
+      - backend
+      - elk
+    ports:
+      - "5001:5001"
+    volumes:
+      - elk-data:/logstash
+
+  kibana:
+    build:
+      context: ./devops/elk/kibana
+      args:
+        ELK_STACK_VERSION: ${ELK_STACK_VERSION}
+    container_name: kibana
+    environment:
+      KIBANA_SYSTEM_PASSWORD: ${KIBANA_SYSTEM_PASSWORD:-}
+    depends_on:
+      - elasticsearch
+    networks:
+      - backend
+      - elk
+    ports:
+      - "5601:5601"
 
 volumes:
   pg-data:
     name: pg-data
+  elk-data:
+    name: elk-data

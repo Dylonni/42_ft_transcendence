@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "60469cd1edf4b390ed5df35a95781b0e7d40ec3055d35082bb1559c1ab460a3d"
+            "sha256": "a6da54264814c268b522e06b9c26941894149b7c294b8db46896d688f8955146"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -33,6 +33,14 @@
             "markers": "python_version >= '3.10'",
             "version": "==5.0.6"
         },
+        "django-prometheus": {
+            "hashes": [
+                "sha256:cf9b26f7ba2e4568f08f8f91480a2882023f5908579681bcf06a4d2465f12168",
+                "sha256:f9c8b6c780c9419ea01043c63a437d79db2c33353451347894408184ad9c3e1e"
+            ],
+            "index": "pypi",
+            "version": "==2.3.1"
+        },
         "djangorestframework": {
             "hashes": [
                 "sha256:2b8871b062ba1aefc2de01f773875441a961fefbf79f5eed1e32b2f096944b20",
@@ -50,6 +58,21 @@
             "index": "pypi",
             "markers": "python_version >= '3.8'",
             "version": "==5.3.1"
+        },
+        "logstash-formatter": {
+            "hashes": [
+                "sha256:163f5ef62df5459f1d36dcb54e9c3f8f0c90157a324a3361887532b615bf4fb9"
+            ],
+            "index": "pypi",
+            "version": "==0.5.17"
+        },
+        "prometheus-client": {
+            "hashes": [
+                "sha256:287629d00b147a32dcb2be0b9df905da599b2d82f80377083ec8463309a4bb89",
+                "sha256:cde524a85bce83ca359cc837f28b8c0db5cac7aa653a588fd7e84ba061c329e7"
+            ],
+            "markers": "python_version >= '3.8'",
+            "version": "==0.20.0"
         },
         "psycopg": {
             "extras": [

@@ -32,5 +32,6 @@ urlpatterns = [
     re_path(_(r'^register/?$'), views.register, name='register'),
     re_path(_(r'^settings/?$'), views.user_settings, name='settings'),
     
+    path('', include('django_prometheus.urls')),
     path('', views.index, name='index'),
 ]
