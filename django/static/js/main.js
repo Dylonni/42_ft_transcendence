@@ -120,7 +120,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
         
-        document.querySelectorAll('form').forEach(form => {
+        document.querySelectorAll('.auth-form').forEach(form => {
             form.addEventListener('submit', (event) => {
                 event.preventDefault();
                 const formData = new FormData(event.target);
@@ -147,6 +147,29 @@ document.addEventListener("DOMContentLoaded", () => {
                             attachHandlers();
                         }
                     }
+                })
+                .catch(error => console.error('Error submitting form:', error));
+            });
+        });
+
+        document.querySelectorAll('.post-form').forEach(form => {
+            form.addEventListener('submit', (event) => {
+                event.preventDefault();
+                let formData = new FormData(event.target);
+                const token = sessionStorage.getItem('access_token');
+                const payload = JSON.parse(atob(token.split('.')[1]));
+                formData.append('id', payload.user_id);
+                console.log(formData);
+                fetch(event.target.action, {
+                    method: event.target.method,
+                    body: formData,
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                    },
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
                 })
                 .catch(error => console.error('Error submitting form:', error));
             });

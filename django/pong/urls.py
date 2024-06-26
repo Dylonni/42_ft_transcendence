@@ -30,6 +30,7 @@ urlpatterns = [
     
     re_path(_(r'^login/?$'), views.login, name='login'),
     re_path(_(r'^register/?$'), views.register, name='register'),
+    re_path(_(r'^settings/?$'), views.user_settings, name='settings'),
     
     path('', views.index, name='index'),
 ]

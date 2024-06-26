@@ -44,3 +44,15 @@ class UserLoginSerializer(serializers.Serializer):
                 raise serializers.ValidationError(msg, code='authorization')
         attrs['user'] = user
         return attrs
+
+class UserUpdateEmailSerializer(serializers.ModelSerializer):
+    email = serializers.EmailField()
+    
+    class Meta:
+        model = CustomUser
+        fields = ('email',)
+    
+    def update(self, instance, validated_data):
+        instance.email = validated_data.get('email', instance.email)
+        instance.save()
+        return instance

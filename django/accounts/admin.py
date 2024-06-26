@@ -7,7 +7,7 @@ from .models import CustomUser
 @admin.register(CustomUser)
 class CustomUserAdmin(UserAdmin):
     fieldsets = (
-        (None, {'fields': ('username', 'password')}),
+        (None, {'fields': ('id', 'username', 'password')}),
         (_('Personal info'), {'fields': ('email',)}),
         (
             _('Permissions'),

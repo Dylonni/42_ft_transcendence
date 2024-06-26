@@ -20,3 +20,10 @@ def register(request):
         html = render_to_string('accounts/register.html', context, request)
         return HttpResponse(html)
     return index(request)
+
+def user_settings(request):
+    if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+        context = {'title': _('Settings')}
+        html = render_to_string('settings.html', context, request)
+        return HttpResponse(html)
+    return index(request)
