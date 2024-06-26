@@ -3,16 +3,27 @@ networks:
     name: backend
 
 services:
+  nginx-modsec:
+    build: ./nginx-modsec
+    container_name: nginx-modsec
+    env_file: .env
+    depends_on:
+      - django
+    networks:
+      - backend
+    ports:
+      - "8080:8080"
+      - "8443:8443"
+
   django:
     build: ./django
     container_name: django
     env_file: .env
     networks:
       - backend
-    ports:
-      - "8000:8000"
     volumes:
-      - ./django:/django
+      - ./django/accounts:/django/accounts
+      - ./django/pong:/django/pong
     depends_on:
       postgres:
         condition: service_healthy
@@ -28,8 +39,8 @@ services:
     healthcheck:
       test: pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}
       interval: 5s
-      timeout: 5s
-      retries: 4
+      timeout: 3s
+      retries: 5
 
 volumes:
   pg-data:
