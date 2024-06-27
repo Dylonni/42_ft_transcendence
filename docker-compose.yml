@@ -13,7 +13,7 @@ services:
     depends_on:
       - vault
       - django
-      - postgres_exporter
+      - postgres-exporter
       - prometheus
       - grafana
       - elasticsearch
@@ -84,9 +84,9 @@ services:
       - pg-data:/var/lib/postgresql/data
 
 # MONITORING
-  postgres_exporter:
-    build: ./devops/mon/postgres_exporter
-    container_name: postgres_exporter
+  postgres-exporter:
+    build: ./devops/mon/postgres-exporter
+    container_name: postgres-exporter
     env_file: .env
     networks:
       - backend
