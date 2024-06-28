@@ -10,8 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 from datetime import timedelta
+import hvac
 import os
 from pathlib import Path
+import re
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,7 +23,24 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
+# SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
+
+vault_token = None
+
+with open('/django/secrets/token', 'r') as f:
+	lines = f.readlines()
+
+for line in lines:
+	match = re.match(r'token\s+(.+)', line)
+	if match:
+		vault_token = match.group(1)
+		break
+
+client = hvac.Client(url=os.getenv('VAULT_ADDR'), token=vault_token)
+secret_path = 'django/key'
+secret_response = client.secrets.kv.v2.read_secret_version(path=secret_path)
+print(secret_response)
+SECRET_KEY = secret_response['data']['data']['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
