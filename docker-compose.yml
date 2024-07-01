@@ -44,6 +44,8 @@ services:
     volumes:
       - ./web/django/accounts:/django/accounts
       - ./web/django/pong:/django/pong
+      - ./web/django/static:/django/static
+      - ./web/django/templates:/django/templates
       - elk-data:/logstash
     depends_on:
       postgres:

@@ -1,5 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     const appDiv = document.getElementById('content');
+    const sidebarDiv = document.getElementById('sidebar');
+   
     
     const originalPushState = history.pushState;
     history.pushState = function () {

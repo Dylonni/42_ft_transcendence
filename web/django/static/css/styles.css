@@ -6,9 +6,8 @@
   background-color: #00babc;
 }
 
-.signup {
-  display: none;
-  /*visibility: hidden;*/
+.fit-cover {
+  object-fit: cover;
 }
 
 .lottie-bg {
@@ -22,7 +21,49 @@
   margin-right: auto;
 }
 
-body {
-  overflow: hidden;
+.icon-tabler-home:hover, .icon-tabler-home.active {
+  color: #5abfea;
 }
 
+.icon-tabler-user:hover, .icon-tabler-user.active {
+  color: #ff8a00;
+}
+
+.icon-tabler-list-numbers:hover, .icon-tabler-list-numbers.active {
+  color: #edd32c;
+}
+
+.icon-tabler-message-chatbot:hover, .icon-tabler-message-chatbot.active {
+  color: #30c12e;
+}
+
+.icon-tabler-settings:hover, .icon-tabler-settings.active {
+  color: #9d71ed;
+}
+
+#navtoggle {
+  -webkit-appearance: none;
+  visibility: hidden;
+  display: none;
+}
+
+.form-label {
+  cursor: pointer;
+}
+
+#navtoggle:checked ~ .navbar-container {
+  transform: translateX(-105px);
+}
+
+#navtoggle:checked ~ .navbar-container .icon-tabler-arrow-badge-left {
+  transform: rotate(180deg);
+  transition: transform 0.5s ease;
+}
+
+.navbar-container {
+  transform: translateX(0px);
+}
+
+.icon-tabler-arrow-badge-left {
+  transition: transform 0.5s ease;
+}
