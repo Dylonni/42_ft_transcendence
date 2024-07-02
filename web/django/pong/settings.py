@@ -39,7 +39,6 @@ for line in lines:
 client = hvac.Client(url=os.getenv('VAULT_ADDR'), token=vault_token)
 secret_path = 'django/key'
 secret_response = client.secrets.kv.v2.read_secret_version(path=secret_path)
-print(secret_response)
 SECRET_KEY = secret_response['data']['data']['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -47,7 +46,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', 'django']
 
-CSRF_TRUSTED_ORIGINS= ['http://localhost:8080']
+CSRF_TRUSTED_ORIGINS = ['http://localhost:8080']
 
 
 # Application definition
@@ -161,6 +160,17 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# Email
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = os.getenv('DJANGO_MAIL')
+EMAIL_HOST_USER = os.getenv('DJANGO_MAIL_USERNAME')
+EMAIL_HOST_PASSWORD = os.getenv('DJANGO_MAIL_PASSWORD')
+
+# JWT
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (

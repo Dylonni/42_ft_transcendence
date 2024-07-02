@@ -11,6 +11,7 @@ djangorestframework-simplejwt = "*"
 django-prometheus = "*"
 logstash-formatter = "*"
 hvac = "*"
+requests = "*"
 
 [dev-packages]
 

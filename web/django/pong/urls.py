@@ -21,7 +21,7 @@ from django.utils.translation import gettext_lazy as _
 from . import views
 
 apipatterns = [
-    path('accounts/', include('accounts.urls')),
+    path('accounts/', include(('accounts.urls', 'accounts'), namespace='accounts')),
 ]
 
 urlpatterns = [
