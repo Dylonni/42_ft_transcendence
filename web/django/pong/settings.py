@@ -237,3 +237,24 @@ LOGGING = {
         },
     },
 }
+
+
+
+# SSL/HTTPS settings
+# https://docs.djangoproject.com/en/5.0/topics/security/#ssl-https
+
+# SECURE_SSL_REDIRECT = True # probably not useful when used at 42
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+SESSION_COOKIE_SECURE = True
+
+CSRF_COOKIE_SECURE = True
+
+SECURE_BROWSER_XSS_FILTER = True
+
+# SECURE_HSTS_SECONDS = 30 # in seconds, change value to a much larger one when in production
+
+# SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+
+# SECURE_HSTS_PRELOAD = True # to be uncommented just before prod and tested

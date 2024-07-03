@@ -6,7 +6,7 @@ RUN apk add --no-cache openssl
 
 # #ssl config
 RUN mkdir -p /etc/nginx/ssl
-RUN openssl req -x509 -nodes -days 365 -sha256 -newkey rsa:2048 -keyout /etc/ssl/private/nginx_selfsigned.key  -out /etc/ssl/certs/nginx_selfsigned.crt -subj "/C=FR/ST=IDF/L=Paris/O=Ecole42/OU=Stud/CN=localhost"
+RUN openssl req -x509 -nodes -days 365 -sha256 -newkey rsa:2048 -keyout /etc/ssl/private/nginx_selfsigned.key  -out /etc/ssl/certs/nginx_selfsigned.crt -subj "/C=FR/ST=IDF/L=Paris/O=Ecole42/OU=Stud/CN=ft_transcendence"
 
 COPY ./conf/vault.conf /etc/nginx/conf.d/vault.conf
 COPY ./conf/postgres-exporter.conf /etc/nginx/conf.d/postgres-exporter.conf
