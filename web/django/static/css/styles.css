@@ -1,5 +1,9 @@
-.google_connect {
-  background-color: black;
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  background-color: #161616;
 }
 
 .qd_connect {
@@ -66,4 +70,36 @@
 
 .icon-tabler-arrow-badge-left {
   transition: transform 0.5s ease;
+}
+
+#inputsearch:focus {
+  outline: none;
+}
+
+#gamesearch:focus {
+  outline: none;
+}
+
+.roomel {
+  flex: 1 1 20%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 800px) {
+  .gameroom {
+    flex-direction: column;
+  }
+}
+
+
+p, h1, button {
+  font-size: calc(1vw + 1vh);
+}
+
+.room-name, .room-creator, .room-type, .nb-players {
+  color: #8100be;
+}
+
+#chatInput:focus{
+  outline: none;
 }

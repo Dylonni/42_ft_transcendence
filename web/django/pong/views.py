@@ -27,3 +27,17 @@ def user_settings(request):
         html = render_to_string('settings.html', context, request)
         return HttpResponse(html)
     return index(request)
+
+def home(request):
+    if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+        context = {'title': _('Home')}
+        html = render_to_string('home.html', context, request)
+        return HttpResponse(html)
+    return index(request)
+
+def social(request):
+    if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+        context = {'title': _('Social')}
+        html = render_to_string('social.html', context, request)
+        return HttpResponse(html)
+    return index(request)

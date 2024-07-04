@@ -34,7 +34,7 @@ class UserRegisterView(generics.CreateAPIView):
             'status': 'Authentication successful!',
             'access': str(refresh.access_token),
             'refresh': str(refresh),
-            'redirect': '/settings',
+            'redirect': '/home',
         }, status=status.HTTP_201_CREATED)
 
 
@@ -53,7 +53,7 @@ class UserLoginView(generics.GenericAPIView):
             'status': 'Authentication successful!',
             'access': str(refresh.access_token),
             'refresh': str(refresh),
-            'redirect': '/settings',
+            'redirect': '/home',
         }, status=status.HTTP_200_OK)
 
 class UserUpdateEmailView(generics.GenericAPIView):
