@@ -13,24 +13,24 @@ services:
     depends_on:
       - vault
       - django
-      # - postgres-exporter
-      # - prometheus
-      # - grafana
-      # - elasticsearch
-      # - logstash
-      # - kibana
+      - postgres-exporter
+      - prometheus
+      - grafana
+      - elasticsearch
+      - logstash
+      - kibana
     networks:
       - backend
     ports:
       - "8080:8080" # HTTP -> Django
       - "8443:8443" # HTTPS
       - "8200:8200" # Vault
-      # - "9187:9187" # Postgres Exporter
-      # - "9090:9090" # Prometheus
-      # - "3000:3000" # Grafana
-      # - "9200:9200" # Elasticsearch
-      # - "5001:5001" # Logstash
-      # - "5601:5601" # Kibana
+      # - "9187:9187" # Postgres Exporter - no need to expose
+      - "9090:9090" # Prometheus
+      - "3000:3000" # Grafana
+      # - "9200:9200" # Elasticsearch - no need to expose
+      # - "5001:5001" # Logstash - no need to expose
+      - "5601:5601" # Kibana - shows "elasticsearch", which is normal
 
   vault:
     build: ./cybersec/vault
@@ -86,78 +86,78 @@ services:
     volumes:
       - pg-data:/var/lib/postgresql/data
 
-# # MONITORING
-#   postgres-exporter:
-#     build: ./devops/mon/postgres-exporter
-#     container_name: postgres-exporter
-#     env_file: .env
-#     networks:
-#       - backend
+# MONITORING
+  postgres-exporter:
+    build: ./devops/mon/postgres-exporter
+    container_name: postgres-exporter
+    env_file: .env
+    networks:
+      - backend
 
-#   prometheus:
-#     build: ./devops/mon/prometheus
-#     container_name: prometheus
-#     depends_on:
-#       django:
-#         condition: service_healthy
-#     networks:
-#       - backend
+  prometheus:
+    build: ./devops/mon/prometheus
+    container_name: prometheus
+    depends_on:
+      django:
+        condition: service_healthy
+    networks:
+      - backend
 
-#   grafana:
-#     build: ./devops/mon/grafana
-#     container_name: grafana
-#     env_file: .env
-#     depends_on:
-#       - prometheus
-#     networks:
-#       - backend
+  grafana:
+    build: ./devops/mon/grafana
+    container_name: grafana
+    env_file: .env
+    depends_on:
+      - prometheus
+    networks:
+      - backend
 
-# # ELK STACK
-#   elasticsearch:
-#     build:
-#       context: ./devops/elk/elasticsearch
-#       args:
-#         ELK_STACK_VERSION: ${ELK_STACK_VERSION}
-#     container_name: elasticsearch
-#     environment:
-#       node.name: elasticsearch
-#       discovery.type: single-node
-#       ES_JAVA_OPTS: -Xms512m -Xmx512m
-#       ELASTIC_PASSWORD: ${ELASTIC_PASSWORD:-}
-#     networks:
-#       - backend
-#       - elk
+# ELK STACK
+  elasticsearch:
+    build:
+      context: ./devops/elk/elasticsearch
+      args:
+        ELK_STACK_VERSION: ${ELK_STACK_VERSION}
+    container_name: elasticsearch
+    environment:
+      node.name: elasticsearch
+      discovery.type: single-node
+      ES_JAVA_OPTS: -Xms512m -Xmx512m
+      ELASTIC_PASSWORD: ${ELASTIC_PASSWORD:-}
+    networks:
+      - backend
+      - elk
 
-#   logstash:
-#     build:
-#       context: ./devops/elk/logstash
-#       args:
-#         ELK_STACK_VERSION: ${ELK_STACK_VERSION}
-#     container_name: logstash
-#     environment:
-#       LS_JAVA_OPTS: -Xms256m -Xmx256m
-#       LOGSTASH_INTERNAL_PASSWORD: ${LOGSTASH_INTERNAL_PASSWORD:-}
-#     depends_on:
-#       - elasticsearch
-#     networks:
-#       - backend
-#       - elk
-#     volumes:
-#       - elk-data:/logstash
+  logstash:
+    build:
+      context: ./devops/elk/logstash
+      args:
+        ELK_STACK_VERSION: ${ELK_STACK_VERSION}
+    container_name: logstash
+    environment:
+      LS_JAVA_OPTS: -Xms256m -Xmx256m
+      LOGSTASH_INTERNAL_PASSWORD: ${LOGSTASH_INTERNAL_PASSWORD:-}
+    depends_on:
+      - elasticsearch
+    networks:
+      - backend
+      - elk
+    volumes:
+      - elk-data:/logstash
 
-#   kibana:
-#     build:
-#       context: ./devops/elk/kibana
-#       args:
-#         ELK_STACK_VERSION: ${ELK_STACK_VERSION}
-#     container_name: kibana
-#     environment:
-#       KIBANA_SYSTEM_PASSWORD: ${KIBANA_SYSTEM_PASSWORD:-}
-#     depends_on:
-#       - elasticsearch
-#     networks:
-#       - backend
-#       - elk
+  kibana:
+    build:
+      context: ./devops/elk/kibana
+      args:
+        ELK_STACK_VERSION: ${ELK_STACK_VERSION}
+    container_name: kibana
+    environment:
+      KIBANA_SYSTEM_PASSWORD: ${KIBANA_SYSTEM_PASSWORD:-}
+    depends_on:
+      - elasticsearch
+    networks:
+      - backend
+      - elk
 
 volumes:
   pg-data:
