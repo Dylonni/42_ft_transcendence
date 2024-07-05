@@ -31,7 +31,7 @@
 				<div class="col-md-6 col-xl-4" style="filter: blur(0px);">
 					<div class="card mb-5">
 						<div class="card-body d-flex flex-column align-items-center" style="filter: blur(0px);">
-							<form class="text-center auth-form" method="post" action="/api/accounts/register/">
+							<form class="text-center auth-form" method="post" action="/api/auth/register/">
 								{% csrf_token %}
 								<h2 style="padding-bottom: 20px;">Register</h2>
 								<div class="mb-3 form-floating"><input class="form-control form-control form-control" type="text" id="floatingUser-register" maxlength="64" minlength="4" name="username" pattern="^[a-zA-Z0-9_.-]*$" placeholder=" " required=""><label class="form-label" for="floatingUser-register">Username</label></div>

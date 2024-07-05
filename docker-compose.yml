@@ -11,42 +11,48 @@ services:
     container_name: nginx-modsec
     env_file: .env
     depends_on:
+      - vault
       - django
+      # - postgres-exporter
+      # - prometheus
+      # - grafana
+      # - elasticsearch
+      # - logstash
+      # - kibana
     networks:
       - backend
     ports:
-      - "8080:8080"
-      - "8443:8443"
+      - "8080:8080" # HTTP -> Django
+      - "8443:8443" # HTTPS
+      - "8200:8200" # Vault
+      # - "9187:9187" # Postgres Exporter
+      # - "9090:9090" # Prometheus
+      # - "3000:3000" # Grafana
+      # - "9200:9200" # Elasticsearch
+      # - "5001:5001" # Logstash
+      # - "5601:5601" # Kibana
 
   vault:
     build: ./cybersec/vault
     container_name: vault
     env_file: .env
-    networks:
-      - backend
     cap_add:
       - IPC_LOCK
-    ports:
-      - "8200:8200"
     healthcheck:
       test: ["CMD-SHELL", "vault status | grep 'Sealed.*false' && test -f /vault/output/initialized"]
       interval: 10s
       timeout: 5s
       retries: 5
+    networks:
+      - backend
+    volumes:
+      - django-token:/vault/secrets/django
 
 # WEB
   django:
     build: ./web/django
     container_name: django
     env_file: .env
-    networks:
-      - backend
-    volumes:
-      - ./web/django/accounts:/django/accounts
-      - ./web/django/pong:/django/pong
-      - ./web/django/static:/django/static
-      - ./web/django/templates:/django/templates
-      - elk-data:/logstash
     depends_on:
       postgres:
         condition: service_healthy
@@ -55,112 +61,110 @@ services:
       interval: 5s
       timeout: 5s
       retries: 4
+    networks:
+      - backend
+    volumes:
+      - ./web/django/accounts:/django/accounts
+      - ./web/django/pong:/django/pong
+      - ./web/django/static:/django/static
+      - ./web/django/templates:/django/templates
+      - elk-data:/logstash
+      - django-token:/django/secrets:ro
 
   postgres:
     build: ./web/postgres
     container_name: postgres
     env_file: .env
-    networks:
-      - backend
-    volumes:
-      - pg-data:/var/lib/postgresql/data
+    depends_on:
+      vault:
+        condition: service_healthy
     healthcheck:
       test: pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}
       interval: 5s
       timeout: 5s
       retries: 4
-    depends_on:
-      vault:
-        condition: service_healthy
-
-# MONITORING
-  postgres_exporter:
-    build: ./devops/mon/postgres_exporter
-    container_name: postgres_exporter
-    env_file: .env
-    ports:
-      - "9187:9187"
     networks:
       - backend
-
-  prometheus:
-    build: ./devops/mon/prometheus
-    container_name: prometheus
-    depends_on:
-      django:
-        condition: service_healthy
-    networks:
-      - backend
-    ports:
-      - "9090:9090"
-
-  grafana:
-    build: ./devops/mon/grafana
-    container_name: grafana
-    env_file:
-      - .env
-    depends_on:
-      - prometheus
-    networks:
-      - backend
-    ports:
-      - "3000:3000"
-
-# ELK STACK
-  elasticsearch:
-    build:
-      context: ./devops/elk/elasticsearch
-      args:
-        ELK_STACK_VERSION: ${ELK_STACK_VERSION}
-    container_name: elasticsearch
-    environment:
-      node.name: elasticsearch
-      discovery.type: single-node
-      ES_JAVA_OPTS: -Xms512m -Xmx512m
-      ELASTIC_PASSWORD: ${ELASTIC_PASSWORD:-}
-    networks:
-      - backend
-      - elk
-    ports:
-      - "9200:9200"
-
-  logstash:
-    build:
-      context: ./devops/elk/logstash
-      args:
-        ELK_STACK_VERSION: ${ELK_STACK_VERSION}
-    container_name: logstash
-    environment:
-      LS_JAVA_OPTS: -Xms256m -Xmx256m
-      LOGSTASH_INTERNAL_PASSWORD: ${LOGSTASH_INTERNAL_PASSWORD:-}
-    depends_on:
-      - elasticsearch
-    networks:
-      - backend
-      - elk
-    ports:
-      - "5001:5001"
     volumes:
-      - elk-data:/logstash
+      - pg-data:/var/lib/postgresql/data
 
-  kibana:
-    build:
-      context: ./devops/elk/kibana
-      args:
-        ELK_STACK_VERSION: ${ELK_STACK_VERSION}
-    container_name: kibana
-    environment:
-      KIBANA_SYSTEM_PASSWORD: ${KIBANA_SYSTEM_PASSWORD:-}
-    depends_on:
-      - elasticsearch
-    networks:
-      - backend
-      - elk
-    ports:
-      - "5601:5601"
+# # MONITORING
+#   postgres-exporter:
+#     build: ./devops/mon/postgres-exporter
+#     container_name: postgres-exporter
+#     env_file: .env
+#     networks:
+#       - backend
+
+#   prometheus:
+#     build: ./devops/mon/prometheus
+#     container_name: prometheus
+#     depends_on:
+#       django:
+#         condition: service_healthy
+#     networks:
+#       - backend
+
+#   grafana:
+#     build: ./devops/mon/grafana
+#     container_name: grafana
+#     env_file: .env
+#     depends_on:
+#       - prometheus
+#     networks:
+#       - backend
+
+# # ELK STACK
+#   elasticsearch:
+#     build:
+#       context: ./devops/elk/elasticsearch
+#       args:
+#         ELK_STACK_VERSION: ${ELK_STACK_VERSION}
+#     container_name: elasticsearch
+#     environment:
+#       node.name: elasticsearch
+#       discovery.type: single-node
+#       ES_JAVA_OPTS: -Xms512m -Xmx512m
+#       ELASTIC_PASSWORD: ${ELASTIC_PASSWORD:-}
+#     networks:
+#       - backend
+#       - elk
+
+#   logstash:
+#     build:
+#       context: ./devops/elk/logstash
+#       args:
+#         ELK_STACK_VERSION: ${ELK_STACK_VERSION}
+#     container_name: logstash
+#     environment:
+#       LS_JAVA_OPTS: -Xms256m -Xmx256m
+#       LOGSTASH_INTERNAL_PASSWORD: ${LOGSTASH_INTERNAL_PASSWORD:-}
+#     depends_on:
+#       - elasticsearch
+#     networks:
+#       - backend
+#       - elk
+#     volumes:
+#       - elk-data:/logstash
+
+#   kibana:
+#     build:
+#       context: ./devops/elk/kibana
+#       args:
+#         ELK_STACK_VERSION: ${ELK_STACK_VERSION}
+#     container_name: kibana
+#     environment:
+#       KIBANA_SYSTEM_PASSWORD: ${KIBANA_SYSTEM_PASSWORD:-}
+#     depends_on:
+#       - elasticsearch
+#     networks:
+#       - backend
+#       - elk
 
 volumes:
   pg-data:
     name: pg-data
   elk-data:
     name: elk-data
+  django-token:
+    name: django-token

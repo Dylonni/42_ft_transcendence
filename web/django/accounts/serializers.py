@@ -3,23 +3,7 @@ from django.contrib.auth import authenticate, get_user_model
 from django.utils.translation import gettext_lazy as _
 from rest_framework import serializers
 
-CustomUser = get_user_model()
-
-
-class UserRegisterSerializer(serializers.ModelSerializer):
-    password = serializers.CharField(write_only=True, required=True)
-    
-    class Meta:
-        model = CustomUser
-        fields = ('username', 'email', 'password')
-    
-    def create(self, validated_data):
-        user = CustomUser.objects.create_user(
-            username=validated_data['username'],
-            email=validated_data['email'],
-            password=validated_data['password']
-        )
-        return user
+UserModel = get_user_model()
 
 
 class UserLoginSerializer(serializers.Serializer):
@@ -37,19 +21,46 @@ class UserLoginSerializer(serializers.Serializer):
         user = authenticate(request=self.context.get('request'), username=username_or_email, password=password)
         if not user:
             try:
-                user = CustomUser.objects.get(email=username_or_email)
+                user = UserModel.objects.get(email=username_or_email)
                 user = authenticate(request=self.context.get('request'), username=user.username, password=password)
-            except CustomUser.DoesNotExist as e:
+            except UserModel.DoesNotExist as e:
                 msg = _('Unable to log in with provided credentials.')
                 raise serializers.ValidationError(msg, code='authorization')
         attrs['user'] = user
         return attrs
 
+
+class UserRegisterSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserModel
+        fields = ('username', 'email', 'password')
+        extra_kwargs = {'password': {'write_only': True}}
+
+
+class PasswordResetRequestSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+    
+    def validate_email(self, value):
+        self.user = UserModel.objects.filter(email=value).first()
+        return value
+    
+    def get_user(self):
+        return getattr(self, 'user', None)
+
+
+class PasswordResetConfirmSerializer(serializers.Serializer):
+    new_password = serializers.CharField(write_only=True)
+
+    def validate_new_password(self, value):
+        # Add any custom password validation if necessary
+        return value
+
+
 class UserUpdateEmailSerializer(serializers.ModelSerializer):
     email = serializers.EmailField()
     
     class Meta:
-        model = CustomUser
+        model = UserModel
         fields = ('email',)
     
     def update(self, instance, validated_data):

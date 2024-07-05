@@ -1,51 +1,53 @@
-from django.http import HttpResponse
-from django.shortcuts import render
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
+from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
+from django.http import HttpResponse
+from django.conf import settings
 from django.utils.translation import gettext as _
 
-def index(request):
-    context = {'title': _('Transcendence')}
-    return render(request, 'index.html', context)
-
-def login(request):
+def redirect_not_ajax(request, title, path):
     if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
-        context = {'title': _('Login')}
-        html = render_to_string('accounts/login.html', context, request)
+        context = {'title': title}
+        html = render_to_string(path, context, request)
         return HttpResponse(html)
-    return index(request)
+    return redirect('index')
 
-def register(request):
-    if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
-        context = {'title': _('Register')}
-        html = render_to_string('accounts/register.html', context, request)
-        return HttpResponse(html)
-    return index(request)
 
-def home(request):
-    if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
-        context = {'title': _('Home')}
-        html = render_to_string('home.html', context, request)
-        return HttpResponse(html)
-    return index(request)
+class IndexView(APIView):
+    def get(self, request, *args, **kwargs):
+        context = {'title': _('Transcendence')}
+        return render(request, 'index.html', context)
 
-def profile(request):
-    if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
-        context = {'title': _('Profile')}
-        html = render_to_string('profile.html', context, request)
-        return HttpResponse(html)
-    return index(request)
 
-def social(request):
-    if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
-        context = {'title': _('Social')}
-        html = render_to_string('social.html', context, request)
-        return HttpResponse(html)
-    return index(request)
+class LoginView(APIView):
+    def get(self, request, *args, **kwargs):
+        return redirect_not_ajax(request, _('Login'), 'accounts/login.html')
 
-def user_settings(request):
-    if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
-        context = {'title': _('Settings')}
-        html = render_to_string('settings.html', context, request)
-        return HttpResponse(html)
-    return index(request)
 
+class RegisterView(APIView):
+    def get(self, request, *args, **kwargs):
+        return redirect_not_ajax(request, _('Register'), 'accounts/register.html')
+
+
+class HomeView(APIView):
+    def get(self, request, *args, **kwargs):
+        return redirect_not_ajax(request, _('Home'), 'home.html')
+
+
+class ProfileView(APIView):
+    def get(self, request, *args, **kwargs):
+        return redirect_not_ajax(request, _('Profile'), 'profile.html')
+
+
+class SocialView(APIView):
+    def get(self, request, *args, **kwargs):
+        return redirect_not_ajax(request, _('Social'), 'social.html')
+
+
+class SettingsView(APIView):
+    permission_classes = (IsAuthenticated,)
+    
+    def get(self, request, *args, **kwargs):
+        return redirect_not_ajax(request, _('Settings'), 'settings.html')
