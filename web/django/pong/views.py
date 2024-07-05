@@ -33,7 +33,17 @@ class RegisterView(APIView):
 
 class HomeView(APIView):
     def get(self, request, *args, **kwargs):
-        return redirect_not_ajax(request, _('Home'), 'accounts/home.html')
+        return redirect_not_ajax(request, _('Home'), 'home.html')
+
+
+class ProfileView(APIView):
+    def get(self, request, *args, **kwargs):
+        return redirect_not_ajax(request, _('Profile'), 'profile.html')
+
+
+class SocialView(APIView):
+    def get(self, request, *args, **kwargs):
+        return redirect_not_ajax(request, _('Social'), 'social.html')
 
 
 class SettingsView(APIView):

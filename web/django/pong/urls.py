@@ -29,10 +29,12 @@ urlpatterns = [
     path('', include('django_prometheus.urls')),
     path('', views.IndexView.as_view(), name='index'),
     path('api/', include((apipatterns, 'api'), namespace='api')),
-    
+
     re_path(_(r'^login/?$'), views.LoginView.as_view(), name='login'),
     re_path(_(r'^register/?$'), views.RegisterView.as_view(), name='register'),
 	# re_path(_(r'^password-reset/?$'), views.PasswordReset.as_view(), name='password_reset'),
-    # re_path(_(r'^home/?$'), views.HomeView.as_view(), name='home'),
+    re_path(_(r'^home/?$'), views.HomeView.as_view(), name='home'),
+    re_path(_(r'^profile/?$'), views.ProfileView.as_view(), name='profile'),
+	  re_path(_(r'^social/?$'), views.SocialView.as_view(), name='social'),
     re_path(_(r'^settings/?$'), views.SettingsView.as_view(), name='settings'),
 ]
