@@ -22,9 +22,15 @@ elasticsearch.password: ${KIBANA_SYSTEM_PASSWORD}
 ## https://www.elastic.co/guide/en/kibana/current/using-kibana-with-security.html
 ## https://www.elastic.co/guide/en/kibana/current/kibana-encryption-keys.html
 #
-#xpack.security.encryptionKey:
-#xpack.encryptedSavedObjects.encryptionKey:
-#xpack.reporting.encryptionKey:
+# xpack.security.encryptionKey: ${KIBANA_ENCRYPTION_KEY}
+# xpack.encryptedSavedObjects.encryptionKey:
+# xpack.reporting.encryptionKey:
+
+# server.ssl.enabled: true
+# server.ssl.certificate: /certs/kibana/kibana.crt
+# server.ssl.key: /certs/kibana/kibana.key
+
+
 
 ## Fleet
 ## https://www.elastic.co/guide/en/kibana/current/fleet-settings-kb.html

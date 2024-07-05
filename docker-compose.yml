@@ -28,7 +28,7 @@ services:
       # - "9187:9187" # Postgres Exporter - no need to expose
       - "9090:9090" # Prometheus
       - "3000:3000" # Grafana
-      # - "9200:9200" # Elasticsearch - no need to expose
+      - "9200:9200" # Elasticsearch - no need to expose
       # - "5001:5001" # Logstash - no need to expose
       - "5601:5601" # Kibana - shows "elasticsearch", which is normal
 
@@ -123,10 +123,14 @@ services:
       node.name: elasticsearch
       discovery.type: single-node
       ES_JAVA_OPTS: -Xms512m -Xmx512m
-      ELASTIC_PASSWORD: ${ELASTIC_PASSWORD:-}
+      ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
+      KIBANA_SYSTEM_PASSWORD: ${KIBANA_SYSTEM_PASSWORD:-}
+      ELASTIC_CERT_PWD: ${ELASTIC_CERT_PWD:-}
     networks:
       - backend
       - elk
+    volumes:
+      - elk-data:/usr/share/elasticsearch/config/certs
 
   logstash:
     build:
@@ -153,11 +157,14 @@ services:
     container_name: kibana
     environment:
       KIBANA_SYSTEM_PASSWORD: ${KIBANA_SYSTEM_PASSWORD:-}
+      KIBANA_ENCRYPTION_KEY: ${KIBANA_ENCRYPTION_KEY:-}
     depends_on:
       - elasticsearch
     networks:
       - backend
       - elk
+    volumes:
+      - elk-data:/certs
 
 volumes:
   pg-data:
