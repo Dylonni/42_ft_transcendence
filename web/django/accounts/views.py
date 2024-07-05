@@ -65,7 +65,7 @@ user_login = UserLoginView.as_view()
 
 class UserLogoutView(APIView):
     permission_classes = (AllowAny,)
-
+    
     def post(self, request, *args, **kwargs):
         response = Response(
             {

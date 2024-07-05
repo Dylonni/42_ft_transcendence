@@ -1,7 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
     const appDiv = document.getElementById('content');
-    const sidebarDiv = document.getElementById('sidebar');
-   
     
     const originalPushState = history.pushState;
     history.pushState = function () {
@@ -81,6 +79,27 @@ document.addEventListener("DOMContentLoaded", () => {
                 .catch(error => console.error('Error submitting form:', error));
             });
         });
+
+        let logoutBtn = document.querySelector('.logout-btn')
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', (event) => {
+            event.preventDefault();
+            fetch(`/api/auth/logout/`, {
+                method: 'POST',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                if (data.redirect) {
+                    navigateTo(data.redirect);
+                }
+            })
+            .catch(error => console.error('Error logging out:', error));
+        });
+        }
     };
 
     window.addEventListener('popstate', renderPage);

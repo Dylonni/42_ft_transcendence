@@ -32,16 +32,22 @@ class RegisterView(APIView):
 
 
 class HomeView(APIView):
+    permission_classes = (IsAuthenticated,)
+    
     def get(self, request, *args, **kwargs):
         return redirect_not_ajax(request, _('Home'), 'home.html')
 
 
 class ProfileView(APIView):
+    permission_classes = (IsAuthenticated,)
+    
     def get(self, request, *args, **kwargs):
         return redirect_not_ajax(request, _('Profile'), 'profile.html')
 
 
 class SocialView(APIView):
+    permission_classes = (IsAuthenticated,)
+    
     def get(self, request, *args, **kwargs):
         return redirect_not_ajax(request, _('Social'), 'social.html')
 
