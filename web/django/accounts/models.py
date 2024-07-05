@@ -73,6 +73,27 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
             "invalid": _("Enter a valid email address."),
         },
     )
+    fortytwo_id = models.CharField(
+        _("42 id"),
+        null=True,
+        blank=True,
+        editable=False,
+        help_text=_("Unique identifier for the user from 42."),
+    )
+    fortytwo_access_token = models.TextField(
+        _("42 access token"),
+        null=True,
+        blank=True,
+        editable=False,
+        help_text=_("Access token for 42 API."),
+    )
+    fortytwo_refresh_token = models.TextField(
+        _("42 refresh token"),
+        null=True,
+        blank=True,
+        editable=False,
+        help_text=_("Refresh token for 42 API."),
+    )
     date_joined = models.DateTimeField(
         _("date joined"),
         default=timezone.now,

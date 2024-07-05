@@ -1,4 +1,4 @@
-FROM grafana/grafana:10.4.4-ubuntu
+FROM grafana/grafana:10.4.4
 
 COPY provisioning/datasources/ /etc/grafana/provisioning/datasources
 COPY provisioning/dashboards/ /etc/grafana/provisioning/dashboards

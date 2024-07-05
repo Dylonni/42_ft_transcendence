@@ -10,8 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 from datetime import timedelta
+import hvac
 import os
 from pathlib import Path
+import re
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,14 +23,30 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
+# SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
+
+vault_token = None
+
+with open('/django/secrets/token', 'r') as f:
+	lines = f.readlines()
+
+for line in lines:
+	match = re.match(r'token\s+(.+)', line)
+	if match:
+		vault_token = match.group(1)
+		break
+
+client = hvac.Client(url=os.getenv('VAULT_ADDR'), token=vault_token)
+secret_path = 'django/key'
+secret_response = client.secrets.kv.v2.read_secret_version(path=secret_path)
+SECRET_KEY = secret_response['data']['data']['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', 'django']
 
-CSRF_TRUSTED_ORIGINS= ['http://localhost:8080']
+CSRF_TRUSTED_ORIGINS = ['http://localhost:8080']
 
 
 # Application definition
@@ -53,6 +71,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'accounts.middleware.JWTCookieMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_prometheus.middleware.PrometheusAfterMiddleware',
@@ -115,6 +134,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+PASSWORD_RESET_TIMEOUT = 600
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
@@ -142,18 +162,36 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# Email
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = os.getenv('DJANGO_MAIL')
+EMAIL_HOST_USER = os.getenv('DJANGO_MAIL_USERNAME')
+EMAIL_HOST_PASSWORD = os.getenv('DJANGO_MAIL_PASSWORD')
+
+# 42 API
+
+FORTYTWO_ID = os.getenv('DJANGO_42_ID')
+FORTYTWO_SECRET = os.getenv('DJANGO_42_SECRET')
+
+# JWT
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-    )
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ),
 }
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
-    'ROTATE_REFRESH_TOKENS': False,
-    'BLACKLIST_AFTER_ROTATION': False,
+    'ROTATE_REFRESH_TOKENS': True,
+    'BLACKLIST_AFTER_ROTATION': True,
     'UPDATE_LAST_LOGIN': False,
 
     'ALGORITHM': 'HS256',
@@ -189,32 +227,32 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_REFRESH_SERIALIZER': 'rest_framework_simplejwt.serializers.TokenRefreshSlidingSerializer',
 }
 
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'logstash': {
-            'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'filename': '/logstash/debug.log',
-            'formatter': 'json',
-        },
-        'console': {
-            'level': 'DEBUG',
-            'class': 'logging.StreamHandler',
-            'formatter': 'json',
-        },
-    },
-    'formatters': {
-        'json': {
-            '()': 'logstash_formatter.LogstashFormatter',
-        },
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['logstash', 'console'],
-            'level': 'DEBUG',
-            'propagate': True,
-        },
-    },
-}
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'handlers': {
+#         'logstash': {
+#             'level': 'DEBUG',
+#             'class': 'logging.FileHandler',
+#             'filename': '/logstash/debug.log',
+#             'formatter': 'json',
+#         },
+#         'console': {
+#             'level': 'DEBUG',
+#             'class': 'logging.StreamHandler',
+#             'formatter': 'json',
+#         },
+#     },
+#     'formatters': {
+#         'json': {
+#             '()': 'logstash_formatter.LogstashFormatter',
+#         },
+#     },
+#     'loggers': {
+#         'django': {
+#             'handlers': ['logstash', 'console'],
+#             'level': 'DEBUG',
+#             'propagate': True,
+#         },
+#     },
+# }

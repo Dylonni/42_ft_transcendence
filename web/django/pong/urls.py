@@ -21,17 +21,18 @@ from django.utils.translation import gettext_lazy as _
 from . import views
 
 apipatterns = [
-    path('accounts/', include('accounts.urls')),
+    path('', include(('accounts.urls', 'accounts'), namespace='accounts')),
 ]
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', include('django_prometheus.urls')),
+    path('', views.IndexView.as_view(), name='index'),
     path('api/', include((apipatterns, 'api'), namespace='api')),
     
-    re_path(_(r'^login/?$'), views.login, name='login'),
-    re_path(_(r'^register/?$'), views.register, name='register'),
-    re_path(_(r'^settings/?$'), views.user_settings, name='settings'),
-    
-    path('', include('django_prometheus.urls')),
-    path('', views.index, name='index'),
+    re_path(_(r'^login/?$'), views.LoginView.as_view(), name='login'),
+    re_path(_(r'^register/?$'), views.RegisterView.as_view(), name='register'),
+	# re_path(_(r'^password-reset/?$'), views.PasswordReset.as_view(), name='password_reset'),
+    # re_path(_(r'^home/?$'), views.HomeView.as_view(), name='home'),
+    re_path(_(r'^settings/?$'), views.SettingsView.as_view(), name='settings'),
 ]

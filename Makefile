@@ -30,24 +30,30 @@ logs:
 exec: 
 	@$(COMPOSE_CMD) exec -it $(ARGS) sh
 
-.PHONY: restart
-restart:
+.PHONY: rebuild
+rebuild:
 	${MAKE} down
 	${MAKE} build
 	${MAKE} up
 
+.PHONY: restart
+restart:
+	${MAKE} down
+	${MAKE} up
+
 .PHONY: fclean
-fclean: down
-	docker system prune -f -a --volumes
-	# Check if 'pg-data' exists
-	@if docker volume ls | grep -q 'pg-data'; then \
-		docker volume rm pg-data; \
-	fi
-	@if docker volume ls | grep -q 'elk-data'; then \
-		docker volume rm elk-data; \
-	fi
+fclean:
+	${MAKE} vclean
+	@docker system prune -af
 
 .PHONY: re
-re: fclean
+re:
 	${MAKE} fclean
 	${MAKE} all
+
+.PHONY: vclean
+vclean:
+	${MAKE} down
+	@if [ "$$(docker volume ls -q)" ]; then \
+		docker volume rm $$(docker volume ls -q | grep -v 'vscode'); \
+	fi
