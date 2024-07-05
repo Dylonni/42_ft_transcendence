@@ -2,8 +2,7 @@ body, html {
   margin: 0;
   padding: 0;
   height: 100%;
-  overflow: hidden;
-  background-color: #161616;
+  background-color: #2c2b2b;
 }
 
 .qd_connect {
@@ -91,15 +90,30 @@ body, html {
   }
 }
 
-
-p, h1, button {
-  font-size: calc(1vw + 1vh);
-}
-
 .room-name, .room-creator, .room-type, .nb-players {
-  color: #8100be;
+  color: #5abfea;
 }
 
 #chatInput:focus{
   outline: none;
+}
+
+.gameinfos {
+  flex: 1 1 25%;
+}
+
+.versus, .gameinfos, .game-duration, .game-date {
+  color: var(--bs-secondary);
+}
+
+.total-games, .total-tournaments {
+  color: rgb(220,149,66);
+}
+
+.total-won {
+  color: var(--bs-form-valid-color);
+}
+
+.total-loss {
+  color: var(--bs-form-invalid-color);
 }

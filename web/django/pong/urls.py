@@ -30,8 +30,9 @@ urlpatterns = [
     
     re_path(_(r'^login/?$'), views.login, name='login'),
     re_path(_(r'^register/?$'), views.register, name='register'),
-	re_path(_(r'^home/?$'), views.user_settings, name='home'),
-	re_path(_(r'^social/?$'), views.user_settings, name='social'),
+	re_path(_(r'^home/?$'), views.home, name='home'),
+    re_path(_(r'^profile/?$'), views.profile, name='profile'),
+	re_path(_(r'^social/?$'), views.social, name='social'),
     re_path(_(r'^settings/?$'), views.user_settings, name='settings'),
     
     path('', include('django_prometheus.urls')),

@@ -21,17 +21,17 @@ def register(request):
         return HttpResponse(html)
     return index(request)
 
-def user_settings(request):
-    if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
-        context = {'title': _('Settings')}
-        html = render_to_string('settings.html', context, request)
-        return HttpResponse(html)
-    return index(request)
-
 def home(request):
     if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
         context = {'title': _('Home')}
         html = render_to_string('home.html', context, request)
+        return HttpResponse(html)
+    return index(request)
+
+def profile(request):
+    if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+        context = {'title': _('Profile')}
+        html = render_to_string('profile.html', context, request)
         return HttpResponse(html)
     return index(request)
 
@@ -41,3 +41,11 @@ def social(request):
         html = render_to_string('social.html', context, request)
         return HttpResponse(html)
     return index(request)
+
+def user_settings(request):
+    if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+        context = {'title': _('Settings')}
+        html = render_to_string('settings.html', context, request)
+        return HttpResponse(html)
+    return index(request)
+
