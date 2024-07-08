@@ -118,12 +118,18 @@ services:
       context: ./devops/elk/elasticsearch
       args:
         ELK_STACK_VERSION: ${ELK_STACK_VERSION}
+        ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
     container_name: elasticsearch
     environment:
-      node.name: elasticsearch
+      cluster.name: docker-cluster
+      node.name: transcendence42
       discovery.type: single-node
+      ELASTIC_USERNAME: elastic
       ES_JAVA_OPTS: -Xms512m -Xmx512m
       ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
+      bootstrap.memory_lock: "true"
+      xpack.security.enabled: "true"
+      xpack.security.transport.ssl.enabled: "true"
       KIBANA_SYSTEM_PASSWORD: ${KIBANA_SYSTEM_PASSWORD:-}
       ELASTIC_CERT_PWD: ${ELASTIC_CERT_PWD:-}
     networks:
@@ -156,8 +162,15 @@ services:
         ELK_STACK_VERSION: ${ELK_STACK_VERSION}
     container_name: kibana
     environment:
+      XPACK_SECURITY_ENROLLEMNT_ENABLED: "true"
       KIBANA_SYSTEM_PASSWORD: ${KIBANA_SYSTEM_PASSWORD:-}
+      ELASTICSEARCH_URL: http://localhost:9200
+      ELASTICSEARCH_HOSTS: http://localhost:9200
+      XPACK_MONITORING_ENABLED: "true"
+      XPACK_MONITORING_COLLECTION_ENABLED: "true"
+      XPACK_SECURITY_ENABLED: "true"
       KIBANA_ENCRYPTION_KEY: ${KIBANA_ENCRYPTION_KEY:-}
+      ELASTIC_PASSWORD: $ELASTIC_PASSWORD
     depends_on:
       - elasticsearch
     networks:

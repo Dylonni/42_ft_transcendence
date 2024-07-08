@@ -13,6 +13,8 @@ monitoring.ui.container.logstash.enabled: true
 elasticsearch.username: kibana_system
 elasticsearch.password: ${KIBANA_SYSTEM_PASSWORD}
 
+xpack.security.enrollment.enabled: true
+
 ## Encryption keys (optional but highly recommended)
 ##
 ## Generate with either
