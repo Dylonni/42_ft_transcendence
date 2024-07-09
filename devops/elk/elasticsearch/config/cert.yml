@@ -1,0 +1,8 @@
+instances:
+  - name: "transcendence42"
+    dns:
+      - "localhost"
+      - "transcendence42"
+      - "transcendence42.rocks"
+    ip:
+      - "127.0.0.1"

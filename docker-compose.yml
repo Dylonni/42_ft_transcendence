@@ -123,7 +123,6 @@ services:
     environment:
       node.name: transcendence42
       discovery.type: single-node
-      xpack.security.http.ssl.enabled: false
       xpack.license.self_generated.type: trial
       ES_JAVA_OPTS: -Xms512m -Xmx512m
       ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}

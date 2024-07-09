@@ -3,7 +3,14 @@
 #
 server.name: kibana
 server.host: 0.0.0.0
-elasticsearch.hosts: [ http://elasticsearch:9200 ]
+
+elasticsearch.hosts:
+  - "http://elasticsearch:9200"
+  - "https://localhost:9200"
+
+# elasticsearch.hosts: [ http://elasticsearch:9200 ]
+# elasticsearch.hosts: https://localhost:9200
+
 
 monitoring.ui.container.elasticsearch.enabled: true
 monitoring.ui.container.logstash.enabled: true
@@ -31,6 +38,10 @@ xpack.security.enrollment.enabled: true
 # server.ssl.enabled: true
 # server.ssl.certificate: /certs/kibana/kibana.crt
 # server.ssl.key: /certs/kibana/kibana.key
+
+#mjust testing
+# elasticsearch.ssl.certificateAuthorities: [ "config/elasticsearch-ca.pem" ]
+
 
 
 
