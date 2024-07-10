@@ -1,10 +1,35 @@
 #!/usr/bin/expect -f
 
-set timeout 60
+set timeout -1
+# Print all environment variables
+# puts "Printing all environment variables";
+# foreach name [array names env] {
+#     puts "$name: $env($name)"
+# }
+# puts "Printing all environment variables done";
+
+
 set elastic_password $env(ELASTIC_PASSWORD)
 set completed 0
+exp_internal 1
 spawn ./bin/elasticsearch-certutil http
+match_max 100000
 expect {
+	"\r\n\r\n" {
+		exp_continue
+	}
+    "## Elasticsearch HTTP Certificate Utility" {
+        exp_continue
+    }
+    "## Do you wish to generate a Certificate Signing Request (CSR)?" {
+        exp_continue
+    }
+    "If you choose not to generate a CSR" {
+        exp_continue
+    }
+    "configure all your clients to trust that custom CA" {
+        exp_continue
+    }
     "Generate a CSR?" {
         send "n\r"
         exp_continue
@@ -25,14 +50,7 @@ expect {
         send "90d\r"
         exp_continue
     }
-    timeout {
-        puts "Operation timed out"
-        exit 1
-    }
-    eof {
-        puts "Unexpected end of file or error"
-        exit 1
-    }
+
     "Generate a certificate per node?" {
         send "n\r"
         exp_continue
@@ -62,11 +80,11 @@ expect {
         exp_continue
     }
     -re {Provide a password for the "http\.p12" file:} {
-        send "$\r"
+        send "$(ELASTIC_PASSWORD)\r"
         exp_continue
     }
     "Repeat password to confirm:" {
-        send "$\r"
+        send "$(ELASTIC_PASSWORD)\r"
         exp_continue
     }
     "What filename should be used for the output zip file?" {

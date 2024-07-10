@@ -1,14 +1,40 @@
 #!/usr/bin/expect -f
 
-set timeout 60
+set timeout -1
+# Print all environment variables
+# puts "Printing all environment variables";
+# foreach name [array names env] {
+#     puts "$name: $env($name)"
+# }
+# puts "Printing all environment variables done";
+
+
 set elastic_password $env(ELASTIC_PASSWORD)
+set completed 0
+exp_internal 1
 spawn ./bin/elasticsearch-certutil http
+match_max 100000
 expect {
-    "Generate a CSR? [y/N]" {
+    "## Elasticsearch HTTP Certificate Utility" {
+        exp_continue
+    }
+    "## Do you wish to generate a Certificate Signing Request (CSR)?" {
+        exp_continue
+    }
+    "If you choose not to generate a CSR" {
+        exp_continue
+    }
+    "configure all your clients to trust that custom CA" {
+        exp_continue
+    }
+    "\r\n\r\n\u001b[?2004h" {
+        exp_continue
+    }
+    "Generate a CSR?" {
         send "n\r"
         exp_continue
     }
-    "Use an existing CA? [y/N]" {
+    "Use an existing CA?" {
         send "y\r"
         exp_continue
     }
@@ -20,7 +46,7 @@ expect {
         send "\r"
         exp_continue
     }
-    "For how long should your certificate be valid? [5y]" {
+    "For how long should your certificate be valid?" {
         send "90d\r"
         exp_continue
     }
@@ -32,47 +58,61 @@ expect {
         puts "Unexpected end of file or error"
         exit 1
     }
-    "Generate a certificate per node? [y/N]" {
+    "Generate a certificate per node?" {
         send "n\r"
         exp_continue
     }
-    "When you are done, press <ENTER> once more to move on to the next step." {
+    "Enter all the hostnames *When you are done, press <ENTER> once more to move on to the next step." {
         send "localhost\r"
         send "transcendence42\r"
         send "transcendence42.rocks\r"
         send "\r"
         exp_continue
     }
-    "Is this correct [Y/n]" {
+    "Is this correct" {
         send "y\r"
         exp_continue
     }
-    "When you are done, press <ENTER> once more to move on to the next step." {
+    "Enter all the IP addresses *When you are done, press <ENTER> once more to move on to the next step." {
         send "127.0.0.1\r"
         send "\r"
         exp_continue
     }
-    "Is this correct [Y/n]" {
+    "Is this correct" {
         send "y\r"
         exp_continue
     }
-    "Do you wish to change any of these options? [y/N]" {
+    "Do you wish to change any of these options?" {
         send "n\r"
         exp_continue
     }
-    "Provide a password for the http.p12 file:  [<ENTER> for none]" {
-        send "$elastic_password\r"
+    -re {Provide a password for the "http\.p12" file:} {
+        send "$\r"
         exp_continue
     }
     "Repeat password to confirm:" {
-        send "$elastic_password\r"
+        send "$\r"
         exp_continue
     }
-    "What filename should be used for the output zip file? [/usr/share/elasticsearch/elasticsearch-ssl-http.zip]" {
+    "What filename should be used for the output zip file?" {
         send "/usr/share/elasticsearch/elasticsearch-ssl-http.zip\r"
+        exp_continue
+    }
+    "Zip file written to /usr/share/elasticsearch/elasticsearch-ssl-http.zip" {
+        set completed 1
+    }
+    eof {
+        if {$completed} {
+            puts "Completed successfully"
+        } else {
+            puts "Unexpected end of file"
+            exit 1
+        }
     }
     default {
-        puts "Unexpected output"
-        exit 1
+        if {!$completed} {
+            puts "Unexpected output"
+            exit 1
+        }
     }
 }

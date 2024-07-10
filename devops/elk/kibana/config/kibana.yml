@@ -11,6 +11,7 @@ elasticsearch.hosts:
 # elasticsearch.hosts: [ http://elasticsearch:9200 ]
 # elasticsearch.hosts: https://localhost:9200
 
+elasticsearch.ssl.certificateAuthorities: [ "/usr/share/kibana/config/elasticsearch-ca.pem" ]
 
 monitoring.ui.container.elasticsearch.enabled: true
 monitoring.ui.container.logstash.enabled: true
