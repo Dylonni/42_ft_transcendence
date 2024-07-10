@@ -8,7 +8,9 @@ RUN expect -c "\
 	expect \"Use an existing CA? [y/N]\"; \
 	send \"y\r\"; \
 	expect \"CA Path:\"; \
-	send \"/usr/share/elasticsearch/config/elastic-stack-ca.p12\r\"; \
+	send \"
+/usr/share/elasticsearch/config/elastic-stack-ca.p12
+\r\"; \
 	expect \"Password for elastic-stack-ca.p12:\"; \
 	send \"\r\"; \
 	expect \"For how long should your certificate be valid? [5y]\"; \
@@ -24,6 +26,7 @@ RUN expect -c "\
 	send \"y\r\"; \
 	expect \"When you are done, press <ENTER> once more to move on to the next step.\"; \
 	send \"127.0.0.1\r\"; \
+            172.18.0.2
 	send \"\r\"; \
 	expect \"Is this correct [Y/n]\"; \
 	send \"y\r\"; \

@@ -36,9 +36,9 @@ xpack.security.enrollment.enabled: true
 # xpack.encryptedSavedObjects.encryptionKey:
 # xpack.reporting.encryptionKey:
 
-# server.ssl.enabled: true
-# server.ssl.certificate: /certs/kibana/kibana.crt
-# server.ssl.key: /certs/kibana/kibana.key
+server.ssl.enabled: true
+server.ssl.certificate: /certs/kibana/kibana-server.crt
+server.ssl.key: /certs/kibana/kibana-server.key
 
 #mjust testing
 # elasticsearch.ssl.certificateAuthorities: [ "config/elasticsearch-ca.pem" ]

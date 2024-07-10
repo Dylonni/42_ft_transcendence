@@ -4,23 +4,41 @@ ARG ELASTIC_PASSWORD
 
 FROM docker.elastic.co/elasticsearch/elasticsearch:${ELK_STACK_VERSION}
 
-# ENV ELASTIC_PASSWORD=elastic
+# ENV ELASTIC_PASSWORD=${ELASTIC_PASSWORD}
+# # ENV ELASTIC_PASSWORD=elastic
 # RUN if [ -z "$ELASTIC_PASSWORD" ]; then echo "ELASTIC_PASSWORD is not set" && exit 1; else echo "ELASTIC_PASSWORD is set to '$ELASTIC_PASSWORD'"; fi
 
 
-RUN mkdir -p /usr/share/elasticsearch/config/certs
-RUN ./bin/elasticsearch-certutil ca --out /usr/share/elasticsearch/config/elastic-stack-ca.p12 --pass "${ELASTIC_PASSWORD}" --silent
-RUN ./bin/elasticsearch-certutil cert --ca /usr/share/elasticsearch/config/elastic-stack-ca.p12 --ca-pass "${ELASTIC_PASSWORD}" --out /usr/share/elasticsearch/config/elastic-certificates.p12  --pass "${ELASTIC_PASSWORD}" --silent
+# RUN mkdir -p /usr/share/elasticsearch/config/certs
+# RUN ./bin/elasticsearch-certutil ca --out /usr/share/elasticsearch/config/elastic-stack-ca.p12 --pass "${ELASTIC_PASSWORD}" --silent
+# RUN ./bin/elasticsearch-certutil cert --ca /usr/share/elasticsearch/config/elastic-stack-ca.p12 --ca-pass "${ELASTIC_PASSWORD}" --out /usr/share/elasticsearch/config/elastic-certificates.p12  --pass "${ELASTIC_PASSWORD}" --silent
 # RUN cp /usr/share/elasticsearch/config/elastic-stack-ca.p12 /usr/share/elasticsearch/config/
 
 RUN ./bin/elasticsearch-keystore create
 RUN echo "${ELASTIC_PASSWORD}" | ./bin/elasticsearch-keystore add --stdin xpack.security.transport.ssl.keystore.secure_password
 RUN echo "${ELASTIC_PASSWORD}" | ./bin/elasticsearch-keystore add --stdin xpack.security.transport.ssl.truststore.secure_password
 
+
+
+COPY ./config/elastic-certificates.p12 /usr/share/elasticsearch/elastic-certificates.p12
+COPY ./config/elasticsearch.crt /usr/share/elasticsearch/elasticsearch.crt
+COPY ./config/elasticsearch.key /usr/share/elasticsearch/elasticsearch.key
+COPY ./config/elasticsearch.p12 /usr/share/elasticsearch/elasticsearch.p12
+COPY ./config/elastic-stack-ca.p12 /usr/share/elasticsearch/elastic-stack-ca.p12
+
+
+# COPY ./config/elasticsearch.keystore /usr/share/elasticsearch/config/elasticsearch.keystore
 COPY ./config/http.p12 /usr/share/elasticsearch/config/http.p12
 
-RUN echo "" | ./bin/elasticsearch-keystore add xpack.security.http.ssl.keystore.secure_password
+RUN mkdir -p /usr/share/elasticsearch/kibana-server
+COPY ./config/kibana-server.csr /usr/share/elasticsearch/kibana-server/kibana-server.csr
+COPY ./config/kibana-server.key /usr/share/elasticsearch/kibana-server/kibana-server.key
 
+
+
+
+
+RUN echo ${ELASTIC_PASSWORD} | ./bin/elasticsearch-keystore add --stdin xpack.security.http.ssl.keystore.secure_password
 
 # USER root
 # ENV ELASTIC_PASSWORD=${ELASTIC_PASSWORD}
@@ -82,7 +100,11 @@ COPY ./config/elasticsearch.yml /usr/share/elasticsearch/config/elasticsearch.ym
 
 # RUN bin/elasticsearch-reset-password -u elastic -y
 
+COPY ./config/fullscript.sh /usr/share/elasticsearch/fullscript.sh
+# RUN chmod +x /usr/share/elasticsearch/fullscript.sh
+
+
 # ENTRYPOINT ["/usr/share/elasticsearch/certutils_http.sh"]
-# ENTRYPOINT ["/usr/share/elasticsearch/cert2.sh"]
+# ENTRYPOINT ["/usr/share/elasticsearch/fullscript.sh"]
 
 # ENTRYPOINT /usr/share/elasticsearch/script.exp
