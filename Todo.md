@@ -13,7 +13,8 @@
 - [ ] Remove the "Stats Indicator" , Create a Rank indicator
 
     TEMPLATES
-- [ ] Add {% static 'path/to/img' %} to all templates with {% load static %} at start
+- [x] Add {% static 'path/to/img' %} to all templates with {% load static %} at start
+- [ ] Replace the following tags with variables: #Rank, #GamesPlayed, #Wins, #Loss, #Score, #RoomName
 
 
     SETTINGS

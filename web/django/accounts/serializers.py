@@ -16,16 +16,16 @@ class UserLoginSerializer(serializers.Serializer):
         
         if not username_or_email or not password:
             msg = _('Must include "username/email" and "password".')
-            raise serializers.ValidationError(msg, code='authorization')
+            raise serializers.ValidationError(msg)
         
         user = authenticate(request=self.context.get('request'), username=username_or_email, password=password)
         if not user:
             try:
                 user = UserModel.objects.get(email=username_or_email)
                 user = authenticate(request=self.context.get('request'), username=user.username, password=password)
-            except UserModel.DoesNotExist as e:
+            except UserModel.DoesNotExist:
                 msg = _('Unable to log in with provided credentials.')
-                raise serializers.ValidationError(msg, code='authorization')
+                raise serializers.ValidationError(msg)
         attrs['user'] = user
         return attrs
 

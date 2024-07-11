@@ -11,56 +11,63 @@ from .tokens import EmailTokenGenerator
 def send_activation_mail(request, user):
     current_site = get_current_site(request)
     token_generator = EmailTokenGenerator()
-    message = render_to_string('accounts/email_activate.html', {
+    html_message = render_to_string('accounts/email_activate.html', {
         'user': user,
         'domain': current_site.domain,
         'uid': urlsafe_base64_encode(force_bytes(user.pk)),
         'token': token_generator.make_token(user),
     })
-    to_email = user.email
     send_mail(
         subject='Activate your account',
         message='',
         from_email=settings.DEFAULT_FROM_EMAIL,
-        recipient_list=[to_email],
-        html_message=message,
+        recipient_list=[user.email],
+        fail_silently=False,
+        auth_user=settings.EMAIL_HOST_USER,
+        auth_password=settings.EMAIL_HOST_USER,
+        html_message=html_message,
     )
 
 def send_password_reset_mail(request, user):
     current_site = get_current_site(request)
     token_generator = EmailTokenGenerator()
-    message = render_to_string('accounts/email_password_reset.html', {
+    html_message = render_to_string('accounts/email_password_reset.html', {
         'user': user,
         'domain': current_site.domain,
         'uid': urlsafe_base64_encode(force_bytes(user.pk)),
         'token': token_generator.make_token(user),
     })
-    to_email = user.email
     send_mail(
         subject='Activate your account',
         message='',
         from_email=settings.DEFAULT_FROM_EMAIL,
-        recipient_list=[to_email],
-        html_message=message,
+        recipient_list=[user.email],
+        fail_silently=False,
+        auth_user=settings.EMAIL_HOST_USER,
+        auth_password=settings.EMAIL_HOST_USER,
+        html_message=html_message,
     )
 
-def set_jwt_cookies(response, user):
+def set_jwt_cookies_for_user(response, user):
     refresh = RefreshToken.for_user(user)
+    set_jwt_as_cookies(response, str(refresh.access_token), str(refresh))
+    return str(refresh.access_token), str(refresh)
+
+def set_jwt_as_cookies(response, access_token, refresh_token):
     response.set_cookie(
         key='access_token',
-        value=str(refresh.access_token),
+        value=access_token,
         httponly=True,
         secure=True,
         samesite='Lax'
     )
     response.set_cookie(
         key='refresh_token',
-        value=str(refresh),
+        value=refresh_token,
         httponly=True,
         secure=True,
         samesite='Lax'
     )
-    return str(refresh.access_token), str(refresh)
 
 def unset_jwt_cookies(response):
     response.delete_cookie(
@@ -77,7 +84,7 @@ def is_token_valid(token):
     except TokenError:
         return False
 
-def refresh_access_token(refresh_token):
+def get_jwt_from_refresh(refresh_token):
     try:
         refresh = RefreshToken(refresh_token)
         return str(refresh.access_token), str(refresh)

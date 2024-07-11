@@ -58,10 +58,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
+    'channels',
     'django_prometheus',
     'rest_framework',
     'rest_framework_simplejwt',
-    'accounts.apps.AccountsConfig',
+    
+    'accounts',
+    'profiles',
+    'friends',
 ]
 
 MIDDLEWARE = [
@@ -98,6 +103,13 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'pong.wsgi.application'
+ASGI_APPLICATION = 'pong.asgi.application'
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer',
+    },
+}
 
 
 # Database
@@ -115,6 +127,7 @@ DATABASES = {
 }
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -157,6 +170,10 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
 
+MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
@@ -176,14 +193,13 @@ EMAIL_HOST_PASSWORD = os.getenv('DJANGO_MAIL_PASSWORD')
 
 FORTYTWO_ID = os.getenv('DJANGO_42_ID')
 FORTYTWO_SECRET = os.getenv('DJANGO_42_SECRET')
+FORTYTWO_REDIRECT_URI = os.getenv('DJANGO_42_REDIRECT_URI')
 
 # JWT
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-        'rest_framework.authentication.BasicAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
     ),
 }
 

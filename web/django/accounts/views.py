@@ -6,6 +6,7 @@ from django.conf import settings
 from django.contrib.auth import authenticate, get_user_model, login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
+from django.core.files.base import ContentFile
 from django.core.mail import send_mail
 from django.contrib.sites.shortcuts import get_current_site
 from django.shortcuts import redirect, render
@@ -21,6 +22,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
 from urllib.parse import quote
+from profiles.models import Profile
 from .serializers import (
     PasswordResetConfirmSerializer,
     PasswordResetRequestSerializer,
@@ -30,10 +32,13 @@ from .serializers import (
 )
 from .tokens import EmailTokenGenerator
 from .utils import (
+    is_token_valid,
+    get_jwt_from_refresh,
     send_activation_mail,
     send_password_reset_mail,
-    set_jwt_cookies,
-    unset_jwt_cookies
+    set_jwt_as_cookies,
+    set_jwt_cookies_for_user,
+    unset_jwt_cookies,
 )
 
 UserModel = get_user_model()
@@ -57,7 +62,7 @@ class UserLoginView(APIView):
             status=status.HTTP_200_OK,
         )
         login(request, user)
-        set_jwt_cookies(response, user)
+        set_jwt_cookies_for_user(response, user)
         return response
 
 user_login = UserLoginView.as_view()
@@ -116,6 +121,7 @@ class UserActivateView(APIView):
         token_generator = EmailTokenGenerator()
         if user is not None and token_generator.check_token(user, token):
             user.is_active = True
+            user.is_verified = True
             user.save()
             
             response = Response(
@@ -126,7 +132,7 @@ class UserActivateView(APIView):
                 status=status.HTTP_200_OK,
             )
             login(request, user)
-            set_jwt_cookies(response, user)
+            set_jwt_cookies_for_user(response, user)
             return response
         
         response = Response(
@@ -183,7 +189,7 @@ class PasswordResetView(APIView):
                 status=status.HTTP_200_OK,
             )
             login(request, user)
-            set_jwt_cookies(response, user)
+            set_jwt_cookies_for_user(response, user)
             return response
         
         response = Response(
@@ -214,7 +220,7 @@ class PasswordResetConfirmView(APIView):
             status=status.HTTP_200_OK,
         )
         login(request, user)
-        set_jwt_cookies(response, user)
+        set_jwt_cookies_for_user(response, user)
         return response
 
 password_reset_confirm = PasswordResetConfirmView.as_view()
@@ -224,7 +230,7 @@ class FortyTwoLoginView(APIView):
     permission_classes = (AllowAny,)
     
     def get(self, request, *args, **kwargs):
-        redirect_uri = quote('http://localhost:8080/api/oauth/42/callback/', safe='')
+        redirect_uri = quote(settings.FORTYTWO_REDIRECT_URI, safe='')
         authorization_url = f'https://api.intra.42.fr/oauth/authorize?client_id={settings.FORTYTWO_ID}&redirect_uri={redirect_uri}&response_type=code'
         return redirect(authorization_url)
 
@@ -238,7 +244,7 @@ class FortyTwoCallbackView(APIView):
             'client_id': settings.FORTYTWO_ID,
             'client_secret': settings.FORTYTWO_SECRET,
             'code': request.GET.get('code'),
-            'redirect_uri': 'http://localhost:8080/api/oauth/42/callback/',
+            'redirect_uri': settings.FORTYTWO_REDIRECT_URI,
         })
         
         token_response = response.json()
@@ -252,6 +258,7 @@ class FortyTwoCallbackView(APIView):
         fortytwo_id = user_info['id']
         username = "42_" + user_info['login']
         email = user_info['email']
+        img = user_info['image']['versions']['small']
         
         try:
             user = UserModel.objects.get(fortytwo_id=fortytwo_id)
@@ -278,16 +285,72 @@ class FortyTwoCallbackView(APIView):
                     fortytwo_id=fortytwo_id,
                     fortytwo_access_token=fortytwo_access_token,
                     fortytwo_refresh_token=fortytwo_refresh_token,
+                    is_verified=True,
                 )
+        self._save_avatar_from_url(user, img)
+        profile = Profile.objects.get(user=user)
         
-        response = Response({
-            'status': _('Authentication successful!'),
-        }, status=status.HTTP_200_OK)
+        response = redirect('/home/')
         login(request, user)
-        set_jwt_cookies(response, user)
+        set_jwt_cookies_for_user(response, user)
         return response
+    
+    def _save_avatar_from_url(self, user, url):
+        response = requests.get(url)
+        if response.status_code == 200:
+            file_name = url.split('/')[-1]
+            profile = Profile.objects.get(user=user)
+            profile.avatar.save(file_name, ContentFile(response.content), save=True)
 
 fortytwo_callback = FortyTwoCallbackView.as_view()
+
+
+class TokenVerify(APIView):
+    def post(self, request, *args, **kwargs):
+        access_token = request.COOKIES.get('access_token')
+        refresh_token = request.COOKIES.get('refresh_token')
+        if access_token:
+            if is_token_valid(access_token):
+                response = Response(
+                    {
+                        'status': _('Already authenticated!'),
+                        'redirect': '/home/',
+                    },
+                    status=status.HTTP_200_OK,
+                )
+                return response
+            else:
+                access_token, refresh_token = get_jwt_from_refresh(refresh_token)
+                if access_token is None:
+                    response = Response(
+                        {
+                            'status': _('Invalid tokens!'),
+                            'redirect': '/login/',
+                        },
+                        status=status.HTTP_200_OK,
+                    )
+                    unset_jwt_cookies(response)
+                    return response
+                else:
+                    response = Response(
+                        {
+                            'status': _('Already authenticated!'),
+                            'redirect': '/home/',
+                        },
+                        status=status.HTTP_200_OK,
+                    )
+                    set_jwt_as_cookies(response, access_token, refresh_token)
+                    return response
+        response = Response(
+            {
+                'status': _('Welcome!'),
+                'redirect': '/login/',
+            },
+            status=status.HTTP_200_OK,
+        )
+        return response
+
+token_verify = TokenVerify.as_view()
 
 
 class UserUpdateEmailView(generics.GenericAPIView):

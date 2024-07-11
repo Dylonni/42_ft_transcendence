@@ -22,7 +22,7 @@ oauthpatterns = [
 
 tknpatterns = [
 	path('refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path('verify/', TokenVerifyView.as_view(), name='token_verify'),
+    path('verify/', views.token_verify, name='token_verify'),
 ]
 
 urlpatterns = [

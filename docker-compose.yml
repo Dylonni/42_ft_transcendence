@@ -64,10 +64,7 @@ services:
     networks:
       - backend
     volumes:
-      - ./web/django/accounts:/django/accounts
-      - ./web/django/pong:/django/pong
-      - ./web/django/static:/django/static
-      - ./web/django/templates:/django/templates
+      - ./web/django:/django
       - elk-data:/logstash
       - django-token:/django/secrets:ro
 

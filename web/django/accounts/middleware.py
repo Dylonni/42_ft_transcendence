@@ -1,7 +1,7 @@
 from django.contrib.auth import logout
 from .utils import (
     is_token_valid,
-    refresh_access_token,
+    get_jwt_from_refresh,
     unset_jwt_cookies,
 )
 
@@ -17,7 +17,7 @@ class JWTCookieMiddleware:
             if is_token_valid(access_token):
                 request.META['HTTP_AUTHORIZATION'] = f'Bearer {access_token}'
             else:
-                access_token, refresh_token = refresh_access_token(refresh_token)
+                access_token, refresh_token = get_jwt_from_refresh(refresh_token)
                 if not access_token:
                     invalid_tokens = True
         
