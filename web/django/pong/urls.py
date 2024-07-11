@@ -35,6 +35,7 @@ urlpatterns = [
 	# re_path(_(r'^password-reset/?$'), views.PasswordReset.as_view(), name='password_reset'),
     re_path(_(r'^home/?$'), views.HomeView.as_view(), name='home'),
     re_path(_(r'^profile/?$'), views.ProfileView.as_view(), name='profile'),
-	  re_path(_(r'^social/?$'), views.SocialView.as_view(), name='social'),
+    re_path(_(r'^leaderboard/?$'), views.LeaderboardView.as_view(), name='leaderboard'),
+	re_path(_(r'^social/?$'), views.SocialView.as_view(), name='social'),
     re_path(_(r'^settings/?$'), views.SettingsView.as_view(), name='settings'),
 ]

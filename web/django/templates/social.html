@@ -1,3 +1,4 @@
+{% load static %}
 {% include "sidebar.html" %}
 {% block content %}
 <div class="container">
@@ -30,7 +31,7 @@
 				</div>
 				<div class="d-xl-flex justify-content-xl-center overflow-auto" id="freind-list" style="width: 100%;height: 100%;margin-top: 0px;">
 					<div class="d-flex d-xl-flex flex-row justify-content-start align-items-center justify-content-lg-center align-items-lg-center align-items-xl-center" id="friend-item" style="height: 95px;width: 100%;border-radius: 2px;background: rgba(33,37,41,0.76);">
-						<div class="d-xl-flex justify-content-xl-start align-items-xl-center" style="border-radius: 0px;padding-top: 0px;margin-bottom: 0px;height: 60px;width: 20%;margin-top: 0px;position: sticky;"><img width="60" height="60" src="static/img/question_mark.png" style="border-radius: 35px;">
+						<div class="d-xl-flex justify-content-xl-start align-items-xl-center" style="border-radius: 0px;padding-top: 0px;margin-bottom: 0px;height: 60px;width: 20%;margin-top: 0px;position: sticky;"><img width="60" height="60" src="{% static '/img/question_mark.png' %}" style="border-radius: 35px;">
 							<div id="notification" style="width: 10px;height: 10px;background: #ff0000;border-radius: 8px;margin: 0px;padding-right: 0px;margin-bottom: 45px;margin-right: 0px;margin-left: 0px;"></div>
 						</div>
 						<div style="width: 40%;height: 60%;margin-bottom: 0px;"><span id="status" style="color: rgb(51,255,0);margin-top: 0px;margin-bottom: 0px;">Online</span>
@@ -62,7 +63,7 @@
 				<div class="d-flex d-xl-flex flex-column overflow-auto" style="width: 100%;height: 80%;background: #343a40;padding-top: 0px;margin-top: 0px;margin-left: 0px;">
 					<section id="message-list" class="overflow-auto" style="margin: 0px;margin-left: 0px;margin-right: 0px;height: 100%;width: 100%;">
 						<div class="d-flex d-xxl-flex align-items-center align-items-xxl-center" id="template-friend-msg" style="height: auto;width: 100%;padding-bottom: 0px;margin-bottom: 10px;">
-							<div class="d-xxl-flex justify-content-xxl-center align-items-xxl-center" style="border-radius: 0px;width: 60px;height: 60px;padding-left: 0px;margin-left: 10px;"><img width="93" height="135" src="static/img/question_mark.png" style="border-radius: 41px;width: 100%;height: 100%;"></div>
+							<div class="d-xxl-flex justify-content-xxl-center align-items-xxl-center" style="border-radius: 0px;width: 60px;height: 60px;padding-left: 0px;margin-left: 10px;"><img width="93" height="135" src="{% static '/img/question_mark.png' %}" style="border-radius: 41px;width: 100%;height: 100%;"></div>
 							<div class="text-break" style="height: 100%;background: #4c575f;width: 65%;border-radius: 20px;margin-left: 20px;margin-top: 0px;padding-top: 10px;box-shadow: -2px 2px rgb(21,23,25);text-shadow: 2px 2px var(--bs-emphasis-color);border-bottom-left-radius: 19px;border-top-left-radius: 19px;border-top-right-radius: 19px;border-bottom-right-radius: 19px;">
 								<div class="message-wrapper" style="height: 100%;width: 90%;margin-left: 0px;margin-right: 0px;padding-left: 10px;padding-right: 10px;">
 									<p class="wrapbox" style="margin-left: 0px;color: var(--bs-body-bg);width: 100%;">dkezijedooiezjdezdddddddddddddddddddddddddddddddddddddddddddddd<br>ddddddddddddddddddddddddddddddddddddddddddddddddddlololl</p>
@@ -75,7 +76,7 @@
 									<p class="wrapbox" style="margin-left: 0px;color: var(--bs-body-bg);width: 100%;text-shadow: 2px 2px var(--bs-emphasis-color);">dkezijedooiezjdezdddddddddddddddddddddddddddddddddddddddddddddd<br><br></p>
 								</div>
 							</div>
-							<div class="d-xxl-flex justify-content-xxl-center align-items-xxl-center" style="border-radius: 0px;width: 60px;height: 60px;padding-left: 0px;margin-left: 15px;margin-right: 10px;"><img width="93" height="135" src="static/img/question_mark.png" style="border-radius: 41px;width: 100%;height: 100%;"></div>
+							<div class="d-xxl-flex justify-content-xxl-center align-items-xxl-center" style="border-radius: 0px;width: 60px;height: 60px;padding-left: 0px;margin-left: 15px;margin-right: 10px;"><img width="93" height="135" src="{% static '/img/question_mark.png' %}" style="border-radius: 41px;width: 100%;height: 100%;"></div>
 						</div>
 					</section>
 				</div>

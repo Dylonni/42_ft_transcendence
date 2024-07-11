@@ -1,8 +1,8 @@
+{% load static %}
 {% block content %}
 <div class="lottie-bg">
-	<lottie-player id="pong_anim" src="static/js/Animation%20-%201718218491020.json" mode="normal" autoplay="" loop=""></lottie-player>
+	<lottie-player id="pong_anim" src="{% static '/js/pong_anim.json' %}" mode="normal" loop=""></lottie-player>
 </div>
-
 <header>
 	<nav class="navbar navbar-expand-md bg-body py-3" style="background: var(--bs-light);">
 		<div class="container"><a class="navbar-brand d-flex align-items-center" href="/"><img src="static/img/game_icon.png" width="275" height="140" style="background: var(--bs-body-bg);"></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
@@ -34,10 +34,10 @@
 							<form class="text-center auth-form" method="post" action="/api/auth/register/">
 								{% csrf_token %}
 								<h2 style="padding-bottom: 20px;">Register</h2>
-								<div class="mb-3 form-floating"><input class="form-control form-control form-control" type="text" id="floatingUser-register" maxlength="64" minlength="4" name="username" pattern="^[a-zA-Z0-9_.-]*$" placeholder=" " required=""><label class="form-label" for="floatingUser-register">Username</label></div>
-								<div class="mb-3 form-floating"><input class="form-control form-control form-control" type="email" id="floatingMail-register" name="email" placeholder=" " required=""><label class="form-label" for="floatingMail-register">Email</label></div>
-								<div class="mb-3 form-floating"><input class="form-control form-control form-control" type="password" id="floatingPassword-register" maxlength="254" minlength="6" name="password" pattern="^[\w\W]{6,254}$" placeholder=" " required="" title="Password must include at least 6 Characters long"><label class="form-label" for="floatingMail-register">Password</label>
-									<div class="form-check" style="width: 110.078px;margin-left: 0px;margin-bottom: 0px;height: 29px;padding-top: 2px;"><input class="form-check-input" type="checkbox" id="formCheck-3" style="margin-left: -23px;width: 16px;margin-right: 0px;margin-top: 5px;"><label class="form-check-label" for="formCheck-3" style="margin-left: 0px;font-size: 12px;margin-top: 0px;margin-bottom: 5px;">Show password</label></div>
+								<div class="mb-3 form-floating"><input class="form-control" type="text" id="floatingUser-register" maxlength="64" minlength="4" name="username" pattern="^[a-zA-Z0-9_.-]*$" placeholder=" " required=""><label class="form-label" for="floatingUser-register">Username</label></div>
+								<div class="mb-3 form-floating"><input class="form-control" type="email" id="floatingMail-register" name="email" placeholder=" " required=""><label class="form-label" for="floatingMail-register">Email</label></div>
+								<div class="mb-3 form-floating"><input class="form-control" type="password" id="floatingPassword-register" maxlength="254" minlength="6" name="password" pattern="^[\w\W]{6,254}$" placeholder=" " required="" title="Password must include at least 6 Characters long"><label class="form-label" for="floatingMail-register">Password</label>
+									<div class="form-check" style="width: 110.078px;margin-left: 0px;margin-bottom: 0px;height: 29px;padding-top: 2px;"><input class="form-check-input" onclick="showPassword()" type="checkbox" id="formCheck-3" style="margin-left: -23px;width: 16px;margin-right: 0px;margin-top: 5px;"><label class="form-check-label" for="formCheck-3" style="margin-left: 0px;font-size: 12px;margin-top: 0px;margin-bottom: 5px;">Show password</label></div>
 								</div>
 								<div class="mb-3"><button class="btn btn-primary d-block w-100" type="submit">Register</button></div>
 								<p class="text-muted">Already Registered ?&nbsp;<a href="/login">Sign in here</a></p>

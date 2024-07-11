@@ -44,6 +44,13 @@ class ProfileView(APIView):
     def get(self, request, *args, **kwargs):
         return redirect_not_ajax(request, _('Profile'), 'profile.html')
 
+class LeaderboardView(APIView):
+    permission_classes = (IsAuthenticated,)
+    
+    def get(self, request, *args, **kwargs):
+        return redirect_not_ajax(request, _('Leaderboard'), 'leaderboard.html')
+
+
 
 class SocialView(APIView):
     permission_classes = (IsAuthenticated,)

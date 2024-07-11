@@ -117,3 +117,15 @@ body, html {
 .total-loss {
   color: var(--bs-form-invalid-color);
 }
+
+.leadcolumns {
+  flex: 1 1 33%;
+}
+
+.first-place {
+  z-index: 1000;
+}
+
+.leaderboardinfos {
+  flex: 1 1 25%;
+}
