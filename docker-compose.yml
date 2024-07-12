@@ -19,6 +19,7 @@ services:
       - elasticsearch
       - logstash
       - kibana
+    restart: always
     networks:
       - backend
     ports:
@@ -130,6 +131,7 @@ services:
       - backend
       - elk
     volumes:
+      - shared_elk:/usr/share/elasticsearch/config
       - elk-data:/usr/share/elasticsearch/
 
   logstash:
@@ -158,14 +160,14 @@ services:
     environment:
       ELASTICSEARCH_USERNAME: kibana
       KIBANA_SYSTEM_PASSWORD: ${KIBANA_SYSTEM_PASSWORD:-}
-      xpack.security.enabled: false
-      xpack.license.self_generated.type: trial
     depends_on:
       - elasticsearch
     networks:
       - backend
       - elk
+    restart: always
     volumes:
+      - shared_elk:/usr/share/kibana/config
       - elk-data:/certs
 
 volumes:
@@ -175,3 +177,5 @@ volumes:
     name: elk-data
   django-token:
     name: django-token
+  shared_elk:
+    name: shared_elk

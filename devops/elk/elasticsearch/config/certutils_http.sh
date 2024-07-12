@@ -21,12 +21,13 @@ set timeout -1
 # }
 
 
-set elastic_password $env(ELASTIC_PASSWORD)
+# set elastic_password $env(ELASTIC_PASSWORD)
 set completed 0
 exp_internal 1
 spawn ./bin/elasticsearch-certutil http
 match_max 100000
-expect -exact "\r
+
+expect "\r
 ## Elasticsearch HTTP Certificate Utility\r
 \r
 The 'http' command guides you through the process of generating certificates\r
@@ -52,10 +53,13 @@ for you. That certificate will be signed by a CA under your control. This is a\r
 quick and easy way to secure your cluster with TLS, but you will need to\r
 configure all your clients to trust that custom CA.\r
 \r
-\u001b[?2004hGenerate a CSR? \[y/N\]"
+Generate a CSR?"
+
+# expect -exact "Generate a CSR?"
+
+
 send -- "n\r"
-expect -exact "n\r\r
-\[?1l>\[?1000l\[?2004l\r
+expect "n\r\r
 ## Do you have an existing Certificate Authority (CA) key-pair that you wish to use to sign your certificate?\r
 \r
 If you have an existing CA certificate and key, then you can use that CA to\r
@@ -65,27 +69,25 @@ and may be easier for you to manage.\r
 \r
 If you do not have an existing CA, one will be generated for you.\r
 \r
-\[?1h=\[?2004hUse an existing CA? \[y/N\]"
+Use an existing CA? \[y/N\]"
 send -- "y\r"
-expect -exact "y\r\r
-\[?1l>\[?1000l\[?2004l\r
+expect "y\r\r
 ## What is the path to your CA?\r
 \r
 Please enter the full pathname to the Certificate Authority that you wish to\r
 use for signing your new http certificate. This can be in PKCS#12 (.p12), JKS\r
 (.jks) or PEM (.crt, .key, .pem) format.\r
-\[?1h=\[?2004hCA Path: "
-send -- "\[200~/usr/share/elasticsearch/config/elastic-stack-ca.p12\[201~"
-expect -exact "\[7m/usr/share/elasticsearch/config/elastic-stack-ca.p12\[0m"
+CA Path: "
+send -- "usr/share/elasticsearch/config/elastic-stack-ca.p12\r"
+expect "/usr/share/elasticsearch/config/elastic-stack-ca.p12\r"
 send -- "\r"
-expect -exact "\[52D/usr/share/elasticsearch/config/elastic-stack-ca.p12\r\r
-\[?1l>\[?1000l\[?2004lReading a PKCS12 keystore requires a password.\r
+expect "/usr/share/elasticsearch/config/elastic-stack-ca.p12\r\r
+Reading a PKCS12 keystore requires a password.\r
 It is possible for the keystore's password to be blank,\r
 in which case you can simply press <ENTER> at the prompt\r
-\[?1h=\[?2004hPassword for elastic-stack-ca.p12:"
-send -- "\r"
+Password for elastic-stack-ca.p12:"
+send -- "$env(ELASTIC_PASSWORD)\r"
 expect -exact "\r\r
-\[?1l>\[?1000l\[?2004l\r
 ## How long should your certificates be valid?\r
 \r
 Every certificate has an expiry date. When the expiry date is reached clients\r
@@ -99,10 +101,9 @@ a few months before it expires.\r
 \r
 You may enter the validity period in years (e.g. 3Y), months (e.g. 18M), or days (e.g. 90D)\r
 \r
-\[?1h=\[?2004hFor how long should your certificate be valid? \[5y\] "
+For how long should your certificate be valid? \[5y\] "
 send -- "90d\r"
 expect -exact "90d\r\r
-\[?1l>\[?1000l\[?2004l\r
 ## Do you wish to generate one certificate per node?\r
 \r
 If you have multiple nodes in your cluster, then you may choose to generate a\r
@@ -122,10 +123,9 @@ additional nodes to your cluster in the future, then you should generate a\r
 certificate per node so that you can more easily generate new certificates when\r
 you provision new nodes.\r
 \r
-\[?1h=\[?2004hGenerate a certificate per node? \[y/N\]"
+Generate a certificate per node? \[y/N\]"
 send -- "n\r"
 expect -exact "n\r\r
-\[?1l>\[?1000l\[?2004l\r
 ## Which hostnames will be used to connect to your nodes?\r
 \r
 These hostnames will be added as \"DNS\" names in the \"Subject Alternative Name\"\r
@@ -140,37 +140,26 @@ can enter that here.\r
 \r
 Enter all the hostnames that you need, one per line.\r
 When you are done, press <ENTER> once more to move on to the next step.\r
-\r
-\[?1h=\[?2004h"
-send -- "\[200~localhost\[201~"
-expect -exact "\[7mlocalhost\[0m"
-send -- "\r"
-expect -exact "\rlocalhost\r\r
-\[?1l>\[?1000l\[?2004l\[?1h=\[?2004h"
-send -- "\[200~transcendence42\[201~"
-expect -exact "\[7mtranscendence42\[0m"
-send -- "\r"
-expect -exact "\rtranscendence42\r\r
-\[?1l>\[?1000l\[?2004l\[?1h=\[?2004h"
-send -- "\[200~transcendence42\[201~"
-expect -exact "\[7mtranscendence42\[0m"
-send -- "."
-expect -exact "\rtranscendence42.\[K"
-send -- "rocks\r"
-expect -exact "rocks\r\r
-\[?1l>\[?1000l\[?2004l\[?1h=\[?2004h"
-send -- "\r"
+\r"
+send -- "localhost\r"
+expect -exact "localhost"
+
+send -- "transcendence42\r"
+expect -exact "transcendence42"
+
+send -- "transcendence42.rocks\r"
+expect -exact "transcendence42.rocks"
+
 expect -exact "\r\r
-\[?1l>\[?1000l\[?2004lYou entered the following hostnames.\r
+You entered the following hostnames.\r
 \r
  - localhost\r
  - transcendence42\r
  - transcendence42.rocks\r
 \r
-\[?1h=\[?2004hIs this correct \[Y/n\]"
+Is this correct \[Y/n\]"
 send -- "y\r"
 expect -exact "y\r\r
-\[?1l>\[?1000l\[?2004l\r
 ## Which IP addresses will be used to connect to your nodes?\r
 \r
 If your clients will ever connect to your nodes by numeric IP address, then you\r
@@ -182,21 +171,18 @@ to your cluster then you can just press <ENTER> to skip this step.\r
 \r
 Enter all the IP addresses that you need, one per line.\r
 When you are done, press <ENTER> once more to move on to the next step.\r
-\r
-\[?1h=\[?2004h"
+\r"
 send -- "127.0.0.1\r"
-expect -exact "127.0.0.1\r\r
-\[?1l>\[?1000l\[?2004l\[?1h=\[?2004h"
+expect -exact "127.0.0.1\r\r"
 send -- "\r"
 expect -exact "\r\r
-\[?1l>\[?1000l\[?2004lYou entered the following IP addresses.\r
+You entered the following IP addresses.\r
 \r
  - 127.0.0.1\r
 \r
-\[?1h=\[?2004hIs this correct \[Y/n\]"
+Is this correct \[Y/n\]"
 send -- "y\r"
 expect -exact "y\r\r
-\[?1l>\[?1000l\[?2004l\r
 ## Other certificate options\r
 \r
 The generated certificate will have the following additional configuration\r
@@ -208,10 +194,9 @@ Key Name: localhost\r
 Subject DN: CN=localhost\r
 Key Size: 2048\r
 \r
-\[?1h=\[?2004hDo you wish to change any of these options? \[y/N\]"
+Do you wish to change any of these options? \[y/N\]"
 send -- "n\r"
 expect -exact "n\r\r
-\[?1l>\[?1000l\[?2004l\r
 ## What password do you want for your private key(s)?\r
 \r
 Your private key(s) will be stored in a PKCS#12 keystore file named \"http.p12\".\r
@@ -219,13 +204,12 @@ This type of keystore is always password protected, but it is possible to use a\
 blank password.\r
 \r
 If you wish to use a blank password, simply press <enter> at the prompt below.\r
-\[?1h=\[?2004hProvide a password for the \"http.p12\" file:  \[<ENTER> for none\]"
-send -- "elastic\r"
+Provide a password for the \"http.p12\" file:  \[<ENTER> for none\]"
+send -- "$env(ELASTIC_PASSWORD)\r"
 expect -exact "\r\r
-\[?1l>\[?1000l\[?2004l\[?1h=\[?2004hRepeat password to confirm: "
-send -- "elastic\r"
+Repeat password to confirm: "
+send -- "$env(ELASTIC_PASSWORD)\r"
 expect -exact "\r\r
-\[?1l>\[?1000l\[?2004l\r
 ## Where should we save the generated files?\r
 \r
 A number of files will be generated including your private key(s),\r
@@ -233,8 +217,8 @@ public certificate(s), and sample configuration options for Elastic Stack produc
 \r
 These files will be included in a single zip archive.\r
 \r
-\[?1h=\[?2004hWhat filename should be used for the output zip file? \[/usr/share/elasticsearch/elasticsearch-ssl-http.zip\] "
-send -- "\[200~/usr/share/elasticsearch/elasticsearch-ssl-http.zip\[201~"
-expect -exact "\[7m/usr/share/elasticsearch/ela\[0m\[7ms\[0m\[7mticsearch-ssl-http.zip\[0m"
+hWhat filename should be used for the output zip file? \[/usr/share/elasticsearch/elasticsearch-ssl-http.zip\] "
+send -- "/usr/share/elasticsearch/elasticsearch-ssl-http.zip\r"
+expect -exact "/usr/share/elasticsearch/elasticsearch-ssl-http.zip\r"
 send -- "\r"
 expect eof

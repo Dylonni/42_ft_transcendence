@@ -102,7 +102,7 @@ expect -exact "\[52D/usr/share/elasticsearch/config/elastic-stack-ca.p12\r\r
 It is possible for the keystore's password to be blank,\r
 in which case you can simply press <ENTER> at the prompt\r
 \[?1h=\[?2004hPassword for elastic-stack-ca.p12:"
-send -- "\r"
+send -- "$env(ELASTIC_PASSWORD)\r"
 expect -exact "\r\r
 \[?1l>\[?1000l\[?2004l\r
 ## How long should your certificates be valid?\r
