@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const appDiv = document.getElementById('content');
+    const contentDiv = document.getElementById('content');
     
     const originalPushState = history.pushState;
     history.pushState = function () {
@@ -23,47 +23,20 @@ document.addEventListener("DOMContentLoaded", () => {
         history.pushState(null, null, url);
     };
     
-    const getCookie = (name) => {
-        let value = "; " + document.cookie;
-        let parts = value.split("; " + name + "=");
-        if (parts.length === 2) {
-            return parts.pop().split(";").shift();
-        }
-    }
-    
     const renderPage = () => {
         let path = window.location.pathname;
         console.log(path);
-        if (path.localeCompare("/") == 0) {
-            var csrftoken = getCookie('csrftoken');
-            fetch('/api/token/verify/', {
-                method: 'POST',
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest',
-                    'X-CSRFToken': csrftoken,
-                },
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-                if (data.redirect) {
-                    navigateTo(data.redirect);
-                }
-            })
-            .catch(error => console.error('Error verifying tokens:', error));
-        } else {
-            fetch(`${path}`, {
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest',
-                },
-            })
-            .then(response => response.text())
-            .then(html => {
-                appDiv.innerHTML = html;
-                attachHandlers();
-            })
-            .catch(error => console.error('Error fetching content:', error));
-        }
+        fetch(`${path}`, {
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+            },
+        })
+        .then(response => response.text())
+        .then(html => {
+            contentDiv.innerHTML = html;
+            attachHandlers();
+        })
+        .catch(error => console.error('Error fetching content:', error));
     };
     
     const attachHandlers = () => {
@@ -133,6 +106,5 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener('pushState', renderPage);
     window.addEventListener('replaceState', renderPage);
 
-    // renderPage();
     attachHandlers();
 });

@@ -288,7 +288,6 @@ class FortyTwoCallbackView(APIView):
                     is_verified=True,
                 )
         self._save_avatar_from_url(user, img)
-        profile = Profile.objects.get(user=user)
         
         response = redirect('/home/')
         login(request, user)
@@ -301,6 +300,7 @@ class FortyTwoCallbackView(APIView):
             file_name = url.split('/')[-1]
             profile = Profile.objects.get(user=user)
             profile.avatar.save(file_name, ContentFile(response.content), save=True)
+            profile.refresh_from_db()
 
 fortytwo_callback = FortyTwoCallbackView.as_view()
 
