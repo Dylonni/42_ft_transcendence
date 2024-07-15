@@ -1,11 +1,7 @@
 import logging
-import random
 import uuid
 from django.contrib.auth import get_user_model
 from django.db import models
-from django.db.models.signals import post_save
-from django.dispatch import receiver
-from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from .managers import ProfileManager
 from .storage import OverwriteStorage
@@ -64,28 +60,3 @@ class Profile(models.Model):
     class Meta:
         verbose_name = _("profile")
         verbose_name_plural = _("profiles")
-
-def generate_unique_alias():
-    while True:
-        number = random.randint(100000, 999999)
-        alias = f'Player_{number}'
-        if not Profile.objects.filter(alias=alias).exists():
-            return alias
-
-def get_random_default_avatar():
-    number = random.randint(1, 6)
-    avatar = f'defaults/avatar{number}.webp'
-    return avatar
-
-@receiver(post_save, sender=UserModel)
-def create_profile(sender, instance, created, **kwargs):
-    if created:
-        Profile.objects.create(
-            user=instance,
-            alias=generate_unique_alias(),
-            avatar=get_random_default_avatar(),
-        )
-
-@receiver(post_save, sender=UserModel)
-def save_profile(sender, instance, **kwargs):
-    instance.profile.save()

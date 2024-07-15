@@ -1,7 +1,10 @@
+import logging
 from asgiref.sync import async_to_sync
 from channels.layers import get_channel_layer
 from django.db import models
 from django.db.models import Q
+
+logger = logging.getLogger('django')
 
 
 class FriendshipManager(models.Manager):
@@ -24,16 +27,25 @@ class FriendshipManager(models.Manager):
             Q(profile1=profile2, profile2=profile1)
         ).exists()
     
-    def remove_friendship(self, profile1, profile2):
+    def remove_friendship(self, to_remove, removed_by):
         friendship = self.filter(
-            Q(profile1=profile1, profile2=profile2) |
-            Q(profile1=profile2, profile2=profile1)
+            Q(profile1=to_remove, profile2=removed_by) |
+            Q(profile1=removed_by, profile2=to_remove)
         )
         if friendship.exists():
-            friendship.delete()
+            friendship.removed_by = removed_by
+            friendship.save()
+            return True
+        return False
     
     def friendships(self, profile):
         return self.filter(Q(profile1=profile) | Q(profile2=profile))
+    
+    def friends_ids_of_profile(self, profile):
+        qs1 = self.filter(profile1=profile).values_list('profile2', flat=True)
+        qs2 = self.filter(profile2=profile).values_list('profile1', flat=True)
+        friend_ids = set(qs1) | set(qs2)
+        return friend_ids
     
     def search_by_alias(self, alias):
         return self.filter(

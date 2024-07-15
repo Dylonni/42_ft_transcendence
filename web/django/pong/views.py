@@ -4,30 +4,34 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
 from django.utils.translation import gettext as _
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework_simplejwt.exceptions import TokenError
-from rest_framework_simplejwt.tokens import AccessToken, RefreshToken
 from profiles.models import Profile
+from friends.models import Friendship
+from .mixins import JWTCookieAuthenticationMixin, RedirectIfAuthenticatedMixin
 
 UserModel = get_user_model()
 logger = logging.getLogger('django')
 
-def get_profile_context(request):
+def get_profile_context(request, profile_id=None):
     context = {}
-    auth_header = request.META.get('HTTP_AUTHORIZATION')
-    if auth_header and auth_header.startswith('Bearer '):
-        access_token = auth_header.split(' ')[1]
+    if profile_id:
         try:
-            access_token_obj = AccessToken(access_token)
-            user_id = access_token_obj['user_id']
-            user = UserModel.objects.get(id=user_id)
-            profile = Profile.objects.get(user=user)
+            profile = Profile.objects.get(id=profile_id)
             context['profile'] = profile
+            friends_ids = Friendship.objects.friends_ids_of_profile(profile)
+            context['friends'] = Profile.objects.filter(id__in=friends_ids)
             return context
-        except Exception as e:
+        except Profile.DoesNotExist:
             return context
+    try:
+        profile = Profile.objects.get(user=request.user)
+        context['profile'] = profile
+        friends_ids = Friendship.objects.friends_ids_of_profile(profile)
+        context['friends'] = Profile.objects.filter(id__in=friends_ids)
+    except Profile.DoesNotExist:
+        return context
     return context
 
 def render_with_sub_template(request, path, title, context={}):
@@ -51,96 +55,79 @@ def render_response(request, path, title, need_auth):
     return render_with_sub_template(request, path, title, context)
 
 
-class IndexView(APIView):
+class PublicView(RedirectIfAuthenticatedMixin, APIView):
+    permission_classes = (AllowAny,)
+
+
+class PrivateView(JWTCookieAuthenticationMixin, APIView):
+    permission_classes = (IsAuthenticated,)
+
+
+class IndexView(PublicView):
     def get(self, request):
         return render_with_sub_template(request, 'accounts/login.html', _('Login'))
 
 index = IndexView.as_view()
 
 
-class LoginView(APIView):
+class LoginView(PublicView):
     def get(self, request):
-        if request.user.is_authenticated:
-            return redirect('/home/')
         return render_response(request, 'accounts/login.html', _('Login'), False)
 
 login = LoginView.as_view()
 
 
-class RegisterView(APIView):
+class RegisterView(PublicView):
     def get(self, request):
-        if request.user.is_authenticated:
-            return redirect('/home/')
         return render_response(request, 'accounts/register.html', _('Register'), False)
 
 register = RegisterView.as_view()
 
 
-class HomeView(APIView):
-    permission_classes = (IsAuthenticated,)
-    
+class HomeView(PrivateView):
     def get(self, request):
         return render_response(request, 'home.html', _('Home'), True)
 
 home = HomeView.as_view()
 
 
-class ProfileView(APIView):
-    permission_classes = (IsAuthenticated,)
-    
+class ProfileView(PrivateView):
     def get(self, request):
         return render_response(request, 'profile.html', _('Profile'), True)
 
 profile = ProfileView.as_view()
 
 
-class LeaderboardView(APIView):
-    permission_classes = (IsAuthenticated,)
-    
+class ProfileOtherView(PrivateView):
+    def get(self, request, profile_id):
+        context = {}
+        if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+            context = get_profile_context(request, profile_id)
+            context['title'] = _('Profile')
+            html = render_to_string('profile.html', context, request)
+            return HttpResponse(html)
+        context = get_profile_context(request, profile_id)
+        return render_with_sub_template(request, 'profile.html', _('Profile'), context)
+
+profile_other = ProfileOtherView.as_view()
+
+
+class LeaderboardView(PrivateView):
     def get(self, request):
-        return render_response(request, 'leaderboard.html', _('Leaderboard'), True)
+        return render_response(request, 'leaderboard.html', _('Leaderboard'), False)
 
 leaderboard = LeaderboardView.as_view()
 
 
-class SocialView(APIView):
-    permission_classes = (IsAuthenticated,)
-    
+class SocialView(PrivateView):
     def get(self, request):
         return render_response(request, 'social.html', _('Social'), True)
 
 social = SocialView.as_view()
 
 
-class SettingsView(APIView):
-    permission_classes = (IsAuthenticated,)
-    
+class SettingsView(PrivateView):
     def get(self, request):
         return render_response(request, 'settings.html', _('Settings'), True)
 
 settings = SettingsView.as_view()
-
-# def verify_jwt_cookies(request):
-#     access_token = request.COOKIES.get('access_token')
-#     refresh_token = request.COOKIES.get('refresh_token')
-    
-#     if not access_token:
-#         logger.info('No access token found in cookies.')
-#         return False
-    
-#     try:
-#         AccessToken(access_token)
-#     except TokenError:
-#         logger.info('Invalid access token. Trying to refresh.')
-#         if not refresh_token:
-#             logger.warning('No refresh token found in cookies.')
-#             return False
-#         try:
-#             refresh = RefreshToken(refresh_token)
-#             access_token, refresh_token = str(refresh.access_token), str(refresh)
-#         except TokenError:
-#             logger.error('Invalid refresh token.')
-#             return False
-    
-#     request.META['HTTP_AUTHORIZATION'] = f'Bearer {access_token}'
-#     return True

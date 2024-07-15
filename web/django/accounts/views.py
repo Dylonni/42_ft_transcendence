@@ -22,6 +22,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
 from urllib.parse import quote
+from pong.views import PrivateView, PublicView
 from profiles.models import Profile
 from .serializers import (
     PasswordResetConfirmSerializer,
@@ -45,15 +46,14 @@ UserModel = get_user_model()
 logger = logging.getLogger('django')
 
 
-class UserLoginView(APIView):
-    permission_classes = (AllowAny,)
-    
+class UserLoginView(PublicView):
     @method_decorator(ensure_csrf_cookie)
     def post(self, request, *args, **kwargs):
         serializer = UserLoginSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data['user']
         
+        logger.info(f'User {user.username} logged in.')
         response = Response(
             {
                 'status': _('User logged in!'),
@@ -68,10 +68,9 @@ class UserLoginView(APIView):
 user_login = UserLoginView.as_view()
 
 
-class UserLogoutView(APIView):
-    permission_classes = (AllowAny,)
-    
+class UserLogoutView(PrivateView):
     def post(self, request, *args, **kwargs):
+        logger.info('User logged out.')
         response = Response(
             {
                 'status': _('User logged out!'),
@@ -86,16 +85,15 @@ class UserLogoutView(APIView):
 user_logout = UserLogoutView.as_view()
 
 
-class UserRegisterView(APIView):
-    permission_classes = (AllowAny,)
-    
+class UserRegisterView(PublicView):
     @method_decorator(ensure_csrf_cookie)
     def post(self, request, *args, **kwargs):
-        # Resend email if account not verified yet but exists
+        # TODO: Resend email if account not verified yet but exists
         serializer = UserRegisterSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.save(is_active=False)
         
+        logger.info(f'Account registered for user {user.username}. Activation email sent to {user.email}.')
         response = Response(
             {
                 'status': _('Account registered! Please check your email to activate your account.'),
@@ -108,70 +106,54 @@ class UserRegisterView(APIView):
 user_register = UserRegisterView.as_view()
 
 
-class UserActivateView(APIView):
-    permission_classes = (AllowAny,)
-    
+class UserActivateView(PublicView):
     def get(self, request, uidb64, token, *args, **kwargs):
         try:
             uid = force_str(urlsafe_base64_decode(uidb64))
             user = UserModel.objects.get(pk=uid)
-        except(TypeError, ValueError, OverflowError, UserModel.DoesNotExist):
+            Profile.objects.create_from_user(user)
+        except (TypeError, ValueError, OverflowError, UserModel.DoesNotExist) as e:
             user = None
+            logger.error(f"Error activating account: {e}")
         
         token_generator = EmailTokenGenerator()
         if user is not None and token_generator.check_token(user, token):
             user.is_active = True
             user.is_verified = True
             user.save()
-            
-            response = Response(
-                {
-                    'status': _('Account activated!'),
-                    'redirect': '/home/',
-                },
-                status=status.HTTP_200_OK,
-            )
+            logger.info(f'Account activated for user {user.username}. User logged in.')
+            response = redirect('/home/')
             login(request, user)
             set_jwt_cookies_for_user(response, user)
             return response
         
-        response = Response(
-            {
-                'status': _('Activation link is invalid!'),
-                'redirect': '/login/',
-            },
-            status=status.HTTP_400_BAD_REQUEST,
-        )
-        return response
+        logger.warning('Invalid activation link or token.')
+        return redirect('/login/')
 
 user_activate = UserActivateView.as_view()
 
 
-class PasswordResetRequestView(APIView):
-    permission_classes = (AllowAny,)
-    
+class PasswordResetRequestView(PublicView):
     @method_decorator(ensure_csrf_cookie)
     def post(self, request, *args, **kwargs):
         serializer = PasswordResetRequestSerializer(data=request.data)
         serializer.is_valid()
         user = serializer.get_user()
+        if user:
+            send_password_reset_mail(request, user)
         response = Response(
             {
                 'status': _('Please check your email to reset your password.'),
             },
             status=status.HTTP_200_OK,
         )
-        if user:
-            send_password_reset_mail(request, user)
         return response
 
 
 password_reset_request = PasswordResetRequestView.as_view()
 
 
-class PasswordResetView(APIView):
-    permission_classes = (AllowAny,)
-    
+class PasswordResetView(PublicView):
     def get(self, request, uidb64, token, *args, **kwargs):
         try:
             uid = force_str(urlsafe_base64_decode(uidb64))
@@ -204,9 +186,7 @@ class PasswordResetView(APIView):
 password_reset = PasswordResetView.as_view()
 
 
-class PasswordResetConfirmView(APIView):
-    permission_classes = (AllowAny,)
-    
+class PasswordResetConfirmView(PublicView):
     @method_decorator(ensure_csrf_cookie)
     def post(self, request, *args, **kwargs):
         serializer = PasswordResetConfirmSerializer(data=request.data)
@@ -226,9 +206,7 @@ class PasswordResetConfirmView(APIView):
 password_reset_confirm = PasswordResetConfirmView.as_view()
 
 
-class FortyTwoLoginView(APIView):
-    permission_classes = (AllowAny,)
-    
+class FortyTwoLoginView(PublicView):
     def get(self, request, *args, **kwargs):
         redirect_uri = quote(settings.FORTYTWO_REDIRECT_URI, safe='')
         authorization_url = f'https://api.intra.42.fr/oauth/authorize?client_id={settings.FORTYTWO_ID}&redirect_uri={redirect_uri}&response_type=code'
@@ -237,28 +215,35 @@ class FortyTwoLoginView(APIView):
 fortytwo_login = FortyTwoLoginView.as_view()
 
 
-class FortyTwoCallbackView(APIView):
+class FortyTwoCallbackView(PublicView):
     def get(self, request, *args, **kwargs):
+        code = request.GET.get('code')
+        if not code:
+            logger.error('No authorization code received.')
+            return redirect('/login')
+        
         response = requests.post('https://api.intra.42.fr/oauth/token', data={
             'grant_type': 'authorization_code',
             'client_id': settings.FORTYTWO_ID,
             'client_secret': settings.FORTYTWO_SECRET,
-            'code': request.GET.get('code'),
+            'code': code,
             'redirect_uri': settings.FORTYTWO_REDIRECT_URI,
         })
-        
         token_response = response.json()
-        fortytwo_access_token = token_response['access_token']
-        fortytwo_refresh_token = token_response['refresh_token']
+        fortytwo_access_token = token_response.get('access_token')
+        fortytwo_refresh_token = token_response.get('refresh_token')
+        if not fortytwo_access_token:
+            logger.error('No access token received from 42 API.')
+            return redirect('/login')
         
         user_info_response = requests.get('https://api.intra.42.fr/v2/me', headers={
             'Authorization': f'Bearer {fortytwo_access_token}'
         })
         user_info = user_info_response.json()
-        fortytwo_id = user_info['id']
-        username = "42_" + user_info['login']
-        email = user_info['email']
-        img = user_info['image']['versions']['small']
+        fortytwo_id = user_info.get('id')
+        username = "42_" + user_info.get('login')
+        email = user_info.get('email')
+        img = user_info.get('image', {}).get('versions', {}).get('small')
         
         try:
             user = UserModel.objects.get(fortytwo_id=fortytwo_id)
@@ -287,6 +272,7 @@ class FortyTwoCallbackView(APIView):
                     fortytwo_refresh_token=fortytwo_refresh_token,
                     is_verified=True,
                 )
+                Profile.objects.create_from_user(user)
         self._save_avatar_from_url(user, img)
         
         response = redirect('/home/')
@@ -301,11 +287,13 @@ class FortyTwoCallbackView(APIView):
             profile = Profile.objects.get(user=user)
             profile.avatar.save(file_name, ContentFile(response.content), save=True)
             profile.refresh_from_db()
+        else:
+            logger.warning('Failed to fetch avatar from URL: %s', url)
 
 fortytwo_callback = FortyTwoCallbackView.as_view()
 
 
-class TokenVerify(APIView):
+class TokenVerify(PublicView):
     def post(self, request, *args, **kwargs):
         access_token = request.COOKIES.get('access_token')
         refresh_token = request.COOKIES.get('refresh_token')

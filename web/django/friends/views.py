@@ -1,23 +1,31 @@
 import logging
+from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404
 from django.utils.translation import gettext_lazy as _
 from rest_framework import status
+from rest_framework.authentication import get_authorization_header
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework_simplejwt.tokens import AccessToken, TokenError
+from pong.views import PrivateView
 from profiles.models import Profile
 from profiles.views import profile_detail
 from .models import FriendRequest, Friendship, FriendMessage
-from .serializers import FriendMessageSerializer, FriendRequestSerializer, FriendshipSerializer
+from .serializers import (
+    FriendMessageSerializer,
+    FriendRequestCreateSerializer,
+    FriendRequestSerializer,
+    FriendshipSerializer,
+)
 
+UserModel = get_user_model()
 logger = logging.getLogger('django')
 
 
-class FriendshipListView(APIView):
-    permission_classes = (IsAuthenticated,)
-    
-    def get(self, request, profile_id):
-        profile = Profile.objects.get(id=profile_id)
+class FriendshipListView(PrivateView):
+    def get(self, request):
+        profile = Profile.objects.get(user=request.user)
         friendships = Friendship.objects.friendships(profile)
         serializer = FriendshipSerializer(friendships, many=True)
         return Response(serializer.data)
@@ -25,9 +33,7 @@ class FriendshipListView(APIView):
 friend_list = FriendshipListView.as_view()
 
 
-class FriendshipDetailView(APIView):
-    permission_classes = (IsAuthenticated,)
-    
+class FriendshipDetailView(PrivateView):
     def get(self, request, profile_id):
         return profile_detail(request, profile_id=profile_id)
     
@@ -41,9 +47,7 @@ class FriendshipDetailView(APIView):
 friend_detail = FriendshipDetailView.as_view()
 
 
-class FriendSearchView(APIView):
-    permission_classes = (IsAuthenticated,)
-    
+class FriendSearchView(PrivateView):
     def get(self, request):
         alias = request.query_params.get('alias', '')
         friends = Friendship.objects.search_by_alias(alias)
@@ -53,9 +57,7 @@ class FriendSearchView(APIView):
 friend_search = FriendSearchView.as_view()
 
 
-class FriendRequestListCreateView(APIView):
-    permission_classes = (IsAuthenticated,)
-    
+class FriendRequestListCreateView(PrivateView):
     def get(self, request, profile_id):
         profile = Profile.objects.get(id=profile_id)
         requests = FriendRequest.objects.pending_requests(profile)
@@ -63,21 +65,22 @@ class FriendRequestListCreateView(APIView):
         return Response(serializer.data)
     
     def post(self, request):
-        serializer = FriendRequestSerializer(data=request.data)
+        try:
+            sender_profile = Profile.objects.get(user=request.user)
+            request.data['sender_id'] = sender_profile.id
+        except Profile.DoesNotExist:
+            logger.error('Profile not found')
+            return Response({'error': 'Profile not found'}, status=status.HTTP_404_NOT_FOUND)
+        serializer = FriendRequestCreateSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        friend_request = FriendRequest.objects.create_request(
-            sender=serializer.validated_data['sender'],
-            receiver=serializer.validated_data['receiver'],
-        )
-        logger.info(f'Friend request {friend_request.id} sent by {friend_request.sender} to {friend_request.receiver}')
-        return Response(status=status.HTTP_201_CREATED)
+        friend_request = serializer.save()
+        logger.info(f'Friend request {friend_request.id} sent by {friend_request.sender.alias} to {friend_request.receiver.alias}')
+        return Response({}, status=status.HTTP_201_CREATED)
 
 friend_request_list_create = FriendRequestListCreateView.as_view()
 
 
-class FriendRequestDetailView(APIView):
-    permission_classes = (IsAuthenticated,)
-    
+class FriendRequestDetailView(PrivateView):
     def delete(self, request, request_id):
         try:
             FriendRequest.objects.remove_request_by_id(request_id)
@@ -101,9 +104,7 @@ class FriendRequestDetailView(APIView):
 friend_request_detail = FriendRequestDetailView.as_view()
 
 
-class FriendMessageView(APIView):
-    permission_classes = (IsAuthenticated,)
-    
+class FriendMessageView(PrivateView):
     def post(self, request, receiver_id):
         sender = get_object_or_404(Profile, user=request.user)
         receiver = get_object_or_404(Profile, id=receiver_id)
@@ -121,9 +122,7 @@ class FriendMessageView(APIView):
 friend_message = FriendMessageView.as_view()
 
 
-class FriendConversationView(APIView):
-    permission_classes = (IsAuthenticated,)
-    
+class FriendConversationView(PrivateView):
     def get(self, request, profile_id):
         user_profile = get_object_or_404(Profile, user=request.user)
         other_profile = get_object_or_404(Profile, id=profile_id)

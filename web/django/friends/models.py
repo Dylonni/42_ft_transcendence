@@ -29,6 +29,14 @@ class Friendship(models.Model):
         verbose_name=_('created at'),
         default=timezone.now,
     )
+    removed_by = models.ForeignKey(
+        to='profiles.Profile',
+        verbose_name=_('removed by'),
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='removed_friendships',
+    )
     
     objects = FriendshipManager()
     
@@ -83,6 +91,12 @@ class FriendMessage(models.Model):
         unique=True,
         default=uuid.uuid4,
         editable=False,
+    )
+    friendship = models.ForeignKey(
+        to='Friendship',
+        verbose_name=_('friendship'),
+        on_delete=models.CASCADE,
+        related_name='messages',
     )
     sender = models.ForeignKey(
         to='profiles.Profile',

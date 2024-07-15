@@ -26,3 +26,8 @@
 Reminder for Pipenv install in django:
 run ```pip install --upgrade pip ``` to check location of pip
 then launch ```/mnt/nfs/homes/daumis/.local/bin/pipenv install```
+
+Reminder to check postgres:
+psql db user
+\dt
+SELECT * FROM friends_friendrequest;

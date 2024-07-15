@@ -1,22 +1,24 @@
 import logging
-from django.contrib.auth import logout
+from django.contrib.auth import get_user_model, logout
 from django.shortcuts import redirect
 from rest_framework_simplejwt.exceptions import TokenError
 from rest_framework_simplejwt.tokens import AccessToken, RefreshToken
-from .utils import set_jwt_as_cookies
+from accounts.utils import set_jwt_as_cookies
 
+UserModel = get_user_model()
 logger = logging.getLogger('django')
 
 
-class JWTCookieMiddleware:
-    def __init__(self, get_response):
-        self.get_response = get_response
-    
-    def __call__(self, request):
-        public_paths = ['/', '/login', '/register']
-        if request.path in public_paths:
-            return self.get_response(request)
-        
+class RedirectIfAuthenticatedMixin:
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            logger.info('User is authenticated. Redirecting to /home/.')
+            return redirect('/home/')
+        return super().dispatch(request, *args, **kwargs)
+
+
+class JWTCookieAuthenticationMixin:
+    def dispatch(self, request, *args, **kwargs):
         access_token = request.COOKIES.get('access_token')
         refresh_token = request.COOKIES.get('refresh_token')
         if not access_token:
@@ -24,7 +26,8 @@ class JWTCookieMiddleware:
             return redirect('/login')
         
         try:
-            AccessToken(access_token)
+            access_token_obj = AccessToken(access_token)
+            logger.info('Valid access token.')
         except TokenError:
             logger.info('Invalid access token. Trying to refresh.')
             if not refresh_token:
@@ -33,16 +36,26 @@ class JWTCookieMiddleware:
             try:
                 refresh = RefreshToken(refresh_token)
                 access_token, refresh_token = str(refresh.access_token), str(refresh)
+                access_token_obj = AccessToken(access_token)
                 logger.info('Successfully refreshed tokens.')
             except TokenError:
                 logger.error('Invalid refresh token.')
                 return self._logout_and_redirect(request)
         
-        response = self.get_response(request)
+        try:
+            user_id = access_token_obj['user_id']
+            request.user = UserModel.objects.get(id=user_id)
+            logger.info(f'Authenticated user: {request.user.username}')
+        except UserModel.DoesNotExist:
+            logger.error('User does not exist.')
+            return self._logout_and_redirect(request)
+        request.META['HTTP_AUTHORIZATION'] = f'Bearer {access_token}'
+        response = super().dispatch(request, *args, **kwargs)
         set_jwt_as_cookies(response, access_token, refresh_token)
         return response
     
     def _logout_and_redirect(self, request):
+        logger.info('Logging out.')
         logout(request)
         response = redirect('/login')
         response.delete_cookie(key='access_token')

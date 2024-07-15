@@ -24,7 +24,7 @@ def send_activation_mail(request, user):
         recipient_list=[user.email],
         fail_silently=False,
         auth_user=settings.EMAIL_HOST_USER,
-        auth_password=settings.EMAIL_HOST_USER,
+        auth_password=settings.EMAIL_HOST_PASSWORD,
         html_message=html_message,
     )
 
@@ -44,7 +44,7 @@ def send_password_reset_mail(request, user):
         recipient_list=[user.email],
         fail_silently=False,
         auth_user=settings.EMAIL_HOST_USER,
-        auth_password=settings.EMAIL_HOST_USER,
+        auth_password=settings.EMAIL_HOST_PASSWORD,
         html_message=html_message,
     )
 

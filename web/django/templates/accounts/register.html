@@ -5,7 +5,7 @@
 </div>
 <header>
 	<nav class="navbar navbar-expand-md bg-body py-3" style="background: var(--bs-light);">
-		<div class="container"><a class="navbar-brand d-flex align-items-center" href="/"><img src="static/img/game_icon.png" width="275" height="140" style="background: var(--bs-body-bg);"></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+		<div class="container"><a class="navbar-brand d-flex align-items-center" href="/"><img src="{% static '/img/game_icon.png' %}" width="275" height="140" style="background: var(--bs-body-bg);"></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
 			<div class="collapse navbar-collapse" id="navcol-1">
 				<ul class="navbar-nav ms-auto">
 					<li class="nav-item"><a class="nav-link active link-primary" href="#">Quick Play</a></li>
@@ -40,7 +40,7 @@
 									<div class="form-check" style="width: 110.078px;margin-left: 0px;margin-bottom: 0px;height: 29px;padding-top: 2px;"><input class="form-check-input" onclick="showPassword()" type="checkbox" id="formCheck-3" style="margin-left: -23px;width: 16px;margin-right: 0px;margin-top: 5px;"><label class="form-check-label" for="formCheck-3" style="margin-left: 0px;font-size: 12px;margin-top: 0px;margin-bottom: 5px;">Show password</label></div>
 								</div>
 								<div class="mb-3"><button class="btn btn-primary d-block w-100" type="submit">Register</button></div>
-								<p class="text-muted">Already Registered ?&nbsp;<a href="/login">Sign in here</a></p>
+								<p class="text-muted">Already Registered ?&nbsp;<a href="/login/">Sign in here</a></p>
 							</form>
 						</div>
 					</div>

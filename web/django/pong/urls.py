@@ -17,9 +17,8 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import include, path, re_path
+from django.urls import include, path
 from django.shortcuts import render
-from django.utils.translation import gettext_lazy as _
 from . import views
 
 apipatterns = [
@@ -34,12 +33,13 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('api/', include((apipatterns, 'api'), namespace='api')),
 
-    re_path(_(r'^login/?$'), views.login, name='login'),
-    re_path(_(r'^register/?$'), views.register, name='register'),
-	# re_path(_(r'^password-reset/?$'), views.PasswordReset.as_view(), name='password_reset'),
-    re_path(_(r'^home/?$'), views.home, name='home'),
-    re_path(_(r'^profile/?$'), views.profile, name='profile'),
-    re_path(_(r'^leaderboard/?$'), views.leaderboard, name='leaderboard'),
-	re_path(_(r'^social/?$'), views.social, name='social'),
-    re_path(_(r'^settings/?$'), views.settings, name='settings'),
+    path('login/', views.login, name='login'),
+    path('register/', views.register, name='register'),
+	# path('password-reset/', views.PasswordReset.as_view(), name='password_reset'),
+    path('home/', views.home, name='home'),
+    path('profile/', views.profile, name='profile'),
+	path('profile/<uuid:profile_id>/', views.profile_other, name='profile_other'),
+    path('leaderboard/', views.leaderboard, name='leaderboard'),
+	path('social/', views.social, name='social'),
+    path('settings/', views.settings, name='settings'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
