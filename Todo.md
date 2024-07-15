@@ -17,6 +17,12 @@
 - [ ] Replace the following tags with variables: #Rank, #GamesPlayed, #Wins, #Loss, #Score, #RoomName
 
 
+    Profile Page
+- [ ] Add a profile list page when searching
+
+    NOTIFICATION
+- [ ] Add a little notifcation center
+
     SETTINGS
 - [ ] Fix the second and third panel's responsive
 - [ ] Add a modal or a wayto inform the user that an email has been set to reset his password/email
