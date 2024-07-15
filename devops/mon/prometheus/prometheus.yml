@@ -15,3 +15,7 @@ scrape_configs:
         - postgres-exporter:9187
         labels:
           group: 'postgres-server'
+  # - job_name: 'prometheus'
+  #   static_configs:
+  #     - targets:
+  #       - prometheus:9090
