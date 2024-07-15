@@ -1,0 +1,250 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-07-15 14:30+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+#: accounts/admin.py:11
+msgid "Personal info"
+msgstr "Informations personnelles"
+
+#: accounts/admin.py:13
+msgid "Permissions"
+msgstr "Permissions"
+
+#: accounts/admin.py:24
+msgid "Important dates"
+msgstr "Dates importantes"
+
+#: accounts/models.py:48
+msgid "id"
+msgstr "identifiant"
+
+#: accounts/models.py:53
+msgid "Unique identifier for the user, automatically generated."
+msgstr "Identifiant unique pour l'utilisateur, genere automatiquement."
+
+#: accounts/models.py:56
+msgid "username"
+msgstr "nom d'utilisateur"
+
+#: accounts/models.py:60
+msgid "Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only."
+msgstr "Requis. 150 caracteres maximum. Lettres, chiffres et @/./+/-/_ uniquement."
+
+#: accounts/models.py:64
+msgid "The username must be 150 characters or fewer."
+msgstr "Le nom d'utilisateur doit contenir 150 caracteres maximum."
+
+#: accounts/models.py:65
+msgid "This value may contain only letters, numbers, and @/./+/-/_ characters."
+msgstr "Ce champ peut uniquement contenir des lettres, des chiffres et les caracteres @/./+/-/_."
+
+#: accounts/models.py:69
+msgid "email address"
+msgstr "addresse courriel"
+
+#: accounts/models.py:71
+msgid "Required. A valid email address."
+msgstr "Requis. Une adresse courriel valide."
+
+#: accounts/models.py:73
+msgid "Enter a valid email address."
+msgstr "Veuillez entrer une adresse courriel valide."
+
+#: accounts/models.py:77
+msgid "42 id"
+msgstr "identifiant 42"
+
+#: accounts/models.py:81
+msgid "Unique identifier for the user from 42."
+msgstr "Identifiant unique pour l'utilisateur de 42."
+
+#: accounts/models.py:84
+msgid "42 access token"
+msgstr "Jeton d'acces 42"
+
+#: accounts/models.py:88
+msgid "Access token for 42 API."
+msgstr "Jeton d'acces pour l'API 42."
+
+#: accounts/models.py:91
+msgid "42 refresh token"
+msgstr "Jeton de rafraichissement 42"
+
+#: accounts/models.py:95
+msgid "Refresh token for 42 API."
+msgstr "Jeton de rafraichissement pour l'API 42."
+
+#: accounts/models.py:98
+msgid "date joined"
+msgstr "date d'inscription"
+
+#: accounts/models.py:100
+msgid "The date and time when the user joined."
+msgstr "La date et l'heure d'inscription de l'utilisateur."
+
+#: accounts/models.py:103
+msgid "staff status"
+msgstr "statut du personnel"
+
+#: accounts/models.py:105
+msgid "Designates whether the user can log into this admin site."
+msgstr "Indique si l'utilisateur peut se connecter a ce site d'administration."
+
+#: accounts/models.py:108
+msgid "active"
+msgstr "actif"
+
+#: accounts/models.py:111
+msgid ""
+"Designates whether this user should be treated as active. Unselect this "
+"instead of deleting accounts."
+msgstr ""
+"Indique si cet utilisateur doit etre considere comme actif. A decocher "
+"au lieu de supprimer le compte."
+
+#: accounts/models.py:117
+msgid "groups"
+msgstr "groupes"
+
+#: accounts/models.py:120
+msgid ""
+"The groups this user belongs to. A user will get all permissions granted to "
+"each of their groups."
+msgstr ""
+"Les groupes auxquels appartient cet utilisateur. L'utilisateur obtiendra toutes les "
+"permissions accordees a chacun de ses groupes."
+
+#: accounts/models.py:128
+msgid "user permissions"
+msgstr "permissions de l'utilisateur"
+
+#: accounts/models.py:130
+msgid "Specific permissions for this user."
+msgstr "Permissions specifiques a cet utilisateur."
+
+#: accounts/models.py:142
+msgid "custom user"
+msgstr "utilisateur personnalise"
+
+#: accounts/models.py:143
+msgid "custom users"
+msgstr "utilisateurs personnalises"
+
+#: accounts/serializers.py:18
+msgid "Must include \"username/email\" and \"password\"."
+msgstr "Doit inclure \"nom d'utilisateur/courriel\" et \"mot de passe\"."
+
+#: accounts/serializers.py:27
+msgid "Unable to log in with provided credentials."
+msgstr "Impossible de se connecter avec les identifiants fournis."
+
+#: accounts/views.py:54
+msgid "User logged in!"
+msgstr "Utilisateur connecte"
+
+#: accounts/views.py:72
+msgid "User logged out!"
+msgstr "Utilisateur deconnecte"
+
+#: accounts/views.py:96
+msgid "Account registered! Please check your email to activate your account."
+msgstr "Compte enregistre! Veuillez verifier votre courriel pour activer votre compte."
+
+#: accounts/views.py:123
+msgid "Account activated!"
+msgstr "Compte active"
+
+#: accounts/views.py:134
+msgid "Activation link is invalid!"
+msgstr "Le lien d'activation est invalide!"
+
+#: accounts/views.py:154
+msgid "Please check your email to reset your password."
+msgstr "Afin reinitialiser votre mot de passe, veuillez verifier votre courriel."
+
+#: accounts/views.py:180
+msgid "Set your new password."
+msgstr "Crez votre mot de passe"
+
+#: accounts/views.py:191
+msgid "Password reset link is invalid!"
+msgstr "Le lien de reinitialisation du mot de passe est invalide!"
+
+#: accounts/views.py:211
+msgid "Password changed!"
+msgstr "Mot de passe modifie"
+
+#: accounts/views.py:284
+msgid "Authentication successful!"
+msgstr "Authentification reussie"
+
+#: accounts/views.py:311
+msgid "Email updated succesfully!"
+msgstr "Courriel mis a jour avec succes"
+
+#: pong/urls.py:33
+msgid "^login/?$"
+msgstr ""
+
+#: pong/urls.py:34
+msgid "^register/?$"
+msgstr ""
+
+#: pong/urls.py:36
+msgid "^home/?$"
+msgstr ""
+
+#: pong/urls.py:37
+msgid "^profile/?$"
+msgstr ""
+
+#: pong/urls.py:38
+msgid "^social/?$"
+msgstr ""
+
+#: pong/urls.py:39
+msgid "^settings/?$"
+msgstr ""
+
+#: pong/views.py:20
+msgid "Transcendence"
+msgstr ""
+
+#: pong/views.py:26
+msgid "Login"
+msgstr "Connexion"
+
+#: pong/views.py:31
+msgid "Register"
+msgstr "Enregistrement"
+
+#: pong/views.py:38
+msgid "Home"
+msgstr "Accueil"
+
+#: pong/views.py:45
+msgid "Profile"
+msgstr "Profil"
+
+#: pong/views.py:52
+msgid "Social"
+msgstr "Amis"
+
+#: pong/views.py:59
+msgid "Settings"
+msgstr "Parametres"

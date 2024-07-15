@@ -75,6 +75,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_prometheus.middleware.PrometheusAfterMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
+
 ]
 
 ROOT_URLCONF = 'pong.urls'
@@ -140,9 +142,21 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
+LANGUAGES = [
+	('en', 'English'),
+    ('fr', 'French'),
+	('jp', 'japanese'),
+]
+
 TIME_ZONE = 'UTC'
 
+LOCALE_PATHS = [
+    os.path.join(BASE_DIR, 'locale'),
+]
+
 USE_I18N = True
+
+USE_L10N = True
 
 USE_TZ = True
 
