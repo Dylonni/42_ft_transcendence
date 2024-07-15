@@ -46,7 +46,7 @@ server.ssl.key: /usr/share/kibana/config/kibana-server.key # check exact path
 
 
 
-#mjust testing
+#just testing
 # elasticsearch.ssl.certificateAuthorities: [ "config/elasticsearch-ca.pem" ]
 
 

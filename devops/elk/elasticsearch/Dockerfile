@@ -17,8 +17,14 @@ RUN apt-get update && \
 COPY ./config/elasticsearch.yml /usr/share/elasticsearch/config/elasticsearch.yml
 
 
-COPY ./config/certutils_http.sh /usr/share/elasticsearch/certutils_http.sh
-RUN chmod +x /usr/share/elasticsearch/certutils_http.sh
+COPY ./config/cert2.sh /usr/share/elasticsearch/cert2.sh
+RUN chmod +x /usr/share/elasticsearch/cert2.sh
+
+# COPY ./config/script.exp /usr/share/elasticsearch/script.exp
+# RUN chmod +x /usr/share/elasticsearch/script.exp
+
+# COPY ./config/certutils_http.sh /usr/share/elasticsearch/certutils_http.sh
+# RUN chmod +x /usr/share/elasticsearch/certutils_http.sh
 
 COPY ./config/utils.sh /usr/share/elasticsearch/utils.sh
 RUN chmod +x /usr/share/elasticsearch/utils.sh
