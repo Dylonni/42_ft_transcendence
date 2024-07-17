@@ -1,3 +1,4 @@
+{% load i18n %}
 {% block content %}
 <div class="lottie-bg">
 	<lottie-player id="pong_anim" src="static/js/Animation%20-%201718218491020.json" mode="normal" autoplay="" loop=""></lottie-player>
@@ -8,8 +9,8 @@
 		<div class="container"><a class="navbar-brand d-flex align-items-center" href="/"><img src="static/img/game_icon.png" width="275" height="140" style="background: var(--bs-body-bg);"></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
 			<div class="collapse navbar-collapse" id="navcol-1">
 				<ul class="navbar-nav ms-auto">
-					<li class="nav-item"><a class="nav-link active link-primary" href="#">Quick Play</a></li>
-					<li class="nav-item"><a class="nav-link disabled" href="#">My Profile</a></li>
+					<li class="nav-item"><a class="nav-link active link-primary" href="#">{% translate "Quick Play" %}</a></li>
+					<li class="nav-item"><a class="nav-link disabled" href="#">{% translate "My Profile" %}</a></li>
 					<li class="theme-switcher nav-item dropdown"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><i class="far fa-moon text-primary mb-1" style="font-size: 24px;"></i></a>
 						<div class="dropdown-menu"><a class="dropdown-item d-flex align-items-center" href="#" data-bs-theme-value="light"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-sun-fill opacity-50 me-2">
 									<path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0m0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13m8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5M3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8m10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0m-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707M4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"></path>
@@ -33,18 +34,18 @@
 						<div class="card-body d-flex flex-column align-items-center">
 							<form class="text-center auth-form" method="post" action="/api/auth/login/">
 								{% csrf_token %}
-								<h2 class="text-primary" style="padding-bottom: 20px;">Log in</h2>
+								<h2 class="text-primary" style="padding-bottom: 20px;">{% translate "Log in" %}</h2>
 								<div class="mb-3 form-floating"><input class="form-control form-control form-control" type="text" id="floatingInput" name="username_or_email" placeholder=" " required=""><label class="form-label" for="floatingInput">Username / Email</label></div>
 								<div class="mb-3 form-floating"><input class="form-control form-control form-control" type="password" id="floatingPassword-register-1" maxlength="254" minlength="6" name="password" pattern="^(?=.*\d)(?=.*[a-zA-Z])(?=.*[A-Z])(?=.*[-\#\$\.\%\&amp;\*])(?=.*[a-zA-Z]).{6,254}$" placeholder=" " required=""><label class="form-label" for="floatingMail-register">Password</label>
 									<div class="form-check" style="width: 110.078px;margin-left: 0px;margin-bottom: 0px;height: 29px;padding-top: 2px;"><input class="form-check-input" type="checkbox" id="formCheck-1" style="margin-left: -23px;width: 16px;margin-right: 0px;margin-top: 5px;"><label class="form-check-label" for="formCheck-1" style="margin-left: 0px;font-size: 12px;margin-top: 0px;margin-bottom: 5px;">Show password</label></div>
 								</div><span class="input-group" style="height: 35px;width: 264.062px;padding-left: 0px;margin-left: 0px;padding-bottom: 40px;"><a class="d-xl-flex justify-content-xl-end" href="#" style="padding-bottom: 0px;padding-left: 0px;padding-top: 0px;width: 140.078px;font-size: 13px;height: 34px;margin-left: 60px;">Forgot your password ?</a></span>
-								<div class="mb-3"><button class="btn btn-primary d-block w-100" type="submit">Login</button></div>
+								<div class="mb-3"><button class="btn btn-primary d-block w-100" type="submit">{% translate "Log in" %}</button></div>
 								</form>
 								<div>
 									<a class="btn btn-primary d-block w-100 google_connect" href="#">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Connect with Google&nbsp; &nbsp; &nbsp; &nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewbox="0 0 16 16" class="bi bi-google" style="font-size:20px;"><path d="M15.545 6.558a9.42 9.42 0 0 1 .139 1.626c0 2.434-.87 4.492-2.384 5.885h.002C11.978 15.292 10.158 16 8 16A8 8 0 1 1 8 0a7.689 7.689 0 0 1 5.352 2.082l-2.284 2.284A4.347 4.347 0 0 0 8 3.166c-2.087 0-3.86 1.408-4.492 3.304a4.792 4.792 0 0 0 0 3.063h.003c.635 1.893 2.405 3.301 4.492 3.301 1.078 0 2.004-.276 2.722-.764h-.003a3.702 3.702 0 0 0 1.599-2.431H8v-3.08h7.545z"></path></svg></a>
 									<a id="login-42" class="btn btn-primary d-block w-100 qd_connect">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Connect with 42 Auth&nbsp; &nbsp; &nbsp;<img src="static/img/42_Logo.svg.png" width="23" height="23"></a>
 								</div>
-								<p class="text-muted">Not Registered ?&nbsp;<a href="/register">Create an account</a></p>
+								<p class="text-muted">{% translate "Not Registered ?" %}&nbsp;<a href="/register">Create an account</a></p>
 						</div>
 					</div>
 				</div>

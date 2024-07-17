@@ -1,0 +1,263 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-07-17 13:24+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: accounts/admin.py:11
+msgid "Personal info"
+msgstr ""
+
+#: accounts/admin.py:13
+msgid "Permissions"
+msgstr ""
+
+#: accounts/admin.py:24
+msgid "Important dates"
+msgstr ""
+
+#: accounts/models.py:48
+msgid "id"
+msgstr ""
+
+#: accounts/models.py:53
+msgid "Unique identifier for the user, automatically generated."
+msgstr ""
+
+#: accounts/models.py:56
+msgid "username"
+msgstr ""
+
+#: accounts/models.py:60
+msgid "Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only."
+msgstr ""
+
+#: accounts/models.py:64
+msgid "The username must be 150 characters or fewer."
+msgstr ""
+
+#: accounts/models.py:65
+msgid "This value may contain only letters, numbers, and @/./+/-/_ characters."
+msgstr ""
+
+#: accounts/models.py:69
+msgid "email address"
+msgstr ""
+
+#: accounts/models.py:71
+msgid "Required. A valid email address."
+msgstr ""
+
+#: accounts/models.py:73
+msgid "Enter a valid email address."
+msgstr ""
+
+#: accounts/models.py:77
+msgid "42 id"
+msgstr ""
+
+#: accounts/models.py:81
+msgid "Unique identifier for the user from 42."
+msgstr ""
+
+#: accounts/models.py:84
+msgid "42 access token"
+msgstr ""
+
+#: accounts/models.py:88
+msgid "Access token for 42 API."
+msgstr ""
+
+#: accounts/models.py:91
+msgid "42 refresh token"
+msgstr ""
+
+#: accounts/models.py:95
+msgid "Refresh token for 42 API."
+msgstr ""
+
+#: accounts/models.py:98
+msgid "date joined"
+msgstr ""
+
+#: accounts/models.py:100
+msgid "The date and time when the user joined."
+msgstr ""
+
+#: accounts/models.py:103
+msgid "staff status"
+msgstr ""
+
+#: accounts/models.py:105
+msgid "Designates whether the user can log into this admin site."
+msgstr ""
+
+#: accounts/models.py:108
+msgid "active"
+msgstr ""
+
+#: accounts/models.py:111
+msgid ""
+"Designates whether this user should be treated as active. Unselect this "
+"instead of deleting accounts."
+msgstr ""
+
+#: accounts/models.py:117
+msgid "groups"
+msgstr ""
+
+#: accounts/models.py:120
+msgid ""
+"The groups this user belongs to. A user will get all permissions granted to "
+"each of their groups."
+msgstr ""
+
+#: accounts/models.py:128
+msgid "user permissions"
+msgstr ""
+
+#: accounts/models.py:130
+msgid "Specific permissions for this user."
+msgstr ""
+
+#: accounts/models.py:142
+msgid "custom user"
+msgstr ""
+
+#: accounts/models.py:143
+msgid "custom users"
+msgstr ""
+
+#: accounts/serializers.py:18
+msgid "Must include \"username/email\" and \"password\"."
+msgstr ""
+
+#: accounts/serializers.py:27
+msgid "Unable to log in with provided credentials."
+msgstr ""
+
+#: accounts/views.py:54
+msgid "User logged in!"
+msgstr ""
+
+#: accounts/views.py:72
+msgid "User logged out!"
+msgstr ""
+
+#: accounts/views.py:96
+msgid "Account registered! Please check your email to activate your account."
+msgstr ""
+
+#: accounts/views.py:123
+msgid "Account activated!"
+msgstr ""
+
+#: accounts/views.py:134
+msgid "Activation link is invalid!"
+msgstr ""
+
+#: accounts/views.py:154
+msgid "Please check your email to reset your password."
+msgstr ""
+
+#: accounts/views.py:180
+msgid "Set your new password."
+msgstr ""
+
+#: accounts/views.py:191
+msgid "Password reset link is invalid!"
+msgstr ""
+
+#: accounts/views.py:211
+msgid "Password changed!"
+msgstr ""
+
+#: accounts/views.py:284
+msgid "Authentication successful!"
+msgstr ""
+
+#: accounts/views.py:311
+msgid "Email updated succesfully!"
+msgstr ""
+
+#: pong/urls.py:33
+msgid "^login/?$"
+msgstr ""
+
+#: pong/urls.py:34
+msgid "^register/?$"
+msgstr ""
+
+#: pong/urls.py:36
+msgid "^home/?$"
+msgstr ""
+
+#: pong/urls.py:37
+msgid "^profile/?$"
+msgstr ""
+
+#: pong/urls.py:38
+msgid "^social/?$"
+msgstr ""
+
+#: pong/urls.py:39
+msgid "^settings/?$"
+msgstr ""
+
+#: pong/views.py:21
+msgid "Transcendence"
+msgstr ""
+
+#: pong/views.py:28
+msgid "Login"
+msgstr ""
+
+#: pong/views.py:33
+msgid "Register"
+msgstr ""
+
+#: pong/views.py:40
+msgid "Home"
+msgstr ""
+
+#: pong/views.py:47
+msgid "Profile"
+msgstr ""
+
+#: pong/views.py:54
+msgid "Social"
+msgstr ""
+
+#: pong/views.py:61
+msgid "Settings"
+msgstr ""
+
+#: templates/accounts/login.html:12
+msgid "Quick Play"
+msgstr "Partie rapide"
+
+#: templates/accounts/login.html:13
+msgid "My Profile"
+msgstr "Mon profil"
+
+#: templates/accounts/login.html:37
+msgid "Log in"
+msgstr "Connnneexxxion"
+
+#: templates/accounts/login.html:48
+msgid "Not Registered ?"
+msgstr ""
