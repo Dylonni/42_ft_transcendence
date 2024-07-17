@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-17 13:24+0000\n"
+"POT-Creation-Date: 2024-07-17 15:28+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -226,7 +226,8 @@ msgstr ""
 msgid "Login"
 msgstr ""
 
-#: pong/views.py:33
+#: pong/views.py:33 templates/accounts/register.html:37
+#: templates/accounts/register.html:43
 msgid "Register"
 msgstr ""
 
@@ -234,30 +235,272 @@ msgstr ""
 msgid "Home"
 msgstr ""
 
-#: pong/views.py:47
+#: pong/views.py:47 templates/profile.html:7
 msgid "Profile"
 msgstr ""
 
-#: pong/views.py:54
+#: pong/views.py:54 templates/social.html:8
 msgid "Social"
 msgstr ""
 
-#: pong/views.py:61
+#: pong/views.py:61 templates/settings.html:8
 msgid "Settings"
 msgstr ""
 
-#: templates/accounts/login.html:12
+#: templates/accounts/email_activate.html:5
+msgid "Activate Your Account"
+msgstr ""
+
+#: templates/accounts/email_activate.html:8
+#, python-format
+msgid "Hi '%(user.username)s'"
+msgstr ""
+
+#: templates/accounts/email_activate.html:9
+msgid ""
+"Thank you for registering at Transcendence. Please click the link below to "
+"activate your account:"
+msgstr ""
+
+#: templates/accounts/email_activate.html:10
+msgid "Activate your account"
+msgstr ""
+
+#: templates/accounts/email_activate.html:11
+msgid "If you did not create an account, please ignore this email."
+msgstr ""
+
+#: templates/accounts/email_activate.html:12
+msgid "Thanks,"
+msgstr ""
+
+#: templates/accounts/email_activate.html:12
+msgid "The Transcendence Team"
+msgstr ""
+
+#: templates/accounts/login.html:12 templates/accounts/register.html:12
 msgid "Quick Play"
 msgstr "Partie rapide"
 
-#: templates/accounts/login.html:13
+#: templates/accounts/login.html:13 templates/accounts/register.html:13
 msgid "My Profile"
 msgstr "Mon profil"
 
-#: templates/accounts/login.html:37
+#: templates/accounts/login.html:37 templates/accounts/login.html:42
 msgid "Log in"
 msgstr "Connnneexxxion"
 
+#: templates/accounts/login.html:38
+msgid "Username / Email"
+msgstr ""
+
+#: templates/accounts/login.html:39 templates/accounts/register.html:40
+msgid "Password"
+msgstr ""
+
+#: templates/accounts/login.html:40 templates/accounts/register.html:41
+msgid "Show password"
+msgstr ""
+
+#: templates/accounts/login.html:41
+msgid "Forgot your password ?"
+msgstr ""
+
+#: templates/accounts/login.html:45
+msgid "Connect with Google"
+msgstr ""
+
+#: templates/accounts/login.html:46
+msgid "Connect with 42 Auth"
+msgstr ""
+
 #: templates/accounts/login.html:48
 msgid "Not Registered ?"
+msgstr ""
+
+#: templates/accounts/login.html:48
+msgid "Create an account"
+msgstr ""
+
+#: templates/accounts/login.html:60 templates/accounts/register.html:57
+msgid "Privacy Policy"
+msgstr ""
+
+#: templates/accounts/login.html:61 templates/accounts/register.html:58
+msgid "Development Team"
+msgstr ""
+
+#: templates/accounts/register.html:38
+msgid "Username"
+msgstr ""
+
+#: templates/accounts/register.html:39 templates/settings.html:67
+msgid "Email"
+msgstr ""
+
+#: templates/accounts/register.html:44
+msgid "Already Registered ?"
+msgstr ""
+
+#: templates/accounts/register.html:44
+msgid "Sign in here"
+msgstr ""
+
+#: templates/home.html:26 templates/profile.html:21 templates/profile.html:57
+#: templates/profile.html:75
+msgid "#PlayerName"
+msgstr ""
+
+#: templates/home.html:28
+msgid "Stats"
+msgstr ""
+
+#: templates/home.html:28
+msgid "Games played:"
+msgstr ""
+
+#: templates/home.html:33
+msgid "Wins"
+msgstr ""
+
+#: templates/home.html:34
+msgid "Loss"
+msgstr ""
+
+#: templates/home.html:37
+msgid "Create GameRoom"
+msgstr ""
+
+#: templates/home.html:67
+msgid "Game Rooms"
+msgstr ""
+
+#: templates/home.html:72
+msgid "Room Name"
+msgstr ""
+
+#: templates/home.html:73
+msgid "#RoomName"
+msgstr ""
+
+#: templates/home.html:76
+msgid "Created By"
+msgstr ""
+
+#: templates/home.html:77
+msgid "#CreatorName"
+msgstr ""
+
+#: templates/home.html:80
+msgid "Room Type"
+msgstr ""
+
+#: templates/home.html:81
+msgid "#Classic/Retro"
+msgstr ""
+
+#: templates/home.html:84
+msgid "Current Players"
+msgstr ""
+
+#: templates/home.html:97
+msgid "NO GAMES TO DISPLAY"
+msgstr ""
+
+#: templates/profile.html:51
+msgid "Recent Games"
+msgstr ""
+
+#: templates/profile.html:56 templates/profile.html:74
+msgid "Versus"
+msgstr ""
+
+#: templates/profile.html:60 templates/profile.html:78
+msgid "Score"
+msgstr ""
+
+#: templates/profile.html:64 templates/profile.html:82
+msgid "Game Duration"
+msgstr ""
+
+#: templates/profile.html:68 templates/profile.html:86
+msgid "Date"
+msgstr ""
+
+#: templates/profile.html:98
+msgid "Player Statistics"
+msgstr ""
+
+#: templates/profile.html:105
+msgid "Total Games"
+msgstr ""
+
+#: templates/profile.html:108 templates/profile.html:116
+msgid "#Won Tournaments"
+msgstr ""
+
+#: templates/profile.html:121
+msgid "Won Games"
+msgstr ""
+
+#: templates/profile.html:121
+msgid "#WonGames"
+msgstr ""
+
+#: templates/profile.html:124
+msgid "Lost Games"
+msgstr ""
+
+#: templates/profile.html:124
+msgid "#LostGames"
+msgstr ""
+
+#: templates/settings.html:23
+#, fuzzy
+#| msgid "My Profile"
+msgid "Profile Card"
+msgstr "Mon profil"
+
+#: templates/settings.html:53
+msgid "Account"
+msgstr ""
+
+#: templates/settings.html:61
+msgid "#Username"
+msgstr ""
+
+#: templates/settings.html:64
+msgid "Account created on"
+msgstr ""
+
+#: templates/settings.html:64
+msgid "#Date of Creation"
+msgstr ""
+
+#: templates/settings.html:67
+msgid "Currentmail****@*****.com"
+msgstr ""
+
+#: templates/settings.html:74
+msgid "Modify Email"
+msgstr ""
+
+#: templates/settings.html:74
+msgid "Modify Password"
+msgstr ""
+
+#: templates/settings.html:80
+msgid "Block list"
+msgstr ""
+
+#: templates/settings.html:89
+msgid "Delete my account"
+msgstr ""
+
+#: templates/social.html:24
+msgid "Friends"
+msgstr ""
+
+#: templates/social.html:38
+msgid "#Friendfrrrrrrrrrrrrrrrrrrrr"
 msgstr ""
