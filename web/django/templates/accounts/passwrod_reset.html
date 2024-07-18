@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Reset your Password</title>
+</head>
+<body>
+    <p>Hi {{ user.username }},</p>
+    <p>Please click the link below to modify your password:</p>
+    <p><a href="http://{{ domain }}:8080{% url 'api:accounts:auth:user_activate' uidb64=uid token=token %}">Reset Password</a></p>
+    <p>If you have not requested a password reset, please ignore this email.</p>
+    <p>Thanks,<br>The Transcendence Team</p>
+</body>
+</html>

@@ -142,3 +142,32 @@ a:hover {
 a:active { 
   text-decoration: none; 
 }
+
+#notiftoggle {
+  -webkit-appearance: none;
+  visibility: hidden;
+  display: none;
+}
+
+.form-label {
+  cursor: pointer;
+}
+
+#notiftoggle:checked ~ .notif-panel {
+  display: block;
+}
+
+.notif-panel {
+  display: none;
+}
+
+#notif-toggler {
+  bottom: 0px;
+  position: fixed;
+}
+
+.notif-panel {
+  bottom: 0px;
+  position: fixed;
+}
+

@@ -1,0 +1,70 @@
+{% load static %}
+{% block content %}
+<input type="checkbox" id="notiftoggle">
+    <div class="d-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" id="notif-toggler" style="width: 100px;height: 80px;margin-left: 35px;margin-right: 35px;margin-top: 35px;margin-bottom: 35px;z-index: 999;">
+        <div class="d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center rubberBand animated" style="opacity: 1;backdrop-filter: opacity(1);-webkit-backdrop-filter: opacity(1);position: absolute;width: 70px;height: 70px;border-radius: 50px;background: var(--bs-light-text-emphasis);border-style: solid;border-color: #292c30;z-index: 998;"><label class="form-label" for="notiftoggle" style="margin-bottom: 0px;padding-bottom: 0px;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-bell-ringing" data-bs-toggle="tooltip" data-bss-tooltip="" data-bs-placement="bottom" style="font-size: 45px;color: var(--bs-body-bg);" title="Notifications">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M10 5a2 2 0 0 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6"></path>
+                    <path d="M9 17v1a3 3 0 0 0 6 0v-1"></path>
+                    <path d="M21 6.727a11.05 11.05 0 0 0 -2.794 -3.727"></path>
+                    <path d="M3 6.727a11.05 11.05 0 0 1 2.792 -3.727"></path>
+                </svg></label></div>
+        <div style="width: 13px;height: 13px;background: #ff0000;border-radius: 10px;margin-top: 0px;padding-top: 0px;margin-bottom: 60px;margin-right: 2px;margin-left: 60px;"></div>
+    </div>
+    <div class="overflow-auto notif-panel" style="width: 300px;height: 500px;background: #2e353b;margin-left: 79px;margin-right: 79px;margin-top: 115px;margin-bottom: 115px;border-radius: 19px;z-index: 999;">
+        <div class="toast fade hide" role="alert" data-bs-autohide="false" id="toast-gameinvite">
+            <div class="toast-header" style="padding-bottom: 0px;background: #5abfea;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-device-gamepad" style="font-size: 29px;color: var(--bs-body-bg);">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M2 6m0 2a2 2 0 0 1 2 -2h16a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-16a2 2 0 0 1 -2 -2z"></path>
+                    <path d="M6 12h4m-2 -2v4"></path>
+                    <path d="M15 11l0 .01"></path>
+                    <path d="M18 13l0 .01"></path>
+                </svg><strong class="me-auto" style="margin-left: 8px;color: var(--bs-body-bg);">Game Invite</strong><button class="btn-close ms-2 mb-1 close" type="button" aria-label="Close" data-bs-dismiss="toast"></button></div>
+            <div class="toast-body" role="alert" style="background: #2e353b;">
+                <p style="color: var(--bs-body-bg);padding-bottom: 0px;margin-bottom: 7px;"><span class="text-truncate" style="font-weight: bold;padding-left: 0px;margin-left: 10px;font-style: italic;">#PlayerName</span>&nbsp;has invited you to play !&nbsp;</p>
+                <p class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center" style="margin-bottom: 0px;margin-top: 6px;"><button class="btn btn-primary d-flex justify-content-center align-items-center" type="button" style="margin-left: 10px;margin-right: 10px;background: rgba(255,255,255,0);width: 45px;height: 31px;border-width: 2px;border-color: var(--bs-form-valid-border-color);"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-check" style="color: var(--bs-form-valid-border-color);">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M5 12l5 5l10 -10"></path>
+                        </svg></button><button class="btn btn-primary d-flex justify-content-center align-items-center" type="button" style="margin-left: 10px;margin-right: 10px;width: 45px;height: 30.5px;background: rgba(255,255,255,0);border-width: 2px;border-color: #d14414;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-x" style="color: #d14414;">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M18 6l-12 12"></path>
+                            <path d="M6 6l12 12"></path>
+                        </svg></button></p>
+                <p class="d-flex justify-content-center align-items-center" style="margin-bottom: 0px;color: var(--bs-body-bg);">&nbsp;Accept&nbsp; &nbsp; &nbsp; Decline</p>
+            </div>
+        </div>
+        <div class="toast fade hide" role="alert" data-bs-autohide="false" id="toast-friendrequest">
+            <div class="toast-header" style="padding-bottom: 0px;background: #c89911;padding-top: 0px;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-user-plus" style="font-size: 29px;color: var(--bs-body-bg);">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
+                    <path d="M16 19h6"></path>
+                    <path d="M19 16v6"></path>
+                    <path d="M6 21v-2a4 4 0 0 1 4 -4h4"></path>
+                </svg><strong class="me-auto" style="margin-left: 8px;color: var(--bs-body-bg);">Friend Request</strong><small style="color: var(--bs-body-bg);">#time ago</small><button class="btn-close ms-2 mb-1 close" type="button" aria-label="Close" data-bs-dismiss="toast"></button></div>
+            <div class="toast-body" role="alert" style="background: #2e353b;">
+                <p style="color: var(--bs-body-bg);padding-bottom: 0px;margin-bottom: 7px;">&nbsp;<span class="text-truncate" style="font-weight: bold;padding-left: 0px;margin-left: 10px;font-style: italic;">#PlayerName</span>&nbsp;wants to be your friend !</p>
+                <p class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center" style="margin-bottom: 0px;margin-top: 6px;"><button class="btn btn-primary d-flex justify-content-center align-items-center" type="button" style="margin-left: 10px;margin-right: 10px;background: rgba(255,255,255,0);width: 45px;height: 31px;border-width: 2px;border-color: var(--bs-form-valid-border-color);"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-check" style="color: var(--bs-form-valid-border-color);">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M5 12l5 5l10 -10"></path>
+                        </svg></button><button class="btn btn-primary d-flex justify-content-center align-items-center" type="button" style="margin-left: 10px;margin-right: 10px;width: 45px;height: 30.5px;background: rgba(255,255,255,0);border-width: 2px;border-color: #d14414;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-x" style="color: #d14414;">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M18 6l-12 12"></path>
+                            <path d="M6 6l12 12"></path>
+                        </svg></button></p>
+                <p class="d-flex justify-content-center align-items-center" style="margin-bottom: 0px;color: var(--bs-body-bg);">&nbsp;Accept&nbsp; &nbsp; &nbsp; Decline</p>
+            </div>
+        </div>
+        <div class="toast fade hide" role="alert" data-bs-autohide="false" id="toast-newmessage">
+            <div class="toast-header" style="padding-bottom: 0px;background: #3d9c3c;padding-top: 0px;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-message-chatbot" style="font-size: 28px;color: var(--bs-body-bg);">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M18 4a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-5l-5 3v-3h-2a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3h12z"></path>
+                    <path d="M9.5 9h.01"></path>
+                    <path d="M14.5 9h.01"></path>
+                    <path d="M9.5 13a3.5 3.5 0 0 0 5 0"></path>
+                </svg><strong class="me-auto" style="margin-left: 8px;color: var(--bs-body-bg);">New Message</strong><small style="color: var(--bs-body-bg);">#time ago</small><button class="btn-close ms-2 mb-1 close" type="button" aria-label="Close" data-bs-dismiss="toast"></button></div>
+            <div class="toast-body" role="alert" style="background: #2e353b;backdrop-filter: blur(0px);-webkit-backdrop-filter: blur(0px);padding-bottom: 10px;padding-top: 12px;">
+                <p style="color: var(--bs-body-bg);padding-bottom: 0px;margin-bottom: 7px;">&nbsp;New message from<a href="#"><span class="text-truncate" style="font-weight: bold;padding-left: 0px;margin-left: 10px;font-style: italic;color: var(--bs-body-bg);">#PlayerName</span></a>&nbsp;!</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

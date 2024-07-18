@@ -38,7 +38,7 @@ def send_password_reset_mail(request, user):
         'token': token_generator.make_token(user),
     })
     send_mail(
-        subject='Activate your account',
+        subject='Reset your password',
         message='',
         from_email=settings.DEFAULT_FROM_EMAIL,
         recipient_list=[user.email],

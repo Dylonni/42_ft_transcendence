@@ -83,6 +83,12 @@ class RegisterView(PublicView):
 
 register = RegisterView.as_view()
 
+class PasswordResetView(PublicView):
+    def get(self, request):
+        return render_response(request, 'accounts/password_reset.html', _('Register'), False)
+
+password_reset = PasswordResetView.as_view()
+
 
 class HomeView(PrivateView):
     def get(self, request):
