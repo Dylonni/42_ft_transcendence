@@ -35,7 +35,7 @@ urlpatterns = [
 
     path('login/', views.login, name='login'),
     path('register/', views.register, name='register'),
-	# path('password-reset/', views.PasswordReset.as_view(), name='password_reset'),
+	path('forgot-password/', views.forgot_password, name='forgot_password'),
     path('home/', views.home, name='home'),
     path('profile/', views.profile, name='profile'),
 	path('profile/<uuid:profile_id>/', views.profile_other, name='profile_other'),
