@@ -4,6 +4,8 @@
 - [X] Create a template for "confirm new password" (password input) -> create a show password button
 - [X] Make the "show password" work
 - [ ] Create Divs to load upon error codes
+- [ ] Do not redirect when forgot password email has been sent
+- [ ] Fix toast
 
     NAVBAR
 - [ ] Rework the navbar by adding a page to localplay
