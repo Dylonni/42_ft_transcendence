@@ -20,488 +20,499 @@ msgstr ""
 
 #: accounts/admin.py:11
 msgid "Personal info"
-msgstr "個人情報について"
+msgstr "Персональная информация"
 
 #: accounts/admin.py:13
 msgid "Permissions"
-msgstr "パーミッション"
+msgstr "Разрешения"
 
 #: accounts/admin.py:24
 msgid "Important dates"
-msgstr "重要な日付"
+msgstr "Важные даты"
 
 #: accounts/models.py:48
 msgid "id"
-msgstr "ID"
+msgstr "id"
 
 #: accounts/models.py:53
 msgid "Unique identifier for the user, automatically generated."
-msgstr "ユーザーの独自の識別子、自動的に生成されます。"
+msgstr ""
+"Уникальный идентификатор для пользователя, сгенерированный автоматически."
 
 #: accounts/models.py:56
 msgid "username"
-msgstr "パスワード"
+msgstr "имя пользователя"
 
 #: accounts/models.py:60
 msgid "Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only."
-msgstr "必須 150文字以内 文字、数字、@/./+/-/_ のみ。"
+msgstr "150 символов или меньше. Буквы, цифры и только @/./+/-/_."
 
 #: accounts/models.py:64
 msgid "The username must be 150 characters or fewer."
-msgstr "ユーザー名は150文字以下でなければなりません。"
+msgstr "Имя пользователя должно быть 150 символов или меньше."
 
 #: accounts/models.py:65
 msgid ""
 "This value may contain only letters, numbers, and @/./+/-/_ characters."
-msgstr "この値は、文字、数字、および @/./+/-/_ 文字のみを含む場合があります。"
+msgstr "Это значение может содержать только буквы, цифры и символы @/./+/-/_."
 
 #: accounts/models.py:69
 msgid "email address"
-msgstr "メールアドレス"
+msgstr "адрес электронной почты"
 
 #: accounts/models.py:71
 msgid "Required. A valid email address."
-msgstr "有効なメールアドレスは必須項目です。"
+msgstr "Требуется. Действительный адрес электронной почты."
 
 #: accounts/models.py:73
 msgid "Enter a valid email address."
-msgstr "有効なメールアドレスを入力してください。"
+msgstr "Введите действительный адрес электронной почты."
 
 #: accounts/models.py:77
 msgid "42 id"
-msgstr "42 ID"
+msgstr "42 id"
 
 #: accounts/models.py:81
 msgid "Unique identifier for the user from 42."
-msgstr "42 からユーザー固有の識別子。"
+msgstr "Уникальный идентификатор пользователя от 42."
 
 #: accounts/models.py:84
 msgid "42 access token"
-msgstr "42アクセストークン"
+msgstr "42 Access Token"
 
 #: accounts/models.py:88
 msgid "Access token for 42 API."
-msgstr "42 API へのアクセストークン。"
+msgstr "Токен доступа для 42 API."
 
 #: accounts/models.py:91
 msgid "42 refresh token"
-msgstr "42リフレッシュトークン"
+msgstr "42 Обновить маркер"
 
 #: accounts/models.py:95
 msgid "Refresh token for 42 API."
-msgstr "42 API のトークンを更新します。"
+msgstr "Обновите токен для 42 API."
 
 #: accounts/models.py:98
 msgid "date joined"
-msgstr "参加日"
+msgstr "дата присоединения"
 
 #: accounts/models.py:100
 msgid "The date and time when the user joined."
-msgstr "ユーザーが参加した日時。"
+msgstr "Дата и время, когда пользователь присоединился."
 
 #: accounts/models.py:103
 msgid "staff status"
-msgstr "スタッフのステータス"
+msgstr "Статус персонала"
 
 #: accounts/models.py:105
 msgid "Designates whether the user can log into this admin site."
-msgstr "ユーザーがこの管理者サイトにログインできるかどうかを指定します。"
+msgstr "Определяет, может ли пользователь войти на этот сайт администратора."
 
 #: accounts/models.py:108
 msgid "active"
-msgstr "アクティブ"
+msgstr "активный"
 
 #: accounts/models.py:111
 msgid ""
 "Designates whether this user should be treated as active. Unselect this "
 "instead of deleting accounts."
-msgstr "このユーザーが有効に扱われるべきかどうかを指定します。 削除ではなく、これを選択解除します。"
+msgstr ""
+"Определяет, следует ли считать этого пользователя активным. Выберите это "
+"вместо удаления учетных записей."
 
 #: accounts/models.py:117
 msgid "groups"
-msgstr "グループ"
+msgstr "группы"
 
 #: accounts/models.py:120
 msgid ""
 "The groups this user belongs to. A user will get all permissions granted to "
 "each of their groups."
-msgstr "ユーザーが所属するグループ ユーザーは、各グループに付与されたすべての権限を取得します。"
+msgstr ""
+"Группы, к которым принадлежит данный пользователь. Пользователь получает все"
+" разрешения, предоставленные каждой из групп."
 
 #: accounts/models.py:128
 msgid "user permissions"
-msgstr "ユーザー権限"
+msgstr "разрешения пользователя"
 
 #: accounts/models.py:130
 msgid "Specific permissions for this user."
-msgstr "利用者の特定権限"
+msgstr "Конкретные разрешения для данного пользователя."
 
 #: accounts/models.py:142
 msgid "custom user"
-msgstr "カスタムユーザ"
+msgstr "пользователь"
 
 #: accounts/models.py:143
 msgid "custom users"
-msgstr "カスタムユーザー"
+msgstr "пользователь"
 
 #: accounts/serializers.py:18
 msgid "Must include \"username/email\" and \"password\"."
-msgstr "\"ウーザー名／Eメール\" と \"パスワード\" を含める必要があります。"
+msgstr ""
+"Должен включать в себя «имя пользователя / электронная почта» и «пароль»."
 
 #: accounts/serializers.py:27
 msgid "Unable to log in with provided credentials."
-msgstr "提供された認証情報でログインできません。"
+msgstr "Невозможно войти в систему с предоставленными учетными данными."
 
 #: accounts/views.py:54
 msgid "User logged in!"
-msgstr "ログイン完成！"
+msgstr "Пользователь вошел!"
 
 #: accounts/views.py:72
 msgid "User logged out!"
-msgstr "ログアウト完成！"
+msgstr "Пользователь вышел!"
 
 #: accounts/views.py:96
 msgid "Account registered! Please check your email to activate your account."
-msgstr "会員登録 口座の有効化は、Eメールアドレスをご確認ください。"
+msgstr ""
+"Счет зарегистрирован! Пожалуйста, проверьте свою электронную почту, чтобы "
+"активировать свою учетную запись."
 
 #: accounts/views.py:123
 msgid "Account activated!"
-msgstr "アクティブにアカウント!"
+msgstr "Учетная запись активирована!"
 
 #: accounts/views.py:134
 msgid "Activation link is invalid!"
-msgstr "アクティベーションリンクは無効です!"
+msgstr "Ссылка активации недействительна!"
 
 #: accounts/views.py:154
 msgid "Please check your email to reset your password."
-msgstr "パスワードをリセットするには、メールアドレスをご確認ください。"
+msgstr "Пожалуйста, проверьте свою электронную почту, чтобы сбросить пароль."
 
 #: accounts/views.py:180
 msgid "Set your new password."
-msgstr "新しいパスワードを設定します。"
+msgstr "Установите свой новый пароль."
 
 #: accounts/views.py:191
 msgid "Password reset link is invalid!"
-msgstr "パスワードリセットリンクが無効です!"
+msgstr "Ссылка сброса пароля недействительна!"
 
 #: accounts/views.py:211
 msgid "Password changed!"
-msgstr "パスワード変更"
+msgstr "Пароль изменился!"
 
 #: accounts/views.py:284
 msgid "Authentication successful!"
-msgstr "認証成功!"
+msgstr "Аутентификация прошла успешно!"
 
 #: accounts/views.py:311
 msgid "Email updated succesfully!"
-msgstr "メールup"
+msgstr "Электронная почта обновилась успешно!"
 
 #: pong/urls.py:33
 msgid "^login/?$"
-msgstr ""
+msgstr "Логин/?$"
 
 #: pong/urls.py:34
 msgid "^register/?$"
-msgstr ""
+msgstr "Регистрация/?$"
 
 #: pong/urls.py:36
 msgid "^home/?$"
-msgstr ""
+msgstr "Домой / $"
 
 #: pong/urls.py:37
 msgid "^profile/?$"
-msgstr ""
+msgstr "Профиль/?$"
 
 #: pong/urls.py:38
 msgid "^social/?$"
-msgstr ""
+msgstr "Социальный / $"
 
 #: pong/urls.py:39
 msgid "^settings/?$"
-msgstr ""
+msgstr "^settings/?$"
 
 #: pong/views.py:21
 msgid "Transcendence"
-msgstr "Transcendence"
+msgstr "Трансцендентность"
 
 #: pong/views.py:28
 msgid "Login"
-msgstr "ログイン"
+msgstr "Логин"
 
 #: pong/views.py:33 templates/accounts/register.html:37
 #: templates/accounts/register.html:43
 msgid "Register"
-msgstr "会員登録"
+msgstr "регистрировать"
 
 #: pong/views.py:40
 msgid "Home"
-msgstr "ホーム"
+msgstr "Домой"
 
 #: pong/views.py:47 templates/profile.html:7
 msgid "Profile"
-msgstr "プロフィール"
+msgstr "профиль"
 
 #: pong/views.py:54 templates/social.html:8
 msgid "Social"
-msgstr "社会招聘"
+msgstr "социальный"
 
 #: pong/views.py:61 templates/settings.html:8
 msgid "Settings"
-msgstr "設定"
+msgstr "Настройки"
 
 #: templates/accounts/email_activate.html:5
 msgid "Activate Your Account"
-msgstr "アカウントの有効化"
+msgstr "Активируйте свой аккаунт"
 
 #: templates/accounts/email_activate.html:8
 #, python-format
 msgid "Hi '%(user.username)s'"
-msgstr "こんにちは '%(user.username)s"
+msgstr "Привет '%(user.username)s'"
 
 #: templates/accounts/email_activate.html:9
 msgid ""
 "Thank you for registering at Transcendence. Please click the link below to "
 "activate your account:"
-msgstr "Transcendenceに登録いただきありがとうございます。 下記のリンクをクリックしてアカウントを有効化してください。"
+msgstr ""
+"Спасибо, что зарегистрировались в Transcendence. Пожалуйста, нажмите ссылку "
+"ниже, чтобы активировать свою учетную запись:"
 
 #: templates/accounts/email_activate.html:10
 msgid "Activate your account"
-msgstr "アカウントの有効化"
+msgstr "Активируйте свой аккаунт"
 
 #: templates/accounts/email_activate.html:11
 msgid "If you did not create an account, please ignore this email."
-msgstr "アカウントを作成しなかった場合は、このメールを無視してください。"
+msgstr ""
+"Если вы не создали учетную запись, пожалуйста, проигнорируйте это письмо."
 
 #: templates/accounts/email_activate.html:12
 msgid "Thanks,"
-msgstr "ありがとうございます。"
+msgstr "Спасибо."
 
 #: templates/accounts/email_activate.html:12
 msgid "The Transcendence Team"
-msgstr "Transcendenceチーム"
+msgstr "Трансцендентная команда"
 
 #: templates/accounts/login.html:12 templates/accounts/register.html:12
 msgid "Quick Play"
-msgstr "クイックプレイ"
+msgstr "Быстрая игра"
 
 #: templates/accounts/login.html:13 templates/accounts/register.html:13
 msgid "My Profile"
-msgstr "私のプロフィール"
+msgstr "Мой профиль"
 
 #: templates/accounts/login.html:37 templates/accounts/login.html:42
 msgid "Log in"
-msgstr "ログイン"
+msgstr "Входите."
 
 #: templates/accounts/login.html:38
 msgid "Username / Email"
-msgstr "ユーザー名／メール"
+msgstr "Имя пользователя / Email"
 
 #: templates/accounts/login.html:39 templates/accounts/register.html:40
 msgid "Password"
-msgstr "パスワード"
+msgstr "Пароль"
 
 #: templates/accounts/login.html:40 templates/accounts/register.html:41
 msgid "Show password"
-msgstr "パスワードを表示する"
+msgstr "Покажи пароль"
 
 #: templates/accounts/login.html:41
 msgid "Forgot your password ?"
-msgstr "パスワードを忘れた場合"
+msgstr "Забыли пароль?"
 
 #: templates/accounts/login.html:45
 msgid "Connect with Google"
-msgstr "Googleで登録"
+msgstr "Подключение к Google"
 
 #: templates/accounts/login.html:46
 msgid "Connect with 42 Auth"
-msgstr "42 Authで登録"
+msgstr "Связь с 42 Auth"
 
 #: templates/accounts/login.html:48
 msgid "Not Registered ?"
-msgstr "初めてご利用ですか？"
+msgstr "Не зарегистрированы?"
 
 #: templates/accounts/login.html:48
 msgid "Create an account"
-msgstr "新規登録"
+msgstr "Создать аккаунт"
 
 #: templates/accounts/login.html:60 templates/accounts/register.html:57
 msgid "Privacy Policy"
-msgstr "プライバシー規約"
+msgstr "Политика конфиденциальности"
 
 #: templates/accounts/login.html:61 templates/accounts/register.html:58
 msgid "Development Team"
-msgstr "開発チーム"
+msgstr "Команда разработчиков"
 
 #: templates/accounts/register.html:38
 msgid "Username"
-msgstr "ユーザ名"
+msgstr "Имя пользователя"
 
 #: templates/accounts/register.html:39 templates/settings.html:67
 msgid "Email"
-msgstr "Eメール"
+msgstr "Электронная почта"
 
 #: templates/accounts/register.html:44
 msgid "Already Registered ?"
-msgstr "すでにアカウントを持ちですか?"
+msgstr "Уже зарегистрированы?"
 
 #: templates/accounts/register.html:44
 msgid "Sign in here"
-msgstr "新規登録はこちら"
+msgstr "Подпишите здесь"
 
 #: templates/home.html:26 templates/profile.html:21 templates/profile.html:57
 #: templates/profile.html:75
 msgid "#PlayerName"
-msgstr "#プレイヤー名"
+msgstr "#Имя игрока"
 
 #: templates/home.html:28
 msgid "Stats"
-msgstr "統計情報"
+msgstr "Статистика"
 
 #: templates/home.html:28
 msgid "Games played:"
-msgstr "ゲームプレイ:"
+msgstr "В игры играли:"
 
 #: templates/home.html:33
 msgid "Wins"
-msgstr "ウィンズ"
+msgstr "Победа"
 
 #: templates/home.html:34
 msgid "Loss"
-msgstr "ログイン"
+msgstr "Потеря"
 
 #: templates/home.html:37
 msgid "Create GameRoom"
-msgstr "GameRoomを作成する"
+msgstr "Создать GameRoom"
 
 #: templates/home.html:67
 msgid "Game Rooms"
-msgstr "ゲームルーム"
+msgstr "Игровые комнаты"
 
 #: templates/home.html:72
 msgid "Room Name"
-msgstr "ルーム名"
+msgstr "Название комнаты"
 
 #: templates/home.html:73
 msgid "#RoomName"
-msgstr "#部屋名"
+msgstr "#RoomName"
 
 #: templates/home.html:76
 msgid "Created By"
-msgstr "によって作成された"
+msgstr "созданный"
 
 #: templates/home.html:77
 msgid "#CreatorName"
-msgstr "#クリエイター名"
+msgstr "#CreatorName"
 
 #: templates/home.html:80
 msgid "Room Type"
-msgstr "客室タイプ"
+msgstr "Тип комнаты"
 
 #: templates/home.html:81
 msgid "#Classic/Retro"
-msgstr "#クラシック/レトロ"
+msgstr "#Классика/Ретро"
 
 #: templates/home.html:84
 msgid "Current Players"
-msgstr "現在のプレーヤー"
+msgstr "Текущие игроки"
 
 #: templates/home.html:97
 msgid "NO GAMES TO DISPLAY"
-msgstr "ディスプレイにゲームはありません"
+msgstr "Никаких игр, чтобы дисплеи"
 
 #: templates/profile.html:51
 msgid "Recent Games"
-msgstr "最近のゲーム"
+msgstr "Последние игры"
 
 #: templates/profile.html:56 templates/profile.html:74
 msgid "Versus"
-msgstr "ヴェルサス"
+msgstr "Версия"
 
 #: templates/profile.html:60 templates/profile.html:78
 msgid "Score"
-msgstr "スコア"
+msgstr "счет"
 
 #: templates/profile.html:64 templates/profile.html:82
 msgid "Game Duration"
-msgstr "ゲーム期間"
+msgstr "Продолжительность игры"
 
 #: templates/profile.html:68 templates/profile.html:86
 msgid "Date"
-msgstr "日程表"
+msgstr "Дата"
 
 #: templates/profile.html:98
 msgid "Player Statistics"
-msgstr "プレイヤー統計"
+msgstr "Статистика игроков"
 
 #: templates/profile.html:105
 msgid "Total Games"
-msgstr "トータルゲーム"
+msgstr "Игры Total"
 
 #: templates/profile.html:108 templates/profile.html:116
 msgid "#Won Tournaments"
-msgstr "#Won トーナメント"
+msgstr "#Выиграл турниры"
 
 #: templates/profile.html:121
 msgid "Won Games"
-msgstr "ウォンゲーム"
+msgstr "Победил в играх"
 
 #: templates/profile.html:121
 msgid "#WonGames"
-msgstr "#WonGames について"
+msgstr "#выиграл"
 
 #: templates/profile.html:124
 msgid "Lost Games"
-msgstr "失われたゲーム"
+msgstr "Потерянные игры"
 
 #: templates/profile.html:124
 msgid "#LostGames"
-msgstr "ログイン"
+msgstr "#потерянные игры"
 
 #: templates/settings.html:23
 #, fuzzy
 #| msgid "My Profile"
 msgid "Profile Card"
-msgstr "プロフィールカード"
+msgstr "Карта профиля"
 
 #: templates/settings.html:53
 msgid "Account"
-msgstr "パスワード"
+msgstr "Счет"
 
 #: templates/settings.html:61
 msgid "#Username"
-msgstr "#ユーザー名"
+msgstr "#Имя пользователя"
 
 #: templates/settings.html:64
 msgid "Account created on"
-msgstr "作成したアカウント"
+msgstr "Счет, созданный"
 
 #: templates/settings.html:64
 msgid "#Date of Creation"
-msgstr "#作成日"
+msgstr "#Дата создания"
 
 #: templates/settings.html:67
 msgid "Currentmail****@*****.com"
-msgstr "現在のメールアドレス****@*****.com"
+msgstr "Currentmail****@*****.com"
 
 #: templates/settings.html:74
 msgid "Modify Email"
-msgstr "メールの修正"
+msgstr "Изменить электронную почту"
 
 #: templates/settings.html:74
 msgid "Modify Password"
-msgstr "パスワード変更"
+msgstr "Изменить пароль"
 
 #: templates/settings.html:80
 msgid "Block list"
-msgstr "ブロックリスト"
+msgstr "Список блоков"
 
 #: templates/settings.html:89
 msgid "Delete my account"
-msgstr "アカウントの削除"
+msgstr "Удалить мой аккаунт"
 
 #: templates/social.html:24
 msgid "Friends"
-msgstr "スタッフ"
+msgstr "Друзья"
 
 #: templates/social.html:38
 msgid "#Friendfrrrrrrrrrrrrrrrrrrrr"
-msgstr "#Friendfrrrrrrrrrrrrrrrrrrrrr"
+msgstr "#Friendfrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"

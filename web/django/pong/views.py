@@ -24,7 +24,7 @@ class IndexView(APIView):
 
 class LoginView(APIView):
     def get(self, request, *args, **kwargs):
-        translation.activate("fr")
+        translation.activate("ja")
         return redirect_not_ajax(request, _('Login'), 'accounts/login.html')
 
 
