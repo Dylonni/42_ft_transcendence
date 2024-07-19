@@ -3,7 +3,7 @@
 - [X] Create a template for "forgot password" (mail input)
 - [X] Create a template for "confirm new password" (password input) -> create a show password button
 - [X] Make the "show password" work
-- [ ] Create Divs to load upon error codes
+- [X] Create Divs to load upon error codes
 - [ ] Do not redirect when forgot password email has been sent
 - [ ] Fix toast
 
@@ -12,8 +12,8 @@
 - [ ] Make the navbar show icons depending on context
 
     HOME
-- [ ] Create a modal for "Create GameRoom"
-- [ ] Add dropdown for languages (FR, EN, JP)
+- [X] Create a modal for "Create GameRoom"
+- [X] Add dropdown for languages (FR, EN, JP)
 - [ ] Move Player search to the right side
 - [ ] Add a background for "Search Game"
 - [ ] Remove the "Stats Indicator" , Create a Rank indicator
@@ -32,7 +32,7 @@
 - [ ] Fix buttons according to context
 - [ ] Make a chart to check games won, games lost and more
 
--   SOCIAL
+    SOCIAL
 - [ ] Show player context (online, offline, ingame)
 
     LEADERBOARD
