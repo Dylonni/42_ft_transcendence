@@ -1,0 +1,506 @@
+# Một số trò chơi.
+# Bản quyền (C) NĂM CỦA MỘT CÒI TÚI
+# Hồ sơ này được phân phối dưới cùng giấy phép với gói hồ sơ.
+¢Ü Đầu tiên ¢Ü <email@address>Năm.
+#
+♪, mơ hồ
+msgstr ""
+msgtr ""
+"Project-Id-Version: CÂU CHUYỆN
+"Hãy thông báo-msgstr-Bugs-to:\n"
+"POT-Creation-Dete: 2024-07-17 15:28 +0000\n"
+"PO-Revision-Date: năm-O-DA HO: mI+ZONE"
+"Người dịch phụ đề: <email@address>\n"
+"Language-Team: <ll@li.org>\n"
+Giấy phép:\n
+"MIME-Viersion: 1.0n"
+"Content-type: text/prime; charset=UTF-8n"
+"Transfer-Encoding: 8bit\n"
+"Pliral-Forms: nplrals = 2; số nhiều =(n > 1);\n"
+
+#: tài khoản/admin.py:11
+Name
+msgtr ""
+
+#: tài khoản/admin.py:13
+GenericName
+msgtr ""
+
+#: tài khoản/admin.py:24
+msgstr "Ngày quan trọng"
+msgtr ""
+
+#: tài khoản/models.py:48
+msgstr "id"
+msgtr ""
+
+#: tài khoản/models.py:53
+msgstr "Không xác định cho người dùng, tự động tạo ra."
+msgtr ""
+
+#: tài khoản/models.py:56
+msgstr "tên người dùng"
+msgtr ""
+
+#: tài khoản/mdels.py:60
+msgstr "Required. 150 ký tự hoặc ít hơn. Chữ cái, chữ số và@/./+/_ duy nhất."
+msgtr ""
+
+#: tài khoản/models.py:64
+msgstr "Tên người dùng phải 150 ký tự hoặc ít hơn."
+msgtr ""
+
+#: tài khoản/models.py:65
+msgstr "giá trị này chỉ có thể chứa chữ cái, số, và @ /./+/_ ký tự."
+msgtr ""
+
+#: tài khoản/models.py:69
+msgstr "địa chỉ email"
+msgtr ""
+
+#: tài khoản/models.py:71
+msgstr "Required. Một địa chỉ email hợp lệ."
+msgtr ""
+
+#: tài khoản/models.py:73
+msgstr "Hãy nhập một địa chỉ email hợp lệ."
+msgtr ""
+
+#: tài khoản/models.py:77
+msgstr 42 id
+msgtr ""
+
+#: tài khoản/models.py:81
+msgstr "Không xác định cho người dùng từ 42."
+msgtr ""
+
+#: tài khoản/models.py:84
+msgstr "42 tín hiệu truy cập"
+msgtr ""
+
+#: tài khoản/models.py:88
+msgstr "Điềm năng thành công cho 42 API."
+msgtr ""
+
+#: tài khoản/models.py:91
+msgstr "42 tín hiệu tươi"
+msgtr ""
+
+#: tài khoản/models.py:95
+msgstr "Một vật kỷ niệm mới cho 42 API."
+msgtr ""
+
+#: tài khoản/models.py:98
+msgstr "ngày tháng kết hợp"
+msgtr ""
+
+#: tài khoản/mdels.py:100
+msgstr "Ngày và thời gian khi người dùng tham gia."
+msgtr ""
+
+#: tài khoản/models.py: 103
+GenericName
+msgtr ""
+
+#: tài khoản/models.py: 105
+msgstr "Hãy xác định liệu người dùng có thể đăng nhập vào khu vực quản trị này không."
+msgtr ""
+
+#: tài khoản/models.py: 108
+msgstr « hoạt động »
+msgtr ""
+
+#: tài khoản/models.py:111
+msgstr ""
+"Hãy xác nhận người dùng này có nên được đối xử như là hoạt động hay không. Bỏ chọn cái này
+"trong việc xóa tài khoản."
+msgtr ""
+
+#: tài khoản/models.py:117
+msgstr "các nhóm"
+msgtr ""
+
+#: tài khoản/models.py: 120
+msgstr ""
+"Các nhóm người dùng này thuộc về. Một người dùng sẽ được chấp thuận mọi quyền."
+"mỗi nhóm của họ."
+msgtr ""
+
+#: tài khoản/models.py:128
+msgstr "cho phép người dùng"
+msgtr ""
+
+#: tài khoản/mdels.py:130
+msgstr "Sự cho phép đặc biệt cho người dùng này."
+msgtr ""
+
+#: tài khoản/models.py: 1482
+msgstr « Người dùng thường »
+msgtr ""
+
+#: tài khoản/models.py: 143
+msgstr « Người dùng thường »
+msgtr ""
+
+#: tài khoản/ bộ chuyển phát.py:18
+msgstr "Must bao gồm tên / email\" và \" mật khẩu\".
+msgtr ""
+
+#: tài khoản/ bộ chuyển phát.py:27
+msgstr "Không thể đăng nhập với giấy ủy nhiệm."
+msgtr ""
+
+#: tài khoản/xem.py:54
+msgstr "User đăng nhập!"
+msgtr ""
+
+#: tài khoản/xem.py:72
+msgstr "User đăng xuất!"
+msgtr ""
+
+#: tài khoản/xem.py:96
+msgstr "Ac Count đã đăng ký! Vui lòng kiểm tra email của bạn để kích hoạt tài khoản của bạn. "
+msgtr ""
+
+#: tài khoản/xem.py:123
+msgstr "Ac Count đã kích hoạt!"
+msgtr ""
+
+#: tài khoản/xem.py: 184
+msgstr " Liên kết kích hoạt không hợp lệ!"
+msgtr ""
+
+#: tài khoản/xem.py: 154
+msgstr "Hãy kiểm tra email của bạn để đặt lại mật khẩu của bạn."
+msgtr ""
+
+#: tài khoản/xem.py:180
+msgstr "Chỉ định mật khẩu mới."
+msgtr ""
+
+#: tài khoản/xem.py:191
+msgstr "Chuyến bay khởi động lại không hợp lệ!"
+msgtr ""
+
+#: tài khoản/xem.py:211
+msgstr "Bần bị thay đổi!"
+msgtr ""
+
+#: tài khoản/xem.py: 284
+msgstr "Sự chứng thực thành công!"
+msgtr ""
+
+#: tài khoản/xem.py: 311
+msgstr "Email cập nhật thành công!"
+msgtr ""
+
+#: pong/urls.py:33
+msgstr "xlogin/?$"
+msgtr ""
+
+#: pong/urls.py:34
+msgstr "xregister/?
+msgtr ""
+
+#: pong/urls.py:36
+msgd "xhome/?$"
+msgtr ""
+
+#: pong/urls.py:37
+msgstr "x đặc biệt/?
+msgtr ""
+
+#: pong/urls.py:38
+msgstr "x xã hội/?$"
+msgtr ""
+
+#: pong/urls.py:39
+msgd "x staps/?$"
+msgtr ""
+
+#: pong/views.py:21
+msgstr "Transcentence"
+msgtr ""
+
+#: pong/views.py:28
+msgstr "Login"
+msgtr ""
+
+#: pong/views.py:33 Biểu mẫu/ thực đơn/register.html:37
+#: Biểu mẫu/rangs/register.html:43
+msgstr "Register"
+msgtr ""
+
+#: pong/views.py:40
+msgstr " home"
+msgtr ""
+
+#: hong/views.py:47 Mẫu/Frant.html:7
+msgstr "Profile"
+msgtr ""
+
+#: pong/views.py:54 mẫu/ xã hội.html:8
+msgstr "Sicial"
+msgtr ""
+
+#: hong/views.py:61 Mẫu
+msgstr "Sets"
+msgtr ""
+
+#: faces/aclates/mail_ kích hoạt.html:5
+msgstr "Hãy chuẩn bị tài khoản của bạn"
+msgtr ""
+
+#: faces/ac Counts/email_ kích hoạt.html:8
+#, python-format
+msgstr "Hi '%(er.user)s"
+msgtr ""
+
+#: faces/ac Counts/email_ kích hoạt.html:9
+msgstr ""
+"Cảm ơn vì đã đăng ký ở Transcendence. Hãy nhấn vào liên kết dưới đây để "
+" kích hoạt tài khoản của bạn: "
+msgtr ""
+
+#: faces/ac Counts/email_ kích hoạt.html: 10
+msgstr "Hãy chuẩn bị tài khoản của bạn"
+msgtr ""
+
+#: faces/ac Counts/email_ kích hoạt.html:11
+msgstr "Nếu bạn không tạo một tài khoản, xin vui lòng bỏ qua email này."
+msgtr ""
+
+#: faces/ac Counts/email_ kích hoạt.html:12
+msgstr "Cảm ơn,"
+msgtr ""
+
+#: faces/ac Counts/email_ kích hoạt.html:12
+msgstr "The Transcendence Team"
+msgtr ""
+
+#: Biểu mẫu/ac Counts/login.html:12 mẫu/aclites/register.html:12
+msgstr "Quick Play"
+msgtr ""
+
+#: Biểu mẫu/ac Counts/login.html: 13 mẫu/aclates/register.html:13
+msgd " Hồ sơ của tôi"
+msgtr ""
+
+#: faces/aclates/login.html:37 mẫu/ac Counts/login.html:42
+msgstr "Lig in"
+msgtr ""
+
+#: faces/ac Counts/login.html:38
+msgd "người dùng tên / email"
+msgtr ""
+
+#: Biểu mẫu/ac Counts/login.html:39 mẫu/acites/register.html:40
+msgstr "Biểu ngữ"
+msgtr ""
+
+#: faces/aclates/login.html: 40 mẫu/angtes/register.html:41
+msgstr « Hiển thị mật khẩu »
+msgtr ""
+
+#: faces/ac Counts/login.html:41
+msgstr "Hãy quên mật khẩu của bạn?"
+msgtr ""
+
+#: faces/ac Counts/login.html:45
+msgstr " Kết nối với Google"
+msgtr ""
+
+#: faces/ac Counts/login.html:46
+msgstr "Connite with 42 Auth"
+msgtr ""
+
+#: faces/ac Counts/login.html:48
+msgstr "Không đăng ký"?
+msgtr ""
+
+#: faces/ac Counts/login.html:48
+msgd "Crelate a account"
+msgtr ""
+
+#: Biểu mẫu/rangs/login.html:60 mẫu/aclites/register.html:57
+msgstr "Chính sách độc lập"
+msgtr ""
+
+#: faces/ac Counts/login.html:61 Name
+msgstr "Tổ phát triển"
+msgtr ""
+
+#: Biểu mẫu/rangs/register.html:38
+msgstr "người dùng"
+msgtr ""
+
+#: Biểu mẫu/rangs/register.html:39 Mẫu/ Thiết lập. html:67
+msgstr "Email"
+msgtr ""
+
+#: Biểu mẫu/rangs/register.html:44
+msgstr "Already Regised?"
+msgtr ""
+
+#: Biểu mẫu/rangs/register.html:44
+msgstr "Sign in here"
+msgtr ""
+
+#: faces/home.html:26et/ Fric.html:21 Mẫu
+#: Biểu mẫu/ thực tế. html:75
+msgstr "#Player"
+msgtr ""
+
+#: faces/home.html:28
+msgstr "Stats"
+msgtr ""
+
+#: faces/home.html:28
+msgstr "Trò chơi:"
+msgtr ""
+
+#: faces/home.html:33
+msgstr "Wins"
+msgtr ""
+
+#: faces/home.html:34
+msgstr "Loss"
+msgtr ""
+
+#: faces/home.html:37
+msgstr "Create GameRoom"
+msgtr ""
+
+#: faces/home.html:67
+msgd " run rẩy"
+msgtr ""
+
+#: faces/home.html:72
+msgstr "Room Name"
+msgtr ""
+
+#: faces/home.html:73
+msgstr "#RoomName
+msgtr ""
+
+#: faces/home.html:76
+msgstr "Created By"
+msgtr ""
+
+#: faces/home.html:77
+msgstr "#Creator"
+msgtr ""
+
+#: faces/home.html:80
+msgstr "Room Type"
+msgtr ""
+
+#: faces/home.html:81
+msgstr "# Clasic/Retro"
+msgtr ""
+
+#: faces/home.html:84
+msgstr "máy chơi hiện tại"
+msgtr ""
+
+#: faces/home.html:97
+msgstr "No GAMES to dispPLAY"
+msgtr ""
+
+#: Biểu mẫu/ thực tế. html:51
+msgstr "Recent Games"
+msgtr ""
+
+#: Biểu mẫu/ đặc trưng. html:56 mẫu/ đặc trưng.html:74
+msgstr "Versus"
+msgtr ""
+
+#: Biểu mẫu/ đặc trưng. html:60 mẫu/ đặc trưng.html:78
+msgstr "Scure"
+msgtr ""
+
+#: Biểu mẫu/ đặc trưng. html: 64 mẫu/ đặc trưng.html:82
+msgstr "Trò chơi kéo dài"
+msgtr ""
+
+#: Biểu mẫu/ đặc trưng. html:68 mẫu/ đặc trưng.html:86
+msgstr "Dete"
+msgtr ""
+
+#: Biểu mẫu/ thực tế. html:98
+msgstr « Thống kê nhà chơi »
+msgtr ""
+
+#: Biểu mẫu/ thực tế. html: 105
+msgstr "Total Games"
+msgtr ""
+
+#: Biểu mẫu/ thật. html: 108 Mẫu
+msgstr "#Won sports"
+msgtr ""
+
+#: faces/ frict.html:121
+msgstr "Won Games"
+msgtr ""
+
+#: faces/ frict.html:121
+msgstr "#Won Games"
+msgtr ""
+
+#: faces/ frict.html:124
+msgstr "Lst Games"
+msgtr ""
+
+#: faces/ frict.html:124
+msgstr "#Lost Games"
+msgtr ""
+
+#: các mẫu/ dàn cảnh.html:23
+♪, mơ hồ
+# msgstr "Dổ hồ sơ của tôi"
+msgstr "Profile Card"
+msgtr ""
+
+#: Biểu mẫu/ dàn cảnh.html:53
+msgstr "Ac Count"
+msgtr ""
+
+#: faces/ sets.html:61
+msgstr "# username"
+msgtr ""
+
+#: Biểu mẫu/ dàn cảnh.html:64
+msgstr "Ac Count tạo ra"
+msgtr ""
+
+#: Biểu mẫu/ dàn cảnh.html:64
+msgstr "# Dite of Creation"
+msgtr ""
+
+#: Biểu mẫu/ dàn cảnh.html:67
+msgstr "Alarmmail** @ t.com"
+msgtr ""
+
+#: Biểu mẫu/ dàn cảnh.html:74
+msgstr « Sửa thư »
+msgtr ""
+
+#: Biểu mẫu/ dàn cảnh.html:74
+msgd « Sửa mật khẩu »
+msgtr ""
+
+#: Biểu mẫu/ dàn xếp.html: 80
+msgstr "Block list"
+msgtr ""
+
+#: Biểu mẫu/ dàn cảnh.html:89
+msgstr "Làm sạch tài khoản của tôi"
+msgtr ""
+
+#: biểu mẫu/ xã hội.html:24
+msgstr "bạn bè"
+msgtr ""
+
+#: biểu mẫu/ xã hội.html: 38
+msgstr "# người bạn của chúng ta,_BAR_
+msgtr ""

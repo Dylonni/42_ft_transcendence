@@ -1,0 +1,187 @@
+Jeu/partie
+anglais "Player Name"
+LANG 
+anglais "active"
+LANG 
+anglais "inactive"
+LANG 
+
+anglais "Quick Play"
+LANG 
+
+anglais "Create Game Room"
+LANG 
+anglais "Creator Name"
+LANG 
+anglais "Created By"
+LANG 
+anglais "Creation Date"
+LANG 
+
+anglais "Game Rooms"
+LANG 
+anglais "Room Name"
+LANG 
+anglais "Current Players"
+LANG 
+
+anglais "Score"
+LANG 
+anglais "Player Statistics"
+LANG 
+anglais "NO GAMES TO DISPLAY"
+LANG 
+anglais "Recent Games"
+LANG 
+anglais "Date"
+LANG 
+anglais "Games played"
+LANG 
+anglais "Total number of Games"
+LANG 
+anglais "Versus"
+LANG 
+
+anglais "Wins"
+LANG 
+anglais "Won Games"
+LANG 
+anglais "Won Tournaments"
+LANG 
+
+anglais "Losses"
+LANG 
+anglais "Lost Games"
+LANG 
+anglais "Lost Tournaments"
+LANG 
+
+Inscription/connexion sur le site
+anglais "Register"
+LANG 
+anglais "Sign in here"
+LANG 
+anglais "Create an account"
+LANG 
+anglais "Already Registered ?"
+LANG 
+anglais "Log in"
+LANG 
+anglais "Forgot your password ?"
+LANG 
+anglais "Not Registered ?"
+LANG 
+
+anglais "Username"
+LANG 
+anglais "Email"
+LANG 
+anglais "Password"
+LANG 
+anglais "Show password"
+LANG 
+anglais "Required."
+LANG 
+anglais "150 characters or less. Letters, digits and @/./+/-/_ only."
+LANG 
+
+anglais "Account"
+LANG 
+anglais "Account created on"
+LANG 
+anglais "Account registered!"
+LANG 
+anglais "The username must be 150 characters or less."
+LANG 
+anglais "Please enter a valid email address."
+LANG 
+anglais "Please check your email to activate your account."
+LANG 
+anglais "Account activated!"
+LANG 
+anglais "Activation link is invalid!"
+LANG 
+anglais "Unable to log in with the provided credentials."
+LANG 
+
+
+
+connexion via tiers compte (google, etc)
+anglais "Connect with <google>"
+LANG 
+anglais "<google> id"
+LANG 
+anglais "Authentication successful!"
+LANG 
+
+
+gestion du compte, profil
+anglais "Personal info"
+LANG 
+anglais "Login"
+LANG 
+anglais "My Profile"
+LANG 
+anglais "Email address"
+LANG 
+anglais "Modify Email"
+LANG 
+anglais "Modify Password"
+LANG 
+anglais "Set your new password."
+LANG 
+
+anglais "Must include \"username/email\" and \"password\"."
+LANG 
+anglais "Password changed!"
+LANG 
+anglais "Password reset link is invalid!"
+LANG 
+anglais "Please check your email to reset your password."
+LANG 
+anglais "Email updated succesfully!"
+LANG 
+anglais "Delete my account"
+LANG 
+
+
+aspect social (liste d'amis, d'utilisateurs bloqués, etc)
+anglais "Friends"
+LANG 
+anglais "Block list"
+LANG 
+
+autres (barre de navigation, footer, etc)
+anglais "Home"
+LANG 
+anglais "Profile"
+LANG 
+anglais "Leaderboard"
+LANG 
+anglais "Social"
+LANG 
+anglais "Settings"
+LANG 
+anglais "Logout"
+LANG 
+anglais "Privacy Policy"
+LANG 
+anglais "Development Team"
+LANG 
+
+dans les courriels envoyés par le site :
+anglais "Hi"
+LANG 
+anglais "Thank you for registering at Transcendence. Please click the link below to activate your account :"
+LANG 
+anglais "Activate your account"
+LANG 
+anglais "If you did not create an account, please ignore this email."
+LANG 
+anglais "Thanks,"
+LANG 
+anglais "The Transcendence Team"
+LANG 
+
+
+

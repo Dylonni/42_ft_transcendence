@@ -1,0 +1,517 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-07-17 15:28+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: accounts/admin.py:11
+msgid "Personal info"
+msgstr "Informazioni personali"
+
+#: accounts/admin.py:13
+msgid "Permissions"
+msgstr "Permissioni"
+
+#: accounts/admin.py:24
+msgid "Important dates"
+msgstr "Date importanti"
+
+#: accounts/models.py:48
+msgid "id"
+msgstr "Id"
+
+#: accounts/models.py:53
+msgid "Unique identifier for the user, automatically generated."
+msgstr "Unico identificativo per l'utente, generato automaticamente."
+
+#: accounts/models.py:56
+msgid "username"
+msgstr "nome utente"
+
+#: accounts/models.py:60
+msgid "Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only."
+msgstr "Richiesto. 150 caratteri o meno. Lettere, cifre e solo @/./+/-/_."
+
+#: accounts/models.py:64
+msgid "The username must be 150 characters or fewer."
+msgstr "Il nome utente deve essere di 150 caratteri o meno."
+
+#: accounts/models.py:65
+msgid ""
+"This value may contain only letters, numbers, and @/./+/-/_ characters."
+msgstr ""
+"Questo valore può contenere solo lettere, numeri e caratteri @/./+/-/_."
+
+#: accounts/models.py:69
+msgid "email address"
+msgstr "indirizzo email"
+
+#: accounts/models.py:71
+msgid "Required. A valid email address."
+msgstr "Richiesto. Un indirizzo email valido."
+
+#: accounts/models.py:73
+msgid "Enter a valid email address."
+msgstr "Inserisci un indirizzo email valido."
+
+#: accounts/models.py:77
+msgid "42 id"
+msgstr "42."
+
+#: accounts/models.py:81
+msgid "Unique identifier for the user from 42."
+msgstr "Unico identificativo per l'utente da 42."
+
+#: accounts/models.py:84
+msgid "42 access token"
+msgstr "42 access token"
+
+#: accounts/models.py:88
+msgid "Access token for 42 API."
+msgstr "Access token per 42 API."
+
+#: accounts/models.py:91
+msgid "42 refresh token"
+msgstr "42 token di aggiornamento"
+
+#: accounts/models.py:95
+msgid "Refresh token for 42 API."
+msgstr "Token Refresh per 42 API."
+
+#: accounts/models.py:98
+msgid "date joined"
+msgstr "data unita"
+
+#: accounts/models.py:100
+msgid "The date and time when the user joined."
+msgstr "La data e l'ora in cui l'utente si è unito."
+
+#: accounts/models.py:103
+msgid "staff status"
+msgstr "stato del personale"
+
+#: accounts/models.py:105
+msgid "Designates whether the user can log into this admin site."
+msgstr "Progetta se l'utente può accedere a questo sito di amministrazione."
+
+#: accounts/models.py:108
+msgid "active"
+msgstr "attivo"
+
+#: accounts/models.py:111
+msgid ""
+"Designates whether this user should be treated as active. Unselect this "
+"instead of deleting accounts."
+msgstr ""
+"Progetta se questo utente deve essere trattato come attivo. Scollegare "
+"questo invece di cancellare i conti."
+
+#: accounts/models.py:117
+msgid "groups"
+msgstr "gruppi"
+
+#: accounts/models.py:120
+msgid ""
+"The groups this user belongs to. A user will get all permissions granted to "
+"each of their groups."
+msgstr ""
+"I gruppi a cui appartiene questo utente. Un utente otterrà tutte le "
+"autorizzazioni concesse a ciascuno dei loro gruppi."
+
+#: accounts/models.py:128
+msgid "user permissions"
+msgstr "autorizzazioni utente"
+
+#: accounts/models.py:130
+msgid "Specific permissions for this user."
+msgstr "autorizzazioni specifiche per questo utente."
+
+#: accounts/models.py:142
+msgid "custom user"
+msgstr "utente personalizzato"
+
+#: accounts/models.py:143
+msgid "custom users"
+msgstr "utenti personalizzati"
+
+#: accounts/serializers.py:18
+msgid "Must include \"username/email\" and \"password\"."
+msgstr "Deve includere \"username/email\" e \"password\"."
+
+#: accounts/serializers.py:27
+msgid "Unable to log in with provided credentials."
+msgstr "Non è possibile accedere con le credenziali fornite."
+
+#: accounts/views.py:54
+msgid "User logged in!"
+msgstr "L'utente è entrato!"
+
+#: accounts/views.py:72
+msgid "User logged out!"
+msgstr "L'utente si è registrato!"
+
+#: accounts/views.py:96
+msgid "Account registered! Please check your email to activate your account."
+msgstr "Conto registrato! Controlla la tua email per attivare il tuo account."
+
+#: accounts/views.py:123
+msgid "Account activated!"
+msgstr "Conto attivato!"
+
+#: accounts/views.py:134
+msgid "Activation link is invalid!"
+msgstr "Il link di attivazione non è valido!"
+
+#: accounts/views.py:154
+msgid "Please check your email to reset your password."
+msgstr ""
+"Si prega di controllare la posta elettronica per ripristinare la password."
+
+#: accounts/views.py:180
+msgid "Set your new password."
+msgstr "Imposta la nuova password."
+
+#: accounts/views.py:191
+msgid "Password reset link is invalid!"
+msgstr "Password reset link non è valido!"
+
+#: accounts/views.py:211
+msgid "Password changed!"
+msgstr "La password è cambiata!"
+
+#: accounts/views.py:284
+msgid "Authentication successful!"
+msgstr "Autenticazione di successo!"
+
+#: accounts/views.py:311
+msgid "Email updated succesfully!"
+msgstr "Email aggiornata con successo!"
+
+#: pong/urls.py:33
+msgid "^login/?$"
+msgstr "^login/?$"
+
+#: pong/urls.py:34
+msgid "^register/?$"
+msgstr "^register/?$"
+
+#: pong/urls.py:36
+msgid "^home/?$"
+msgstr "^home/?$"
+
+#: pong/urls.py:37
+msgid "^profile/?$"
+msgstr "^profile/?$"
+
+#: pong/urls.py:38
+msgid "^social/?$"
+msgstr "^social/$"
+
+#: pong/urls.py:39
+msgid "^settings/?$"
+msgstr "^settings/?$"
+
+#: pong/views.py:21
+msgid "Transcendence"
+msgstr "Trascendenza"
+
+#: pong/views.py:28
+msgid "Login"
+msgstr "Accedi"
+
+#: pong/views.py:33 templates/accounts/register.html:37
+#: templates/accounts/register.html:43
+msgid "Register"
+msgstr "Registrazione"
+
+#: pong/views.py:40
+msgid "Home"
+msgstr "Home"
+
+#: pong/views.py:47 templates/profile.html:7
+msgid "Profile"
+msgstr "Profilo"
+
+#: pong/views.py:54 templates/social.html:8
+msgid "Social"
+msgstr "Sociale"
+
+#: pong/views.py:61 templates/settings.html:8
+msgid "Settings"
+msgstr "Impostazioni impostazioni"
+
+#: templates/accounts/email_activate.html:5
+msgid "Activate Your Account"
+msgstr "Attiva il tuo account"
+
+#: templates/accounts/email_activate.html:8
+#, python-format
+msgid "Hi '%(user.username)s'"
+msgstr "Hi '% (user.username) '"
+
+#: templates/accounts/email_activate.html:9
+msgid ""
+"Thank you for registering at Transcendence. Please click the link below to "
+"activate your account:"
+msgstr ""
+"Grazie per la registrazione a Transcendence. Clicca sul link sottostante per"
+" attivare il tuo account:"
+
+#: templates/accounts/email_activate.html:10
+msgid "Activate your account"
+msgstr "Attiva il tuo account"
+
+#: templates/accounts/email_activate.html:11
+msgid "If you did not create an account, please ignore this email."
+msgstr "Se non hai creato un account, ignora questa e-mail."
+
+#: templates/accounts/email_activate.html:12
+msgid "Thanks,"
+msgstr "Grazie."
+
+#: templates/accounts/email_activate.html:12
+msgid "The Transcendence Team"
+msgstr "Il team di trascendenza"
+
+#: templates/accounts/login.html:12 templates/accounts/register.html:12
+msgid "Quick Play"
+msgstr "Gioco veloce"
+
+#: templates/accounts/login.html:13 templates/accounts/register.html:13
+msgid "My Profile"
+msgstr "Il mio profilo"
+
+#: templates/accounts/login.html:37 templates/accounts/login.html:42
+msgid "Log in"
+msgstr "Accedi"
+
+#: templates/accounts/login.html:38
+msgid "Username / Email"
+msgstr "Nome utente / Email"
+
+#: templates/accounts/login.html:39 templates/accounts/register.html:40
+msgid "Password"
+msgstr "Password"
+
+#: templates/accounts/login.html:40 templates/accounts/register.html:41
+msgid "Show password"
+msgstr "Mostra la password"
+
+#: templates/accounts/login.html:41
+msgid "Forgot your password ?"
+msgstr "Hai dimenticato la password?"
+
+#: templates/accounts/login.html:45
+msgid "Connect with Google"
+msgstr "Connettiti con Google"
+
+#: templates/accounts/login.html:46
+msgid "Connect with 42 Auth"
+msgstr "Connettiti con 42 Auth"
+
+#: templates/accounts/login.html:48
+msgid "Not Registered ?"
+msgstr "Non registrato?"
+
+#: templates/accounts/login.html:48
+msgid "Create an account"
+msgstr "Creare un account"
+
+#: templates/accounts/login.html:60 templates/accounts/register.html:57
+msgid "Privacy Policy"
+msgstr "Informativa sulla privacy"
+
+#: templates/accounts/login.html:61 templates/accounts/register.html:58
+msgid "Development Team"
+msgstr "Team di sviluppo"
+
+#: templates/accounts/register.html:38
+msgid "Username"
+msgstr "Nome utente"
+
+#: templates/accounts/register.html:39 templates/settings.html:67
+msgid "Email"
+msgstr "Email"
+
+#: templates/accounts/register.html:44
+msgid "Already Registered ?"
+msgstr "Sei già registrato?"
+
+#: templates/accounts/register.html:44
+msgid "Sign in here"
+msgstr "Firma qui"
+
+#: templates/home.html:26 templates/profile.html:21 templates/profile.html:57
+#: templates/profile.html:75
+msgid "#PlayerName"
+msgstr "# PlayerName #"
+
+#: templates/home.html:28
+msgid "Stats"
+msgstr "Statistiche"
+
+#: templates/home.html:28
+msgid "Games played:"
+msgstr "Giochi giocati:"
+
+#: templates/home.html:33
+msgid "Wins"
+msgstr "Vince"
+
+#: templates/home.html:34
+msgid "Loss"
+msgstr "Perdita"
+
+#: templates/home.html:37
+msgid "Create GameRoom"
+msgstr "Creare GameRoom"
+
+#: templates/home.html:67
+msgid "Game Rooms"
+msgstr "Camere di gioco"
+
+#: templates/home.html:72
+msgid "Room Name"
+msgstr "Nome della camera"
+
+#: templates/home.html:73
+msgid "#RoomName"
+msgstr "#RoomName #"
+
+#: templates/home.html:76
+msgid "Created By"
+msgstr "Creato da"
+
+#: templates/home.html:77
+msgid "#CreatorName"
+msgstr "#CreatorName #"
+
+#: templates/home.html:80
+msgid "Room Type"
+msgstr "Tipo di camera"
+
+#: templates/home.html:81
+msgid "#Classic/Retro"
+msgstr "#Classic/Retro"
+
+#: templates/home.html:84
+msgid "Current Players"
+msgstr "Giocatori attuali"
+
+#: templates/home.html:97
+msgid "NO GAMES TO DISPLAY"
+msgstr "NO GAMES TO DISPLAY"
+
+#: templates/profile.html:51
+msgid "Recent Games"
+msgstr "Giochi recenti"
+
+#: templates/profile.html:56 templates/profile.html:74
+msgid "Versus"
+msgstr "Versus"
+
+#: templates/profile.html:60 templates/profile.html:78
+msgid "Score"
+msgstr "Punteggio"
+
+#: templates/profile.html:64 templates/profile.html:82
+msgid "Game Duration"
+msgstr "Durata del gioco"
+
+#: templates/profile.html:68 templates/profile.html:86
+msgid "Date"
+msgstr "Data"
+
+#: templates/profile.html:98
+msgid "Player Statistics"
+msgstr "Statistiche del giocatore"
+
+#: templates/profile.html:105
+msgid "Total Games"
+msgstr "Totale giochi"
+
+#: templates/profile.html:108 templates/profile.html:116
+msgid "#Won Tournaments"
+msgstr "#Won Tournaments"
+
+#: templates/profile.html:121
+msgid "Won Games"
+msgstr "Giochi di Won"
+
+#: templates/profile.html:121
+msgid "#WonGames"
+msgstr "#WonGames #"
+
+#: templates/profile.html:124
+msgid "Lost Games"
+msgstr "Giochi persi"
+
+#: templates/profile.html:124
+msgid "#LostGames"
+msgstr "#LostGames #"
+
+#: templates/settings.html:23
+#, fuzzy
+#| msgid "My Profile"
+msgid "Profile Card"
+msgstr "Scheda di profilo"
+
+#: templates/settings.html:53
+msgid "Account"
+msgstr "Account"
+
+#: templates/settings.html:61
+msgid "#Username"
+msgstr "# Nome utente #"
+
+#: templates/settings.html:64
+msgid "Account created on"
+msgstr "Account creato su"
+
+#: templates/settings.html:64
+msgid "#Date of Creation"
+msgstr "#Date of Creation"
+
+#: templates/settings.html:67
+msgid "Currentmail****@*****.com"
+msgstr ""
+"Posta "
+"corrente**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************"
+
+#: templates/settings.html:74
+msgid "Modify Email"
+msgstr "Modifica Email"
+
+#: templates/settings.html:74
+msgid "Modify Password"
+msgstr "Modifica della password"
+
+#: templates/settings.html:80
+msgid "Block list"
+msgstr "Elenco dei blocchi"
+
+#: templates/settings.html:89
+msgid "Delete my account"
+msgstr "Cancella il mio account"
+
+#: templates/social.html:24
+msgid "Friends"
+msgstr "Amici"
+
+#: templates/social.html:38
+msgid "#Friendfrrrrrrrrrrrrrrrrrrrr"
+msgstr "Traduzione:"
