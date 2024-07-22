@@ -1,28 +1,21 @@
 import logging
-import uuid
 from django.contrib.auth import get_user_model
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from .managers import ProfileManager
+from pong.models import BaseModel
+from .managers import ProfileManager, ProfileBlockManager
 from .storage import OverwriteStorage
 
 UserModel = get_user_model()
 logger = logging.getLogger('django')
 
 
-class Profile(models.Model):
+class Profile(BaseModel):
     class StatusChoices(models.TextChoices):
         CONNECTED = 'Connected', _('Connected')
         OCCUPIED = 'Occupied', _('Occupied')
         DISCONNECTED = 'Disconnected', _('Disconnected')
     
-    id = models.UUIDField(
-        verbose_name=_('id'),
-        primary_key=True,
-        unique=True,
-        default=uuid.uuid4,
-        editable=False,
-    )
     user = models.OneToOneField(
         to=UserModel,
         verbose_name=_('user'),
@@ -44,19 +37,36 @@ class Profile(models.Model):
         choices=StatusChoices.choices,
         default=StatusChoices.DISCONNECTED,
     )
-    blocked_profiles = models.ManyToManyField(
-        to='self',
-        verbose_name=_('blocked profiles'),
-        blank=True,
-        symmetrical=False,
-        related_name='blocked_by',
-    )
     
     objects = ProfileManager()
-    
-    def __str__(self):
-        return self.alias
     
     class Meta:
         verbose_name = _("profile")
         verbose_name_plural = _("profiles")
+    
+    def __str__(self):
+        return self.alias
+
+
+class ProfileBlock(BaseModel):
+    blocker = models.ForeignKey(
+        to='profiles.Profile',
+        verbose_name=_('blocker'),
+        on_delete=models.CASCADE,
+        related_name='blocked_profiles',
+    )
+    blocked = models.ForeignKey(
+        to='profiles.Profile',
+        verbose_name=_('blocked'),
+        on_delete=models.CASCADE,
+        related_name='blockers',
+    )
+    
+    objects = ProfileBlockManager()
+    
+    class Meta:
+        verbose_name = _("profile block")
+        verbose_name_plural = _("profile blocks")
+    
+    def __str__(self):
+        return f'{self.blocker} blocked {self.blocked}'

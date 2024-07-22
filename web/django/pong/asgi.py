@@ -7,11 +7,12 @@ For more information on this file, see
 https://docs.djangoproject.com/en/5.0/howto/deployment/asgi/
 """
 
-import friends.routing
 import os
 from channels.auth import AuthMiddlewareStack
 from channels.routing import ProtocolTypeRouter, URLRouter
 from django.core.asgi import get_asgi_application
+import friends.routing
+# import notifs.routing
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'pong.settings')
 
@@ -20,6 +21,7 @@ application = ProtocolTypeRouter({
     'websocket': AuthMiddlewareStack(
         URLRouter(
             friends.routing.websocket_urlpatterns
+			# + notifs.routing.websocket_urlpatterns
         )
     ),
 })

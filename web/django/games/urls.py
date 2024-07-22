@@ -3,11 +3,8 @@ from django.utils.translation import gettext_lazy as _
 from . import views
 
 urlpatterns = [
-    path('tournaments/', ...), # GET, POST
-    path('tournaments/<uuid:tournament_id>/', ...), # GET
-    path('tournaments/<uuid:tournament_id>/join/', ...), # POST
-    path('tournaments/<uuid:tournament_id>/leave/', ...), # POST
-    path('tournaments/<uuid:tournament_id>/ready/', ...), # POST
-    path('tournaments/<uuid:tournament_id>/start/', ...), # POST
-    path('tournaments/search/', ...), # GET
+    path('games/', views.game_list, name='game_list'),
+    path('games/search/', views.game_search, name='game_search'),
+    # path('games/<uuid:game_id>/', views.game_detail, name='game_detail'),
+    # path('games/<uuid:game_id>/start/', ...),
 ]

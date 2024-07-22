@@ -26,17 +26,16 @@ class ProfileManager(models.Manager):
         except self.model.DoesNotExist:
             return None
     
+    def set_user_status(self, user, status):
+        try:
+            profile = self.get(user=user)
+            profile.status = status
+            profile.save()
+        except self.model.DoesNotExist:
+            logger.info(f'No profile found to set status')
+    
     def search_by_alias(self, alias):
         return self.filter(alias__istartswith=alias)
-    
-    def block_profile(self, profile, profile_to_block):
-        profile.blocked_profiles.add(profile_to_block)
-    
-    def unblock_profile(self, profile, profile_to_unblock):
-        profile.blocked_profiles.remove(profile_to_unblock)
-    
-    def is_blocked(self, profile):
-        return self.blocked_profiles.filter(pk=profile.pk).exists()
     
     def _generate_unique_alias(self):
         while True:
@@ -49,3 +48,16 @@ class ProfileManager(models.Manager):
         number = random.randint(1, 6)
         avatar = f'defaults/avatar{number}.webp'
         return avatar
+
+
+class ProfileBlockManager(models.Manager):
+    def get_blocked_profiles(self, blocker):
+        return self.filter(blocker=blocker)
+    
+    def is_blocked(self, blocker, blocked):
+        return self.filter(blocker=blocker, blocked=blocked).exists()
+    
+    def create_block(self, blocker, blocked):
+        if self.is_blocked(blocker, blocked):
+            raise ValueError('Profile is already blocked.')
+        return self.create(blocker=blocker, blocked=blocked)

@@ -18,13 +18,13 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
-from django.shortcuts import render
 from . import views
 
 apipatterns = [
     path('', include(('accounts.urls', 'accounts'), namespace='accounts')),
     path('', include(('profiles.urls', 'profiles'), namespace='profiles')),
     path('', include(('friends.urls', 'friends'), namespace='friends')),
+    path('lang/<str:lang>/', views.lang_reload, name='lang_reload'),
 ]
 
 urlpatterns = [
@@ -37,9 +37,11 @@ urlpatterns = [
     path('register/', views.register, name='register'),
 	path('forgot-password/', views.forgot_password, name='forgot_password'),
     path('home/', views.home, name='home'),
-    path('profile/', views.profile, name='profile'),
-	path('profile/<uuid:profile_id>/', views.profile_other, name='profile_other'),
+    path('profiles/me/', views.profile, name='profile'),
+	path('profiles/<uuid:profile_id>/', views.profile_other, name='profile_other'),
     path('leaderboard/', views.leaderboard, name='leaderboard'),
-	path('social/', views.social, name='social'),
+	path('friends/', views.social, name='social'),
+    path('friends/<uuid:friend_id>/', views.social_friend, name='social_friend'),
     path('settings/', views.settings, name='settings'),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)\
+    + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

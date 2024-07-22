@@ -1,18 +1,17 @@
-import uuid
 from django.db import models
-from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
-from .managers import GameManager, PlayerManager, ScoreManager, TournamentManager
+from pong.models import BaseModel, BaseInteraction
+from .managers import (
+    GameManager,
+    GameInviteManager,
+    PlayerManager,
+    RoundManager,
+    ScoreManager,
+    GameMessageManager,
+)
 
 
-class Tournament(models.Model):
-    id = models.UUIDField(
-        verbose_name=_('id'),
-        primary_key=True,
-        unique=True,
-        default=uuid.uuid4,
-        editable=False,
-    )
+class Game(BaseModel):
     name = models.CharField(
         verbose_name=_('name'),
         max_length=255,
@@ -35,11 +34,7 @@ class Tournament(models.Model):
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
-        related_name='won_tournaments',
-    )
-    created_at = models.DateTimeField(
-        verbose_name=_('created at'),
-        default=timezone.now,
+        related_name='won_games',
     )
     started_at = models.DateTimeField(
         verbose_name=_('started at'),
@@ -52,14 +47,28 @@ class Tournament(models.Model):
         null=True,
     )
     
-    objects = TournamentManager()
-    
-    def __str__(self):
-        return f'Tournament {self.name}'
+    objects = GameManager()
     
     class Meta:
-        verbose_name = _('tournament')
-        verbose_name_plural = _('tournaments')
+        verbose_name = _('game')
+        verbose_name_plural = _('games')
+    
+    def __str__(self):
+        return f'Game {self.name}'
+
+
+class GameInvite(BaseInteraction):
+    objects = GameInviteManager()
+    
+    class Meta:
+        verbose_name = _('game invitation')
+        verbose_name_plural = _('game invitations')
+        constraints = [
+            models.UniqueConstraint(fields=['sender', 'receiver'], name='unique_game_invite_pair')
+        ]
+    
+    def __str__(self):
+        return f'Game invitation ({self.id}) from {self.sender} to {self.receiver}'
 
 
 class Player(models.Model):
@@ -70,18 +79,14 @@ class Player(models.Model):
         WATCHING = 'Watching', _('Watching')
     
     profile = models.OneToOneField(
-        to='Profile',
+        to='profiles.Profile',
         verbose_name=_('profile'),
         on_delete=models.CASCADE,
     )
-    tournament = models.ForeignKey(
-        to=Tournament,
-        verbose_name=_('tournament'),
+    game = models.ForeignKey(
+        to=Game,
+        verbose_name=_('game'),
         on_delete=models.CASCADE,
-    )
-    is_ready = models.BooleanField(
-        verbose_name=_('ready'),
-        default=False,
     )
     status = models.CharField(
         verbose_name=_('status'),
@@ -92,37 +97,34 @@ class Player(models.Model):
     
     objects = PlayerManager()
     
-    def __str__(self):
-        return self.profile.alias
-    
     class Meta:
         verbose_name = _('player')
         verbose_name_plural = _('players')
     
+    def __str__(self):
+        return self.profile.alias
+    
     def set_waiting(self):
         self.status = self.StatusChoices.WAITING
+        self.save()
     
     def set_ready(self):
         self.status = self.StatusChoices.READY
+        self.save()
     
     def set_playing(self):
         self.status = self.StatusChoices.PLAYING
+        self.save()
     
     def set_watching(self):
         self.status = self.StatusChoices.WATCHING
+        self.save()
 
 
-class Game(models.Model):
-    id = models.UUIDField(
-        verbose_name=_('id'),
-        primary_key=True,
-        unique=True,
-        default=uuid.uuid4,
-        editable=False,
-    )
-    tournament = models.ForeignKey(
-        to=Tournament,
-        verbose_name=_('tournament'),
+class Round(BaseModel):
+    game = models.ForeignKey(
+        to=Game,
+        verbose_name=_('game'),
         on_delete=models.CASCADE,
     )
     order = models.PositiveSmallIntegerField(
@@ -133,13 +135,13 @@ class Game(models.Model):
         to=Player,
         verbose_name=_('player1'),
         on_delete=models.CASCADE,
-        related_name='player1_games',
+        related_name='player1_rounds',
     )
     player2 = models.ForeignKey(
         to=Player,
         verbose_name=_('player2'),
         on_delete=models.CASCADE,
-        related_name='player2_games',
+        related_name='player2_rounds',
     )
     winner = models.ForeignKey(
         to=Player,
@@ -147,29 +149,29 @@ class Game(models.Model):
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
-        related_name='won_games',
+        related_name='won_rounds',
     )
-    next_game = models.ForeignKey(
+    next_round = models.ForeignKey(
         to='self',
-        verbose_name=_('next game'),
+        verbose_name=_('next round'),
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
-        related_name='previous_games',
+        related_name='previous_rounds',
     )
     started = models.BooleanField(
         verbose_name=_('started'),
         default=False,
     )
     
-    objects = GameManager()
+    objects = RoundManager()
+    
+    class Meta:
+        verbose_name = _('round')
+        verbose_name_plural = _('rounds')
     
     def __str__(self):
         return f'{self.player1} VS {self.player2}'
-    
-    class Meta:
-        verbose_name = _('game')
-        verbose_name_plural = _('games')
 
 
 class Score(models.Model):
@@ -191,10 +193,44 @@ class Score(models.Model):
     
     objects = ScoreManager()
     
-    def __str__(self):
-        return f'{self.player} - {self.points} points'
-    
     class Meta:
         verbose_name = _('score')
         verbose_name_plural = _('scores')
         unique_together = ('game', 'player')
+    
+    def __str__(self):
+        return f'{self.player} - {self.points} points'
+
+
+class GameMessage(BaseModel):
+    game = models.ForeignKey(
+        to=Game,
+        verbose_name=_('game'),
+        on_delete=models.CASCADE,
+        related_name='messages',
+    )
+    sender = models.ForeignKey(
+        to='profiles.Profile',
+        verbose_name=_('sender'),
+        on_delete=models.CASCADE,
+        related_name='%(class)s_sent',
+    )
+    content = models.TextField(
+        verbose_name=_('content'),
+        blank=False,
+        null=True,
+    )
+    read = models.BooleanField(
+        verbose_name=_('read'),
+        default=False,
+    )
+    
+    objects = GameMessageManager()
+    
+    class Meta:
+        verbose_name = _('game message')
+        verbose_name_plural = _('game messages')
+        ordering = ['created_at']
+    
+    def __str__(self):
+        return f'Game message ({self.id}) from {self.sender}'
