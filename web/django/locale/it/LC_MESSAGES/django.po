@@ -261,7 +261,7 @@ msgstr "Attiva il tuo account"
 #: templates/accounts/email_activate.html:8
 #, python-format
 msgid "Hi '%(user.username)s'"
-msgstr "Hi '% (user.username) '"
+msgstr "Ciao '%(user.username)s '"
 
 #: templates/accounts/email_activate.html:9
 msgid ""

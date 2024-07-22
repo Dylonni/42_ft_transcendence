@@ -145,11 +145,24 @@ anglais "Delete my account"
 ouighour "ھېساباتىمنى ئۆچۈرۈڭ"
 
 
-aspect social (liste d'amis, d'utilisateurs bloqués, etc)
+aspect social (liste d'amis, d'utilisateurs bloqués, statut en ligne, etc)
 anglais "Friends"
 ouighour "دوستلار"
 anglais "Block list"
 ouighour "توسۇش تىزىملىكى"
+anglais "Find a player"
+ouighour "قويغۇچ تېپىڭ"
+anglais "Find a game"
+ouighour "ئويۇن تېپىڭ"
+anglais "online"
+ouighour "توردا"
+anglais "offline"
+ouighour "تورسىز"
+anglais "playing"
+ouighour "ئويناش"
+anglais "send a message"
+ouighour "ئۇچۇر ئەۋەتىڭ"
+
 
 autres (barre de navigation, footer, etc)
 anglais "Home"

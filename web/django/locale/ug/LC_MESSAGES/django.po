@@ -52,8 +52,8 @@ msgstr "ئىشلەتكۈچى ئىسمى 150 ھەرپ ياكى ئۇنىڭدىن �
 
 #: accounts/models.py:65
 msgid ""
+"This value may contain only letters, numbers, and @/./+/-/_ characters."
 msgstr "بۇ قىممەت پەقەت ھەرپ ، سان ۋە @ /. / + / - / _ ھەرپلەرنى ئۆز ئىچىگە ئالىدۇ."
-msgstr "Ce champ peut uniquement contenir : lettres, chiffres et les caractères @/./+/-/_."
 
 #: accounts/models.py:69
 msgid "email address"
@@ -116,7 +116,7 @@ msgid ""
 "Designates whether this user should be treated as active. Unselect this "
 "instead of deleting accounts."
 msgstr ""
-"بۇ ئىشلەتكۈچىگە ئاكتىپ مۇئامىلە قىلىش كېرەكمۇ-يوق بۇنى بەلگىلەيدۇ. بۇنى تاللىماڭ".
+"بۇ ئىشلەتكۈچىگە ئاكتىپ مۇئامىلە قىلىش كېرەكمۇ-يوق بۇنى بەلگىلەيدۇ. بۇنى تاللىماڭ"
 "ھېساباتنى ئۆچۈرۈشنىڭ ئورنىغا."
 
 #: accounts/models.py:117
@@ -128,7 +128,7 @@ msgid ""
 "The groups this user belongs to. A user will get all permissions granted to "
 "each of their groups."
 msgstr ""
-"بۇ ئىشلەتكۈچى تەۋە گۇرۇپپىلار. ئىشلەتكۈچى بارلىق ئىجازەتلەرگە ئېرىشىدۇ".
+"بۇ ئىشلەتكۈچى تەۋە گۇرۇپپىلار. ئىشلەتكۈچى بارلىق ئىجازەتلەرگە ئېرىشىدۇ"
 "ئۇلارنىڭ ھەر بىر گۇرۇپپىسى"
 
 #: accounts/models.py:128
@@ -149,7 +149,7 @@ msgstr "ئىختىيارى ئىشلەتكۈچى"
 
 #: accounts/serializers.py:18
 msgid "Must include \"username/email\" and \"password\"."
-msgstr "چوقۇم \" ئىشلەتكۈچى ئىسمى / ئېلېكترونلۇق خەت \ "ۋە \" پارول \ "نى ئۆز ئىچىگە ئېلىشى كېرەك."
+msgstr "چوقۇم \" ئىشلەتكۈچى ئىسمى / ئېلېكترونلۇق خەت \" ۋە \" پارول \"نى ئۆز ئىچىگە ئېلىشى كېرەك."
 
 #: accounts/serializers.py:27
 msgid "Unable to log in with provided credentials."
@@ -238,7 +238,7 @@ msgstr "تىزىملىتىڭ"
 
 #: pong/views.py:40
 msgid "Home"
-msgstr ""
+msgstr "Home"
 
 #: pong/views.py:47 templates/profile.html:7
 msgid "Profile"
@@ -259,7 +259,7 @@ msgstr "ھېساباتىڭىزنى ئاكتىپلاڭ"
 #: templates/accounts/email_activate.html:8
 #, python-format
 msgid "Hi '%(user.username)s'"
-msgstr ""
+msgstr "WOWOWWO '%(user.username)s'"
 
 #: templates/accounts/email_activate.html:9
 msgid ""
@@ -356,11 +356,11 @@ msgstr "بۇ يەرگە كىرىڭ"
 #: templates/home.html:26 templates/profile.html:21 templates/profile.html:57
 #: templates/profile.html:75
 msgid "#PlayerName"
-msgstr ""
+msgstr "#WOWOWOW"
 
 #: templates/home.html:28
 msgid "Stats"
-msgstr ""
+msgstr "WOWOWOW"
 
 #: templates/home.html:28
 msgid "Games played:"
@@ -368,7 +368,7 @@ msgstr "ئويۇنلار ئوينىدى:"
 
 #: templates/home.html:33
 msgid "Wins"
-msgstr ""
+msgstr "WOWOWOW"
 
 #: templates/home.html:34
 msgid "Loss"
@@ -388,7 +388,7 @@ msgstr "ياتاق ئىسمى"
 
 #: templates/home.html:73
 msgid "#RoomName"
-msgstr ""
+msgstr "#ياتاقئىسمى"
 
 #: templates/home.html:76
 msgid "Created By"
@@ -396,7 +396,7 @@ msgstr "ئىجاد قىلغان"
 
 #: templates/home.html:77
 msgid "#CreatorName"
-msgstr ""
+msgstr "#WOWOWO"
 
 #: templates/home.html:80
 msgid "Room Type"
@@ -404,7 +404,7 @@ msgstr "ياتاق تىپى"
 
 #: templates/home.html:81
 msgid "#Classic/Retro"
-msgstr ""
+msgstr "#WIWOWOW"
 
 #: templates/home.html:84
 msgid "Current Players"
@@ -420,19 +420,19 @@ msgstr "يېقىنقى ئويۇنلار"
 
 #: templates/profile.html:56 templates/profile.html:74
 msgid "Versus"
-msgstr ""
+msgstr "WOWOWOWOW"
 
 #: templates/profile.html:60 templates/profile.html:78
+msgid "Score"
 msgstr "نومۇر"
-msgstr "Score"
 
 #: templates/profile.html:64 templates/profile.html:82
+msgid "Game Duration"
 msgstr "ئويۇن ۋاقتى"
-msgstr "Durée du jeu"
 
 #: templates/profile.html:68 templates/profile.html:86
+msgid "Date"
 msgstr "چېسلا"
-msgstr "Date"
 
 #: templates/profile.html:98
 msgid "Player Statistics"
@@ -444,15 +444,15 @@ msgstr "ئومۇمىي ئويۇن"
 
 #: templates/profile.html:108 templates/profile.html:116
 msgid "#Won Tournaments"
-msgstr ""
+msgstr "#WOWOWO"
 
 #: templates/profile.html:121
 msgid "Won Games"
-msgstr ""
+msgstr "WOWOWOW"
 
 #: templates/profile.html:121
 msgid "#WonGames"
-msgstr ""
+msgstr "#WOWOWO"
 
 #: templates/profile.html:124
 msgid "Lost Games"
@@ -460,7 +460,7 @@ msgstr "يوقالغان ئويۇنلار"
 
 #: templates/profile.html:124
 msgid "#LostGames"
-msgstr ""
+msgstr "#WOWOW"
 
 #: templates/settings.html:23
 #, fuzzy

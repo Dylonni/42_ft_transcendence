@@ -20,7 +20,7 @@ from PyQt5.QtCore import Qt
 from argostranslate import package, translate
 
 FROM_CODES = ['en']
-TO_CODES = ['fr', 'it', 'ja', 'ru', 'ug', 'vn', 'ur', 'th', 'zt', 'bn']
+TO_CODES = ['ar', 'es', 'fa', 'fr', 'it', 'ja', 'ru', 'ug', 'vi']
 
 
 class TranslationTool(QMainWindow):

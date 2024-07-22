@@ -372,6 +372,10 @@ msgstr "ログイン"
 msgid "Create GameRoom"
 msgstr "GameRoomを作成する"
 
+#: templates/home.html:53
+msgid "Find a Game"
+msgstr "ゲームを探す"
+
 #: templates/home.html:67
 msgid "Game Rooms"
 msgstr "ゲームルーム"
@@ -500,7 +504,7 @@ msgstr "アカウントの削除"
 
 #: templates/social.html:24
 msgid "Friends"
-msgstr "スタッフ"
+msgstr "友達"
 
 #: templates/social.html:38
 msgid "#Friendfrrrrrrrrrrrrrrrrrrrr"
