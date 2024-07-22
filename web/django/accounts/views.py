@@ -52,7 +52,7 @@ class UserLoginView(PublicView):
         serializer = UserLoginSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data['user']
-        
+        Profile.objects.set_user_status(user, Profile.StatusChoices.CONNECTED)
         logger.info(f'User {user.username} logged in.')
         response = Response(
             {
@@ -70,11 +70,12 @@ user_login = UserLoginView.as_view()
 
 class UserLogoutView(PrivateView):
     def post(self, request, *args, **kwargs):
+        Profile.objects.set_user_status(request.user, Profile.StatusChoices.DISCONNECTED)
         logger.info('User logged out.')
         response = Response(
             {
                 'status': _('User logged out!'),
-                'redirect': '/login/',
+                'redirect': '/',
             },
             status=status.HTTP_200_OK,
         )
@@ -121,6 +122,7 @@ class UserActivateView(PublicView):
             user.is_active = True
             user.is_verified = True
             user.save()
+            Profile.objects.set_user_status(user, Profile.StatusChoices.CONNECTED)
             logger.info(f'Account activated for user {user.username}. User logged in.')
             response = redirect('/home/')
             login(request, user)
@@ -274,7 +276,7 @@ class FortyTwoCallbackView(PublicView):
                 )
                 Profile.objects.create_from_user(user)
         self._save_avatar_from_url(user, img)
-        
+        Profile.objects.set_user_status(user, Profile.StatusChoices.CONNECTED)
         response = redirect('/home/')
         login(request, user)
         set_jwt_cookies_for_user(response, user)

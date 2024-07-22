@@ -1,26 +1,27 @@
 {% load static %}
 {% block content %}
+
 <div>
     <h1 class="d-xxl-flex justify-content-xxl-center align-items-xxl-center" style="color: var(--bs-body-bg);margin-top: 35px;margin-bottom: 35px;">Choose a mode</h1>
 </div>
 <div class="container">
-    <div class="row" style="margin-left: 0px;margin-right: 0px;">
-        <div class="col-md-4 d-xxl-flex flex-column justify-content-xxl-center" style="width: 390px;margin-top: 20px;margin-bottom: 20px;margin-left: 20px;margin-right: 20px;padding-left: 20px;padding-right: 20px;"><a href="#">
-                <div class="card cardmode" id="vsAi" style="padding-left: 0px;padding-right: 0px;margin-left: 0px;margin-right: 0px;height: 435px;border-top-left-radius: 16px;border-top-right-radius: 16px;border-style: none;">
-                    <h4 class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="color: var(--bs-emphasis-color);">Against AI</h4>
-                    <div class="card-body d-xxl-flex justify-content-xxl-center align-items-xxl-end" style="height: 330px; background: url('{% static '/img/vsia.webp' %}') center / cover no-repeat;border-style: none;padding-left: 0px;padding-right: 0px;padding-top: 0px;padding-bottom: 0px;"></div>
+    <div class="row d-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="margin-left: 0px;margin-right: 0px;">
+        <div class="col-md-4" style="width: 390px;margin-top: 20px;margin-bottom: 20px;padding-left: 20px;padding-right: 20px;margin-left: 20px;margin-right: 20px;"><a href="#">
+                <div class="card cardmode" id="vsAi" style="height: 435px;border-top-left-radius: 16px;border-top-right-radius: 16px;border-style: none;background: var(--bs-emphasis-color);">
+                    <h4 class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="color: var(--bs-body-bg);">Against AI</h4>
+                    <div class="card-body d-flex d-xxl-flex justify-content-center align-items-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center cardimg" style="height: 330px;"><img src="{% static '/img/vsia.webp' %}" width="318" height="366" style="width: 108%;height: 108%;border-bottom-left-radius: 9px;border-bottom-right-radius: 9px;"></div>
                 </div>
             </a></div>
         <div class="col-md-4" style="width: 390px;margin-top: 20px;margin-bottom: 20px;padding-left: 20px;padding-right: 20px;margin-left: 20px;margin-right: 20px;"><a href="#">
-                <div class="card cardmode" id="vsLocal" style="height: 435px;border-top-left-radius: 16px;border-top-right-radius: 16px;border-bottom-right-radius: 6px;border-style: none;border-color: var(--bs-body-color);">
-                    <h4 class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="color: var(--bs-emphasis-color);">Local Play</h4>
-                    <div class="card-body d-xxl-flex align-items-xxl-end" style="height: 330px;background: url('{% static '/img/localplay.webp' %}') center / cover no-repeat;"></div>
+                <div class="card cardmode" id="vsLocal" style="height: 435px;border-top-left-radius: 16px;border-top-right-radius: 16px;border-style: none;background: var(--bs-emphasis-color);">
+                    <h4 class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="color: var(--bs-body-bg);">Local Play</h4>
+                    <div class="card-body d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center cardimg" style="height: 330px;"><img src="{% static '/img/localplay.webp' %}" width="318" height="366" style="width: 108%;height: 108%;border-bottom-right-radius: 9px;border-bottom-left-radius: 9px;"></div>
                 </div>
             </a></div>
-        <div class="col-md-4" style="width: 390px;margin-top: 20px;margin-bottom: 20px;padding-left: 20px;padding-right: 20px;margin-left: 20px;margin-right: 20px;"><a href="#">
-                <div class="card cardmode" id="vsOnline" style="height: 435px;border-top-left-radius: 16px;border-top-right-radius: 16px;border-style: none;">
-                    <h4 class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="color: var(--bs-emphasis-color);">Online Play</h4>
-                    <div class="card-body d-xxl-flex align-items-xxl-end" style="height: 330px;background: url('{% static '/img/onlineplay.webp' %}') center / cover no-repeat;"></div>
+        <div class="col-md-4" style="width: 390px;margin-top: 20px;margin-bottom: 20px;padding-left: 20px;padding-right: 20px;margin-left: 20px;margin-right: 20px;"><a href="/login/">
+                <div class="card cardmode" id="vsOnline" style="height: 435px;border-top-left-radius: 16px;border-top-right-radius: 16px;border-style: none;background: var(--bs-emphasis-color);">
+                    <h4 class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="color: var(--bs-body-bg);">Online Play</h4>
+                    <div class="card-body d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center cardimg" style="height: 330px;"><img src="{% static '/img/onlineplay.webp' %}" width="318" height="366" style="width: 108%;height: 108%;border-bottom-right-radius: 9px;border-bottom-left-radius: 9px;"></div>
                 </div>
             </a></div>
     </div>

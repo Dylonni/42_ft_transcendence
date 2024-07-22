@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     const contentDiv = document.getElementById('content');
+    let chatSocket;
     
     const originalPushState = history.pushState;
     history.pushState = function () {
@@ -54,12 +55,37 @@ document.addEventListener("DOMContentLoaded", () => {
         .catch(error => console.error('Error fetching content:', error));
     };
     
+    const langReload = (lang) => {
+        console.log(lang);
+        fetch(`/api/lang/${lang}/`, {
+            method: 'POST',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                'path': window.location.pathname,
+            }),
+        })
+        .then(response => response.text())
+        .then(html => {
+            contentDiv.innerHTML = html;
+            attachHandlers();
+        })
+        .catch(error => console.error('Error fetching content:', error));
+    };
+    
     const attachHandlers = () => {
         document.querySelectorAll('a').forEach(anchor => {
             if (anchor.id != 'login-42') {
                 anchor.addEventListener('click', (event) => {
                     event.preventDefault();
-                    navigateTo(anchor.href);
+                    if (anchor.id.startsWith('lang')) {
+                        const lang = anchor.id.split('-')[1];
+                        langReload(lang);
+                    } else {
+                        navigateTo(anchor.href);
+                    }
                 });
             }
         });
@@ -117,55 +143,107 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
         
-        let profileSearchBtn = document.getElementById('profile-search-btn');
-        if (profileSearchBtn) {
+        const profileSearchBtn = document.getElementById('profile-search-btn');
+        const profileSearchInput = document.getElementById('inputsearch');
+        if (profileSearchBtn && profileSearchInput) {
             profileSearchBtn.addEventListener('click', (e) => {
-                const alias = document.getElementById('inputsearch').value;
-                fetch(`/api/profiles/search/?alias=${alias}`)
+                const alias = profileSearchInput.value;
+                if (alias) {
+                    fetch(`/api/profiles/search/?alias=${alias}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data) {
+                            console.log(data);
+                            navigateTo(`/profiles/${data[0].id}`);
+                        }
+                    })
+                    .catch(error => console.error('Error searching profile:', error));
+                }
+            });
+            profileSearchInput.addEventListener('keyup', (e) => {
+                if (e.key === 'Enter') {
+                    profileSearchBtn.click();
+                }
+            });
+        }        
+        
+        const addFriendBtn = document.getElementById('add-friend-btn');
+        if (addFriendBtn) {
+            addFriendBtn.addEventListener('click', (e) => {
+                let currentUrl = window.location.pathname;
+                if (!currentUrl.endsWith('/')) {
+                    currentUrl += '/';
+                }
+                const csrfToken = getCookie('csrftoken');
+                fetch(`/api${currentUrl}requests/`, {
+                    method: 'POST',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': csrfToken,
+                    },
+                })
                 .then(response => response.json())
                 .then(data => {
                     console.log(data);
-                    if (data.redirect) {
-                        navigateTo(data.redirect);
-                    }
                 })
-                .catch(error => console.error('Error searching profile:', error));
+                .catch(error => console.error('Error adding friend:', error));
             });
         }
         
-        let addFriendBtn = document.getElementById('add-friend-btn');
-        if (addFriendBtn) {
-            addFriendBtn.addEventListener('click', (e) => {
-                const currentUrl = window.location.pathname;
-                const uuidRegex = /\/profile\/([0-9a-fA-F-]{36})\/?/;
-                const match = currentUrl.match(uuidRegex);
-                if (match) {
-                    const uuid = match[1];
-                    const csrftoken = getCookie('csrftoken');
-                    fetch(`/api/profiles/${uuid}/request/`, {
-                        method: 'POST',
-                        headers: {
-                            'X-Requested-With': 'XMLHttpRequest',
-                            'Content-Type': 'application/json',
-                            'X-CSRFToken': csrftoken,
-                        },
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        console.log(data);
-                    })
-                    .catch(error => console.error('Error adding friend:', error));
-                } else {
-                    console.error('UUID not found in the URL');
-                }
-                let profile_id = window.location.href.substring(window.location.href.lastIndexOf('/') + 1);
-            });
+        const friendChatBtn = document.getElementById('friend-chat-btn');
+        const friendChatInput = document.getElementById('chatInput');
+        const messageList = document.getElementById('message-list');
+        if (friendChatBtn && friendChatInput && messageList) {
+            console.log('CHAT SYSTEM');
+            const currentUrl = window.location.pathname;
+            const uuidRegex = /\/friends\/([0-9a-fA-F-]{36})\/?/;
+            const match = currentUrl.match(uuidRegex);
+            if (match) {
+                const uuid = match[1];
+                chatSocket = new WebSocket(
+                    `ws://${window.location.host}/ws/chat/${uuid}/`
+                );
+                
+                chatSocket.addEventListener('open', (e) => {
+                    console.log('Chat socket connection established');
+                });
+                
+                chatSocket.addEventListener('message', (e) => {
+                    const data = JSON.parse(e.data);
+                    const message = data['message'];
+                    console.log(message);
+                    messageList.innerHTML += message;
+                });
+                
+                chatSocket.addEventListener('close', (e) => {
+                    console.error('Chat socket closed unexpectedly');
+                });
+                
+                friendChatBtn.addEventListener('click', (e) => {
+                    const message = friendChatInput.value;
+                    if (message) {
+                        chatSocket.send(JSON.stringify({
+                            'message': message
+                        }));
+                        console.log(`Sent: ${message}`);
+                        friendChatInput.value = '';
+                    }
+                });
+                
+                friendChatInput.focus();
+                friendChatInput.addEventListener('keyup', (e) => {
+                    if (e.key === 'Enter') {
+                        friendChatBtn.click();
+                    }
+                });
+            }
         }
     };
-
+    
     window.addEventListener('popstate', renderPage);
     window.addEventListener('pushState', renderPage);
     window.addEventListener('replaceState', renderPage);
-
+    
     attachHandlers();
 });

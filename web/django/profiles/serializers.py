@@ -1,25 +1,16 @@
+import logging
 from rest_framework import serializers
-from .models import Profile
+from .models import Profile, ProfileBlock
+
+logger = logging.getLogger('django')
 
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = ['id', 'user', 'alias', 'avatar', 'status', 'blocked_profiles']
+        fields = '__all__'
 
 
-class ProfileAliasSerializer(serializers.ModelSerializer):
+class ProfileBlockSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Profile
-        fields = ['alias']
-
-
-class ProfileAvatarSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Profile
-        fields = ['avatar']
-
-
-class ProfileStatusSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Profile
-        fields = ['status']
+        model = ProfileBlock
+        fields = '__all__'

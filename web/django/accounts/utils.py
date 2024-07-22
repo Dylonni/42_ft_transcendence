@@ -31,7 +31,7 @@ def send_activation_mail(request, user):
 def send_password_reset_mail(request, user):
     current_site = get_current_site(request)
     token_generator = EmailTokenGenerator()
-    html_message = render_to_string('accounts/password_reset.html', {
+    html_message = render_to_string('accounts/email_reset_password.html', {
         'user': user,
         'domain': current_site.domain,
         'uid': urlsafe_base64_encode(force_bytes(user.pk)),
@@ -58,15 +58,15 @@ def set_jwt_as_cookies(response, access_token, refresh_token):
         key='access_token',
         value=access_token,
         httponly=True,
-        secure=True,
-        samesite='Lax'
+        # secure=True,
+        # samesite='Lax',
     )
     response.set_cookie(
         key='refresh_token',
         value=refresh_token,
         httponly=True,
-        secure=True,
-        samesite='Lax'
+        # secure=True,
+        # samesite='Lax',
     )
 
 def unset_jwt_cookies(response):
