@@ -13,17 +13,6 @@ body, html {
   object-fit: cover;
 }
 
-.lottie-bg {
-  position: absolute;
-  z-index: -1;
-  width: 80%;
-  height: 100%;
-  left: 0;
-  right: 0;
-  margin-left: auto;
-  margin-right: auto;
-}
-
 .icon-tabler-home:hover, .icon-tabler-home.active {
   color: #5abfea;
 }
@@ -44,7 +33,7 @@ body, html {
   color: #9d71ed;
 }
 
-#navtoggle {
+#navtoggle, #notiftoggle {
   -webkit-appearance: none;
   visibility: hidden;
   display: none;
@@ -71,11 +60,7 @@ body, html {
   transition: transform 0.5s ease;
 }
 
-#inputsearch:focus {
-  outline: none;
-}
-
-#gamesearch:focus {
+#inputsearch:focus, #gamesearch:focus, #chatInput:focus {
   outline: none;
 }
 
@@ -92,10 +77,6 @@ body, html {
 
 .room-name, .room-creator, .room-type, .nb-players {
   color: #5abfea;
-}
-
-#chatInput:focus{
-  outline: none;
 }
 
 .gameinfos {
@@ -143,16 +124,6 @@ a:active {
   text-decoration: none; 
 }
 
-#notiftoggle {
-  -webkit-appearance: none;
-  visibility: hidden;
-  display: none;
-}
-
-.form-label {
-  cursor: pointer;
-}
-
 #notiftoggle:checked ~ .notif-panel {
   display: block;
 }
@@ -161,12 +132,7 @@ a:active {
   display: none;
 }
 
-#notif-toggler {
-  bottom: 0px;
-  position: fixed;
-}
-
-.notif-panel {
+#notif-toggler, .notif-panel{
   bottom: 0px;
   position: fixed;
 }
