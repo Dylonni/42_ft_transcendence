@@ -354,6 +354,10 @@ msgstr "Déjà enregistré ?"
 msgid "Sign in here"
 msgstr "Connectez-vous ici"
 
+#: templates/home.html:14
+msgid "Find a player"
+msgstr "Trouver un joueur"
+
 #: templates/home.html:26 templates/profile.html:21 templates/profile.html:57
 #: templates/profile.html:75
 msgid "#PlayerName"
@@ -378,6 +382,10 @@ msgstr "Défaites"
 #: templates/home.html:37
 msgid "Create GameRoom"
 msgstr "Créer un salon de jeux"
+
+#: templates/home.html:53
+msgid "Find a Game"
+msgstr "Trouver une partie"
 
 #: templates/home.html:67
 msgid "Game Rooms"
@@ -512,3 +520,7 @@ msgstr "Amis"
 #: templates/social.html:38
 msgid "#Friendfrrrrrrrrrrrrrrrrrrrr"
 msgstr "#Amis à part"
+
+#: templates/social.html:84
+msgid "  Send a message"
+msgstr "  Envoyer un message"

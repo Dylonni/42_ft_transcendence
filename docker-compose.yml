@@ -68,6 +68,7 @@ services:
       - ./web/django/pong:/django/pong
       - ./web/django/static:/django/static
       - ./web/django/templates:/django/templates
+      - ./web/django/locale:/django/locale
       - elk-data:/logstash
       - django-token:/django/secrets:ro
 

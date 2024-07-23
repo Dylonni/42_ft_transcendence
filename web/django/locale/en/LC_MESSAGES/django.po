@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-17 15:28+0000\n"
+"POT-Creation-Date: 2024-07-23 08:04+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -226,24 +226,24 @@ msgstr ""
 msgid "Login"
 msgstr ""
 
-#: pong/views.py:33 templates/accounts/register.html:37
+#: pong/views.py:34 templates/accounts/register.html:37
 #: templates/accounts/register.html:43
 msgid "Register"
 msgstr ""
 
-#: pong/views.py:40
+#: pong/views.py:42
 msgid "Home"
 msgstr ""
 
-#: pong/views.py:47 templates/profile.html:7
+#: pong/views.py:50 templates/profile.html:7
 msgid "Profile"
 msgstr ""
 
-#: pong/views.py:54 templates/social.html:8
+#: pong/views.py:58 templates/social.html:8
 msgid "Social"
 msgstr ""
 
-#: pong/views.py:61 templates/settings.html:8
+#: pong/views.py:66 templates/settings.html:8
 msgid "Settings"
 msgstr ""
 
@@ -346,8 +346,12 @@ msgstr ""
 msgid "Sign in here"
 msgstr ""
 
+#: templates/home.html:14
+msgid "Find a player"
+msgstr ""
+
 #: templates/home.html:26 templates/profile.html:21 templates/profile.html:57
-#: templates/profile.html:75
+#: templates/profile.html:75 templates/settings.html:28
 msgid "#PlayerName"
 msgstr ""
 
@@ -369,6 +373,10 @@ msgstr ""
 
 #: templates/home.html:37
 msgid "Create GameRoom"
+msgstr ""
+
+#: templates/home.html:53
+msgid "Find a Game"
 msgstr ""
 
 #: templates/home.html:67
@@ -456,8 +464,6 @@ msgid "#LostGames"
 msgstr ""
 
 #: templates/settings.html:23
-#, fuzzy
-#| msgid "My Profile"
 msgid "Profile Card"
 msgstr ""
 
@@ -503,4 +509,8 @@ msgstr ""
 
 #: templates/social.html:38
 msgid "#Friendfrrrrrrrrrrrrrrrrrrrr"
+msgstr ""
+
+#: templates/social.html:84
+msgid "  Send a message"
 msgstr ""

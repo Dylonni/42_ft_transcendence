@@ -40,7 +40,7 @@ msgstr "Không xác định cho người dùng, tự động tạo ra."
 
 #: accounts/models.py:56
 msgid "username"
-msgtr ""
+msgstr ""
 
 #: accounts/models.py:60
 msgid "Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only."
@@ -101,7 +101,7 @@ msgstr "Ngày và thời gian khi người dùng tham gia."
 
 #: accounts/models.py:103
 msgid "staff status"
-msgtr ""
+msgstr ""
 
 #: accounts/models.py:105
 msgid "Designates whether the user can log into this admin site."
@@ -116,7 +116,7 @@ msgid ""
 "Designates whether this user should be treated as active. Unselect this "
 "instead of deleting accounts."
 msgstr ""
-"Hãy xác nhận người dùng này có nên được đối xử như là hoạt động hay không. Bỏ chọn cái này
+"Hãy xác nhận người dùng này có nên được đối xử như là hoạt động hay không. Bỏ chọn cái này"
 "trong việc xóa tài khoản."
 
 #: accounts/models.py:117
@@ -149,7 +149,7 @@ msgstr "Người dùng thường"
 
 #: accounts/serializers.py:18
 msgid "Must include \"username/email\" and \"password\"."
-msgstr "Must bao gồm tên / email\" và \" mật khẩu\".
+msgstr "Must bao gồm tên / email\" và \" mật khẩu"
 
 #: accounts/serializers.py:27
 msgid "Unable to log in with provided credentials."
@@ -291,7 +291,7 @@ msgstr ""
 
 #: templates/accounts/login.html:13 templates/accounts/register.html:13
 msgid "My Profile"
-msgd "Hồ sơ của tôi"
+msgstr "Hồ sơ của tôi"
 
 #: templates/accounts/login.html:37 templates/accounts/login.html:42
 msgid "Log in"
@@ -299,7 +299,7 @@ msgstr ""
 
 #: templates/accounts/login.html:38
 msgid "Username / Email"
-msgd "người dùng tên / email"
+msgstr "người dùng tên / email"
 
 #: templates/accounts/login.html:39 templates/accounts/register.html:40
 msgid "Password"
@@ -338,8 +338,8 @@ msgid "Development Team"
 msgstr "Tổ phát triển"
 
 #: templates/accounts/register.html:38
+msgid "Username"
 msgstr "người dùng"
-msgstr "Nom d'utilisateur"
 
 #: templates/accounts/register.html:39 templates/settings.html:67
 msgid "Email"
@@ -351,6 +351,10 @@ msgstr ""
 
 #: templates/accounts/register.html:44
 msgid "Sign in here"
+msgstr ""
+
+#: templates/home.html:14
+msgid "Find a player"
 msgstr ""
 
 #: templates/home.html:26 templates/profile.html:21 templates/profile.html:57
@@ -376,6 +380,10 @@ msgstr ""
 
 #: templates/home.html:37
 msgid "Create GameRoom"
+msgstr ""
+
+#: templates/home.html:53
+msgid "Find a Game"
 msgstr ""
 
 #: templates/home.html:67
@@ -511,3 +519,7 @@ msgstr "Bạn bè"
 #: templates/social.html:38
 msgid "#Friendfrrrrrrrrrrrrrrrrrrrr"
 msgstr "#Amis à part"
+
+#: templates/social.html:84
+msgid "  Send a message"
+msgstr ""

@@ -24,13 +24,13 @@ class IndexView(APIView):
 
 class LoginView(APIView):
     def get(self, request, *args, **kwargs):
-        translation.activate("fr")
+        translation.activate("ug")
         return redirect_not_ajax(request, _('Login'), 'accounts/login.html')
 
 
 class RegisterView(APIView):
     def get(self, request, *args, **kwargs):
-        translation.activate("ja")
+        translation.activate("ug")
         return redirect_not_ajax(request, _('Register'), 'accounts/register.html')
 
 
@@ -38,7 +38,7 @@ class HomeView(APIView):
     permission_classes = (IsAuthenticated,)
     
     def get(self, request, *args, **kwargs):
-        translation.activate("fr")
+        translation.activate("ug")
         return redirect_not_ajax(request, _('Home'), 'home.html')
 
 
@@ -46,7 +46,7 @@ class ProfileView(APIView):
     permission_classes = (IsAuthenticated,)
     
     def get(self, request, *args, **kwargs):
-        translation.activate("ja")
+        translation.activate("ug")
         return redirect_not_ajax(request, _('Profile'), 'profile.html')
 
 
@@ -54,7 +54,7 @@ class SocialView(APIView):
     permission_classes = (IsAuthenticated,)
     
     def get(self, request, *args, **kwargs):
-        translation.activate("ja")
+        translation.activate("ug")
         return redirect_not_ajax(request, _('Social'), 'social.html')
 
 
@@ -62,5 +62,5 @@ class SettingsView(APIView):
     permission_classes = (IsAuthenticated,)
     
     def get(self, request, *args, **kwargs):
-        translation.activate("ja")
+        translation.activate("ug")
         return redirect_not_ajax(request, _('Settings'), 'settings.html')

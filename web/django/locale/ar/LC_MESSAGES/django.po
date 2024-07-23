@@ -355,6 +355,10 @@ msgstr "مسجل بالفعل؟"
 msgid "Sign in here"
 msgstr "وقع هنا"
 
+#: templates/home.html:14
+msgid "Find a player"
+msgstr "العثور على لاعب"
+
 #: templates/home.html:26 templates/profile.html:21 templates/profile.html:57
 #: templates/profile.html:75
 msgid "#PlayerName"
@@ -379,6 +383,10 @@ msgstr "الخسائر"
 #: templates/home.html:37
 msgid "Create GameRoom"
 msgstr "Create GameRoom"
+
+#: templates/home.html:53
+msgid "Find a Game"
+msgstr "العثور على لعبة"
 
 #: templates/home.html:67
 msgid "Game Rooms"
@@ -513,3 +521,7 @@ msgstr "الأصدقاء"
 #: templates/social.html:38
 msgid "#Friendfrrrrrrrrrrrrrrrrrrrr"
 msgstr "♪Friendfrrrrrrrrrrrrrrrrrr"
+
+#: templates/social.html:84
+msgid "  Send a message"
+msgstr "ارسل رسالة  "
