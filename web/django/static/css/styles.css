@@ -148,8 +148,8 @@ a:active {
 }
 
 #formCheckBsizeSmall, #formCheckBsizeMedium, #formCheckBsizeLarge,
-#formCheckPdsizSmall, #formCheckPdsizeMedium, #formCheckPdsizeLarge,
-#formCheckAiDiff-easy, #formCheckAiDiffNormal, #formCheckAiDiffHard {
+#formCheckPdsizeSmall, #formCheckPdsizeMedium, #formCheckPdsizeLarge,
+#formCheckAiDiffEasy, #formCheckAiDiffNormal, #formCheckAiDiffHard {
   visibility: hidden;
   display: none;
 }

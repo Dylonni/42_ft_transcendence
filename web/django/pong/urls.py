@@ -24,6 +24,7 @@ apipatterns = [
     path('', include(('accounts.urls', 'accounts'), namespace='accounts')),
     path('', include(('profiles.urls', 'profiles'), namespace='profiles')),
     path('', include(('friends.urls', 'friends'), namespace='friends')),
+    path('', include(('games.urls', 'games'), namespace='games')),
     path('lang/<str:lang>/', views.lang_reload, name='lang_reload'),
 ]
 
@@ -37,11 +38,13 @@ urlpatterns = [
     path('register/', views.register, name='register'),
 	path('forgot-password/', views.forgot_password, name='forgot_password'),
     path('home/', views.home, name='home'),
+	path('select/', views.select_game, name='select_game'),
+	path('customize/', views.customize_game, name='customize_game'),
     path('profiles/me/', views.profile, name='profile'),
 	path('profiles/<uuid:profile_id>/', views.profile_other, name='profile_other'),
     path('leaderboard/', views.leaderboard, name='leaderboard'),
 	path('friends/', views.social, name='social'),
     path('friends/<uuid:friend_id>/', views.social_friend, name='social_friend'),
     path('settings/', views.settings, name='settings'),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)\
-    + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    # + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

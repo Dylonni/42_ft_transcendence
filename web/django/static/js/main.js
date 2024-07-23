@@ -190,7 +190,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 .catch(error => console.error('Error adding friend:', error));
             });
         }
-        
+        const createGameForm = document.getElementById('createGameForm');
+        const verifyForm = document.getElementById('formCheckBsizeMedium');
+        if (createGameForm) {
+            createGameForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const formData = new FormData(e.target);
+                console.log(formData.values());
+                console.log(verifyForm);
+            });
+        }
         const friendChatBtn = document.getElementById('friend-chat-btn');
         const friendChatInput = document.getElementById('chatInput');
         const messageList = document.getElementById('message-list');

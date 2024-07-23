@@ -42,6 +42,9 @@
     NOTIFICATION
 - [X] Add a little notifcation center
 
+-   CREATE_GAME
+- [ ] Fix formData being empty on chrome
+
     SETTINGS
 - [ ] Fix the second and third panel's responsive
 - [ ] Add a modal or a wayto inform the user that an email has been set to reset his password/email
@@ -49,6 +52,7 @@
 - [ ] Add a file input to change the persons avatar
 - [X] Create a template for change email
 - [ ] Fix the way to change persons Avatar/Nickname
+- [ ] Add players default language
 
 Reminder for Pipenv install in django:
 run ```pip install --upgrade pip ``` to check location of pip

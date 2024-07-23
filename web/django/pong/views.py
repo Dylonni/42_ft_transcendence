@@ -5,6 +5,7 @@ from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
 from django.utils import translation
 from django.utils.translation import gettext as _
+from django.contrib.auth.models import AnonymousUser
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -20,8 +21,11 @@ def get_profile_context(request, profile_id=None):
     try:
         if profile_id:
             profile = Profile.objects.get(id=profile_id)
-        else:
-            profile = Profile.objects.get(user=request.user)
+        else: 
+            if request.user.id:
+                profile = Profile.objects.get(user=request.user)
+            else:
+                profile = None
         context['profile'] = profile
         return context
     except Profile.DoesNotExist:
@@ -65,7 +69,8 @@ class PrivateView(JWTCookieAuthenticationMixin, LangVerificationMixin, APIView):
 
 class IndexView(PublicView):
     def get(self, request):
-        return render_with_sub_template(request, 'modeselect.html', _('Transcendence'))
+        context = get_profile_context(request)
+        return render_with_sub_template(request, 'modeselect.html', _('Transcendence'), context)
 
 index = IndexView.as_view()
 
@@ -98,6 +103,19 @@ class HomeView(PrivateView):
 
 home = HomeView.as_view()
 
+class SelectGameView(PrivateView):
+    def get(self, request):
+        context = get_profile_context(request)
+        return render_response(request, 'modeselect.html', _('Choose Mode'), context)
+
+select_game = SelectGameView.as_view()
+
+class CustomizeGameView(PrivateView):
+    def get(self, request):
+        context = get_profile_context(request)
+        return render_response(request, 'customize_game.html', _('Customize Game'), context)
+
+customize_game = CustomizeGameView.as_view()
 
 class ProfileView(PrivateView):
     def get(self, request):
