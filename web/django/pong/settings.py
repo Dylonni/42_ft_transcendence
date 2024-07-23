@@ -149,13 +149,14 @@ USE_L10N = True
 
 USE_TZ = True
 
-# LANGUAGE_CODE = 'en'
 
 LANGUAGES = [
     ('en', 'English'),
+    ('es', 'Spanish'),
     ('fr', 'French'),
-    # Add more languages as needed
-	# ('ja', 'Japanese'),
+    ('it', 'Italian'),
+    ('ja', 'Japanese'),
+    ('ug', 'Uyghur')
 ]
 
 
