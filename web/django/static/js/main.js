@@ -94,7 +94,7 @@ document.addEventListener("DOMContentLoaded", () => {
             form.addEventListener('submit', (event) => {
                 event.preventDefault();
                 const formData = new FormData(event.target);
-                console.log(formData);
+                console.log(...formData);
                 fetch(event.target.action, {
                     method: event.target.method,
                     headers: {
@@ -191,13 +191,11 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
         const createGameForm = document.getElementById('createGameForm');
-        const verifyForm = document.getElementById('formCheckBsizeMedium');
         if (createGameForm) {
             createGameForm.addEventListener('submit', (e) => {
                 e.preventDefault();
                 const formData = new FormData(e.target);
-                console.log(formData.values());
-                console.log(verifyForm);
+                console.log(...formData);
             });
         }
         const friendChatBtn = document.getElementById('friend-chat-btn');

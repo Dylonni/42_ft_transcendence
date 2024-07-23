@@ -43,7 +43,7 @@
 - [X] Add a little notifcation center
 
 -   CREATE_GAME
-- [ ] Fix formData being empty on chrome
+- [X] Fix formData being empty on chrome
 
     SETTINGS
 - [ ] Fix the second and third panel's responsive
