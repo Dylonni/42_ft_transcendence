@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-23 08:04+0000\n"
+"POT-Creation-Date: 2024-07-23 12:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -411,6 +411,10 @@ msgstr ""
 msgid "Current Players"
 msgstr ""
 
+#: templates/home.html:87
+msgid "Join"
+msgstr ""
+
 #: templates/home.html:97
 msgid "NO GAMES TO DISPLAY"
 msgstr ""
@@ -505,6 +509,10 @@ msgstr ""
 
 #: templates/social.html:24
 msgid "Friends"
+msgstr ""
+
+#: templates/social.html:37
+msgid "Online"
 msgstr ""
 
 #: templates/social.html:38

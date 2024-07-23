@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-17 15:28+0000\n"
+"POT-Creation-Date: 2024-07-23 12:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -32,7 +32,7 @@ msgstr "تواريخ هامة"
 
 #: accounts/models.py:48
 msgid "id"
-msgstr "id  /// البيت"
+msgstr "البيت"
 
 #: accounts/models.py:53
 msgid "Unique identifier for the user, automatically generated."
@@ -51,8 +51,7 @@ msgid "The username must be 150 characters or fewer."
 msgstr "يجب أن يكون اسم المستخدم 150 شخصية أو أقل."
 
 #: accounts/models.py:65
-msgid ""
-"This value may contain only letters, numbers, and @/./+/-/_ characters."
+msgid "This value may contain only letters, numbers, and @/./+/-/_ characters."
 msgstr "ولا تتضمن هذه القيمة سوى رسائل وأرقام وشخصيات @/./+/-/."
 
 #: accounts/models.py:69
@@ -229,26 +228,26 @@ msgstr "Transcendence"
 
 #: pong/views.py:28
 msgid "Login"
-msgstr "Login   // البيت"
+msgstr " البيت"
 
-#: pong/views.py:33 templates/accounts/register.html:37
+#: pong/views.py:34 templates/accounts/register.html:37
 #: templates/accounts/register.html:43
 msgid "Register"
 msgstr "السجل"
 
-#: pong/views.py:40
+#: pong/views.py:42
 msgid "Home"
 msgstr "البيت"
 
-#: pong/views.py:47 templates/profile.html:7
+#: pong/views.py:50 templates/profile.html:7
 msgid "Profile"
 msgstr "Profile  البيت"
 
-#: pong/views.py:54 templates/social.html:8
+#: pong/views.py:58 templates/social.html:8
 msgid "Social"
 msgstr "الاجتماعية"
 
-#: pong/views.py:61 templates/settings.html:8
+#: pong/views.py:66 templates/settings.html:8
 msgid "Settings"
 msgstr "التركيبات"
 
@@ -261,15 +260,12 @@ msgstr "تفعيل حسابك"
 msgid "Hi '%(user.username)s'"
 msgstr "'%(user.username)s' مرحبا"
 
-
-
 #: templates/accounts/email_activate.html:9
 msgid ""
 "Thank you for registering at Transcendence. Please click the link below to "
 "activate your account:"
 msgstr ""
-"شكراً لك على تسجيلك في \"الإرسال\". يرجى النقر على الرابط أدناه لتفعيل "
-"حسابك:"
+"شكراً لك على تسجيلك في \"الإرسال\". يرجى النقر على الرابط أدناه لتفعيل حسابك:"
 
 #: templates/accounts/email_activate.html:10
 msgid "Activate your account"
@@ -360,7 +356,7 @@ msgid "Find a player"
 msgstr "العثور على لاعب"
 
 #: templates/home.html:26 templates/profile.html:21 templates/profile.html:57
-#: templates/profile.html:75
+#: templates/profile.html:75 templates/settings.html:28
 msgid "#PlayerName"
 msgstr "# PlayerName"
 
@@ -419,6 +415,10 @@ msgstr "# Classic/Retro"
 #: templates/home.html:84
 msgid "Current Players"
 msgstr "الألياف الحالية"
+
+#: templates/home.html:87
+msgid "Join"
+msgstr ""
 
 #: templates/home.html:97
 msgid "NO GAMES TO DISPLAY"
@@ -517,6 +517,10 @@ msgstr "تحذف حسابي"
 #: templates/social.html:24
 msgid "Friends"
 msgstr "الأصدقاء"
+
+#: templates/social.html:37
+msgid "Online"
+msgstr ""
 
 #: templates/social.html:38
 msgid "#Friendfrrrrrrrrrrrrrrrrrrrr"

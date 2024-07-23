@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-17 15:28+0000\n"
+"POT-Creation-Date: 2024-07-23 12:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -44,17 +44,17 @@ msgstr "ئىشلەتكۈچى ئىسمى"
 
 #: accounts/models.py:60
 msgid "Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only."
-msgstr ".تەلەپ قىلىنىدۇ. 150 ھەرپ ياكى ئۇنىڭدىنمۇ ئاز. خەت ، رەقەم ۋە @ /. / + / - / _  پەقەت."
+msgstr ""
+".تەلەپ قىلىنىدۇ. 150 ھەرپ ياكى ئۇنىڭدىنمۇ ئاز. خەت ، رەقەم ۋە @ /. / + / - / "
+"_  پەقەت."
 
 #: accounts/models.py:64
 msgid "The username must be 150 characters or fewer."
 msgstr "ئىشلەتكۈچى ئىسمى 150 ھەرپ ياكى ئۇنىڭدىن تۆۋەن بولۇشى كېرەك."
 
 #: accounts/models.py:65
-msgid ""
-"This value may contain only letters, numbers, and @/./+/-/_ characters."
+msgid "This value may contain only letters, numbers, and @/./+/-/_ characters."
 msgstr "NOPE"
-
 
 #: accounts/models.py:69
 msgid "email address"
@@ -118,7 +118,6 @@ msgid ""
 "instead of deleting accounts."
 msgstr "NOPE"
 
-
 #: accounts/models.py:117
 msgid "groups"
 msgstr "NOPE"
@@ -128,7 +127,6 @@ msgid ""
 "The groups this user belongs to. A user will get all permissions granted to "
 "each of their groups."
 msgstr "NOPE"
-
 
 #: accounts/models.py:128
 msgid "user permissions"
@@ -148,7 +146,9 @@ msgstr "NOPE"
 
 #: accounts/serializers.py:18
 msgid "Must include \"username/email\" and \"password\"."
-msgstr "چوقۇم \" ئىشلەتكۈچى ئىسمى / ئېلېكترونلۇق خەت \" ۋە \" پارول \" نى ئۆز ئىچىگە ئېلىشى كېرەك."
+msgstr ""
+"چوقۇم \" ئىشلەتكۈچى ئىسمى / ئېلېكترونلۇق خەت \" ۋە \" پارول \" نى ئۆز ئىچىگە "
+"ئېلىشى كېرەك."
 
 #: accounts/serializers.py:27
 msgid "Unable to log in with provided credentials."
@@ -164,7 +164,8 @@ msgstr "NOPE"
 
 #: accounts/views.py:96
 msgid "Account registered! Please check your email to activate your account."
-msgstr "!ھېسابات تىزىملىتىلدىھېساباتىڭىزنى قوزغىتىش ئۈچۈن ئېلىخېتڭىزنى تەكشۈرۈڭ."
+msgstr ""
+"!ھېسابات تىزىملىتىلدىھېساباتىڭىزنى قوزغىتىش ئۈچۈن ئېلىخېتڭىزنى تەكشۈرۈڭ."
 
 #: accounts/views.py:123
 msgid "Account activated!"
@@ -200,27 +201,27 @@ msgstr "ئېلخەت مۇۋەپپەقىيەتلىك يېڭىلاندى!"
 
 #: pong/urls.py:33
 msgid "^login/?$"
-msgstr "NOPE"
+msgstr ""
 
 #: pong/urls.py:34
 msgid "^register/?$"
-msgstr "NOPE"
+msgstr ""
 
 #: pong/urls.py:36
 msgid "^home/?$"
-msgstr "NOPE"
+msgstr ""
 
 #: pong/urls.py:37
 msgid "^profile/?$"
-msgstr "NOPE"
+msgstr ""
 
 #: pong/urls.py:38
 msgid "^social/?$"
-msgstr "NOPE"
+msgstr ""
 
 #: pong/urls.py:39
 msgid "^settings/?$"
-msgstr "NOPE"
+msgstr ""
 
 #: pong/views.py:21
 msgid "Transcendence"
@@ -230,24 +231,24 @@ msgstr "Transcendence"
 msgid "Login"
 msgstr "كىرىش"
 
-#: pong/views.py:33 templates/accounts/register.html:37
+#: pong/views.py:34 templates/accounts/register.html:37
 #: templates/accounts/register.html:43
 msgid "Register"
 msgstr "تىزىملىتىڭ"
 
-#: pong/views.py:40
+#: pong/views.py:42
 msgid "Home"
 msgstr "ئۆي"
 
-#: pong/views.py:47 templates/profile.html:7
+#: pong/views.py:50 templates/profile.html:7
 msgid "Profile"
 msgstr "ئارخىپ"
 
-#: pong/views.py:54 templates/social.html:8
+#: pong/views.py:58 templates/social.html:8
 msgid "Social"
 msgstr "ئىجتىمائىي"
 
-#: pong/views.py:61 templates/settings.html:8
+#: pong/views.py:66 templates/settings.html:8
 msgid "Settings"
 msgstr "تەڭشەك"
 
@@ -264,7 +265,9 @@ msgstr "'%(user.username)s'ياخشىمۇسىز"
 msgid ""
 "Thank you for registering at Transcendence. Please click the link below to "
 "activate your account:"
-msgstr "Transcendence غا تىزىملاتقانلىقىڭىزغا رەھمەت. تۆۋەندىكى ئۇلىنىشنى چېكىڭ.ھېساباتىڭىزنى قوزغىتىڭ:"
+msgstr ""
+"Transcendence غا تىزىملاتقانلىقىڭىزغا رەھمەت. تۆۋەندىكى ئۇلىنىشنى چېكىڭ."
+"ھېساباتىڭىزنى قوزغىتىڭ:"
 
 #: templates/accounts/email_activate.html:10
 msgid "Activate your account"
@@ -355,7 +358,7 @@ msgid "Find a player"
 msgstr "ئويۇنچى تېپىڭ"
 
 #: templates/home.html:26 templates/profile.html:21 templates/profile.html:57
-#: templates/profile.html:75
+#: templates/profile.html:75 templates/settings.html:28
 msgid "#PlayerName"
 msgstr "،ماھىرئىسمى#"
 
@@ -407,7 +410,6 @@ msgstr "قۇرغۇچىنىڭئىسمى#"
 msgid "Room Type"
 msgstr "NOPE"
 
-
 #: templates/home.html:81
 msgid "#Classic/Retro"
 msgstr "NOPE"
@@ -415,6 +417,10 @@ msgstr "NOPE"
 #: templates/home.html:84
 msgid "Current Players"
 msgstr "ئويۇندىكى ماھىرلار"
+
+#: templates/home.html:87
+msgid "Join"
+msgstr ""
 
 #: templates/home.html:97
 msgid "NO GAMES TO DISPLAY"
@@ -469,8 +475,6 @@ msgid "#LostGames"
 msgstr "مەغلۇپبولغانئويۇنلار#"
 
 #: templates/settings.html:23
-#, fuzzy
-#| msgid "My Profile"
 msgid "Profile Card"
 msgstr "ئارخىپ"
 
@@ -513,6 +517,14 @@ msgstr "ھېساباتىمنى ئۆچۈرۈڭ"
 #: templates/social.html:24
 msgid "Friends"
 msgstr "دوستلار"
+
+#: templates/social.html:37
+msgid "Online"
+msgstr ""
+
+#: templates/social.html:38
+msgid "#Friendfrrrrrrrrrrrrrrrrrrrr"
+msgstr ""
 
 #: templates/social.html:84
 msgid "  Send a message"

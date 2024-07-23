@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-17 15:28+0000\n"
+"POT-Creation-Date: 2024-07-23 12:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -51,8 +51,7 @@ msgid "The username must be 150 characters or fewer."
 msgstr "ユーザー名は150文字以下でなければなりません。"
 
 #: accounts/models.py:65
-msgid ""
-"This value may contain only letters, numbers, and @/./+/-/_ characters."
+msgid "This value may contain only letters, numbers, and @/./+/-/_ characters."
 msgstr "この値は、文字、数字、および @/./+/-/_ 文字のみを含む場合があります。"
 
 #: accounts/models.py:69
@@ -115,7 +114,9 @@ msgstr "アクティブ"
 msgid ""
 "Designates whether this user should be treated as active. Unselect this "
 "instead of deleting accounts."
-msgstr "このユーザーが有効に扱われるべきかどうかを指定します。 削除ではなく、これを選択解除します。"
+msgstr ""
+"このユーザーが有効に扱われるべきかどうかを指定します。 削除ではなく、これを選"
+"択解除します。"
 
 #: accounts/models.py:117
 msgid "groups"
@@ -125,7 +126,9 @@ msgstr "グループ"
 msgid ""
 "The groups this user belongs to. A user will get all permissions granted to "
 "each of their groups."
-msgstr "ユーザーが所属するグループ ユーザーは、各グループに付与されたすべての権限を取得します。"
+msgstr ""
+"ユーザーが所属するグループ ユーザーは、各グループに付与されたすべての権限を取"
+"得します。"
 
 #: accounts/models.py:128
 msgid "user permissions"
@@ -227,24 +230,24 @@ msgstr "Transcendence"
 msgid "Login"
 msgstr "ログイン"
 
-#: pong/views.py:33 templates/accounts/register.html:37
+#: pong/views.py:34 templates/accounts/register.html:37
 #: templates/accounts/register.html:43
 msgid "Register"
 msgstr "会員登録"
 
-#: pong/views.py:40
+#: pong/views.py:42
 msgid "Home"
 msgstr "ホーム"
 
-#: pong/views.py:47 templates/profile.html:7
+#: pong/views.py:50 templates/profile.html:7
 msgid "Profile"
 msgstr "プロフィール"
 
-#: pong/views.py:54 templates/social.html:8
+#: pong/views.py:58 templates/social.html:8
 msgid "Social"
-msgstr "社会招聘"
+msgstr "チャット"
 
-#: pong/views.py:61 templates/settings.html:8
+#: pong/views.py:66 templates/settings.html:8
 msgid "Settings"
 msgstr "設定"
 
@@ -261,7 +264,9 @@ msgstr "こんにちは '%(user.username)s"
 msgid ""
 "Thank you for registering at Transcendence. Please click the link below to "
 "activate your account:"
-msgstr "Transcendenceに登録いただきありがとうございます。 下記のリンクをクリックしてアカウントを有効化してください。"
+msgstr ""
+"Transcendenceに登録いただきありがとうございます。 下記のリンクをクリックして"
+"アカウントを有効化してください。"
 
 #: templates/accounts/email_activate.html:10
 msgid "Activate your account"
@@ -281,7 +286,7 @@ msgstr "Transcendenceチーム"
 
 #: templates/accounts/login.html:12 templates/accounts/register.html:12
 msgid "Quick Play"
-msgstr "クイックプレイ"
+msgstr "今すぐプレイ"
 
 #: templates/accounts/login.html:13 templates/accounts/register.html:13
 msgid "My Profile"
@@ -352,7 +357,7 @@ msgid "Find a player"
 msgstr "プレイヤーを検索"
 
 #: templates/home.html:26 templates/profile.html:21 templates/profile.html:57
-#: templates/profile.html:75
+#: templates/profile.html:75 templates/settings.html:28
 msgid "#PlayerName"
 msgstr "#プレイヤー名"
 
@@ -412,6 +417,10 @@ msgstr "#クラシック/レトロ"
 msgid "Current Players"
 msgstr "現在対局中"
 
+#: templates/home.html:87
+msgid "Join"
+msgstr "参加"
+
 #: templates/home.html:97
 msgid "NO GAMES TO DISPLAY"
 msgstr "ゲームはありません"
@@ -456,7 +465,7 @@ msgstr "ゲーム勝ち"
 msgid "#WonGames"
 msgstr "#ゲーム勝ち"
 
-#: templates/profile.html:12け
+#: templates/profile.html:124
 msgid "Lost Games"
 msgstr "ゲーム負"
 
@@ -508,10 +517,14 @@ msgstr "アカウントの削除"
 msgid "Friends"
 msgstr "友達"
 
+#: templates/social.html:37
+msgid "Online"
+msgstr "オンライン"
+
 #: templates/social.html:38
 msgid "#Friendfrrrrrrrrrrrrrrrrrrrr"
 msgstr "#Friendfrrrrrrrrrrrrrrrrrrrrr"
 
 #: templates/social.html:84
 msgid "  Send a message"
-msgstr "　　メッセージを送る"
+msgstr "　　メッセージ送信"

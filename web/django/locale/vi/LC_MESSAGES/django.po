@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-17 15:28+0000\n"
+"POT-Creation-Date: 2024-07-23 12:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -51,8 +51,7 @@ msgid "The username must be 150 characters or fewer."
 msgstr "Tên người dùng phải 150 ký tự hoặc ít hơn."
 
 #: accounts/models.py:65
-msgid ""
-"This value may contain only letters, numbers, and @/./+/-/_ characters."
+msgid "This value may contain only letters, numbers, and @/./+/-/_ characters."
 msgstr "giá trị này chỉ có thể chứa chữ cái, số, và @ /./+/_ ký tự."
 
 #: accounts/models.py:69
@@ -105,7 +104,8 @@ msgstr ""
 
 #: accounts/models.py:105
 msgid "Designates whether the user can log into this admin site."
-msgstr "Hãy xác định liệu người dùng có thể đăng nhập vào khu vực quản trị này không."
+msgstr ""
+"Hãy xác định liệu người dùng có thể đăng nhập vào khu vực quản trị này không."
 
 #: accounts/models.py:108
 msgid "active"
@@ -116,8 +116,8 @@ msgid ""
 "Designates whether this user should be treated as active. Unselect this "
 "instead of deleting accounts."
 msgstr ""
-"Hãy xác nhận người dùng này có nên được đối xử như là hoạt động hay không. Bỏ chọn cái này"
-"trong việc xóa tài khoản."
+"Hãy xác nhận người dùng này có nên được đối xử như là hoạt động hay không. "
+"Bỏ chọn cái nàytrong việc xóa tài khoản."
 
 #: accounts/models.py:117
 msgid "groups"
@@ -128,8 +128,8 @@ msgid ""
 "The groups this user belongs to. A user will get all permissions granted to "
 "each of their groups."
 msgstr ""
-"Các nhóm người dùng này thuộc về. Một người dùng sẽ được chấp thuận mọi quyền."
-"mỗi nhóm của họ."
+"Các nhóm người dùng này thuộc về. Một người dùng sẽ được chấp thuận mọi "
+"quyền.mỗi nhóm của họ."
 
 #: accounts/models.py:128
 msgid "user permissions"
@@ -165,7 +165,9 @@ msgstr "User đăng xuất!"
 
 #: accounts/views.py:96
 msgid "Account registered! Please check your email to activate your account."
-msgstr "Ac Count đã đăng ký! Vui lòng kiểm tra email của bạn để kích hoạt tài khoản của bạn. "
+msgstr ""
+"Ac Count đã đăng ký! Vui lòng kiểm tra email của bạn để kích hoạt tài khoản "
+"của bạn. "
 
 #: accounts/views.py:123
 msgid "Account activated!"
@@ -231,24 +233,24 @@ msgstr "Transcendance"
 msgid "Login"
 msgstr ""
 
-#: pong/views.py:33 templates/accounts/register.html:37
+#: pong/views.py:34 templates/accounts/register.html:37
 #: templates/accounts/register.html:43
 msgid "Register"
 msgstr ""
 
-#: pong/views.py:40
+#: pong/views.py:42
 msgid "Home"
 msgstr ""
 
-#: pong/views.py:47 templates/profile.html:7
+#: pong/views.py:50 templates/profile.html:7
 msgid "Profile"
 msgstr ""
 
-#: pong/views.py:54 templates/social.html:8
+#: pong/views.py:58 templates/social.html:8
 msgid "Social"
 msgstr ""
 
-#: pong/views.py:61 templates/settings.html:8
+#: pong/views.py:66 templates/settings.html:8
 msgid "Settings"
 msgstr ""
 
@@ -266,8 +268,8 @@ msgid ""
 "Thank you for registering at Transcendence. Please click the link below to "
 "activate your account:"
 msgstr ""
-"Cảm ơn vì đã đăng ký ở Transcendence. Hãy nhấn vào liên kết dưới đây để "
-" kích hoạt tài khoản của bạn: "
+"Cảm ơn vì đã đăng ký ở Transcendence. Hãy nhấn vào liên kết dưới đây để  "
+"kích hoạt tài khoản của bạn: "
 
 #: templates/accounts/email_activate.html:10
 msgid "Activate your account"
@@ -358,7 +360,7 @@ msgid "Find a player"
 msgstr ""
 
 #: templates/home.html:26 templates/profile.html:21 templates/profile.html:57
-#: templates/profile.html:75
+#: templates/profile.html:75 templates/settings.html:28
 msgid "#PlayerName"
 msgstr ""
 
@@ -418,6 +420,10 @@ msgstr ""
 msgid "Current Players"
 msgstr ""
 
+#: templates/home.html:87
+msgid "Join"
+msgstr ""
+
 #: templates/home.html:97
 msgid "NO GAMES TO DISPLAY"
 msgstr ""
@@ -471,8 +477,6 @@ msgid "#LostGames"
 msgstr ""
 
 #: templates/settings.html:23
-#, fuzzy
-#| msgid "My Profile"
 msgid "Profile Card"
 msgstr ""
 
@@ -515,6 +519,10 @@ msgstr "Làm sạch tài khoản của tôi"
 #: templates/social.html:24
 msgid "Friends"
 msgstr "Bạn bè"
+
+#: templates/social.html:37
+msgid "Online"
+msgstr ""
 
 #: templates/social.html:38
 msgid "#Friendfrrrrrrrrrrrrrrrrrrrr"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-17 15:28+0000\n"
+"POT-Creation-Date: 2024-07-23 12:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -44,16 +44,18 @@ msgstr "Nom d'utilisateur"
 
 #: accounts/models.py:60
 msgid "Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only."
-msgstr "Requis. 150 caractères maximum. Uniquement lettres, chiffres et @/./+/-/_ ."
+msgstr ""
+"Requis. 150 caractères maximum. Uniquement lettres, chiffres et @/./+/-/_ ."
 
 #: accounts/models.py:64
 msgid "The username must be 150 characters or fewer."
 msgstr "Le nom d'utilisateur doit être de 150 caractères ou moins."
 
 #: accounts/models.py:65
-msgid ""
-"This value may contain only letters, numbers, and @/./+/-/_ characters."
-msgstr "Ce champ peut uniquement contenir : lettres, chiffres et les caractères @/./+/-/_."
+msgid "This value may contain only letters, numbers, and @/./+/-/_ characters."
+msgstr ""
+"Ce champ peut uniquement contenir : lettres, chiffres et les caractères @/./"
+"+/-/_."
 
 #: accounts/models.py:69
 msgid "email address"
@@ -116,8 +118,8 @@ msgid ""
 "Designates whether this user should be treated as active. Unselect this "
 "instead of deleting accounts."
 msgstr ""
-"Indique si cet utilisateur doit être traité comme actif. Désélectionnez ceci"
-" au lieu de supprimer des comptes."
+"Indique si cet utilisateur doit être traité comme actif. Désélectionnez ceci "
+"au lieu de supprimer des comptes."
 
 #: accounts/models.py:117
 msgid "groups"
@@ -166,7 +168,8 @@ msgstr "Utilisateur déconnecté !"
 #: accounts/views.py:96
 msgid "Account registered! Please check your email to activate your account."
 msgstr ""
-"Compte enregistré ! Veuillez vérifier votre adresse courriel pour activer votre compte."
+"Compte enregistré ! Veuillez vérifier votre adresse courriel pour activer "
+"votre compte."
 
 #: accounts/views.py:123
 msgid "Account activated!"
@@ -178,7 +181,9 @@ msgstr "Le lien d'activation est invalide !"
 
 #: accounts/views.py:154
 msgid "Please check your email to reset your password."
-msgstr "Veuillez vérifier votre adresse courriel pour réinitialiser votre mot de passe."
+msgstr ""
+"Veuillez vérifier votre adresse courriel pour réinitialiser votre mot de "
+"passe."
 
 #: accounts/views.py:180
 msgid "Set your new password."
@@ -202,27 +207,27 @@ msgstr "Adresse courriel mise à jour avec succès!"
 
 #: pong/urls.py:33
 msgid "^login/?$"
-msgstr "^login/?$"
+msgstr ""
 
 #: pong/urls.py:34
 msgid "^register/?$"
-msgstr "^registre/?$"
+msgstr ""
 
 #: pong/urls.py:36
 msgid "^home/?$"
-msgstr "^domicile/?$"
+msgstr ""
 
 #: pong/urls.py:37
 msgid "^profile/?$"
-msgstr "^profil/?$"
+msgstr ""
 
 #: pong/urls.py:38
 msgid "^social/?$"
-msgstr "^social/?$"
+msgstr ""
 
 #: pong/urls.py:39
 msgid "^settings/?$"
-msgstr "^fixations/?$"
+msgstr ""
 
 #: pong/views.py:21
 msgid "Transcendence"
@@ -232,24 +237,24 @@ msgstr "Transcendance"
 msgid "Login"
 msgstr "Connexion"
 
-#: pong/views.py:33 templates/accounts/register.html:37
+#: pong/views.py:34 templates/accounts/register.html:37
 #: templates/accounts/register.html:43
 msgid "Register"
 msgstr "S'enregistrer"
 
-#: pong/views.py:40
+#: pong/views.py:42
 msgid "Home"
 msgstr "Accueil"
 
-#: pong/views.py:47 templates/profile.html:7
+#: pong/views.py:50 templates/profile.html:7
 msgid "Profile"
 msgstr "Profil"
 
-#: pong/views.py:54 templates/social.html:8
+#: pong/views.py:58 templates/social.html:8
 msgid "Social"
-msgstr "Social"
+msgstr "Clavardage"
 
-#: pong/views.py:61 templates/settings.html:8
+#: pong/views.py:66 templates/settings.html:8
 msgid "Settings"
 msgstr "Paramètres"
 
@@ -359,7 +364,7 @@ msgid "Find a player"
 msgstr "Trouver un joueur"
 
 #: templates/home.html:26 templates/profile.html:21 templates/profile.html:57
-#: templates/profile.html:75
+#: templates/profile.html:75 templates/settings.html:28
 msgid "#PlayerName"
 msgstr "Nom du joueur"
 
@@ -369,7 +374,7 @@ msgstr "Statistiques"
 
 #: templates/home.html:28
 msgid "Games played:"
-msgstr "Jeux joués :"
+msgstr "Parties jouées :"
 
 #: templates/home.html:33
 msgid "Wins"
@@ -417,7 +422,11 @@ msgstr "#Classique/Rétro"
 
 #: templates/home.html:84
 msgid "Current Players"
-msgstr "Joueurs actuels"
+msgstr "Parties en cours"
+
+#: templates/home.html:87
+msgid "Join"
+msgstr "Rejoindre"
 
 #: templates/home.html:97
 msgid "NO GAMES TO DISPLAY"
@@ -425,7 +434,7 @@ msgstr "AUCUNE PARTIE A AFFICHER"
 
 #: templates/profile.html:51
 msgid "Recent Games"
-msgstr "Jeux récents"
+msgstr "Dernières parties"
 
 #: templates/profile.html:56 templates/profile.html:74
 msgid "Versus"
@@ -433,11 +442,11 @@ msgstr "Adversaire"
 
 #: templates/profile.html:60 templates/profile.html:78
 msgid "Score"
-msgstr "Score"
+msgstr "Résultats"
 
 #: templates/profile.html:64 templates/profile.html:82
 msgid "Game Duration"
-msgstr "Durée du jeu"
+msgstr "Durée de la partie"
 
 #: templates/profile.html:68 templates/profile.html:86
 msgid "Date"
@@ -449,19 +458,19 @@ msgstr "Statistiques du joueur"
 
 #: templates/profile.html:105
 msgid "Total Games"
-msgstr "Total des parties"
+msgstr "Nombre de parties"
 
 #: templates/profile.html:108 templates/profile.html:116
 msgid "#Won Tournaments"
-msgstr "#Tournois gagnés"
+msgstr "#Tournois remportés"
 
 #: templates/profile.html:121
 msgid "Won Games"
-msgstr "Parties Gagnées"
+msgstr "Parties remportées"
 
 #: templates/profile.html:121
 msgid "#WonGames"
-msgstr "#PartiesGagnées"
+msgstr "#Partiesremportées"
 
 #: templates/profile.html:124
 msgid "Lost Games"
@@ -475,7 +484,7 @@ msgstr "#PartiesPerdues"
 #, fuzzy
 #| msgid "My Profile"
 msgid "Profile Card"
-msgstr "Profil"
+msgstr "Mon profil"
 
 #: templates/settings.html:53
 msgid "Account"
@@ -491,15 +500,15 @@ msgstr "Compte créé sur"
 
 #: templates/settings.html:64
 msgid "#Date of Creation"
-msgstr "#Date de création"
+msgstr "#DateDeCréation"
 
 #: templates/settings.html:67
 msgid "Currentmail****@*****.com"
-msgstr "Courrielactuel****@****.com"
+msgstr "Courriel****@****.com"
 
 #: templates/settings.html:74
 msgid "Modify Email"
-msgstr "Modifier le courriel"
+msgstr "Modifier l'adresse courriel"
 
 #: templates/settings.html:74
 msgid "Modify Password"
@@ -516,6 +525,10 @@ msgstr "Supprimer mon compte"
 #: templates/social.html:24
 msgid "Friends"
 msgstr "Amis"
+
+#: templates/social.html:37
+msgid "Online"
+msgstr "En ligne"
 
 #: templates/social.html:38
 msgid "#Friendfrrrrrrrrrrrrrrrrrrrr"

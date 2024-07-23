@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-17 15:28+0000\n"
+"POT-Creation-Date: 2024-07-23 12:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -51,8 +51,7 @@ msgid "The username must be 150 characters or fewer."
 msgstr "Il nome utente deve essere di 150 caratteri o meno."
 
 #: accounts/models.py:65
-msgid ""
-"This value may contain only letters, numbers, and @/./+/-/_ characters."
+msgid "This value may contain only letters, numbers, and @/./+/-/_ characters."
 msgstr ""
 "Questo valore può contenere solo lettere, numeri e caratteri @/./+/-/_."
 
@@ -203,27 +202,27 @@ msgstr "Email aggiornata con successo!"
 
 #: pong/urls.py:33
 msgid "^login/?$"
-msgstr "^login/?$"
+msgstr ""
 
 #: pong/urls.py:34
 msgid "^register/?$"
-msgstr "^register/?$"
+msgstr ""
 
 #: pong/urls.py:36
 msgid "^home/?$"
-msgstr "^home/?$"
+msgstr ""
 
 #: pong/urls.py:37
 msgid "^profile/?$"
-msgstr "^profile/?$"
+msgstr ""
 
 #: pong/urls.py:38
 msgid "^social/?$"
-msgstr "^social/$"
+msgstr ""
 
 #: pong/urls.py:39
 msgid "^settings/?$"
-msgstr "^settings/?$"
+msgstr ""
 
 #: pong/views.py:21
 msgid "Transcendence"
@@ -233,26 +232,26 @@ msgstr "Trascendenza"
 msgid "Login"
 msgstr "Accedi"
 
-#: pong/views.py:33 templates/accounts/register.html:37
+#: pong/views.py:34 templates/accounts/register.html:37
 #: templates/accounts/register.html:43
 msgid "Register"
 msgstr "Registrazione"
 
-#: pong/views.py:40
+#: pong/views.py:42
 msgid "Home"
 msgstr "Home"
 
-#: pong/views.py:47 templates/profile.html:7
+#: pong/views.py:50 templates/profile.html:7
 msgid "Profile"
 msgstr "Profilo"
 
-#: pong/views.py:54 templates/social.html:8
+#: pong/views.py:58 templates/social.html:8
 msgid "Social"
 msgstr "Sociale"
 
-#: pong/views.py:61 templates/settings.html:8
+#: pong/views.py:66 templates/settings.html:8
 msgid "Settings"
-msgstr "Impostazioni impostazioni"
+msgstr "Impostazioni"
 
 #: templates/accounts/email_activate.html:5
 msgid "Activate Your Account"
@@ -268,8 +267,8 @@ msgid ""
 "Thank you for registering at Transcendence. Please click the link below to "
 "activate your account:"
 msgstr ""
-"Grazie per la registrazione a Transcendence. Clicca sul link sottostante per"
-" attivare il tuo account:"
+"Grazie per la registrazione a Transcendence. Clicca sul link sottostante per "
+"attivare il tuo account:"
 
 #: templates/accounts/email_activate.html:10
 msgid "Activate your account"
@@ -353,10 +352,14 @@ msgstr "Sei già registrato?"
 
 #: templates/accounts/register.html:44
 msgid "Sign in here"
-msgstr "Firma qui"
+msgstr "Accedi qui"
+
+#: templates/home.html:14
+msgid "Find a player"
+msgstr "Trova un giocatore"
 
 #: templates/home.html:26 templates/profile.html:21 templates/profile.html:57
-#: templates/profile.html:75
+#: templates/profile.html:75 templates/settings.html:28
 msgid "#PlayerName"
 msgstr "# PlayerName #"
 
@@ -379,6 +382,12 @@ msgstr "Perdita"
 #: templates/home.html:37
 msgid "Create GameRoom"
 msgstr "Creare GameRoom"
+
+#: templates/home.html:53
+#, fuzzy
+#| msgid "Won Games"
+msgid "Find a Game"
+msgstr "Trova un gioco"
 
 #: templates/home.html:67
 msgid "Game Rooms"
@@ -412,9 +421,13 @@ msgstr "#Classic/Retro"
 msgid "Current Players"
 msgstr "Giocatori attuali"
 
+#: templates/home.html:87
+msgid "Join"
+msgstr "Join"
+
 #: templates/home.html:97
 msgid "NO GAMES TO DISPLAY"
-msgstr "NO GAMES TO DISPLAY"
+msgstr "Nessun gioco da visualizzare"
 
 #: templates/profile.html:51
 msgid "Recent Games"
@@ -426,7 +439,7 @@ msgstr "Versus"
 
 #: templates/profile.html:60 templates/profile.html:78
 msgid "Score"
-msgstr "Punteggio"
+msgstr "Avversario"
 
 #: templates/profile.html:64 templates/profile.html:82
 msgid "Game Duration"
@@ -442,7 +455,7 @@ msgstr "Statistiche del giocatore"
 
 #: templates/profile.html:105
 msgid "Total Games"
-msgstr "Totale giochi"
+msgstr "Numero de giochi"
 
 #: templates/profile.html:108 templates/profile.html:116
 msgid "#Won Tournaments"
@@ -450,7 +463,7 @@ msgstr "#Won Tournaments"
 
 #: templates/profile.html:121
 msgid "Won Games"
-msgstr "Giochi di Won"
+msgstr "Giochi vinti"
 
 #: templates/profile.html:121
 msgid "#WonGames"
@@ -465,8 +478,6 @@ msgid "#LostGames"
 msgstr "#LostGames #"
 
 #: templates/settings.html:23
-#, fuzzy
-#| msgid "My Profile"
 msgid "Profile Card"
 msgstr "Scheda di profilo"
 
@@ -488,9 +499,7 @@ msgstr "#Date of Creation"
 
 #: templates/settings.html:67
 msgid "Currentmail****@*****.com"
-msgstr ""
-"Posta "
-"corrente**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************"
+msgstr "Currentmail****@*****.com"
 
 #: templates/settings.html:74
 msgid "Modify Email"
@@ -512,6 +521,14 @@ msgstr "Cancella il mio account"
 msgid "Friends"
 msgstr "Amici"
 
+#: templates/social.html:37
+msgid "Online"
+msgstr "Online"
+
 #: templates/social.html:38
 msgid "#Friendfrrrrrrrrrrrrrrrrrrrr"
-msgstr "Traduzione:"
+msgstr ""
+
+#: templates/social.html:84
+msgid "  Send a message"
+msgstr "  Mandare un messagio"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-17 15:28+0000\n"
+"POT-Creation-Date: 2024-07-23 12:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -51,8 +51,7 @@ msgid "The username must be 150 characters or fewer."
 msgstr "نام کاربری باید 150 کاراکتر یا کمتر باشد."
 
 #: accounts/models.py:65
-msgid ""
-"This value may contain only letters, numbers, and @/./+/-/_ characters."
+msgid "This value may contain only letters, numbers, and @/./+/-/_ characters."
 msgstr ""
 "این ارزش ممکن است فقط شامل حروف، اعداد و @ / + / / / / / / / / / / / / / / "
 "شخصیت."
@@ -118,8 +117,8 @@ msgid ""
 "Designates whether this user should be treated as active. Unselect this "
 "instead of deleting accounts."
 msgstr ""
-"مشخص می کند که آیا این کاربر باید به عنوان فعال رفتار شود. این را به جای حذف"
-" حساب ها انتخاب کنید."
+"مشخص می کند که آیا این کاربر باید به عنوان فعال رفتار شود. این را به جای حذف "
+"حساب ها انتخاب کنید."
 
 #: accounts/models.py:117
 msgid "groups"
@@ -203,27 +202,27 @@ msgstr "ایمیل به روز شده به روز شد!"
 
 #: pong/urls.py:33
 msgid "^login/?$"
-msgstr "^login/$$"
+msgstr ""
 
 #: pong/urls.py:34
 msgid "^register/?$"
-msgstr "^register/$$"
+msgstr ""
 
 #: pong/urls.py:36
 msgid "^home/?$"
-msgstr "↑ Home/?$"
+msgstr ""
 
 #: pong/urls.py:37
 msgid "^profile/?$"
-msgstr "^profile/$$"
+msgstr ""
 
 #: pong/urls.py:38
 msgid "^social/?$"
-msgstr "↑ Social/?$"
+msgstr ""
 
 #: pong/urls.py:39
 msgid "^settings/?$"
-msgstr "^sets/$$"
+msgstr ""
 
 #: pong/views.py:21
 msgid "Transcendence"
@@ -233,24 +232,24 @@ msgstr "بازگشت"
 msgid "Login"
 msgstr "ورود"
 
-#: pong/views.py:33 templates/accounts/register.html:37
+#: pong/views.py:34 templates/accounts/register.html:37
 #: templates/accounts/register.html:43
 msgid "Register"
 msgstr "ثبت نام"
 
-#: pong/views.py:40
+#: pong/views.py:42
 msgid "Home"
 msgstr "خانه "
 
-#: pong/views.py:47 templates/profile.html:7
+#: pong/views.py:50 templates/profile.html:7
 msgid "Profile"
 msgstr "پروفایل پروفایل پروفایل"
 
-#: pong/views.py:54 templates/social.html:8
+#: pong/views.py:58 templates/social.html:8
 msgid "Social"
 msgstr "اجتماعی اجتماعی اجتماعی"
 
-#: pong/views.py:61 templates/settings.html:8
+#: pong/views.py:66 templates/settings.html:8
 msgid "Settings"
 msgstr "تنظیمات"
 
@@ -355,8 +354,12 @@ msgstr "ثبت شده است؟"
 msgid "Sign in here"
 msgstr "ثبت نام در اینجا"
 
+#: templates/home.html:14
+msgid "Find a player"
+msgstr ""
+
 #: templates/home.html:26 templates/profile.html:21 templates/profile.html:57
-#: templates/profile.html:75
+#: templates/profile.html:75 templates/settings.html:28
 msgid "#PlayerName"
 msgstr "#PlayerName"
 
@@ -379,6 +382,12 @@ msgstr "از دست دادن"
 #: templates/home.html:37
 msgid "Create GameRoom"
 msgstr "ساخت بازی GameRoom"
+
+#: templates/home.html:53
+#, fuzzy
+#| msgid "Won Games"
+msgid "Find a Game"
+msgstr "بازی های برنده"
 
 #: templates/home.html:67
 msgid "Game Rooms"
@@ -411,6 +420,10 @@ msgstr "Classic/Retro"
 #: templates/home.html:84
 msgid "Current Players"
 msgstr "بازیگران فعلی"
+
+#: templates/home.html:87
+msgid "Join"
+msgstr ""
 
 #: templates/home.html:97
 msgid "NO GAMES TO DISPLAY"
@@ -488,7 +501,7 @@ msgstr "#Date of Creation"
 
 #: templates/settings.html:67
 msgid "Currentmail****@*****.com"
-msgstr "Nextmail****************************************************"
+msgstr "Currentmail****@*****.com"
 
 #: templates/settings.html:74
 msgid "Modify Email"
@@ -510,6 +523,14 @@ msgstr "حذف حساب من"
 msgid "Friends"
 msgstr "دوستان"
 
+#: templates/social.html:37
+msgid "Online"
+msgstr ""
+
 #: templates/social.html:38
 msgid "#Friendfrrrrrrrrrrrrrrrrrrrr"
 msgstr "دانلود بازی Friendfrrrrrrrrrr"
+
+#: templates/social.html:84
+msgid "  Send a message"
+msgstr ""
