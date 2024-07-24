@@ -190,19 +190,35 @@ document.addEventListener("DOMContentLoaded", () => {
                 .catch(error => console.error('Error adding friend:', error));
             });
         }
+        
         const createGameForm = document.getElementById('createGameForm');
         if (createGameForm) {
             createGameForm.addEventListener('submit', (e) => {
                 e.preventDefault();
                 const formData = new FormData(e.target);
                 console.log(...formData);
+                fetch(e.target.action, {
+                    method: e.target.method,
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                    },
+                    body: formData,
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    if (data.redirect) {
+                        navigateTo(data.redirect);
+                    }
+                })
+                .catch(error => console.error('Error creating game:', error));
             });
         }
+        
         const friendChatBtn = document.getElementById('friend-chat-btn');
         const friendChatInput = document.getElementById('chatInput');
         const messageList = document.getElementById('message-list');
         if (friendChatBtn && friendChatInput && messageList) {
-            console.log('CHAT SYSTEM');
             const currentUrl = window.location.pathname;
             const uuidRegex = /\/friends\/([0-9a-fA-F-]{36})\/?/;
             const match = currentUrl.match(uuidRegex);

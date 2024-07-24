@@ -1,3 +1,4 @@
+from django.core.validators import MaxValueValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from pong.models import BaseModel, BaseInteraction
@@ -8,21 +9,73 @@ from .managers import (
     RoundManager,
     ScoreManager,
     GameMessageManager,
+    BaseGameManager,
 )
 
 
-class Game(BaseModel):
+class BaseGame(BaseModel):
+    win_score = models.PositiveSmallIntegerField(
+        verbose_name=_('score to win'),
+        default=5,
+    )
+    ball_size = models.PositiveSmallIntegerField(
+        verbose_name=_('ball size'),
+        default=1,
+        validators=[MaxValueValidator(2)],
+    )
+    ball_speed = models.PositiveSmallIntegerField(
+        verbose_name=_('ball speed'),
+        default=1,
+        validators=[MaxValueValidator(2)],
+    )
+    paddle_length = models.PositiveSmallIntegerField(
+        verbose_name=_('paddle length'),
+        default=1,
+        validators=[MaxValueValidator(2)],
+    )
+    ai_difficulty = models.PositiveSmallIntegerField(
+        verbose_name=_('ai difficulty'),
+        default=1,
+        validators=[MaxValueValidator(2)],
+    )
+    map_choice = models.PositiveSmallIntegerField(
+        verbose_name=_('map choice'),
+        default=0,
+        validators=[MaxValueValidator(2)],
+    )
+    power_ups = models.CharField(
+        verbose_name=_('power ups'),
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+    game_events = models.CharField(
+        verbose_name=_('game events'),
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+    
+    objects = BaseGameManager()
+    
+    class Meta:
+        verbose_name = _('base game')
+        verbose_name_plural = _('base games')
+    
+    def __str__(self):
+        return f'Base Game'
+
+
+class Game(BaseGame):
     name = models.CharField(
         verbose_name=_('name'),
         max_length=255,
+        null=True,
+        blank=True,
     )
     player_limit = models.PositiveSmallIntegerField(
         verbose_name=_('player limit'),
         default=1,
-    )
-    win_score = models.PositiveSmallIntegerField(
-        verbose_name=_('score to win'),
-        default=5,
     )
     current_order = models.PositiveSmallIntegerField(
         verbose_name=_('current order'),
@@ -93,6 +146,10 @@ class Player(models.Model):
         max_length=10,
         choices=StatusChoices.choices,
         default=StatusChoices.WAITING,
+    )
+    is_host = models.BooleanField(
+        verbose_name=_('is host'),
+        default=False,
     )
     
     objects = PlayerManager()

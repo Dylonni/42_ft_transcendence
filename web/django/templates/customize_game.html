@@ -33,7 +33,11 @@
     </header>
 </div>
 
+{% if profile %}
 <form id="createGameForm" method="post" action="/api/games/">
+{% else %}
+<form id="createGameForm" method="post" action="/api/offline/">
+{% endif %}
 <div class="container">
     <div class="row">
         <div class="col-md-12 col-lg-6 col-xl-6 col-xxl-6" style="padding-left: 40px;padding-right: 40px;">
@@ -192,19 +196,19 @@
                             <div class="form-check d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center"
                                 style="padding-left: 0px;margin-bottom: 0px;margin-left: 0px;margin-right: 0px;width: 33%;">
                                 <input class="form-check-input" type="radio" id="formCheckBsSlow" name="ballSpeed"
-                                    style="margin-left: 0px;margin-top: 0px;">
+                                    style="margin-left: 0px;margin-top: 0px;" value="0">
                                 <label class="form-check-label" for="formCheckBsSlow"></label>
                             </div>
                             <div class="form-check d-flex justify-content-center align-items-center"
                                 style="padding-left: 0px;padding-bottom: 0px;margin-bottom: 0px;width: 33%;margin-left: 0px;margin-right: 0px;">
                                 <input class="form-check-input" type="radio" id="formCheckBsNormal" name="ballSpeed"
-                                    style="margin-left: 0px;margin-top: 0px;" checked>
+                                    style="margin-left: 0px;margin-top: 0px;" value="1" checked>
                                 <label class="form-check-label" for="formCheckBsNormal"></label>
                             </div>
                             <div class="form-check d-flex justify-content-center align-items-center"
                                 style="margin-bottom: 0px;padding-left: 0px;width: 33%;">
                                 <input class="form-check-input" type="radio" id="formCheckBsFast" name="ballSpeed"
-                                    style="margin-left: 0px;margin-top: 0px;">
+                                    style="margin-left: 0px;margin-top: 0px;" value="2">
                                 <label class="form-check-label" for="formCheckBsFast"></label>
                             </div>
                         </div>
@@ -227,7 +231,7 @@
                             <div class="form-check d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center"
                                 style="padding-left: 0px;margin-left: 0px;margin-bottom: 0px;margin-right: 0px;height: 74px;width: 33%;">
                                 <input class="form-check-input pdsize" type="radio" id="formCheckPdsizeSmall"
-                                    name="pdsize">
+                                    name="pdsize" value="0">
                                 <label class="form-check-label" for="formCheckPdsizeSmall">
                                     <i class="far fa-window-minimize"
                                         style="font-size: 32px;color: var(--bs-code-color);padding-top: 18px;margin-top: 17px;"></i>
@@ -236,7 +240,7 @@
                             <div class="form-check d-flex justify-content-center align-items-center"
                                 style="padding-left: 0px;padding-bottom: 0px;margin-left: 15px;margin-bottom: 0px;margin-right: 15px;height: 74px;width: 33%;">
                                 <input class="form-check-input pdsize" type="radio" id="formCheckPdsizeMedium"
-                                    name="pdsize" checked>
+                                    name="pdsize" value="1" checked>
                                 <label class="form-check-label" for="formCheckPdsizeMedium">
                                     <i class="far fa-window-minimize"
                                         style="font-size: 57px;color: var(--bs-code-color);width: 100%;margin-top: 17px;"></i>
@@ -245,7 +249,7 @@
                             <div class="form-check d-flex justify-content-center align-items-center"
                                 style="margin-bottom: 0px;padding-left: 0px;width: 33%;height: 74px;">
                                 <input class="form-check-input pdsize" type="radio" id="formCheckPdsizeLarge"
-                                    name="pdsize">
+                                    name="pdsize" value="2">
                                 <label class="form-check-label" for="formCheckPdsizeLarge" style="font-size: 26px;">
                                     <i class="far fa-window-minimize"
                                         style="font-size: 77px;color: var(--bs-code-color);margin-bottom: 0px;padding-bottom: 0px;"></i>
@@ -286,7 +290,7 @@
                             <div class="form-check d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center"
                                 style="padding-left: 0px;margin-left: 0px;margin-bottom: 0px;margin-right: 0px;height: 74px;width: 33%;">
                                 <input class="form-check-input aidiff" type="radio" id="formCheckAiDiffEasy"
-                                    name="aidiff"><label class="form-check-label" for="formCheckAiDiffEasy"><svg
+                                    name="aidiff" value="0"><label class="form-check-label" for="formCheckAiDiffEasy"><svg
                                         xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"
                                         stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
                                         stroke-linejoin="round" class="icon icon-tabler icon-tabler-robot-face"
@@ -304,7 +308,7 @@
                             <div class="form-check d-flex justify-content-center align-items-center"
                                 style="padding-left: 0px;padding-bottom: 0px;margin-bottom: 0px;height: 74px;width: 33%;margin-right: 0px;margin-left: 0px;">
                                 <input class="form-check-input aidiff" type="radio" id="formCheckAiDiffNormal"
-                                    name="aidiff" checked><label class="form-check-label" for="formCheckAiDiffNormal"><svg
+                                    name="aidiff" value="1" checked><label class="form-check-label" for="formCheckAiDiffNormal"><svg
                                         xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"
                                         stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
                                         stroke-linejoin="round" class="icon icon-tabler icon-tabler-robot-face"
@@ -322,7 +326,7 @@
                             <div class="form-check d-flex justify-content-center align-items-center"
                                 style="margin-bottom: 0px;padding-left: 0px;width: 33%;height: 74px;"><input
                                     class="form-check-input aidiff" type="radio" id="formCheckAiDiffHard"
-                                    name="aidiff"><label class="form-check-label" for="formCheckAiDiffHard"
+                                    name="aidiff" value="2"><label class="form-check-label" for="formCheckAiDiffHard"
                                     style="font-size: 26px;"><svg xmlns="http://www.w3.org/2000/svg" width="1em"
                                         height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
                                         fill="none" stroke-linecap="round" stroke-linejoin="round"
@@ -496,7 +500,11 @@
             style="margin-top: 0px;margin-bottom: 0px;padding-top: 15px;padding-bottom: 15px;">
             <div class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xl-center justify-content-xxl-center align-items-xxl-center"
                 style="width: 50%;">
+                {% if profile %}
                 <a href="/select/">
+                {% else %}
+                <a href="/">
+                {% endif %}
                 <button
                     class="btn btn-primary d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center"
                     type="button" style="background: rgb(181,140,10);border-style: none;width: 150.422px;"><svg

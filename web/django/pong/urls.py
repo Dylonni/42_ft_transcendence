@@ -34,6 +34,8 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('api/', include((apipatterns, 'api'), namespace='api')),
 
+    path('mode/', views.mode_select, name='mode_select'),
+    path('play/', views.play, name='play'),
     path('login/', views.login, name='login'),
     path('register/', views.register, name='register'),
 	path('forgot-password/', views.forgot_password, name='forgot_password'),

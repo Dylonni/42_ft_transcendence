@@ -4,10 +4,15 @@ from django.db import models
 from django.db.models import Q
 from django.utils import timezone
 
+
+class BaseGameManager(models.Manager):
+    pass
+
+
 class GameManager(models.Manager):
     def create_game(self, name='', player_limit=5, win_score=5):
         game = self.create(
-            name=self._generate_name(),
+            name=self.generate_name(),
             player_limit=player_limit,
             win_score=win_score,
         )
@@ -16,7 +21,7 @@ class GameManager(models.Manager):
     def search_by_name(self, name):
         return self.filter(name__icontains=name)
     
-    def _generate_name(self):
+    def generate_name(self):
         while True:
             number = random.randint(100000, 999999)
             name = f'Game_{number}'
@@ -62,6 +67,9 @@ class GameInviteManager(models.Manager):
 class PlayerManager(models.Manager):
     def join_game(self, profile, game):
         player = self.create(profile=profile, game=game)
+        if not self.filter(game=game).exclude(id=player.id).exists():
+            player.is_host = True
+            player.save()
         return player
     
     def leave_game(self, profile, game):
@@ -79,6 +87,10 @@ class PlayerManager(models.Manager):
     
     def get_players_by_game_id(self, game_id):
         return self.filter(game__id=game_id)
+    
+    def can_join_game(self, game):
+        players = self.get_players_by_game_id(game.id)
+        return players.count() == game.player_limit
     
     def can_start_game(self, game_id):
         players = self.get_players_by_game_id(game_id)

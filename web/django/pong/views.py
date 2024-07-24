@@ -11,6 +11,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from profiles.models import Profile
 from friends.models import Friendship, FriendMessage
+from games.models import Game, Player
 from .mixins import JWTCookieAuthenticationMixin, LangVerificationMixin, RedirectIfAuthenticatedMixin
 
 UserModel = get_user_model()
@@ -41,6 +42,18 @@ def get_friend_context(request, profile_id=None):
         context['friends'] = Profile.objects.filter(id__in=friends_ids)
         return context
     except Profile.DoesNotExist:
+        return context
+
+def get_game_context(context={}):
+    try:
+        games = Game.objects.all()
+        context['games'] = games
+        # TODO: refactor model to retrieve game host and player count
+        # for i, game in enumerate(games):
+        #     context['games'][i]['host'] = Player.objects.get(game=game, is_host=True).profile.alias
+        #     context['games'][i]['count'] = Player.objects.get(game=game).count()
+        return context
+    except Game.DoesNotExist:
         return context
 
 def render_with_sub_template(request, path, title, context={}):
@@ -75,6 +88,20 @@ class IndexView(PublicView):
 index = IndexView.as_view()
 
 
+class ModeSelectView(PublicView):
+    def get(self, request):
+        return render_with_sub_template(request, 'customize_game.html', _('Customize Game'))
+
+mode_select = ModeSelectView.as_view()
+
+
+class PlayView(PublicView):
+    def get(self, request):
+        return render_with_sub_template(request, 'play.html', _('Play'))
+
+play = PlayView.as_view()
+
+
 class LoginView(PublicView):
     def get(self, request):
         return render_response(request, 'accounts/login.html', _('Login'))
@@ -99,6 +126,7 @@ forgot_password = ForgotPasswordView.as_view()
 class HomeView(PrivateView):
     def get(self, request):
         context = get_profile_context(request)
+        context = get_game_context(context)
         return render_response(request, 'home.html', _('Home'), context)
 
 home = HomeView.as_view()

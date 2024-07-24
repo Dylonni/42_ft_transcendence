@@ -37,6 +37,10 @@ class Profile(BaseModel):
         choices=StatusChoices.choices,
         default=StatusChoices.DISCONNECTED,
     )
+    default_lang = models.CharField(
+        verbose_name=_('default language'),
+        max_length=40,
+    )
     
     objects = ProfileManager()
     
