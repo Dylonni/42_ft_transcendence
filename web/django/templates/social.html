@@ -1,10 +1,11 @@
+{% load i18n %}
 {% include "sidebar.html" %}
 {% block content %}
 <div class="container">
 	<div class="row d-xxl-flex justify-content-xxl-center align-items-xxl-center">
 		<div class="col-md-12 d-flex d-md-flex d-xl-flex justify-content-center align-items-center justify-content-md-center align-items-md-center justify-content-xl-center align-items-xl-center" style="padding-top: 1px;">
 			<div class="d-flex d-md-flex justify-content-center align-items-center justify-content-md-center align-items-md-center">
-				<h1 class="d-xl-flex justify-content-xl-center align-items-xxl-center" style="color: var(--bs-body-bg);border-radius: 10px;border-style: solid;margin-bottom: 50px;">Social&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-message-chatbot">
+				<h1 class="d-xl-flex justify-content-xl-center align-items-xxl-center" style="color: var(--bs-body-bg);border-radius: 10px;border-style: solid;margin-bottom: 50px;">{% translate "Social" %}&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-message-chatbot">
 						<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
 						<path d="M18 4a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-5l-5 3v-3h-2a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3h12z"></path>
 						<path d="M9.5 9h.01"></path>
@@ -20,7 +21,7 @@
 		<div class="col-sm-9 col-md-8 col-lg-6 col-xl-4 d-sm-flex" style="height: 100%;margin-top: 0px;">
 			<div class="d-flex d-xl-flex flex-column justify-content-xl-start" style="width: 100%;height: 100%;background: #343a40;border-radius: 15px;border-top-left-radius: 19px;border-top-right-radius: 19px;border-bottom-right-radius: 19px;border-bottom-left-radius: 19px;">
 				<div class="d-flex d-lg-flex d-xl-flex justify-content-center align-items-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center" style="width: 100%;height: 8%;border-radius: 0px;color: var(--bs-body-bg);background: #289726;border-top-left-radius: 19px;border-top-right-radius: 19px;margin-bottom: 0px;">
-					<h1 class="fs-3" style="margin-bottom: 2px;text-shadow: 2px 2px var(--bs-emphasis-color);">Friends</h1><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-users" style="font-size: 30px;margin-left: 10px;">
+					<h1 class="fs-3" style="margin-bottom: 2px;text-shadow: 2px 2px var(--bs-emphasis-color);">{% translate "Friends" %}</h1><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-users" style="font-size: 30px;margin-left: 10px;">
 						<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
 						<path d="M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"></path>
 						<path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
@@ -33,8 +34,8 @@
 						<div class="d-xl-flex justify-content-xl-start align-items-xl-center" style="border-radius: 0px;padding-top: 0px;margin-bottom: 0px;height: 60px;width: 20%;margin-top: 0px;position: sticky;"><img width="60" height="60" src="static/img/question_mark.png" style="border-radius: 35px;">
 							<div id="notification" style="width: 10px;height: 10px;background: #ff0000;border-radius: 8px;margin: 0px;padding-right: 0px;margin-bottom: 45px;margin-right: 0px;margin-left: 0px;"></div>
 						</div>
-						<div style="width: 40%;height: 60%;margin-bottom: 0px;"><span id="status" style="color: rgb(51,255,0);margin-top: 0px;margin-bottom: 0px;">Online</span>
-							<h1 class="fs-5 text-truncate" id="friend-id" style="color: var(--bs-body-bg);margin-bottom: 0px;margin-top: 0px;">#Friendfrrrrrrrrrrrrrrrrrrrr</h1>
+						<div style="width: 40%;height: 60%;margin-bottom: 0px;"><span id="status" style="color: rgb(51,255,0);margin-top: 0px;margin-bottom: 0px;">{% translate "Online" %}</span>
+							<h1 class="fs-5 text-truncate" id="friend-id" style="color: var(--bs-body-bg);margin-bottom: 0px;margin-top: 0px;">{% translate "#Friendfrrrrrrrrrrrrrrrrrrrr" %}</h1>
 						</div>
 						<div class="d-flex d-xl-flex justify-content-end align-items-center justify-content-xl-center align-items-xl-center justify-content-xxl-end" style="width: 40%;height: 70%;margin-left: 10px;"><button class="btn btn-primary" data-bs-toggle="tooltip" data-bss-tooltip="" type="submit" style="background: rgba(33,37,41,0);border-radius: 20px;border-color: rgb(195,117,0);" title="Block Player"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-user-cancel" style="margin-right: 0px;font-size: 30px;color: rgb(195,117,0);">
 									<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -80,7 +81,7 @@
 					</section>
 				</div>
 				<div class="d-flex flex-row align-items-center justify-content-xxl-start" style="height: 10%;width: 100%;border-radius: 19px;padding-bottom: 2px;margin-bottom: 0px;background: #111314;border-top-left-radius: 0px;border-top-right-radius: 0px;padding-left: 20px;padding-right: 20px;">
-					<div style="width: 90%;"><input class="d-xl-flex align-items-xl-center overflow-auto" type="text" id="chatInput" style="background: rgba(255,255,255,0);border-radius: 14px;color: var(--bs-body-bg);margin-top: 5px;height: 100%;width: 100%;border: 0px solid var(--bs-body-bg);margin-right: 0px;margin-left: 0px;" placeholder="  Send a message" autofocus=""></div>
+					<div style="width: 90%;"><input class="d-xl-flex align-items-xl-center overflow-auto" type="text" id="chatInput" style="background: rgba(255,255,255,0);border-radius: 14px;color: var(--bs-body-bg);margin-top: 5px;height: 100%;width: 100%;border: 0px solid var(--bs-body-bg);margin-right: 0px;margin-left: 0px;" placeholder="{% translate "  Send a message" %}" autofocus=""></div>
 					<div class="d-flex justify-content-center justify-content-xxl-end" style="width: 10%;margin-right: 0px;"><button class="btn btn-primary d-flex d-xl-flex justify-content-center align-items-center justify-content-xl-center align-items-xl-center" type="button" style="background: rgba(13,110,253,0);border-radius: 40px;border: 2px solid var(--bs-btn-disabled-color);width: 55px;height: 55px;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-send" style="font-size: 27px;">
 								<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
 								<path d="M10 14l11 -11"></path>
