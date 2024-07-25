@@ -12,10 +12,10 @@ services:
     env_file: .env
     depends_on:
       - vault
-      - django
-      - postgres-exporter
-      - prometheus
-      - grafana
+      # - django
+      # - postgres-exporter
+      # - prometheus
+      # - grafana
       # - elasticsearch
       # - logstash
       # - kibana
@@ -50,125 +50,162 @@ services:
       - django-token:/vault/secrets/django
 
 # WEB
-  django:
-    build: ./web/django
-    container_name: django
-    env_file: .env
-    depends_on:
-      postgres:
-        condition: service_healthy
-    healthcheck:
-      test: ["CMD", "curl", "-f", "localhost:8000"]
-      interval: 5s
-      timeout: 5s
-      retries: 4
-    networks:
-      - backend
-    volumes:
-      - ./web/django/accounts:/django/accounts
-      - ./web/django/pong:/django/pong
-      - elk-data:/logstash
-      - django-token:/django/secrets:ro
+  # django:
+  #   build: ./web/django
+  #   container_name: django
+  #   env_file: .env
+  #   depends_on:
+  #     postgres:
+  #       condition: service_healthy
+  #   healthcheck:
+  #     test: ["CMD", "curl", "-f", "localhost:8000"]
+  #     interval: 5s
+  #     timeout: 5s
+  #     retries: 4
+  #   networks:
+  #     - backend
+  #   volumes:
+  #     - ./web/django/accounts:/django/accounts
+  #     - ./web/django/pong:/django/pong
+  #     - elk-data:/logstash
+  #     - django-token:/django/secrets:ro
 
-  postgres:
-    build: ./web/postgres
-    container_name: postgres
-    env_file: .env
-    depends_on:
-      vault:
-        condition: service_healthy
-    healthcheck:
-      test: pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}
-      interval: 5s
-      timeout: 5s
-      retries: 4
-    networks:
-      - backend
-    volumes:
-      - pg-data:/var/lib/postgresql/data
+  # postgres:
+  #   build: ./web/postgres
+  #   container_name: postgres
+  #   env_file: .env
+  #   depends_on:
+  #     vault:
+  #       condition: service_healthy
+  #   healthcheck:
+  #     test: pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}
+  #     interval: 5s
+  #     timeout: 5s
+  #     retries: 4
+  #   networks:
+  #     - backend
+  #   volumes:
+  #     - pg-data:/var/lib/postgresql/data
 
 # MONITORING
-  postgres-exporter:
-    build: ./devops/mon/postgres-exporter
-    container_name: postgres-exporter
+  # postgres-exporter:
+  #   build: ./devops/mon/postgres-exporter
+  #   container_name: postgres-exporter
+  #   env_file: .env
+  #   networks:
+  #     - backend
+
+  # prometheus:
+  #   build: ./devops/mon/prometheus
+  #   container_name: prometheus
+  #   depends_on:
+  #     django:
+  #       condition: service_healthy
+  #   networks:
+  #     - backend
+
+  # grafana:
+  #   build: ./devops/mon/grafana
+  #   container_name: grafana
+  #   env_file: .env
+  #   depends_on:
+  #     - prometheus
+  #   networks:
+  #     - backend
+
+# ELK STACK
+  elk_certs:
+    build:
+      context: ./devops/elk/elk_certs
+      args:
+        ELK_STACK_VERSION: ${ELK_STACK_VERSION}
+        ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
+        KIBANA_SYSTEM_PASSWORD: ${KIBANA_SYSTEM_PASSWORD:-}
+    container_name: elk_certs
+    environment:
+      node.name: transcendence42
+      discovery.type: single-node
+      xpack.license.self_generated.type: trial
+      ES_JAVA_OPTS: -Xms512m -Xmx512m
+      ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
+      KIBANA_SYSTEM_PASSWORD: ${KIBANA_SYSTEM_PASSWORD:-}
     env_file: .env
     networks:
       - backend
+      - elk
+    volumes:
+      - shared_elk:/usr/share/elasticsearch/config/certs
+      - elk-data:/usr/share/elasticsearch/
+    # user: root
+    healthcheck:
+      test: ["CMD-SHELL", "[ -f config/certs/elasticsearch/elasticsearch.crt ]"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
-  prometheus:
-    build: ./devops/mon/prometheus
-    container_name: prometheus
+
+
+  elasticsearch:
+    build:
+      context: ./devops/elk/elasticsearch
+      args:
+        ELK_STACK_VERSION: ${ELK_STACK_VERSION}
+        ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
+    container_name: elasticsearch
+    environment:
+      node.name: transcendence42
+      discovery.type: single-node
+      xpack.license.self_generated.type: trial
+      ES_JAVA_OPTS: -Xms512m -Xmx512m
+      ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
+    env_file: .env
     depends_on:
-      django:
+      elk_certs:
         condition: service_healthy
     networks:
       - backend
+      - elk
+    volumes:
+      - shared_elk:/usr/share/elasticsearch/config/certs
+      - elk-data:/usr/share/elasticsearch/
 
-  grafana:
-    build: ./devops/mon/grafana
-    container_name: grafana
-    env_file: .env
+  logstash:
+    build:
+      context: ./devops/elk/logstash
+      args:
+        ELK_STACK_VERSION: ${ELK_STACK_VERSION}
+    container_name: logstash
+    environment:
+      LS_JAVA_OPTS: -Xms256m -Xmx256m
+      LOGSTASH_INTERNAL_PASSWORD: ${LOGSTASH_INTERNAL_PASSWORD:-}
     depends_on:
-      - prometheus
+      - elasticsearch
     networks:
       - backend
+      - elk
+    volumes:
+      - elk-data:/logstash
 
-# ELK STACK
-  # elasticsearch:
-  #   build:
-  #     context: ./devops/elk/elasticsearch
-  #     args:
-  #       ELK_STACK_VERSION: ${ELK_STACK_VERSION}
-  #       ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
-  #   container_name: elasticsearch
-  #   environment:
-  #     node.name: transcendence42
-  #     discovery.type: single-node
-  #     xpack.license.self_generated.type: trial
-  #     ES_JAVA_OPTS: -Xms512m -Xmx512m
-  #     ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
-  #   networks:
-  #     - backend
-  #     - elk
-  #   volumes:
-  #     - shared_elk:/usr/share/elasticsearch/config
-  #     - elk-data:/usr/share/elasticsearch/
-
-  # logstash:
-  #   build:
-  #     context: ./devops/elk/logstash
-  #     args:
-  #       ELK_STACK_VERSION: ${ELK_STACK_VERSION}
-  #   container_name: logstash
-  #   environment:
-  #     LS_JAVA_OPTS: -Xms256m -Xmx256m
-  #     LOGSTASH_INTERNAL_PASSWORD: ${LOGSTASH_INTERNAL_PASSWORD:-}
-  #   depends_on:
-  #     - elasticsearch
-  #   networks:
-  #     - backend
-  #     - elk
-  #   volumes:
-  #     - elk-data:/logstash
-
-  # kibana:
-  #   build:
-  #     context: ./devops/elk/kibana
-  #     args:
-  #       ELK_STACK_VERSION: ${ELK_STACK_VERSION}
-  #   container_name: kibana
-  #   environment:
-  #     ELASTICSEARCH_USERNAME: kibana
-  #     KIBANA_SYSTEM_PASSWORD: ${KIBANA_SYSTEM_PASSWORD:-}
-  #   depends_on:
-  #     - elasticsearch
-  #   networks:
-  #     - backend
-  #     - elk
-  #   restart: always
-  #   volumes:
-  #     - shared_elk:/usr/share/kibana/config
-  #     - elk-data:/certs
+  kibana:
+    build:
+      context: ./devops/elk/kibana
+      args:
+        ELK_STACK_VERSION: ${ELK_STACK_VERSION}
+    container_name: kibana
+    environment:
+      ELASTICSEARCH_USERNAME: kibana
+      KIBANA_SYSTEM_PASSWORD: ${KIBANA_SYSTEM_PASSWORD:-}
+      ELASTICSEARCH_SSL_CERTIFICATEAUTHORITIES: config/certs/ca/ca.crt
+    depends_on:
+      - elasticsearch
+    env_file: .env
+    networks:
+      - backend
+      - elk
+    restart: always
+    volumes:
+      - shared_elk:/usr/share/kibana/config/certs
+      - elk-data:/certs
 
 volumes:
   pg-data:

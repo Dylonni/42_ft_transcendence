@@ -145,7 +145,7 @@ LANGUAGE_CODE = 'en-us'
 LANGUAGES = [
 	('en', 'English'),
     ('fr', 'French'),
-	('jp', 'japanese'),
+	# ('jp', 'japanese'),
 ]
 
 TIME_ZONE = 'UTC'

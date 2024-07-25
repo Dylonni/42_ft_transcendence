@@ -39,8 +39,8 @@ xpack.security.enrollment.enabled: true
 xpack.security.enabled: true
 
 server.ssl.enabled: true
-server.ssl.certificate: /usr/share/kibana/config/kibana-server.crt  # check exact path
-server.ssl.key: /usr/share/kibana/config/kibana-server.key # check exact path
+server.ssl.certificate: /usr/share/kibana/config/certs/kibana-server.crt  # check exact path
+server.ssl.key: /usr/share/kibana/config/certs/kibana-server.key # check exact path
 
 
 
