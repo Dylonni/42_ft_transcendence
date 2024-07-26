@@ -3,11 +3,11 @@ ARG ELK_STACK_VERSION
 FROM docker.elastic.co/elasticsearch/elasticsearch:${ELK_STACK_VERSION}
 
 
-RUN mkdir -p /usr/share/elasticsearch/config/certs 
+# RUN mkdir -p /usr/share/elasticsearch/config/certs 
 
 USER root
-# RUN mkdir -p /usr/share/elasticsearch/config/certs && \
-# 	chown -R elasticsearch:elasticsearch /usr/share/elasticsearch/config/certs
+RUN mkdir -p /usr/share/elasticsearch/config/certs && \
+	chown -R elasticsearch:elasticsearch /usr/share/elasticsearch/config/certs
 
 
 COPY ./config/cert.yml /usr/share/elasticsearch/config/certs/cert.yml

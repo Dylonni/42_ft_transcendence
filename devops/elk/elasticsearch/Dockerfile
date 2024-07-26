@@ -5,7 +5,7 @@ ARG ELK_STACK_VERSION
 FROM docker.elastic.co/elasticsearch/elasticsearch:8.14.1
 
 
-USER root
+# USER root
 
 # RUN apt-get update && \
 #     apt-get install -y expect && \
@@ -23,6 +23,15 @@ USER root
 
 
 
+USER root
+# RUN mkdir -p /usr/share/elasticsearch/config/certs && \
+# 	chown -R elasticsearch:elasticsearch /usr/share/elasticsearch/config/certs
+RUN mkdir -p /usr/share/elasticsearch/config/certs 
+
+COPY ./config/cert.yml /usr/share/elasticsearch/config/certs/cert.yml
+
+COPY ./config/init.sh /usr/share/elasticsearch/init.sh
+RUN chmod +x /usr/share/elasticsearch/init.sh
 
 # RUN cat /etc/ssl/certs/trans_cert.pem /etc/ssl/certs/e5-cross.pem /etc/ssl/certs/e6-cross.pem > /etc/ssl/certs/fullchain.pem
 
@@ -34,9 +43,9 @@ USER root
 # RUN chown elasticsearch:elasticsearch /usr/share/elasticsearch/config/elasticsearch.p12
 # RUN chmod 600 /usr/share/elasticsearch/config/elasticsearch.p12
 
-RUN chown elasticsearch:elasticsearch /usr/share/elasticsearch/bin/elasticsearch-keystore
+# RUN chown elasticsearch:elasticsearch /usr/share/elasticsearch/bin/elasticsearch-keystore
 
-USER elasticsearch
+# USER elasticsearch
 
 # RUN export ; exit 1
 
@@ -55,3 +64,4 @@ RUN echo "Current user:" && whoami
 # ENTRYPOINT ["/usr/share/elasticsearch/startup.sh"]
 # CMD ["/bin/bash", "-c", "/usr/share/elasticsearch/startup.sh"]
 
+ENTRYPOINT [ "/usr/share/elasticsearch/init.sh" ]

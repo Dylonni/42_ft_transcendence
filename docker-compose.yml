@@ -48,6 +48,7 @@ services:
       - backend
     volumes:
       - django-token:/vault/secrets/django
+      # - vault-certs:/vault/certs
 
 # WEB
   # django:
@@ -114,98 +115,121 @@ services:
   #     - backend
 
 # ELK STACK
-  elk_certs:
-    build:
-      context: ./devops/elk/elk_certs
-      args:
-        ELK_STACK_VERSION: ${ELK_STACK_VERSION}
-        ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
-        KIBANA_SYSTEM_PASSWORD: ${KIBANA_SYSTEM_PASSWORD:-}
-    container_name: elk_certs
-    environment:
-      node.name: transcendence42
-      discovery.type: single-node
-      xpack.license.self_generated.type: trial
-      ES_JAVA_OPTS: -Xms512m -Xmx512m
-      ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
-      KIBANA_SYSTEM_PASSWORD: ${KIBANA_SYSTEM_PASSWORD:-}
-    env_file: .env
-    networks:
-      - backend
-      - elk
-    volumes:
-      - shared_elk:/usr/share/elasticsearch/config/certs
-      - elk-data:/usr/share/elasticsearch/
-    # user: root
-    healthcheck:
-      test: ["CMD-SHELL", "[ -f config/certs/elasticsearch/elasticsearch.crt ]"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+  # elk_certs:
+  #   build:
+  #     context: ./devops/elk/elk_certs
+  #     args:
+  #       ELK_STACK_VERSION: ${ELK_STACK_VERSION}
+  #       ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
+  #       KIBANA_SYSTEM_PASSWORD: ${KIBANA_SYSTEM_PASSWORD:-}
+  #   container_name: elk_certs
+  #   environment:
+  #     node.name: transcendence42
+  #     discovery.type: single-node
+  #     xpack.license.self_generated.type: trial
+  #     ES_JAVA_OPTS: -Xms512m -Xmx512m
+  #     ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
+  #     KIBANA_SYSTEM_PASSWORD: ${KIBANA_SYSTEM_PASSWORD:-}
+  #   env_file: .env
+  #   networks:
+  #     - backend
+  #     - elk
+  #   volumes:
+  #     - shared_elk:/usr/share/elasticsearch/config/certs
+  #     - elk-data:/usr/share/elasticsearch/
+  #   # user: root
+  #   healthcheck:
+  #     test: ["CMD-SHELL", "[ -f config/certs/elasticsearch/elasticsearch.crt ]"]
+  #     interval: 10s
+  #     timeout: 5s
+  #     retries: 5
+
+### test with elast and elk_certs
+  # elasticsearch:
+  #   build:
+  #     context: ./devops/elk/elasticsearch
+  #     args:
+  #       ELK_STACK_VERSION: ${ELK_STACK_VERSION}
+  #       ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
+  #       KIBANA_SYSTEM_PASSWORD: ${KIBANA_SYSTEM_PASSWORD:-}
+  #   container_name: elasticsearch
+  #   environment:
+  #     node.name: transcendence42
+  #     discovery.type: single-node
+  #     xpack.license.self_generated.type: trial
+  #     ES_JAVA_OPTS: -Xms512m -Xmx512m
+  #     ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
+  #     KIBANA_SYSTEM_PASSWORD: ${KIBANA_SYSTEM_PASSWORD:-}
+  #   env_file: .env
+  #   networks:
+  #     - backend
+  #     - elk
+  #   volumes:
+  #     - shared_elk:/usr/share/elasticsearch/config/certs
+  #     - elk-data:/usr/share/elasticsearch/
 
 
+  # elasticsearch:
+  #   build:
+  #     context: ./devops/elk/elasticsearch
+  #     args:
+  #       ELK_STACK_VERSION: ${ELK_STACK_VERSION}
+  #       ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
+  #   container_name: elasticsearch
+  #   environment:
+  #     node.name: transcendence42
+  #     discovery.type: single-node
+  #     xpack.license.self_generated.type: trial
+  #     ES_JAVA_OPTS: -Xms512m -Xmx512m
+  #     ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
+  #   env_file: .env
+  #   depends_on:
+  #     elk_certs:
+  #       condition: service_healthy
+  #   networks:
+  #     - backend
+  #     - elk
+  #   volumes:
+  #     - shared_elk:/usr/share/elasticsearch/config/certs
+  #     - elk-data:/usr/share/elasticsearch/
 
-  elasticsearch:
-    build:
-      context: ./devops/elk/elasticsearch
-      args:
-        ELK_STACK_VERSION: ${ELK_STACK_VERSION}
-        ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
-    container_name: elasticsearch
-    environment:
-      node.name: transcendence42
-      discovery.type: single-node
-      xpack.license.self_generated.type: trial
-      ES_JAVA_OPTS: -Xms512m -Xmx512m
-      ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
-    env_file: .env
-    depends_on:
-      elk_certs:
-        condition: service_healthy
-    networks:
-      - backend
-      - elk
-    volumes:
-      - shared_elk:/usr/share/elasticsearch/config/certs
-      - elk-data:/usr/share/elasticsearch/
+  # logstash:
+  #   build:
+  #     context: ./devops/elk/logstash
+  #     args:
+  #       ELK_STACK_VERSION: ${ELK_STACK_VERSION}
+  #   container_name: logstash
+  #   environment:
+  #     LS_JAVA_OPTS: -Xms256m -Xmx256m
+  #     LOGSTASH_INTERNAL_PASSWORD: ${LOGSTASH_INTERNAL_PASSWORD:-}
+  #   depends_on:
+  #     - elasticsearch
+  #   networks:
+  #     - backend
+  #     - elk
+  #   volumes:
+  #     - elk-data:/logstash
 
-  logstash:
-    build:
-      context: ./devops/elk/logstash
-      args:
-        ELK_STACK_VERSION: ${ELK_STACK_VERSION}
-    container_name: logstash
-    environment:
-      LS_JAVA_OPTS: -Xms256m -Xmx256m
-      LOGSTASH_INTERNAL_PASSWORD: ${LOGSTASH_INTERNAL_PASSWORD:-}
-    depends_on:
-      - elasticsearch
-    networks:
-      - backend
-      - elk
-    volumes:
-      - elk-data:/logstash
-
-  kibana:
-    build:
-      context: ./devops/elk/kibana
-      args:
-        ELK_STACK_VERSION: ${ELK_STACK_VERSION}
-    container_name: kibana
-    environment:
-      ELASTICSEARCH_USERNAME: kibana
-      KIBANA_SYSTEM_PASSWORD: ${KIBANA_SYSTEM_PASSWORD:-}
-      ELASTICSEARCH_SSL_CERTIFICATEAUTHORITIES: config/certs/ca/ca.crt
-    depends_on:
-      - elasticsearch
-    env_file: .env
-    networks:
-      - backend
-      - elk
-    restart: always
-    volumes:
-      - shared_elk:/usr/share/kibana/config/certs
-      - elk-data:/certs
+  # kibana:
+  #   build:
+  #     context: ./devops/elk/kibana
+  #     args:
+  #       ELK_STACK_VERSION: ${ELK_STACK_VERSION}
+  #   container_name: kibana
+  #   environment:
+  #     ELASTICSEARCH_USERNAME: kibana
+  #     KIBANA_SYSTEM_PASSWORD: ${KIBANA_SYSTEM_PASSWORD:-}
+  #     ELASTICSEARCH_SSL_CERTIFICATEAUTHORITIES: config/certs/ca/ca.crt
+  #   depends_on:
+  #     - elasticsearch
+  #   env_file: .env
+  #   networks:
+  #     - backend
+  #     - elk
+  #   restart: always
+  #   volumes:
+  #     - shared_elk:/usr/share/kibana/config/certs
+  #     - elk-data:/certs
 
 volumes:
   pg-data:
@@ -216,3 +240,5 @@ volumes:
     name: django-token
   shared_elk:
     name: shared_elk
+  vault-certs:
+    name: vault-certs
