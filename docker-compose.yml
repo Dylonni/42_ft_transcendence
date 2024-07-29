@@ -12,10 +12,10 @@ services:
     env_file: .env
     depends_on:
       - vault
-      # - django
-      # - postgres-exporter
-      # - prometheus
-      # - grafana
+      - django
+      - postgres-exporter
+      - prometheus
+      - grafana
       # - elasticsearch
       # - logstash
       # - kibana
@@ -32,6 +32,8 @@ services:
       - "9200:9200" # Elasticsearch - no need to expose
       # - "5001:5001" # Logstash - no need to expose
       - "5601:5601" # Kibana - shows "elasticsearch", which is normal
+    volumes:
+      - shared_elk:/etc/ssl/certs
 
   vault:
     build: ./cybersec/vault
@@ -48,7 +50,8 @@ services:
       - backend
     volumes:
       - django-token:/vault/secrets/django
-      # - vault-certs:/vault/certs
+      - shared_elk:/etc/ssl/certs
+
 
 # WEB
   django:
@@ -74,48 +77,48 @@ services:
       - elk-data:/logstash
       - django-token:/django/secrets:ro
 
-  # postgres:
-  #   build: ./web/postgres
-  #   container_name: postgres
-  #   env_file: .env
-  #   depends_on:
-  #     vault:
-  #       condition: service_healthy
-  #   healthcheck:
-  #     test: pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}
-  #     interval: 5s
-  #     timeout: 5s
-  #     retries: 4
-  #   networks:
-  #     - backend
-  #   volumes:
-  #     - pg-data:/var/lib/postgresql/data
+  postgres:
+    build: ./web/postgres
+    container_name: postgres
+    env_file: .env
+    depends_on:
+      vault:
+        condition: service_healthy
+    healthcheck:
+      test: pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}
+      interval: 5s
+      timeout: 5s
+      retries: 4
+    networks:
+      - backend
+    volumes:
+      - pg-data:/var/lib/postgresql/data
 
 # MONITORING
-  # postgres-exporter:
-  #   build: ./devops/mon/postgres-exporter
-  #   container_name: postgres-exporter
-  #   env_file: .env
-  #   networks:
-  #     - backend
+  postgres-exporter:
+    build: ./devops/mon/postgres-exporter
+    container_name: postgres-exporter
+    env_file: .env
+    networks:
+      - backend
 
-  # prometheus:
-  #   build: ./devops/mon/prometheus
-  #   container_name: prometheus
-  #   depends_on:
-  #     django:
-  #       condition: service_healthy
-  #   networks:
-  #     - backend
+  prometheus:
+    build: ./devops/mon/prometheus
+    container_name: prometheus
+    depends_on:
+      django:
+        condition: service_healthy
+    networks:
+      - backend
 
-  # grafana:
-  #   build: ./devops/mon/grafana
-  #   container_name: grafana
-  #   env_file: .env
-  #   depends_on:
-  #     - prometheus
-  #   networks:
-  #     - backend
+  grafana:
+    build: ./devops/mon/grafana
+    container_name: grafana
+    env_file: .env
+    depends_on:
+      - prometheus
+    networks:
+      - backend
 
 # ELK STACK
   # elk_certs:
@@ -137,6 +140,8 @@ services:
   #   networks:
   #     - backend
   #     - elk
+  #   depends_on:
+  #     - vault
   #   volumes:
   #     - shared_elk:/usr/share/elasticsearch/config/certs
   #     - elk-data:/usr/share/elasticsearch/
@@ -147,7 +152,7 @@ services:
   #     timeout: 5s
   #     retries: 5
 
-### test with elast and elk_certs
+### test with elast and elk_certs // this one seems ok but kibana needs its enroll token
   # elasticsearch:
   #   build:
   #     context: ./devops/elk/elasticsearch

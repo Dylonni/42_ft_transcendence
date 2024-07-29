@@ -30,6 +30,24 @@ else
     vault policy write django-policy /vault/config/policies/django-policy.hcl
     vault token create -ttl=1h -policy=django-policy > /vault/secrets/django/token
 
+
+    # Check if the vault command was successful
+    if [ $? -eq 0 ]; then
+        echo "Vault command executed successfully."
+    else
+        echo "Vault command failed to execute." >&2
+        exit 1
+    fi
+
+    # Check if the token file is not empty
+    if [ -s /vault/secrets/django/token ]; then
+        echo "Token was successfully created."
+    else
+        echo "Token file is empty." >&2
+        exit 1
+    fi
+
+
     # echo "Sealing Vault..."
     # vault operator seal
 fi

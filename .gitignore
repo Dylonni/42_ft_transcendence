@@ -1,5 +1,7 @@
 .env
 
 cybersec/nginx-modsec/conf/cert
+cybersec/vault/config/certs
+
 
 __pycache__/
