@@ -39,7 +39,6 @@ for line in lines:
 client = hvac.Client(url=os.getenv('VAULT_ADDR'), token=vault_token)
 secret_path = 'django/key'
 secret_response = client.secrets.kv.v2.read_secret_version(path=secret_path)
-print(secret_response)
 SECRET_KEY = secret_response['data']['data']['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -48,7 +47,6 @@ DEBUG = True
 ALLOWED_HOSTS = ['localhost', 'django', '127.0.0.1', 'www.transcendence42.rocks']
 
 CSRF_TRUSTED_ORIGINS = ['https://localhost:8443', 'http://localhost:8080', 'https://127.0.0.1:8443', 'http://127.0.0.1:8080']
-
 
 # Application definition
 
@@ -72,6 +70,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'accounts.middleware.JWTCookieMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_prometheus.middleware.PrometheusAfterMiddleware',
@@ -136,6 +135,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+PASSWORD_RESET_TIMEOUT = 600
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
@@ -161,6 +161,21 @@ USE_L10N = True
 USE_TZ = True
 
 
+LANGUAGES = [
+    ('en', 'English'),
+    ('es', 'Spanish'),
+    ('fr', 'French'),
+    ('it', 'Italian'),
+    ('ja', 'Japanese'),
+    ('ug', 'Uyghur')
+]
+
+
+LOCALE_PATHS = [
+    os.path.join(BASE_DIR, 'locale'),
+]
+
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
@@ -175,18 +190,36 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# Email
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = os.getenv('DJANGO_MAIL')
+EMAIL_HOST_USER = os.getenv('DJANGO_MAIL_USERNAME')
+EMAIL_HOST_PASSWORD = os.getenv('DJANGO_MAIL_PASSWORD')
+
+# 42 API
+
+FORTYTWO_ID = os.getenv('DJANGO_42_ID')
+FORTYTWO_SECRET = os.getenv('DJANGO_42_SECRET')
+
+# JWT
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-    )
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ),
 }
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
-    'ROTATE_REFRESH_TOKENS': False,
-    'BLACKLIST_AFTER_ROTATION': False,
+    'ROTATE_REFRESH_TOKENS': True,
+    'BLACKLIST_AFTER_ROTATION': True,
     'UPDATE_LAST_LOGIN': False,
 
     'ALGORITHM': 'HS256',

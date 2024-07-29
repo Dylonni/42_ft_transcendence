@@ -1,0 +1,536 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-07-23 12:08+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: accounts/admin.py:11
+msgid "Personal info"
+msgstr "اطلاعات شخصی"
+
+#: accounts/admin.py:13
+msgid "Permissions"
+msgstr "مجوز"
+
+#: accounts/admin.py:24
+msgid "Important dates"
+msgstr "تاریخ های مهم"
+
+#: accounts/models.py:48
+msgid "id"
+msgstr "id"
+
+#: accounts/models.py:53
+msgid "Unique identifier for the user, automatically generated."
+msgstr "شناسه منحصر به فرد برای کاربر، به طور خودکار تولید شده است."
+
+#: accounts/models.py:56
+msgid "username"
+msgstr "نام کاربری"
+
+#: accounts/models.py:60
+msgid "Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only."
+msgstr "150 کاراکتر یا کمتر حروف، رقم ها و @//+/////_فقط"
+
+#: accounts/models.py:64
+msgid "The username must be 150 characters or fewer."
+msgstr "نام کاربری باید 150 کاراکتر یا کمتر باشد."
+
+#: accounts/models.py:65
+msgid "This value may contain only letters, numbers, and @/./+/-/_ characters."
+msgstr ""
+"این ارزش ممکن است فقط شامل حروف، اعداد و @ / + / / / / / / / / / / / / / / "
+"شخصیت."
+
+#: accounts/models.py:69
+msgid "email address"
+msgstr "آدرس ایمیل"
+
+#: accounts/models.py:71
+msgid "Required. A valid email address."
+msgstr "مورد نیاز یک آدرس ایمیل معتبر"
+
+#: accounts/models.py:73
+msgid "Enter a valid email address."
+msgstr "یک آدرس ایمیل معتبر وارد کنید."
+
+#: accounts/models.py:77
+msgid "42 id"
+msgstr "۴۲"
+
+#: accounts/models.py:81
+msgid "Unique identifier for the user from 42."
+msgstr "شناسه منحصر به فرد برای کاربر از ۴۲"
+
+#: accounts/models.py:84
+msgid "42 access token"
+msgstr "42 توکن دسترسی"
+
+#: accounts/models.py:88
+msgid "Access token for 42 API."
+msgstr "دسترسی به توکن 42 API"
+
+#: accounts/models.py:91
+msgid "42 refresh token"
+msgstr "42 توکن جدید"
+
+#: accounts/models.py:95
+msgid "Refresh token for 42 API."
+msgstr "تبدیل توکن به 42 API"
+
+#: accounts/models.py:98
+msgid "date joined"
+msgstr "تاریخ پیوستن"
+
+#: accounts/models.py:100
+msgid "The date and time when the user joined."
+msgstr "تاریخ و زمان زمانی که کاربر به آن پیوست."
+
+#: accounts/models.py:103
+msgid "staff status"
+msgstr "وضعیت کارکنان"
+
+#: accounts/models.py:105
+msgid "Designates whether the user can log into this admin site."
+msgstr "مشخص می کند که آیا کاربر می تواند به این سایت مدیریت وارد شود."
+
+#: accounts/models.py:108
+msgid "active"
+msgstr "فعال فعال فعال"
+
+#: accounts/models.py:111
+msgid ""
+"Designates whether this user should be treated as active. Unselect this "
+"instead of deleting accounts."
+msgstr ""
+"مشخص می کند که آیا این کاربر باید به عنوان فعال رفتار شود. این را به جای حذف "
+"حساب ها انتخاب کنید."
+
+#: accounts/models.py:117
+msgid "groups"
+msgstr "گروه ها"
+
+#: accounts/models.py:120
+msgid ""
+"The groups this user belongs to. A user will get all permissions granted to "
+"each of their groups."
+msgstr ""
+"گروه هایی که این کاربر به آن تعلق دارد. کاربر تمام مجوز های اعطا شده به هر "
+"یک از گروه های خود را."
+
+#: accounts/models.py:128
+msgid "user permissions"
+msgstr "مجوز کاربر"
+
+#: accounts/models.py:130
+msgid "Specific permissions for this user."
+msgstr "مجوز های خاص برای این کاربر"
+
+#: accounts/models.py:142
+msgid "custom user"
+msgstr "کاربران سفارشی"
+
+#: accounts/models.py:143
+msgid "custom users"
+msgstr "کاربران سفارشی"
+
+#: accounts/serializers.py:18
+msgid "Must include \"username/email\" and \"password\"."
+msgstr "باید شامل “نام کاربری / ایمیل” و “رمز” باشد."
+
+#: accounts/serializers.py:27
+msgid "Unable to log in with provided credentials."
+msgstr "عدم امکان ثبت نام با مدارک ارائه شده"
+
+#: accounts/views.py:54
+msgid "User logged in!"
+msgstr "کاربر وارد شد!"
+
+#: accounts/views.py:72
+msgid "User logged out!"
+msgstr "کاربر وارد شد!"
+
+#: accounts/views.py:96
+msgid "Account registered! Please check your email to activate your account."
+msgstr "حساب ثبت شده! لطفا ایمیل خود را برای فعال کردن حساب خود بررسی کنید."
+
+#: accounts/views.py:123
+msgid "Account activated!"
+msgstr "حساب فعال!"
+
+#: accounts/views.py:134
+msgid "Activation link is invalid!"
+msgstr "لینک فعال سازی بی اعتبار است!"
+
+#: accounts/views.py:154
+msgid "Please check your email to reset your password."
+msgstr "لطفا ایمیل خود را برای تنظیم رمز عبور خود بررسی کنید."
+
+#: accounts/views.py:180
+msgid "Set your new password."
+msgstr "پسورد جدید خود را تنظیم کنید."
+
+#: accounts/views.py:191
+msgid "Password reset link is invalid!"
+msgstr "Password Reset link بی اعتبار است!"
+
+#: accounts/views.py:211
+msgid "Password changed!"
+msgstr "رمز عبور تغییر کرد!"
+
+#: accounts/views.py:284
+msgid "Authentication successful!"
+msgstr "اعتبار موفقیت آمیز!"
+
+#: accounts/views.py:311
+msgid "Email updated succesfully!"
+msgstr "ایمیل به روز شده به روز شد!"
+
+#: pong/urls.py:33
+msgid "^login/?$"
+msgstr ""
+
+#: pong/urls.py:34
+msgid "^register/?$"
+msgstr ""
+
+#: pong/urls.py:36
+msgid "^home/?$"
+msgstr ""
+
+#: pong/urls.py:37
+msgid "^profile/?$"
+msgstr ""
+
+#: pong/urls.py:38
+msgid "^social/?$"
+msgstr ""
+
+#: pong/urls.py:39
+msgid "^settings/?$"
+msgstr ""
+
+#: pong/views.py:21
+msgid "Transcendence"
+msgstr "بازگشت"
+
+#: pong/views.py:28
+msgid "Login"
+msgstr "ورود"
+
+#: pong/views.py:34 templates/accounts/register.html:37
+#: templates/accounts/register.html:43
+msgid "Register"
+msgstr "ثبت نام"
+
+#: pong/views.py:42
+msgid "Home"
+msgstr "خانه "
+
+#: pong/views.py:50 templates/profile.html:7
+msgid "Profile"
+msgstr "پروفایل پروفایل پروفایل"
+
+#: pong/views.py:58 templates/social.html:8
+msgid "Social"
+msgstr "اجتماعی اجتماعی اجتماعی"
+
+#: pong/views.py:66 templates/settings.html:8
+msgid "Settings"
+msgstr "تنظیمات"
+
+#: templates/accounts/email_activate.html:5
+msgid "Activate Your Account"
+msgstr "فعال کردن حساب شما"
+
+#: templates/accounts/email_activate.html:8
+#, python-format
+msgid "Hi '%(user.username)s'"
+msgstr "سلام بر کاربران '%(user.username)s'"
+
+#: templates/accounts/email_activate.html:9
+msgid ""
+"Thank you for registering at Transcendence. Please click the link below to "
+"activate your account:"
+msgstr ""
+"ممنون از ثبت نام در Transcendence لطفا لینک زیر را برای فعال کردن حساب خود "
+"کلیک کنید:"
+
+#: templates/accounts/email_activate.html:10
+msgid "Activate your account"
+msgstr "فعال کردن حساب شما"
+
+#: templates/accounts/email_activate.html:11
+msgid "If you did not create an account, please ignore this email."
+msgstr "اگر حساب کاربری ایجاد نکردید، لطفا این ایمیل را نادیده بگیرید."
+
+#: templates/accounts/email_activate.html:12
+msgid "Thanks,"
+msgstr "ممنون ممنون"
+
+#: templates/accounts/email_activate.html:12
+msgid "The Transcendence Team"
+msgstr "تیم Transcendence"
+
+#: templates/accounts/login.html:12 templates/accounts/register.html:12
+msgid "Quick Play"
+msgstr "Quick Play"
+
+#: templates/accounts/login.html:13 templates/accounts/register.html:13
+msgid "My Profile"
+msgstr "پروفایل من"
+
+#: templates/accounts/login.html:37 templates/accounts/login.html:42
+msgid "Log in"
+msgstr "ورود در"
+
+#: templates/accounts/login.html:38
+msgid "Username / Email"
+msgstr "نام کاربری / ایمیل"
+
+#: templates/accounts/login.html:39 templates/accounts/register.html:40
+msgid "Password"
+msgstr "Password"
+
+#: templates/accounts/login.html:40 templates/accounts/register.html:41
+msgid "Show password"
+msgstr "نشان دادن رمز عبور"
+
+#: templates/accounts/login.html:41
+msgid "Forgot your password ?"
+msgstr "رمز عبور خود را فراموش کنید؟"
+
+#: templates/accounts/login.html:45
+msgid "Connect with Google"
+msgstr "ارتباط با Google"
+
+#: templates/accounts/login.html:46
+msgid "Connect with 42 Auth"
+msgstr "ارتباط با 42 Auth"
+
+#: templates/accounts/login.html:48
+msgid "Not Registered ?"
+msgstr "ثبت نشده؟"
+
+#: templates/accounts/login.html:48
+msgid "Create an account"
+msgstr "ایجاد یک حساب"
+
+#: templates/accounts/login.html:60 templates/accounts/register.html:57
+msgid "Privacy Policy"
+msgstr "سیاست حفظ حریم خصوصی"
+
+#: templates/accounts/login.html:61 templates/accounts/register.html:58
+msgid "Development Team"
+msgstr "تیم توسعه"
+
+#: templates/accounts/register.html:38
+msgid "Username"
+msgstr "Username"
+
+#: templates/accounts/register.html:39 templates/settings.html:67
+msgid "Email"
+msgstr "ایمیل ایمیل"
+
+#: templates/accounts/register.html:44
+msgid "Already Registered ?"
+msgstr "ثبت شده است؟"
+
+#: templates/accounts/register.html:44
+msgid "Sign in here"
+msgstr "ثبت نام در اینجا"
+
+#: templates/home.html:14
+msgid "Find a player"
+msgstr ""
+
+#: templates/home.html:26 templates/profile.html:21 templates/profile.html:57
+#: templates/profile.html:75 templates/settings.html:28
+msgid "#PlayerName"
+msgstr "#PlayerName"
+
+#: templates/home.html:28
+msgid "Stats"
+msgstr "آمار"
+
+#: templates/home.html:28
+msgid "Games played:"
+msgstr "بازی های بازی:"
+
+#: templates/home.html:33
+msgid "Wins"
+msgstr "برنده"
+
+#: templates/home.html:34
+msgid "Loss"
+msgstr "از دست دادن"
+
+#: templates/home.html:37
+msgid "Create GameRoom"
+msgstr "ساخت بازی GameRoom"
+
+#: templates/home.html:53
+#, fuzzy
+#| msgid "Won Games"
+msgid "Find a Game"
+msgstr "بازی های برنده"
+
+#: templates/home.html:67
+msgid "Game Rooms"
+msgstr "اتاق های بازی"
+
+#: templates/home.html:72
+msgid "Room Name"
+msgstr "نام اتاق"
+
+#: templates/home.html:73
+msgid "#RoomName"
+msgstr "#RoomName"
+
+#: templates/home.html:76
+msgid "Created By"
+msgstr "ساخته شده توسط"
+
+#: templates/home.html:77
+msgid "#CreatorName"
+msgstr "#CreatorName"
+
+#: templates/home.html:80
+msgid "Room Type"
+msgstr "اتاق تایپ"
+
+#: templates/home.html:81
+msgid "#Classic/Retro"
+msgstr "Classic/Retro"
+
+#: templates/home.html:84
+msgid "Current Players"
+msgstr "بازیگران فعلی"
+
+#: templates/home.html:87
+msgid "Join"
+msgstr ""
+
+#: templates/home.html:97
+msgid "NO GAMES TO DISPLAY"
+msgstr "بازی برای بازی DIS"
+
+#: templates/profile.html:51
+msgid "Recent Games"
+msgstr "بازی های اخیر"
+
+#: templates/profile.html:56 templates/profile.html:74
+msgid "Versus"
+msgstr "Versus"
+
+#: templates/profile.html:60 templates/profile.html:78
+msgid "Score"
+msgstr "امتیاز"
+
+#: templates/profile.html:64 templates/profile.html:82
+msgid "Game Duration"
+msgstr "مدت زمان بازی"
+
+#: templates/profile.html:68 templates/profile.html:86
+msgid "Date"
+msgstr "تاریخ تاریخ"
+
+#: templates/profile.html:98
+msgid "Player Statistics"
+msgstr "آمار بازیکن"
+
+#: templates/profile.html:105
+msgid "Total Games"
+msgstr "Total Games"
+
+#: templates/profile.html:108 templates/profile.html:116
+msgid "#Won Tournaments"
+msgstr "مسابقات Won"
+
+#: templates/profile.html:121
+msgid "Won Games"
+msgstr "بازی های برنده"
+
+#: templates/profile.html:121
+msgid "#WonGames"
+msgstr "#WonGames"
+
+#: templates/profile.html:124
+msgid "Lost Games"
+msgstr "بازی های Lost Games"
+
+#: templates/profile.html:124
+msgid "#LostGames"
+msgstr "#LostGames"
+
+#: templates/settings.html:23
+#, fuzzy
+#| msgid "My Profile"
+msgid "Profile Card"
+msgstr "پروفایل کارت"
+
+#: templates/settings.html:53
+msgid "Account"
+msgstr "حساب حساب حساب"
+
+#: templates/settings.html:61
+msgid "#Username"
+msgstr "#Username"
+
+#: templates/settings.html:64
+msgid "Account created on"
+msgstr "حساب ایجاد شده در"
+
+#: templates/settings.html:64
+msgid "#Date of Creation"
+msgstr "#Date of Creation"
+
+#: templates/settings.html:67
+msgid "Currentmail****@*****.com"
+msgstr "Currentmail****@*****.com"
+
+#: templates/settings.html:74
+msgid "Modify Email"
+msgstr "اصلاح ایمیل"
+
+#: templates/settings.html:74
+msgid "Modify Password"
+msgstr "تغییر رمز عبور"
+
+#: templates/settings.html:80
+msgid "Block list"
+msgstr "فهرست Block list"
+
+#: templates/settings.html:89
+msgid "Delete my account"
+msgstr "حذف حساب من"
+
+#: templates/social.html:24
+msgid "Friends"
+msgstr "دوستان"
+
+#: templates/social.html:37
+msgid "Online"
+msgstr ""
+
+#: templates/social.html:38
+msgid "#Friendfrrrrrrrrrrrrrrrrrrrr"
+msgstr "دانلود بازی Friendfrrrrrrrrrr"
+
+#: templates/social.html:84
+msgid "  Send a message"
+msgstr ""

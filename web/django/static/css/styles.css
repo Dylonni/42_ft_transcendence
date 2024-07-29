@@ -1,14 +1,16 @@
-.google_connect {
-  background-color: black;
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: #2c2b2b;
 }
 
 .qd_connect {
   background-color: #00babc;
 }
 
-.signup {
-  display: none;
-  /*visibility: hidden;*/
+.fit-cover {
+  object-fit: cover;
 }
 
 .lottie-bg {
@@ -22,7 +24,96 @@
   margin-right: auto;
 }
 
-body {
-  overflow: hidden;
+.icon-tabler-home:hover, .icon-tabler-home.active {
+  color: #5abfea;
 }
 
+.icon-tabler-user:hover, .icon-tabler-user.active {
+  color: #ff8a00;
+}
+
+.icon-tabler-list-numbers:hover, .icon-tabler-list-numbers.active {
+  color: #edd32c;
+}
+
+.icon-tabler-message-chatbot:hover, .icon-tabler-message-chatbot.active {
+  color: #30c12e;
+}
+
+.icon-tabler-settings:hover, .icon-tabler-settings.active {
+  color: #9d71ed;
+}
+
+#navtoggle {
+  -webkit-appearance: none;
+  visibility: hidden;
+  display: none;
+}
+
+.form-label {
+  cursor: pointer;
+}
+
+#navtoggle:checked ~ .navbar-container {
+  transform: translateX(-105px);
+}
+
+#navtoggle:checked ~ .navbar-container .icon-tabler-arrow-badge-left {
+  transform: rotate(180deg);
+  transition: transform 0.5s ease;
+}
+
+.navbar-container {
+  transform: translateX(0px);
+}
+
+.icon-tabler-arrow-badge-left {
+  transition: transform 0.5s ease;
+}
+
+#inputsearch:focus {
+  outline: none;
+}
+
+#gamesearch:focus {
+  outline: none;
+}
+
+.roomel {
+  flex: 1 1 20%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 800px) {
+  .gameroom {
+    flex-direction: column;
+  }
+}
+
+.room-name, .room-creator, .room-type, .nb-players {
+  color: #5abfea;
+}
+
+#chatInput:focus{
+  outline: none;
+}
+
+.gameinfos {
+  flex: 1 1 25%;
+}
+
+.versus, .gameinfos, .game-duration, .game-date {
+  color: var(--bs-secondary);
+}
+
+.total-games, .total-tournaments {
+  color: rgb(220,149,66);
+}
+
+.total-won {
+  color: var(--bs-form-valid-color);
+}
+
+.total-loss {
+  color: var(--bs-form-invalid-color);
+}
