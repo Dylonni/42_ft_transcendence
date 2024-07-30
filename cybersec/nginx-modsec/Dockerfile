@@ -59,7 +59,13 @@ COPY ./conf/grafana.conf /etc/nginx/conf.d/grafana.conf
 COPY ./conf/elasticsearch.conf /etc/nginx/conf.d/elasticsearch.conf
 COPY ./conf/logstash.conf /etc/nginx/conf.d/logstash.conf
 COPY ./conf/kibana.conf /etc/nginx/conf.d/kibana.conf
-COPY ./conf/nginx.conf /etc/nginx/templates/conf.d/default.conf.template
 
+COPY ./conf/nginx.conf /etc/nginx/templates/conf.d/default.conf.template
+COPY ./conf/modsecurity.conf /etc/nginx/templates/modsecurity.d/modsecurity.conf.template
+
+COPY ./conf/proxy_backend.conf /etc/nginx/conf.d/proxy_backend.conf
+
+# RUN sudo chmod -R 755 /usr/share/nginx/html
+# RUN sudo chown -R www-data:www-data /usr/share/nginx/html
 
 EXPOSE 8080 8443
