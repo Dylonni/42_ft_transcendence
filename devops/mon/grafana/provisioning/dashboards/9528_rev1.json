@@ -116,7 +116,7 @@
         }
       ],
       "thresholds": "",
-      "title": "Total Requests",
+      "title": "Total Requests, amended",
       "type": "singlestat",
       "valueFontSize": "80%",
       "valueMaps": [

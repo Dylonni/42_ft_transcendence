@@ -61,7 +61,7 @@ COPY ./conf/logstash.conf /etc/nginx/conf.d/logstash.conf
 COPY ./conf/kibana.conf /etc/nginx/conf.d/kibana.conf
 
 COPY ./conf/nginx.conf /etc/nginx/templates/conf.d/default.conf.template
-COPY ./conf/modsecurity.conf /etc/nginx/templates/modsecurity.d/modsecurity.conf.template
+COPY ./conf/modsecurity.conf /etc/nginx/templates/modsecurity.d/modsecurity-override.conf.template
 
 COPY ./conf/proxy_backend.conf /etc/nginx/conf.d/proxy_backend.conf
 
