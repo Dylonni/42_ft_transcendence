@@ -167,3 +167,16 @@ a:active {
   border: 2px solid rgb(241,185,77);
 }
 
+input[type="file"] {
+  display: none;
+}
+
+#photoUpload {
+  cursor: pointer;
+}
+
+.refreshButton:hover {
+  transform: rotate(-360deg);
+  transition: transform 0.5s ease;
+}
+

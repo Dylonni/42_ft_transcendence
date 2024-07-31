@@ -10,6 +10,7 @@
     NAVBAR
 - [ ] Rework the navbar by adding a page to localplay
 - [ ] Make the navbar show icons depending on context
+- [ ] Put tooltips on every icon
 
     HOME
 - [X] Create a modal for "Create GameRoom"
@@ -20,8 +21,13 @@
 - [ ] Find a way to display all Rooms with tabs
 
     GAME
-- [ ] Create a gameroom with enough space to play and chat on the right side
-- [ ] Show a timer to indicate when the next match will be and the VS Panel
+- [X] Create a gameroom with enough space to play and chat on the right side
+- [X] Show a timer to indicate when the next match will be and the VS Panel
+- [ ] Integrate chat
+- [ ] Possibility to invite a random player
+
+    CUSTOMIZE GAME
+- [ ] Replace radio input for powerups and events by checkboxes
 
     TEMPLATES
 - [x] Add {% static 'path/to/ressource' %} to all templates with {% load static %} at start
