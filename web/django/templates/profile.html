@@ -1,135 +1,210 @@
 {% load static %}
 {% include "sidebar.html" %}
 {% block content %}
-    <div class="container">
-        <div class="row" style="width: 100%;margin: 0px;">
-            <div class="col-md-12 d-flex justify-content-center align-items-center" style="margin-bottom: 71px;">
-                <h1 class="d-xl-flex justify-content-xl-center align-items-xl-center" style="color: var(--bs-body-bg);">Profile<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-user">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                        <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
-                        <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
-                    </svg></h1>
-            </div>
-        </div>
+<div class="container">
+ <div class="row" style="width: 100%;margin: 0px;">
+  <div class="col-md-12 d-flex justify-content-center align-items-center" style="margin-bottom: 71px;">
+   <h1 class="d-xl-flex justify-content-xl-center align-items-xl-center" style="color: var(--bs-body-bg);">
+    Profile
+    <svg class="icon icon-tabler icon-tabler-user" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
+     <path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
+     <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
+     <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
+    </svg>
+   </h1>
+  </div>
+ </div>
+</div>
+<div class="container">
+ <div class="row d-xxl-flex justify-content-xxl-center align-items-xxl-center">
+  <div class="col-md-5 col-lg-4 col-xl-3 col-xxl-3" style="height: 100%;">
+   <div class="d-xxl-flex justify-content-xxl-center align-items-xxl-center text-truncate" style="background: rgba(255,255,255,0);width: 100%;height: 60%;backdrop-filter: blur(0px);-webkit-backdrop-filter: blur(0px);color: var(--bs-body-bg);border-radius: 28px;border: 3px solid rgb(220,149,66);">
+    <div class="d-flex d-md-flex d-lg-flex d-xl-flex flex-column justify-content-center align-items-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="background: rgba(0,0,0,0);margin-top: 0px;margin-bottom: 0px;padding-bottom: 0px;padding-top: 0px;height: 420px;">
+     <div class="d-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="width: 160px;background: var(--bs-secondary-text-emphasis);border-radius: 50%;height: 160px;border-style: solid;border-color: var(--bs-secondary-text-emphasis);margin-top: 0px;padding-bottom: 0px;padding-top: 0px;margin-bottom: 13px;">
+      <img height="166" src="{{ profile.avatar.url }}" style="border-radius: 50%;height: 90%;width: 90%;" width="169"/>
+     </div>
+     <div class="text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center" style="width: 100%;">
+      <h1 class="text-truncate fs-3" id="player-name" style="color: var(--bs-body-bg);font-family: Roboto, sans-serif;border-style: none;display: inline-block;width: 90%;">
+       {{ profile.alias }}
+      </h1>
+     </div>
+     <div class="d-flex justify-content-center align-items-center" id="template-actions" style="width: 100%;height: 20%;">
+      <button class="btn btn-primary" style="margin-left: 12px;margin-right: 12px;box-shadow: 0px 0px;background: rgba(255,255,255,0);border-style: none;color: var(--bs-btn-border-color);" type="button">
+       <svg class="icon icon-tabler icon-tabler-user-plus" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 35px;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
+        <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
+        <path d="M16 19h6"></path>
+        <path d="M19 16v6"></path>
+        <path d="M6 21v-2a4 4 0 0 1 4 -4h4"></path>
+       </svg>
+      </button>
+      <button class="btn btn-primary" style="margin-left: 12px;margin-right: 12px;background: rgba(255,255,255,0);border-style: none;color: rgb(255,131,42);" type="button">
+       <svg class="icon icon-tabler icon-tabler-user-cancel" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 35px;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
+        <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
+        <path d="M6 21v-2a4 4 0 0 1 4 -4h3.5"></path>
+        <path d="M19 19m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"></path>
+        <path d="M17 21l4 -4"></path>
+       </svg>
+      </button>
+      <button class="btn btn-primary" style="margin-left: 12px;margin-right: 12px;background: rgba(255,255,255,0);color: rgb(255,0,0);border-style: none;" type="button">
+       <svg class="icon icon-tabler icon-tabler-trash" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 35px;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
+        <path d="M4 7l16 0"></path>
+        <path d="M10 11l0 6"></path>
+        <path d="M14 11l0 6"></path>
+        <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>
+        <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path>
+       </svg>
+      </button>
+     </div>
     </div>
-    <div class="container">
-        <div class="row d-xxl-flex justify-content-xxl-center align-items-xxl-center">
-            <div class="col-md-5 col-lg-4 col-xl-3 col-xxl-3" style="height: 100%;">
-                <div class="d-xxl-flex justify-content-xxl-center align-items-xxl-center text-truncate" style="background: rgba(255,255,255,0);width: 100%;height: 60%;backdrop-filter: blur(0px);-webkit-backdrop-filter: blur(0px);color: var(--bs-body-bg);border-radius: 28px;border: 3px solid rgb(220,149,66);">
-                    <div class="d-flex d-md-flex d-lg-flex d-xl-flex flex-column justify-content-center align-items-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="background: rgba(0,0,0,0);margin-top: 0px;margin-bottom: 0px;padding-bottom: 0px;padding-top: 0px;height: 420px;">
-                        <div class="d-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="width: 160px;background: var(--bs-secondary-text-emphasis);border-radius: 50%;height: 160px;border-style: solid;border-color: var(--bs-secondary-text-emphasis);margin-top: 0px;padding-bottom: 0px;padding-top: 0px;margin-bottom: 13px;"><img src="{{ profile.avatar.url }}" width="169" height="166" style="border-radius: 50%;height: 90%;width: 90%;"></div>
-                        <div class="text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center" style="width: 100%;">
-                            <h1 class="text-truncate fs-3" id="player-name" style="color: var(--bs-body-bg);font-family: Roboto, sans-serif;border-style: none;display: inline-block;width: 90%;">{{ profile.alias }}</h1>
-                        </div>
-                        
-                        <div class="d-flex justify-content-center align-items-center" id="template-actions" style="width: 100%;height: 20%;"><button class="btn btn-primary" type="button" style="margin-left: 12px;margin-right: 12px;box-shadow: 0px 0px;background: rgba(255,255,255,0);border-style: none;color: var(--bs-btn-border-color);"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-user-plus" style="font-size: 35px;">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                    <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
-                                    <path d="M16 19h6"></path>
-                                    <path d="M19 16v6"></path>
-                                    <path d="M6 21v-2a4 4 0 0 1 4 -4h4"></path>
-                                </svg></button><button class="btn btn-primary" type="button" style="margin-left: 12px;margin-right: 12px;background: rgba(255,255,255,0);border-style: none;color: rgb(255,131,42);"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-user-cancel" style="font-size: 35px;">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                    <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
-                                    <path d="M6 21v-2a4 4 0 0 1 4 -4h3.5"></path>
-                                    <path d="M19 19m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"></path>
-                                    <path d="M17 21l4 -4"></path>
-                                </svg></button><button class="btn btn-primary" type="button" style="margin-left: 12px;margin-right: 12px;background: rgba(255,255,255,0);color: rgb(255,0,0);border-style: none;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-trash" style="font-size: 35px;">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                    <path d="M4 7l16 0"></path>
-                                    <path d="M10 11l0 6"></path>
-                                    <path d="M14 11l0 6"></path>
-                                    <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>
-                                    <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path>
-                                </svg></button></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-7 col-lg-8 col-xl-9">
-                <div class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="width: 100%;height: 40px;background: rgb(220,149,66);border-top-left-radius: 19px;border-top-right-radius: 19px;">
-                    <h1 class="fs-3" style="color: var(--bs-body-bg);text-shadow: 2px 2px var(--bs-emphasis-color);">Recent Games</h1>
-                </div>
-                <div class="overflow-auto" style="background: rgba(255,255,255,0);border-radius: 19px;height: 400px;margin-left: 0px;margin-right: 0px;padding-left: 10px;padding-right: 10px;border-top-left-radius: 0px;border-top-right-radius: 0px;border: 3px solid rgb(220,149,66);">
-                    <div class="d-flex flex-wrap game-loose" id="template-loose" style="background: var(--bs-black);width: 100%;padding-left: 0px;border-radius: 18px;border: 2px solid rgb(255,0,0);margin-top: 10px;margin-bottom: 10px;">
-                        <div class="text-truncate gameinfos" style="border-style: none;margin-bottom: 0px;">
-                            <h1 class="fs-5 d-xxl-flex justify-content-xxl-center align-items-xxl-center text-truncate versus">Versus</h1>
-                            <p class="text-truncate d-xxl-flex justify-content-xxl-center align-items-xxl-center text-truncate" style="color: var(--bs-body-bg);">#PlayerName</p>
-                        </div>
-                        <div class="text-truncate gameinfos" style="border-style: none;">
-                            <h1 class="fs-5 d-xxl-flex justify-content-xxl-center align-items-xxl-center text-truncate score">Score</h1>
-                            <p class="text-truncate d-xxl-flex justify-content-xxl-center align-items-xxl-center text-truncate" style="color: var(--bs-body-bg);">#X/#Y</p>
-                        </div>
-                        <div class="text-truncate gameinfos" style="border-style: none;">
-                            <h1 class="fs-5 d-xxl-flex justify-content-xxl-center align-items-xxl-center text-truncate game-duration">Game Duration</h1>
-                            <p class="d-xxl-flex justify-content-xxl-center align-items-xxl-center text-truncate" style="color: var(--bs-body-bg);">#XXmin#YY</p>
-                        </div>
-                        <div class="text-truncate gameinfos" style="border-style: none;">
-                            <h1 class="fs-5 d-xxl-flex justify-content-xxl-center align-items-xxl-center text-truncate game-date">Date</h1>
-                            <p class="d-xxl-flex justify-content-xxl-center align-items-xxl-center text-truncate" style="color: var(--bs-body-bg);">#DD/#MM/#YYYY</p>
-                        </div>
-                    </div>
-                    <div class="d-flex flex-wrap game-won" id="template-win" style="background: var(--bs-black);width: 100%;padding-left: 0px;border-radius: 18px;border: 2px solid rgb(14,157,20);margin-top: 10px;margin-bottom: 10px;">
-                        <div class="text-truncate gameinfos" style="border-style: none;">
-                            <h1 class="fs-5 d-xxl-flex justify-content-xxl-center align-items-xxl-center text-truncate versus">Versus</h1>
-                            <p class="text-truncate d-xxl-flex justify-content-xxl-center align-items-xxl-center text-truncate" style="color: var(--bs-body-bg);">#PlayerName</p>
-                        </div>
-                        <div class="text-truncate gameinfos" style="border-style: none;">
-                            <h1 class="fs-5 d-xxl-flex justify-content-xxl-center align-items-xxl-center text-truncate score">Score</h1>
-                            <p class="text-truncate d-xxl-flex justify-content-xxl-center align-items-xxl-center text-truncate" style="color: var(--bs-body-bg);">#X/#Y</p>
-                        </div>
-                        <div class="text-truncate gameinfos" style="border-style: none;">
-                            <h1 class="fs-5 d-xxl-flex justify-content-xxl-center align-items-xxl-center text-truncate game-duration">Game Duration</h1>
-                            <p class="d-xxl-flex justify-content-xxl-center align-items-xxl-center text-truncate" style="color: var(--bs-body-bg);">#XXmin#YY</p>
-                        </div>
-                        <div class="text-truncate gameinfos" style="border-style: none;">
-                            <h1 class="fs-5 d-xxl-flex justify-content-xxl-center align-items-xxl-center text-truncate game-date">Date</h1>
-                            <p class="d-xxl-flex justify-content-xxl-center align-items-xxl-center text-truncate" style="color: var(--bs-body-bg);">#DD/#MM/#YYYY</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+   </div>
+  </div>
+  <div class="col-md-7 col-lg-8 col-xl-9">
+   <div class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="width: 100%;height: 40px;background: rgb(220,149,66);border-top-left-radius: 19px;border-top-right-radius: 19px;">
+    <h1 class="fs-3" style="color: var(--bs-body-bg);text-shadow: 2px 2px var(--bs-emphasis-color);">
+     Recent Games
+    </h1>
+   </div>
+   <div class="overflow-auto" style="background: rgba(255,255,255,0);border-radius: 19px;height: 400px;margin-left: 0px;margin-right: 0px;padding-left: 10px;padding-right: 10px;border-top-left-radius: 0px;border-top-right-radius: 0px;border: 3px solid rgb(220,149,66);">
+    <div class="d-flex flex-wrap game-loose" id="template-loose" style="background: var(--bs-black);width: 100%;padding-left: 0px;border-radius: 18px;border: 2px solid rgb(255,0,0);margin-top: 10px;margin-bottom: 10px;">
+     <div class="text-truncate gameinfos" style="border-style: none;margin-bottom: 0px;">
+      <h1 class="fs-5 d-xxl-flex justify-content-xxl-center align-items-xxl-center text-truncate versus">
+       Versus
+      </h1>
+      <p class="text-truncate d-xxl-flex justify-content-xxl-center align-items-xxl-center text-truncate" style="color: var(--bs-body-bg);">
+       #PlayerName
+      </p>
+     </div>
+     <div class="text-truncate gameinfos" style="border-style: none;">
+      <h1 class="fs-5 d-xxl-flex justify-content-xxl-center align-items-xxl-center text-truncate score">
+       Score
+      </h1>
+      <p class="text-truncate d-xxl-flex justify-content-xxl-center align-items-xxl-center text-truncate" style="color: var(--bs-body-bg);">
+       #X/#Y
+      </p>
+     </div>
+     <div class="text-truncate gameinfos" style="border-style: none;">
+      <h1 class="fs-5 d-xxl-flex justify-content-xxl-center align-items-xxl-center text-truncate game-duration">
+       Game Duration
+      </h1>
+      <p class="d-xxl-flex justify-content-xxl-center align-items-xxl-center text-truncate" style="color: var(--bs-body-bg);">
+       #XXmin#YY
+      </p>
+     </div>
+     <div class="text-truncate gameinfos" style="border-style: none;">
+      <h1 class="fs-5 d-xxl-flex justify-content-xxl-center align-items-xxl-center text-truncate game-date">
+       Date
+      </h1>
+      <p class="d-xxl-flex justify-content-xxl-center align-items-xxl-center text-truncate" style="color: var(--bs-body-bg);">
+       #DD/#MM/#YYYY
+      </p>
+     </div>
     </div>
-    <div class="container">
-        <div class="row">
-            <div class="col" style="padding-top: 0px;margin-top: 25px;">
-                <div class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="width: 100%;height: 40px;background: rgb(220,149,66);border-top-left-radius: 19px;border-top-right-radius: 19px;">
-                    <h1 class="fs-3" style="color: var(--bs-body-bg);text-shadow: 2px 2px var(--bs-emphasis-color);">Player Statistics</h1>
-                </div>
-            </div>
-            <div class="col-md-12" style="width: 100%;">
-                <div class="d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center overflow-auto" style="background: rgba(0,0,0,0);border-radius: 19px;height: 100%;border-top-left-radius: 0px;border-top-right-radius: 0px;border-style: solid;border-color: rgb(220,149,66);width: 100%;">
-                    <div class="d-xxl-flex flex-column justify-content-xxl-center align-items-xxl-center" style="width: 33%;">
-                        <div class="d-flex d-sm-flex flex-column justify-content-sm-start justify-content-xxl-center align-items-xxl-center">
-                            <h1 class="fs-4 d-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-start justify-content-md-center justify-content-xxl-center align-items-xxl-center" style="color: var(--bs-body-bg);">Total Games</h1><span class="fs-5 d-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-start justify-content-md-center justify-content-xxl-center align-items-xxl-center total-games" style="width: 100%;">#TotalGames</span>
-                        </div>
-                        <div class="d-flex d-xxl-flex flex-column justify-content-xxl-center align-items-xxl-center" style="margin-top: 5px;margin-bottom: 5px;">
-                            <h1 class="fs-4 d-md-flex d-lg-flex d-xl-flex justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center" style="color: var(--bs-body-bg);">Won Tournaments&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-trophy" style="font-size: 32px;color: #f9e814;">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                    <path d="M8 21l8 0"></path>
-                                    <path d="M12 17l0 4"></path>
-                                    <path d="M7 4l10 0"></path>
-                                    <path d="M17 4v8a5 5 0 0 1 -10 0v-8"></path>
-                                    <path d="M5 9m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
-                                    <path d="M19 9m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
-                                </svg></h1><span class="fs-5 d-flex justify-content-center align-items-center total-tournaments" style="width: 100%;">#Won Tournaments</span>
-                        </div>
-                    </div>
-                    <div class="d-xxl-flex flex-column justify-content-xxl-center align-items-xxl-center" style="width: 34%;">
-                        <div class="d-flex d-xxl-flex flex-column justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center">
-                            <h1 class="fs-4 d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="color: var(--bs-body-bg);">Won Games</h1><span class="fs-5 d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center total-won" style="width: 100%;">#WonGames</span>
-                        </div>
-                        <div class="d-xxl-flex flex-column justify-content-xxl-center align-items-xxl-center" style="margin-top: 5px;margin-bottom: 5px;">
-                            <h1 class="fs-4 d-sm-flex d-md-flex d-xl-flex justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-xl-center align-items-xl-center" style="color: var(--bs-body-bg);">Lost Games</h1><span class="fs-5 d-flex justify-content-center align-items-center total-loss" style="width: 100%;">#LostGames</span>
-                        </div>
-                    </div>
-                    <div class="d-flex d-xxl-flex flex-column justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="width: 33%;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-chart-pie-filled" style="font-size: 157px;color: var(--bs-body-bg);">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                            <path d="M9.883 2.207a1.9 1.9 0 0 1 2.087 1.522l.025 .167l.005 .104v7a1 1 0 0 0 .883 .993l.117 .007h6.8a2 2 0 0 1 2 2a1 1 0 0 1 -.026 .226a10 10 0 1 1 -12.27 -11.933l.27 -.067l.11 -.02z" stroke-width="0" fill="currentColor"></path>
-                            <path d="M14 3.5v5.5a1 1 0 0 0 1 1h5.5a1 1 0 0 0 .943 -1.332a10 10 0 0 0 -6.11 -6.111a1 1 0 0 0 -1.333 .943z" stroke-width="0" fill="currentColor"></path>
-                        </svg></div>
-                </div>
-            </div>
-        </div>
+    <div class="d-flex flex-wrap game-won" id="template-win" style="background: var(--bs-black);width: 100%;padding-left: 0px;border-radius: 18px;border: 2px solid rgb(14,157,20);margin-top: 10px;margin-bottom: 10px;">
+     <div class="text-truncate gameinfos" style="border-style: none;">
+      <h1 class="fs-5 d-xxl-flex justify-content-xxl-center align-items-xxl-center text-truncate versus">
+       Versus
+      </h1>
+      <p class="text-truncate d-xxl-flex justify-content-xxl-center align-items-xxl-center text-truncate" style="color: var(--bs-body-bg);">
+       #PlayerName
+      </p>
+     </div>
+     <div class="text-truncate gameinfos" style="border-style: none;">
+      <h1 class="fs-5 d-xxl-flex justify-content-xxl-center align-items-xxl-center text-truncate score">
+       Score
+      </h1>
+      <p class="text-truncate d-xxl-flex justify-content-xxl-center align-items-xxl-center text-truncate" style="color: var(--bs-body-bg);">
+       #X/#Y
+      </p>
+     </div>
+     <div class="text-truncate gameinfos" style="border-style: none;">
+      <h1 class="fs-5 d-xxl-flex justify-content-xxl-center align-items-xxl-center text-truncate game-duration">
+       Game Duration
+      </h1>
+      <p class="d-xxl-flex justify-content-xxl-center align-items-xxl-center text-truncate" style="color: var(--bs-body-bg);">
+       #XXmin#YY
+      </p>
+     </div>
+     <div class="text-truncate gameinfos" style="border-style: none;">
+      <h1 class="fs-5 d-xxl-flex justify-content-xxl-center align-items-xxl-center text-truncate game-date">
+       Date
+      </h1>
+      <p class="d-xxl-flex justify-content-xxl-center align-items-xxl-center text-truncate" style="color: var(--bs-body-bg);">
+       #DD/#MM/#YYYY
+      </p>
+     </div>
     </div>
+   </div>
+  </div>
+ </div>
+</div>
+<div class="container">
+ <div class="row">
+  <div class="col" style="padding-top: 0px;margin-top: 25px;">
+   <div class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="width: 100%;height: 40px;background: rgb(220,149,66);border-top-left-radius: 19px;border-top-right-radius: 19px;">
+    <h1 class="fs-3" style="color: var(--bs-body-bg);text-shadow: 2px 2px var(--bs-emphasis-color);">
+     Player Statistics
+    </h1>
+   </div>
+  </div>
+  <div class="col-md-12" style="width: 100%;">
+   <div class="d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center overflow-auto" style="background: rgba(0,0,0,0);border-radius: 19px;height: 100%;border-top-left-radius: 0px;border-top-right-radius: 0px;border-style: solid;border-color: rgb(220,149,66);width: 100%;">
+    <div class="d-xxl-flex flex-column justify-content-xxl-center align-items-xxl-center" style="width: 33%;">
+     <div class="d-flex d-sm-flex flex-column justify-content-sm-start justify-content-xxl-center align-items-xxl-center">
+      <h1 class="fs-4 d-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-start justify-content-md-center justify-content-xxl-center align-items-xxl-center" style="color: var(--bs-body-bg);">
+       Total Games
+      </h1>
+      <span class="fs-5 d-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-start justify-content-md-center justify-content-xxl-center align-items-xxl-center total-games" style="width: 100%;">
+       #TotalGames
+      </span>
+     </div>
+     <div class="d-flex d-xxl-flex flex-column justify-content-xxl-center align-items-xxl-center" style="margin-top: 5px;margin-bottom: 5px;">
+      <h1 class="fs-4 d-md-flex d-lg-flex d-xl-flex justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center" style="color: var(--bs-body-bg);">
+       Won Tournaments
+       <svg class="icon icon-tabler icon-tabler-trophy" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 32px;color: #f9e814;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
+        <path d="M8 21l8 0"></path>
+        <path d="M12 17l0 4"></path>
+        <path d="M7 4l10 0"></path>
+        <path d="M17 4v8a5 5 0 0 1 -10 0v-8"></path>
+        <path d="M5 9m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
+        <path d="M19 9m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
+       </svg>
+      </h1>
+      <span class="fs-5 d-flex justify-content-center align-items-center total-tournaments" style="width: 100%;">
+       #Won Tournaments
+      </span>
+     </div>
+    </div>
+    <div class="d-xxl-flex flex-column justify-content-xxl-center align-items-xxl-center" style="width: 34%;">
+     <div class="d-flex d-xxl-flex flex-column justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center">
+      <h1 class="fs-4 d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="color: var(--bs-body-bg);">
+       Won Games
+      </h1>
+      <span class="fs-5 d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center total-won" style="width: 100%;">
+       #WonGames
+      </span>
+     </div>
+     <div class="d-xxl-flex flex-column justify-content-xxl-center align-items-xxl-center" style="margin-top: 5px;margin-bottom: 5px;">
+      <h1 class="fs-4 d-sm-flex d-md-flex d-xl-flex justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-xl-center align-items-xl-center" style="color: var(--bs-body-bg);">
+       Lost Games
+      </h1>
+      <span class="fs-5 d-flex justify-content-center align-items-center total-loss" style="width: 100%;">
+       #LostGames
+      </span>
+     </div>
+    </div>
+    <div class="d-flex d-xxl-flex flex-column justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="width: 33%;">
+     <svg class="icon icon-tabler icon-tabler-chart-pie-filled" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 157px;color: var(--bs-body-bg);" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
+      <path d="M9.883 2.207a1.9 1.9 0 0 1 2.087 1.522l.025 .167l.005 .104v7a1 1 0 0 0 .883 .993l.117 .007h6.8a2 2 0 0 1 2 2a1 1 0 0 1 -.026 .226a10 10 0 1 1 -12.27 -11.933l.27 -.067l.11 -.02z" fill="currentColor" stroke-width="0"></path>
+      <path d="M14 3.5v5.5a1 1 0 0 0 1 1h5.5a1 1 0 0 0 .943 -1.332a10 10 0 0 0 -6.11 -6.111a1 1 0 0 0 -1.333 .943z" fill="currentColor" stroke-width="0"></path>
+     </svg>
+    </div>
+   </div>
+  </div>
+ </div>
+</div>
 {% endblock %}
