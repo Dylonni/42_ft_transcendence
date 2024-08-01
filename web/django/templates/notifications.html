@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 {% block content %}
 <body style="background: var(--bs-body-color);">
     <input id="notiftoggle" type="checkbox"/>
@@ -30,7 +31,7 @@
                     <path d="M18 13l0 .01"></path>
                 </svg>
                 <strong class="me-auto" style="color: var(--bs-body-bg);">
-                    Game Invite
+                    {% translate 'Game Invite' %}
                 </strong>
                 <button aria-label="Close" class="btn-close ms-2 mb-1 close" style="padding-left: 4px;padding-right: 4px;margin-left: 7px;margin-right: 7px;" type="button">
                 </button>
@@ -41,7 +42,7 @@
                         {{ notif.sender.alias }}
                     </span>
                 </a>
-                has invited you to play !
+                {% translate 'has invited you to play !' %}'
             </p>
             <p class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center" style="margin-bottom: 0px;margin-top: 6px;">
                 <button class="btn btn-primary d-flex justify-content-center align-items-center" style="margin-left: 10px;margin-right: 10px;background: rgba(255,255,255,0);width: 45px;height: 31px;border-width: 2px;border-color: var(--bs-form-valid-border-color);" type="button">
@@ -60,10 +61,10 @@
             </p>
             <div class="d-flex justify-content-center align-items-center">
                 <span style="color: var(--bs-body-bg);font-size: 14px;margin-left: 11px;margin-right: 11px;">
-                    Accept
+                    {% translate 'Accept' %}
                 </span>
                 <span style="color: var(--bs-body-bg);font-size: 14px;margin-left: 11px;margin-right: 11px;">
-                    Decline
+                    {% translate 'Decline' %}
                 </span>
             </div>
         </div>
@@ -79,7 +80,7 @@
                     <path d="M19 16v6"></path>
                 </svg>
                 <strong class="me-auto" style="color: var(--bs-body-bg);">
-                    Friend Request
+                    {% translate 'Friend Request' %}
                 </strong>
                 <small style="color: var(--bs-body-bg);">
                     {{ notif.get_time_since }}
@@ -93,7 +94,7 @@
                         {{ notif.sender }}
                     </span>
                 </a>
-                wants to be your friend !
+                {% translate 'wants to be your friend !' %}
             </p>
             <p class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center" style="margin-bottom: 0px;margin-top: 6px;">
                 <button class="btn btn-primary d-flex justify-content-center align-items-center" style="margin-left: 10px;margin-right: 10px;background: rgba(255,255,255,0);width: 45px;height: 31px;border-width: 2px;border-color: var(--bs-form-valid-border-color);" type="button">

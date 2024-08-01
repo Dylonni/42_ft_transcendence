@@ -1,18 +1,19 @@
 {% load static %}
+{% load i18n %}
 {% include "sidebar.html" %}
 {% block content %}
 <div class="container">
     <div class="row d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="height: 100%;margin-top: 0px;margin-bottom: 0px;">
         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-11 d-xl-flex justify-content-xl-end align-items-xl-center" style="height: 100%;padding-left: 0px;padding-right: 0px;">
             <div class="d-flex d-lg-flex d-xl-flex d-xxl-flex flex-row-reverse justify-content-start align-items-center justify-content-sm-start justify-content-md-start justify-content-lg-start align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center">
-                <a aria-controls="collapse-1" aria-expanded="false" class="btn btn-primary d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" data-bs-toggle="collapse" role="button" style="background: var(--bs-body-color);border-radius: 50%;width: 55px;height: 55px;margin-left: 5px;margin-right: 5px;border: 2px solid rgb(255, 255, 255);">
-                    <svg class="icon icon-tabler icon-tabler-search" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 24px;width: 100%;height: 100%;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
-                        <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"></path>
-                        <path d="M21 21l-6 -6"></path>
-                    </svg>
-                </a>
-                <div class="collapse collapse-horizontal" id="collapse-1">
+                <button class="btn btn-primary d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" type="button" style="width: 55px;height: 55px;border-radius: 50%;background: rgba(13,110,253,0);border: 2px solid var(--bs-body-bg);" data-bs-toggle="collapse" data-bs-target="#playerFinder" aria-controls="playerFinder" aria-expanded="false"><svg class="icon icon-tabler icon-tabler-user-search" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" style="width: 100%;height: 100%;">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
+                    <path d="M6 21v-2a4 4 0 0 1 4 -4h1.5"></path>
+                    <path d="M18 18m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"></path>
+                    <path d="M20.2 20.2l1.8 1.8"></path>
+                </svg></button>
+                <div class="collapse collapse-horizontal" id="playerFinder">
                     <input class="d-xxl-flex" placeholder="Find a Player" style="height: 55px;color: var(--bs-body-bg);background: var(--bs-body-color);border-radius: 19px;width: 250px;margin-left: 0px;margin-right: 0px;padding-left: 10px;padding-right: 10px;border: 2px solid var(--bs-body-bg) ;" type="text"/>
                 </div>
             </div>
@@ -22,7 +23,7 @@
 <div class="container" style="margin-top: 0px;margin-bottom: 15px;">
     <div class="row d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center">
         <div class="col-12 col-sm-8 col-md-7 col-lg-6 col-xl-5 col-xxl-4 d-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="height: 100%;padding-left: 0px;padding-right: 0px;">
-            <div class="d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex flex-row justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center align-items-xxl-start p-4 text-center m-5 rounded-5" style="backdrop-filter: blur(30px);-webkit-backdrop-filter: blur(30px);filter: blur(0px);background: linear-gradient(-45deg, black, rgba(131,131,131,0) 51%, #000000);box-shadow: 0px 0px 6px 2px #5abfea;height: 100%;width: 100%;border: 1px solid #5abfea;">
+            <div class="d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex flex-row justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center align-items-xxl-start p-4 text-center m-5 rounded-5" style="backdrop-filter: blur(30px);-webkit-backdrop-filter: blur(30px);filter: blur(0px);box-shadow: 0px 0px 6px 2px #5abfea;height: 100%;width: 100%;border: 1px solid #5abfea;">
                 <div style="width: 170px;height: 100%;">
                     <div class="text-nowrap text-truncate d-flex d-md-flex d-xxl-flex flex-column justify-content-center align-items-center justify-content-md-center align-items-md-center justify-content-xxl-center align-items-xxl-center" id="player-info-1" style="width: 170px;height: 165px;border-radius: 19px;">
                         <img class="rounded-circle mb-3 fit-cover" height="130" src="{{ profile.avatar.url }}" style="height: 110px;width: 110px;box-shadow: 0px 0px 12px 3px #5abfea;border: 4px solid #5abfea ;" width="130"/>
@@ -55,9 +56,9 @@
                 </div>
             </div>
         </div>
-        <div class="col-12 col-sm-4 col-md-5 col-lg-3 col-xl-4 col-xxl-3 d-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-xl-start justify-content-xxl-center align-items-xxl-center" style="height: 100%;padding-left: 0px;padding-right: 0px;">
+        <div class="col-12 col-sm-4 col-md-5 col-lg-3 col-xl-2 col-xxl-2 d-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-xl-start justify-content-xxl-center align-items-xxl-center" style="height: 100%;padding-left: 0px;padding-right: 0px;">
             <a class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" href="/select/" style="height: 214px;width: 201.75px;">
-                <div class="d-flex d-xl-flex d-xxl-flex flex-column justify-content-center align-items-center justify-content-xl-center justify-content-xxl-center align-items-xxl-center p-4 text-center m-5 rounded-5" style="backdrop-filter: blur(30px);-webkit-backdrop-filter: blur(30px);filter: blur(0px);background: linear-gradient(-45deg, black, rgba(131,131,131,0) 51%, #000000);box-shadow: 0px 0px 6px 2px #5abfea;border: 1px solid #5abfea;height: 215px;">
+                <div class="d-flex d-xl-flex d-xxl-flex flex-column justify-content-center align-items-center justify-content-xl-center justify-content-xxl-center align-items-xxl-center p-4 text-center m-5 rounded-5" style="box-shadow: 0px 0px 6px 2px #5abfea;border: 1px solid #5abfea;height: 85%;">
                     <div class="d-flex d-sm-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-xxl-center align-items-xxl-center" style="width: 100%;height: 100%;">
                         <div class="d-flex d-md-flex d-xxl-flex flex-column justify-content-center align-items-end align-items-sm-start justify-content-md-center align-items-md-start align-items-lg-start align-items-xl-start justify-content-xxl-center align-items-xxl-center stats" style="padding-right: 0px;height: 150px;width: 80%;padding-left: 0px;padding-top: 0px;padding-bottom: 0px;margin-left: 15px;margin-right: 15px;">
                             <div class="d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex flex-column justify-content-center align-items-center justify-content-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="margin-bottom: 0px;width: 100%;height: 100%;padding-top: 0px;padding-bottom: 0px;">

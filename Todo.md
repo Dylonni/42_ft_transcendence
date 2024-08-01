@@ -1,11 +1,10 @@
     LOGIN
-
 - [X] Create a template for "forgot password" (mail input)
 - [X] Create a template for "confirm new password" (password input) -> create a show password button
 - [X] Make the "show password" work
 - [X] Create Divs to load upon error codes
 - [ ] Do not redirect when forgot password email has been sent
-- [ ] Fix toast
+- [X] Fix toast
 
     NAVBAR
 - [ ] Rework the navbar by adding a page to localplay
@@ -43,7 +42,7 @@
 
     LEADERBOARD
 - [ ] Make better 2nd and third place
-- [ ] Find a way to display all ranks with tabs
+- [ ] Rework page 
 
     NOTIFICATION
 - [X] Add a little notifcation center

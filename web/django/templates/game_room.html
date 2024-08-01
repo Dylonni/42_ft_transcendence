@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 {% include "sidebar.html" %}
 {% block content %}
 <div class="container" style="padding-top: 0px;padding-bottom: 0px;padding-left: 29px;padding-right: 29px;margin-top: 5px;margin-bottom: 5px;">
@@ -9,7 +10,7 @@
             </h1>
             <div class="d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="width: 100%;margin-bottom: 0px;margin-top: 0px;">
                 <div class="d-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="width: 100%;margin-top: 0px;margin-bottom: 5px;">
-                    <div class="d-flex d-xxl-flex flex-column justify-content-end justify-content-lg-center align-items-lg-center justify-content-xxl-end align-items-xxl-center" data-bs-placement="bottom" data-bs-toggle="tooltip" data-bss-tooltip="" id="roomOwner" style="width: 20%;height: 130px;margin-left: 10px;margin-right: 10px;backdrop-filter: opacity(1);-webkit-backdrop-filter: opacity(1);opacity: 1;" title="Room Owner">
+                    <div class="d-flex d-xxl-flex flex-column justify-content-end justify-content-lg-center align-items-lg-center justify-content-xxl-end align-items-xxl-center" data-bs-placement="bottom" data-bs-toggle="tooltip" data-bss-tooltip="" id="roomOwner" style="width: 20%;height: 130px;margin-left: 10px;margin-right: 10px;backdrop-filter: opacity(1);-webkit-backdrop-filter: opacity(1);opacity: 1;" title="{% translate 'Room Owner' %}">
                         <div class="d-flex justify-content-center align-items-center" style="width: 100%;">
                             <svg class="icon icon-tabler icon-tabler-crown" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 30px;color: #5abfea;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
@@ -83,7 +84,7 @@
                         </div>
                         <div class="d-flex justify-content-center align-items-center" style="width: 100%;">
                             <span class="text-nowrap" style="color: var(--bs-body-bg);">
-                                Invite Player
+                                {% translate 'Invite Player' %}
                             </span>
                         </div>
                     </div>
@@ -131,7 +132,7 @@
                 <div class="card-body d-flex d-lg-flex d-xl-flex d-xxl-flex flex-column justify-content-center align-items-start justify-content-xl-center justify-content-xxl-center" style="background: repeating-linear-gradient(-45deg, rgb(0,0,0) 0%, rgba(255,255,255,0.1) 53%, var(--bs-emphasis-color) 100%), var(--bs-emphasis-color);backdrop-filter: blur(11px);-webkit-backdrop-filter: blur(11px);border-radius: 19px;width: 100%;height: 100%;">
                     <div style="width: 100%;">
                         <h4 class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="background: rgba(33,37,41,0.8);padding-bottom: 0px;margin-bottom: 10px;border-radius: 20px;">
-                            Game Infos
+                            {% translate 'Game Infos' %}
                         </h4>
                     </div>
                     <div class="d-md-flex d-lg-flex d-xl-flex d-xxl-flex flex-column align-items-lg-center flex-xl-row align-items-xl-start flex-xxl-row align-items-xxl-center" style="width: 100%;height: 50%;">
@@ -139,7 +140,7 @@
                             <div class="d-flex d-lg-flex d-xl-flex d-xxl-flex flex-column justify-content-center align-items-center flex-sm-row flex-md-row flex-lg-row justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="width: 100%;height: 100%;margin-top: 15px;margin-bottom: 15px;">
                                 <div class="d-flex d-xxl-flex flex-column justify-content-center align-items-center align-items-xxl-center" style="background: var(--bs-body-color);border-top-left-radius: 19px;border-top-right-radius: 19px;border-bottom-right-radius: 19px;border-bottom-left-radius: 19px;width: 100%;margin-top: 20px;margin-bottom: 20px;margin-left: 10px;margin-right: 10px;">
                                     <h1 class="fs-5 d-xxl-flex justify-content-xxl-center align-items-xxl-center" style="color: var(--bs-body-bg);margin-top: 10px;margin-bottom: 0px;">
-                                        Players
+                                        {% translate 'Players' %}
                                         <svg class="icon icon-tabler icon-tabler-users-group" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 25px;margin-left: 10px;margin-right: 10px;color: #75aadb;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
                                             <path d="M10 13a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path>
@@ -158,7 +159,7 @@
                                 </div>
                                 <div class="d-flex d-xxl-flex flex-column justify-content-center align-items-center align-items-xxl-center" style="background: var(--bs-body-color);border-top-left-radius: 19px;border-top-right-radius: 19px;border-bottom-right-radius: 19px;border-bottom-left-radius: 19px;width: 100%;margin-top: 20px;margin-bottom: 20px;margin-left: 10px;margin-right: 10px;">
                                     <h1 class="fs-5 d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="color: var(--bs-body-bg);margin-top: 10px;margin-bottom: 0px;">
-                                        Score to win
+                                        {% translate 'Score to win' %}
                                         <svg class="icon icon-tabler icon-tabler-stars-filled" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 25px;margin-left: 10px;margin-right: 10px;color: #ffc61e;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
                                             <path d="M17.657 12.007a1.39 1.39 0 0 0 -1.103 .765l-.855 1.723l-1.907 .277c-.52 .072 -.96 .44 -1.124 .944l-.038 .14c-.1 .465 .046 .954 .393 1.29l1.377 1.337l-.326 1.892a1.393 1.393 0 0 0 2.018 1.465l1.708 -.895l1.708 .896a1.388 1.388 0 0 0 1.462 -.105l.112 -.09a1.39 1.39 0 0 0 .442 -1.272l-.325 -1.891l1.38 -1.339c.38 -.371 .516 -.924 .352 -1.427l-.051 -.134a1.39 1.39 0 0 0 -1.073 -.81l-1.907 -.278l-.853 -1.722a1.393 1.393 0 0 0 -1.247 -.773l-.143 .007z" fill="currentColor" stroke-width="0"></path>
@@ -171,7 +172,7 @@
                                             {{ game.win_score }}
                                         </span>
                                         <span class="d-flex d-xxl-flex align-items-center justify-content-xxl-center align-items-xxl-center" style="color: #ffc61e;font-size: 15px;font-weight: bold;height: 40px;">
-                                            points
+                                            {% translate 'points' %}
                                         </span>
                                     </div>
                                 </div>
@@ -180,7 +181,7 @@
                                 <div style="width: 100%;margin-left: 15px;margin-right: 15px;">
                                     <div class="d-flex d-xxl-flex flex-column justify-content-center align-items-center align-items-xxl-center" style="border-top-left-radius: 19px;border-top-right-radius: 19px;border-bottom-right-radius: 19px;border-bottom-left-radius: 19px;margin-left: 0px;margin-right: 0px;background: var(--bs-body-color);">
                                         <h1 class="text-nowrap fs-5 d-xxl-flex justify-content-xxl-center align-items-xxl-center" style="color: var(--bs-body-bg);margin-top: 10px;margin-bottom: 10px;">
-                                            Ball size
+                                            {% translate 'Ball size' %}
                                             <svg class="icon icon-tabler icon-tabler-inner-shadow-bottom-right" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 26px;margin-left: 5px;margin-right: 5px;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
                                                 <path d="M12 21a9 9 0 1 1 0 -18a9 9 0 0 1 0 18z"></path>
@@ -197,7 +198,7 @@
                                 <div style="width: 100%;margin-left: 15px;margin-right: 15px;">
                                     <div class="d-flex d-xxl-flex flex-column justify-content-center align-items-center align-items-xxl-center" style="border-top-left-radius: 19px;border-top-right-radius: 19px;border-bottom-right-radius: 19px;border-bottom-left-radius: 19px;background: var(--bs-body-color);">
                                         <h1 class="text-nowrap fs-5 d-xxl-flex justify-content-xxl-center align-items-xxl-center" style="color: var(--bs-body-bg);margin-top: 10px;margin-bottom: 10px;">
-                                            Paddle size
+                                            {% translate 'Paddle size' %}
                                             <svg class="icon icon-tabler icon-tabler-arrows-horizontal" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 26px;margin-left: 5px;margin-right: 5px;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
                                                 <path d="M7 8l-4 4l4 4"></path>
@@ -215,7 +216,7 @@
                                 <div style="width: 100%;margin-left: 15px;margin-right: 15px;">
                                     <div class="d-flex d-xxl-flex flex-column justify-content-center align-items-center align-items-xxl-center" style="border-top-left-radius: 19px;border-top-right-radius: 19px;border-bottom-right-radius: 19px;border-bottom-left-radius: 19px;background: var(--bs-body-color);">
                                         <h1 class="fs-5 d-xxl-flex justify-content-xxl-center align-items-xxl-center" style="color: var(--bs-body-bg);margin-top: 10px;margin-bottom: 10px;">
-                                            Initial Ball Speed
+                                            {% translate 'Initial Ball Speed' %}
                                             <svg class="icon icon-tabler icon-tabler-brand-speedtest" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 26px;margin-left: 5px;margin-right: 5px;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
                                                 <path d="M5.636 19.364a9 9 0 1 1 12.728 0"></path>
@@ -232,52 +233,52 @@
                             </div>
                             <div class="d-flex d-lg-flex d-xl-flex d-xxl-flex flex-column justify-content-center align-items-center flex-sm-row flex-md-row flex-lg-row justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="width: 100%;height: 100%;margin-top: 25px;margin-bottom: 25px;">
                                 <h1 class="fs-3">
-                                    Powerups
+                                    {% translate 'Powerups' %}
                                 </h1>
                                 <div style="width: 100%;margin-left: 15px;margin-right: 15px;">
                                     <div class="d-flex d-xxl-flex flex-column justify-content-center align-items-center align-items-xxl-center" style="border-top-left-radius: 19px;border-top-right-radius: 19px;border-bottom-right-radius: 19px;border-bottom-left-radius: 19px;margin-left: 0px;margin-right: 0px;background: var(--bs-body-color);">
                                         <h1 class="fs-6 d-xxl-flex justify-content-xxl-center align-items-xxl-center" style="color: var(--bs-body-bg);margin-top: 10px;margin-bottom: 10px;">
-                                            Paddle Grow
+                                            {% translate 'Paddle Grow' %}
                                         </h1>
                                     </div>
                                 </div>
                                 <div style="width: 100%;margin-left: 15px;margin-right: 15px;">
                                     <div class="d-flex d-xxl-flex flex-column justify-content-center align-items-center align-items-xxl-center" style="border-top-left-radius: 19px;border-top-right-radius: 19px;border-bottom-right-radius: 19px;border-bottom-left-radius: 19px;background: var(--bs-body-color);">
                                         <h1 class="fs-6 d-xxl-flex justify-content-xxl-center align-items-xxl-center" style="color: var(--bs-body-bg);margin-top: 10px;margin-bottom: 10px;">
-                                            Blockers
+                                            {% translate 'Blockers' %}
                                         </h1>
                                     </div>
                                 </div>
                                 <div style="width: 100%;margin-left: 15px;margin-right: 15px;">
                                     <div class="d-flex d-xxl-flex flex-column justify-content-center align-items-center align-items-xxl-center" style="border-top-left-radius: 19px;border-top-right-radius: 19px;border-bottom-right-radius: 19px;border-bottom-left-radius: 19px;background: var(--bs-body-color);">
                                         <h1 class="fs-6 d-xxl-flex justify-content-xxl-center align-items-xxl-center" style="color: var(--bs-body-bg);margin-top: 10px;margin-bottom: 10px;">
-                                            Bouncy ball
+                                            {% translate 'Bouncy ball' %}
                                         </h1>
                                     </div>
                                 </div>
                             </div>
                             <div class="d-flex d-lg-flex d-xl-flex d-xxl-flex flex-column justify-content-center align-items-center flex-sm-row flex-md-row flex-lg-row justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="width: 100%;height: 100%;margin-top: 25px;margin-bottom: 25px;">
                                 <h1 class="fs-3">
-                                    Events
+                                    {% translate 'Events' %}
                                 </h1>
                                 <div style="width: 100%;margin-left: 15px;margin-right: 15px;">
                                     <div class="d-flex d-xxl-flex flex-column justify-content-center align-items-center align-items-xxl-center" style="border-top-left-radius: 19px;border-top-right-radius: 19px;border-bottom-right-radius: 19px;border-bottom-left-radius: 19px;margin-left: 0px;margin-right: 0px;background: var(--bs-body-color);">
                                         <h1 class="fs-6 d-xxl-flex justify-content-xxl-center align-items-xxl-center" style="color: var(--bs-body-bg);margin-top: 10px;margin-bottom: 10px;">
-                                            TBD
+                                            {% translate 'TBD' %}
                                         </h1>
                                     </div>
                                 </div>
                                 <div style="width: 100%;margin-left: 15px;margin-right: 15px;">
                                     <div class="d-flex d-xxl-flex flex-column justify-content-center align-items-center align-items-xxl-center" style="border-top-left-radius: 19px;border-top-right-radius: 19px;border-bottom-right-radius: 19px;border-bottom-left-radius: 19px;background: var(--bs-body-color);">
                                         <h1 class="fs-6 d-xxl-flex justify-content-xxl-center align-items-xxl-center" style="color: var(--bs-body-bg);margin-top: 10px;margin-bottom: 10px;">
-                                            TBD
+                                            {% translate 'TBD' %}
                                         </h1>
                                     </div>
                                 </div>
                                 <div style="width: 100%;margin-left: 15px;margin-right: 15px;">
                                     <div class="d-flex d-xxl-flex flex-column justify-content-center align-items-center align-items-xxl-center" style="border-top-left-radius: 19px;border-top-right-radius: 19px;border-bottom-right-radius: 19px;border-bottom-left-radius: 19px;background: var(--bs-body-color);">
                                         <h1 class="fs-6 d-xxl-flex justify-content-xxl-center align-items-xxl-center" style="color: var(--bs-body-bg);margin-top: 10px;margin-bottom: 10px;">
-                                            TBD
+                                            {% translate 'TBD' %}
                                         </h1>
                                     </div>
                                 </div>
@@ -291,14 +292,14 @@
                                     <path d="M15 4h1a1 1 0 0 1 1 1v3.5"></path>
                                     <path d="M20 6c.264 .112 .52 .217 .768 .315a1 1 0 0 1 .53 1.311l-2.298 5.374"></path>
                                 </svg>
-                                Map
+                                {% translate 'Map' %}
                             </h1>
                             <div style="width: 100%;height: 50%;">
                                 <img src="assets/img/resized.webp" style="width: 100%;height: 100%;border-radius: 20px;"/>
                             </div>
                             <div class="d-xxl-flex flex-column justify-content-xxl-center align-items-xxl-center" style="width: 100%;height: 50%;background: linear-gradient(45deg, #00b5ee 19%, #ff0000 86%), #d38800;border-radius: 20px;margin-bottom: 0px;margin-top: 15px;padding-top: 10px;padding-bottom: 10px;">
                                 <h1 class="text-uppercase d-flex d-sm-flex d-md-flex d-xl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-xl-center" style="text-shadow: 3px 3px 3px var(--bs-emphasis-color);margin-bottom: 0px;">
-                                    Get ready
+                                    {% translate 'Get ready' %}
                                 </h1>
                                 <div class="d-flex d-xxl-flex flex-row justify-content-center align-items-center align-items-lg-center justify-content-xl-center justify-content-xxl-end align-items-xxl-center" style="width: 100%;height: auto;backdrop-filter: opacity(1);-webkit-backdrop-filter: opacity(1);opacity: 1;margin-left: 0px;margin-right: 0px;" title="Room Owner">
                                     <div class="text-nowrap text-truncate d-flex d-lg-flex d-xxl-flex flex-column justify-content-center align-items-center justify-content-lg-center align-items-lg-center justify-content-xxl-center" style="width: 100%;height: 100%;text-overflow: ellipsis;padding-right: 0px;padding-left: 0px;margin-left: 0px;margin-right: 0px;">
@@ -334,12 +335,12 @@
                     <path d="M18 6l-12 12"></path>
                     <path d="M6 6l12 12"></path>
                 </svg>
-                Leave Room
+                {% translate "Leave Room" %}
             </button>
         </div>
         <div class="col-md-6 col-xl-6 col-xxl-6 d-flex d-md-flex d-xxl-flex justify-content-center align-items-center justify-content-md-center align-items-md-center justify-content-xxl-center align-items-xxl-center">
             <button class="btn btn-primary" style="background: #339e35;border-style: none;" type="button">
-                Ready
+                {% translate "Ready" %}
                 <svg class="icon icon-tabler icon-tabler-check" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 30px;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
                     <path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
                     <path d="M5 12l5 5l10 -10"></path>
@@ -359,20 +360,20 @@
                         <path d="M12 9v4"></path>
                         <path d="M12 16v.01"></path>
                     </svg>
-                    Do you confirm leaving ?
+                    {% translate 'Do you confirm leaving ?' %}
                 </h4>
             </div>
             <div class="modal-body">
                 <p>
-                    If any game has started, leaving will make you unable to join the room again and your next game will be considered as a defeat.
+                    {% translate 'If any game has started, leaving will make you unable to join the room again and your next game will be considered as a defeat.' %}
                 </p>
             </div>
             <div class="modal-footer" style="border-style: none;">
                 <button class="btn btn-light" data-bs-dismiss="modal" type="button">
-                    Cancel
+                    {% translate 'Cancel' %}
                 </button>
                 <button class="btn btn-primary" style="background: #e8112d;border-style: none;" type="button">
-                    Leave
+                    {% translate 'Leave' %}
                 </button>
             </div>
         </div>
@@ -390,7 +391,7 @@
                         <path d="M19 16v6"></path>
                         <path d="M6 21v-2a4 4 0 0 1 4 -4h4"></path>
                     </svg>
-                    Invite
+                    {% translate 'Invite' %}
                 </h4>
                 <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button">
                 </button>
@@ -398,7 +399,7 @@
             <div class="modal-body" style="width: 100%;">
                 <div class="fs-4 d-flex d-xl-flex flex-column justify-content-center align-items-center justify-content-xl-center align-items-xl-center" style="width: 100%;height: 100%;background: var(--bs-body-color);border-radius: 20px;margin-top: 10px;margin-bottom: 10px;">
                     <h1 class="fs-5 text-center" style="margin-bottom: 0px;color: var(--bs-body-bg);">
-                        Invite a random Player
+                        {% translate 'Invite a random Player' %}
                     </h1>
                     <div class="d-flex justify-content-center align-items-center" style="width: 90px;height: 90px;margin-top: 10px;margin-bottom: 10px;border-radius: 50%;border: 3px solid var(--bs-body-bg) ;">
                         <svg class="icon icon-tabler icon-tabler-user-question" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 44px;width: 50px;height: 60px;color: var(--bs-body-bg);" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
@@ -410,12 +411,12 @@
                         </svg>
                     </div>
                     <button class="btn btn-primary" style="background: var(--bs-btn-bg);color: var(--bs-btn-disabled-color);margin-top: 6px;margin-bottom: 6px;" type="submit">
-                        Invite
+                        {% translate 'Invite' %}
                     </button>
                 </div>
                 <div class="d-flex d-xxl-flex flex-column justify-content-start align-items-center justify-content-xxl-start" style="width: 100%;height: 100%;background: var(--bs-body-color);border-radius: 20px;">
                     <h1 class="fs-5 d-flex justify-content-center align-items-center" style="color: var(--bs-body-bg);margin-bottom: 0px;border-bottom-width: 1px;border-bottom-style: none;">
-                        Invite a friend
+                        {% translate 'Invite a friend' %}
                     </h1>
                     {% for friend in friends %}
                     <div class="text-truncate d-flex align-items-center" id="friendToInvite" style="width: 100%;height: 55px;border-top: 1px solid var(--bs-light-text-emphasis);border-bottom: 1px solid var(--bs-light-text-emphasis);border-bottom-left-radius: 20px;border-bottom-right-radius: 20px;">

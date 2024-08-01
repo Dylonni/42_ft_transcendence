@@ -280,10 +280,8 @@ document.addEventListener("DOMContentLoaded", () => {
             })
         }
 
-        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bss-tooltip]'));
-        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-            return new bootstrap.Tooltip(tooltipTriggerEl);
-        })
+        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+        const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl,  {trigger: 'hover'}));
 
         if (window.innerWidth < 768) {
             [].slice.call(document.querySelectorAll('[data-bss-disabled-mobile]')).forEach(function (elem) {

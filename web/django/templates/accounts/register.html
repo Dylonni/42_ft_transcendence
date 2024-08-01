@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 {% block content %}
 <header class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-lg-center justify-content-xxl-center align-items-xxl-center">
     <div>
@@ -40,41 +41,41 @@
                             <form action="/api/auth/register/" class="text-center auth-form" method="post">
                                 {% csrf_token %}
                                 <h2 style="padding-bottom: 20px;">
-                                    Register
+                                    {% translate 'Register' %}
                                 </h2>
                                 <div class="mb-3 form-floating">
                                     <input class="form-control" id="floatingUser-register" maxlength="64" minlength="4" name="username" pattern="^[a-zA-Z0-9_.-]*$" placeholder=" " required="" type="text"/>
                                     <label class="form-label" for="floatingUser-register">
-                                        Username
+                                        {% translate 'Username' %}
                                     </label>
                                 </div>
                                 <div class="mb-3 form-floating">
                                     <input class="form-control" id="floatingMail-register" name="email" placeholder=" " required="" type="email"/>
                                     <label class="form-label" for="floatingMail-register">
-                                        Email
+                                        {% translate 'Email' %}
                                     </label>
                                 </div>
                                 <div class="mb-3 form-floating">
                                     <input class="form-control" id="floatingPassword-register" maxlength="254" minlength="6" name="password" pattern="^[\w\W]{6,254}$" placeholder=" " required="" title="Password must include at least 6 Characters long" type="password"/>
                                     <label class="form-label" for="floatingMail-register">
-                                        Password
+                                        {% translate 'Password' %}
                                     </label>
                                     <div class="form-check" style="width: 110.078px;margin-left: 0px;margin-bottom: 0px;height: 29px;padding-top: 2px;">
                                         <input class="form-check-input" id="formCheck-3" onclick="showPassword()" style="margin-left: -23px;width: 16px;margin-right: 0px;margin-top: 5px;" type="checkbox"/>
                                         <label class="form-check-label" for="formCheck-3" style="margin-left: 0px;font-size: 12px;margin-top: 0px;margin-bottom: 5px;">
-                                            Show password
+                                            {% translate 'Show password' %}
                                         </label>
                                     </div>
                                 </div>
                                 <div class="mb-3">
                                     <button class="btn btn-primary d-block w-100" type="submit">
-                                        Register
+                                        {% translate 'Register' %}
                                     </button>
                                 </div>
                                 <p class="text-muted">
-                                    Already Registered ?
+                                    {% translate 'Already Registered ?' %}'
                                     <a href="/login/">
-                                        Sign in here
+                                        {% translate 'Sign in here' %}
                                     </a>
                                 </p>
                             </form>

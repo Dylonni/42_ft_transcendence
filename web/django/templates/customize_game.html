@@ -1,10 +1,11 @@
 {% load static %}
+{% load i18n %}
 {% include "sidebar.html" %}
 {% block content %}
 <div class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="margin-bottom: 20px;">
     <header class="d-flex d-xl-flex justify-content-center align-items-center justify-content-xl-center align-items-xl-center" style="width: 40%;">
         <h1 class="d-xl-flex justify-content-xl-center align-items-xl-center" style="color: var(--bs-body-bg);margin-left: 25px;margin-right: 25px;margin-bottom: 0px;">
-            Customize your game
+            {% translate 'Customize your game' %}
         </h1>
         <div class="d-flex d-xxl-flex flex-column justify-content-center align-items-center flex-sm-row flex-md-row flex-lg-row flex-xl-row flex-xxl-row justify-content-xxl-center align-items-xxl-center" style="width: 100px;padding-left: 0px;margin-right: 0px;height: 100px;">
             <svg class="icon icon-tabler icon-tabler-world" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 38px;color: var(--bs-body-bg);" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
@@ -43,7 +44,7 @@
             <div class="col-md-12 col-lg-6 col-xl-6 col-xxl-6" style="padding-left: 40px;padding-right: 40px;">
                 <div class="card" style="background: var(--bs-emphasis-color);border-bottom-right-radius: 22px;border-bottom-left-radius: 22px;border-top-left-radius: 22px;border-top-right-radius: 22px;margin-top: 0px;margin-bottom: 0px;padding-top: 0px;padding-bottom: 0px;">
                     <h4 class="fs-3 d-flex d-xl-flex justify-content-center justify-content-xl-center align-items-xl-center" style="color: var(--bs-body-bg);margin-bottom: 0px;">
-                        Game Options
+                        {% translate 'Game Options' %}
                         <svg class="icon icon-tabler icon-tabler-adjustments" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 35px;margin-left: 10px;margin-right: 10px;margin-top: 5px;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
                             <path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
                             <path d="M4 10a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path>
@@ -61,7 +62,7 @@
                         <div class="d-flex d-lg-flex d-xl-flex d-xxl-flex flex-column justify-content-center align-items-center flex-sm-row flex-md-row flex-lg-row justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="width: 100%;">
                             <div class="d-flex d-xxl-flex flex-column justify-content-center align-items-center align-items-xxl-center" style="background: var(--bs-body-color);border-top-left-radius: 19px;border-top-right-radius: 19px;border-bottom-right-radius: 19px;border-bottom-left-radius: 19px;width: 50%;margin-top: 20px;margin-bottom: 20px;margin-left: 10px;margin-right: 10px;">
                                 <h1 class="fs-5 d-xxl-flex justify-content-xxl-center align-items-xxl-center" style="color: var(--bs-body-bg);margin-top: 10px;margin-bottom: 0px;">
-                                    Players
+                                    {% translate 'Players' %}
                                     <svg class="icon icon-tabler icon-tabler-users-group" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 25px;margin-left: 10px;margin-right: 10px;color: #75aadb;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
                                         <path d="M10 13a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path>
@@ -93,7 +94,7 @@
                             </div>
                             <div class="d-flex d-xxl-flex flex-column justify-content-center align-items-center align-items-xxl-center" style="background: var(--bs-body-color);border-top-left-radius: 19px;border-top-right-radius: 19px;border-bottom-right-radius: 19px;border-bottom-left-radius: 19px;width: 50%;margin-top: 20px;margin-bottom: 20px;margin-left: 10px;margin-right: 10px;">
                                 <h1 class="fs-5 d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="color: var(--bs-body-bg);margin-top: 10px;margin-bottom: 0px;">
-                                    Score to win
+                                    {% translate 'Score to win' %}
                                     <svg class="icon icon-tabler icon-tabler-stars-filled" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 25px;margin-left: 10px;margin-right: 10px;color: #ffc61e;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
                                         <path d="M17.657 12.007a1.39 1.39 0 0 0 -1.103 .765l-.855 1.723l-1.907 .277c-.52 .072 -.96 .44 -1.124 .944l-.038 .14c-.1 .465 .046 .954 .393 1.29l1.377 1.337l-.326 1.892a1.393 1.393 0 0 0 2.018 1.465l1.708 -.895l1.708 .896a1.388 1.388 0 0 0 1.462 -.105l.112 -.09a1.39 1.39 0 0 0 .442 -1.272l-.325 -1.891l1.38 -1.339c.38 -.371 .516 -.924 .352 -1.427l-.051 -.134a1.39 1.39 0 0 0 -1.073 -.81l-1.907 -.278l-.853 -1.722a1.393 1.393 0 0 0 -1.247 -.773l-.143 .007z" fill="currentColor" stroke-width="0"></path>
@@ -129,7 +130,7 @@
                         </div>
                         <div class="d-flex d-xxl-flex flex-column justify-content-center align-items-center align-items-xxl-center" style="background: var(--bs-body-color);border-top-left-radius: 19px;border-top-right-radius: 19px;border-bottom-right-radius: 19px;border-bottom-left-radius: 19px;width: 100%;margin-top: 0px;margin-bottom: 10px;">
                             <h1 class="fs-5 d-xxl-flex justify-content-xxl-center align-items-xxl-center" style="color: var(--bs-body-bg);margin-top: 10px;margin-bottom: 10px;">
-                                Ball size
+                                {% translate 'Ball size' %}
                             </h1>
                             <div class="d-flex d-xxl-flex flex-row justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center radiogroup" style="width: 60%">
                                 <div class="form-check d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="padding-left: 0px;margin-bottom: 0px;margin-left: 0px;margin-right: 0px;width: 33%;">
@@ -153,19 +154,19 @@
                             </div>
                             <div class="d-flex justify-content-center align-items-center" style="width: 60%;margin-bottom: 20px;">
                                 <span class="d-flex justify-content-center align-items-center" style="color: var(--bs-body-bg);width: 33%;font-weight: bold;">
-                                    Small
+                                    {% translate 'Small' %}
                                 </span>
                                 <span class="d-flex justify-content-center align-items-center" style="color: var(--bs-body-bg);width: 33%;font-weight: bold;margin-left: 15px;margin-right: 15px;">
-                                    Medium
+                                    {% translate 'Medium' %}
                                 </span>
                                 <span class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="color: var(--bs-body-bg);width: 33%;font-weight: bold;">
-                                    Large
+                                    {% translate 'Large' %}
                                 </span>
                             </div>
                         </div>
                         <div class="d-flex d-xxl-flex flex-column justify-content-center align-items-center align-items-xxl-center" style="background: var(--bs-body-color);border-top-left-radius: 19px;border-top-right-radius: 19px;border-bottom-right-radius: 19px;border-bottom-left-radius: 19px;height: 100px;width: 100%;margin-bottom: 10px;">
                             <h1 class="fs-5 d-xxl-flex justify-content-xxl-center align-items-xxl-center" data-bs-toggle="tooltip" data-bss-tooltip="" style="color: var(--bs-body-bg);margin-top: 10px;margin-bottom: 10px;" title="This will define the ball launch speed for each round">
-                                Initial ball speed
+                                {% translate 'Initial ball speed' %}
                             </h1>
                             <div class="d-flex d-xxl-flex flex-row justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center radiogroup" style="width: 60%">
                                 <div class="form-check d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="padding-left: 0px;margin-bottom: 0px;margin-left: 0px;margin-right: 0px;width: 33%;">
@@ -186,19 +187,19 @@
                             </div>
                             <div class="d-flex justify-content-center align-items-center" style="width: 60%;margin-bottom: 20px;">
                                 <span class="d-flex justify-content-center align-items-center" style="color: var(--bs-body-bg);width: 33%;font-weight: bold;">
-                                    Slow
+                                    {% translate 'Slow' %}
                                 </span>
                                 <span class="d-flex justify-content-center align-items-center" style="color: var(--bs-body-bg);width: 33%;font-weight: bold;margin-right: 0px;margin-left: 0px;">
-                                    Normal
+                                    {% translate 'Normal' %}
                                 </span>
                                 <span class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="color: var(--bs-body-bg);width: 33%;font-weight: bold;">
-                                    Fast
+                                    {% translate 'Fast' %}
                                 </span>
                             </div>
                         </div>
                         <div class="d-flex d-xxl-flex flex-column justify-content-center align-items-center align-items-xxl-center" style="background: var(--bs-body-color);border-top-left-radius: 19px;border-top-right-radius: 19px;border-bottom-right-radius: 19px;border-bottom-left-radius: 19px;width: 100%;margin-top: 0px;margin-bottom: 10px;padding-top: 0px;padding-bottom: 0px;">
                             <h1 class="fs-5 d-xxl-flex justify-content-xxl-center align-items-xxl-center" style="color: var(--bs-body-bg);margin-bottom: 10px;margin-top: 10px;padding-top: 0px;">
-                                Paddle Size
+                                {% translate 'Paddle Size' %}
                             </h1>
                             <div class="d-flex d-xxl-flex flex-row justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center radiogroup" style="width: 76%;height: 61px;">
                                 <div class="form-check d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="padding-left: 0px;margin-left: 0px;margin-bottom: 0px;margin-right: 0px;height: 74px;width: 33%;">
@@ -225,19 +226,19 @@
                             </div>
                             <div class="d-flex flex-row justify-content-center align-items-center" style="width: 80%;padding-bottom: 0px;margin-bottom: 6px;margin-top: 11px;">
                                 <span class="d-flex justify-content-center align-items-center" style="color: var(--bs-body-bg);width: 33%;font-weight: bold;">
-                                    Small
+                                    {% translate 'Small' %}
                                 </span>
                                 <span class="d-flex justify-content-center align-items-center" style="color: var(--bs-body-bg);width: 33%;font-weight: bold;margin-left: 0px;margin-right: 0px;">
-                                    Medium
+                                    {% translate 'Medium' %}
                                 </span>
                                 <span class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="color: var(--bs-body-bg);width: 33%;font-weight: bold;">
-                                    Large
+                                    {% translate 'Large' %}
                                 </span>
                             </div>
                         </div>
                         <div class="d-flex d-xxl-flex flex-column justify-content-center align-items-center align-items-xxl-center" style="background: var(--bs-body-color);border-top-left-radius: 19px;border-top-right-radius: 19px;border-bottom-right-radius: 19px;border-bottom-left-radius: 19px;width: 100%;margin-top: 0px;margin-bottom: 10px;padding-top: 0px;padding-bottom: 0px;">
                             <h1 class="fs-5 d-xxl-flex justify-content-xxl-center align-items-xxl-center" style="color: var(--bs-body-bg);margin-top: 10px;margin-bottom: 10px;">
-                                AI Difficulty
+                                {% translate 'AI Difficulty' %}
                                 <svg class="icon icon-tabler icon-tabler-robot" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 30px;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
                                     <path d="M6 4m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v4a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z"></path>
@@ -297,13 +298,13 @@
                             </div>
                             <div class="d-flex flex-row justify-content-center align-items-center" style="width: 80%;padding-bottom: 0px;margin-top: 12px;margin-bottom: 12px;">
                                 <span class="d-flex justify-content-center align-items-center" style="color: var(--bs-body-bg);width: 33%;font-weight: bold;">
-                                    Easy
+                                    {% translate 'Easy' %}
                                 </span>
                                 <span class="d-flex justify-content-center align-items-center" style="color: var(--bs-body-bg);width: 33%;font-weight: bold;margin-left: 0px;margin-right: 0px;">
-                                    Normal
+                                    {% translate 'Normal' %}
                                 </span>
                                 <span class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="color: var(--bs-body-bg);width: 33%;font-weight: bold;">
-                                    Hard
+                                    {% translate 'Hard' %}
                                 </span>
                             </div>
                         </div>
@@ -313,7 +314,7 @@
             <div class="col-md-12 col-lg-6 col-xl-6 col-xxl-6" style="padding-left: 40px;padding-right: 40px;">
                 <div class="card" style="background: var(--bs-emphasis-color);border-bottom-right-radius: 22px;border-bottom-left-radius: 22px;border-top-left-radius: 22px;border-top-right-radius: 22px;">
                     <h4 class="fs-3 d-flex d-xl-flex justify-content-center justify-content-xl-center align-items-xl-center" style="color: var(--bs-body-bg);margin-bottom: 0px;">
-                        Arena Options
+                        {% translate 'Arena Options' %}
                         <svg class="icon icon-tabler icon-tabler-bolt" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="margin-left: 10px;margin-right: 10px;font-size: 35px;margin-top: 5px;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
                             <path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
                             <path d="M13 3l0 7l6 0l-8 11l0 -7l-6 0l8 -11"></path>
@@ -323,7 +324,7 @@
                         <div class="d-flex d-xxl-flex flex-column justify-content-center align-items-center justify-content-xxl-start align-items-xxl-center" style="width: 100%;padding-bottom: 0px;margin-bottom: 20px;">
                             <div>
                                 <h1 class="fs-5 d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="color: var(--bs-body-bg);margin-top: 15px;margin-bottom: 15px;">
-                                    Map
+                                    {% translate 'Map' %}
                                 </h1>
                             </div>
                             <div class="d-flex d-xxl-flex flex-column justify-content-center align-items-center align-items-xxl-center" style="background: var(--bs-body-color);border-top-left-radius: 19px;border-top-right-radius: 19px;border-bottom-right-radius: 19px;border-bottom-left-radius: 19px;width: 85%;">
@@ -368,7 +369,7 @@
                         </div>
                         <div class="d-flex d-xxl-flex flex-column justify-content-center align-items-center align-items-xxl-center" style="background: var(--bs-body-color);border-top-left-radius: 19px;border-top-right-radius: 19px;border-bottom-right-radius: 19px;border-bottom-left-radius: 19px;width: 100%;margin-left: 0px;margin-right: 0px;margin-top: 25px;margin-bottom: 25px;">
                             <h1 class="fs-5 d-xxl-flex justify-content-xxl-center align-items-xxl-center" style="color: var(--bs-body-bg);margin-top: 0px;margin-bottom: 0px;">
-                                Powerups
+                                {% translate 'Powerups' %}
                                 <svg class="icon icon-tabler icon-tabler-rocket" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 30px;color: rgb(220,133,71);margin-left: 10px;margin-right: 10px;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
                                     <path d="M4 13a8 8 0 0 1 7 7a6 6 0 0 0 3 -5a9 9 0 0 0 6 -8a3 3 0 0 0 -3 -3a9 9 0 0 0 -8 6a6 6 0 0 0 -5 3"></path>
@@ -395,19 +396,19 @@
                             </div>
                             <div class="d-flex flex-row justify-content-center align-items-center" style="width: 80%;padding-bottom: 0px;margin-bottom: 6px;margin-top: 0px;">
                                 <span class="d-flex justify-content-center align-items-center" style="color: var(--bs-body-bg);width: 33%;font-weight: bold;">
-                                    Paddle grow
+                                    {% translate 'Paddle grow' %}
                                 </span>
                                 <span class="d-flex justify-content-center align-items-center" style="color: var(--bs-body-bg);width: 33%;font-weight: bold;margin-left: 0px;margin-right: 0px;">
-                                    Blockers
+                                    {% translate 'Blockers' %}
                                 </span>
                                 <span class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="color: var(--bs-body-bg);width: 33%;font-weight: bold;">
-                                    Bouncy ball
+                                    {% translate 'Bouncy ball' %}
                                 </span>
                             </div>
                         </div>
                         <div class="d-flex d-xxl-flex flex-column justify-content-center align-items-center align-items-xxl-center" style="background: var(--bs-body-color);border-top-left-radius: 19px;border-top-right-radius: 19px;border-bottom-right-radius: 19px;border-bottom-left-radius: 19px;width: 100%;margin-top: 25px;margin-bottom: 25px;">
                             <h1 class="fs-5 d-xxl-flex justify-content-xxl-center align-items-xxl-center" style="color: var(--bs-body-bg);margin-top: 0px;margin-bottom: 0px;">
-                                Events
+                                {% translate 'Events' %}
                                 <svg class="icon icon-tabler icon-tabler-transform" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="margin-left: 10px;margin-right: 10px;font-size: 30px;color: #a984ed;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
                                     <path d="M3 6a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"></path>
@@ -435,13 +436,13 @@
                             </div>
                             <div class="d-flex flex-row justify-content-center align-items-center" style="width: 80%;padding-bottom: 0px;margin-bottom: 6px;margin-top: 0px;">
                                 <span class="d-flex justify-content-center align-items-center" style="color: var(--bs-body-bg);width: 33%;font-weight: bold;">
-                                    small
+                                    {% translate 'small' %}
                                 </span>
                                 <span class="d-flex justify-content-center align-items-center" style="color: var(--bs-body-bg);width: 33%;font-weight: bold;margin-left: 0px;margin-right: 0px;">
-                                    medium
+                                    {% translate 'medium' %}
                                 </span>
                                 <span class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="color: var(--bs-body-bg);width: 33%;font-weight: bold;">
-                                    large
+                                    {% translate 'large' %}
                                 </span>
                             </div>
                         </div>
@@ -465,7 +466,7 @@
                                 <path d="M15 6l-6 6l6 6"></path>
                             </svg>
                             <span>
-                                Go Back
+                                {% translate 'Go Back' %}
                             </span>
                         </button>
                     </a>
@@ -473,7 +474,7 @@
                 <div class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xl-center justify-content-xxl-center" style="width: 50%;">
                     <button class="btn btn-primary d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" id="createGameBtn" style="border-style: none;background: rgb(58,119,40);" type="submit">
                         <span>
-                            Create Game
+                            {% translate 'Create Game' %}
                         </span>
                         <svg class="icon icon-tabler icon-tabler-chevron-right" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 35px;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
                             <path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
