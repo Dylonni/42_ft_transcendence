@@ -1,0 +1,80 @@
+To amend SSL certificates to include `localhost` as a Subject Alternative Name (SAN), you'll need to create a new certificate with `localhost` included in the SAN field. This is because the SAN field is where you specify additional host names (like `localhost`) that the certificate should be valid for, alongside the common name (CN).
+
+Here's how you can do it in your Dockerfile, using OpenSSL to generate a new certificate and key that includes `localhost` in the SAN. This process involves creating a configuration file for OpenSSL to specify the SANs and then using that configuration file to generate the certificate.
+
+1. **Create an OpenSSL Configuration File**: First, you need to create a configuration file that OpenSSL can use to include the SANs. You can do this by creating a file named `san.cnf` with the following content. This configuration includes both DNS and IP entries for `localhost`.
+
+    ```ini
+    [req]
+    default_bits = 2048
+    prompt = no
+    default_md = sha256
+    distinguished_name = dn
+    req_extensions = req_ext
+
+    [dn]
+    C=FR
+    ST=IDF
+    L=Paris
+    O=Ecole42
+    OU=Stud
+    CN=www.transcendence42.rocks
+
+    [req_ext]
+    subjectAltName = @alt_names
+
+    [alt_names]
+    DNS.1 = www.transcendence42.rocks
+    DNS.2 = localhost
+    IP.1 = 127.0.0.1
+    ```
+
+2. **Modify Dockerfile to Use the Configuration File**: You'll need to modify your Dockerfile to include this configuration file and use it when generating your SSL certificate. Here's how you can adjust your Dockerfile:
+
+    ```dockerfile
+    FROM owasp/modsecurity-crs:4.3.0-nginx-alpine-202406090906
+
+    USER root
+    RUN apk update && apk upgrade
+    RUN apk add --no-cache openssl
+
+    # Create OpenSSL config file for SAN
+    RUN echo '[req]\n\
+    default_bits = 2048\n\
+    prompt = no\n\
+    default_md = sha256\n\
+    distinguished_name = dn\n\
+    req_extensions = req_ext\n\
+    \n\
+    [dn]\n\
+    C=FR\n\
+    ST=IDF\n\
+    L=Paris\n\
+    O=Ecole42\n\
+    OU=Stud\n\
+    CN=www.transcendence42.rocks\n\
+    \n\
+    [req_ext]\n\
+    subjectAltName = @alt_names\n\
+    \n\
+    [alt_names]\n\
+    DNS.1 = www.transcendence42.rocks\n\
+    DNS.2 = localhost\n\
+    IP.1 = 127.0.0.1' > /etc/ssl/san.cnf
+
+    # Generate new SSL certificate with SAN including localhost
+    RUN openssl req -x509 -nodes -days 365 -sha256 -newkey rsa:2048 -keyout /etc/ssl/private/nginx_selfsigned.key -out /etc/ssl/certs/nginx_selfsigned.crt -config /etc/ssl/san.cnf -extensions req_ext
+
+    COPY ./conf/vault.conf /etc/nginx/conf.d/vault.conf
+    COPY ./conf/postgres-exporter.conf /etc/nginx/conf.d/postgres-exporter.conf
+    COPY ./conf/prometheus.conf /etc/nginx/conf.d/prometheus.conf
+    COPY ./conf/grafana.conf /etc/nginx/conf.d/grafana.conf
+    COPY ./conf/elasticsearch.conf /etc/nginx/conf.d/elasticsearch.conf
+    COPY ./conf/logstash.conf /etc/nginx/conf.d/logstash.conf
+    COPY ./conf/kibana.conf /etc/nginx/conf.d/kibana.conf
+    COPY ./conf/nginx.conf /etc/nginx/templates/conf.d/default.conf.template
+
+    EXPOSE 8080 8443
+    ```
+
+This Dockerfile now includes steps to create an OpenSSL configuration file with SAN entries for `localhost` and uses that configuration to generate a new SSL certificate. This certificate will be valid for both `www.transcendence42.rocks` and `localhost`, along with the IP `127.0.0.1`.

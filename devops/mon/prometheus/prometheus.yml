@@ -19,4 +19,6 @@ scrape_configs:
         - postgres-exporter:9187
         labels:
           group: 'postgres-server'
+        # rule_files:
+        #   - 'postgres_alerts.yml'
 
