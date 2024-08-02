@@ -1,0 +1,237 @@
+    {
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.50,\n  sum (\n    rate (\n        django_http_requests_latency_seconds_by_view_method_bucket {\n          namespace=~\"$namespace\",\n          job=~\"$job\",\n          view=\"$view\",\n          method=~\"$method\"\n        }[$__range]\n    )\n  ) by (job, le)\n)\n"
+        }
+      ],
+      "title": "Average Request Latency (P50) [1w]",
+      "type": "stat"
+    }
+
+
+	{
+		"targets": [
+		  {
+			"expr": "histogram_quantile(0.95,\n  sum (\n    rate (\n        django_http_requests_latency_seconds_by_view_method_bucket {\n          namespace=~\"$namespace\",\n          job=~\"$job\",\n          view=\"$view\",\n          method=~\"$method\"\n        }[$__range]\n    )\n  ) by (job, le)\n)\n"
+		  }
+		],
+		"title": "Average Request Latency (P95) [1w]",
+		"type": "stat"
+	  },
+
+
+	  {
+		"targets": [
+		  {
+			"expr": "histogram_quantile(0.50,\n  sum(\n    irate(\n      django_http_requests_latency_seconds_by_view_method_bucket{\n        namespace=~\"$namespace\",\n        job=~\"$job\",\n        view=\"$view\",\n        method=~\"$method\"\n      }[$__rate_interval]\n    ) > 0\n  ) by (view, le)\n)\n",
+			"legendFormat": "50 - {{ view }}"
+		  },
+		  {
+			"expr": "histogram_quantile(0.95,\n  sum(\n    irate(\n      django_http_requests_latency_seconds_by_view_method_bucket{\n        namespace=~\"$namespace\",\n        job=~\"$job\",\n        view=\"$view\",\n        method=~\"$method\"\n      }[$__rate_interval]\n    ) > 0\n  ) by (view, le)\n)\n",
+			"legendFormat": "95 - {{ view }}"
+		  },
+		  {
+			"expr": "histogram_quantile(0.99,\n  sum(\n    irate(\n      django_http_requests_latency_seconds_by_view_method_bucket{\n        namespace=~\"$namespace\",\n        job=~\"$job\",\n        view=\"$view\",\n        method=~\"$method\"\n      }[$__rate_interval]\n    ) > 0\n  ) by (view, le)\n)\n",
+			"legendFormat": "99 - {{ view }}"
+		  },
+		  {
+			"expr": "histogram_quantile(0.999,\n  sum(\n    irate(\n      django_http_requests_latency_seconds_by_view_method_bucket{\n        namespace=~\"$namespace\",\n        job=~\"$job\",\n        view=\"$view\",\n        method=~\"$method\"\n      }[$__rate_interval]\n    ) > 0\n  ) by (view, le)\n)\n",
+			"legendFormat": "99.9 - {{ view }}"
+		  }
+		],
+		"title": "Request Latency",
+		"type": "timeseries"
+	  }
+
+
+	  {
+		"targets": [
+		  {
+			"expr": "histogram_quantile(0.50, sum(rate(django_http_requests_latency_seconds_by_view_method_bucket{namespace=~\"$namespace\", app=~\"^$app$\",view!~\"prometheus-django-metrics|healthcheck\"}[5m])) by (job, le))",
+			"format": "time_series",
+			"interval": "",
+			"intervalFactor": 1,
+			"legendFormat": "quantile=50",
+			"refId": "A"
+		  },
+		  {
+			"expr": "histogram_quantile(0.95, sum(rate(django_http_requests_latency_seconds_by_view_method_bucket{namespace=~\"$namespace\", app=~\"^$app$\",view!~\"prometheus-django-metrics|healthcheck\"}[5m])) by (job, le))",
+			"format": "time_series",
+			"hide": false,
+			"interval": "",
+			"intervalFactor": 1,
+			"legendFormat": "quantile=95",
+			"refId": "B"
+		  },
+		  {
+			"expr": "histogram_quantile(0.99, sum(rate(django_http_requests_latency_seconds_by_view_method_bucket{namespace=~\"$namespace\", app=~\"^$app$\",view!~\"prometheus-django-metrics|healthcheck\"}[5m])) by (job, le))",
+			"format": "time_series",
+			"hide": false,
+			"interval": "",
+			"intervalFactor": 1,
+			"legendFormat": "quantile=99",
+			"refId": "C"
+		  },
+		  {
+			"expr": "histogram_quantile(0.999, sum(rate(django_http_requests_latency_seconds_by_view_method_bucket{namespace=~\"$namespace\", app=~\"^$app$\",view!~\"prometheus-django-metrics|healthcheck\"}[5m])) by (job, le))",
+			"format": "time_series",
+			"hide": false,
+			"interval": "",
+			"intervalFactor": 1,
+			"legendFormat": "quantile=99.9",
+			"refId": "D"
+		  }
+		],
+		"title": "Request Latency",
+	  },
+
+
+
+	  {
+		"targets": [
+		  {
+			"expr": "histogram_quantile(0.95,\n  sum (\n    irate(\n      django_http_requests_latency_seconds_by_view_method_bucket{\n        namespace=~\"$namespace\",\n        job=~\"$job\",\n        view!~\"<unnamed view>|health_check:health_check_home|prometheus-django-metrics\",\n      }[$__rate_interval]\n    )\n  ) by (job, le)\n)\n"
+		  }
+		],
+		"title": "Request Latency (P95)",
+		"type": "stat"
+	  },
+
+
+	  {
+		"targets": [
+		  {
+			"expr": "histogram_quantile(0.50,\n  sum(\n    rate(\n      django_http_requests_latency_seconds_by_view_method_bucket{\n        namespace=~\"$namespace\",\n        job=~\"$job\",\n        view=~\"$view\",\n        view!~\"<unnamed view>|health_check:health_check_home|prometheus-django-metrics|\",\n        view!~\"admin.*\",\n        method=~\"$method\"\n      }[$__rate_interval]\n    ) > 0\n  ) by (namespace, job, view, le)\n)\n",
+			"format": "table",
+			"instant": true
+		  },
+		  {
+			"expr": "histogram_quantile(0.95,\n  sum(\n    rate(\n      django_http_requests_latency_seconds_by_view_method_bucket{\n        namespace=~\"$namespace\",\n        job=~\"$job\",\n        view=~\"$view\",\n        view!~\"<unnamed view>|health_check:health_check_home|prometheus-django-metrics|\",\n        view!~\"admin.*\",\n        method=~\"$method\"\n      }[$__rate_interval]\n    ) > 0\n  ) by (namespace, job, view, le)\n)\n",
+			"format": "table",
+			"instant": true
+		  },
+		  {
+			"expr": "histogram_quantile(0.99,\n  sum(\n    rate(\n      django_http_requests_latency_seconds_by_view_method_bucket{\n        namespace=~\"$namespace\",\n        job=~\"$job\",\n        view=~\"$view\",\n        view!~\"<unnamed view>|health_check:health_check_home|prometheus-django-metrics|\",\n        view!~\"admin.*\",\n        method=~\"$method\"\n      }[$__rate_interval]\n    ) > 0\n  ) by (namespace, job, view, le)\n)\n",
+			"format": "table",
+			"instant": true
+		  }
+		],
+		"title": "API & Other Views Request Latency",
+	  },
+
+	  {
+		"targets": [
+		  {
+			"expr": "histogram_quantile(0.50,\n  sum(\n    rate(\n      django_http_requests_latency_seconds_by_view_method_bucket{\n        namespace=~\"$namespace\",\n        job=~\"$job\",\n        view=~\"$view\",\n        view!~\"<unnamed view>|health_check:health_check_home|prometheus-django-metrics|\",\n        view=~\"admin.*\",\n        method=~\"$method\"\n      }[$__rate_interval]\n    ) > 0\n  ) by (namespace, job, view, le)\n)\n",
+			"format": "table",
+			"instant": true
+		  },
+		  {
+			"expr": "histogram_quantile(0.95,\n  sum(\n    rate(\n      django_http_requests_latency_seconds_by_view_method_bucket{\n        namespace=~\"$namespace\",\n        job=~\"$job\",\n        view=~\"$view\",\n        view!~\"<unnamed view>|health_check:health_check_home|prometheus-django-metrics|\",\n        view=~\"admin.*\",\n        method=~\"$method\"\n      }[$__rate_interval]\n    ) > 0\n  ) by (namespace, job, view, le)\n)\n",
+			"format": "table",
+			"instant": true
+		  },
+		  {
+			"expr": "histogram_quantile(0.99,\n  sum(\n    rate(\n      django_http_requests_latency_seconds_by_view_method_bucket{\n        namespace=~\"$namespace\",\n        job=~\"$job\",\n        view=~\"$view\",\n        view!~\"<unnamed view>|health_check:health_check_home|prometheus-django-metrics|\",\n        view=~\"admin.*\",\n        method=~\"$method\"\n      }[$__rate_interval]\n    ) > 0\n  ) by (namespace, job, view, le)\n)\n",
+			"format": "table",
+			"instant": true
+		  }
+		],
+		"title": "Admin Request Latency",
+	  },
+
+
+	  {
+		"targets": [
+		  {
+			"expr": "sum(rate(django_http_requests_latency_including_middlewares_seconds_bucket{app=~\"^$application$\"}[$__rate_interval])) by (le)",
+			"format": "heatmap",
+			"interval": "",
+			"legendFormat": "{{le}}",
+			"range": true,
+			"refId": "A"
+		  }
+		],
+		"title": "Number of Requests by Processing Time",
+		"type": "heatmap"
+	  },
+
+
+
+	  {
+		"targets": [
+		  {
+			"editorMode": "code",
+			"expr": "histogram_quantile(0.50, sum(irate(django_http_requests_latency_seconds_by_view_method_bucket{app=~\"^$application$\"}[$__rate_interval])) by (le))",
+			"format": "time_series",
+			"interval": "",
+			"intervalFactor": 1,
+			"legendFormat": "50 quantile",
+			"range": true,
+			"refId": "A"
+		  },
+		  {
+			"editorMode": "code",
+			"expr": "histogram_quantile(0.95, sum(irate(django_http_requests_latency_seconds_by_view_method_bucket{app=~\"^$application$\"}[$__rate_interval])) by (le))",
+			"format": "time_series",
+			"hide": false,
+			"interval": "",
+			"intervalFactor": 1,
+			"legendFormat": "95 quantile",
+			"range": true,
+			"refId": "B"
+		  },
+		  {
+			"editorMode": "code",
+			"expr": "histogram_quantile(0.99, sum(irate(django_http_requests_latency_seconds_by_view_method_bucket{app=~\"^$application$\"}[$__rate_interval])) by (le))",
+			"format": "time_series",
+			"hide": false,
+			"interval": "",
+			"intervalFactor": 1,
+			"legendFormat": "99 quantile",
+			"range": true,
+			"refId": "C"
+		  }
+		],
+		"title": "Request Latency",
+		"type": "timeseries"
+	  },
+
+
+
+	  {
+		"targets": [
+		  {
+			"editorMode": "code",
+			"exemplar": false,
+			"expr": "topk(20, (1 - (sum(max_over_time(django_http_requests_latency_seconds_by_view_method_bucket{app=~\"^$application$\",le=\"$threshold\"}[$__range]) / ignoring(le) max_over_time(django_http_requests_latency_seconds_by_view_method_count{app=~\"^$application$\"}[$__range])) by (method, view) / count(present_over_time(django_http_requests_latency_seconds_by_view_method_count{app=~\"^$application$\"}[$__range])) by (method, view))) > 0.0099)",
+			"format": "table",
+			"instant": true,
+			"interval": "",
+			"legendFormat": "{{method}} {{view}}",
+			"range": false,
+			"refId": "A"
+		  }
+		],
+		"title": "Top 20 Views by Response Time (> $threshold)",
+		"type": "bargauge"
+	  },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
