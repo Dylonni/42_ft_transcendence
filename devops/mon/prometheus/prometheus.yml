@@ -1,6 +1,15 @@
 global:
   scrape_interval: 15s
 
+# rule_files:
+#   - 'postgres_alerts.yml'
+
+# alerting:
+#   alertmanagers:
+#     - static_configs:
+#         - targets:
+#           - alert-manager:9093
+
 scrape_configs:
   - job_name: 'prometheus'
     static_configs:
@@ -19,6 +28,5 @@ scrape_configs:
         - postgres-exporter:9187
         labels:
           group: 'postgres-server'
-        # rule_files:
-        #   - 'postgres_alerts.yml'
+
 

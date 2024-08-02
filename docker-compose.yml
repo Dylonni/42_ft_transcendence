@@ -16,6 +16,7 @@ services:
       - postgres-exporter
       - prometheus
       - grafana
+      # - alert-manager
       # - elasticsearch
       # - logstash
       # - kibana
@@ -29,6 +30,7 @@ services:
       # - "9187:9187" # Postgres Exporter - no need to expose
       - "9090:9090" # Prometheus
       - "3000:3000" # Grafana
+      # - "9093:9093" # Alert Manager
       # - "9200:9200" # Elasticsearch - no need to expose
       # - "5001:5001" # Logstash - no need to expose
       # - "5601:5601" # Kibana - shows "elasticsearch", which is normal
@@ -110,6 +112,8 @@ services:
         condition: service_healthy
     networks:
       - backend
+    # volumes:
+    #   - prom-data:/prometheus
 
   grafana:
     build: ./devops/mon/grafana
@@ -119,6 +123,19 @@ services:
       - prometheus
     networks:
       - backend
+    # volumes:
+    #   - gf-data:/var/lib/grafana
+
+  # alert-manager:
+  #   build: ./devops/mon/alert-manager
+  #   container_name: alert-manager
+  #   depends_on:
+  #     - prometheus
+  #   networks:
+  #     - backend
+  #   volumes:
+  #     - am-data:/data
+  #   command: --config.file=/etc/alertmanager/alertmanager.yml --log.level=debug --web.listen-address=:9093 --cluster.listen-address=
 
 # ELK STACK
   # elk_certs:
@@ -242,12 +259,19 @@ services:
 volumes:
   pg-data:
     name: pg-data
-  elk-data:
-    name: elk-data
+  # prom-data:
+  #   name: prom-data
+  # am-data:
+  #   name: am-data
+  # gf-data:
+  #   name: gf-data
   django-token:
     name: django-token
-  shared_elk:
-    name: shared_elk
   vault-certs:
     name: vault-certs
+  elk-data:
+    name: elk-data
+  shared_elk:
+    name: shared_elk
+
 

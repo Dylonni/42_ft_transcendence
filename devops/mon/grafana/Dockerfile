@@ -17,7 +17,6 @@ COPY provisioning/dashboards/17658_rev2.json /var/lib/grafana/dashboards/17658_r
 # COPY provisioning/dashboards/test.json /var/lib/grafana/dashboards/test.json
 
 
-# COPY config/grafana.ini /etc/grafana/grafana.ini
 
 COPY provisioning/alerting/contact_point_discord.yaml /etc/grafana/provisioning/alerting/contact_point_discord.yaml
 COPY provisioning/alerting/policies-1722510964203.yaml /etc/grafana/provisioning/alerting/policies-1722510964203.yaml
