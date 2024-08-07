@@ -2,6 +2,6 @@
 
 cybersec/nginx-modsec/conf/cert
 cybersec/vault/config/certs
-
+.DS_Store
 
 __pycache__/
