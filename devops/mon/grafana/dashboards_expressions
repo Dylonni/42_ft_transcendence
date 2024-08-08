@@ -1,0 +1,293 @@
+All expressions for dashboards 
+
+111 http requests
+222 http latency
+333 database operations
+
+
+
+
+
+
+
+
+
+
+
+
+
+"type": "bargauge"
+222
+"title": "Top 20 Views by Response Time (> $threshold)",
+topk(20, (1 - (sum(max_over_time(django_http_requests_latency_seconds_by_view_method_bucket{app=~\"^$application$\",le=\"$threshold\"}[$__range]) / ignoring(le) max_over_time(django_http_requests_latency_seconds_by_view_method_count{app=~\"^$application$\"}[$__range])) by (method, view) / count(present_over_time(django_http_requests_latency_seconds_by_view_method_count{app=~\"^$application$\"}[$__range])) by (method, view))) > 0.0099)
+
+
+"type": "gauge"
+333
+"title": "DB Query Errors",
+sum(max_over_time(django_db_errors_total{app=~\"^$application$\"}[$__range]))
+
+"title": "DB Connection Errors",
+sum(max_over_time(django_db_new_connection_errors_total{app=~\"^$application$\"}[$__range]))
+
+"title": "Cache Hit Ratio",
+sum(django_cache_get_hits_total{app=~\"^$application$\"}) by (backend) / sum(django_cache_get_total{app=~\"^$application$\"}) by (backend)
+
+
+
+
+
+
+
+	"type": "graph",
+333
+	"title": "Database Ops"
+sum(irate(django_db_execute_total{namespace=~\"$namespace\", app=~\"^$app$\"}[1m])) by (vendor)
+
+"title": "Models stats", {for inserts, updates, deletes}
+sum(irate(django_model_deletes_total{namespace=~\"$namespace\", app=~\"^$app$\"}[1m])) by (model)
+sum(irate(django_model_inserts_total{namespace=~\"$namespace\", app=~\"^$app$\"}[1m])) by (model)
+sum(irate(django_model_updates_total{namespace=~\"$namespace\", app=~\"^$app$\"}[1m])) by (model)
+
+
+
+
+"type": "heatmap"
+
+111
+	"title": "Number of Responses by Size",
+sum(rate(django_http_responses_body_total_bytes_bucket{app=~\"^$application$\"}[$__rate_interval])) by (le)
+
+
+222
+  "title": "Number of Requests by Processing Time",
+sum(rate(django_http_requests_latency_including_middlewares_seconds_bucket{app=~\"^$application$\"}[$__rate_interval])) by (le)
+
+333
+"title": "Database Query Duration",
+sum(rate(django_db_query_duration_seconds_bucket{app=~\"^$application$\"}[$__rate_interval])) by (le)
+
+
+
+
+"type": "singlestat",
+
+111
+      "title": "Total Requests, amended",
+sum(irate(django_http_requests_total_by_transport_total{namespace=~\"$namespace\", app=~\"^$app$\"}[1m]))
+
+      "title": "2XX Responses",
+sum(irate(django_http_responses_total_by_status_total{status=~\"2.+\",namespace=~\"$namespace\", app=~\"^$app$\"}[1m]))
+
+      "title": "5XX Responses",
+sum(irate(django_http_responses_total_by_status_total{status=~\"5.+\",namespace=~\"$namespace\", app=~\"^$app$\"}[1m]))
+
+
+
+
+"type": "stat",
+
+111
+      "title": "Success Rate (non 4xx-5xx responses) [1w]",
+sum(rate(django_http_responses_total_by_status_view_method_total{namespace=~\"$namespace\", job=~\"$job\", view=\"$view\", method=~\"$method\", status!~\"[4-5].*\"}[1w]))/sum(rate(django_http_responses_total_by_status_view_method_total{namespace=~\"$namespace\", job=~\"$job\", view=\"$view\", method=~\"$method\"}[1w]))
+
+	"title": "HTTP Exceptions [1w]",
+sum by (view) (increase(django_http_exceptions_total_by_view_total{namespace=~\"$namespace\", njob=~\"$job\",view=\"$view\",}[1w])> 0)
+
+      "title": "Request Volume",
+round(sum(rate(django_http_requests_total_by_view_transport_method_total{namespace=~\"$namespace\", job=~\"$job\", view=~\"$view\", view!~\"<unnamed view>|health_check:health_check_home|prometheus-django-metrics\", method=~\"$method\"}[$__rate_interval])), 0.001)
+
+"title": "Success Rate (non 4-5xx responses)" {excludes unnamed views like health-check metrics}  {replace rate interval with [1w]}
+sum(rate(django_http_responses_total_by_status_view_method_total{namespace=~\"$namespace\", job=~\"$job\", view=~\"$view\", view!~\"<unnamed view>|health_check:health_check_home|prometheus-django-metrics\", method=~\"$method\", status!~\"[4-5].*\"}[$__rate_interval]))/sum(rate(django_http_responses_total_by_status_view_method_total{namespace=~\"$namespace\", job=~\"$job\", view=~\"$view\", view!~\"<unnamed view>|health_check:health_check_home|prometheus-django-metrics\", method=~\"$method\"}[$__rate_interval]))
+
+      "title": "Request Volume",
+round(sum(rate(django_http_requests_total_by_view_transport_method_total{namespace=~\"$namespace\", job=~\"$job\", view!~\"<unnamed view>|health_check:health_check_home|prometheus-django-metrics\",}[$__rate_interval])), 0.001)
+
+      "title": "Requests",
+sum(irate(django_http_requests_total_by_transport_total{app=~\"^$application$\"}[$__rate_interval]))
+
+      "title": "2XX Responses",
+sum(irate(django_http_responses_total_by_status_total{status=~\"2.+\",app=~\"^$application$\"}[$__rate_interval]))
+
+      "title": "3XX Responses",
+sum(irate(django_http_responses_total_by_status_total{status=~\"3.+\",app=~\"^$application$\"}[$__rate_interval]))
+
+	"title": "4XX Responses",
+sum(irate(django_http_responses_total_by_status_total{status=~\"4.+\",app=~\"^$application$\"}[$__rate_interval]))
+
+	"title": "5XX Responses",
+sum(irate(django_http_responses_total_by_status_total{status=~\"5.+\",app=~\"^$application$\"}[$__rate_interval]))
+
+      "title": "Request Body Size (P95)",
+histogram_quantile(0.95, sum (rate(django_http_requests_body_total_bytes_bucket{namespace=~\"$namespace\", job=~\"$job\",}[$__rate_interval])) by (job, le))
+
+
+222
+  "title": "Average Request Latency (P50) [1w]",
+histogram_quantile(0.50,sum (rate (django_http_requests_latency_seconds_by_view_method_bucket {namespace=~\"$namespace\",job=~\"$job\",view=\"$view\",method=~\"$method\"}[$__range])) by (job, le))
+
+"title": "Average Request Latency (P95) [1w]",
+histogram_quantile(0.95,sum (rate (django_http_requests_latency_seconds_by_view_method_bucket {namespace=~\"$namespace\",job=~\"$job\",view=\"$view\",method=~\"$method\"}[$__range])) by (job, le))
+
+
+
+333
+      "title": "Database Ops",
+sum (rate (django_db_execute_total {namespace=~\"$namespace\",job=~\"$job\",}[$__rate_interval])) by (namespace, job)
+
+"title": "Database Ops",
+sum (rate (django_db_execute_total {namespace=~\"$namespace\",job=~\"$job\",}[$__rate_interval])) by (namespace, job)
+
+"title": "Cache Hitrate [30m]",
+sum (rate (django_cache_get_hits_total {namespace=~\"$namespace\",job=~\"$job\",}[30m])) by (namespace, job)/sum (rate (django_cache_get_total {namespace=~\"$namespace\",job=~\"$job\",\}[30m])) by (namespace, job)
+
+"title": "Migrations Applied",
+max (django_migrations_applied_total {namespace=\"$namespace\",job=~\"$job\"}) by (namespace, job)
+
+"title": "Migrations Unapplied",
+max (django_migrations_unapplied_total {namespace=\"$namespace\",job=~\"$job\"}) by (namespace, job)
+
+
+
+
+
+
+
+"type": "table"
+
+111
+  "title": "Top Exceptions by View (1w)",
+round(topk(10,sum by (namespace, job, view) (increase(django_http_exceptions_total_by_view_total{namespace=~\"$namespace\",job=~\"$job\",view!~\"<unnamed view>|health_check:health_check_home|prometheus-django-metrics\",}[1w]) > 0)))
+
+		"title": "Top Exceptions by Type (1w)",
+round(topk(10,sum by (namespace, job, type) (increase(django_http_exceptions_total_by_type_total{namespace=~\"$namespace\",job=~\"$job\",}[1w]) > 0)))
+
+		"title": "Top Responses By View (1w)",
+round(topk(10,sum by (namespace, job, view) (increase(django_http_responses_total_by_status_view_method_total{namespace=~\"$namespace\",job=~\"$job\",view!~\"<unnamed view>|health_check:health_check_home|prometheus-django-metrics\",method=~\"$method\"}[1w]) > 0)))
+
+		"title": "Top Templates (1w)",
+topk(10,round(sum by (namespace, job, templatename) (increase(django_http_responses_total_by_templatename_total{namespace=~\"$namespace\",job=~\"$job\",templatename!~\".*'health_check/index.html'.*|None\"}[1w]) > 0)))
+
+
+222
+"title": "API & Other Views Request Latency",
+histogram_quantile(0.50,sum(rate(django_http_requests_latency_seconds_by_view_method_bucket{namespace=~\"$namespace\",job=~\"$job\",view=~\"$view\",view!~\"<unnamed view>|health_check:health_check_home|prometheus-django-metrics|\",view!~\"admin.*\",method=~\"$method\"}[$__rate_interval]) > 0\) by (namespace, job, view, le))
+histogram_quantile(0.95,sum(rate(django_http_requests_latency_seconds_by_view_method_bucket{namespace=~\"$namespace\",job=~\"$job\",view=~\"$view\",view!~\"<unnamed view>|health_check:health_check_home|prometheus-django-metrics|\",view!~\"admin.*\",method=~\"$method\"}[$__rate_interval]) > 0\) by (namespace, job, view, le))
+histogram_quantile(0.99,sum(rate(django_http_requests_latency_seconds_by_view_method_bucket{namespace=~\"$namespace\",job=~\"$job\",view=~\"$view\",view!~\"<unnamed view>|health_check:health_check_home|prometheus-django-metrics|\",view!~\"admin.*\",method=~\"$method\"}[$__rate_interval]) > 0\) by (namespace, job, view, le))
+
+"title": "Admin Request Latency",
+histogram_quantile(0.50,sum(rate(django_http_requests_latency_seconds_by_view_method_bucket{namespace=~\"$namespace\",job=~\"$job\",view=~\"$view\",view!~\"<unnamed view>|health_check:health_check_home|prometheus-django-metrics|\",view=~\"admin.*\",method=~\"$method\"}[$__rate_interval]) > 0) by (namespace, job, view, le))
+histogram_quantile(0.95,sum(rate(django_http_requests_latency_seconds_by_view_method_bucket{namespace=~\"$namespace\",job=~\"$job\",view=~\"$view\",view!~\"<unnamed view>|health_check:health_check_home|prometheus-django-metrics|\",view=~\"admin.*\",method=~\"$method\"}[$__rate_interval]) > 0) by (namespace, job, view, le))
+histogram_quantile(0.99,sum(rate(django_http_requests_latency_seconds_by_view_method_bucket{namespace=~\"$namespace\",job=~\"$job\",view=~\"$view\",view!~\"<unnamed view>|health_check:health_check_home|prometheus-django-metrics|\",view=~\"admin.*\",method=~\"$method\"}[$__rate_interval]) > 0) by (namespace, job, view, le))
+
+
+333
+"title": "Top Database Errors (1w)",
+round(topk(10,sum by (type) (increase(django_db_errors_total{namespace=~\"$namespace\",job=~\"$job\",}[1w]) > 0)))
+
+
+
+
+
+
+
+
+
+  "type": "timeseries"
+
+  111
+      "title": "Requests",
+round(sum(rate(django_http_requests_total_by_view_transport_method_total{namespace=~\"$namespace\", job=~\"$job\", view=\"$view\"}[$__rate_interval])> 0) by (job), 0.001)
+
+      "title": "Responses Status Codes",
+round(sum(rate(django_http_responses_total_by_status_view_method_total{namespace=~\"$namespace\", job=~\"$job\", view=\"$view\", method=~\"$method\",}[$__rate_interval])> 0) by (namespace, job, view, status, method), 0.001)
+
+      "title": "4XX Responses",
+sum(irate(django_http_responses_total_by_status_total{status=~\"4.+\",namespace=~\"$namespace\", app=~\"^$app$\"}[1m]))
+
+      "title": "Requests",
+sum(irate(django_http_requests_total_by_view_transport_method_total{namespace=~\"$namespace\", app=~\"^$app$\",view!~\"prometheus-django-metrics|healthcheck\"}[1m])) by (method, view)
+
+      "title": "Responses",
+sum(irate(django_http_responses_before_middlewares_total{namespace=~\"$namespace\", app=~\"^$app$\", view!~\"prometheus-django-metrics|healthcheck\"}[1m])) by(job)
+
+      "title": "Response Status",
+sum(irate(django_http_responses_total_by_status_total{namespace=~\"$namespace\", app=~\"^$app$\", view!~\"prometheus-django-metrics|healthcheck\"}[1m])) by(status)
+
+      "title": "API & Other Views Response Status", {for status 2xx, 4xx, 5xx}
+round(sum(rate(django_http_responses_total_by_status_view_method_total{namespace=~\"$namespace\", job=~\"$job\",view=~\"$view\",view!~\"<unnamed view>|health_check:health_check_home|prometheus-django-metrics\",method=~\"$method\",status=~\"2.*\",view!~\"admin.*\"}[$__rate_interval]) > 0) by (namespace, job, view), 0.001)
+round(sum(rate(django_http_responses_total_by_status_view_method_total{namespace=~\"$namespace\", job=~\"$job\",view=~\"$view\",view!~\"<unnamed view>|health_check:health_check_home|prometheus-django-metrics\",method=~\"$method\",status=~\"4.*\",view!~\"admin.*\"}[$__rate_interval]) > 0) by (namespace, job, view), 0.001)
+round(sum(rate(django_http_responses_total_by_status_view_method_total{namespace=~\"$namespace\", job=~\"$job\",view=~\"$view\",view!~\"<unnamed view>|health_check:health_check_home|prometheus-django-metrics\",method=~\"$method\",status=~\"5.*\",view!~\"admin.*\"}[$__rate_interval]) > 0) by (namespace, job, view), 0.001)
+
+      "title": "Admin Views Response Status", {for status 2xx, 4xx, 5xx}
+round(sum(rate(django_http_responses_total_by_status_view_method_total{namespace=~\"$namespace\",job=~\"$job\",view=~\"$view\",view!~\"<unnamed view>|health_check:health_check_home|prometheus-django-metrics\",method=~\"$method\",status=~\"2.*\",view=~\"admin.*\",}[$__rate_interval]) > 0) by (namespace, job, view), 0.001)
+round(sum(rate(django_http_responses_total_by_status_view_method_total{namespace=~\"$namespace\",job=~\"$job\",view=~\"$view\",view!~\"<unnamed view>|health_check:health_check_home|prometheus-django-metrics\",method=~\"$method\",status=~\"4.*\",view=~\"admin.*\",}[$__rate_interval]) > 0) by (namespace, job, view), 0.001)
+round(sum(rate(django_http_responses_total_by_status_view_method_total{namespace=~\"$namespace\",job=~\"$job\",view=~\"$view\",view!~\"<unnamed view>|health_check:health_check_home|prometheus-django-metrics\",method=~\"$method\",status=~\"5.*\",view=~\"admin.*\",}[$__rate_interval]) > 0) by (namespace, job, view), 0.001)
+
+      "title": "Responses", {for status 2xx, 3xx, 4xx, 5xx}
+round(sum(rate(django_http_responses_total_by_status_view_method_total{namespace=~\"$namespace\",job=~\"$job\",view!~\"<unnamed view>|health_check:health_check_home|prometheus-django-metrics\",status=~\"2.*\",}[$__rate_interval]) > 0) by (job), 0.001)
+round(sum(rate(django_http_responses_total_by_status_view_method_total{namespace=~\"$namespace\",job=~\"$job\",view!~\"<unnamed view>|health_check:health_check_home|prometheus-django-metrics\",status=~\"3.*\",}[$__rate_interval]) > 0) by (job), 0.001)
+round(sum(rate(django_http_responses_total_by_status_view_method_total{namespace=~\"$namespace\",job=~\"$job\",view!~\"<unnamed view>|health_check:health_check_home|prometheus-django-metrics\",status=~\"4.*\",}[$__rate_interval]) > 0) by (job), 0.001)
+round(sum(rate(django_http_responses_total_by_status_view_method_total{namespace=~\"$namespace\",job=~\"$job\",view!~\"<unnamed view>|health_check:health_check_home|prometheus-django-metrics\",status=~\"5.*\",}[$__rate_interval]) > 0) by (job), 0.001)
+
+      "title": "Response Status",
+sum(irate(django_http_responses_total_by_status_total{app=~\"^$application$\"}[$__rate_interval])) by(status)
+
+      "title": "Top Requests",
+topk(10, sum(irate(django_http_requests_total_by_view_transport_method_total{app=~\"^$application$\",view!~\"prometheus-django-metrics|healthcheck|.*shop_product_import_1c_status\"}[$__rate_interval])) by(method, view) > 0)
+
+
+222
+"title": "Request Latency", {for P50, P95, P99, P99.9} v1
+histogram_quantile(0.50,sum(irate(django_http_requests_latency_seconds_by_view_method_bucket{namespace=~\"$namespace\",job=~\"$job\",view=\"$view\",method=~\"$method\"}[$__rate_interval]) > 0) by (view, le))
+histogram_quantile(0.95,sum(irate(django_http_requests_latency_seconds_by_view_method_bucket{namespace=~\"$namespace\",job=~\"$job\",view=\"$view\",method=~\"$method\"}[$__rate_interval]) > 0) by (view, le))
+histogram_quantile(0.99,sum(irate(django_http_requests_latency_seconds_by_view_method_bucket{namespace=~\"$namespace\",job=~\"$job\",view=\"$view\",method=~\"$method\"}[$__rate_interval]) > 0) by (view, le))
+histogram_quantile(0.999,sum(irate(django_http_requests_latency_seconds_by_view_method_bucket{namespace=~\"$namespace\",job=~\"$job\",view=\"$view\",method=~\"$method\"}[$__rate_interval]) > 0) by (view, le))
+
+"title": "Request Latency", {for P50, P95, P99, P99.9} v2
+histogram_quantile(0.50, sum(rate(django_http_requests_latency_seconds_by_view_method_bucket{namespace=~\"$namespace\", app=~\"^$app$\",view!~\"prometheus-django-metrics|healthcheck\"}[5m])) by (job, le))
+histogram_quantile(0.95, sum(rate(django_http_requests_latency_seconds_by_view_method_bucket{namespace=~\"$namespace\", app=~\"^$app$\",view!~\"prometheus-django-metrics|healthcheck\"}[5m])) by (job, le))
+histogram_quantile(0.99, sum(rate(django_http_requests_latency_seconds_by_view_method_bucket{namespace=~\"$namespace\", app=~\"^$app$\",view!~\"prometheus-django-metrics|healthcheck\"}[5m])) by (job, le))
+histogram_quantile(0.999, sum(rate(django_http_requests_latency_seconds_by_view_method_bucket{namespace=~\"$namespace\", app=~\"^$app$\",view!~\"prometheus-django-metrics|healthcheck\"}[5m])) by (job, le))
+
+"title": "Request Latency (P95)", {removes unnamed views like health-check metrics}
+histogram_quantile(0.95,sum(irate(django_http_requests_latency_seconds_by_view_method_bucket{namespace=~\"$namespace\",job=~\"$job\",view!~\"<unnamed view>|health_check:health_check_home|prometheus-django-metrics\",}[$__rate_interval]\)) by (job, le))
+
+"title": "Request Latency",
+histogram_quantile(0.50, sum(irate(django_http_requests_latency_seconds_by_view_method_bucket{app=~\"^$application$\"}[$__rate_interval])) by (le))
+histogram_quantile(0.95, sum(irate(django_http_requests_latency_seconds_by_view_method_bucket{app=~\"^$application$\"}[$__rate_interval])) by (le))
+histogram_quantile(0.99, sum(irate(django_http_requests_latency_seconds_by_view_method_bucket{app=~\"^$application$\"}[$__rate_interval])) by (le))
+
+
+
+333
+"title": "Database Connections",
+round(\n  sum(\n    increase(\n      django_db_new_connections_total{\n        namespace=~\"$namespace\",\n        job=~\"$job\",\n      }[$__rate_interval]\n    ) > 0\n  ) by (namespace, job, vendor))
+
+"title": "Database Latency", {for P50, P95, P99, P99.9}
+histogram_quantile(0.50,sum(irate(django_db_query_duration_seconds_bucket{namespace=~\"$namespace\",job=~\"$job\",}[$__rate_interval]) > 0) by (vendor, namespace, job, le))
+histogram_quantile(0.95,sum(irate(django_db_query_duration_seconds_bucket{namespace=~\"$namespace\",job=~\"$job\",}[$__rate_interval]) > 0) by (vendor, namespace, job, le))
+histogram_quantile(0.99,sum(irate(django_db_query_duration_seconds_bucket{namespace=~\"$namespace\",job=~\"$job\",}[$__rate_interval]) > 0) by (vendor, namespace, job, le))
+histogram_quantile(0.999,sum(irate(django_db_query_duration_seconds_bucket{namespace=~\"$namespace\",job=~\"$job\",}[$__rate_interval]) > 0) by (vendor, namespace, job, le))
+
+"title": "Cache Get",
+sum(rate(django_cache_get_hits_total{namespace=~\"$namespace\",job=~\"$job\",}[$__rate_interval]) > 0) by (namespace, job, backend)
+sum(rate(django_cache_get_misses_total{namespace=~\"$namespace\",job=~\"$job\",}[$__rate_interval]) > 0) by (namespace, job, backend)
+
+"title": "Database Total Queries",
+sum(irate(django_db_execute_total{app=~\"^$application$\"}[$__rate_interval])) by (vendor)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
