@@ -1,7 +1,9 @@
+{% extends "index.html" %}
 {% load static %}
 {% load i18n %}
-{% include "../sidebar.html" %}
+{% block title %}{% translate "Login" %}{% endblock %}
 {% block content %}
+{% include "../sidebar.html" %}
 <header class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-lg-center justify-content-xxl-center align-items-xxl-center">
     <div>
         <img height="140" src="{% static '/img/game_icon_invert.png' %}" width="300"/>
@@ -19,14 +21,20 @@
             <button aria-expanded="true" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" style="border-style: none;background: rgba(255,255,255,0);color: var(--bs-body-bg);" type="button">
             </button>
             <div class="dropdown-menu" data-bs-popper="none">
-                <a class="dropdown-item d-xxl-flex justify-content-xxl-start align-items-xxl-center" href="#" id="lang-en">
+                <a class="dropdown-item d-xxl-flex justify-content-xxl-start align-items-xxl-center" id="lang-en">
                     EN
                 </a>
-                <a class="dropdown-item" href="#" id="lang-fr">
+                <a class="dropdown-item" id="lang-fr">
                     FR
                 </a>
-                <a class="dropdown-item" href="#" id="lang-ja">
+                <a class="dropdown-item" id="lang-ja">
                     JP
+                </a>
+                <a class="dropdown-item" id="lang-es">
+                    ES
+                </a>
+                <a class="dropdown-item" id="lang-ug">
+                    UG
                 </a>
             </div>
         </div>

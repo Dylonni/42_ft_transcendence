@@ -1,7 +1,9 @@
+{% extends "index.html" %}
 {% load static %}
 {% load i18n %}
-{% include "sidebar.html" %}
+{% block title %}{% translate "Leaderboard" %}{% endblock %}
 {% block content %}
+{% include "sidebar.html" %}
 <div class="container" style="width: 100%;">
     <div class="row d-xxl-flex justify-content-xxl-center align-items-xxl-center">
         <div class="col-md-12 d-lg-flex d-xl-flex d-xxl-flex justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="width: 100%;padding-left: 0px;padding-right: 0px;height: 100%;padding-top: 0px;padding-bottom: 0px;margin-top: 0px;margin-bottom: 0px;">
@@ -74,7 +76,7 @@
                     {% translate 'Your Rank' %}
                 </h1>
                 <h1 class="fs-2 d-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-xl-center justify-content-xxl-center text-truncate" id="player-name-4" style="color: var(--bs-body-bg);border-radius: 10px;width: 100%;height: 50.3906px;padding-top: 0px;padding-bottom: 0px;margin-bottom: -1px;margin-top: 10px;font-family: Roboto, sans-serif;">
-                    #{{ profile.get_rank }}
+                    #{{ rank }}
                 </h1>
             </div>
         </div>
@@ -138,7 +140,7 @@
                         {{ player.elo }}
                     </p>
                     <p class="text-truncate d-xxl-flex justify-content-xxl-center align-items-xxl-center text-truncate" style="color: var(--bs-body-bg);margin-bottom: 0px;font-size: 20px;text-shadow: 1px 1px 3px var(--bs-emphasis-color);">
-                        Wins
+                        Points
                     </p>
                 </div>
                 <div class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center text-truncate leaderboardinfos" style="border-style: none;font-size: 30px;">
@@ -168,7 +170,7 @@
                         {{ player.elo }}
                     </p>
                     <p class="text-truncate d-xxl-flex justify-content-xxl-center align-items-xxl-center text-truncate" style="color: var(--bs-body-bg);margin-bottom: 0px;font-size: 20px;text-shadow: 1px 1px 3px var(--bs-emphasis-color);">
-                        Wins
+                        Points
                     </p>
                 </div>
                 <div class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center text-truncate leaderboardinfos" style="border-style: none;font-size: 30px;">

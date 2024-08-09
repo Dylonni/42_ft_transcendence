@@ -7,9 +7,8 @@ urlpatterns = [
     path('profiles/search/', views.profile_search, name='profile_search'),
     
     path('profiles/me/', views.my_detail, name='my_detail'),
-	# TODO: add urls to update alias, avatar and status
-    # path('profiles/me/alias/', views.my_alias, name='my_alias'),
-    # path('profiles/me/avatar/', views.my_avatar, name='my_avatar'),
+    path('profiles/me/alias/', views.my_alias, name='my_alias'),
+    path('profiles/me/avatar/', views.my_avatar, name='my_avatar'),
     # path('profiles/me/status/', views.my_status, name='my_status'),
 	
     path('profiles/<uuid:profile_id>/', views.profile_detail, name='profile_detail'),

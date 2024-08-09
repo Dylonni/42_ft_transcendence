@@ -1,10 +1,16 @@
 from rest_framework import serializers
-from .models import Game, GameInvite, Player, Round, Score
+from .models import Game, GameRound, GameInvite, GameMessage
 
 
 class GameSerializer(serializers.ModelSerializer):
     class Meta:
         model = Game
+        fields = '__all__'
+
+
+class GameRoundSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = GameRound
         fields = '__all__'
 
 
@@ -14,19 +20,7 @@ class GameInviteSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class PlayerSerializer(serializers.ModelSerializer):
+class GameMessageSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Player
-        fields = '__all__'
-
-
-class RoundSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Round
-        fields = '__all__'
-
-
-class ScoreSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Score
+        model = GameMessage
         fields = '__all__'

@@ -1,11 +1,12 @@
+{% load static %}
+{% load i18n %}
 <!DOCTYPE html>
 <html data-bs-theme="light" data-bss-forced-theme="light" lang="en">
-    {% load static %}
     <head>
         <meta charset="utf-8"/>
         <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport"/>
         <title>
-            {{ title }}
+            {% block title %}{% translate "Transcendence" %}{% endblock %}
         </title>
         <link href="{% static '/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet"/>
         <link href="{% static '/fonts/fontawesome-all.min.css' %}" rel="stylesheet"/>
@@ -15,7 +16,7 @@
     </head>
     <body>
         <div id="content">
-            {{ sub_template|safe }}
+            {% block content %}{% endblock %}
         </div>
         <script src="{% static '/bootstrap/js/bootstrap.min.js' %}">
         </script>

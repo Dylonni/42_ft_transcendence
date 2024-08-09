@@ -1,7 +1,9 @@
+{% extends "index.html" %}
 {% load static %}
 {% load i18n %}
-{% include "sidebar.html" %}
+{% block title %}{% translate "Transcendence" %}{% endblock %}
 {% block content %}
+{% include "sidebar.html" %}
 <div>
     <h1 class="d-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="color: var(--bs-body-bg);margin-top: 35px;margin-bottom: 35px;">
         Choose a mode
@@ -43,9 +45,9 @@
         </div>
         <div class="col-md-4" style="width: 390px;margin-top: 20px;margin-bottom: 20px;padding-left: 20px;padding-right: 20px;margin-left: 20px;margin-right: 20px;">
             {% if profile %}
-            <a href="/customize/?mode=2">
+            <a href="/customize/?mode=2" data-route="/customize/?mode=2">
             {% else %}
-            <a href="/login/">
+            <a href="/login/" data-route="/login/">
             {% endif %}
                 <div class="card cardmode" id="vsOnline" style="height: 435px;border-top-left-radius: 16px;border-top-right-radius: 16px;border-style: none;background: var(--bs-emphasis-color);">
                     <h4 class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="color: var(--bs-body-bg);">

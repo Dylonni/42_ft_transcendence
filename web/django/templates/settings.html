@@ -1,7 +1,9 @@
+{% extends "index.html" %}
 {% load static %}
 {% load i18n %}
-{% include "sidebar.html" %}
+{% block title %}{% translate "Settings" %}{% endblock %}
 {% block content %}
+{% include "sidebar.html" %}
 <div class="container" style="margin-top: 10px;margin-bottom: 10px;">
     <div class="row d-xxl-flex" style="height: 105px;">
         <div class="col-md-12 d-flex d-sm-flex d-md-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-xxl-center align-items-xxl-center" style="padding-left: 0px;padding-right: 0px;padding-top: 0px;padding-bottom: 0px;margin-top: 0px;margin-bottom: 50px;height: 100%;">
@@ -30,7 +32,7 @@
                     </div>
                     <div class="d-flex d-md-flex d-lg-flex d-xl-flex flex-column justify-content-center align-items-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="background: rgba(0,0,0,0);width: 100%;height: 100%;margin-bottom: 0px;margin-top: 10px;">
                         <div class="d-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="width: 160px;background: var(--bs-body-bg);height: 160px;padding-bottom: 0px;padding-top: 0px;box-shadow: 0px 0px 6px 9px #371977;border-radius: 50%;border: 0px none var(--bs-secondary-text-emphasis);margin-top: 15px;margin-bottom: 20px;">
-                            <img height="166" src="{{ profile.avatar.url }}" style="height: 100%;width: 100%;border-radius: 50%;" width="169"/>
+                            <img height="166" src="{{ profile.avatar_url }}?{% now 'U' %}" style="height: 100%;width: 100%;border-radius: 50%;" width="169"/>
                         </div>
                         <div class="d-flex d-xxl-flex flex-row justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="width: 70%;">
                             <form class="d-flex d-xxl-flex justify-content-center justify-content-xxl-center align-items-xxl-center" style="width: 100%;">
@@ -54,35 +56,44 @@
                     </div>
                     <section class="d-flex align-items-center justify-content-sm-center justify-content-xxl-center" style="height: 100%;width: 100%;margin-top: 15px;margin-bottom: 15px;">
                         <div class="d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="width: 100px;height: 99px;border-radius: 0px;margin-left: 6px;margin-right: 0px;">
-                            <a class="d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" href="">
-                                <img class="img-fluid" src="assets/img/avatar4.webp" style="border-radius: 50px;width: 90%;height: 90%;"/>
+                            <a class="d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" href="/api/profiles/me/avatar/?id=1">
+                                <img class="img-fluid" src="{% static 'img/avatar4.webp' %}" style="border-radius: 50px;width: 90%;height: 90%;"/>
                             </a>
                         </div>
                         <div class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="width: 100px;height: 99px;border-radius: 0px;margin-left: 6px;margin-right: 0px;">
-                            <a class="d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" href="#">
-                                <img class="d-xxl-flex img-fluid" src="assets/img/avatar6.webp" style="border-radius: 50px;width: 90%;height: 90%;"/>
+                            <a class="d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" href="/api/profiles/me/avatar/?id=2">
+                                <img class="d-xxl-flex img-fluid" src="{% static 'img/avatar6.webp' %}" style="border-radius: 50px;width: 90%;height: 90%;"/>
                             </a>
                         </div>
                         <div class="d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="width: 100px;height: 99px;border-radius: 0px;margin-left: 6px;padding-right: 0px;margin-right: 0px;">
-                            <a class="d-flex justify-content-center align-items-center" href="#">
-                                <img class="d-xxl-flex img-fluid" src="assets/img/avatar5.webp" style="border-radius: 50px;width: 90%;height: 90%;"/>
+                            <a class="d-flex justify-content-center align-items-center" href="/api/profiles/me/avatar/?id=3">
+                                <img class="d-xxl-flex img-fluid" src="{% static 'img/avatar5.webp' %}" style="border-radius: 50px;width: 90%;height: 90%;"/>
                             </a>
                         </div>
                     </section>
                     <section class="d-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="height: 100%;width: 100%;margin-top: 15px;margin-bottom: 15px;">
                         <div class="d-flex d-sm-flex d-md-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-xxl-center align-items-xxl-center" style="width: 100px;height: 99px;border-radius: 0px;margin-left: 6px;margin-right: 0px;">
-                            <a class="d-flex d-sm-flex d-md-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center" href="#">
-                                <img class="d-md-flex d-xxl-flex img-fluid" src="assets/img/avatar1.webp" style="border-radius: 50px;width: 90%;height: 90%;"/>
+                            <a class="d-flex d-sm-flex d-md-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center" href="/api/profiles/me/avatar/?id=4">
+                                <img class="d-md-flex d-xxl-flex img-fluid" src="{% static 'img/avatar1.webp' %}" style="border-radius: 50px;width: 90%;height: 90%;"/>
                             </a>
                         </div>
                         <div class="d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="width: 100px;height: 99px;border-radius: 0px;margin-left: 6px;margin-right: 0px;">
-                            <a class="d-flex justify-content-center align-items-sm-center" href="#">
-                                <img class="d-xxl-flex img-fluid" src="assets/img/42.jpg" style="border-radius: 50px;width: 90%;height: 90%;"/>
+                            {% if profile.user.fortytwo_avatar_url %}
+                            <a class="d-flex justify-content-center align-items-sm-center" href="/api/profiles/me/avatar/?id=fortytwo">
+                                <img class="d-xxl-flex img-fluid" src="{{ profile.user.fortytwo_avatar_url }}" style="border-radius: 50px;width: 90%;height: 90%;"/>
                             </a>
+                            {% else %}
+                            <a class="d-flex justify-content-center align-items-sm-center" href="/api/oauth/42/login/" id="login-42">
+                                <img class="d-xxl-flex img-fluid" src="{% static '/img/42_Logo.svg.png' %}" style="border-radius: 50px;width: 90%;height: 90%;"/>
+                            </a>
+                            {% endif %}
                         </div>
                         <div class="d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="width: 92px;height: 91px;border-radius: 50%;margin-left: 6px;padding-right: 0px;margin-right: 0px;border-style: solid;border-color: var(--bs-body-bg);">
                             <label class="form-label d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" id="photoUpload" style="width: 90%;height: 90%;margin-bottom: 0px;">
-                                <input type="file"/>
+                                <input type="file" id="avatar-upload" accept="image/*"/>
+                                {% if profile.avatar %}
+                                <img class="d-xxl-flex img-fluid" src="{{ profile.avatar.url }}?{% now 'U' %}" style="border-radius: 50px;width: 100%;height: 100%;"/>
+                                {% else %}
                                 <svg class="icon icon-tabler icon-tabler-photo-plus" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 45px;color: var(--bs-body-bg);" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
                                     <path d="M15 8h.01"></path>
@@ -92,6 +103,7 @@
                                     <path d="M16 19h6"></path>
                                     <path d="M19 16v6"></path>
                                 </svg>
+                                {% endif %}
                             </label>
                         </div>
                     </section>

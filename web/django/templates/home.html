@@ -1,7 +1,10 @@
+{% extends "index.html" %}
 {% load static %}
 {% load i18n %}
-{% include "sidebar.html" %}
+{% block title %}{% translate "Home" %}{% endblock %}
 {% block content %}
+{% include "sidebar.html" %}
+{% include "notifications.html" %}
 <div class="container">
     <div class="row d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="height: 100%;margin-top: 0px;margin-bottom: 0px;">
         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-11 d-xl-flex justify-content-xl-end align-items-xl-center" style="height: 100%;padding-left: 0px;padding-right: 0px;">
@@ -26,7 +29,7 @@
             <div class="d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex flex-row justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center align-items-xxl-start p-4 text-center m-5 rounded-5" style="backdrop-filter: blur(30px);-webkit-backdrop-filter: blur(30px);filter: blur(0px);box-shadow: 0px 0px 6px 2px #5abfea;height: 100%;width: 100%;border: 1px solid #5abfea;">
                 <div style="width: 170px;height: 100%;">
                     <div class="text-nowrap text-truncate d-flex d-md-flex d-xxl-flex flex-column justify-content-center align-items-center justify-content-md-center align-items-md-center justify-content-xxl-center align-items-xxl-center" id="player-info-1" style="width: 170px;height: 165px;border-radius: 19px;">
-                        <img class="rounded-circle mb-3 fit-cover" height="130" src="{{ profile.avatar.url }}" style="height: 110px;width: 110px;box-shadow: 0px 0px 12px 3px #5abfea;border: 4px solid #5abfea ;" width="130"/>
+                        <img class="rounded-circle mb-3 fit-cover" height="130" src="{{ profile.avatar_url }}?{% now 'U' %}" style="height: 110px;width: 110px;box-shadow: 0px 0px 12px 3px #5abfea;border: 4px solid #5abfea ;" width="130"/>
                         <span class="text-truncate fs-5 text-light text-truncate" style="text-overflow: ellipsis;height: 30px;width: 100%;font-weight: bold;background: rgba(90,191,234,0.3);box-shadow: 0px 0px 20px 2px rgba(90,191,234,0.3);border-radius: 15px;text-shadow: 2px 2px 2px var(--bs-emphasis-color);">
                             {{ profile.alias }}
                         </span>

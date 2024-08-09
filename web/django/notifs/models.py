@@ -1,27 +1,22 @@
 from django.db import models
+from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
-from pong.models import BaseModel
+from pong.models import BaseInteraction
 from .managers import NotificationManager
 
 
-class Notification(BaseModel):
-    class NotificationChoices(models.TextChoices):
-        # ACHIEVEMENT = 'Achievement', _('Achievement')
+class Notification(BaseInteraction):
+    class NotificationCategories(models.TextChoices):
         FRIEND_REQUEST = 'Friend Request', _('Friend Request')
         FRIEND_MESSAGE = 'Friend Message', _('Friend Message')
         GAME_INVITATION = 'Game Invitation', _('Game Invitation')
         GAME_MESSAGE = 'Game Message', _('Game Message')
     
-    notification_type = models.CharField(
+    category = models.CharField(
+        verbose_name=_('category'),
         max_length=20,
-        choices=NotificationChoices.choices,
-        default=NotificationChoices.MESSAGE,
-    )
-    receiver = models.ForeignKey(
-        to='profiles.Profile',
-        verbose_name=_('receiver'),
-        on_delete=models.CASCADE,
-        related_name='notifications_received',
+        choices=NotificationCategories.choices,
+        default=NotificationCategories.GAME_INVITATION,
     )
     content = models.TextField(
         verbose_name=_('content'),
@@ -42,3 +37,10 @@ class Notification(BaseModel):
     
     def __str__(self):
         return f'Notification ({self.id}) for a {self.notification_type} to {self.receiver}'
+    
+    def mark_as_read(self):
+        self.read = True
+        self.save()
+
+    def get_time_since(self):
+        return timezone.now() - self.created_at

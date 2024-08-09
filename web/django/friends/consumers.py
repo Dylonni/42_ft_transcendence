@@ -1,7 +1,6 @@
 import json
 import logging
 from django.apps import apps
-from django.template.loader import render_to_string
 from channels.db import database_sync_to_async
 from channels.generic.websocket import AsyncWebsocketConsumer
 
@@ -44,6 +43,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
         profile = await self.get_profile(self.user)
         sender = await self.get_profile_from_alias(message['sender'])
         logger.info(f'Sending message to {message["receiver"]} in room {self.room_name}: {message["content"]}')
+        # TODO: display timestamp in more human readable way
         if (str(message['sender']) != str(profile)):
             message = f'<div class="d-flex d-xxl-flex align-items-center align-items-xxl-center" id="template-friend-msg" style="height: auto;width: 100%;padding-bottom: 0px;margin-top: 15px;margin-bottom: 15px;">\
                             <div class="d-xxl-flex justify-content-xxl-center align-items-xxl-center" style="border-radius:0px;width:60px;height:60px;padding-left:0px;margin-left:10px;" href="#"><img width="93" height="135" src="{sender.avatar.url}" style="border-radius:41px;width:100%;height:100%;"></div>\
@@ -55,7 +55,6 @@ class ChatConsumer(AsyncWebsocketConsumer):
                             </div>\
                         </div>'
         else:
-            # message = render_to_string(path, context, )
             message = f'<div class="d-flex d-xxl-flex justify-content-end align-items-center justify-content-xxl-end align-items-xxl-center" id="template-my-msg" style="height: auto;width: 100%;margin-top: 15px;margin-bottom: 15px;">\
                             <div class="text-break" style="height: 100%;background: #3e7e5b;width: 65%;border-radius: 20px;margin-bottom: 0px;margin-top: 0px;padding-top: 10px;border-bottom-right-radius: 0px;border-top-left-radius: 19px;border-top-right-radius: 19px;border-bottom-left-radius: 19px;margin-right: 20px;font-size: 19px;">\
                                 <div class="message-wrapper" style="height:100%;width:90%;margin-left:0px;margin-right:0px;padding-left:10px;padding-right:10px;">\

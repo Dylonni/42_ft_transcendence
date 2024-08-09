@@ -17,6 +17,7 @@ authpatterns = [
 
 oauthpatterns = [
 	path('42/login/', views.fortytwo_login, name='fortytwo_login'),
+	# path('42/link/', views.fortytwo_link, name='fortytwo_link'),
 	path('42/callback/', views.fortytwo_callback, name='fortytwo_callback'),
 ]
 

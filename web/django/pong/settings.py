@@ -46,8 +46,6 @@ ALLOWED_HOSTS = ['localhost', 'django', '*']
 
 CSRF_TRUSTED_ORIGINS = ['http://localhost:8080']
 
-ALLOWED_LANGUAGES = ['en', 'fr', 'ja']
-
 
 # Application definition
 
@@ -69,6 +67,7 @@ INSTALLED_APPS = [
     'profiles',
     'friends',
 	'games',
+	'notifs',
 ]
 
 MIDDLEWARE = [
@@ -159,7 +158,22 @@ TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
+USE_L10N = True
+
 USE_TZ = True
+
+LANGUAGES = [
+    ('en', 'English'),
+    ('es', 'Spanish'),
+    ('fr', 'French'),
+    ('it', 'Italian'),
+    ('ja', 'Japanese'),
+    ('ug', 'Uyghur'),
+]
+
+LOCALE_PATHS = [
+    os.path.join(BASE_DIR, 'locale'),
+]
 
 
 # Static files (CSS, JavaScript, Images)

@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import send_mail
+from django.http import HttpResponse
 from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
@@ -53,7 +54,7 @@ def set_jwt_cookies_for_user(response, user):
     set_jwt_as_cookies(response, str(refresh.access_token), str(refresh))
     return str(refresh.access_token), str(refresh)
 
-def set_jwt_as_cookies(response, access_token, refresh_token):
+def set_jwt_as_cookies(response: HttpResponse, access_token, refresh_token):
     response.set_cookie(
         key='access_token',
         value=access_token,
@@ -69,7 +70,7 @@ def set_jwt_as_cookies(response, access_token, refresh_token):
         # samesite='Lax',
     )
 
-def unset_jwt_cookies(response):
+def unset_jwt_cookies(response: HttpResponse):
     response.delete_cookie(
         key='access_token',
     )

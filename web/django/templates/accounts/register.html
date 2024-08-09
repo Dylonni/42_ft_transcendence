@@ -1,6 +1,9 @@
+{% extends "index.html" %}
 {% load static %}
 {% load i18n %}
+{% block title %}{% translate "Register" %}{% endblock %}
 {% block content %}
+{% include "../sidebar.html" %}
 <header class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-lg-center justify-content-xxl-center align-items-xxl-center">
     <div>
         <img height="140" src="{% static '/img/game_icon_invert.png' %}" width="300"/>

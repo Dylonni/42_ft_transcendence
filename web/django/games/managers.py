@@ -1,22 +1,15 @@
 import math
 import random
+from asgiref.sync import async_to_sync
 from django.db import models
 from django.db.models import Q
 from django.utils import timezone
-
-
-class BaseGameManager(models.Manager):
-    pass
+from notifs.consumers import NotifConsumer
 
 
 class GameManager(models.Manager):
-    def create_game(self, name='', player_limit=5, win_score=5):
-        game = self.create(
-            name=self.generate_name(),
-            player_limit=player_limit,
-            win_score=win_score,
-        )
-        return game
+    def create_game(self, host):
+        return self.create(name=self.generate_name(), host=host)
     
     def search_by_name(self, name):
         return self.filter(name__icontains=name)
@@ -29,81 +22,7 @@ class GameManager(models.Manager):
                 return name
 
 
-# TODO: complete class
-class GameInviteManager(models.Manager):
-    def get_invite(self, sender, receiver):
-        return self.filter(
-            Q(sender=sender, receiver=receiver) | 
-            Q(sender=receiver, receiver=sender)
-        ).first()
-    
-    def get_invites(self, profile):
-        return self.filter(Q(sender=profile) | Q(receiver=profile))
-    
-    def get_received_invites(self, profile):
-        return self.filter(receiver=profile)
-    
-    def create_invite(self, sender, receiver):
-        if sender == receiver:
-            raise ValueError('Cannot send a game invite to yourself.')
-        if self.filter(sender=sender, receiver=receiver).exists():
-            raise ValueError('Game invite already sent.')
-        if self.filter(sender=receiver, receiver=sender).exists():
-            raise ValueError('Game invite already received.')
-        
-        game_invite = self.create(sender=sender, receiver=receiver)
-        return game_invite
-    
-    def accept_invite(self, invite_id):
-        game_invite = self.get(id=invite_id)
-        # Add logic to add receiver in game_invite.game.id
-        game_invite.delete()
-    
-    def decline_invite(self, invite_id):
-        game_invite = self.get(id=invite_id)
-        game_invite.delete()
-
-
-class PlayerManager(models.Manager):
-    def join_game(self, profile, game):
-        player = self.create(profile=profile, game=game)
-        if not self.filter(game=game).exclude(id=player.id).exists():
-            player.is_host = True
-            player.save()
-        return player
-    
-    def leave_game(self, profile, game):
-        try:
-            player = self.get(profile=profile, game=game)
-            player.delete()
-            return True
-        except self.model.DoesNotExist:
-            return False
-    
-    def mark_ready(self, player, ready):
-        player.is_ready = ready
-        player.save()
-        return player
-    
-    def get_players_by_game_id(self, game_id):
-        return self.filter(game__id=game_id)
-    
-    def can_join_game(self, game):
-        players = self.get_players_by_game_id(game.id)
-        return players.count() == game.player_limit
-    
-    def can_start_game(self, game_id):
-        players = self.get_players_by_game_id(game_id)
-        return all(player.is_ready for player in players)
-    
-    def shuffle_players_for_game(self, game_id):
-        players = list(self.get_players_by_game_id(game_id))
-        random.shuffle(players)
-        return players
-
-
-# TODO: complete class
-class RoundManager(models.Manager):
+class GameRoundManager(models.Manager):
     def create_round(self, player1, player2):
         round = self.create(player1=player1, player2=player2)
         return round
@@ -156,8 +75,48 @@ class RoundManager(models.Manager):
 
 
 # TODO: complete class
-class ScoreManager(models.Manager):
-    pass
+class GameInviteManager(models.Manager):
+    def get_invite(self, sender, receiver):
+        return self.filter(
+            Q(sender=sender, receiver=receiver) | 
+            Q(sender=receiver, receiver=sender)
+        ).first()
+    
+    def get_invites(self, profile):
+        return self.filter(Q(sender=profile) | Q(receiver=profile))
+    
+    def get_received_invites(self, profile):
+        return self.filter(receiver=profile)
+    
+    def create_invite(self, sender, receiver):
+        if sender == receiver:
+            raise ValueError('Cannot send a game invite to yourself.')
+        if self.filter(sender=sender, receiver=receiver).exists():
+            raise ValueError('Game invite already sent.')
+        if self.filter(sender=receiver, receiver=sender).exists():
+            raise ValueError('Game invite already received.')
+        
+        game_invite = self.create(sender=sender, receiver=receiver)
+        self.send_game_invite_notif(game_invite)
+        return game_invite
+    
+    def accept_invite(self, invite_id):
+        game_invite = self.get(id=invite_id)
+        # Add logic to add receiver in game_invite.game.id
+        game_invite.delete()
+    
+    def decline_invite(self, invite_id):
+        game_invite = self.get(id=invite_id)
+        game_invite.delete()
+    
+    def send_game_invite_notif(self, game_invite):
+        consumer = NotifConsumer()
+        async_to_sync(consumer.notify_profile)(
+            sender=game_invite.sender,
+            receiver=game_invite.receiver,
+            category='Game Invitation',
+            content=f'{game_invite.sender} has invited you to play!',
+        )
 
 
 # TODO: complete class

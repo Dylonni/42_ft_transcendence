@@ -6,12 +6,14 @@ from django.template.loader import render_to_string
 from django.utils import translation
 from django.utils.translation import gettext as _
 from django.contrib.auth.models import AnonymousUser
+from rest_framework import status
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from profiles.models import Profile
 from friends.models import Friendship, FriendMessage
-from games.models import Game, Player
+from games.models import Game
+from notifs.models import Notification
 from .mixins import JWTCookieAuthenticationMixin, LangVerificationMixin, RedirectIfAuthenticatedMixin
 
 UserModel = get_user_model()
@@ -38,8 +40,8 @@ def get_friend_context(request, profile_id=None):
         profile = context.get('profile', None)
         if profile is None:
             return context
-        friends_ids = Friendship.objects.get_friend_ids(profile)
-        context['friends'] = Profile.objects.filter(id__in=friends_ids)
+        friendships_ids = Friendship.objects.get_friendships_ids(profile)
+        context['friends'] = Profile.objects.filter(id__in=friendships_ids)
         return context
     except Profile.DoesNotExist:
         return context
@@ -83,42 +85,47 @@ class PrivateView(JWTCookieAuthenticationMixin, LangVerificationMixin, APIView):
 class IndexView(PublicView):
     def get(self, request):
         context = get_profile_context(request)
-        return render_with_sub_template(request, 'modeselect.html', _('Transcendence'), context)
+        return render(request, 'modeselect.html', context)
 
 index = IndexView.as_view()
 
 
 class ModeSelectView(PublicView):
     def get(self, request):
-        return render_with_sub_template(request, 'customize_game.html', _('Customize Game'))
+        context = get_profile_context(request)
+        return render(request, 'customize_game.html', context)
 
 mode_select = ModeSelectView.as_view()
 
 
 class PlayView(PublicView):
     def get(self, request):
-        return render_with_sub_template(request, 'play.html', _('Play'))
+        return render(request, 'play.html')
 
 play = PlayView.as_view()
 
 
 class LoginView(PublicView):
     def get(self, request):
-        return render_response(request, 'accounts/login.html', _('Login'))
+        context = {}
+        fortytwo = request.query_params.get('fortytwo', None)
+        if fortytwo:
+            context['fortytwo'] = fortytwo
+        return render(request, 'accounts/login.html', context)
 
 login = LoginView.as_view()
 
 
 class RegisterView(PublicView):
     def get(self, request):
-        return render_response(request, 'accounts/register.html', _('Register'))
+        return render(request, 'accounts/register.html')
 
 register = RegisterView.as_view()
 
 
 class ForgotPasswordView(PublicView):
     def get(self, request):
-        return render_response(request, 'accounts/forgot_password.html', _('Forgot Password'))
+        return render(request, 'accounts/forgot_password.html')
 
 forgot_password = ForgotPasswordView.as_view()
 
@@ -127,28 +134,41 @@ class HomeView(PrivateView):
     def get(self, request):
         context = get_profile_context(request)
         context = get_game_context(context)
-        return render_response(request, 'home.html', _('Home'), context)
+        context['notifs'] = Notification.objects.get_notifications_for_profile(request.profile.id)
+        return render(request, 'home.html', context)
 
 home = HomeView.as_view()
+
 
 class SelectGameView(PrivateView):
     def get(self, request):
         context = get_profile_context(request)
-        return render_response(request, 'modeselect.html', _('Choose Mode'), context)
+        return render(request, 'modeselect.html', context)
 
 select_game = SelectGameView.as_view()
+
 
 class CustomizeGameView(PrivateView):
     def get(self, request):
         context = get_profile_context(request)
-        return render_response(request, 'customize_game.html', _('Customize Game'), context)
+        return render(request, 'customize_game.html', context)
 
 customize_game = CustomizeGameView.as_view()
+
+
+class GameRoomView(PrivateView):
+    def get(self, request, game_id):
+        context = get_profile_context(request)
+        context['game'] = Game.objects.get(id=game_id)
+        return render(request, 'game_room.html', context)
+
+game_room = GameRoomView.as_view()
+
 
 class ProfileView(PrivateView):
     def get(self, request):
         context = get_profile_context(request)
-        return render_response(request, 'profile.html', _('Profile'), context)
+        return render(request, 'profile.html', context)
 
 profile = ProfileView.as_view()
 
@@ -156,7 +176,7 @@ profile = ProfileView.as_view()
 class ProfileOtherView(PrivateView):
     def get(self, request, profile_id):
         context = get_profile_context(request, profile_id)
-        return render_response(request, 'profile.html', _('Profile'), context)
+        return render(request, 'profile.html', context)
 
 profile_other = ProfileOtherView.as_view()
 
@@ -164,21 +184,25 @@ profile_other = ProfileOtherView.as_view()
 class LeaderboardView(PrivateView):
     def get(self, request):
         context = get_profile_context(request)
-        return render_response(request, 'leaderboard.html', _('Leaderboard'), context)
+        context['players'] = Profile.objects.get_ranked_profiles()
+        return render(request, 'leaderboard.html', context)
 
 leaderboard = LeaderboardView.as_view()
 
 
 class SocialView(PrivateView):
     def get(self, request):
-        friends_ids = Friendship.objects.get_friend_ids(request.profile)
-        if friends_ids:
-            first_friend_id = next(iter(friends_ids))
+        friendships_ids = Friendship.objects.get_friendships_ids(request.profile)
+        if friendships_ids:
+            first_friend_id = next(iter(friendships_ids))
             first_friend = Profile.objects.get(id=first_friend_id)
             friendship_id = Friendship.objects.get_friendship_id(request.profile, first_friend)
             if friendship_id:
                 return redirect(f'/friends/{friendship_id}/')
-        return render_response(request, 'social.html', _('Social'))
+        # context = {'profile': request.profile}
+        # friendship_id = request.query_params.get('id', '')
+        # context['messages'] = FriendMessage.objects.get_messages(friendship_id)
+        return render(request, 'social.html')
 
 social = SocialView.as_view()
 
@@ -186,8 +210,9 @@ social = SocialView.as_view()
 class SocialFriendView(PrivateView):
     def get(self, request, friend_id):
         context = get_friend_context(request)
-        context['messages'] = FriendMessage.objects.get_messages(friend_id)
-        return render_response(request, 'social.html', _('Social'), context)
+        friendship_id = request.query_params.get('id', '')
+        context['messages'] = FriendMessage.objects.get_messages(friendship_id)
+        return render(request, 'social.html', context)
 
 social_friend = SocialFriendView.as_view()
 
@@ -195,17 +220,18 @@ social_friend = SocialFriendView.as_view()
 class SettingsView(PrivateView):
     def get(self, request):
         context = get_profile_context(request)
-        return render_response(request, 'settings.html', _('Settings'), context)
+        return render(request, 'settings.html', context)
 
 settings = SettingsView.as_view()
 
 
 class LangReloadView(PublicView):
     def post(self, request, lang):
-        logger.info(f'Changing language to: "{lang}".')
         path = request.data.get('path')
         translation.activate(lang)
-        response = redirect(path)
+        logger.info('Language changed.', extra={'lang': lang})
+        response_data = {'message': _('Language changed.'), 'redirect': path}
+        response = Response(response_data, status=status.HTTP_200_OK)
         response.set_cookie(
             key='lang',
             value=lang,

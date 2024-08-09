@@ -36,12 +36,15 @@ urlpatterns = [
 
     path('mode/', views.mode_select, name='mode_select'),
     path('play/', views.play, name='play'),
+	
     path('login/', views.login, name='login'),
     path('register/', views.register, name='register'),
 	path('forgot-password/', views.forgot_password, name='forgot_password'),
+	
     path('home/', views.home, name='home'),
 	path('select/', views.select_game, name='select_game'),
 	path('customize/', views.customize_game, name='customize_game'),
+	path('games/<uuid:game_id>/', views.game_room, name='game_room'),
     path('profiles/me/', views.profile, name='profile'),
 	path('profiles/<uuid:profile_id>/', views.profile_other, name='profile_other'),
     path('leaderboard/', views.leaderboard, name='leaderboard'),

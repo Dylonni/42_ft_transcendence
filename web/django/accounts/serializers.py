@@ -1,4 +1,3 @@
-import logging
 from django.conf import settings
 from django.contrib.auth import authenticate, get_user_model
 from django.contrib.auth.hashers import make_password
@@ -6,7 +5,6 @@ from django.utils.translation import gettext_lazy as _
 from rest_framework import serializers
 
 UserModel = get_user_model()
-logger = logging.getLogger('django')
 
 
 class UserLoginSerializer(serializers.Serializer):
@@ -18,31 +16,22 @@ class UserLoginSerializer(serializers.Serializer):
         password = attrs.get('password')
         
         if not username_or_email or not password:
-            msg = _('Must include "username/email" and "password".')
-            raise serializers.ValidationError(msg)
+            raise serializers.ValidationError(_('Must include username/email and password.'))
         
-        logger.info('Checking credentials')
         try:
             user = UserModel.objects.get(username=username_or_email)
-            logger.info('Found user with username')
         except UserModel.DoesNotExist:
             try:
                 user = UserModel.objects.get(email=username_or_email)
-                logger.info('Found user with email')
             except UserModel.DoesNotExist:
-                msg = _('Unable to log in with provided credentials.')
-                raise serializers.ValidationError(msg)
+                raise serializers.ValidationError(_('Unable to log in with provided credentials.'))
         
-        logger.info(f'Active: {user.is_active}, Password: {user.check_password(password)}, Verified: {user.is_verified}')
-        if not user.is_active:
-            msg = _('Account is inactive.')
-            raise serializers.ValidationError(msg)
-        if not user.check_password(password):
-            msg = _('Unable to log in with provided credentials.')
-            raise serializers.ValidationError(msg)
         if not user.is_verified:
-            msg = _('Check your email and activate your account first.')
-            raise serializers.ValidationError(msg)
+            raise serializers.ValidationError(_('Check your email and activate your account first.'))
+        if not user.check_password(password):
+            raise serializers.ValidationError(_('Unable to log in with provided credentials.'))
+        if not user.is_active:
+            raise serializers.ValidationError(_('Account is inactive.'))
         attrs['user'] = user
         return attrs
 

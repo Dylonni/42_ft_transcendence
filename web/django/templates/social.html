@@ -1,7 +1,9 @@
+{% extends "index.html" %}
 {% load static %}
 {% load i18n %}
-{% include "sidebar.html" %}
+{% block title %}{% translate "Social" %}{% endblock %}
 {% block content %}
+{% include "sidebar.html" %}
 <div class="container">
     <div class="row d-xxl-flex justify-content-xxl-center align-items-xxl-center">
         <div class="col-md-12 d-flex d-md-flex d-xl-flex justify-content-center align-items-center justify-content-md-center align-items-md-center justify-content-xl-center align-items-xl-center" style="padding-top:1px;">

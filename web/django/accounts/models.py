@@ -19,52 +19,46 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         unique=True,
         default=uuid.uuid4,
         editable=False,
-        help_text=_('Unique identifier for the user, automatically generated.'),
     )
     username = models.CharField(
         verbose_name=_('username'),
         max_length=150,
         unique=True,
-        help_text=_(
-            'Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.'
-        ),
-        validators=[username_validator],
-        error_messages={
-            'max_length': _('The username must be 150 characters or fewer.'),
-            'invalid': _('This value may contain only letters, numbers, and @/./+/-/_ characters.'),
-        },
     )
     email = models.EmailField(
         verbose_name=_('email address'),
         unique=True,
-        help_text=_('Required. A valid email address.'),
-        error_messages={
-            'invalid': _('Enter a valid email address.'),
-        },
     )
     fortytwo_id = models.CharField(
         verbose_name=_('42 id'),
         null=True,
         blank=True,
         editable=False,
-        help_text=_('Unique identifier for the user from 42.'),
     )
     fortytwo_access_token = models.TextField(
         verbose_name=_('42 access token'),
         null=True,
         blank=True,
         editable=False,
-        help_text=_('Access token for 42 API.'),
     )
     fortytwo_refresh_token = models.TextField(
         verbose_name=_('42 refresh token'),
         null=True,
         blank=True,
         editable=False,
-        help_text=_('Refresh token for 42 API.'),
     )
-    fortytwo_image_url = models.CharField(
-        verbose_name=_('42 image url'),
+    fortytwo_avatar_url = models.CharField(
+        verbose_name=_('42 avatar url'),
+        null=True,
+        blank=True,
+    )
+    fortytwo_coalition_cover_url = models.CharField(
+        verbose_name=_('42 coalition cover url'),
+        null=True,
+        blank=True,
+    )
+    fortytwo_coalition_color = models.CharField(
+        verbose_name=_('42 coalition color'),
         null=True,
         blank=True,
     )
@@ -72,42 +66,30 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         verbose_name=_('date joined'),
         default=timezone.now,
         db_index=True,
-        help_text=_('The date and time when the user joined.'),
     )
     is_staff = models.BooleanField(
         verbose_name=_('staff status'),
         default=False,
-        help_text=_('Designates whether the user can log into this admin site.'),
     )
     is_active = models.BooleanField(
         verbose_name=_('active'),
         default=True,
-        help_text=_(
-            'Designates whether this user should be treated as active. '
-            'Unselect this instead of deleting accounts.'
-        ),
     )
     is_verified = models.BooleanField(
         verbose_name=_('verified'),
         default=False,
-        help_text=_('Designates whether the user has verified their email.'),
     )
     groups = models.ManyToManyField(
-        Group,
+        to=Group,
         verbose_name=_('groups'),
         blank=True,
-        help_text=_(
-            'The groups this user belongs to. A user will get all permissions '
-            'granted to each of their groups.'
-        ),
         related_name='custom_user_set',
         related_query_name='custom_user',
     )
     user_permissions = models.ManyToManyField(
-        Permission,
+        to=Permission,
         verbose_name=_('user permissions'),
         blank=True,
-        help_text=_('Specific permissions for this user.'),
         related_name='custom_user_set',
         related_query_name='custom_user',
     )
@@ -125,3 +107,17 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     def clean(self):
         super().clean()
         self.email = self.__class__.objects.normalize_email(self.email)
+    
+    def update_fortytwo_infos(self, id, access_token, refresh_token, avatar_url, coalition_cover_url, coalition_color):
+        self.fortytwo_id = id
+        self.fortytwo_access_token = access_token
+        self.fortytwo_refresh_token = refresh_token
+        self.fortytwo_avatar_url = avatar_url
+        self.fortytwo_coalition_cover_url = coalition_cover_url
+        self.fortytwo_coalition_color = coalition_color
+        self.save()
+    
+    def set_as_verified(self):
+        self.is_verified = True
+        self.is_active = True
+        self.save()

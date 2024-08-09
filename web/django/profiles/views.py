@@ -40,13 +40,49 @@ class ProfileSearchView(PrivateView):
 profile_search = ProfileSearchView.as_view()
 
 
-# TODO: add methods to patch alias, avatar and status
 class MyDetailView(PrivateView):
     def get(self, request):
         serializer = ProfileSerializer(request.profile)
         return Response(serializer.data)
 
 my_detail = MyDetailView.as_view()
+
+
+class MyAliasView(PrivateView):
+    def post(self, request):
+        serializer = ProfileSerializer(request.profile, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            logger.info('Alias updated.', extra={'profile': request.profile})
+            response_data = {'message': _('Alias updated.'), 'redirect': '/settings/'}
+            return Response(response_data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+my_alias = MyAliasView.as_view()
+
+
+class MyAvatarView(PrivateView):
+    def post(self, request):
+        img_id = request.query_params.get('id', None)
+        if img_id:
+            profile = request.profile
+            if img_id == 'fortytwo':
+                fortytwo_avatar_url = request.user.fortytwo_avatar_url
+                profile.avatar_url = fortytwo_avatar_url if fortytwo_avatar_url else profile.set_default_avatar_url()
+            else:
+                profile.set_default_avatar_url(img_id)
+            logger.info('Avatar updated.', extra={'profile': request.profile})
+            response_data = {'message': _('Avatar updated.'), 'redirect': '/settings/'}
+            return Response(response_data, status=status.HTTP_200_OK)
+        serializer = ProfileSerializer(request.profile, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            logger.info('Avatar updated.', extra={'profile': request.profile})
+            response_data = {'message': _('Avatar updated.'), 'redirect': '/settings/'}
+            return Response(response_data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+my_avatar = MyAvatarView.as_view()
 
 
 class ProfileDetailView(PrivateView):

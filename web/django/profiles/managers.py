@@ -1,18 +1,15 @@
-import logging
 import random
 from django.db import models
 
-logger = logging.getLogger('django')
-
 
 class ProfileManager(models.Manager):
-    def create_from_user(self, user):
+    def create_from_user(self, user, avatar_url=None):
         profile = self.create(
             user=user,
             alias=self._generate_unique_alias(),
-            avatar=self._get_random_default_avatar(),
+            avatar_url=avatar_url if avatar_url else self._get_random_default_avatar(),
         )
-        logger.info(f'Profile created for user {user.username}. Profile ID: {profile.id}')
+        return profile
     
     def get_by_user(self, user):
         try:
@@ -32,7 +29,7 @@ class ProfileManager(models.Manager):
             profile.status = status
             profile.save()
         except self.model.DoesNotExist:
-            logger.info(f'No profile found to set status')
+            raise ValueError('No profile found to set status.')
     
     def search_by_alias(self, alias):
         return self.filter(alias__istartswith=alias)
@@ -45,9 +42,17 @@ class ProfileManager(models.Manager):
                 return alias
     
     def _get_random_default_avatar(self):
-        number = random.randint(1, 6)
-        avatar = f'defaults/avatar{number}.webp'
+        number = random.randint(1, 4)
+        avatar = f'/media/defaults/avatar{number}.webp'
         return avatar
+    
+    def get_rank(self, profile):
+        higher_elo_count = self.filter(elo__gt=profile.elo).count()
+        rank = higher_elo_count + 1
+        return rank
+    
+    def get_ranked_profiles(self):
+        return self.order_by('-elo')
 
 
 class ProfileBlockManager(models.Manager):

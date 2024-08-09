@@ -1,10 +1,8 @@
-import logging
 from asgiref.sync import async_to_sync
 from channels.layers import get_channel_layer
 from django.db import models
 from django.db.models import Q
-
-logger = logging.getLogger('django')
+from notifs.consumers import NotifConsumer
 
 
 class FriendshipManager(models.Manager):
@@ -29,7 +27,7 @@ class FriendshipManager(models.Manager):
             return friendship.profile2
         return friendship.profile1
     
-    def get_friend_ids(self, profile):
+    def get_friendships_ids(self, profile):
         qs1 = self.filter(profile1=profile).exclude(removed_by=profile).values_list('profile2', flat=True)
         qs2 = self.filter(profile2=profile).exclude(removed_by=profile).values_list('profile1', flat=True)
         friend_ids = set(qs1) | set(qs2)
@@ -88,10 +86,20 @@ class FriendRequestManager(models.Manager):
             raise ValueError('Friend request already received.')
         
         friend_request = self.create(sender=sender, receiver=receiver)
+        self.send_friend_request_notif(friend_request)
         return friend_request
     
     def remove_request(self, friend_request):
         friend_request.delete()
+    
+    def send_friend_request_notif(self, friend_request):
+        consumer = NotifConsumer()
+        async_to_sync(consumer.notify_profile)(
+            sender=friend_request.sender,
+            receiver=friend_request.receiver,
+            category='Friend Request',
+            content=f'{friend_request.sender} would like to be your friend.',
+        )
 
 
 class FriendMessageManager(models.Manager):
