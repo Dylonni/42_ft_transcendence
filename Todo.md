@@ -38,7 +38,8 @@
 - [ ] Make a chart to check games won, games lost and more
 
     SOCIAL
-- [ ] Show player context (online, offline, ingame)
+- [X] Show player context (online, offline, ingame)
+- [ ] Rework page
 
     LEADERBOARD
 - [ ] Make better 2nd and third place
@@ -51,13 +52,13 @@
 - [X] Fix formData being empty on chrome
 
     SETTINGS
-- [ ] Fix the second and third panel's responsive
-- [ ] Add a modal or a wayto inform the user that an email has been set to reset his password/email
-- [ ] Add a modal for account deletion with asking user password twice
-- [ ] Add a file input to change the persons avatar
+- [X] Fix the second and third panel's responsive
+- [X] Add a modal or a wayto inform the user that an email has been set to reset his password/email
+- [X] Add a modal for account deletion with asking user password twice
+- [X] Add a file input to change the persons avatar
 - [X] Create a template for change email
-- [ ] Fix the way to change persons Avatar/Nickname
-- [ ] Add players default language
+- [X] Fix the way to change persons Avatar/Nickname
+- [X] Add players default language
 
 Reminder for Pipenv install in django:
 run ```pip install --upgrade pip ``` to check location of pip

@@ -297,7 +297,7 @@
                                 {% translate 'Map' %}
                             </h1>
                             <div style="width: 100%;height: 50%;">
-                                <img src="assets/img/resized.webp" style="width: 100%;height: 100%;border-radius: 20px;"/>
+                                <img src="{% static '/img/resized.webp'%}" style="width: 100%;height: 100%;border-radius: 20px;"/>
                             </div>
                             <div class="d-xxl-flex flex-column justify-content-xxl-center align-items-xxl-center" style="width: 100%;height: 50%;background: linear-gradient(45deg, #00b5ee 19%, #ff0000 86%), #d38800;border-radius: 20px;margin-bottom: 0px;margin-top: 15px;padding-top: 10px;padding-bottom: 10px;">
                                 <h1 class="text-uppercase d-flex d-sm-flex d-md-flex d-xl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-xl-center" style="text-shadow: 3px 3px 3px var(--bs-emphasis-color);margin-bottom: 0px;">
@@ -305,16 +305,16 @@
                                 </h1>
                                 <div class="d-flex d-xxl-flex flex-row justify-content-center align-items-center align-items-lg-center justify-content-xl-center justify-content-xxl-end align-items-xxl-center" style="width: 100%;height: auto;backdrop-filter: opacity(1);-webkit-backdrop-filter: opacity(1);opacity: 1;margin-left: 0px;margin-right: 0px;" title="Room Owner">
                                     <div class="text-nowrap text-truncate d-flex d-lg-flex d-xxl-flex flex-column justify-content-center align-items-center justify-content-lg-center align-items-lg-center justify-content-xxl-center" style="width: 100%;height: 100%;text-overflow: ellipsis;padding-right: 0px;padding-left: 0px;margin-left: 0px;margin-right: 0px;">
-                                        <img src="assets/img/icon8.webp" style="border-radius: 50px;width: 85px;border: 4px solid var(--bs-emphasis-color) ;"/>
+                                        <img src="{{ round.player1.img }}" style="border-radius: 50px;width: 85px;border: 4px solid var(--bs-emphasis-color) ;"/>
                                         <h1 class="text-truncate fs-4 text-center" style="width: 100%;text-shadow: 3px 3px 3px var(--bs-emphasis-color);">
                                             {{ round.player1 }}
                                         </h1>
                                     </div>
                                     <div class="d-flex d-lg-flex d-xxl-flex justify-content-center align-items-center justify-content-lg-center align-items-lg-center justify-content-xxl-center" style="width: 30%;height: 100%;margin-bottom: 25px;">
-                                        <img class="bounce animated" data-bss-disabled-mobile="true" src="assets/img/Versus.webp" style="width: 70px;"/>
+                                        <img class="bounce animated" data-bss-disabled-mobile="true" src="{% static '/img/versus.webp'%}" style="width: 70px;"/>
                                     </div>
                                     <div class="text-nowrap text-truncate d-flex d-lg-flex d-xxl-flex flex-column justify-content-center align-items-center justify-content-lg-center align-items-lg-center justify-content-xxl-center" style="width: 100%;height: 100%;text-overflow: ellipsis;padding-right: 0px;padding-left: 0px;margin-left: 0px;margin-right: 0px;">
-                                        <img src="assets/img/icon8.webp" style="border-radius: 50px;width: 85px;border: 4px solid var(--bs-emphasis-color) ;"/>
+                                        <img src="{{ round.player2.img }}" style="border-radius: 50px;width: 85px;border: 4px solid var(--bs-emphasis-color) ;"/>
                                         <h1 class="text-truncate fs-4 text-center" style="width: 100%;text-shadow: 3px 3px 3px var(--bs-emphasis-color);">
                                             {{ round.player2 }}
                                         </h1>

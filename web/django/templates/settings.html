@@ -6,96 +6,83 @@
 {% include "sidebar.html" %}
 <div class="container" style="margin-top: 10px;margin-bottom: 10px;">
     <div class="row d-xxl-flex" style="height: 105px;">
-        <div class="col-md-12 d-flex d-sm-flex d-md-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-xxl-center align-items-xxl-center" style="padding-left: 0px;padding-right: 0px;padding-top: 0px;padding-bottom: 0px;margin-top: 0px;margin-bottom: 50px;height: 100%;">
+        <div class="col-md-12 d-flex d-sm-flex d-md-flex d-xxl-flex justify-content-center align-items-start justify-content-sm-center align-items-sm-start justify-content-md-center align-items-md-start justify-content-xxl-center align-items-xxl-start" style="padding-left: 0px;padding-right: 0px;padding-top: 0px;padding-bottom: 0px;margin-top: 0px;margin-bottom: 50px;height: 100%;text-shadow: 0px 0px 4px var(--bs-body-bg);">
             <div>
-                <h1 class="fw-normal text-center d-flex d-sm-flex d-md-flex d-lg-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xxl-center align-items-xxl-center" style="color: var(--bs-body-bg);height: 75px;width: 365.719px;margin-top: 0px;margin-bottom: 0px;">
-                    {% translate 'Settings' %}
-                    <svg class="icon icon-tabler icon-tabler-settings" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="margin-left: 10px;margin-right: 10px;color: #9d71ed;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
+                <h1 class="fw-normal text-center d-flex d-sm-flex d-md-flex d-lg-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xxl-center align-items-xxl-center" style="color: var(--bs-body-bg);height: 75px;width: 365.719px;margin-top: 0px;margin-bottom: 0px;">{% translate 'Settings' %}<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-settings" style="margin-left: 10px;margin-right: 10px;color: var(--bs-gray-600);">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                         <path d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z"></path>
                         <path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"></path>
-                    </svg>
-                </h1>
+                    </svg></h1>
             </div>
         </div>
     </div>
 </div>
 <div class="container flex-column" style="height: 100%;">
-    <div class="row d-md-flex justify-content-md-center align-items-md-center" style="height: 100%;margin-top: 0px;margin-bottom: 0px;">
-        <div class="col-md-6 col-lg-5 col-xl-4 col-xxl-4 d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="height: 100%;">
-            <div class="d-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex flex-column justify-content-center align-items-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="background: linear-gradient(-45deg, rgb(0,0,0) 0%, rgba(255,255,255,0) 54%, rgb(0,0,0) 99%), var(--bs-body-color);width: 100%;height: 100%;backdrop-filter: blur(0px);-webkit-backdrop-filter: blur(0px);color: var(--bs-body-bg);border-radius: 28px;box-shadow: 0px 0px 6px 2px #371977;border: 5px solid #371977;">
+    <div class="row d-flex d-md-flex align-items-start justify-content-md-center align-items-md-center align-items-xl-start align-items-xxl-start" style="height: 100%;margin-top: 0px;margin-bottom: 0px;">
+        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-5 col-xxl-4 d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="height: 100%;padding-left: 12px;padding-right: 12px;">
+            <div class="d-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex flex-column justify-content-center align-items-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="background: linear-gradient(-45deg, rgb(0,0,0) 0%, rgba(255,255,255,0) 54%, rgb(0,0,0) 99%), var(--bs-body-color);width: 100%;height: 766px;backdrop-filter: blur(0px);-webkit-backdrop-filter: blur(0px);color: var(--bs-body-bg);border-radius: 28px;box-shadow: 0px 0px 6px 2px var(--bs-gray-500);border: 5px solid var(--bs-body-color);">
                 <div style="width: 100%;height: 100%;margin-bottom: 21px;">
-                    <div class="d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="border-style: none;margin-top: 10px;margin-bottom: 0px;">
-                        <h1 class="fs-4" style="margin-bottom: 0px;color: var(--bs-body-bg);">
-                            {% translate 'Profile Card' %}
-                        </h1>
+                    <div class="d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="border-style: none;margin-bottom: 0px;margin-top: 0px;">
+                        <h1 class="fs-4" style="margin-bottom: 0px;color: var(--bs-body-bg);margin-top: 15px;">{% translate 'Profile Card' %}</h1>
                     </div>
-                    <div class="d-flex d-md-flex d-lg-flex d-xl-flex flex-column justify-content-center align-items-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="background: rgba(0,0,0,0);width: 100%;height: 100%;margin-bottom: 0px;margin-top: 10px;">
-                        <div class="d-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="width: 160px;background: var(--bs-body-bg);height: 160px;padding-bottom: 0px;padding-top: 0px;box-shadow: 0px 0px 6px 9px #371977;border-radius: 50%;border: 0px none var(--bs-secondary-text-emphasis);margin-top: 15px;margin-bottom: 20px;">
-                            <img height="166" src="{{ profile.avatar_url }}?{% now 'U' %}" style="height: 100%;width: 100%;border-radius: 50%;" width="169"/>
-                        </div>
+                    <div class="d-flex d-md-flex d-lg-flex d-xl-flex flex-column justify-content-center align-items-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="background: rgba(0,0,0,0);width: 100%;height: 90%;margin-top: 0px;margin-bottom: 0px;">
+                        <div class="d-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="width: 160px;background: var(--bs-body-bg);height: 160px;padding-bottom: 0px;padding-top: 0px;box-shadow: 0px 0px 6px 6px var(--bs-body-bg);border-radius: 50%;border: 0px none var(--bs-secondary-text-emphasis);margin-bottom: 30px;margin-top: 28px;"><img src="{{ profile.avatar_url }}?{% now 'U' %}" width="169" height="166" style="height: 100%;width: 100%;border-radius: 50%;"></div>
                         <div class="d-flex d-xxl-flex flex-row justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="width: 70%;">
-                            <form class="d-flex d-xxl-flex justify-content-center justify-content-xxl-center align-items-xxl-center" style="width: 100%;">
-                                <input class="form-control" maxlength="20" placeholder="#PlayerName" style="background: var(--bs-body-bg);color: var(--bs-emphasis-color);border-style: none;border-top-right-radius: 0px;border-bottom-right-radius: 0px;" type="text"/>
-                                <button class="btn btn-primary d-flex d-xxl-flex align-items-center justify-content-xxl-center align-items-xxl-center" style="background: var(--bs-btn-disabled-color);height: 38px;width: 45px;border-style: none;padding-left: 0px;padding-right: 0px;margin-left: 0px;margin-right: 11px;" type="submit">
-                                    <svg class="icon icon-tabler icon-tabler-pencil" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 36px;border-top-right-radius: 6px;border-bottom-right-radius: 6px;color: var(--bs-emphasis-color);" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
+                            <form class="d-flex d-xxl-flex justify-content-center justify-content-xxl-center align-items-xxl-center" style="width: 100%;background: var(--bs-body-bg);border-radius: 5px;"><input class="form-control" type="text" placeholder="{{ profile.alias }}" style="background: var(--bs-body-bg);color: var(--bs-emphasis-color);border-style: none;border-top-right-radius: 0px;border-bottom-right-radius: 0px;margin-left: 0px;" maxlength="20"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-check rubberBand animated" id="succesIcon" style="font-size: 45px;border-top-right-radius: 6px;border-bottom-right-radius: 6px;color: var(--bs-success);">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M5 12l5 5l10 -10"></path>
+                                </svg><button class="btn btn-primary d-flex d-xxl-flex align-items-center justify-content-xxl-center align-items-xxl-center" type="submit" style="background: var(--bs-btn-disabled-color);height: 100%;width: 45px;border-style: none;padding-left: 0px;padding-right: 0px;margin-left: 0px;margin-right: 11px;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-pencil" id="modifyIcon" style="font-size: 36px;border-top-right-radius: 6px;border-bottom-right-radius: 6px;color: var(--bs-emphasis-color);">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                                         <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4"></path>
                                         <path d="M13.5 6.5l4 4"></path>
-                                    </svg>
-                                </button>
-                            </form>
-                        </div>
+                                    </svg></button></form>
+                        </div><span id="alreadyTaken" style="color: #f74902;margin-top: 15px;margin-bottom: 0px;text-align: center;">{% translate 'This user alias is already taken, try another one' %}</span>
                     </div>
                 </div>
-                <div class="d-flex d-xxl-flex flex-column justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="width: 95%;height: 100%;background: #371977;border-radius: 28px;margin: 0px;padding-bottom: 0px;margin-top: 0px;margin-bottom: 0px;">
-                    <div class="d-flex justify-content-center align-items-center" style="width: 95%;backdrop-filter: blur(100px);-webkit-backdrop-filter: blur(100px);margin-top: 4px;margin-bottom: 4px;border-radius: 15px;border: 0px solid var(--bs-secondary-color);">
-                        <h1 class="fs-5 d-flex justify-content-center align-items-center" style="margin-bottom: 0px;">
+                <div class="d-flex d-xxl-flex flex-column justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="width: 95%;height: 100%;background: var(--bs-secondary-text-emphasis);border-radius: 28px;margin: 0px;margin-top: 0px;margin-bottom: 10px;padding-top: 21px;padding-bottom: 21px;">
+                    <div class="d-flex justify-content-center align-items-center" style="width: 95%;backdrop-filter: blur(100px);-webkit-backdrop-filter: blur(100px);border-radius: 15px;border: 0px solid var(--bs-secondary-color);margin-top: 0px;margin-bottom: 0px;">
+                        <h1 class="fs-5 d-flex justify-content-center align-items-center" style="margin-bottom: 0px;color: var(--bs-body-bg);">
                             {% translate 'Avatars' %}
                         </h1>
                     </div>
-                    <section class="d-flex align-items-center justify-content-sm-center justify-content-xxl-center" style="height: 100%;width: 100%;margin-top: 15px;margin-bottom: 15px;">
+                    <section class="d-flex justify-content-center align-items-center justify-content-sm-center justify-content-xxl-center" style="height: 100%;width: 100%;margin-bottom: -1px;margin-top: 0px;">
                         <div class="d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="width: 100px;height: 99px;border-radius: 0px;margin-left: 6px;margin-right: 0px;">
-                            <a class="d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" href="/api/profiles/me/avatar/?id=1">
-                                <img class="img-fluid" src="{% static 'img/avatar4.webp' %}" style="border-radius: 50px;width: 90%;height: 90%;"/>
+                            <a class="d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" href="">
+                                <img class="img-fluid" style="border-radius: 50%;width: 90%;height: 90%;border-style: solid;border-color: var(--bs-body-bg);" src="{% static 'img/avatar4.webp' %}">
                             </a>
                         </div>
-                        <div class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="width: 100px;height: 99px;border-radius: 0px;margin-left: 6px;margin-right: 0px;">
-                            <a class="d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" href="/api/profiles/me/avatar/?id=2">
-                                <img class="d-xxl-flex img-fluid" src="{% static 'img/avatar6.webp' %}" style="border-radius: 50px;width: 90%;height: 90%;"/>
-                            </a>
-                        </div>
+                        <div class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="width: 100px;height: 99px;border-radius: 0px;margin-left: 6px;margin-right: 0px;"><a class="d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" href="#">
+                            <img class="d-xxl-flex img-fluid" style="border-radius: 50%;width: 90%;height: 90%;border-style: solid;border-color: var(--bs-body-bg);" src="{% static 'img/avatar6.webp' %}">
+                        </a>
+                    </div>
                         <div class="d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="width: 100px;height: 99px;border-radius: 0px;margin-left: 6px;padding-right: 0px;margin-right: 0px;">
-                            <a class="d-flex justify-content-center align-items-center" href="/api/profiles/me/avatar/?id=3">
-                                <img class="d-xxl-flex img-fluid" src="{% static 'img/avatar5.webp' %}" style="border-radius: 50px;width: 90%;height: 90%;"/>
+                            <a class="d-flex justify-content-center align-items-center" href="#">
+                                <img class="d-xxl-flex img-fluid" style="border-radius: 50%;width: 90%;height: 90%;border-style: solid;border-color: var(--bs-body-bg);" src="{% static 'img/avatar5.webp' %}">
                             </a>
                         </div>
                     </section>
-                    <section class="d-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="height: 100%;width: 100%;margin-top: 15px;margin-bottom: 15px;">
+                    <section class="d-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="height: 100%;width: 100%;margin-top: 0px;margin-bottom: 0px;">
                         <div class="d-flex d-sm-flex d-md-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-xxl-center align-items-xxl-center" style="width: 100px;height: 99px;border-radius: 0px;margin-left: 6px;margin-right: 0px;">
-                            <a class="d-flex d-sm-flex d-md-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center" href="/api/profiles/me/avatar/?id=4">
-                                <img class="d-md-flex d-xxl-flex img-fluid" src="{% static 'img/avatar1.webp' %}" style="border-radius: 50px;width: 90%;height: 90%;"/>
+                            <a class="d-flex d-sm-flex d-md-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center" href="#">
+                                <img class="d-md-flex d-xxl-flex img-fluid" style="border-radius: 50%;width: 90%;height: 90%;border-style: solid;border-color: var(--bs-body-bg);" src="{% static 'img/avatar1.webp' %}">
                             </a>
                         </div>
                         <div class="d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="width: 100px;height: 99px;border-radius: 0px;margin-left: 6px;margin-right: 0px;">
                             {% if profile.user.fortytwo_avatar_url %}
                             <a class="d-flex justify-content-center align-items-sm-center" href="/api/profiles/me/avatar/?id=fortytwo">
-                                <img class="d-xxl-flex img-fluid" src="{{ profile.user.fortytwo_avatar_url }}" style="border-radius: 50px;width: 90%;height: 90%;"/>
+                                <img class="d-xxl-flex img-fluid" style="border-radius: 50%;width: 90%;height: 90%;border-style: solid;border-color: var(--bs-body-bg);" src="{{ profile.user.fortytwo_avatar_url }}">
                             </a>
                             {% else %}
                             <a class="d-flex justify-content-center align-items-sm-center" href="/api/oauth/42/login/" id="login-42">
-                                <img class="d-xxl-flex img-fluid" src="{% static '/img/42_Logo.svg.png' %}" style="border-radius: 50px;width: 90%;height: 90%;"/>
+                                <img class="d-xxl-flex img-fluid" style="border-radius: 50%;width: 90%;height: 90%;border-style: solid;border-color: var(--bs-body-bg);" src="{% static '/img/42.webp' %}">
                             </a>
                             {% endif %}
                         </div>
                         <div class="d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="width: 92px;height: 91px;border-radius: 50%;margin-left: 6px;padding-right: 0px;margin-right: 0px;border-style: solid;border-color: var(--bs-body-bg);">
                             <label class="form-label d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" id="photoUpload" style="width: 90%;height: 90%;margin-bottom: 0px;">
                                 <input type="file" id="avatar-upload" accept="image/*"/>
-                                {% if profile.avatar %}
-                                <img class="d-xxl-flex img-fluid" src="{{ profile.avatar.url }}?{% now 'U' %}" style="border-radius: 50px;width: 100%;height: 100%;"/>
-                                {% else %}
-                                <svg class="icon icon-tabler icon-tabler-photo-plus" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 45px;color: var(--bs-body-bg);" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-photo-plus" style="font-size: 45px;color: var(--bs-body-bg);">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                                     <path d="M15 8h.01"></path>
                                     <path d="M12.5 21h-6.5a3 3 0 0 1 -3 -3v-12a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v6.5"></path>
                                     <path d="M3 16l5 -5c.928 -.893 2.072 -.893 3 0l4 4"></path>
@@ -103,86 +90,220 @@
                                     <path d="M16 19h6"></path>
                                     <path d="M19 16v6"></path>
                                 </svg>
-                                {% endif %}
                             </label>
                         </div>
                     </section>
+                </div><span id="wrongAvatarSize" style="color: #f74902;text-align: center;margin-top: 0px;margin-bottom: 10px;">{% translate 'Your image size must not be greater then X bytes' %}</span>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-7 col-xxl-4 d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="height: 100%;padding-left: 12px;padding-right: 12px;">
+            <div class="d-flex d-sm-flex flex-column justify-content-sm-center align-items-sm-center" style="border-radius: 28px;background: linear-gradient(-51deg, rgba(0,0,0,0) 0%, var(--bs-emphasis-color) 5%, rgba(255,255,255,0) 100%), var(--bs-body-color);width: 100%;height: 100%;filter: blur(0px);backdrop-filter: blur(0px);-webkit-backdrop-filter: blur(0px);box-shadow: 0px 0px 6px 2px var(--bs-gray-400);border: 5px solid var(--bs-body-color);">
+                <div class="d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center" style="height: 50px;width: 100%;margin-top: 0px;position: relative;color: #ffffff;border-radius: 22px;margin-bottom: 0px;">
+                    <h1 class="fs-4 d-flex justify-content-center align-items-center" style="margin-bottom: 0px;color: var(--bs-body-bg);border-radius: 0px;">{% translate 'Account Infos' %}</h1>
+                </div>
+                <div class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="height: 80%;width: 100%;">
+                    <div class="d-flex flex-column justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center section-wrapper" style="padding-left: 11px;padding-right: 11px;height: 100%;background: var(--bs-secondary-text-emphasis);border-radius: 18px;width: 100%;padding-top: 0px;padding-bottom: 0px;margin-left: 40px;margin-right: 40px;filter: blur(0px);backdrop-filter: blur(0px);-webkit-backdrop-filter: blur(0px);border-width: 2px;border-color: var(--bs-body-color);margin-top: 36px;margin-bottom: 36px;">
+                        <section class="d-flex flex-column justify-content-center align-items-start align-items-xxl-start" id="templateNormalAcc" style="width: 100%;height: 100%;background: rgba(0,0,0,0.15);border-radius: 10px;margin-top: 10px;margin-bottom: 10px;margin-left: 5px;margin-right: 5px;">
+                            <div class="text-truncate d-flex flex-column justify-content-center align-items-start align-items-sm-start align-items-xxl-start" style="width: 100%;height: 100%;margin-top: 0px;margin-bottom: 0px;padding-left: 0px;padding-right: 0px;margin-left: 0px;margin-right: 0px;">
+                                <div style="margin-top: 15px;margin-bottom: 15px;margin-left: 0px;margin-right: 0px;padding-left: 10px;padding-right: 10px;width: 100%;">
+                                    <h1 class="fs-5 d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex align-items-center align-items-sm-center justify-content-md-start align-items-md-center justify-content-lg-start align-items-lg-center justify-content-xl-start align-items-xl-center justify-content-xxl-start" style="width: 100%;color: var(--bs-body-bg);margin-top: 0px;margin-bottom: 0px;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-user-circle" style="margin-right: 5px;color: var(--bs-body-bg);font-size: 24px;">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                            <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+                                            <path d="M12 10m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"></path>
+                                            <path d="M6.168 18.849a4 4 0 0 1 3.832 -2.849h4a4 4 0 0 1 3.834 2.855"></path>
+                                        </svg>{% translate 'Username' %}</h1><span class="text-truncate d-sm-flex" id="playerUsername" style="color: var(--bs-body-bg);font-size: 14px;font-weight: bold;margin-top: 0px;">{{ profile.user.username }}</span>
+                                </div>
+                                <div style="padding-top: 0px;padding-bottom: 0px;margin-top: 15px;margin-bottom: 15px;width: 100%;margin-left: 0px;margin-right: 0px;padding-left: 10px;padding-right: 10px;">
+                                    <h1 class="fs-5 d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex align-items-center align-items-sm-center justify-content-md-start align-items-md-center justify-content-lg-start justify-content-xl-start justify-content-xxl-start" style="width: 100%;margin-top: -3px;color: var(--bs-body-bg);margin-bottom: 0px;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-cake" style="margin-right: 5px;font-size: 24px;color: var(--bs-body-bg);">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                            <path d="M3 20h18v-8a3 3 0 0 0 -3 -3h-12a3 3 0 0 0 -3 3v8z"></path>
+                                            <path d="M3 14.803c.312 .135 .654 .204 1 .197a2.4 2.4 0 0 0 2 -1a2.4 2.4 0 0 1 2 -1a2.4 2.4 0 0 1 2 1a2.4 2.4 0 0 0 2 1a2.4 2.4 0 0 0 2 -1a2.4 2.4 0 0 1 2 -1a2.4 2.4 0 0 1 2 1a2.4 2.4 0 0 0 2 1c.35 .007 .692 -.062 1 -.197"></path>
+                                            <path d="M12 4l1.465 1.638a2 2 0 1 1 -3.015 .099l1.55 -1.737z"></path>
+                                        </svg>{% translate 'Account created on' %}</h1><span class="text-truncate d-sm-flex" id="accountCreationTime" style="color: var(--bs-body-bg);font-size: 14px;font-weight: bold;margin-top: 0px;">{{ profile.user.date_joined }}</span>
+                                </div>
+                                <div style="margin-top: 15px;margin-bottom: 15px;width: 100%;margin-left: 0px;margin-right: 0px;padding-left: 10px;padding-right: 10px;">
+                                    <h1 class="fs-5 d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex align-items-center align-items-sm-center justify-content-md-start align-items-md-center justify-content-lg-start align-items-lg-center justify-content-xl-start align-items-xl-center justify-content-xxl-start" style="width: 100%;margin-top: -3px;color: var(--bs-body-bg);margin-bottom: 0px;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-mail" style="margin-right: 5px;color: var(--bs-body-bg);font-size: 24px;">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                            <path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z"></path>
+                                            <path d="M3 7l9 6l9 -6"></path>
+                                        </svg>{% translate 'Email' %}</h1><span class="text-truncate d-sm-flex" id="playerCurrentMail" style="color: var(--bs-body-bg);font-size: 14px;font-weight: bold;margin-top: -2px;">{{ profile.user.email }}</span>
+                                </div>
+                                <div class="text-truncate" style="margin-right: 10px;width: 100%;margin-top: 15px;margin-left: 0px;margin-bottom: 10px;padding-left: 10px;padding-right: 10px;">
+                                    <h1 class="fs-5 d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex align-items-sm-center justify-content-md-start align-items-md-center justify-content-lg-start align-items-lg-center justify-content-xl-start align-items-xl-center justify-content-xxl-start" style="color: var(--bs-body-bg);margin-left: 0px;padding-left: 0px;padding-right: 0px;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-link" style="font-size: 24px;margin-right: 5px;">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                            <path d="M9 15l6 -6"></path>
+                                            <path d="M11 6l.463 -.536a5 5 0 0 1 7.071 7.072l-.534 .464"></path>
+                                            <path d="M13 18l-.397 .534a5.068 5.068 0 0 1 -7.127 0a4.972 4.972 0 0 1 0 -7.071l.524 -.463"></path>
+                                        </svg>{% translate 'Link with 42' %}</h1>
+                                    <div class="text-truncate d-flex d-xxl-flex justify-content-start align-items-center justify-content-xxl-start align-items-xxl-center" id="templateFtNotLink" style="width: 100%;">
+                                        <div style="width: 100%;"><span class="text-truncate d-flex d-sm-flex justify-content-start align-items-center justify-content-xxl-start align-items-xxl-center" id="ftNotLinked" style="color: var(--bs-body-bg);font-size: 16px;margin-top: 0px;width: 100%;">{% translate 'Not Linked' %}<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-x" style="font-size: 24px;color: rgb(210,24,24);margin-left: 5px;margin-right: 5px;">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                    <path d="M18 6l-12 12"></path>
+                                                    <path d="M6 6l12 12"></path>
+                                                </svg></span></div><button class="btn btn-primary d-flex d-xxl-flex justify-content-end align-items-center justify-content-xxl-end align-items-xxl-center" type="button" style="background: rgba(13,110,253,0);color: rgb(13,202,240);border-style: none;">{% translate 'Link to 42' %}</button>
+                                    </div>
+                                    <div id="templateFtLink" class="text-truncate d-flex d-xxl-flex justify-content-start align-items-center justify-content-xxl-start align-items-xxl-center" style="width: 100%;">
+                                        <div style="width: 100%;height: 100%;"><span id="ftLink" class="text-truncate d-flex d-sm-flex justify-content-start align-items-center justify-content-xxl-start align-items-xxl-center" style="color: var(--bs-body-bg);font-size: 16px;margin-top: 0px;width: 100%;height: 100%;">{% translate 'Linked' %}<svg class="icon icon-tabler icon-tabler-check" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" style="font-size: 24px;color: rgb(139,210,24);margin-left: 5px;margin-right: 5px;">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                    <path d="M5 12l5 5l10 -10"></path>
+                                                </svg></span></div><button class="btn btn-primary d-flex d-md-flex d-xxl-flex justify-content-end align-items-center align-items-md-center align-items-xxl-center" type="button" style="background: rgba(13,110,253,0);color: rgb(13,202,240);border-style: none;" data-bs-target="#modalUnlinkFt" data-bs-toggle="modal">{% translate 'Unlink account' %}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <section class="d-flex justify-content-center align-items-center" id="templateSecNormalAcc" style="width: 100%;height: 100%;background: rgba(0,0,0,0.15);border-radius: 10px;margin-top: 10px;margin-bottom: 10px;margin-left: 5px;margin-right: 5px;padding-top: 0px;padding-bottom: 0px;">
+                            <div class="d-flex flex-column justify-content-center align-items-start align-items-sm-start" style="width: 100%;padding-bottom: 20px;height: 100%;margin-top: 0px;margin-bottom: 0px;padding-left: 0px;padding-right: 0px;padding-top: 10px;margin-left: 0px;margin-right: 5px;"><button class="btn btn-primary link-info d-sm-flex d-md-flex justify-content-sm-center justify-content-md-center align-items-md-center" type="submit" style="background: #21252900;border-radius: 15px;border-style: none;border-color: var(--bs-highlight-color);margin-top: 10px;margin-bottom: 10px;" data-bs-target="#modalModifyCred" data-bs-toggle="modal">{% translate 'Modify Email' %}</button><button class="btn btn-primary link-info d-sm-flex d-md-flex justify-content-sm-center justify-content-md-center align-items-md-center" type="submit" style="background: #21252900;border-radius: 15px;border-style: none;border-color: var(--bs-highlight-color);margin-bottom: 10px;margin-top: 10px;" data-bs-target="#modalModifyCred" data-bs-toggle="modal">{% translate 'Modify Password' %}</button>
+                                <div class="dropdown" style="width: 100%;"><button class="btn btn-primary dropdown-toggle d-flex justify-content-center align-items-center" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="width: 100%;background: rgba(255,255,255,0);color: rgb(255, 255, 255);border-style: none;border-color: rgb(13,202,240);"><br><span style="background-color: rgba(0, 0, 0, 0.15);">{% translate 'Change Prefered Language' %}</span><br><br></button>
+                                    <div class="dropdown-menu"><a class="dropdown-item" >EN</a><a class="dropdown-item" >FR</a><a class="dropdown-item" >JP</a><a class="dropdown-item" >ES</a><a class="dropdown-item" ">RU</a>
+                                        <div class="dropdown-divider"></div><a class="dropdown-item disabled">{% translate 'Selected' %} : #Language</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+                <div class="d-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="width: 100%;height: 40px;margin: 20px 0px;margin-top: 0px;margin-bottom: 40px;">
+                    <form method="post"><button class="btn btn-danger d-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" type="button" style="width: 195.484px;margin-right: 0px;background: #a92835;border-radius: 9px;margin-top: 5px;margin-bottom: 5px;padding-top: 7px;padding-bottom: 7px;" data-bs-target="#modalDeleteAcc" data-bs-toggle="modal">{% translate 'Delete my account' %}</button></form>
                 </div>
             </div>
         </div>
-        <div class="col-sm-12 col-md-12 col-lg-8 col-xl-8 col-xxl-8 d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="height: 100%;">
-            <div class="d-flex d-sm-flex flex-column justify-content-sm-center align-items-sm-center" style="border-radius: 28px;background: linear-gradient(-51deg, rgba(0,0,0,0) 0%, var(--bs-emphasis-color) 5%, rgba(255,255,255,0) 100%), var(--bs-body-color);width: 100%;height: 662px;filter: blur(0px);backdrop-filter: blur(0px);-webkit-backdrop-filter: blur(0px);border-width: 3px;border-color: var(--bs-body-color);">
+        <div class="col-sm-12 col-md-12 col-lg-8 col-xl-7 col-xxl-4 d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="height: 100%;padding-left: 12px;padding-right: 12px;margin-bottom: 15px;margin-top: 0px;">
+            <div class="d-flex d-sm-flex flex-column justify-content-sm-center align-items-sm-center" style="border-radius: 28px;background: linear-gradient(-51deg, rgba(0,0,0,0) 0%, var(--bs-emphasis-color) 5%, rgba(255,255,255,0) 100%), var(--bs-body-color);width: 100%;height: 100%;filter: blur(0px);backdrop-filter: blur(0px);-webkit-backdrop-filter: blur(0px);box-shadow: 0px 0px 6px 2px var(--bs-gray-400);border: 5px solid var(--bs-body-color);">
                 <div class="d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center" style="height: 50px;width: 100%;margin-top: 0px;position: relative;color: #ffffff;border-radius: 22px;margin-bottom: 0px;">
-                    <h1 class="fs-4 d-flex justify-content-center align-items-center" style="margin-bottom: 0px;color: var(--bs-body-bg);border-radius: 0px;">
-                        {% translate 'Account Infos' %}
-                    </h1>
+                    <h1 class="fs-4 d-flex justify-content-center align-items-center" style="margin-bottom: 0px;color: #af1e2d;border-radius: 0px;font-weight: bold;">{% translate 'Block List' %}<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-ban" style="font-size: 29px;margin-left: 10px;margin-right: 10px;">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+                            <path d="M5.7 5.7l12.6 12.6"></path>
+                        </svg></h1>
                 </div>
-                <div class="d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-sm-center align-items-sm-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="width: 100%;height: 550px;">
-                    <div class="d-flex flex-column justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center section-wrapper" style="padding-left: 11px;padding-right: 11px;height: 80%;background: var(--bs-secondary-text-emphasis);border-radius: 18px;width: 245px;padding-top: 0px;padding-bottom: 0px;margin-left: 40px;margin-right: 40px;filter: blur(0px);backdrop-filter: blur(0px);-webkit-backdrop-filter: blur(0px);margin-top: 50px;margin-bottom: 50px;border-width: 2px;border-color: var(--bs-body-color);">
-                        <form class="d-flex d-sm-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center" id="alias" method="post" style="height: 50%;">
-                            <section class="d-flex flex-column justify-content-center align-items-center" style="width: 100%;height: 100%;background: rgba(0,0,0,0.15);border-radius: 10px;margin-top: 10px;margin-bottom: 10px;margin-left: 5px;margin-right: 5px;">
-                                <div class="text-truncate d-flex flex-column justify-content-center align-items-start align-items-sm-start align-items-xxl-start" style="width: 200px;padding-top: 20px;padding-bottom: 20px;height: 100%;margin-top: 0px;margin-bottom: 0px;padding-left: 0px;padding-right: 0px;margin-left: 5px;margin-right: 5px;">
-                                    <div style="margin-left: 10px;margin-right: 10px;margin-top: 10px;margin-bottom: 10px;">
-                                        <h1 class="fs-5 d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex align-items-sm-center justify-content-md-start align-items-md-center justify-content-lg-start align-items-lg-center justify-content-xl-start align-items-xl-center justify-content-xxl-start" style="width: 100%;margin-top: -3px;color: var(--bs-body-bg);margin-bottom: 15px;">
-                                            {% translate 'Username' %}
-                                        </h1>
-                                        <span class="text-truncate d-sm-flex" id="playerUsername" style="color: var(--bs-body-bg);font-size: 14px;margin-top: -10px;font-weight: bold;">
-                                            {{ profile.user.username }}
-                                        </span>
-                                    </div>
-                                    <div style="padding-top: 0px;padding-bottom: 0px;margin-left: 10px;margin-right: 10px;margin-top: 10px;margin-bottom: 10px;">
-                                        <h1 class="fs-5 d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex align-items-sm-center justify-content-md-start align-items-md-center justify-content-lg-start align-items-lg-center justify-content-xl-start align-items-xl-center justify-content-xxl-start" style="width: 100%;margin-top: -3px;color: var(--bs-body-bg);margin-bottom: 15px;">
-                                            {% translate 'Account created on' %}
-                                        </h1>
-                                        <span class="text-truncate d-sm-flex" id="accountCreationTime" style="color: var(--bs-body-bg);font-size: 14px;margin-top: -10px;font-weight: bold;">
-                                            {{ profile.user.date_joined }}
-                                        </span>
-                                    </div>
-                                    <div style="margin-left: 10px;margin-right: 10px;margin-top: 10px;margin-bottom: 10px;">
-                                        <h1 class="fs-5 d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex align-items-sm-center justify-content-md-start align-items-md-center justify-content-lg-start align-items-lg-center justify-content-xl-start align-items-xl-center justify-content-xxl-start" style="width: 100%;margin-top: -3px;color: var(--bs-body-bg);margin-bottom: 15px;">
-                                            {% translate 'Email' %}
-                                        </h1>
-                                        <span class="text-truncate d-sm-flex" id="playerCurrentMail" style="color: var(--bs-body-bg);font-size: 14px;margin-top: -10px;font-weight: bold;">
-                                            {{ profile.user.email }}
-                                        </span>
-                                    </div>
-                                </div>
-                            </section>
-                        </form>
-                        <form class="d-flex d-sm-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center" id="email" method="post" style="height: 40%;">
-                            <section class="d-flex justify-content-center align-items-center" style="width: 100%;height: 50%;background: rgba(0,0,0,0.15);border-radius: 10px;margin-top: 10px;margin-bottom: 10px;margin-left: 5px;margin-right: 5px;">
-                                <div class="d-flex flex-column justify-content-center align-items-start align-items-sm-start" style="width: 200px;padding-top: 20px;padding-bottom: 20px;height: 100%;margin-top: 0px;margin-bottom: 0px;padding-left: 0px;padding-right: 0px;margin-left: 5px;margin-right: 5px;">
-                                    <button class="btn btn-primary link-info d-sm-flex d-md-flex justify-content-sm-center justify-content-md-center align-items-md-center" style="background: #21252900;border-radius: 15px;border-style: none;border-color: var(--bs-highlight-color);" type="submit">
-                                        {% translate 'Modify Email' %}
-                                    </button>
-                                    <button class="btn btn-primary link-info d-sm-flex d-md-flex justify-content-sm-center justify-content-md-center align-items-md-center" style="background: #21252900;border-radius: 15px;border-style: none;border-color: var(--bs-highlight-color);" type="submit">
-                                        {% translate 'Modify Password' %}
-                                    </button>
-                                </div>
-                            </section>
-                        </form>
+                <div class="d-flex d-xxl-flex flex-column justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center overflow-auto" style="height: 80%;width: 100%;background: var(--bs-secondary-text-emphasis);max-height: 602px;">
+                    <div class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" id="templateBlocked" style="width: 100%;height: 85px;border-bottom-style: solid;">
+                        <div class="d-flex justify-content-center align-items-center" style="width: 20%;height: 100%;">
+                            <div style="width: 50px;height: 50px;"><img style="width: 100%;height: 100%;border-radius: 50%;" src="assets/img/avatar2.webp"></div>
+                        </div>
+                        <div class="text-truncate d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="width: 60%;height: 100%;color: var(--bs-body-bg);">
+                            <h1 class="text-truncate fs-3" style="color: var(--bs-body-bg);margin-bottom: 0px;">Player_1234656789</h1>
+                        </div>
+                        <div class="d-flex justify-content-center align-items-center" style="width: 20%;height: 100%;border-bottom-style: none;"><button class="btn btn-primary d-flex justify-content-center align-items-center" type="button" style="background: rgba(13,110,253,0);border-style: none;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-user-minus" data-bs-toggle="tooltip" data-bss-tooltip="" data-bs-placement="right" style="font-size: 39px;border-bottom-style: none;color: var(--bs-btn-bg);" title="Unblock">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
+                                    <path d="M6 21v-2a4 4 0 0 1 4 -4h4c.348 0 .686 .045 1.009 .128"></path>
+                                    <path d="M16 19h6"></path>
+                                </svg></button></div>
                     </div>
-                    <div class="d-flex flex-row blocking-list" style="background: var(--bs-secondary-text-emphasis);width: 440px;border-radius: 18px;padding-left: 0px;padding-right: 0px;height: 515px;margin-left: 40px;margin-right: 40px;margin-top: 50px;margin-bottom: 50px;">
-                        <div class="d-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="background: rgba(0,0,0,0.17);border-radius: 15px;margin: 1px;height: 50px;width: 100%;padding-left: 0px;padding-right: 0px;margin-left: 0px;margin-right: 0px;border-bottom-right-radius: 0px;border-bottom-left-radius: 0px;">
-                            <h1 class="fs-3 fw-bold d-sm-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-sm-center align-items-sm-center justify-content-xxl-center" style="color: rgb(164,37,50);margin-bottom: 0px;">
-                                {% translate 'Block list' %}
-                                <svg class="icon icon-tabler icon-tabler-ban text-danger" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="margin-top: 4px;margin-right: 0px;margin-left: 7px;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
-                                    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
-                                    <path d="M5.7 5.7l12.6 12.6"></path>
-                                </svg>
-                            </h1>
+                    <div class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" id="templatEmpty" style="width: 100%;height: 85px;border-bottom-style: solid;">
+                        <div class="text-truncate d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="width: 100%;height: 100%;color: var(--bs-body-bg);">
+                            <h1 class="text-truncate fs-3" style="color: var(--bs-light-text-emphasis);margin-bottom: 0px;">{% translate 'BLOCK LIST IS EMPTY' %}</h1>
                         </div>
                     </div>
                 </div>
-                <div class="d-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="width: 100%;height: 40px;">
-                    <form method="post">
-                        <button class="btn btn-danger d-flex d-xxl-flex justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="width: 195.484px;margin-right: 0px;background: var(--bs-btn-active-border-color);border-width: 0px;border-radius: 9px;margin-top: 5px;margin-bottom: 5px;padding-top: 7px;padding-bottom: 7px;" type="submit">
-                            {% translate 'Delete my account' %}
-                        </button>
-                    </form>
+                <div class="d-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="width: 100%;height: 50px;margin: 20px 0px;margin-top: 0px;padding-bottom: 0px;margin-bottom: 0px;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" role="dialog" tabindex="-1" id="modalDeleteAcc">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="margin-bottom: 1px;padding-bottom: 0px;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-trash" style="margin-left: 10px;margin-right: 10px;font-size: 40px;">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M4 7l16 0"></path>
+                        <path d="M10 11l0 6"></path>
+                        <path d="M14 11l0 6"></path>
+                        <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>
+                        <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path>
+                    </svg>{% translate 'Delete account' %}</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body" style="border-style: none;">
+                <p style="font-weight: bold;margin-bottom: 10px;">{% translate 'Are you sure you want to delete your account ?' %}<br>{% translate 'By doing so, you will not be able to :' %}</p>
+                <ul>
+                    <li>{% translate 'Play against other people online' %}</li>
+                    <li>{% translate 'Access your profile and other players profile' %}</li>
+                    <li>{% translate 'Access the leaderboard and view player rankings' %}</li>
+                    <li>{% translate 'Add friends and use the chat' %}</li>
+                </ul>
+                <p style="font-weight: bold;margin-bottom: 10px;">{% translate 'This action will also delete all of your data including :' %}</p>
+                <ul>
+                    <li>{% translate 'Your profile (Avatar, Nickname, Username)' %}</li>
+                    <li>{% translate 'Your conversations and your friend list' %}</li>
+                    <li>{% translate 'Your ranking and your games history' %}</li>
+                </ul>
+                <p style="font-weight: bold;margin-bottom: 0px;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-info-circle" style="font-size: 25px;margin-left: 5px;margin-right: 5px;margin-top: 0px;margin-bottom: 0px;">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path>
+                        <path d="M12 9h.01"></path>
+                        <path d="M11 12h1v4h1"></path>
+                    </svg>{% translate 'If you had linked your account to 42, this will also undo the link.' %}</p>
+                <p class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="font-weight: bold;margin-bottom: 0px;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-alert-triangle-filled" style="font-size: 30px;margin-right: 10px;color: rgb(247,160,58);">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M12 1.67c.955 0 1.845 .467 2.39 1.247l.105 .16l8.114 13.548a2.914 2.914 0 0 1 -2.307 4.363l-.195 .008h-16.225a2.914 2.914 0 0 1 -2.582 -4.2l.099 -.185l8.11 -13.538a2.914 2.914 0 0 1 2.491 -1.403zm.01 13.33l-.127 .007a1 1 0 0 0 0 1.986l.117 .007l.127 -.007a1 1 0 0 0 0 -1.986l-.117 -.007zm-.01 -7a1 1 0 0 0 -.993 .883l-.007 .117v4l.007 .117a1 1 0 0 0 1.986 0l.007 -.117v-4l-.007 -.117a1 1 0 0 0 -.993 -.883z" stroke-width="0" fill="currentColor"></path>
+                    </svg>{% translate 'This action is not reversible' %}</p>
+            </div>
+            <div class="modal-footer d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="border-bottom-style: none;"><button class="btn btn-primary" type="button" style="background: #a92835;text-shadow: 2px 2px 3px rgb(0,0,0);border-style: none;border-bottom-style: none;" data-bs-target="#modalConfirmDelete" data-bs-toggle="modal">{% translate 'Proceed' %}</button></div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" role="dialog" tabindex="-1" id="modalConfirmDelete">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">{% translate 'Confirm Delete' %}</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="font-size: 1em;">{% translate 'Please enter your password to confirm your account deletion' %}</p>
+                <div class="mb-3 form-floating"><input type="password" class="form-control form-control form-control" id="floatingPassword-register" maxlength="254" minlength="6" name="password" placeholder=" " required=""><label class="form-label" for="floatingMail-register">{% translate 'Password' %}</label>
+                    <div class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" id="wrongcredDel">
+                        <p style="color: #e8112d;font-size: 1em;">{% translate 'Wrong credentials. Please try again' %}</p>
+                    </div>
                 </div>
             </div>
+            <div class="modal-footer d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center"><button class="btn btn-light" type="button" data-bs-dismiss="modal">{% translate 'Cancel' %}</button><button class="btn btn-primary" type="submit" style="background: #a92835;border-style: none;">{% translate 'Confirm' %}</button></div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" role="dialog" tabindex="-1" id="modalUnlinkFt">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title d-flex d-xxl-flex justify-content-center align-items-center align-items-xxl-center"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-unlink" style="margin-left: 10px;margin-right: 10px;font-size: 40px;">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M17 22v-2"></path>
+                        <path d="M9 15l6 -6"></path>
+                        <path d="M11 6l.463 -.536a5 5 0 0 1 7.071 7.072l-.534 .464"></path>
+                        <path d="M13 18l-.397 .534a5.068 5.068 0 0 1 -7.127 0a4.972 4.972 0 0 1 0 -7.071l.524 -.463"></path>
+                        <path d="M20 17h2"></path>
+                        <path d="M2 7h2"></path>
+                        <path d="M7 2v2"></path>
+                    </svg>{% translate 'Unlink 42 account' %}</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p><strong>{% translate 'Unlinking your 42 account will result in these changes:' %}</strong></p>
+                <ul style="margin-bottom: 0px;">
+                    <li>{% translate 'You will not be able to connect using 42 auth on login page.' %}</li>
+                    <li>{% translate 'You will not be able to use your 42 banner and profile image.' %}</li>
+                </ul>
+            </div>
+            <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Cancel</button><button class="btn btn-primary" type="button">Unlink</button></div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" role="dialog" tabindex="-1" id="modalModifyCred">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header d-xxl-flex justify-content-xxl-center align-items-xxl-center" style="border-style: none;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-mail-fast" style="font-size: 40px;margin-right: 5px;">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M3 7h3"></path>
+                    <path d="M3 11h2"></path>
+                    <path d="M9.02 8.801l-.6 6a2 2 0 0 0 1.99 2.199h7.98a2 2 0 0 0 1.99 -1.801l.6 -6a2 2 0 0 0 -1.99 -2.199h-7.98a2 2 0 0 0 -1.99 1.801z"></path>
+                    <path d="M9.8 7.5l2.982 3.28a3 3 0 0 0 4.238 .202l3.28 -2.982"></path>
+                </svg>
+                <h4 class="modal-title">{% translate 'An Email has been sent !' %}</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body" style="border-style: none;">
+                <p style="font-weight: bold;">{% translate 'An email with a link has been sent to modify your informations.' %}<br>{% translate 'Make sure to check into your spams as well.' %}<br>{% translate 'You will be able to send another link in 30 seconds.' %}</p>
+            </div>
+            <div class="modal-footer d-flex d-xxl-flex justify-content-center justify-content-xxl-center align-items-xxl-center" style="border-style: none;padding-top: 0px;"><button class="btn btn-primary" type="button" data-bs-dismiss="modal">{% translate 'Got it' %}</button></div>
         </div>
     </div>
 </div>
