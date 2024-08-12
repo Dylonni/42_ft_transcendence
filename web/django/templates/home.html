@@ -9,7 +9,8 @@
     <div class="row d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="height: 100%;margin-top: 0px;margin-bottom: 0px;">
         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-11 d-xl-flex justify-content-xl-end align-items-xl-center" style="height: 100%;padding-left: 0px;padding-right: 0px;">
             <div class="d-flex d-lg-flex d-xl-flex d-xxl-flex flex-row-reverse justify-content-start align-items-center justify-content-sm-start justify-content-md-start justify-content-lg-start align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center">
-                <button class="btn btn-primary d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" type="button" style="width: 55px;height: 55px;border-radius: 50%;background: rgba(13,110,253,0);border: 2px solid var(--bs-body-bg);" data-bs-toggle="collapse" data-bs-target="#playerFinder" aria-controls="playerFinder" aria-expanded="false"><svg class="icon icon-tabler icon-tabler-user-search" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" style="width: 100%;height: 100%;">
+                <button class="btn btn-primary d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" type="button" style="width: 55px;height: 55px;border-radius: 50%;background: rgba(13,110,253,0);border: 2px solid var(--bs-body-bg);" data-bs-toggle="collapse" data-bs-target="#playerFinder" aria-controls="playerFinder" aria-expanded="false">
+                    <svg class="icon icon-tabler icon-tabler-user-search" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" style="width: 100%;height: 100%;">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                     <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
                     <path d="M6 21v-2a4 4 0 0 1 4 -4h1.5"></path>
@@ -172,126 +173,59 @@
         </div>
     </div>
 </div>
-<div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" id="modalFilter" role="dialog" style="border-style: none;" tabindex="-1">
+<div id="modalFilter" class="modal fade" role="dialog" tabindex="-1">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header d-flex justify-content-center align-items-center" style="border-style: none;border-top-left-radius: 7px;">
-                <svg class="icon icon-tabler icon-tabler-filter-edit" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 29px;margin-left: 5px;margin-right: 5px;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
+            <div class="modal-header d-flex justify-content-center align-items-center" style="border-style: none;border-top-left-radius: 7px;"><svg class="icon icon-tabler icon-tabler-filter-edit" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" style="font-size: 29px;margin-left: 5px;margin-right: 5px;">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                     <path d="M10.97 20.344l-1.97 .656v-8.5l-4.48 -4.928a2 2 0 0 1 -.52 -1.345v-2.227h16v2.172a2 2 0 0 1 -.586 1.414l-4.414 4.414v1.5"></path>
                     <path d="M18.42 15.61a2.1 2.1 0 0 1 2.97 2.97l-3.39 3.42h-3v-3l3.42 -3.39z"></path>
                 </svg>
-                <h4 class="modal-title" style="font-weight: bold;">
-                    Filters
-                </h4>
+                <h4 class="modal-title" style="font-weight: bold;">{% translate 'Game Filters' %}</h4>
             </div>
-            <form method="post" action="api/games/search/">
-                <div class="modal-body d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-start justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center" style="height: 100%;width: 100%;color: var(--bs-body-bg);">
-                    <div class="d-flex d-xl-flex d-xxl-flex flex-column justify-content-center align-items-center justify-content-xl-center justify-content-xxl-center align-items-xxl-center" style="width: 100%;height: 100%;border-radius: 19px;margin-left: 10px;margin-right: 10px;color: var(--bs-emphasis-color);border-style: solid;background: var(--bs-dark-border-subtle);">
-                        <h1 class="fs-5 d-flex d-xxl-flex justify-content-center align-items-center align-items-xxl-center" style="padding-top: 3px;padding-bottom: 3px;margin-top: 15px;margin-bottom: 15px;font-weight: bold;color: var(--bs-body-bg);text-shadow: 2px 3px 3px var(--bs-emphasis-color);">
-                            Map
-                            <svg class="icon icon-tabler icon-tabler-cards" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 22px;margin-left: 5px;margin-right: 5px;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
-                                <path d="M3.604 7.197l7.138 -3.109a.96 .96 0 0 1 1.27 .527l4.924 11.902a1 1 0 0 1 -.514 1.304l-7.137 3.109a.96 .96 0 0 1 -1.271 -.527l-4.924 -11.903a1 1 0 0 1 .514 -1.304z"></path>
-                                <path d="M15 4h1a1 1 0 0 1 1 1v3.5"></path>
-                                <path d="M20 6c.264 .112 .52 .217 .768 .315a1 1 0 0 1 .53 1.311l-2.298 5.374"></path>
-                            </svg>
-                        </h1>
-                        <div style="margin-top: 10px;margin-bottom: 10px;">
-                            <div class="form-check">
-                                <input class="form-check-input" id="formCheckMap1" type="checkbox"/>
-                                <label class="form-check-label" for="formCheckMap1" style="font-weight: bold;">
-                                    Map 1
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" id="formCheckMap2" type="checkbox"/>
-                                <label class="form-check-label" for="formCheckMap2" style="font-weight: bold;">
-                                    Map 2
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" id="formCheckMap3" type="checkbox"/>
-                                <label class="form-check-label" for="formCheckMap3" style="font-weight: bold;">
-                                    Map 3
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="d-flex d-xxl-flex flex-column justify-content-center align-items-center align-items-sm-center justify-content-xxl-center align-items-xxl-center" style="border-radius: 19px;color: var(--bs-emphasis-color);margin-left: 10px;margin-right: 10px;height: 100%;width: 100%;border-style: solid;background: var(--bs-dark-border-subtle);">
-                        <h4 class="fs-5 d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="margin-top: 15px;margin-bottom: 15px;font-weight: bold;color: var(--bs-body-bg);text-shadow: 2px 3px 3px var(--bs-emphasis-color);">
-                            Powerups
-                            <svg class="icon icon-tabler icon-tabler-rocket" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 22px;margin-left: 5px;margin-right: 5px;color: var(--bs-orange);" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
-                                <path d="M4 13a8 8 0 0 1 7 7a6 6 0 0 0 3 -5a9 9 0 0 0 6 -8a3 3 0 0 0 -3 -3a9 9 0 0 0 -8 6a6 6 0 0 0 -5 3"></path>
-                                <path d="M7 14a6 6 0 0 0 -3 6a6 6 0 0 0 6 -3"></path>
-                                <path d="M15 9m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"></path>
-                            </svg>
-                        </h4>
-                        <div style="margin-top: 10px;margin-bottom: 10px;">
-                            <div class="form-check">
-                                <input class="form-check-input" id="formCheckPup1" type="checkbox"/>
-                                <label class="form-check-label" for="formCheckPup1" style="font-weight: bold;">
-                                    Paddle Grow
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" id="formCheckPup2" type="checkbox"/>
-                                <label class="form-check-label" for="formCheckPup2" style="font-weight: bold;">
-                                    Blockers
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" id="formCheckPup3" type="checkbox"/>
-                                <label class="form-check-label" for="formCheckPup3" style="font-weight: bold;">
-                                    Bouncy Ball
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="d-flex d-xl-flex d-xxl-flex flex-column justify-content-center align-items-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="width: 100%;height: 100%;border-radius: 19px;margin-left: 10px;margin-right: 10px;color: var(--bs-emphasis-color);border-style: solid;background: var(--bs-dark-border-subtle);">
-                        <h1 class="fs-5 d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="margin-top: 15px;margin-bottom: 15px;font-weight: bold;color: var(--bs-body-bg);text-shadow: 2px 3px 3px var(--bs-emphasis-color);">
-                            Events
-                            <svg class="icon icon-tabler icon-tabler-transform" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 22px;margin-left: 5px;margin-right: 5px;color: #a757ee;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
-                                <path d="M3 6a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"></path>
-                                <path d="M21 11v-3a2 2 0 0 0 -2 -2h-6l3 3m0 -6l-3 3"></path>
-                                <path d="M3 13v3a2 2 0 0 0 2 2h6l-3 -3m0 6l3 -3"></path>
-                                <path d="M15 18a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"></path>
-                            </svg>
-                        </h1>
-                        <div style="margin-top: 10px;margin-bottom: 10px;">
-                            <div class="form-check">
-                                <input class="form-check-input" id="formCheckEvent1" type="checkbox"/>
-                                <label class="form-check-label" for="formCheckEvent1" style="font-weight: bold;">
-                                    TBD
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" id="formCheckEvent2" type="checkbox"/>
-                                <label class="form-check-label" for="formCheckEvent2" style="font-weight: bold;">
-                                    TBD
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" id="formCheckEvent3" type="checkbox"/>
-                                <label class="form-check-label" for="formCheckEvent3" style="font-weight: bold;">
-                                    TBD
-                                </label>
-                            </div>
-                        </div>
+            <div class="modal-body d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-start justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center" style="height: 100%;width: 100%;color: var(--bs-body-bg);border-style: none;">
+                <div class="d-flex d-xl-flex d-xxl-flex flex-column justify-content-center align-items-center justify-content-xl-center justify-content-xxl-center align-items-xxl-center" style="width: 100%;height: 100%;border-radius: 19px;margin-left: 10px;margin-right: 10px;color: var(--bs-emphasis-color);border-style: solid;background: var(--bs-dark-border-subtle);">
+                    <h1 class="fs-5 d-flex d-xxl-flex justify-content-center align-items-center align-items-xxl-center" style="padding-top: 3px;padding-bottom: 3px;margin-top: 15px;margin-bottom: 15px;font-weight: bold;color: var(--bs-body-bg);text-shadow: 2px 3px 3px var(--bs-emphasis-color);">Map<svg class="icon icon-tabler icon-tabler-cards" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" style="font-size: 22px;margin-left: 5px;margin-right: 5px;">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M3.604 7.197l7.138 -3.109a.96 .96 0 0 1 1.27 .527l4.924 11.902a1 1 0 0 1 -.514 1.304l-7.137 3.109a.96 .96 0 0 1 -1.271 -.527l-4.924 -11.903a1 1 0 0 1 .514 -1.304z"></path>
+                            <path d="M15 4h1a1 1 0 0 1 1 1v3.5"></path>
+                            <path d="M20 6c.264 .112 .52 .217 .768 .315a1 1 0 0 1 .53 1.311l-2.298 5.374"></path>
+                        </svg></h1>
+                    <div style="margin-top: 10px;margin-bottom: 10px;">
+                        <div class="form-check"><input id="formCheckMap1" class="form-check-input" type="checkbox" /><label class="form-check-label" for="formCheckMap1" style="font-weight: bold;">Map 1</label></div>
+                        <div class="form-check"><input id="formCheckMap2" class="form-check-input" type="checkbox" /><label class="form-check-label" for="formCheckMap2" style="font-weight: bold;">Map 2</label></div>
+                        <div class="form-check"><input id="formCheckMap3" class="form-check-input" type="checkbox" /><label class="form-check-label" for="formCheckMap3" style="font-weight: bold;">Map 3</label></div>
                     </div>
                 </div>
-                <div class="modal-footer d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="padding-top: 10px;padding-bottom: 10px;border-style: none;">
-                    <button class="btn btn-primary d-xxl-flex" data-bs-dismiss="modal" style="background: var(--bs-form-valid-color);text-shadow: 2px 2px 2px rgb(0,0,0);border-style: none;" type="submit">
-                        Apply Filters
-                        <svg class="icon icon-tabler icon-tabler-check" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 24px;margin-left: 5px;margin-right: 5px;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
-                            <path d="M5 12l5 5l10 -10"></path>
-                        </svg>
-                    </button>
+                <div class="d-flex d-xxl-flex flex-column justify-content-center align-items-center align-items-sm-center justify-content-xxl-center align-items-xxl-center" style="border-radius: 19px;color: var(--bs-emphasis-color);margin-left: 10px;margin-right: 10px;height: 100%;width: 100%;border-style: solid;background: var(--bs-dark-border-subtle);">
+                    <h4 class="fs-5 d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="margin-top: 15px;margin-bottom: 15px;font-weight: bold;color: var(--bs-body-bg);text-shadow: 2px 3px 3px var(--bs-emphasis-color);">Powerups<svg class="icon icon-tabler icon-tabler-rocket" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" style="font-size: 22px;margin-left: 5px;margin-right: 5px;color: var(--bs-orange);">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M4 13a8 8 0 0 1 7 7a6 6 0 0 0 3 -5a9 9 0 0 0 6 -8a3 3 0 0 0 -3 -3a9 9 0 0 0 -8 6a6 6 0 0 0 -5 3"></path>
+                            <path d="M7 14a6 6 0 0 0 -3 6a6 6 0 0 0 6 -3"></path>
+                            <path d="M15 9m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"></path>
+                        </svg></h4>
+                    <div style="margin-top: 10px;margin-bottom: 10px;">
+                        <div class="form-check"><input id="formCheckPup1" class="form-check-input" type="checkbox" /><label class="form-check-label" for="formCheckPup1" style="font-weight: bold;">Paddle Grow</label></div>
+                        <div class="form-check"><input id="formCheckPup2" class="form-check-input" type="checkbox" /><label class="form-check-label" for="formCheckPup2" style="font-weight: bold;">Blockers</label></div>
+                        <div class="form-check"><input id="formCheckPup3" class="form-check-input" type="checkbox" /><label class="form-check-label" for="formCheckPup3" style="font-weight: bold;">Bouncy Ball</label></div>
+                    </div>
                 </div>
-            </form>
+                <div class="d-flex d-xl-flex d-xxl-flex flex-column justify-content-center align-items-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="width: 100%;height: 100%;border-radius: 19px;margin-left: 10px;margin-right: 10px;color: var(--bs-emphasis-color);border-style: solid;background: var(--bs-dark-border-subtle);">
+                    <h1 class="fs-5 d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="margin-top: 15px;margin-bottom: 15px;font-weight: bold;color: var(--bs-body-bg);text-shadow: 2px 3px 3px var(--bs-emphasis-color);">Events<svg class="icon icon-tabler icon-tabler-transform" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" style="font-size: 22px;margin-left: 5px;margin-right: 5px;color: #a757ee;">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M3 6a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"></path>
+                            <path d="M21 11v-3a2 2 0 0 0 -2 -2h-6l3 3m0 -6l-3 3"></path>
+                            <path d="M3 13v3a2 2 0 0 0 2 2h6l-3 -3m0 6l3 -3"></path>
+                            <path d="M15 18a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"></path>
+                        </svg></h1>
+                    <div style="margin-top: 10px;margin-bottom: 10px;">
+                        <div class="form-check"><input id="formCheckEvent1" class="form-check-input" type="checkbox" /><label class="form-check-label" for="formCheckEvent1" style="font-weight: bold;">TBD</label></div>
+                        <div class="form-check"><input id="formCheckEvent2" class="form-check-input" type="checkbox" /><label class="form-check-label" for="formCheckEvent2" style="font-weight: bold;">TBD</label></div>
+                        <div class="form-check"><input id="formCheckEvent3" class="form-check-input" type="checkbox" /><label class="form-check-label" for="formCheckEvent3" style="font-weight: bold;">TBD</label></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" style="border-style: none;"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-primary" type="button">Apply Filters</button></div>
         </div>
     </div>
 </div>

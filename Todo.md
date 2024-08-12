@@ -23,7 +23,7 @@
 - [X] Create a gameroom with enough space to play and chat on the right side
 - [X] Show a timer to indicate when the next match will be and the VS Panel
 - [ ] Integrate chat
-- [ ] Possibility to invite a random player
+- [X] Possibility to invite a random player
 
     CUSTOMIZE GAME
 - [ ] Replace radio input for powerups and events by checkboxes
