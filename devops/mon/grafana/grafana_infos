@@ -4,7 +4,50 @@ dashboards 17617-58 focus on system (requests, database, cache)
 616 has the admin views, and some top10. add also to 617 ?
 
 
+what to monitor ??
 
+when p50/95/99 value becomes ??
+
+when http response success rate drops below 99% ??
+
+when cache hit rate drops below 80% ??
+
+when db latency p99 goes above 100ms ??
+
+when db errors rate goes above 0.1% ??
+
+when database connections are too many ?
+
+when a migration is not applied successfully
+
+when cache hit rate drops below 80%
+
+
+
+
+
+
+
+
+explanation for latency :
+
+Latency percentiles, such as p50, p95, and p99, are statistical measures used to understand the distribution of response times in a system. Here's a breakdown of what each percentile represents:
+
+p50 (50th percentile): This is the median latency. It means that 50% of the requests are served faster than this value, and 50% are slower. It's a good indicator of the typical experience for most users.
+p95 (95th percentile): This value indicates that 95% of the requests are served faster than this value, and only 5% are slower. It helps identify the experience of the majority of users, excluding the slowest 5%.
+p99 (99th percentile): This value shows that 99% of the requests are served faster than this value, and only 1% are slower. It highlights the experience of almost all users, including those experiencing the worst performance.
+When to Send an Alert
+Alerts should be configured based on the specific needs and performance expectations of your system. Here are some general guidelines:
+
+p50 (Median Latency): If the median latency exceeds a certain threshold, it indicates that the typical user experience is degrading. An alert might be sent if this value goes beyond an acceptable limit for your application.
+p95 (95th Percentile Latency): If the p95 latency exceeds a threshold, it suggests that a significant portion of users (5%) are experiencing slower response times. This could be a sign of performance issues that need to be addressed.
+p99 (99th Percentile Latency): If the p99 latency exceeds a threshold, it indicates that the worst-performing requests are taking too long. This is critical for ensuring that even the slowest requests are within acceptable limits.
+
+Example Alert Conditions
+p50 Latency Alert: Send an alert if the p50 latency exceeds 200ms.
+p95 Latency Alert: Send an alert if the p95 latency exceeds 500ms.
+p99 Latency Alert: Send an alert if the p99 latency exceeds 1000ms.
+These thresholds should be adjusted based on the specific performance requirements and user expectations of your application. Monitoring these percentiles helps ensure that your system is performing well for the majority of users and that any performance degradation is quickly identified and addressed.
 
 
 
