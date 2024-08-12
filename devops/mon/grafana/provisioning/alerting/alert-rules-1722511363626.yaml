@@ -1,12 +1,12 @@
 apiVersion: 1
 groups:
     - orgId: 1
-      name: test_group
-      folder: test_folder
+      name: testGroupFirst
+      folder: testFolderFirst
       interval: 10s
       rules:
         - uid: edtib9ciymi9sa
-          title: test-dja
+          title: testDjangoFirst
           condition: C
           data:
             - refId: A
