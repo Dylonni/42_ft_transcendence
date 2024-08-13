@@ -39,7 +39,9 @@
 
     SOCIAL
 - [X] Show player context (online, offline, ingame)
-- [ ] Rework page
+- [X] Rework page
+- [ ] ADD another status "Waiting" , replace playing color by blue , waiting in orange
+- [ ] Make the chat focus last message
 
     LEADERBOARD
 - [ ] Make better 2nd and third place
@@ -59,6 +61,9 @@
 - [X] Create a template for change email
 - [X] Fix the way to change persons Avatar/Nickname
 - [X] Add players default language
+
+    RANDOM CODE
+- [ ] Create modal to verify code for mail/password change
 
 Reminder for Pipenv install in django:
 run ```pip install --upgrade pip ``` to check location of pip

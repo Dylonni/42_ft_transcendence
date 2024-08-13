@@ -271,12 +271,11 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
         
-        const profileSearchBtn = document.getElementById('profile-search-btn');
         const profileSearchInput = document.getElementById('inputsearch');
-        if (profileSearchBtn && profileSearchInput) {
-            profileSearchBtn.addEventListener('click', (e) => {
-                const alias = profileSearchInput.value;
-                if (alias) {
+        if (profileSearchInput) {
+            profileSearchInput.addEventListener('keyup', (e) => {
+                if (e.key === 'Enter') {
+                    const alias = profileSearchInput.value;
                     fetch(`/api/profiles/search/?alias=${alias}`)
                     .then(response => response.json())
                     .then(data => {
@@ -288,13 +287,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     .catch(error => console.error('Error searching profile:', error));
                 }
             });
-            profileSearchInput.addEventListener('keyup', (e) => {
-                if (e.key === 'Enter') {
-                    profileSearchBtn.click();
-                }
-            });
         }        
-        
+
         const addFriendBtn = document.getElementById('add-friend-btn');
         if (addFriendBtn) {
             addFriendBtn.addEventListener('click', (e) => {
