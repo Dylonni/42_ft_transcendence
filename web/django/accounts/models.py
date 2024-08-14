@@ -108,7 +108,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         super().clean()
         self.email = self.__class__.objects.normalize_email(self.email)
     
-    def update_fortytwo_infos(self, id, access_token, refresh_token, avatar_url, coalition_cover_url, coalition_color):
+    def update_fortytwo_infos(self, id=None, access_token=None, refresh_token=None, avatar_url=None, coalition_cover_url=None, coalition_color=None):
         self.fortytwo_id = id
         self.fortytwo_access_token = access_token
         self.fortytwo_refresh_token = refresh_token

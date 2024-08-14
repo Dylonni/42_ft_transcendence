@@ -48,17 +48,29 @@ document.addEventListener("DOMContentLoaded", () => {
             newContent.forEach(node => {
                 contentDiv.appendChild(node.cloneNode(true));
             });
+            removeExtraScripts();
             loadPageScripts(newDocument);
             attachHandlers();
         })
         .catch(error => console.error('Error fetching content:', error));
     };
 
+    const removeExtraScripts = () => {
+        const scriptElements = document.querySelectorAll('script');
+        scriptElements.forEach(scriptElement => {
+            const src = scriptElement.src;
+            if (src && !src.includes('main.js')) {
+                scriptElement.parentNode.removeChild(scriptElement);
+                loadedScripts.delete(src);
+            }
+        });
+    };
+
     const loadPageScripts = (newDocument) => {
         const scriptElements = newDocument.querySelectorAll('script');
         scriptElements.forEach(scriptElement => {
             const src = scriptElement.src;
-            if (!loadedScripts.has(src)) {
+            if (!loadedScripts.has(src) && !src.includes('main.js')) {
                 const newScript = document.createElement('script');
                 newScript.src = src;
                 document.body.appendChild(newScript);
@@ -103,9 +115,13 @@ document.addEventListener("DOMContentLoaded", () => {
         .catch(error => console.error(`Error with request to ${url}:`, error));
     };
 
-    const langReload = (lang) => {
+    const langReload = (lang, isProfileDefault = false) => {
+        const endpoint = isProfileDefault 
+        ? `/api/profiles/me/lang/${lang}/` 
+        : `/api/lang/${lang}/`;
+
         makeAPIRequest(
-            `/api/lang/${lang}/`,
+            endpoint,
             'POST',
             {'Content-Type': 'application/json'},
             JSON.stringify({'path': window.location.pathname}),
@@ -117,6 +133,12 @@ document.addEventListener("DOMContentLoaded", () => {
             socket.close();
             socket = null;
         }
+    };
+
+    const closeAllWebSockets = () => {
+        closeWebSocket(notifSocket);
+        closeWebSocket(friendSocket);
+        closeWebSocket(gameSocket);
     };
 
     const openNotifWebSocket = () => {
@@ -210,13 +232,94 @@ document.addEventListener("DOMContentLoaded", () => {
                     event.preventDefault();
                     if (anchor.id.startsWith('lang')) {
                         const lang = anchor.id.split('-')[1];
-                        langReload(lang);
+                        if (anchor.id.endsWith('default')) {
+                            langReload(lang, true);
+                        } else {
+                            langReload(lang, false);
+                        }
+                    } else if (anchor.id.startsWith('avatar')) {
+                        makeAPIRequest(
+                            anchor.href,
+                            'POST',
+                        );
+                    } else if (anchor.id.startsWith('fortytwo-unlink')) {
+                        makeAPIRequest(
+                            anchor.href,
+                            'POST',
+                        );
                     } else {
                         navigateTo(anchor.href);
                     }
                 });
             }
         });
+        
+        let aliasForm = document.getElementById('alias-form');
+        if (aliasForm) {
+            aliasForm.addEventListener('submit', (event) => {
+                event.preventDefault();
+                const formData = new FormData(event.target);
+                fetch(event.target.action, {
+                    method: event.target.method,
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                    },
+                    body: formData,
+                })
+                .then(response => response.json())
+                .then(data => {
+                    const aliasChangeMsg = document.getElementById('aliasAlreadyTaken');
+                    if (data) {
+                        if ('error' in data) {
+                            if (aliasChangeMsg) {
+                                aliasChangeMsg.classList.remove('d-none', 'd-xxl-none');
+                            }
+                        }
+                        if ('redirect' in data) {
+                            if (aliasChangeMsg) {
+                                aliasChangeMsg.classList.add('d-none', 'd-xxl-none');
+                            }
+                            navigateTo(data.redirect);
+                        }
+                    }
+                })
+                .catch(error => console.error(`Error with request to ${event.target.action}:`, error));
+            });
+        }
+        
+        let deleteAccountForm = document.getElementById('delete-account-form');
+        if (deleteAccountForm) {
+            deleteAccountForm.addEventListener('submit', (event) => {
+                event.preventDefault();
+                const formData = new FormData(event.target);
+                fetch(event.target.action, {
+                    method: event.target.method,
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                    },
+                    body: formData,
+                })
+                .then(response => response.json())
+                .then(data => {
+                    const deleteAccountMsg = document.getElementById('wrongcredDel');
+                    if (data) {
+                        if ('error' in data) {
+                            if (deleteAccountMsg) {
+                                deleteAccountMsg.classList.remove('d-none', 'd-xxl-none');
+                            }
+                        }
+                        if ('redirect' in data) {
+                            if (deleteAccountMsg) {
+                                deleteAccountMsg.classList.add('d-none', 'd-xxl-none');
+                            }
+                            closeAllWebSockets();
+                            navigateTo(data.redirect);
+                        }
+                    }
+                })
+                .catch(error => console.error(`Error with request to ${event.target.action}:`, error));
+            });
+        }
         
         document.querySelectorAll('.auth-form').forEach(form => {
             form.addEventListener('submit', (event) => {
@@ -231,12 +334,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 })
                 .then(response => response.json())
                 .then(data => {
-                    openNotifWebSocket();
                     if ('redirect' in data) {
+                        openNotifWebSocket();
                         navigateTo(data.redirect);
                     }
                 })
-                .catch(error => console.error(`Error with request to ${url}:`, error));
+                .catch(error => console.error(`Error with request to ${event.target.action}:`, error));
             });
         });
         
@@ -248,9 +351,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     '/api/auth/logout/',
                     'POST',
                 );
-                closeWebSocket(notifSocket);
-                closeWebSocket(friendSocket);
-                closeWebSocket(gameSocket);
+                closeAllWebSockets();
             });
         }
         
@@ -261,12 +362,30 @@ document.addEventListener("DOMContentLoaded", () => {
                     const formData = new FormData();
                     const imageFile = e.target.files[0];
                     formData.append('avatar', imageFile);
-                    makeAPIRequest(
-                        '/api/profiles/me/avatar/',
-                        'POST',
-                        {},
-                        formData,
-                    );
+                    fetch('/api/profiles/me/avatar/', {
+                        method: 'POST',
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest',
+                        },
+                        body: formData,
+                    })
+                    .then(response => {
+                        const avatarMsg = document.getElementById('wrongAvatarSize');
+                        if (avatarMsg) {
+                            if (response.ok) {
+                                avatarMsg.classList.add('d-none', 'd-xxl-none');
+                            } else {
+                                avatarMsg.classList.remove('d-none', 'd-xxl-none');
+                            }
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        if (data && 'redirect' in data) {
+                            navigateTo(data.redirect);
+                        }
+                    })
+                    .catch(error => console.error(`Error with request to '/api/profiles/me/avatar/':`, error));
                 }
             });
         }
@@ -328,8 +447,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 })
                 .then(response => response.json())
                 .then(data => {
-                    openGameWebSocket(data.id);
                     if ('redirect' in data) {
+                        openGameWebSocket(data.id);
                         navigateTo(data.redirect);
                     }
                 })

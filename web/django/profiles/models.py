@@ -1,7 +1,9 @@
 import logging
 import requests
+from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.db import models
+from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from pong.models import BaseModel
 from .managers import ProfileManager, ProfileBlockManager
@@ -80,10 +82,27 @@ class Profile(BaseModel):
     def __str__(self):
         return self.alias
     
-    def set_default_avatar_url(self, id='1'):
-        if id not in ['1', '2', '3']:
-            id = '1'
-        self.avatar_url = f'/media/defaults/avatar{id}.webp'
+    def get_avatar_url(self):
+        if self.avatar_url.startswith('http'):
+            return self.avatar_url
+        return self.avatar_url + '?' + str(timezone.now().timestamp())
+    
+    def get_blocked_profiles(self):
+        return self.blocked_profiles.all()
+    
+    def set_avatar_url(self, id='1', path=''):
+        if id == 'fortytwo':
+            self.avatar_url = path
+        else:
+            if id not in ['1', '2', '3', '4']:
+                id = '1'
+            self.avatar_url = f'/media/defaults/avatar{id}.webp'
+        self.save()
+    
+    def set_default_lang(self, lang='en'):
+        if not any(code == lang for code, _ in settings.LANGUAGES):
+            lang = 'en'
+        self.default_lang = lang
         self.save()
     
     def is_host(self):
@@ -134,7 +153,7 @@ class ProfileBlock(BaseModel):
         to='profiles.Profile',
         verbose_name=_('blocked'),
         on_delete=models.CASCADE,
-        related_name='blockers',
+        related_name='blocking_profiles',
     )
     
     objects = ProfileBlockManager()

@@ -207,6 +207,16 @@ class FortyTwoLoginView(APIView):
 fortytwo_login = FortyTwoLoginView.as_view()
 
 
+class FortyTwoUnlinkView(PrivateView):
+    def post(self, request: HttpRequest):
+        request.profile.set_avatar_url()
+        request.user.update_fortytwo_infos()
+        response_data = {'message': _('42 account unlinked.'), 'redirect': '/settings/'}
+        return Response(response_data, status=status.HTTP_200_OK)
+
+fortytwo_unlink = FortyTwoUnlinkView.as_view()
+
+
 class FortyTwoCallbackView(APIView):
     def get(self, request: HttpRequest):
         code = request.GET.get('code')

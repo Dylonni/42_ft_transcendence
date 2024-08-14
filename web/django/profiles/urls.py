@@ -9,7 +9,7 @@ urlpatterns = [
     path('profiles/me/', views.my_detail, name='my_detail'),
     path('profiles/me/alias/', views.my_alias, name='my_alias'),
     path('profiles/me/avatar/', views.my_avatar, name='my_avatar'),
-    # path('profiles/me/status/', views.my_status, name='my_status'),
+	path('profiles/me/lang/<str:lang>/', views.my_lang, name='my_lang'),
 	
     path('profiles/<uuid:profile_id>/', views.profile_detail, name='profile_detail'),
 	path('profiles/<uuid:profile_id>/invites/', views.profile_invite_list, name='profile_invite_list'),
