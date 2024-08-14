@@ -1,13 +1,10 @@
-      "title": "Django Dashboards",
-      "title": "Summary",
+to be kept:
+
+
           "expr": "sum(\n  rate(\n    django_http_responses_total_by_status_view_method_total{\n        namespace=~\"$namespace\",\n        job=~\"$job\",\n        view=\"$view\",\n        method=~\"$method\",\n        status!~\"[4-5].*\"\n      }[1w]\n    )\n) /\nsum(\n  rate(\n    django_http_responses_total_by_status_view_method_total{\n      namespace=~\"$namespace\",\n      job=~\"$job\",\n      view=\"$view\",\n      method=~\"$method\"\n    }[1w]\n  )\n)\n"
       "title": "Success Rate (non 4xx-5xx responses) [1w]",
           "expr": "sum by (view) (\n  increase(\n    django_http_exceptions_total_by_view_total{\n      namespace=~\"$namespace\",\n      job=~\"$job\",\n      view=\"$view\",\n    }[1w]\n  ) > 0\n)\n"
       "title": "HTTP Exceptions [1w]",
-          "expr": "histogram_quantile(0.50,\n  sum (\n    rate (\n        django_http_requests_latency_seconds_by_view_method_bucket {\n          namespace=~\"$namespace\",\n          job=~\"$job\",\n          view=\"$view\",\n          method=~\"$method\"\n        }[$__range]\n    )\n  ) by (job, le)\n)\n"
-      "title": "Average Request Latency (P50) [1w]",
-          "expr": "histogram_quantile(0.95,\n  sum (\n    rate (\n        django_http_requests_latency_seconds_by_view_method_bucket {\n          namespace=~\"$namespace\",\n          job=~\"$job\",\n          view=\"$view\",\n          method=~\"$method\"\n        }[$__range]\n    )\n  ) by (job, le)\n)\n"
-      "title": "Average Request Latency (P95) [1w]",
       "title": "Request & Responses",
           "expr": "round(\n  sum(\n    rate(\n      django_http_requests_total_by_view_transport_method_total{\n        namespace=~\"$namespace\",\n        job=~\"$job\",\n        view=\"$view\"\n      }[$__rate_interval]\n    ) > 0\n  ) by (job), 0.001\n)\n",
       "title": "Requests",
@@ -16,27 +13,10 @@
           "expr": "round(\n  sum(\n    rate(\n      django_http_responses_total_by_status_view_method_total{\n        namespace=~\"$namespace\",\n        job=~\"$job\",\n        view=\"$view\",\n        status=~\"4.*\",\n      }[$__rate_interval]\n    ) > 0\n  ) by (job), 0.001\n)\n",
           "expr": "round(\n  sum(\n    rate(\n      django_http_responses_total_by_status_view_method_total{\n        namespace=~\"$namespace\",\n        job=~\"$job\",\n        view=\"$view\",\n        status=~\"5.*\",\n      }[$__rate_interval]\n    ) > 0\n  ) by (job), 0.001\n)\n",
       "title": "Responses",
-      "title": "Latency & Status Codes",
-          "expr": "round(\n  sum(\n    rate(\n      django_http_responses_total_by_status_view_method_total{\n        namespace=~\"$namespace\",\n        job=~\"$job\",\n        view=\"$view\",\n        method=~\"$method\",\n      }[$__rate_interval]\n    ) > 0\n  ) by (namespace, job, view, status, method), 0.001\n)\n",
-      "title": "Responses Status Codes",
-          "expr": "histogram_quantile(0.50,\n  sum(\n    irate(\n      django_http_requests_latency_seconds_by_view_method_bucket{\n        namespace=~\"$namespace\",\n        job=~\"$job\",\n        view=\"$view\",\n        method=~\"$method\"\n      }[$__rate_interval]\n    ) > 0\n  ) by (view, le)\n)\n",
-          "expr": "histogram_quantile(0.95,\n  sum(\n    irate(\n      django_http_requests_latency_seconds_by_view_method_bucket{\n        namespace=~\"$namespace\",\n        job=~\"$job\",\n        view=\"$view\",\n        method=~\"$method\"\n      }[$__rate_interval]\n    ) > 0\n  ) by (view, le)\n)\n",
-          "expr": "histogram_quantile(0.99,\n  sum(\n    irate(\n      django_http_requests_latency_seconds_by_view_method_bucket{\n        namespace=~\"$namespace\",\n        job=~\"$job\",\n        view=\"$view\",\n        method=~\"$method\"\n      }[$__rate_interval]\n    ) > 0\n  ) by (view, le)\n)\n",
-          "expr": "histogram_quantile(0.999,\n  sum(\n    irate(\n      django_http_requests_latency_seconds_by_view_method_bucket{\n        namespace=~\"$namespace\",\n        job=~\"$job\",\n        view=\"$view\",\n        method=~\"$method\"\n      }[$__rate_interval]\n    ) > 0\n  ) by (view, le)\n)\n",
-      "title": "Request Latency",
-  "title": "Django / Requests / By View",
-
 
 
 
 
 add from 9528 ??
-
-add below also from 616 :
-{,view!~\"prometheus-django-metrics|healthcheck\"}
-
-
-          "expr": "sum(irate(django_http_requests_total_by_transport_total{namespace=~\"$namespace\", app=~\"^$app$\"}[1m]))",
-      "title": "Total Requests",
 
 

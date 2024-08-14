@@ -23,105 +23,6 @@
 	"links": [],
 	"panels": [
 	  {
-		"datasource": {
-		  "type": "prometheus",
-		  "uid": "${DS_PROMETHEUS}"
-		},
-		"description": "start time of the process",
-		"fieldConfig": {
-		  "defaults": {
-			"color": {
-			  "mode": "thresholds"
-			},
-			"mappings": [
-			  {
-				"options": {
-				  "match": "null",
-				  "result": {
-					"text": "N/A"
-				  }
-				},
-				"type": "special"
-			  }
-			],
-			"thresholds": {
-			  "mode": "absolute",
-			  "steps": [
-				{
-				  "color": "green",
-				  "value": null
-				},
-				{
-				  "color": "red",
-				  "value": 80
-				}
-			  ]
-			},
-			"unit": "dateTimeFromNow"
-		  },
-		  "overrides": []
-		},
-		"gridPos": {
-			"h": 2,
-			"w": 4,
-			"x": 4,
-			"y": 9
-		},
-		"id": 70,
-		"maxDataPoints": 100,
-		"options": {
-		  "colorMode": "none",
-		  "graphMode": "none",
-		  "justifyMode": "auto",
-		  "orientation": "horizontal",
-		  "reduceOptions": {
-			"calcs": [
-			  "firstNotNull"
-			],
-			"fields": "",
-			"values": false
-		  },
-		  "showPercentChange": false,
-		  "textMode": "auto",
-		  "wideLayout": true
-		},
-		"pluginVersion": "10.4.4",
-		"targets": [
-		  {
-			"datasource": {
-			  "uid": "${DS_PROMETHEUS}"
-			},
-			"editorMode": "code",
-			"expr": "pg_postmaster_start_time_seconds{release=\"$release\", instance=\"$instance\"} * 1000",
-			"format": "time_series",
-			"hide": true,
-			"intervalFactor": 2,
-			"legendFormat": "",
-			"range": true,
-			"refId": "A"
-		  },
-		  {
-			"datasource": {
-			  "type": "prometheus",
-			  "uid": "${DS_PROMETHEUS}"
-			},
-			"disableTextWrap": false,
-			"editorMode": "code",
-			"expr": "process_start_time_seconds{instance=\"$instance\", job=\"postgres\", group=\"postgres-server\"} * 1000",
-			"fullMetaSearch": false,
-			"hide": false,
-			"includeNullMetadata": true,
-			"instant": false,
-			"legendFormat": "__auto",
-			"range": true,
-			"refId": "B",
-			"useBackend": false
-		  }
-		],
-		"title": "Start Time - test",
-		"type": "stat"
-	  },
-	  {
 		"collapsed": false,
 		"datasource": {
 		  "type": "prometheus",
@@ -131,7 +32,7 @@
 		  "h": 1,
 		  "w": 24,
 		  "x": 0,
-		  "y": 8
+		  "y": 0
 		},
 		"id": 34,
 		"panels": [],
@@ -188,7 +89,7 @@
 		  "h": 2,
 		  "w": 4,
 		  "x": 0,
-		  "y": 9
+		  "y": 1
 		},
 		"id": 36,
 		"maxDataPoints": 100,
@@ -223,6 +124,92 @@
 		  }
 		],
 		"title": "Version",
+		"type": "stat"
+	  },
+	  {
+		"datasource": {
+		  "type": "prometheus",
+		  "uid": "${DS_PROMETHEUS}"
+		},
+		"description": "start time of the process",
+		"fieldConfig": {
+		  "defaults": {
+			"color": {
+			  "mode": "thresholds"
+			},
+			"mappings": [
+			  {
+				"options": {
+				  "match": "null",
+				  "result": {
+					"text": "N/A"
+				  }
+				},
+				"type": "special"
+			  }
+			],
+			"thresholds": {
+			  "mode": "absolute",
+			  "steps": [
+				{
+				  "color": "green",
+				  "value": null
+				},
+				{
+				  "color": "red",
+				  "value": 80
+				}
+			  ]
+			},
+			"unit": "dateTimeFromNow"
+		  },
+		  "overrides": []
+		},
+		"gridPos": {
+		  "h": 2,
+		  "w": 4,
+		  "x": 4,
+		  "y": 1
+		},
+		"id": 70,
+		"maxDataPoints": 100,
+		"options": {
+		  "colorMode": "none",
+		  "graphMode": "none",
+		  "justifyMode": "auto",
+		  "orientation": "horizontal",
+		  "reduceOptions": {
+			"calcs": [
+			  "firstNotNull"
+			],
+			"fields": "",
+			"values": false
+		  },
+		  "showPercentChange": false,
+		  "textMode": "auto",
+		  "wideLayout": true
+		},
+		"pluginVersion": "10.4.4",
+		"targets": [
+		  {
+			"datasource": {
+			  "type": "prometheus",
+			  "uid": "${DS_PROMETHEUS}"
+			},
+			"disableTextWrap": false,
+			"editorMode": "code",
+			"expr": "process_start_time_seconds{instance=\"$instance\", job=\"postgres\", group=\"postgres-server\"} * 1000",
+			"fullMetaSearch": false,
+			"hide": false,
+			"includeNullMetadata": true,
+			"instant": false,
+			"legendFormat": "__auto",
+			"range": true,
+			"refId": "A",
+			"useBackend": false
+		  }
+		],
+		"title": "Start Time - updated",
 		"type": "stat"
 	  },
 	  {
@@ -266,7 +253,7 @@
 		  "h": 2,
 		  "w": 4,
 		  "x": 8,
-		  "y": 9
+		  "y": 1
 		},
 		"id": 10,
 		"maxDataPoints": 100,
@@ -343,7 +330,7 @@
 		  "h": 2,
 		  "w": 4,
 		  "x": 12,
-		  "y": 9
+		  "y": 1
 		},
 		"id": 11,
 		"maxDataPoints": 100,
@@ -420,7 +407,7 @@
 		  "h": 2,
 		  "w": 4,
 		  "x": 16,
-		  "y": 9
+		  "y": 1
 		},
 		"id": 12,
 		"maxDataPoints": 100,
@@ -497,7 +484,7 @@
 		  "h": 2,
 		  "w": 4,
 		  "x": 20,
-		  "y": 9
+		  "y": 1
 		},
 		"id": 38,
 		"maxDataPoints": 100,
@@ -597,7 +584,7 @@
 		  "h": 7,
 		  "w": 8,
 		  "x": 0,
-		  "y": 11
+		  "y": 3
 		},
 		"id": 22,
 		"options": {
@@ -698,7 +685,7 @@
 		  "h": 7,
 		  "w": 8,
 		  "x": 8,
-		  "y": 11
+		  "y": 3
 		},
 		"id": 24,
 		"options": {
@@ -809,7 +796,7 @@
 		  "h": 7,
 		  "w": 8,
 		  "x": 16,
-		  "y": 11
+		  "y": 3
 		},
 		"id": 26,
 		"options": {
@@ -855,7 +842,7 @@
 		  "h": 1,
 		  "w": 24,
 		  "x": 0,
-		  "y": 18
+		  "y": 10
 		},
 		"id": 32,
 		"panels": [],
@@ -912,7 +899,7 @@
 		  "h": 3,
 		  "w": 3,
 		  "x": 0,
-		  "y": 19
+		  "y": 11
 		},
 		"id": 40,
 		"maxDataPoints": 100,
@@ -988,7 +975,7 @@
 		  "h": 3,
 		  "w": 3,
 		  "x": 3,
-		  "y": 19
+		  "y": 11
 		},
 		"id": 42,
 		"maxDataPoints": 100,
@@ -1064,7 +1051,7 @@
 		  "h": 3,
 		  "w": 3,
 		  "x": 6,
-		  "y": 19
+		  "y": 11
 		},
 		"id": 44,
 		"maxDataPoints": 100,
@@ -1140,7 +1127,7 @@
 		  "h": 3,
 		  "w": 3,
 		  "x": 9,
-		  "y": 19
+		  "y": 11
 		},
 		"id": 46,
 		"maxDataPoints": 100,
@@ -1218,7 +1205,7 @@
 		  "h": 3,
 		  "w": 3,
 		  "x": 12,
-		  "y": 19
+		  "y": 11
 		},
 		"id": 48,
 		"maxDataPoints": 100,
@@ -1294,7 +1281,7 @@
 		  "h": 3,
 		  "w": 3,
 		  "x": 15,
-		  "y": 19
+		  "y": 11
 		},
 		"id": 50,
 		"maxDataPoints": 100,
@@ -1370,7 +1357,7 @@
 		  "h": 3,
 		  "w": 2,
 		  "x": 18,
-		  "y": 19
+		  "y": 11
 		},
 		"id": 52,
 		"maxDataPoints": 100,
@@ -1446,7 +1433,7 @@
 		  "h": 3,
 		  "w": 2,
 		  "x": 20,
-		  "y": 19
+		  "y": 11
 		},
 		"id": 54,
 		"maxDataPoints": 100,
@@ -1522,7 +1509,7 @@
 		  "h": 3,
 		  "w": 2,
 		  "x": 22,
-		  "y": 19
+		  "y": 11
 		},
 		"id": 56,
 		"maxDataPoints": 100,
@@ -1567,7 +1554,7 @@
 		  "h": 1,
 		  "w": 24,
 		  "x": 0,
-		  "y": 22
+		  "y": 14
 		},
 		"id": 30,
 		"panels": [],
@@ -1631,7 +1618,8 @@
 			  "mode": "absolute",
 			  "steps": [
 				{
-				  "color": "green"
+				  "color": "green",
+				  "value": null
 				},
 				{
 				  "color": "red",
@@ -1647,7 +1635,7 @@
 		  "h": 7,
 		  "w": 8,
 		  "x": 0,
-		  "y": 23
+		  "y": 15
 		},
 		"id": 1,
 		"options": {
@@ -1731,7 +1719,8 @@
 			  "mode": "absolute",
 			  "steps": [
 				{
-				  "color": "green"
+				  "color": "green",
+				  "value": null
 				},
 				{
 				  "color": "red",
@@ -1747,7 +1736,7 @@
 		  "h": 7,
 		  "w": 8,
 		  "x": 8,
-		  "y": 23
+		  "y": 15
 		},
 		"id": 60,
 		"options": {
@@ -1839,7 +1828,8 @@
 			  "mode": "absolute",
 			  "steps": [
 				{
-				  "color": "green"
+				  "color": "green",
+				  "value": null
 				},
 				{
 				  "color": "red",
@@ -1855,7 +1845,7 @@
 		  "h": 7,
 		  "w": 8,
 		  "x": 16,
-		  "y": 23
+		  "y": 15
 		},
 		"id": 8,
 		"options": {
@@ -1954,7 +1944,7 @@
 		  "h": 7,
 		  "w": 8,
 		  "x": 0,
-		  "y": 30
+		  "y": 22
 		},
 		"id": 5,
 		"options": {
@@ -2053,7 +2043,7 @@
 		  "h": 7,
 		  "w": 8,
 		  "x": 8,
-		  "y": 30
+		  "y": 22
 		},
 		"id": 6,
 		"options": {
@@ -2154,7 +2144,7 @@
 		  "h": 7,
 		  "w": 8,
 		  "x": 16,
-		  "y": 30
+		  "y": 22
 		},
 		"id": 3,
 		"options": {
@@ -2253,7 +2243,7 @@
 		  "h": 7,
 		  "w": 8,
 		  "x": 0,
-		  "y": 37
+		  "y": 29
 		},
 		"id": 14,
 		"options": {
@@ -2353,7 +2343,7 @@
 		  "h": 7,
 		  "w": 8,
 		  "x": 8,
-		  "y": 37
+		  "y": 29
 		},
 		"id": 4,
 		"options": {
@@ -2451,7 +2441,7 @@
 		  "h": 7,
 		  "w": 8,
 		  "x": 16,
-		  "y": 37
+		  "y": 29
 		},
 		"id": 7,
 		"options": {
@@ -2551,7 +2541,7 @@
 		  "h": 7,
 		  "w": 8,
 		  "x": 0,
-		  "y": 44
+		  "y": 36
 		},
 		"id": 68,
 		"options": {
@@ -2649,7 +2639,7 @@
 		  "h": 7,
 		  "w": 8,
 		  "x": 16,
-		  "y": 44
+		  "y": 36
 		},
 		"id": 66,
 		"options": {

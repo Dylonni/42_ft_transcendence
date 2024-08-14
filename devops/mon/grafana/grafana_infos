@@ -1,7 +1,3 @@
-dashboards 17617-58 focus on system (requests, database, cache)
-	try to put all of 658 into 617 or others
-
-616 has the admin views, and some top10. add also to 617 ?
 
 
 what to monitor ??
@@ -22,6 +18,23 @@ when a migration is not applied successfully
 
 when cache hit rate drops below 80%
 
+
+
+
+
+database :
+database access within last week
+database mods within last week
+errors
+cache hit ratio
+
+
+
+admin
+total of accesses
+total of mods (applied and non applied)
+can see who accessed ?
+db latency p50 to p99.9
 
 
 
@@ -117,65 +130,6 @@ saturation
 look at latency p99 on shart intervals (like a minute, to detect spikes)
 also look at cache hit ratio and cache miss ratio (cache hit ratio should be over 80%)
 	-> cache hit ratio
-
-
-
-
-database :
-database access within last week
-database mods within last week
-errors
-cache hit ratio
-
-
-
-
-
-SUMMARY for website
-total requests for site 
-	and overall success rate (non 4xx or 5xx responses)
-average latency p50 and p99
-
-
-
-admin
-total of accesses
-total of mods (applied and non applied)
-can see who accessed ?
-db latency p50 to p99.9
-
-
-
-
-
-
-
-
-
-
-some base expressions :
-
-latency
-
-
-"title": "Top 20 Views by Response Time (> $threshold)",	summary, latency
-topk(20, (1 - (sum(max_over_time(django_http_requests_latency_seconds_by_view_method_bucket{app=~\"^$application$\",le=\"$threshold\"}[$__range]) / ignoring(le) max_over_time(django_http_requests_latency_seconds_by_view_method_count{app=~\"^$application$\"}[$__range])) by (method, view) / count(present_over_time(django_http_requests_latency_seconds_by_view_method_count{app=~\"^$application$\"}[$__range])) by (method, view))) > 0.0099)
-
-  "title": "Number of Requests by Processing Time",	latency
-sum(rate(django_http_requests_latency_including_middlewares_seconds_bucket{app=~\"^$application$\"}[$__rate_interval])) by (le)
-
-  "title": "Average Request Latency (P50) [1w]",
-histogram_quantile(0.50,sum (rate (django_http_requests_latency_seconds_by_view_method_bucket {namespace=~\"$namespace\",job=~\"$job\",view=\"$view\",method=~\"$method\"}[$__range])) by (job, le))
-
-"title": "Request Latency", {for P50}
-histogram_quantile(0.50,sum(irate(django_http_requests_latency_seconds_by_view_method_bucket{namespace=~\"$namespace\",job=~\"$job\",view=\"$view\",method=~\"$method\"}[$__rate_interval]) > 0) by (view, le))
-histogram_quantile(0.50, sum(rate(django_http_requests_latency_seconds_by_view_method_bucket{namespace=~\"$namespace\", app=~\"^$app$\",view!~\"prometheus-django-metrics|healthcheck\"}[5m])) by (job, le))
-histogram_quantile(0.50,sum(irate(django_http_requests_latency_seconds_by_view_method_bucket{namespace=~\"$namespace\",job=~\"$job\",view!~\"<unnamed view>|health_check:health_check_home|prometheus-django-metrics\",}[$__rate_interval]\)) by (job, le))
-histogram_quantile(0.50, sum(irate(django_http_requests_latency_seconds_by_view_method_bucket{app=~\"^$application$\"}[$__rate_interval])) by (le))
-
-
-
-histogram_quantile(0.50, sum(rate(django_http_requests_latency_seconds_by_view_method_bucket{ ?????? ,view!~\"<unnamed view>|health_check:health_check_home|prometheus-django-metrics\"}[TIME_INTERVAL])) by (view, le))
 
 
 
