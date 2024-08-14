@@ -1,48 +1,1203 @@
-The files belonging to this database system will be owned by user "postgres".
-This user must also own the server process.
-
-The database cluster will be initialized with locale "en_US.utf8".
-The default database encoding has accordingly been set to "UTF8".
-The default text search configuration will be set to "english".
-
-Data page checksums are disabled.
-
-fixing permissions on existing directory /var/lib/postgresql/data ... ok
-creating subdirectories ... ok
-selecting dynamic shared memory implementation ... posix
-selecting default max_connections ... 100
-selecting default shared_buffers ... 128MB
-selecting default time zone ... UTC
-creating configuration files ... ok
-running bootstrap script ... ok
-performing post-bootstrap initialization ... ok
-syncing data to disk ... ok
-
-
-Success. You can now start the database server using:
-
-    pg_ctl -D /var/lib/postgresql/data -l logfile start
-
-waiting for server to start....2024-08-13 08:42:49.611 UTC [41] LOG:  starting PostgreSQL 16.3 on x86_64-pc-linux-musl, compiled by gcc (Alpine 13.2.1_git20240309) 13.2.1 20240309, 64-bit
-2024-08-13 08:42:49.613 UTC [41] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
-2024-08-13 08:42:49.619 UTC [44] LOG:  database system was shut down at 2024-08-13 08:42:49 UTC
-2024-08-13 08:42:49.623 UTC [41] LOG:  database system is ready to accept connections
- done
-server started
-CREATE DATABASE
-
-
-/usr/local/bin/docker-entrypoint.sh: ignoring /docker-entrypoint-initdb.d/*
-
-waiting for server to shut down....2024-08-13 08:42:49.733 UTC [41] LOG:  received fast shutdown request
-2024-08-13 08:42:49.735 UTC [41] LOG:  aborting any active transactions
-2024-08-13 08:42:49.736 UTC [41] LOG:  background worker "logical replication launcher" (PID 47) exited with exit code 1
-2024-08-13 08:42:49.736 UTC [42] LOG:  shutting down
-2024-08-13 08:42:49.738 UTC [42] LOG:  checkpoint starting: shutdown immediate
-2024-08-13 08:42:49.807 UTC [42] LOG:  checkpoint complete: wrote 924 buffers (5.6%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.009 s, sync=0.054 s, total=0.071 s; sync files=301, longest=0.012 s, average=0.001 s; distance=4267 kB, estimate=4267 kB; lsn=0/191AA98, redo lsn=0/191AA98
-2024-08-13 08:42:49.812 UTC [41] LOG:  database system is shut down
- done
-server stopped
-
-PostgreSQL init process complete; ready for start up.
-
+logger=settings t=2024-08-14T10:50:22.08921818Z level=info msg="Starting Grafana" version=10.4.4 commit=98b44044ee712c56bc43a806a162d1d1f5d54143 branch=HEAD compiled=2024-08-14T10:50:22Z
+logger=settings t=2024-08-14T10:50:22.089374968Z level=info msg="Config loaded from" file=/usr/share/grafana/conf/defaults.ini
+logger=settings t=2024-08-14T10:50:22.089381275Z level=info msg="Config loaded from" file=/etc/grafana/grafana.ini
+logger=settings t=2024-08-14T10:50:22.089383378Z level=info msg="Config overridden from command line" arg="default.paths.data=/var/lib/grafana"
+logger=settings t=2024-08-14T10:50:22.089385374Z level=info msg="Config overridden from command line" arg="default.paths.logs=/var/log/grafana"
+logger=settings t=2024-08-14T10:50:22.089387675Z level=info msg="Config overridden from command line" arg="default.paths.plugins=/var/lib/grafana/plugins"
+logger=settings t=2024-08-14T10:50:22.089389325Z level=info msg="Config overridden from command line" arg="default.paths.provisioning=/etc/grafana/provisioning"
+logger=settings t=2024-08-14T10:50:22.08939136Z level=info msg="Config overridden from command line" arg="default.log.mode=console"
+logger=settings t=2024-08-14T10:50:22.089393266Z level=info msg="Config overridden from Environment variable" var="GF_PATHS_DATA=/var/lib/grafana"
+logger=settings t=2024-08-14T10:50:22.089395013Z level=info msg="Config overridden from Environment variable" var="GF_PATHS_LOGS=/var/log/grafana"
+logger=settings t=2024-08-14T10:50:22.08939672Z level=info msg="Config overridden from Environment variable" var="GF_PATHS_PLUGINS=/var/lib/grafana/plugins"
+logger=settings t=2024-08-14T10:50:22.089398355Z level=info msg="Config overridden from Environment variable" var="GF_PATHS_PROVISIONING=/etc/grafana/provisioning"
+logger=settings t=2024-08-14T10:50:22.089400004Z level=info msg="Config overridden from Environment variable" var="GF_SECURITY_ADMIN_USER=gf_admin"
+logger=settings t=2024-08-14T10:50:22.08940164Z level=info msg="Config overridden from Environment variable" var="GF_SECURITY_ADMIN_PASSWORD=*********"
+logger=settings t=2024-08-14T10:50:22.089403383Z level=info msg=Target target=[all]
+logger=settings t=2024-08-14T10:50:22.089408864Z level=info msg="Path Home" path=/usr/share/grafana
+logger=settings t=2024-08-14T10:50:22.089411568Z level=info msg="Path Data" path=/var/lib/grafana
+logger=settings t=2024-08-14T10:50:22.089413172Z level=info msg="Path Logs" path=/var/log/grafana
+logger=settings t=2024-08-14T10:50:22.089414673Z level=info msg="Path Plugins" path=/var/lib/grafana/plugins
+logger=settings t=2024-08-14T10:50:22.089416386Z level=info msg="Path Provisioning" path=/etc/grafana/provisioning
+logger=settings t=2024-08-14T10:50:22.089418058Z level=info msg="App mode production"
+logger=sqlstore t=2024-08-14T10:50:22.089581587Z level=info msg="Connecting to DB" dbtype=sqlite3
+logger=sqlstore t=2024-08-14T10:50:22.089596135Z level=info msg="Creating SQLite database file" path=/var/lib/grafana/grafana.db
+logger=migrator t=2024-08-14T10:50:22.090063699Z level=info msg="Starting DB migrations"
+logger=migrator t=2024-08-14T10:50:22.090724298Z level=info msg="Executing migration" id="create migration_log table"
+logger=migrator t=2024-08-14T10:50:22.091215515Z level=info msg="Migration successfully executed" id="create migration_log table" duration=490.98µs
+logger=migrator t=2024-08-14T10:50:22.095344771Z level=info msg="Executing migration" id="create user table"
+logger=migrator t=2024-08-14T10:50:22.095763531Z level=info msg="Migration successfully executed" id="create user table" duration=418.95µs
+logger=migrator t=2024-08-14T10:50:22.099460934Z level=info msg="Executing migration" id="add unique index user.login"
+logger=migrator t=2024-08-14T10:50:22.099845928Z level=info msg="Migration successfully executed" id="add unique index user.login" duration=385.11µs
+logger=migrator t=2024-08-14T10:50:22.103265838Z level=info msg="Executing migration" id="add unique index user.email"
+logger=migrator t=2024-08-14T10:50:22.103630153Z level=info msg="Migration successfully executed" id="add unique index user.email" duration=362.423µs
+logger=migrator t=2024-08-14T10:50:22.107940691Z level=info msg="Executing migration" id="drop index UQE_user_login - v1"
+logger=migrator t=2024-08-14T10:50:22.108284464Z level=info msg="Migration successfully executed" id="drop index UQE_user_login - v1" duration=344.19µs
+logger=migrator t=2024-08-14T10:50:22.112724864Z level=info msg="Executing migration" id="drop index UQE_user_email - v1"
+logger=migrator t=2024-08-14T10:50:22.113028828Z level=info msg="Migration successfully executed" id="drop index UQE_user_email - v1" duration=304.114µs
+logger=migrator t=2024-08-14T10:50:22.11728013Z level=info msg="Executing migration" id="Rename table user to user_v1 - v1"
+logger=migrator t=2024-08-14T10:50:22.11832277Z level=info msg="Migration successfully executed" id="Rename table user to user_v1 - v1" duration=1.04239ms
+logger=migrator t=2024-08-14T10:50:22.125310771Z level=info msg="Executing migration" id="create user table v2"
+logger=migrator t=2024-08-14T10:50:22.125753096Z level=info msg="Migration successfully executed" id="create user table v2" duration=442.364µs
+logger=migrator t=2024-08-14T10:50:22.130944947Z level=info msg="Executing migration" id="create index UQE_user_login - v2"
+logger=migrator t=2024-08-14T10:50:22.131284327Z level=info msg="Migration successfully executed" id="create index UQE_user_login - v2" duration=339.516µs
+logger=migrator t=2024-08-14T10:50:22.136146314Z level=info msg="Executing migration" id="create index UQE_user_email - v2"
+logger=migrator t=2024-08-14T10:50:22.136470203Z level=info msg="Migration successfully executed" id="create index UQE_user_email - v2" duration=323.771µs
+logger=migrator t=2024-08-14T10:50:22.141269677Z level=info msg="Executing migration" id="copy data_source v1 to v2"
+logger=migrator t=2024-08-14T10:50:22.141453776Z level=info msg="Migration successfully executed" id="copy data_source v1 to v2" duration=184.258µs
+logger=migrator t=2024-08-14T10:50:22.145603689Z level=info msg="Executing migration" id="Drop old table user_v1"
+logger=migrator t=2024-08-14T10:50:22.145849599Z level=info msg="Migration successfully executed" id="Drop old table user_v1" duration=245.503µs
+logger=migrator t=2024-08-14T10:50:22.150693914Z level=info msg="Executing migration" id="Add column help_flags1 to user table"
+logger=migrator t=2024-08-14T10:50:22.151188123Z level=info msg="Migration successfully executed" id="Add column help_flags1 to user table" duration=494.137µs
+logger=migrator t=2024-08-14T10:50:22.155372491Z level=info msg="Executing migration" id="Update user table charset"
+logger=migrator t=2024-08-14T10:50:22.155385415Z level=info msg="Migration successfully executed" id="Update user table charset" duration=12.606µs
+logger=migrator t=2024-08-14T10:50:22.159539391Z level=info msg="Executing migration" id="Add last_seen_at column to user"
+logger=migrator t=2024-08-14T10:50:22.160048298Z level=info msg="Migration successfully executed" id="Add last_seen_at column to user" duration=508.768µs
+logger=migrator t=2024-08-14T10:50:22.163956236Z level=info msg="Executing migration" id="Add missing user data"
+logger=migrator t=2024-08-14T10:50:22.164069574Z level=info msg="Migration successfully executed" id="Add missing user data" duration=113.42µs
+logger=migrator t=2024-08-14T10:50:22.168236718Z level=info msg="Executing migration" id="Add is_disabled column to user"
+logger=migrator t=2024-08-14T10:50:22.168735122Z level=info msg="Migration successfully executed" id="Add is_disabled column to user" duration=497.929µs
+logger=migrator t=2024-08-14T10:50:22.173074696Z level=info msg="Executing migration" id="Add index user.login/user.email"
+logger=migrator t=2024-08-14T10:50:22.173391574Z level=info msg="Migration successfully executed" id="Add index user.login/user.email" duration=316.777µs
+logger=migrator t=2024-08-14T10:50:22.177677035Z level=info msg="Executing migration" id="Add is_service_account column to user"
+logger=migrator t=2024-08-14T10:50:22.178299639Z level=info msg="Migration successfully executed" id="Add is_service_account column to user" duration=622.107µs
+logger=migrator t=2024-08-14T10:50:22.182395859Z level=info msg="Executing migration" id="Update is_service_account column to nullable"
+logger=migrator t=2024-08-14T10:50:22.185329673Z level=info msg="Migration successfully executed" id="Update is_service_account column to nullable" duration=2.933416ms
+logger=migrator t=2024-08-14T10:50:22.19018962Z level=info msg="Executing migration" id="Add uid column to user"
+logger=migrator t=2024-08-14T10:50:22.190693725Z level=info msg="Migration successfully executed" id="Add uid column to user" duration=503.682µs
+logger=migrator t=2024-08-14T10:50:22.194759391Z level=info msg="Executing migration" id="Update uid column values for users"
+logger=migrator t=2024-08-14T10:50:22.194843273Z level=info msg="Migration successfully executed" id="Update uid column values for users" duration=84.319µs
+logger=migrator t=2024-08-14T10:50:22.198490807Z level=info msg="Executing migration" id="Add unique index user_uid"
+logger=migrator t=2024-08-14T10:50:22.198809609Z level=info msg="Migration successfully executed" id="Add unique index user_uid" duration=318.932µs
+logger=migrator t=2024-08-14T10:50:22.202624243Z level=info msg="Executing migration" id="update login field with orgid to allow for multiple service accounts with same name across orgs"
+logger=migrator t=2024-08-14T10:50:22.202763591Z level=info msg="Migration successfully executed" id="update login field with orgid to allow for multiple service accounts with same name across orgs" duration=138.226µs
+logger=migrator t=2024-08-14T10:50:22.206714662Z level=info msg="Executing migration" id="create temp user table v1-7"
+logger=migrator t=2024-08-14T10:50:22.207065813Z level=info msg="Migration successfully executed" id="create temp user table v1-7" duration=350.009µs
+logger=migrator t=2024-08-14T10:50:22.210815111Z level=info msg="Executing migration" id="create index IDX_temp_user_email - v1-7"
+logger=migrator t=2024-08-14T10:50:22.211118256Z level=info msg="Migration successfully executed" id="create index IDX_temp_user_email - v1-7" duration=302.941µs
+logger=migrator t=2024-08-14T10:50:22.21483208Z level=info msg="Executing migration" id="create index IDX_temp_user_org_id - v1-7"
+logger=migrator t=2024-08-14T10:50:22.215130526Z level=info msg="Migration successfully executed" id="create index IDX_temp_user_org_id - v1-7" duration=298.257µs
+logger=migrator t=2024-08-14T10:50:22.219767438Z level=info msg="Executing migration" id="create index IDX_temp_user_code - v1-7"
+logger=migrator t=2024-08-14T10:50:22.220131057Z level=info msg="Migration successfully executed" id="create index IDX_temp_user_code - v1-7" duration=363.263µs
+logger=migrator t=2024-08-14T10:50:22.223969497Z level=info msg="Executing migration" id="create index IDX_temp_user_status - v1-7"
+logger=migrator t=2024-08-14T10:50:22.224289692Z level=info msg="Migration successfully executed" id="create index IDX_temp_user_status - v1-7" duration=320.064µs
+logger=migrator t=2024-08-14T10:50:22.227997915Z level=info msg="Executing migration" id="Update temp_user table charset"
+logger=migrator t=2024-08-14T10:50:22.228011206Z level=info msg="Migration successfully executed" id="Update temp_user table charset" duration=15.867µs
+logger=migrator t=2024-08-14T10:50:22.2340474Z level=info msg="Executing migration" id="drop index IDX_temp_user_email - v1"
+logger=migrator t=2024-08-14T10:50:22.234615079Z level=info msg="Migration successfully executed" id="drop index IDX_temp_user_email - v1" duration=567.862µs
+logger=migrator t=2024-08-14T10:50:22.243043577Z level=info msg="Executing migration" id="drop index IDX_temp_user_org_id - v1"
+logger=migrator t=2024-08-14T10:50:22.243426928Z level=info msg="Migration successfully executed" id="drop index IDX_temp_user_org_id - v1" duration=383.428µs
+logger=migrator t=2024-08-14T10:50:22.250875991Z level=info msg="Executing migration" id="drop index IDX_temp_user_code - v1"
+logger=migrator t=2024-08-14T10:50:22.251236476Z level=info msg="Migration successfully executed" id="drop index IDX_temp_user_code - v1" duration=361.645µs
+logger=migrator t=2024-08-14T10:50:22.255003601Z level=info msg="Executing migration" id="drop index IDX_temp_user_status - v1"
+logger=migrator t=2024-08-14T10:50:22.255324544Z level=info msg="Migration successfully executed" id="drop index IDX_temp_user_status - v1" duration=320.627µs
+logger=migrator t=2024-08-14T10:50:22.259013828Z level=info msg="Executing migration" id="Rename table temp_user to temp_user_tmp_qwerty - v1"
+logger=migrator t=2024-08-14T10:50:22.260340928Z level=info msg="Migration successfully executed" id="Rename table temp_user to temp_user_tmp_qwerty - v1" duration=1.321983ms
+logger=migrator t=2024-08-14T10:50:22.264497124Z level=info msg="Executing migration" id="create temp_user v2"
+logger=migrator t=2024-08-14T10:50:22.265035748Z level=info msg="Migration successfully executed" id="create temp_user v2" duration=538.89µs
+logger=migrator t=2024-08-14T10:50:22.268965381Z level=info msg="Executing migration" id="create index IDX_temp_user_email - v2"
+logger=migrator t=2024-08-14T10:50:22.269414969Z level=info msg="Migration successfully executed" id="create index IDX_temp_user_email - v2" duration=449.529µs
+logger=migrator t=2024-08-14T10:50:22.273187189Z level=info msg="Executing migration" id="create index IDX_temp_user_org_id - v2"
+logger=migrator t=2024-08-14T10:50:22.273633048Z level=info msg="Migration successfully executed" id="create index IDX_temp_user_org_id - v2" duration=445.682µs
+logger=migrator t=2024-08-14T10:50:22.27746325Z level=info msg="Executing migration" id="create index IDX_temp_user_code - v2"
+logger=migrator t=2024-08-14T10:50:22.278083245Z level=info msg="Migration successfully executed" id="create index IDX_temp_user_code - v2" duration=619.742µs
+logger=migrator t=2024-08-14T10:50:22.282168576Z level=info msg="Executing migration" id="create index IDX_temp_user_status - v2"
+logger=migrator t=2024-08-14T10:50:22.282521044Z level=info msg="Migration successfully executed" id="create index IDX_temp_user_status - v2" duration=351.169µs
+logger=migrator t=2024-08-14T10:50:22.286347257Z level=info msg="Executing migration" id="copy temp_user v1 to v2"
+logger=migrator t=2024-08-14T10:50:22.286521881Z level=info msg="Migration successfully executed" id="copy temp_user v1 to v2" duration=174.683µs
+logger=migrator t=2024-08-14T10:50:22.290262854Z level=info msg="Executing migration" id="drop temp_user_tmp_qwerty"
+logger=migrator t=2024-08-14T10:50:22.290512964Z level=info msg="Migration successfully executed" id="drop temp_user_tmp_qwerty" duration=260.593µs
+logger=migrator t=2024-08-14T10:50:22.294400947Z level=info msg="Executing migration" id="Set created for temp users that will otherwise prematurely expire"
+logger=migrator t=2024-08-14T10:50:22.29458674Z level=info msg="Migration successfully executed" id="Set created for temp users that will otherwise prematurely expire" duration=185.813µs
+logger=migrator t=2024-08-14T10:50:22.298240287Z level=info msg="Executing migration" id="create star table"
+logger=migrator t=2024-08-14T10:50:22.298545098Z level=info msg="Migration successfully executed" id="create star table" duration=304.629µs
+logger=migrator t=2024-08-14T10:50:22.302359228Z level=info msg="Executing migration" id="add unique index star.user_id_dashboard_id"
+logger=migrator t=2024-08-14T10:50:22.30269146Z level=info msg="Migration successfully executed" id="add unique index star.user_id_dashboard_id" duration=333.122µs
+logger=migrator t=2024-08-14T10:50:22.306283368Z level=info msg="Executing migration" id="create org table v1"
+logger=migrator t=2024-08-14T10:50:22.30663046Z level=info msg="Migration successfully executed" id="create org table v1" duration=345.73µs
+logger=migrator t=2024-08-14T10:50:22.310343905Z level=info msg="Executing migration" id="create index UQE_org_name - v1"
+logger=migrator t=2024-08-14T10:50:22.310688559Z level=info msg="Migration successfully executed" id="create index UQE_org_name - v1" duration=344.858µs
+logger=migrator t=2024-08-14T10:50:22.314380955Z level=info msg="Executing migration" id="create org_user table v1"
+logger=migrator t=2024-08-14T10:50:22.314715325Z level=info msg="Migration successfully executed" id="create org_user table v1" duration=333.889µs
+logger=migrator t=2024-08-14T10:50:22.318569256Z level=info msg="Executing migration" id="create index IDX_org_user_org_id - v1"
+logger=migrator t=2024-08-14T10:50:22.318907242Z level=info msg="Migration successfully executed" id="create index IDX_org_user_org_id - v1" duration=337.815µs
+logger=migrator t=2024-08-14T10:50:22.322707233Z level=info msg="Executing migration" id="create index UQE_org_user_org_id_user_id - v1"
+logger=migrator t=2024-08-14T10:50:22.323048503Z level=info msg="Migration successfully executed" id="create index UQE_org_user_org_id_user_id - v1" duration=341.057µs
+logger=migrator t=2024-08-14T10:50:22.327286396Z level=info msg="Executing migration" id="create index IDX_org_user_user_id - v1"
+logger=migrator t=2024-08-14T10:50:22.327613145Z level=info msg="Migration successfully executed" id="create index IDX_org_user_user_id - v1" duration=326.413µs
+logger=migrator t=2024-08-14T10:50:22.332113274Z level=info msg="Executing migration" id="Update org table charset"
+logger=migrator t=2024-08-14T10:50:22.332124015Z level=info msg="Migration successfully executed" id="Update org table charset" duration=11.198µs
+logger=migrator t=2024-08-14T10:50:22.336425874Z level=info msg="Executing migration" id="Update org_user table charset"
+logger=migrator t=2024-08-14T10:50:22.336438176Z level=info msg="Migration successfully executed" id="Update org_user table charset" duration=12.875µs
+logger=migrator t=2024-08-14T10:50:22.340162119Z level=info msg="Executing migration" id="Migrate all Read Only Viewers to Viewers"
+logger=migrator t=2024-08-14T10:50:22.34024894Z level=info msg="Migration successfully executed" id="Migrate all Read Only Viewers to Viewers" duration=85.807µs
+logger=migrator t=2024-08-14T10:50:22.343824901Z level=info msg="Executing migration" id="create dashboard table"
+logger=migrator t=2024-08-14T10:50:22.344189352Z level=info msg="Migration successfully executed" id="create dashboard table" duration=364.072µs
+logger=migrator t=2024-08-14T10:50:22.347786298Z level=info msg="Executing migration" id="add index dashboard.account_id"
+logger=migrator t=2024-08-14T10:50:22.348158325Z level=info msg="Migration successfully executed" id="add index dashboard.account_id" duration=371.193µs
+logger=migrator t=2024-08-14T10:50:22.351908306Z level=info msg="Executing migration" id="add unique index dashboard_account_id_slug"
+logger=migrator t=2024-08-14T10:50:22.352275245Z level=info msg="Migration successfully executed" id="add unique index dashboard_account_id_slug" duration=366.701µs
+logger=migrator t=2024-08-14T10:50:22.355971446Z level=info msg="Executing migration" id="create dashboard_tag table"
+logger=migrator t=2024-08-14T10:50:22.356293326Z level=info msg="Migration successfully executed" id="create dashboard_tag table" duration=321.4µs
+logger=migrator t=2024-08-14T10:50:22.361546537Z level=info msg="Executing migration" id="add unique index dashboard_tag.dasboard_id_term"
+logger=migrator t=2024-08-14T10:50:22.362037655Z level=info msg="Migration successfully executed" id="add unique index dashboard_tag.dasboard_id_term" duration=491.132µs
+logger=migrator t=2024-08-14T10:50:22.365875013Z level=info msg="Executing migration" id="drop index UQE_dashboard_tag_dashboard_id_term - v1"
+logger=migrator t=2024-08-14T10:50:22.366219116Z level=info msg="Migration successfully executed" id="drop index UQE_dashboard_tag_dashboard_id_term - v1" duration=345.337µs
+logger=migrator t=2024-08-14T10:50:22.370242191Z level=info msg="Executing migration" id="Rename table dashboard to dashboard_v1 - v1"
+logger=migrator t=2024-08-14T10:50:22.372029728Z level=info msg="Migration successfully executed" id="Rename table dashboard to dashboard_v1 - v1" duration=1.787783ms
+logger=migrator t=2024-08-14T10:50:22.376482669Z level=info msg="Executing migration" id="create dashboard v2"
+logger=migrator t=2024-08-14T10:50:22.376831942Z level=info msg="Migration successfully executed" id="create dashboard v2" duration=349.272µs
+logger=migrator t=2024-08-14T10:50:22.381787506Z level=info msg="Executing migration" id="create index IDX_dashboard_org_id - v2"
+logger=migrator t=2024-08-14T10:50:22.382117445Z level=info msg="Migration successfully executed" id="create index IDX_dashboard_org_id - v2" duration=329.81µs
+logger=migrator t=2024-08-14T10:50:22.387762045Z level=info msg="Executing migration" id="create index UQE_dashboard_org_id_slug - v2"
+logger=migrator t=2024-08-14T10:50:22.388138004Z level=info msg="Migration successfully executed" id="create index UQE_dashboard_org_id_slug - v2" duration=375.896µs
+logger=migrator t=2024-08-14T10:50:22.391904316Z level=info msg="Executing migration" id="copy dashboard v1 to v2"
+logger=migrator t=2024-08-14T10:50:22.392066038Z level=info msg="Migration successfully executed" id="copy dashboard v1 to v2" duration=162.285µs
+logger=migrator t=2024-08-14T10:50:22.396053344Z level=info msg="Executing migration" id="drop table dashboard_v1"
+logger=migrator t=2024-08-14T10:50:22.396421608Z level=info msg="Migration successfully executed" id="drop table dashboard_v1" duration=369.467µs
+logger=migrator t=2024-08-14T10:50:22.400100122Z level=info msg="Executing migration" id="alter dashboard.data to mediumtext v1"
+logger=migrator t=2024-08-14T10:50:22.4001344Z level=info msg="Migration successfully executed" id="alter dashboard.data to mediumtext v1" duration=34.908µs
+logger=migrator t=2024-08-14T10:50:22.403916301Z level=info msg="Executing migration" id="Add column updated_by in dashboard - v2"
+logger=migrator t=2024-08-14T10:50:22.404692965Z level=info msg="Migration successfully executed" id="Add column updated_by in dashboard - v2" duration=775.142µs
+logger=migrator t=2024-08-14T10:50:22.40843435Z level=info msg="Executing migration" id="Add column created_by in dashboard - v2"
+logger=migrator t=2024-08-14T10:50:22.409145464Z level=info msg="Migration successfully executed" id="Add column created_by in dashboard - v2" duration=710.822µs
+logger=migrator t=2024-08-14T10:50:22.412973821Z level=info msg="Executing migration" id="Add column gnetId in dashboard"
+logger=migrator t=2024-08-14T10:50:22.413699392Z level=info msg="Migration successfully executed" id="Add column gnetId in dashboard" duration=723.842µs
+logger=migrator t=2024-08-14T10:50:22.417794924Z level=info msg="Executing migration" id="Add index for gnetId in dashboard"
+logger=migrator t=2024-08-14T10:50:22.418188902Z level=info msg="Migration successfully executed" id="Add index for gnetId in dashboard" duration=393.942µs
+logger=migrator t=2024-08-14T10:50:22.422570837Z level=info msg="Executing migration" id="Add column plugin_id in dashboard"
+logger=migrator t=2024-08-14T10:50:22.423346992Z level=info msg="Migration successfully executed" id="Add column plugin_id in dashboard" duration=776.377µs
+logger=migrator t=2024-08-14T10:50:22.430598761Z level=info msg="Executing migration" id="Add index for plugin_id in dashboard"
+logger=migrator t=2024-08-14T10:50:22.430974565Z level=info msg="Migration successfully executed" id="Add index for plugin_id in dashboard" duration=375.696µs
+logger=migrator t=2024-08-14T10:50:22.438072426Z level=info msg="Executing migration" id="Add index for dashboard_id in dashboard_tag"
+logger=migrator t=2024-08-14T10:50:22.438436552Z level=info msg="Migration successfully executed" id="Add index for dashboard_id in dashboard_tag" duration=362.72µs
+logger=migrator t=2024-08-14T10:50:22.445093446Z level=info msg="Executing migration" id="Update dashboard table charset"
+logger=migrator t=2024-08-14T10:50:22.445106791Z level=info msg="Migration successfully executed" id="Update dashboard table charset" duration=13.937µs
+logger=migrator t=2024-08-14T10:50:22.451785262Z level=info msg="Executing migration" id="Update dashboard_tag table charset"
+logger=migrator t=2024-08-14T10:50:22.451797527Z level=info msg="Migration successfully executed" id="Update dashboard_tag table charset" duration=12.831µs
+logger=migrator t=2024-08-14T10:50:22.457484326Z level=info msg="Executing migration" id="Add column folder_id in dashboard"
+logger=migrator t=2024-08-14T10:50:22.458292604Z level=info msg="Migration successfully executed" id="Add column folder_id in dashboard" duration=807.627µs
+logger=migrator t=2024-08-14T10:50:22.465827588Z level=info msg="Executing migration" id="Add column isFolder in dashboard"
+logger=migrator t=2024-08-14T10:50:22.466603119Z level=info msg="Migration successfully executed" id="Add column isFolder in dashboard" duration=775.423µs
+logger=migrator t=2024-08-14T10:50:22.471747436Z level=info msg="Executing migration" id="Add column has_acl in dashboard"
+logger=migrator t=2024-08-14T10:50:22.472514Z level=info msg="Migration successfully executed" id="Add column has_acl in dashboard" duration=766.39µs
+logger=migrator t=2024-08-14T10:50:22.47735343Z level=info msg="Executing migration" id="Add column uid in dashboard"
+logger=migrator t=2024-08-14T10:50:22.47815099Z level=info msg="Migration successfully executed" id="Add column uid in dashboard" duration=797.836µs
+logger=migrator t=2024-08-14T10:50:22.48220079Z level=info msg="Executing migration" id="Update uid column values in dashboard"
+logger=migrator t=2024-08-14T10:50:22.482299778Z level=info msg="Migration successfully executed" id="Update uid column values in dashboard" duration=98.602µs
+logger=migrator t=2024-08-14T10:50:22.486602305Z level=info msg="Executing migration" id="Add unique index dashboard_org_id_uid"
+logger=migrator t=2024-08-14T10:50:22.486947301Z level=info msg="Migration successfully executed" id="Add unique index dashboard_org_id_uid" duration=344.82µs
+logger=migrator t=2024-08-14T10:50:22.49261794Z level=info msg="Executing migration" id="Remove unique index org_id_slug"
+logger=migrator t=2024-08-14T10:50:22.49291955Z level=info msg="Migration successfully executed" id="Remove unique index org_id_slug" duration=301.395µs
+logger=migrator t=2024-08-14T10:50:22.496840618Z level=info msg="Executing migration" id="Update dashboard title length"
+logger=migrator t=2024-08-14T10:50:22.496852297Z level=info msg="Migration successfully executed" id="Update dashboard title length" duration=12.46µs
+logger=migrator t=2024-08-14T10:50:22.500497812Z level=info msg="Executing migration" id="Add unique index for dashboard_org_id_title_folder_id"
+logger=migrator t=2024-08-14T10:50:22.500847225Z level=info msg="Migration successfully executed" id="Add unique index for dashboard_org_id_title_folder_id" duration=349.371µs
+logger=migrator t=2024-08-14T10:50:22.504610697Z level=info msg="Executing migration" id="create dashboard_provisioning"
+logger=migrator t=2024-08-14T10:50:22.504936518Z level=info msg="Migration successfully executed" id="create dashboard_provisioning" duration=325.497µs
+logger=migrator t=2024-08-14T10:50:22.508683097Z level=info msg="Executing migration" id="Rename table dashboard_provisioning to dashboard_provisioning_tmp_qwerty - v1"
+logger=migrator t=2024-08-14T10:50:22.510564678Z level=info msg="Migration successfully executed" id="Rename table dashboard_provisioning to dashboard_provisioning_tmp_qwerty - v1" duration=1.880906ms
+logger=migrator t=2024-08-14T10:50:22.515363746Z level=info msg="Executing migration" id="create dashboard_provisioning v2"
+logger=migrator t=2024-08-14T10:50:22.515721197Z level=info msg="Migration successfully executed" id="create dashboard_provisioning v2" duration=355.82µs
+logger=migrator t=2024-08-14T10:50:22.521224264Z level=info msg="Executing migration" id="create index IDX_dashboard_provisioning_dashboard_id - v2"
+logger=migrator t=2024-08-14T10:50:22.521572102Z level=info msg="Migration successfully executed" id="create index IDX_dashboard_provisioning_dashboard_id - v2" duration=347.77µs
+logger=migrator t=2024-08-14T10:50:22.525387723Z level=info msg="Executing migration" id="create index IDX_dashboard_provisioning_dashboard_id_name - v2"
+logger=migrator t=2024-08-14T10:50:22.5257298Z level=info msg="Migration successfully executed" id="create index IDX_dashboard_provisioning_dashboard_id_name - v2" duration=341.624µs
+logger=migrator t=2024-08-14T10:50:22.5294305Z level=info msg="Executing migration" id="copy dashboard_provisioning v1 to v2"
+logger=migrator t=2024-08-14T10:50:22.529571918Z level=info msg="Migration successfully executed" id="copy dashboard_provisioning v1 to v2" duration=141.646µs
+logger=migrator t=2024-08-14T10:50:22.533672218Z level=info msg="Executing migration" id="drop dashboard_provisioning_tmp_qwerty"
+logger=migrator t=2024-08-14T10:50:22.533949974Z level=info msg="Migration successfully executed" id="drop dashboard_provisioning_tmp_qwerty" duration=277.409µs
+logger=migrator t=2024-08-14T10:50:22.538770858Z level=info msg="Executing migration" id="Add check_sum column"
+logger=migrator t=2024-08-14T10:50:22.539584114Z level=info msg="Migration successfully executed" id="Add check_sum column" duration=812.921µs
+logger=migrator t=2024-08-14T10:50:22.544859517Z level=info msg="Executing migration" id="Add index for dashboard_title"
+logger=migrator t=2024-08-14T10:50:22.545199873Z level=info msg="Migration successfully executed" id="Add index for dashboard_title" duration=341.516µs
+logger=migrator t=2024-08-14T10:50:22.55017556Z level=info msg="Executing migration" id="delete tags for deleted dashboards"
+logger=migrator t=2024-08-14T10:50:22.550256424Z level=info msg="Migration successfully executed" id="delete tags for deleted dashboards" duration=81.247µs
+logger=migrator t=2024-08-14T10:50:22.554336496Z level=info msg="Executing migration" id="delete stars for deleted dashboards"
+logger=migrator t=2024-08-14T10:50:22.554417848Z level=info msg="Migration successfully executed" id="delete stars for deleted dashboards" duration=81.942µs
+logger=migrator t=2024-08-14T10:50:22.558583269Z level=info msg="Executing migration" id="Add index for dashboard_is_folder"
+logger=migrator t=2024-08-14T10:50:22.558963671Z level=info msg="Migration successfully executed" id="Add index for dashboard_is_folder" duration=380.035µs
+logger=migrator t=2024-08-14T10:50:22.563601761Z level=info msg="Executing migration" id="Add isPublic for dashboard"
+logger=migrator t=2024-08-14T10:50:22.564439149Z level=info msg="Migration successfully executed" id="Add isPublic for dashboard" duration=836.974µs
+logger=migrator t=2024-08-14T10:50:22.57082245Z level=info msg="Executing migration" id="create data_source table"
+logger=migrator t=2024-08-14T10:50:22.571256668Z level=info msg="Migration successfully executed" id="create data_source table" duration=433.982µs
+logger=migrator t=2024-08-14T10:50:22.575984576Z level=info msg="Executing migration" id="add index data_source.account_id"
+logger=migrator t=2024-08-14T10:50:22.576366288Z level=info msg="Migration successfully executed" id="add index data_source.account_id" duration=381.802µs
+logger=migrator t=2024-08-14T10:50:22.582152747Z level=info msg="Executing migration" id="add unique index data_source.account_id_name"
+logger=migrator t=2024-08-14T10:50:22.582674544Z level=info msg="Migration successfully executed" id="add unique index data_source.account_id_name" duration=521.842µs
+logger=migrator t=2024-08-14T10:50:22.586519069Z level=info msg="Executing migration" id="drop index IDX_data_source_account_id - v1"
+logger=migrator t=2024-08-14T10:50:22.586838953Z level=info msg="Migration successfully executed" id="drop index IDX_data_source_account_id - v1" duration=319.847µs
+logger=migrator t=2024-08-14T10:50:22.591538717Z level=info msg="Executing migration" id="drop index UQE_data_source_account_id_name - v1"
+logger=migrator t=2024-08-14T10:50:22.591853271Z level=info msg="Migration successfully executed" id="drop index UQE_data_source_account_id_name - v1" duration=314.332µs
+logger=migrator t=2024-08-14T10:50:22.597027251Z level=info msg="Executing migration" id="Rename table data_source to data_source_v1 - v1"
+logger=migrator t=2024-08-14T10:50:22.599082073Z level=info msg="Migration successfully executed" id="Rename table data_source to data_source_v1 - v1" duration=2.054435ms
+logger=migrator t=2024-08-14T10:50:22.604235743Z level=info msg="Executing migration" id="create data_source table v2"
+logger=migrator t=2024-08-14T10:50:22.604645219Z level=info msg="Migration successfully executed" id="create data_source table v2" duration=409.259µs
+logger=migrator t=2024-08-14T10:50:22.608424225Z level=info msg="Executing migration" id="create index IDX_data_source_org_id - v2"
+logger=migrator t=2024-08-14T10:50:22.608774069Z level=info msg="Migration successfully executed" id="create index IDX_data_source_org_id - v2" duration=349.737µs
+logger=migrator t=2024-08-14T10:50:22.612845246Z level=info msg="Executing migration" id="create index UQE_data_source_org_id_name - v2"
+logger=migrator t=2024-08-14T10:50:22.613206155Z level=info msg="Migration successfully executed" id="create index UQE_data_source_org_id_name - v2" duration=360.453µs
+logger=migrator t=2024-08-14T10:50:22.616989997Z level=info msg="Executing migration" id="Drop old table data_source_v1 #2"
+logger=migrator t=2024-08-14T10:50:22.617233029Z level=info msg="Migration successfully executed" id="Drop old table data_source_v1 #2" duration=243.228µs
+logger=migrator t=2024-08-14T10:50:22.621123008Z level=info msg="Executing migration" id="Add column with_credentials"
+logger=migrator t=2024-08-14T10:50:22.62202098Z level=info msg="Migration successfully executed" id="Add column with_credentials" duration=897.485µs
+logger=migrator t=2024-08-14T10:50:22.62612361Z level=info msg="Executing migration" id="Add secure json data column"
+logger=migrator t=2024-08-14T10:50:22.627012011Z level=info msg="Migration successfully executed" id="Add secure json data column" duration=887.296µs
+logger=migrator t=2024-08-14T10:50:22.631200243Z level=info msg="Executing migration" id="Update data_source table charset"
+logger=migrator t=2024-08-14T10:50:22.631211747Z level=info msg="Migration successfully executed" id="Update data_source table charset" duration=12.095µs
+logger=migrator t=2024-08-14T10:50:22.635154022Z level=info msg="Executing migration" id="Update initial version to 1"
+logger=migrator t=2024-08-14T10:50:22.635243032Z level=info msg="Migration successfully executed" id="Update initial version to 1" duration=89.169µs
+logger=migrator t=2024-08-14T10:50:22.639384019Z level=info msg="Executing migration" id="Add read_only data column"
+logger=migrator t=2024-08-14T10:50:22.640275198Z level=info msg="Migration successfully executed" id="Add read_only data column" duration=890.54µs
+logger=migrator t=2024-08-14T10:50:22.644612371Z level=info msg="Executing migration" id="Migrate logging ds to loki ds"
+logger=migrator t=2024-08-14T10:50:22.644705782Z level=info msg="Migration successfully executed" id="Migrate logging ds to loki ds" duration=95.677µs
+logger=migrator t=2024-08-14T10:50:22.648889205Z level=info msg="Executing migration" id="Update json_data with nulls"
+logger=migrator t=2024-08-14T10:50:22.648959743Z level=info msg="Migration successfully executed" id="Update json_data with nulls" duration=70.902µs
+logger=migrator t=2024-08-14T10:50:22.653318144Z level=info msg="Executing migration" id="Add uid column"
+logger=migrator t=2024-08-14T10:50:22.654216375Z level=info msg="Migration successfully executed" id="Add uid column" duration=897.806µs
+logger=migrator t=2024-08-14T10:50:22.659310372Z level=info msg="Executing migration" id="Update uid value"
+logger=migrator t=2024-08-14T10:50:22.659392837Z level=info msg="Migration successfully executed" id="Update uid value" duration=82.605µs
+logger=migrator t=2024-08-14T10:50:22.663347792Z level=info msg="Executing migration" id="Add unique index datasource_org_id_uid"
+logger=migrator t=2024-08-14T10:50:22.663708168Z level=info msg="Migration successfully executed" id="Add unique index datasource_org_id_uid" duration=360.096µs
+logger=migrator t=2024-08-14T10:50:22.668614202Z level=info msg="Executing migration" id="add unique index datasource_org_id_is_default"
+logger=migrator t=2024-08-14T10:50:22.668959185Z level=info msg="Migration successfully executed" id="add unique index datasource_org_id_is_default" duration=344.887µs
+logger=migrator t=2024-08-14T10:50:22.675018029Z level=info msg="Executing migration" id="create api_key table"
+logger=migrator t=2024-08-14T10:50:22.67539696Z level=info msg="Migration successfully executed" id="create api_key table" duration=377.62µs
+logger=migrator t=2024-08-14T10:50:22.679249733Z level=info msg="Executing migration" id="add index api_key.account_id"
+logger=migrator t=2024-08-14T10:50:22.679596336Z level=info msg="Migration successfully executed" id="add index api_key.account_id" duration=346.48µs
+logger=migrator t=2024-08-14T10:50:22.684164314Z level=info msg="Executing migration" id="add index api_key.key"
+logger=migrator t=2024-08-14T10:50:22.684530572Z level=info msg="Migration successfully executed" id="add index api_key.key" duration=365.682µs
+logger=migrator t=2024-08-14T10:50:22.690149693Z level=info msg="Executing migration" id="add index api_key.account_id_name"
+logger=migrator t=2024-08-14T10:50:22.69052996Z level=info msg="Migration successfully executed" id="add index api_key.account_id_name" duration=379.346µs
+logger=migrator t=2024-08-14T10:50:22.694822709Z level=info msg="Executing migration" id="drop index IDX_api_key_account_id - v1"
+logger=migrator t=2024-08-14T10:50:22.695135676Z level=info msg="Migration successfully executed" id="drop index IDX_api_key_account_id - v1" duration=312.683µs
+logger=migrator t=2024-08-14T10:50:22.69963958Z level=info msg="Executing migration" id="drop index UQE_api_key_key - v1"
+logger=migrator t=2024-08-14T10:50:22.699951797Z level=info msg="Migration successfully executed" id="drop index UQE_api_key_key - v1" duration=311.231µs
+logger=migrator t=2024-08-14T10:50:22.70502188Z level=info msg="Executing migration" id="drop index UQE_api_key_account_id_name - v1"
+logger=migrator t=2024-08-14T10:50:22.705331108Z level=info msg="Migration successfully executed" id="drop index UQE_api_key_account_id_name - v1" duration=309.042µs
+logger=migrator t=2024-08-14T10:50:22.710723499Z level=info msg="Executing migration" id="Rename table api_key to api_key_v1 - v1"
+logger=migrator t=2024-08-14T10:50:22.713017414Z level=info msg="Migration successfully executed" id="Rename table api_key to api_key_v1 - v1" duration=2.292514ms
+logger=migrator t=2024-08-14T10:50:22.718035822Z level=info msg="Executing migration" id="create api_key table v2"
+logger=migrator t=2024-08-14T10:50:22.718413828Z level=info msg="Migration successfully executed" id="create api_key table v2" duration=377.898µs
+logger=migrator t=2024-08-14T10:50:22.722056591Z level=info msg="Executing migration" id="create index IDX_api_key_org_id - v2"
+logger=migrator t=2024-08-14T10:50:22.722406022Z level=info msg="Migration successfully executed" id="create index IDX_api_key_org_id - v2" duration=349.394µs
+logger=migrator t=2024-08-14T10:50:22.726012242Z level=info msg="Executing migration" id="create index UQE_api_key_key - v2"
+logger=migrator t=2024-08-14T10:50:22.726371789Z level=info msg="Migration successfully executed" id="create index UQE_api_key_key - v2" duration=359.517µs
+logger=migrator t=2024-08-14T10:50:22.73061377Z level=info msg="Executing migration" id="create index UQE_api_key_org_id_name - v2"
+logger=migrator t=2024-08-14T10:50:22.730949536Z level=info msg="Migration successfully executed" id="create index UQE_api_key_org_id_name - v2" duration=335.691µs
+logger=migrator t=2024-08-14T10:50:22.734699991Z level=info msg="Executing migration" id="copy api_key v1 to v2"
+logger=migrator t=2024-08-14T10:50:22.734860232Z level=info msg="Migration successfully executed" id="copy api_key v1 to v2" duration=160.269µs
+logger=migrator t=2024-08-14T10:50:22.738646269Z level=info msg="Executing migration" id="Drop old table api_key_v1"
+logger=migrator t=2024-08-14T10:50:22.73889662Z level=info msg="Migration successfully executed" id="Drop old table api_key_v1" duration=250.24µs
+logger=migrator t=2024-08-14T10:50:22.742659821Z level=info msg="Executing migration" id="Update api_key table charset"
+logger=migrator t=2024-08-14T10:50:22.74267124Z level=info msg="Migration successfully executed" id="Update api_key table charset" duration=11.948µs
+logger=migrator t=2024-08-14T10:50:22.746802428Z level=info msg="Executing migration" id="Add expires to api_key table"
+logger=migrator t=2024-08-14T10:50:22.747728376Z level=info msg="Migration successfully executed" id="Add expires to api_key table" duration=925.787µs
+logger=migrator t=2024-08-14T10:50:22.752017962Z level=info msg="Executing migration" id="Add service account foreign key"
+logger=migrator t=2024-08-14T10:50:22.752958907Z level=info msg="Migration successfully executed" id="Add service account foreign key" duration=940.542µs
+logger=migrator t=2024-08-14T10:50:22.756955629Z level=info msg="Executing migration" id="set service account foreign key to nil if 0"
+logger=migrator t=2024-08-14T10:50:22.757033276Z level=info msg="Migration successfully executed" id="set service account foreign key to nil if 0" duration=77.983µs
+logger=migrator t=2024-08-14T10:50:22.761154224Z level=info msg="Executing migration" id="Add last_used_at to api_key table"
+logger=migrator t=2024-08-14T10:50:22.7621099Z level=info msg="Migration successfully executed" id="Add last_used_at to api_key table" duration=955.589µs
+logger=migrator t=2024-08-14T10:50:22.766389988Z level=info msg="Executing migration" id="Add is_revoked column to api_key table"
+logger=migrator t=2024-08-14T10:50:22.767353481Z level=info msg="Migration successfully executed" id="Add is_revoked column to api_key table" duration=963.274µs
+logger=migrator t=2024-08-14T10:50:22.771564324Z level=info msg="Executing migration" id="create dashboard_snapshot table v4"
+logger=migrator t=2024-08-14T10:50:22.771915151Z level=info msg="Migration successfully executed" id="create dashboard_snapshot table v4" duration=350.678µs
+logger=migrator t=2024-08-14T10:50:22.775962736Z level=info msg="Executing migration" id="drop table dashboard_snapshot_v4 #1"
+logger=migrator t=2024-08-14T10:50:22.776205911Z level=info msg="Migration successfully executed" id="drop table dashboard_snapshot_v4 #1" duration=242.907µs
+logger=migrator t=2024-08-14T10:50:22.780029811Z level=info msg="Executing migration" id="create dashboard_snapshot table v5 #2"
+logger=migrator t=2024-08-14T10:50:22.780409558Z level=info msg="Migration successfully executed" id="create dashboard_snapshot table v5 #2" duration=379.476µs
+logger=migrator t=2024-08-14T10:50:22.784113187Z level=info msg="Executing migration" id="create index UQE_dashboard_snapshot_key - v5"
+logger=migrator t=2024-08-14T10:50:22.784470282Z level=info msg="Migration successfully executed" id="create index UQE_dashboard_snapshot_key - v5" duration=357.532µs
+logger=migrator t=2024-08-14T10:50:22.78828426Z level=info msg="Executing migration" id="create index UQE_dashboard_snapshot_delete_key - v5"
+logger=migrator t=2024-08-14T10:50:22.788654189Z level=info msg="Migration successfully executed" id="create index UQE_dashboard_snapshot_delete_key - v5" duration=369.82µs
+logger=migrator t=2024-08-14T10:50:22.79415405Z level=info msg="Executing migration" id="create index IDX_dashboard_snapshot_user_id - v5"
+logger=migrator t=2024-08-14T10:50:22.794516875Z level=info msg="Migration successfully executed" id="create index IDX_dashboard_snapshot_user_id - v5" duration=362.526µs
+logger=migrator t=2024-08-14T10:50:22.798295289Z level=info msg="Executing migration" id="alter dashboard_snapshot to mediumtext v2"
+logger=migrator t=2024-08-14T10:50:22.798326321Z level=info msg="Migration successfully executed" id="alter dashboard_snapshot to mediumtext v2" duration=31.606µs
+logger=migrator t=2024-08-14T10:50:22.802353485Z level=info msg="Executing migration" id="Update dashboard_snapshot table charset"
+logger=migrator t=2024-08-14T10:50:22.802364189Z level=info msg="Migration successfully executed" id="Update dashboard_snapshot table charset" duration=11.173µs
+logger=migrator t=2024-08-14T10:50:22.806745782Z level=info msg="Executing migration" id="Add column external_delete_url to dashboard_snapshots table"
+logger=migrator t=2024-08-14T10:50:22.807774782Z level=info msg="Migration successfully executed" id="Add column external_delete_url to dashboard_snapshots table" duration=1.028745ms
+logger=migrator t=2024-08-14T10:50:22.811946127Z level=info msg="Executing migration" id="Add encrypted dashboard json column"
+logger=migrator t=2024-08-14T10:50:22.812981233Z level=info msg="Migration successfully executed" id="Add encrypted dashboard json column" duration=1.034693ms
+logger=migrator t=2024-08-14T10:50:22.816782221Z level=info msg="Executing migration" id="Change dashboard_encrypted column to MEDIUMBLOB"
+logger=migrator t=2024-08-14T10:50:22.81681157Z level=info msg="Migration successfully executed" id="Change dashboard_encrypted column to MEDIUMBLOB" duration=29.863µs
+logger=migrator t=2024-08-14T10:50:22.820909337Z level=info msg="Executing migration" id="create quota table v1"
+logger=migrator t=2024-08-14T10:50:22.821273881Z level=info msg="Migration successfully executed" id="create quota table v1" duration=363.752µs
+logger=migrator t=2024-08-14T10:50:22.825186435Z level=info msg="Executing migration" id="create index UQE_quota_org_id_user_id_target - v1"
+logger=migrator t=2024-08-14T10:50:22.825566755Z level=info msg="Migration successfully executed" id="create index UQE_quota_org_id_user_id_target - v1" duration=380.6µs
+logger=migrator t=2024-08-14T10:50:22.830096025Z level=info msg="Executing migration" id="Update quota table charset"
+logger=migrator t=2024-08-14T10:50:22.830106692Z level=info msg="Migration successfully executed" id="Update quota table charset" duration=11.192µs
+logger=migrator t=2024-08-14T10:50:22.834374281Z level=info msg="Executing migration" id="create plugin_setting table"
+logger=migrator t=2024-08-14T10:50:22.834734926Z level=info msg="Migration successfully executed" id="create plugin_setting table" duration=360.435µs
+logger=migrator t=2024-08-14T10:50:22.839407064Z level=info msg="Executing migration" id="create index UQE_plugin_setting_org_id_plugin_id - v1"
+logger=migrator t=2024-08-14T10:50:22.839771756Z level=info msg="Migration successfully executed" id="create index UQE_plugin_setting_org_id_plugin_id - v1" duration=364.534µs
+logger=migrator t=2024-08-14T10:50:22.843586121Z level=info msg="Executing migration" id="Add column plugin_version to plugin_settings"
+logger=migrator t=2024-08-14T10:50:22.844629094Z level=info msg="Migration successfully executed" id="Add column plugin_version to plugin_settings" duration=1.042757ms
+logger=migrator t=2024-08-14T10:50:22.848374564Z level=info msg="Executing migration" id="Update plugin_setting table charset"
+logger=migrator t=2024-08-14T10:50:22.848385189Z level=info msg="Migration successfully executed" id="Update plugin_setting table charset" duration=11.314µs
+logger=migrator t=2024-08-14T10:50:22.852465121Z level=info msg="Executing migration" id="create session table"
+logger=migrator t=2024-08-14T10:50:22.852865651Z level=info msg="Migration successfully executed" id="create session table" duration=400.435µs
+logger=migrator t=2024-08-14T10:50:22.856581568Z level=info msg="Executing migration" id="Drop old table playlist table"
+logger=migrator t=2024-08-14T10:50:22.856619282Z level=info msg="Migration successfully executed" id="Drop old table playlist table" duration=37.868µs
+logger=migrator t=2024-08-14T10:50:22.860784906Z level=info msg="Executing migration" id="Drop old table playlist_item table"
+logger=migrator t=2024-08-14T10:50:22.860821578Z level=info msg="Migration successfully executed" id="Drop old table playlist_item table" duration=37.389µs
+logger=migrator t=2024-08-14T10:50:22.864618073Z level=info msg="Executing migration" id="create playlist table v2"
+logger=migrator t=2024-08-14T10:50:22.864950043Z level=info msg="Migration successfully executed" id="create playlist table v2" duration=331.531µs
+logger=migrator t=2024-08-14T10:50:22.868696278Z level=info msg="Executing migration" id="create playlist item table v2"
+logger=migrator t=2024-08-14T10:50:22.869034627Z level=info msg="Migration successfully executed" id="create playlist item table v2" duration=338.147µs
+logger=migrator t=2024-08-14T10:50:22.873756249Z level=info msg="Executing migration" id="Update playlist table charset"
+logger=migrator t=2024-08-14T10:50:22.873768376Z level=info msg="Migration successfully executed" id="Update playlist table charset" duration=12.784µs
+logger=migrator t=2024-08-14T10:50:22.878048389Z level=info msg="Executing migration" id="Update playlist_item table charset"
+logger=migrator t=2024-08-14T10:50:22.878058981Z level=info msg="Migration successfully executed" id="Update playlist_item table charset" duration=11.604µs
+logger=migrator t=2024-08-14T10:50:22.882274205Z level=info msg="Executing migration" id="Add playlist column created_at"
+logger=migrator t=2024-08-14T10:50:22.883389494Z level=info msg="Migration successfully executed" id="Add playlist column created_at" duration=1.113747ms
+logger=migrator t=2024-08-14T10:50:22.887665309Z level=info msg="Executing migration" id="Add playlist column updated_at"
+logger=migrator t=2024-08-14T10:50:22.888782125Z level=info msg="Migration successfully executed" id="Add playlist column updated_at" duration=1.116871ms
+logger=migrator t=2024-08-14T10:50:22.892879509Z level=info msg="Executing migration" id="drop preferences table v2"
+logger=migrator t=2024-08-14T10:50:22.892917796Z level=info msg="Migration successfully executed" id="drop preferences table v2" duration=38.392µs
+logger=migrator t=2024-08-14T10:50:22.897041938Z level=info msg="Executing migration" id="drop preferences table v3"
+logger=migrator t=2024-08-14T10:50:22.897077596Z level=info msg="Migration successfully executed" id="drop preferences table v3" duration=35.949µs
+logger=migrator t=2024-08-14T10:50:22.900854224Z level=info msg="Executing migration" id="create preferences table v3"
+logger=migrator t=2024-08-14T10:50:22.901221455Z level=info msg="Migration successfully executed" id="create preferences table v3" duration=366.863µs
+logger=migrator t=2024-08-14T10:50:22.905030912Z level=info msg="Executing migration" id="Update preferences table charset"
+logger=migrator t=2024-08-14T10:50:22.905041225Z level=info msg="Migration successfully executed" id="Update preferences table charset" duration=10.877µs
+logger=migrator t=2024-08-14T10:50:22.908796262Z level=info msg="Executing migration" id="Add column team_id in preferences"
+logger=migrator t=2024-08-14T10:50:22.909908828Z level=info msg="Migration successfully executed" id="Add column team_id in preferences" duration=1.108718ms
+logger=migrator t=2024-08-14T10:50:22.914095075Z level=info msg="Executing migration" id="Update team_id column values in preferences"
+logger=migrator t=2024-08-14T10:50:22.914160564Z level=info msg="Migration successfully executed" id="Update team_id column values in preferences" duration=65.88µs
+logger=migrator t=2024-08-14T10:50:22.918027036Z level=info msg="Executing migration" id="Add column week_start in preferences"
+logger=migrator t=2024-08-14T10:50:22.91914491Z level=info msg="Migration successfully executed" id="Add column week_start in preferences" duration=1.116998ms
+logger=migrator t=2024-08-14T10:50:22.922900147Z level=info msg="Executing migration" id="Add column preferences.json_data"
+logger=migrator t=2024-08-14T10:50:22.924112896Z level=info msg="Migration successfully executed" id="Add column preferences.json_data" duration=1.213443ms
+logger=migrator t=2024-08-14T10:50:22.927875658Z level=info msg="Executing migration" id="alter preferences.json_data to mediumtext v1"
+logger=migrator t=2024-08-14T10:50:22.927906351Z level=info msg="Migration successfully executed" id="alter preferences.json_data to mediumtext v1" duration=30.496µs
+logger=migrator t=2024-08-14T10:50:22.931712601Z level=info msg="Executing migration" id="Add preferences index org_id"
+logger=migrator t=2024-08-14T10:50:22.932124081Z level=info msg="Migration successfully executed" id="Add preferences index org_id" duration=410.493µs
+logger=migrator t=2024-08-14T10:50:22.936667601Z level=info msg="Executing migration" id="Add preferences index user_id"
+logger=migrator t=2024-08-14T10:50:22.937051827Z level=info msg="Migration successfully executed" id="Add preferences index user_id" duration=384.055µs
+logger=migrator t=2024-08-14T10:50:22.942501868Z level=info msg="Executing migration" id="create alert table v1"
+logger=migrator t=2024-08-14T10:50:22.943012372Z level=info msg="Migration successfully executed" id="create alert table v1" duration=510.154µs
+logger=migrator t=2024-08-14T10:50:22.946642183Z level=info msg="Executing migration" id="add index alert org_id & id "
+logger=migrator t=2024-08-14T10:50:22.947052612Z level=info msg="Migration successfully executed" id="add index alert org_id & id " duration=410.095µs
+logger=migrator t=2024-08-14T10:50:22.952172536Z level=info msg="Executing migration" id="add index alert state"
+logger=migrator t=2024-08-14T10:50:22.952515196Z level=info msg="Migration successfully executed" id="add index alert state" duration=343.183µs
+logger=migrator t=2024-08-14T10:50:22.956406372Z level=info msg="Executing migration" id="add index alert dashboard_id"
+logger=migrator t=2024-08-14T10:50:22.956759273Z level=info msg="Migration successfully executed" id="add index alert dashboard_id" duration=353.939µs
+logger=migrator t=2024-08-14T10:50:22.960540312Z level=info msg="Executing migration" id="Create alert_rule_tag table v1"
+logger=migrator t=2024-08-14T10:50:22.960838227Z level=info msg="Migration successfully executed" id="Create alert_rule_tag table v1" duration=297.685µs
+logger=migrator t=2024-08-14T10:50:22.966209292Z level=info msg="Executing migration" id="Add unique index alert_rule_tag.alert_id_tag_id"
+logger=migrator t=2024-08-14T10:50:22.966588262Z level=info msg="Migration successfully executed" id="Add unique index alert_rule_tag.alert_id_tag_id" duration=378.916µs
+logger=migrator t=2024-08-14T10:50:22.97057624Z level=info msg="Executing migration" id="drop index UQE_alert_rule_tag_alert_id_tag_id - v1"
+logger=migrator t=2024-08-14T10:50:22.9709205Z level=info msg="Migration successfully executed" id="drop index UQE_alert_rule_tag_alert_id_tag_id - v1" duration=344.031µs
+logger=migrator t=2024-08-14T10:50:22.974875824Z level=info msg="Executing migration" id="Rename table alert_rule_tag to alert_rule_tag_v1 - v1"
+logger=migrator t=2024-08-14T10:50:22.978049762Z level=info msg="Migration successfully executed" id="Rename table alert_rule_tag to alert_rule_tag_v1 - v1" duration=3.173677ms
+logger=migrator t=2024-08-14T10:50:22.982597934Z level=info msg="Executing migration" id="Create alert_rule_tag table v2"
+logger=migrator t=2024-08-14T10:50:22.982917096Z level=info msg="Migration successfully executed" id="Create alert_rule_tag table v2" duration=319.22µs
+logger=migrator t=2024-08-14T10:50:22.987816193Z level=info msg="Executing migration" id="create index UQE_alert_rule_tag_alert_id_tag_id - Add unique index alert_rule_tag.alert_id_tag_id V2"
+logger=migrator t=2024-08-14T10:50:22.988197695Z level=info msg="Migration successfully executed" id="create index UQE_alert_rule_tag_alert_id_tag_id - Add unique index alert_rule_tag.alert_id_tag_id V2" duration=381.526µs
+logger=migrator t=2024-08-14T10:50:22.993772259Z level=info msg="Executing migration" id="copy alert_rule_tag v1 to v2"
+logger=migrator t=2024-08-14T10:50:22.993901282Z level=info msg="Migration successfully executed" id="copy alert_rule_tag v1 to v2" duration=129.161µs
+logger=migrator t=2024-08-14T10:50:22.998090689Z level=info msg="Executing migration" id="drop table alert_rule_tag_v1"
+logger=migrator t=2024-08-14T10:50:22.998328175Z level=info msg="Migration successfully executed" id="drop table alert_rule_tag_v1" duration=238.343µs
+logger=migrator t=2024-08-14T10:50:23.002761981Z level=info msg="Executing migration" id="create alert_notification table v1"
+logger=migrator t=2024-08-14T10:50:23.003103167Z level=info msg="Migration successfully executed" id="create alert_notification table v1" duration=341.193µs
+logger=migrator t=2024-08-14T10:50:23.006897544Z level=info msg="Executing migration" id="Add column is_default"
+logger=migrator t=2024-08-14T10:50:23.008159813Z level=info msg="Migration successfully executed" id="Add column is_default" duration=1.262234ms
+logger=migrator t=2024-08-14T10:50:23.011855249Z level=info msg="Executing migration" id="Add column frequency"
+logger=migrator t=2024-08-14T10:50:23.013138249Z level=info msg="Migration successfully executed" id="Add column frequency" duration=1.282572ms
+logger=migrator t=2024-08-14T10:50:23.016902467Z level=info msg="Executing migration" id="Add column send_reminder"
+logger=migrator t=2024-08-14T10:50:23.018184057Z level=info msg="Migration successfully executed" id="Add column send_reminder" duration=1.281277ms
+logger=migrator t=2024-08-14T10:50:23.022347803Z level=info msg="Executing migration" id="Add column disable_resolve_message"
+logger=migrator t=2024-08-14T10:50:23.023631351Z level=info msg="Migration successfully executed" id="Add column disable_resolve_message" duration=1.283273ms
+logger=migrator t=2024-08-14T10:50:23.0279048Z level=info msg="Executing migration" id="add index alert_notification org_id & name"
+logger=migrator t=2024-08-14T10:50:23.028278378Z level=info msg="Migration successfully executed" id="add index alert_notification org_id & name" duration=373.555µs
+logger=migrator t=2024-08-14T10:50:23.033202017Z level=info msg="Executing migration" id="Update alert table charset"
+logger=migrator t=2024-08-14T10:50:23.033213396Z level=info msg="Migration successfully executed" id="Update alert table charset" duration=12.039µs
+logger=migrator t=2024-08-14T10:50:23.037511686Z level=info msg="Executing migration" id="Update alert_notification table charset"
+logger=migrator t=2024-08-14T10:50:23.037523909Z level=info msg="Migration successfully executed" id="Update alert_notification table charset" duration=12.937µs
+logger=migrator t=2024-08-14T10:50:23.041749837Z level=info msg="Executing migration" id="create notification_journal table v1"
+logger=migrator t=2024-08-14T10:50:23.042092956Z level=info msg="Migration successfully executed" id="create notification_journal table v1" duration=342.857µs
+logger=migrator t=2024-08-14T10:50:23.046855755Z level=info msg="Executing migration" id="add index notification_journal org_id & alert_id & notifier_id"
+logger=migrator t=2024-08-14T10:50:23.047246198Z level=info msg="Migration successfully executed" id="add index notification_journal org_id & alert_id & notifier_id" duration=391.246µs
+logger=migrator t=2024-08-14T10:50:23.052987281Z level=info msg="Executing migration" id="drop alert_notification_journal"
+logger=migrator t=2024-08-14T10:50:23.053306747Z level=info msg="Migration successfully executed" id="drop alert_notification_journal" duration=319.473µs
+logger=migrator t=2024-08-14T10:50:23.057180345Z level=info msg="Executing migration" id="create alert_notification_state table v1"
+logger=migrator t=2024-08-14T10:50:23.057542962Z level=info msg="Migration successfully executed" id="create alert_notification_state table v1" duration=362.4µs
+logger=migrator t=2024-08-14T10:50:23.06137038Z level=info msg="Executing migration" id="add index alert_notification_state org_id & alert_id & notifier_id"
+logger=migrator t=2024-08-14T10:50:23.061748276Z level=info msg="Migration successfully executed" id="add index alert_notification_state org_id & alert_id & notifier_id" duration=377.477µs
+logger=migrator t=2024-08-14T10:50:23.065658959Z level=info msg="Executing migration" id="Add for to alert table"
+logger=migrator t=2024-08-14T10:50:23.066967123Z level=info msg="Migration successfully executed" id="Add for to alert table" duration=1.307729ms
+logger=migrator t=2024-08-14T10:50:23.070874646Z level=info msg="Executing migration" id="Add column uid in alert_notification"
+logger=migrator t=2024-08-14T10:50:23.072174664Z level=info msg="Migration successfully executed" id="Add column uid in alert_notification" duration=1.299609ms
+logger=migrator t=2024-08-14T10:50:23.075909252Z level=info msg="Executing migration" id="Update uid column values in alert_notification"
+logger=migrator t=2024-08-14T10:50:23.075991392Z level=info msg="Migration successfully executed" id="Update uid column values in alert_notification" duration=83.236µs
+logger=migrator t=2024-08-14T10:50:23.079883955Z level=info msg="Executing migration" id="Add unique index alert_notification_org_id_uid"
+logger=migrator t=2024-08-14T10:50:23.080251315Z level=info msg="Migration successfully executed" id="Add unique index alert_notification_org_id_uid" duration=392.193µs
+logger=migrator t=2024-08-14T10:50:23.08405241Z level=info msg="Executing migration" id="Remove unique index org_id_name"
+logger=migrator t=2024-08-14T10:50:23.084380765Z level=info msg="Migration successfully executed" id="Remove unique index org_id_name" duration=328.278µs
+logger=migrator t=2024-08-14T10:50:23.088773176Z level=info msg="Executing migration" id="Add column secure_settings in alert_notification"
+logger=migrator t=2024-08-14T10:50:23.090109852Z level=info msg="Migration successfully executed" id="Add column secure_settings in alert_notification" duration=1.336451ms
+logger=migrator t=2024-08-14T10:50:23.094767199Z level=info msg="Executing migration" id="alter alert.settings to mediumtext"
+logger=migrator t=2024-08-14T10:50:23.094797409Z level=info msg="Migration successfully executed" id="alter alert.settings to mediumtext" duration=30.597µs
+logger=migrator t=2024-08-14T10:50:23.099807029Z level=info msg="Executing migration" id="Add non-unique index alert_notification_state_alert_id"
+logger=migrator t=2024-08-14T10:50:23.10016624Z level=info msg="Migration successfully executed" id="Add non-unique index alert_notification_state_alert_id" duration=359.058µs
+logger=migrator t=2024-08-14T10:50:23.105285026Z level=info msg="Executing migration" id="Add non-unique index alert_rule_tag_alert_id"
+logger=migrator t=2024-08-14T10:50:23.105688528Z level=info msg="Migration successfully executed" id="Add non-unique index alert_rule_tag_alert_id" duration=403.136µs
+logger=migrator t=2024-08-14T10:50:23.110795343Z level=info msg="Executing migration" id="Drop old annotation table v4"
+logger=migrator t=2024-08-14T10:50:23.110833254Z level=info msg="Migration successfully executed" id="Drop old annotation table v4" duration=38.276µs
+logger=migrator t=2024-08-14T10:50:23.115504402Z level=info msg="Executing migration" id="create annotation table v5"
+logger=migrator t=2024-08-14T10:50:23.115892746Z level=info msg="Migration successfully executed" id="create annotation table v5" duration=387.208µs
+logger=migrator t=2024-08-14T10:50:23.119682011Z level=info msg="Executing migration" id="add index annotation 0 v3"
+logger=migrator t=2024-08-14T10:50:23.120049204Z level=info msg="Migration successfully executed" id="add index annotation 0 v3" duration=367.231µs
+logger=migrator t=2024-08-14T10:50:23.123889518Z level=info msg="Executing migration" id="add index annotation 1 v3"
+logger=migrator t=2024-08-14T10:50:23.124239218Z level=info msg="Migration successfully executed" id="add index annotation 1 v3" duration=349.433µs
+logger=migrator t=2024-08-14T10:50:23.1291239Z level=info msg="Executing migration" id="add index annotation 2 v3"
+logger=migrator t=2024-08-14T10:50:23.12948167Z level=info msg="Migration successfully executed" id="add index annotation 2 v3" duration=357.364µs
+logger=migrator t=2024-08-14T10:50:23.133185572Z level=info msg="Executing migration" id="add index annotation 3 v3"
+logger=migrator t=2024-08-14T10:50:23.133581633Z level=info msg="Migration successfully executed" id="add index annotation 3 v3" duration=396.527µs
+logger=migrator t=2024-08-14T10:50:23.13750576Z level=info msg="Executing migration" id="add index annotation 4 v3"
+logger=migrator t=2024-08-14T10:50:23.137898487Z level=info msg="Migration successfully executed" id="add index annotation 4 v3" duration=393.232µs
+logger=migrator t=2024-08-14T10:50:23.143126738Z level=info msg="Executing migration" id="Update annotation table charset"
+logger=migrator t=2024-08-14T10:50:23.143136338Z level=info msg="Migration successfully executed" id="Update annotation table charset" duration=10.068µs
+logger=migrator t=2024-08-14T10:50:23.147684519Z level=info msg="Executing migration" id="Add column region_id to annotation table"
+logger=migrator t=2024-08-14T10:50:23.149062195Z level=info msg="Migration successfully executed" id="Add column region_id to annotation table" duration=1.377189ms
+logger=migrator t=2024-08-14T10:50:23.152853787Z level=info msg="Executing migration" id="Drop category_id index"
+logger=migrator t=2024-08-14T10:50:23.153197772Z level=info msg="Migration successfully executed" id="Drop category_id index" duration=342.785µs
+logger=migrator t=2024-08-14T10:50:23.156984357Z level=info msg="Executing migration" id="Add column tags to annotation table"
+logger=migrator t=2024-08-14T10:50:23.15836104Z level=info msg="Migration successfully executed" id="Add column tags to annotation table" duration=1.376418ms
+logger=migrator t=2024-08-14T10:50:23.162074259Z level=info msg="Executing migration" id="Create annotation_tag table v2"
+logger=migrator t=2024-08-14T10:50:23.162380658Z level=info msg="Migration successfully executed" id="Create annotation_tag table v2" duration=306.336µs
+logger=migrator t=2024-08-14T10:50:23.166491706Z level=info msg="Executing migration" id="Add unique index annotation_tag.annotation_id_tag_id"
+logger=migrator t=2024-08-14T10:50:23.1668664Z level=info msg="Migration successfully executed" id="Add unique index annotation_tag.annotation_id_tag_id" duration=374.592µs
+logger=migrator t=2024-08-14T10:50:23.171575433Z level=info msg="Executing migration" id="drop index UQE_annotation_tag_annotation_id_tag_id - v2"
+logger=migrator t=2024-08-14T10:50:23.171916554Z level=info msg="Migration successfully executed" id="drop index UQE_annotation_tag_annotation_id_tag_id - v2" duration=341.115µs
+logger=migrator t=2024-08-14T10:50:23.177408413Z level=info msg="Executing migration" id="Rename table annotation_tag to annotation_tag_v2 - v2"
+logger=migrator t=2024-08-14T10:50:23.181103907Z level=info msg="Migration successfully executed" id="Rename table annotation_tag to annotation_tag_v2 - v2" duration=3.693872ms
+logger=migrator t=2024-08-14T10:50:23.185013334Z level=info msg="Executing migration" id="Create annotation_tag table v3"
+logger=migrator t=2024-08-14T10:50:23.185334591Z level=info msg="Migration successfully executed" id="Create annotation_tag table v3" duration=320.716µs
+logger=migrator t=2024-08-14T10:50:23.188958406Z level=info msg="Executing migration" id="create index UQE_annotation_tag_annotation_id_tag_id - Add unique index annotation_tag.annotation_id_tag_id V3"
+logger=migrator t=2024-08-14T10:50:23.189328841Z level=info msg="Migration successfully executed" id="create index UQE_annotation_tag_annotation_id_tag_id - Add unique index annotation_tag.annotation_id_tag_id V3" duration=370.236µs
+logger=migrator t=2024-08-14T10:50:23.193151749Z level=info msg="Executing migration" id="copy annotation_tag v2 to v3"
+logger=migrator t=2024-08-14T10:50:23.193279463Z level=info msg="Migration successfully executed" id="copy annotation_tag v2 to v3" duration=128.016µs
+logger=migrator t=2024-08-14T10:50:23.197085481Z level=info msg="Executing migration" id="drop table annotation_tag_v2"
+logger=migrator t=2024-08-14T10:50:23.197322303Z level=info msg="Migration successfully executed" id="drop table annotation_tag_v2" duration=236.5µs
+logger=migrator t=2024-08-14T10:50:23.201335583Z level=info msg="Executing migration" id="Update alert annotations and set TEXT to empty"
+logger=migrator t=2024-08-14T10:50:23.201412731Z level=info msg="Migration successfully executed" id="Update alert annotations and set TEXT to empty" duration=77.442µs
+logger=migrator t=2024-08-14T10:50:23.205091153Z level=info msg="Executing migration" id="Add created time to annotation table"
+logger=migrator t=2024-08-14T10:50:23.206511638Z level=info msg="Migration successfully executed" id="Add created time to annotation table" duration=1.420184ms
+logger=migrator t=2024-08-14T10:50:23.210352705Z level=info msg="Executing migration" id="Add updated time to annotation table"
+logger=migrator t=2024-08-14T10:50:23.211749515Z level=info msg="Migration successfully executed" id="Add updated time to annotation table" duration=1.396586ms
+logger=migrator t=2024-08-14T10:50:23.215497236Z level=info msg="Executing migration" id="Add index for created in annotation table"
+logger=migrator t=2024-08-14T10:50:23.215862071Z level=info msg="Migration successfully executed" id="Add index for created in annotation table" duration=364.548µs
+logger=migrator t=2024-08-14T10:50:23.219675399Z level=info msg="Executing migration" id="Add index for updated in annotation table"
+logger=migrator t=2024-08-14T10:50:23.220033392Z level=info msg="Migration successfully executed" id="Add index for updated in annotation table" duration=357.718µs
+logger=migrator t=2024-08-14T10:50:23.224502664Z level=info msg="Executing migration" id="Convert existing annotations from seconds to milliseconds"
+logger=migrator t=2024-08-14T10:50:23.224600031Z level=info msg="Migration successfully executed" id="Convert existing annotations from seconds to milliseconds" duration=97.573µs
+logger=migrator t=2024-08-14T10:50:23.228746602Z level=info msg="Executing migration" id="Add epoch_end column"
+logger=migrator t=2024-08-14T10:50:23.230305798Z level=info msg="Migration successfully executed" id="Add epoch_end column" duration=1.558637ms
+logger=migrator t=2024-08-14T10:50:23.234500644Z level=info msg="Executing migration" id="Add index for epoch_end"
+logger=migrator t=2024-08-14T10:50:23.23491118Z level=info msg="Migration successfully executed" id="Add index for epoch_end" duration=410.47µs
+logger=migrator t=2024-08-14T10:50:23.240085523Z level=info msg="Executing migration" id="Make epoch_end the same as epoch"
+logger=migrator t=2024-08-14T10:50:23.240159714Z level=info msg="Migration successfully executed" id="Make epoch_end the same as epoch" duration=75.313µs
+logger=migrator t=2024-08-14T10:50:23.24425784Z level=info msg="Executing migration" id="Move region to single row"
+logger=migrator t=2024-08-14T10:50:23.244408103Z level=info msg="Migration successfully executed" id="Move region to single row" duration=150.543µs
+logger=migrator t=2024-08-14T10:50:23.248696533Z level=info msg="Executing migration" id="Remove index org_id_epoch from annotation table"
+logger=migrator t=2024-08-14T10:50:23.249056372Z level=info msg="Migration successfully executed" id="Remove index org_id_epoch from annotation table" duration=359.947µs
+logger=migrator t=2024-08-14T10:50:23.253364444Z level=info msg="Executing migration" id="Remove index org_id_dashboard_id_panel_id_epoch from annotation table"
+logger=migrator t=2024-08-14T10:50:23.25371134Z level=info msg="Migration successfully executed" id="Remove index org_id_dashboard_id_panel_id_epoch from annotation table" duration=346.759µs
+logger=migrator t=2024-08-14T10:50:23.258160216Z level=info msg="Executing migration" id="Add index for org_id_dashboard_id_epoch_end_epoch on annotation table"
+logger=migrator t=2024-08-14T10:50:23.258551667Z level=info msg="Migration successfully executed" id="Add index for org_id_dashboard_id_epoch_end_epoch on annotation table" duration=391.148µs
+logger=migrator t=2024-08-14T10:50:23.264813476Z level=info msg="Executing migration" id="Add index for org_id_epoch_end_epoch on annotation table"
+logger=migrator t=2024-08-14T10:50:23.265194663Z level=info msg="Migration successfully executed" id="Add index for org_id_epoch_end_epoch on annotation table" duration=381.006µs
+logger=migrator t=2024-08-14T10:50:23.268989262Z level=info msg="Executing migration" id="Remove index org_id_epoch_epoch_end from annotation table"
+logger=migrator t=2024-08-14T10:50:23.269338391Z level=info msg="Migration successfully executed" id="Remove index org_id_epoch_epoch_end from annotation table" duration=349.28µs
+logger=migrator t=2024-08-14T10:50:23.273253403Z level=info msg="Executing migration" id="Add index for alert_id on annotation table"
+logger=migrator t=2024-08-14T10:50:23.273616057Z level=info msg="Migration successfully executed" id="Add index for alert_id on annotation table" duration=362.474µs
+logger=migrator t=2024-08-14T10:50:23.278486023Z level=info msg="Executing migration" id="Increase tags column to length 4096"
+logger=migrator t=2024-08-14T10:50:23.278514898Z level=info msg="Migration successfully executed" id="Increase tags column to length 4096" duration=29.3µs
+logger=migrator t=2024-08-14T10:50:23.28311288Z level=info msg="Executing migration" id="create test_data table"
+logger=migrator t=2024-08-14T10:50:23.283475533Z level=info msg="Migration successfully executed" id="create test_data table" duration=361.427µs
+logger=migrator t=2024-08-14T10:50:23.289084061Z level=info msg="Executing migration" id="create dashboard_version table v1"
+logger=migrator t=2024-08-14T10:50:23.28945217Z level=info msg="Migration successfully executed" id="create dashboard_version table v1" duration=367.971µs
+logger=migrator t=2024-08-14T10:50:23.293265587Z level=info msg="Executing migration" id="add index dashboard_version.dashboard_id"
+logger=migrator t=2024-08-14T10:50:23.293648224Z level=info msg="Migration successfully executed" id="add index dashboard_version.dashboard_id" duration=382.652µs
+logger=migrator t=2024-08-14T10:50:23.298158045Z level=info msg="Executing migration" id="add unique index dashboard_version.dashboard_id and dashboard_version.version"
+logger=migrator t=2024-08-14T10:50:23.298537835Z level=info msg="Migration successfully executed" id="add unique index dashboard_version.dashboard_id and dashboard_version.version" duration=379.591µs
+logger=migrator t=2024-08-14T10:50:23.3047028Z level=info msg="Executing migration" id="Set dashboard version to 1 where 0"
+logger=migrator t=2024-08-14T10:50:23.304788009Z level=info msg="Migration successfully executed" id="Set dashboard version to 1 where 0" duration=85.65µs
+logger=migrator t=2024-08-14T10:50:23.308601705Z level=info msg="Executing migration" id="save existing dashboard data in dashboard_version table v1"
+logger=migrator t=2024-08-14T10:50:23.308765758Z level=info msg="Migration successfully executed" id="save existing dashboard data in dashboard_version table v1" duration=164.129µs
+logger=migrator t=2024-08-14T10:50:23.312483085Z level=info msg="Executing migration" id="alter dashboard_version.data to mediumtext v1"
+logger=migrator t=2024-08-14T10:50:23.312512032Z level=info msg="Migration successfully executed" id="alter dashboard_version.data to mediumtext v1" duration=29.292µs
+logger=migrator t=2024-08-14T10:50:23.316631008Z level=info msg="Executing migration" id="create team table"
+logger=migrator t=2024-08-14T10:50:23.316969891Z level=info msg="Migration successfully executed" id="create team table" duration=338.55µs
+logger=migrator t=2024-08-14T10:50:23.320844133Z level=info msg="Executing migration" id="add index team.org_id"
+logger=migrator t=2024-08-14T10:50:23.321285741Z level=info msg="Migration successfully executed" id="add index team.org_id" duration=441.338µs
+logger=migrator t=2024-08-14T10:50:23.3251139Z level=info msg="Executing migration" id="add unique index team_org_id_name"
+logger=migrator t=2024-08-14T10:50:23.325518167Z level=info msg="Migration successfully executed" id="add unique index team_org_id_name" duration=404.236µs
+logger=migrator t=2024-08-14T10:50:23.33089026Z level=info msg="Executing migration" id="Add column uid in team"
+logger=migrator t=2024-08-14T10:50:23.332414264Z level=info msg="Migration successfully executed" id="Add column uid in team" duration=1.522708ms
+logger=migrator t=2024-08-14T10:50:23.336503346Z level=info msg="Executing migration" id="Update uid column values in team"
+logger=migrator t=2024-08-14T10:50:23.336586405Z level=info msg="Migration successfully executed" id="Update uid column values in team" duration=83.031µs
+logger=migrator t=2024-08-14T10:50:23.34088609Z level=info msg="Executing migration" id="Add unique index team_org_id_uid"
+logger=migrator t=2024-08-14T10:50:23.341277488Z level=info msg="Migration successfully executed" id="Add unique index team_org_id_uid" duration=391.203µs
+logger=migrator t=2024-08-14T10:50:23.346425091Z level=info msg="Executing migration" id="create team member table"
+logger=migrator t=2024-08-14T10:50:23.346763403Z level=info msg="Migration successfully executed" id="create team member table" duration=338.269µs
+logger=migrator t=2024-08-14T10:50:23.350558906Z level=info msg="Executing migration" id="add index team_member.org_id"
+logger=migrator t=2024-08-14T10:50:23.350923086Z level=info msg="Migration successfully executed" id="add index team_member.org_id" duration=364.093µs
+logger=migrator t=2024-08-14T10:50:23.355579889Z level=info msg="Executing migration" id="add unique index team_member_org_id_team_id_user_id"
+logger=migrator t=2024-08-14T10:50:23.355964688Z level=info msg="Migration successfully executed" id="add unique index team_member_org_id_team_id_user_id" duration=384.594µs
+logger=migrator t=2024-08-14T10:50:23.361471601Z level=info msg="Executing migration" id="add index team_member.team_id"
+logger=migrator t=2024-08-14T10:50:23.361836475Z level=info msg="Migration successfully executed" id="add index team_member.team_id" duration=365.574µs
+logger=migrator t=2024-08-14T10:50:23.366040141Z level=info msg="Executing migration" id="Add column email to team table"
+logger=migrator t=2024-08-14T10:50:23.367621641Z level=info msg="Migration successfully executed" id="Add column email to team table" duration=1.581036ms
+logger=migrator t=2024-08-14T10:50:23.371879203Z level=info msg="Executing migration" id="Add column external to team_member table"
+logger=migrator t=2024-08-14T10:50:23.37347617Z level=info msg="Migration successfully executed" id="Add column external to team_member table" duration=1.596398ms
+logger=migrator t=2024-08-14T10:50:23.377775406Z level=info msg="Executing migration" id="Add column permission to team_member table"
+logger=migrator t=2024-08-14T10:50:23.379370377Z level=info msg="Migration successfully executed" id="Add column permission to team_member table" duration=1.593346ms
+logger=migrator t=2024-08-14T10:50:23.383571118Z level=info msg="Executing migration" id="create dashboard acl table"
+logger=migrator t=2024-08-14T10:50:23.383984615Z level=info msg="Migration successfully executed" id="create dashboard acl table" duration=413.312µs
+logger=migrator t=2024-08-14T10:50:23.3888211Z level=info msg="Executing migration" id="add index dashboard_acl_dashboard_id"
+logger=migrator t=2024-08-14T10:50:23.389213935Z level=info msg="Migration successfully executed" id="add index dashboard_acl_dashboard_id" duration=392.656µs
+logger=migrator t=2024-08-14T10:50:23.393118103Z level=info msg="Executing migration" id="add unique index dashboard_acl_dashboard_id_user_id"
+logger=migrator t=2024-08-14T10:50:23.393551789Z level=info msg="Migration successfully executed" id="add unique index dashboard_acl_dashboard_id_user_id" duration=433.56µs
+logger=migrator t=2024-08-14T10:50:23.398772245Z level=info msg="Executing migration" id="add unique index dashboard_acl_dashboard_id_team_id"
+logger=migrator t=2024-08-14T10:50:23.399174688Z level=info msg="Migration successfully executed" id="add unique index dashboard_acl_dashboard_id_team_id" duration=402.408µs
+logger=migrator t=2024-08-14T10:50:23.405756144Z level=info msg="Executing migration" id="add index dashboard_acl_user_id"
+logger=migrator t=2024-08-14T10:50:23.406161045Z level=info msg="Migration successfully executed" id="add index dashboard_acl_user_id" duration=404.486µs
+logger=migrator t=2024-08-14T10:50:23.412110495Z level=info msg="Executing migration" id="add index dashboard_acl_team_id"
+logger=migrator t=2024-08-14T10:50:23.412488717Z level=info msg="Migration successfully executed" id="add index dashboard_acl_team_id" duration=378.092µs
+logger=migrator t=2024-08-14T10:50:23.417924251Z level=info msg="Executing migration" id="add index dashboard_acl_org_id_role"
+logger=migrator t=2024-08-14T10:50:23.4183184Z level=info msg="Migration successfully executed" id="add index dashboard_acl_org_id_role" duration=393.937µs
+logger=migrator t=2024-08-14T10:50:23.422462122Z level=info msg="Executing migration" id="add index dashboard_permission"
+logger=migrator t=2024-08-14T10:50:23.422849592Z level=info msg="Migration successfully executed" id="add index dashboard_permission" duration=387.292µs
+logger=migrator t=2024-08-14T10:50:23.427527717Z level=info msg="Executing migration" id="save default acl rules in dashboard_acl table"
+logger=migrator t=2024-08-14T10:50:23.427847063Z level=info msg="Migration successfully executed" id="save default acl rules in dashboard_acl table" duration=319.2µs
+logger=migrator t=2024-08-14T10:50:23.431648541Z level=info msg="Executing migration" id="delete acl rules for deleted dashboards and folders"
+logger=migrator t=2024-08-14T10:50:23.431754649Z level=info msg="Migration successfully executed" id="delete acl rules for deleted dashboards and folders" duration=106.356µs
+logger=migrator t=2024-08-14T10:50:23.435404152Z level=info msg="Executing migration" id="create tag table"
+logger=migrator t=2024-08-14T10:50:23.435723754Z level=info msg="Migration successfully executed" id="create tag table" duration=319.385µs
+logger=migrator t=2024-08-14T10:50:23.440381712Z level=info msg="Executing migration" id="add index tag.key_value"
+logger=migrator t=2024-08-14T10:50:23.440773156Z level=info msg="Migration successfully executed" id="add index tag.key_value" duration=391.263µs
+logger=migrator t=2024-08-14T10:50:23.446332952Z level=info msg="Executing migration" id="create login attempt table"
+logger=migrator t=2024-08-14T10:50:23.446653621Z level=info msg="Migration successfully executed" id="create login attempt table" duration=320.473µs
+logger=migrator t=2024-08-14T10:50:23.450549825Z level=info msg="Executing migration" id="add index login_attempt.username"
+logger=migrator t=2024-08-14T10:50:23.450933186Z level=info msg="Migration successfully executed" id="add index login_attempt.username" duration=383.145µs
+logger=migrator t=2024-08-14T10:50:23.455589679Z level=info msg="Executing migration" id="drop index IDX_login_attempt_username - v1"
+logger=migrator t=2024-08-14T10:50:23.455955964Z level=info msg="Migration successfully executed" id="drop index IDX_login_attempt_username - v1" duration=366.271µs
+logger=migrator t=2024-08-14T10:50:23.46129746Z level=info msg="Executing migration" id="Rename table login_attempt to login_attempt_tmp_qwerty - v1"
+logger=migrator t=2024-08-14T10:50:23.465807814Z level=info msg="Migration successfully executed" id="Rename table login_attempt to login_attempt_tmp_qwerty - v1" duration=4.510458ms
+logger=migrator t=2024-08-14T10:50:23.469950328Z level=info msg="Executing migration" id="create login_attempt v2"
+logger=migrator t=2024-08-14T10:50:23.470280189Z level=info msg="Migration successfully executed" id="create login_attempt v2" duration=329.664µs
+logger=migrator t=2024-08-14T10:50:23.474095611Z level=info msg="Executing migration" id="create index IDX_login_attempt_username - v2"
+logger=migrator t=2024-08-14T10:50:23.474477969Z level=info msg="Migration successfully executed" id="create index IDX_login_attempt_username - v2" duration=382.219µs
+logger=migrator t=2024-08-14T10:50:23.478467142Z level=info msg="Executing migration" id="copy login_attempt v1 to v2"
+logger=migrator t=2024-08-14T10:50:23.478597039Z level=info msg="Migration successfully executed" id="copy login_attempt v1 to v2" duration=130.145µs
+logger=migrator t=2024-08-14T10:50:23.482672756Z level=info msg="Executing migration" id="drop login_attempt_tmp_qwerty"
+logger=migrator t=2024-08-14T10:50:23.482935649Z level=info msg="Migration successfully executed" id="drop login_attempt_tmp_qwerty" duration=262.784µs
+logger=migrator t=2024-08-14T10:50:23.487207918Z level=info msg="Executing migration" id="create user auth table"
+logger=migrator t=2024-08-14T10:50:23.487543612Z level=info msg="Migration successfully executed" id="create user auth table" duration=335.625µs
+logger=migrator t=2024-08-14T10:50:23.491990313Z level=info msg="Executing migration" id="create index IDX_user_auth_auth_module_auth_id - v1"
+logger=migrator t=2024-08-14T10:50:23.49237585Z level=info msg="Migration successfully executed" id="create index IDX_user_auth_auth_module_auth_id - v1" duration=385.391µs
+logger=migrator t=2024-08-14T10:50:23.497903403Z level=info msg="Executing migration" id="alter user_auth.auth_id to length 190"
+logger=migrator t=2024-08-14T10:50:23.497938294Z level=info msg="Migration successfully executed" id="alter user_auth.auth_id to length 190" duration=35.227µs
+logger=migrator t=2024-08-14T10:50:23.502786658Z level=info msg="Executing migration" id="Add OAuth access token to user_auth"
+logger=migrator t=2024-08-14T10:50:23.504482352Z level=info msg="Migration successfully executed" id="Add OAuth access token to user_auth" duration=1.696223ms
+logger=migrator t=2024-08-14T10:50:23.508603041Z level=info msg="Executing migration" id="Add OAuth refresh token to user_auth"
+logger=migrator t=2024-08-14T10:50:23.51031134Z level=info msg="Migration successfully executed" id="Add OAuth refresh token to user_auth" duration=1.707862ms
+logger=migrator t=2024-08-14T10:50:23.514531015Z level=info msg="Executing migration" id="Add OAuth token type to user_auth"
+logger=migrator t=2024-08-14T10:50:23.516243762Z level=info msg="Migration successfully executed" id="Add OAuth token type to user_auth" duration=1.712354ms
+logger=migrator t=2024-08-14T10:50:23.519920285Z level=info msg="Executing migration" id="Add OAuth expiry to user_auth"
+logger=migrator t=2024-08-14T10:50:23.521649896Z level=info msg="Migration successfully executed" id="Add OAuth expiry to user_auth" duration=1.729432ms
+logger=migrator t=2024-08-14T10:50:23.525526052Z level=info msg="Executing migration" id="Add index to user_id column in user_auth"
+logger=migrator t=2024-08-14T10:50:23.525954993Z level=info msg="Migration successfully executed" id="Add index to user_id column in user_auth" duration=427.387µs
+logger=migrator t=2024-08-14T10:50:23.529787381Z level=info msg="Executing migration" id="Add OAuth ID token to user_auth"
+logger=migrator t=2024-08-14T10:50:23.53152123Z level=info msg="Migration successfully executed" id="Add OAuth ID token to user_auth" duration=1.733691ms
+logger=migrator t=2024-08-14T10:50:23.53650415Z level=info msg="Executing migration" id="create server_lock table"
+logger=migrator t=2024-08-14T10:50:23.536864769Z level=info msg="Migration successfully executed" id="create server_lock table" duration=360.401µs
+logger=migrator t=2024-08-14T10:50:23.542019967Z level=info msg="Executing migration" id="add index server_lock.operation_uid"
+logger=migrator t=2024-08-14T10:50:23.542408263Z level=info msg="Migration successfully executed" id="add index server_lock.operation_uid" duration=387.229µs
+logger=migrator t=2024-08-14T10:50:23.546198215Z level=info msg="Executing migration" id="create user auth token table"
+logger=migrator t=2024-08-14T10:50:23.546574938Z level=info msg="Migration successfully executed" id="create user auth token table" duration=376.538µs
+logger=migrator t=2024-08-14T10:50:23.551030451Z level=info msg="Executing migration" id="add unique index user_auth_token.auth_token"
+logger=migrator t=2024-08-14T10:50:23.551420881Z level=info msg="Migration successfully executed" id="add unique index user_auth_token.auth_token" duration=390.397µs
+logger=migrator t=2024-08-14T10:50:23.556866272Z level=info msg="Executing migration" id="add unique index user_auth_token.prev_auth_token"
+logger=migrator t=2024-08-14T10:50:23.557275517Z level=info msg="Migration successfully executed" id="add unique index user_auth_token.prev_auth_token" duration=409.22µs
+logger=migrator t=2024-08-14T10:50:23.561239231Z level=info msg="Executing migration" id="add index user_auth_token.user_id"
+logger=migrator t=2024-08-14T10:50:23.561665061Z level=info msg="Migration successfully executed" id="add index user_auth_token.user_id" duration=425.603µs
+logger=migrator t=2024-08-14T10:50:23.565519008Z level=info msg="Executing migration" id="Add revoked_at to the user auth token"
+logger=migrator t=2024-08-14T10:50:23.567362327Z level=info msg="Migration successfully executed" id="Add revoked_at to the user auth token" duration=1.842893ms
+logger=migrator t=2024-08-14T10:50:23.572262024Z level=info msg="Executing migration" id="add index user_auth_token.revoked_at"
+logger=migrator t=2024-08-14T10:50:23.572677962Z level=info msg="Migration successfully executed" id="add index user_auth_token.revoked_at" duration=415.844µs
+logger=migrator t=2024-08-14T10:50:23.578226122Z level=info msg="Executing migration" id="create cache_data table"
+logger=migrator t=2024-08-14T10:50:23.578612564Z level=info msg="Migration successfully executed" id="create cache_data table" duration=386.118µs
+logger=migrator t=2024-08-14T10:50:23.58252163Z level=info msg="Executing migration" id="add unique index cache_data.cache_key"
+logger=migrator t=2024-08-14T10:50:23.583036267Z level=info msg="Migration successfully executed" id="add unique index cache_data.cache_key" duration=516.029µs
+logger=migrator t=2024-08-14T10:50:23.587306041Z level=info msg="Executing migration" id="create short_url table v1"
+logger=migrator t=2024-08-14T10:50:23.587713418Z level=info msg="Migration successfully executed" id="create short_url table v1" duration=407.432µs
+logger=migrator t=2024-08-14T10:50:23.592507994Z level=info msg="Executing migration" id="add index short_url.org_id-uid"
+logger=migrator t=2024-08-14T10:50:23.592936049Z level=info msg="Migration successfully executed" id="add index short_url.org_id-uid" duration=427.661µs
+logger=migrator t=2024-08-14T10:50:23.596686018Z level=info msg="Executing migration" id="alter table short_url alter column created_by type to bigint"
+logger=migrator t=2024-08-14T10:50:23.596717157Z level=info msg="Migration successfully executed" id="alter table short_url alter column created_by type to bigint" duration=31.738µs
+logger=migrator t=2024-08-14T10:50:23.600507658Z level=info msg="Executing migration" id="delete alert_definition table"
+logger=migrator t=2024-08-14T10:50:23.6005404Z level=info msg="Migration successfully executed" id="delete alert_definition table" duration=32.651µs
+logger=migrator t=2024-08-14T10:50:23.604429121Z level=info msg="Executing migration" id="recreate alert_definition table"
+logger=migrator t=2024-08-14T10:50:23.604827387Z level=info msg="Migration successfully executed" id="recreate alert_definition table" duration=398.567µs
+logger=migrator t=2024-08-14T10:50:23.608646729Z level=info msg="Executing migration" id="add index in alert_definition on org_id and title columns"
+logger=migrator t=2024-08-14T10:50:23.609066599Z level=info msg="Migration successfully executed" id="add index in alert_definition on org_id and title columns" duration=419.82µs
+logger=migrator t=2024-08-14T10:50:23.613854306Z level=info msg="Executing migration" id="add index in alert_definition on org_id and uid columns"
+logger=migrator t=2024-08-14T10:50:23.614289784Z level=info msg="Migration successfully executed" id="add index in alert_definition on org_id and uid columns" duration=435.336µs
+logger=migrator t=2024-08-14T10:50:23.619458686Z level=info msg="Executing migration" id="alter alert_definition table data column to mediumtext in mysql"
+logger=migrator t=2024-08-14T10:50:23.619487578Z level=info msg="Migration successfully executed" id="alter alert_definition table data column to mediumtext in mysql" duration=29.269µs
+logger=migrator t=2024-08-14T10:50:23.623499021Z level=info msg="Executing migration" id="drop index in alert_definition on org_id and title columns"
+logger=migrator t=2024-08-14T10:50:23.623895826Z level=info msg="Migration successfully executed" id="drop index in alert_definition on org_id and title columns" duration=396.909µs
+logger=migrator t=2024-08-14T10:50:23.628110866Z level=info msg="Executing migration" id="drop index in alert_definition on org_id and uid columns"
+logger=migrator t=2024-08-14T10:50:23.628480833Z level=info msg="Migration successfully executed" id="drop index in alert_definition on org_id and uid columns" duration=369.93µs
+logger=migrator t=2024-08-14T10:50:23.632243688Z level=info msg="Executing migration" id="add unique index in alert_definition on org_id and title columns"
+logger=migrator t=2024-08-14T10:50:23.632668901Z level=info msg="Migration successfully executed" id="add unique index in alert_definition on org_id and title columns" duration=424.941µs
+logger=migrator t=2024-08-14T10:50:23.636473793Z level=info msg="Executing migration" id="add unique index in alert_definition on org_id and uid columns"
+logger=migrator t=2024-08-14T10:50:23.636892385Z level=info msg="Migration successfully executed" id="add unique index in alert_definition on org_id and uid columns" duration=418.435µs
+logger=migrator t=2024-08-14T10:50:23.640671757Z level=info msg="Executing migration" id="Add column paused in alert_definition"
+logger=migrator t=2024-08-14T10:50:23.64262671Z level=info msg="Migration successfully executed" id="Add column paused in alert_definition" duration=1.953422ms
+logger=migrator t=2024-08-14T10:50:23.646577252Z level=info msg="Executing migration" id="drop alert_definition table"
+logger=migrator t=2024-08-14T10:50:23.646991216Z level=info msg="Migration successfully executed" id="drop alert_definition table" duration=412.801µs
+logger=migrator t=2024-08-14T10:50:23.650795694Z level=info msg="Executing migration" id="delete alert_definition_version table"
+logger=migrator t=2024-08-14T10:50:23.650836617Z level=info msg="Migration successfully executed" id="delete alert_definition_version table" duration=41.182µs
+logger=migrator t=2024-08-14T10:50:23.654724295Z level=info msg="Executing migration" id="recreate alert_definition_version table"
+logger=migrator t=2024-08-14T10:50:23.65515221Z level=info msg="Migration successfully executed" id="recreate alert_definition_version table" duration=427.672µs
+logger=migrator t=2024-08-14T10:50:23.659334899Z level=info msg="Executing migration" id="add index in alert_definition_version table on alert_definition_id and version columns"
+logger=migrator t=2024-08-14T10:50:23.659767151Z level=info msg="Migration successfully executed" id="add index in alert_definition_version table on alert_definition_id and version columns" duration=431.954µs
+logger=migrator t=2024-08-14T10:50:23.663951601Z level=info msg="Executing migration" id="add index in alert_definition_version table on alert_definition_uid and version columns"
+logger=migrator t=2024-08-14T10:50:23.664372662Z level=info msg="Migration successfully executed" id="add index in alert_definition_version table on alert_definition_uid and version columns" duration=420.932µs
+logger=migrator t=2024-08-14T10:50:23.668453278Z level=info msg="Executing migration" id="alter alert_definition_version table data column to mediumtext in mysql"
+logger=migrator t=2024-08-14T10:50:23.668481136Z level=info msg="Migration successfully executed" id="alter alert_definition_version table data column to mediumtext in mysql" duration=28.292µs
+logger=migrator t=2024-08-14T10:50:23.672561166Z level=info msg="Executing migration" id="drop alert_definition_version table"
+logger=migrator t=2024-08-14T10:50:23.673061721Z level=info msg="Migration successfully executed" id="drop alert_definition_version table" duration=499.989µs
+logger=migrator t=2024-08-14T10:50:23.677750275Z level=info msg="Executing migration" id="create alert_instance table"
+logger=migrator t=2024-08-14T10:50:23.678180192Z level=info msg="Migration successfully executed" id="create alert_instance table" duration=430.711µs
+logger=migrator t=2024-08-14T10:50:23.683990289Z level=info msg="Executing migration" id="add index in alert_instance table on def_org_id, def_uid and current_state columns"
+logger=migrator t=2024-08-14T10:50:23.68441286Z level=info msg="Migration successfully executed" id="add index in alert_instance table on def_org_id, def_uid and current_state columns" duration=423.246µs
+logger=migrator t=2024-08-14T10:50:23.688542115Z level=info msg="Executing migration" id="add index in alert_instance table on def_org_id, current_state columns"
+logger=migrator t=2024-08-14T10:50:23.688955419Z level=info msg="Migration successfully executed" id="add index in alert_instance table on def_org_id, current_state columns" duration=412.957µs
+logger=migrator t=2024-08-14T10:50:23.693074396Z level=info msg="Executing migration" id="add column current_state_end to alert_instance"
+logger=migrator t=2024-08-14T10:50:23.695032601Z level=info msg="Migration successfully executed" id="add column current_state_end to alert_instance" duration=1.957788ms
+logger=migrator t=2024-08-14T10:50:23.699186866Z level=info msg="Executing migration" id="remove index def_org_id, def_uid, current_state on alert_instance"
+logger=migrator t=2024-08-14T10:50:23.699574319Z level=info msg="Migration successfully executed" id="remove index def_org_id, def_uid, current_state on alert_instance" duration=387.477µs
+logger=migrator t=2024-08-14T10:50:23.703660317Z level=info msg="Executing migration" id="remove index def_org_id, current_state on alert_instance"
+logger=migrator t=2024-08-14T10:50:23.704041611Z level=info msg="Migration successfully executed" id="remove index def_org_id, current_state on alert_instance" duration=381.308µs
+logger=migrator t=2024-08-14T10:50:23.708164899Z level=info msg="Executing migration" id="rename def_org_id to rule_org_id in alert_instance"
+logger=migrator t=2024-08-14T10:50:23.716890566Z level=info msg="Migration successfully executed" id="rename def_org_id to rule_org_id in alert_instance" duration=8.725157ms
+logger=migrator t=2024-08-14T10:50:23.722073254Z level=info msg="Executing migration" id="rename def_uid to rule_uid in alert_instance"
+logger=migrator t=2024-08-14T10:50:23.730725809Z level=info msg="Migration successfully executed" id="rename def_uid to rule_uid in alert_instance" duration=8.652187ms
+logger=migrator t=2024-08-14T10:50:23.735870371Z level=info msg="Executing migration" id="add index rule_org_id, rule_uid, current_state on alert_instance"
+logger=migrator t=2024-08-14T10:50:23.736291644Z level=info msg="Migration successfully executed" id="add index rule_org_id, rule_uid, current_state on alert_instance" duration=421.2µs
+logger=migrator t=2024-08-14T10:50:23.741533041Z level=info msg="Executing migration" id="add index rule_org_id, current_state on alert_instance"
+logger=migrator t=2024-08-14T10:50:23.741956394Z level=info msg="Migration successfully executed" id="add index rule_org_id, current_state on alert_instance" duration=423.471µs
+logger=migrator t=2024-08-14T10:50:23.747531759Z level=info msg="Executing migration" id="add current_reason column related to current_state"
+logger=migrator t=2024-08-14T10:50:23.749438507Z level=info msg="Migration successfully executed" id="add current_reason column related to current_state" duration=1.906599ms
+logger=migrator t=2024-08-14T10:50:23.753324687Z level=info msg="Executing migration" id="add result_fingerprint column to alert_instance"
+logger=migrator t=2024-08-14T10:50:23.755219151Z level=info msg="Migration successfully executed" id="add result_fingerprint column to alert_instance" duration=1.894264ms
+logger=migrator t=2024-08-14T10:50:23.759340671Z level=info msg="Executing migration" id="create alert_rule table"
+logger=migrator t=2024-08-14T10:50:23.759784171Z level=info msg="Migration successfully executed" id="create alert_rule table" duration=443.322µs
+logger=migrator t=2024-08-14T10:50:23.763555321Z level=info msg="Executing migration" id="add index in alert_rule on org_id and title columns"
+logger=migrator t=2024-08-14T10:50:23.763994343Z level=info msg="Migration successfully executed" id="add index in alert_rule on org_id and title columns" duration=439.078µs
+logger=migrator t=2024-08-14T10:50:23.770206639Z level=info msg="Executing migration" id="add index in alert_rule on org_id and uid columns"
+logger=migrator t=2024-08-14T10:50:23.770645828Z level=info msg="Migration successfully executed" id="add index in alert_rule on org_id and uid columns" duration=439.163µs
+logger=migrator t=2024-08-14T10:50:23.776773771Z level=info msg="Executing migration" id="add index in alert_rule on org_id, namespace_uid, group_uid columns"
+logger=migrator t=2024-08-14T10:50:23.777239318Z level=info msg="Migration successfully executed" id="add index in alert_rule on org_id, namespace_uid, group_uid columns" duration=465.26µs
+logger=migrator t=2024-08-14T10:50:23.781109437Z level=info msg="Executing migration" id="alter alert_rule table data column to mediumtext in mysql"
+logger=migrator t=2024-08-14T10:50:23.78113724Z level=info msg="Migration successfully executed" id="alter alert_rule table data column to mediumtext in mysql" duration=28.294µs
+logger=migrator t=2024-08-14T10:50:23.784939169Z level=info msg="Executing migration" id="add column for to alert_rule"
+logger=migrator t=2024-08-14T10:50:23.786986614Z level=info msg="Migration successfully executed" id="add column for to alert_rule" duration=2.047097ms
+logger=migrator t=2024-08-14T10:50:23.790997525Z level=info msg="Executing migration" id="add column annotations to alert_rule"
+logger=migrator t=2024-08-14T10:50:23.793003567Z level=info msg="Migration successfully executed" id="add column annotations to alert_rule" duration=2.005772ms
+logger=migrator t=2024-08-14T10:50:23.797309547Z level=info msg="Executing migration" id="add column labels to alert_rule"
+logger=migrator t=2024-08-14T10:50:23.799328487Z level=info msg="Migration successfully executed" id="add column labels to alert_rule" duration=2.018758ms
+logger=migrator t=2024-08-14T10:50:23.805534658Z level=info msg="Executing migration" id="remove unique index from alert_rule on org_id, title columns"
+logger=migrator t=2024-08-14T10:50:23.80592473Z level=info msg="Migration successfully executed" id="remove unique index from alert_rule on org_id, title columns" duration=389.901µs
+logger=migrator t=2024-08-14T10:50:23.810130383Z level=info msg="Executing migration" id="add index in alert_rule on org_id, namespase_uid and title columns"
+logger=migrator t=2024-08-14T10:50:23.810547886Z level=info msg="Migration successfully executed" id="add index in alert_rule on org_id, namespase_uid and title columns" duration=419.98µs
+logger=migrator t=2024-08-14T10:50:23.81484028Z level=info msg="Executing migration" id="add dashboard_uid column to alert_rule"
+logger=migrator t=2024-08-14T10:50:23.816816231Z level=info msg="Migration successfully executed" id="add dashboard_uid column to alert_rule" duration=1.975618ms
+logger=migrator t=2024-08-14T10:50:23.820969816Z level=info msg="Executing migration" id="add panel_id column to alert_rule"
+logger=migrator t=2024-08-14T10:50:23.822949881Z level=info msg="Migration successfully executed" id="add panel_id column to alert_rule" duration=1.979745ms
+logger=migrator t=2024-08-14T10:50:23.827170765Z level=info msg="Executing migration" id="add index in alert_rule on org_id, dashboard_uid and panel_id columns"
+logger=migrator t=2024-08-14T10:50:23.827594193Z level=info msg="Migration successfully executed" id="add index in alert_rule on org_id, dashboard_uid and panel_id columns" duration=423.107µs
+logger=migrator t=2024-08-14T10:50:23.833132634Z level=info msg="Executing migration" id="add rule_group_idx column to alert_rule"
+logger=migrator t=2024-08-14T10:50:23.835149993Z level=info msg="Migration successfully executed" id="add rule_group_idx column to alert_rule" duration=2.016988ms
+logger=migrator t=2024-08-14T10:50:23.839365329Z level=info msg="Executing migration" id="add is_paused column to alert_rule table"
+logger=migrator t=2024-08-14T10:50:23.841350949Z level=info msg="Migration successfully executed" id="add is_paused column to alert_rule table" duration=1.985229ms
+logger=migrator t=2024-08-14T10:50:23.845522684Z level=info msg="Executing migration" id="fix is_paused column for alert_rule table"
+logger=migrator t=2024-08-14T10:50:23.845550755Z level=info msg="Migration successfully executed" id="fix is_paused column for alert_rule table" duration=28.555µs
+logger=migrator t=2024-08-14T10:50:23.849937334Z level=info msg="Executing migration" id="create alert_rule_version table"
+logger=migrator t=2024-08-14T10:50:23.850429059Z level=info msg="Migration successfully executed" id="create alert_rule_version table" duration=490.695µs
+logger=migrator t=2024-08-14T10:50:23.854174072Z level=info msg="Executing migration" id="add index in alert_rule_version table on rule_org_id, rule_uid and version columns"
+logger=migrator t=2024-08-14T10:50:23.854615344Z level=info msg="Migration successfully executed" id="add index in alert_rule_version table on rule_org_id, rule_uid and version columns" duration=440.763µs
+logger=migrator t=2024-08-14T10:50:23.859361096Z level=info msg="Executing migration" id="add index in alert_rule_version table on rule_org_id, rule_namespace_uid and rule_group columns"
+logger=migrator t=2024-08-14T10:50:23.859817782Z level=info msg="Migration successfully executed" id="add index in alert_rule_version table on rule_org_id, rule_namespace_uid and rule_group columns" duration=456.442µs
+logger=migrator t=2024-08-14T10:50:23.864700985Z level=info msg="Executing migration" id="alter alert_rule_version table data column to mediumtext in mysql"
+logger=migrator t=2024-08-14T10:50:23.864729344Z level=info msg="Migration successfully executed" id="alter alert_rule_version table data column to mediumtext in mysql" duration=28.881µs
+logger=migrator t=2024-08-14T10:50:23.868525256Z level=info msg="Executing migration" id="add column for to alert_rule_version"
+logger=migrator t=2024-08-14T10:50:23.870619014Z level=info msg="Migration successfully executed" id="add column for to alert_rule_version" duration=2.093402ms
+logger=migrator t=2024-08-14T10:50:23.874350212Z level=info msg="Executing migration" id="add column annotations to alert_rule_version"
+logger=migrator t=2024-08-14T10:50:23.876402Z level=info msg="Migration successfully executed" id="add column annotations to alert_rule_version" duration=2.051432ms
+logger=migrator t=2024-08-14T10:50:23.880075989Z level=info msg="Executing migration" id="add column labels to alert_rule_version"
+logger=migrator t=2024-08-14T10:50:23.882138666Z level=info msg="Migration successfully executed" id="add column labels to alert_rule_version" duration=2.061299ms
+logger=migrator t=2024-08-14T10:50:23.885848193Z level=info msg="Executing migration" id="add rule_group_idx column to alert_rule_version"
+logger=migrator t=2024-08-14T10:50:23.887975244Z level=info msg="Migration successfully executed" id="add rule_group_idx column to alert_rule_version" duration=2.126401ms
+logger=migrator t=2024-08-14T10:50:23.892104052Z level=info msg="Executing migration" id="add is_paused column to alert_rule_versions table"
+logger=migrator t=2024-08-14T10:50:23.894180024Z level=info msg="Migration successfully executed" id="add is_paused column to alert_rule_versions table" duration=2.075536ms
+logger=migrator t=2024-08-14T10:50:23.898172688Z level=info msg="Executing migration" id="fix is_paused column for alert_rule_version table"
+logger=migrator t=2024-08-14T10:50:23.89820089Z level=info msg="Migration successfully executed" id="fix is_paused column for alert_rule_version table" duration=28.624µs
+logger=migrator t=2024-08-14T10:50:23.902038298Z level=info msg="Executing migration" id=create_alert_configuration_table
+logger=migrator t=2024-08-14T10:50:23.902383481Z level=info msg="Migration successfully executed" id=create_alert_configuration_table duration=344.977µs
+logger=migrator t=2024-08-14T10:50:23.906010739Z level=info msg="Executing migration" id="Add column default in alert_configuration"
+logger=migrator t=2024-08-14T10:50:23.908079649Z level=info msg="Migration successfully executed" id="Add column default in alert_configuration" duration=2.068597ms
+logger=migrator t=2024-08-14T10:50:23.912980335Z level=info msg="Executing migration" id="alert alert_configuration alertmanager_configuration column from TEXT to MEDIUMTEXT if mysql"
+logger=migrator t=2024-08-14T10:50:23.913009612Z level=info msg="Migration successfully executed" id="alert alert_configuration alertmanager_configuration column from TEXT to MEDIUMTEXT if mysql" duration=29.641µs
+logger=migrator t=2024-08-14T10:50:23.917218791Z level=info msg="Executing migration" id="add column org_id in alert_configuration"
+logger=migrator t=2024-08-14T10:50:23.919336396Z level=info msg="Migration successfully executed" id="add column org_id in alert_configuration" duration=2.117317ms
+logger=migrator t=2024-08-14T10:50:23.923429492Z level=info msg="Executing migration" id="add index in alert_configuration table on org_id column"
+logger=migrator t=2024-08-14T10:50:23.923843732Z level=info msg="Migration successfully executed" id="add index in alert_configuration table on org_id column" duration=414.125µs
+logger=migrator t=2024-08-14T10:50:23.928548739Z level=info msg="Executing migration" id="add configuration_hash column to alert_configuration"
+logger=migrator t=2024-08-14T10:50:23.930656261Z level=info msg="Migration successfully executed" id="add configuration_hash column to alert_configuration" duration=2.108324ms
+logger=migrator t=2024-08-14T10:50:23.934635291Z level=info msg="Executing migration" id=create_ngalert_configuration_table
+logger=migrator t=2024-08-14T10:50:23.934982267Z level=info msg="Migration successfully executed" id=create_ngalert_configuration_table duration=346.698µs
+logger=migrator t=2024-08-14T10:50:23.939065331Z level=info msg="Executing migration" id="add index in ngalert_configuration on org_id column"
+logger=migrator t=2024-08-14T10:50:23.939512525Z level=info msg="Migration successfully executed" id="add index in ngalert_configuration on org_id column" duration=447.228µs
+logger=migrator t=2024-08-14T10:50:23.94338204Z level=info msg="Executing migration" id="add column send_alerts_to in ngalert_configuration"
+logger=migrator t=2024-08-14T10:50:23.945494839Z level=info msg="Migration successfully executed" id="add column send_alerts_to in ngalert_configuration" duration=2.11187ms
+logger=migrator t=2024-08-14T10:50:23.950016143Z level=info msg="Executing migration" id="create provenance_type table"
+logger=migrator t=2024-08-14T10:50:23.950382874Z level=info msg="Migration successfully executed" id="create provenance_type table" duration=366.788µs
+logger=migrator t=2024-08-14T10:50:23.955816543Z level=info msg="Executing migration" id="add index to uniquify (record_key, record_type, org_id) columns"
+logger=migrator t=2024-08-14T10:50:23.956267972Z level=info msg="Migration successfully executed" id="add index to uniquify (record_key, record_type, org_id) columns" duration=451.159µs
+logger=migrator t=2024-08-14T10:50:23.959996741Z level=info msg="Executing migration" id="create alert_image table"
+logger=migrator t=2024-08-14T10:50:23.960371145Z level=info msg="Migration successfully executed" id="create alert_image table" duration=374.253µs
+logger=migrator t=2024-08-14T10:50:23.964036709Z level=info msg="Executing migration" id="add unique index on token to alert_image table"
+logger=migrator t=2024-08-14T10:50:23.964465017Z level=info msg="Migration successfully executed" id="add unique index on token to alert_image table" duration=428.329µs
+logger=migrator t=2024-08-14T10:50:23.969927926Z level=info msg="Executing migration" id="support longer URLs in alert_image table"
+logger=migrator t=2024-08-14T10:50:23.96995725Z level=info msg="Migration successfully executed" id="support longer URLs in alert_image table" duration=29.956µs
+logger=migrator t=2024-08-14T10:50:23.974088023Z level=info msg="Executing migration" id=create_alert_configuration_history_table
+logger=migrator t=2024-08-14T10:50:23.974520432Z level=info msg="Migration successfully executed" id=create_alert_configuration_history_table duration=432.308µs
+logger=migrator t=2024-08-14T10:50:23.980823457Z level=info msg="Executing migration" id="drop non-unique orgID index on alert_configuration"
+logger=migrator t=2024-08-14T10:50:23.981231729Z level=info msg="Migration successfully executed" id="drop non-unique orgID index on alert_configuration" duration=408.064µs
+logger=migrator t=2024-08-14T10:50:23.985558126Z level=info msg="Executing migration" id="drop unique orgID index on alert_configuration if exists"
+logger=migrator t=2024-08-14T10:50:23.985717376Z level=warn msg="Skipping migration: Already executed, but not recorded in migration log" id="drop unique orgID index on alert_configuration if exists"
+logger=migrator t=2024-08-14T10:50:23.989794398Z level=info msg="Executing migration" id="extract alertmanager configuration history to separate table"
+logger=migrator t=2024-08-14T10:50:23.990015841Z level=info msg="Migration successfully executed" id="extract alertmanager configuration history to separate table" duration=221.343µs
+logger=migrator t=2024-08-14T10:50:23.994146985Z level=info msg="Executing migration" id="add unique index on orgID to alert_configuration"
+logger=migrator t=2024-08-14T10:50:23.99457114Z level=info msg="Migration successfully executed" id="add unique index on orgID to alert_configuration" duration=423.953µs
+logger=migrator t=2024-08-14T10:50:23.998673914Z level=info msg="Executing migration" id="add last_applied column to alert_configuration_history"
+logger=migrator t=2024-08-14T10:50:24.000976552Z level=info msg="Migration successfully executed" id="add last_applied column to alert_configuration_history" duration=2.302327ms
+logger=migrator t=2024-08-14T10:50:24.005537326Z level=info msg="Executing migration" id="create library_element table v1"
+logger=migrator t=2024-08-14T10:50:24.006027518Z level=info msg="Migration successfully executed" id="create library_element table v1" duration=489.584µs
+logger=migrator t=2024-08-14T10:50:24.010797463Z level=info msg="Executing migration" id="add index library_element org_id-folder_id-name-kind"
+logger=migrator t=2024-08-14T10:50:24.011246239Z level=info msg="Migration successfully executed" id="add index library_element org_id-folder_id-name-kind" duration=448.566µs
+logger=migrator t=2024-08-14T10:50:24.01519822Z level=info msg="Executing migration" id="create library_element_connection table v1"
+logger=migrator t=2024-08-14T10:50:24.015592938Z level=info msg="Migration successfully executed" id="create library_element_connection table v1" duration=394.521µs
+logger=migrator t=2024-08-14T10:50:24.020374704Z level=info msg="Executing migration" id="add index library_element_connection element_id-kind-connection_id"
+logger=migrator t=2024-08-14T10:50:24.020815322Z level=info msg="Migration successfully executed" id="add index library_element_connection element_id-kind-connection_id" duration=440.385µs
+logger=migrator t=2024-08-14T10:50:24.024609562Z level=info msg="Executing migration" id="add unique index library_element org_id_uid"
+logger=migrator t=2024-08-14T10:50:24.025063047Z level=info msg="Migration successfully executed" id="add unique index library_element org_id_uid" duration=453.111µs
+logger=migrator t=2024-08-14T10:50:24.028951242Z level=info msg="Executing migration" id="increase max description length to 2048"
+logger=migrator t=2024-08-14T10:50:24.028961144Z level=info msg="Migration successfully executed" id="increase max description length to 2048" duration=11.224µs
+logger=migrator t=2024-08-14T10:50:24.032739767Z level=info msg="Executing migration" id="alter library_element model to mediumtext"
+logger=migrator t=2024-08-14T10:50:24.032767824Z level=info msg="Migration successfully executed" id="alter library_element model to mediumtext" duration=28.428µs
+logger=migrator t=2024-08-14T10:50:24.036450382Z level=info msg="Executing migration" id="add library_element folder uid"
+logger=migrator t=2024-08-14T10:50:24.038813246Z level=info msg="Migration successfully executed" id="add library_element folder uid" duration=2.361256ms
+logger=migrator t=2024-08-14T10:50:24.042598522Z level=info msg="Executing migration" id="populate library_element folder_uid"
+logger=migrator t=2024-08-14T10:50:24.042810189Z level=info msg="Migration successfully executed" id="populate library_element folder_uid" duration=211.783µs
+logger=migrator t=2024-08-14T10:50:24.046694979Z level=info msg="Executing migration" id="add index library_element org_id-folder_uid-name-kind"
+logger=migrator t=2024-08-14T10:50:24.047151101Z level=info msg="Migration successfully executed" id="add index library_element org_id-folder_uid-name-kind" duration=455.905µs
+logger=migrator t=2024-08-14T10:50:24.051000756Z level=info msg="Executing migration" id="clone move dashboard alerts to unified alerting"
+logger=migrator t=2024-08-14T10:50:24.051133399Z level=info msg="Migration successfully executed" id="clone move dashboard alerts to unified alerting" duration=133.608µs
+logger=migrator t=2024-08-14T10:50:24.05492077Z level=info msg="Executing migration" id="create data_keys table"
+logger=migrator t=2024-08-14T10:50:24.055390509Z level=info msg="Migration successfully executed" id="create data_keys table" duration=469.809µs
+logger=migrator t=2024-08-14T10:50:24.060034377Z level=info msg="Executing migration" id="create secrets table"
+logger=migrator t=2024-08-14T10:50:24.060494595Z level=info msg="Migration successfully executed" id="create secrets table" duration=460.588µs
+logger=migrator t=2024-08-14T10:50:24.066164516Z level=info msg="Executing migration" id="rename data_keys name column to id"
+logger=migrator t=2024-08-14T10:50:24.077425166Z level=info msg="Migration successfully executed" id="rename data_keys name column to id" duration=11.260255ms
+logger=migrator t=2024-08-14T10:50:24.081638793Z level=info msg="Executing migration" id="add name column into data_keys"
+logger=migrator t=2024-08-14T10:50:24.084043082Z level=info msg="Migration successfully executed" id="add name column into data_keys" duration=2.403864ms
+logger=migrator t=2024-08-14T10:50:24.08835715Z level=info msg="Executing migration" id="copy data_keys id column values into name"
+logger=migrator t=2024-08-14T10:50:24.088429449Z level=info msg="Migration successfully executed" id="copy data_keys id column values into name" duration=72.469µs
+logger=migrator t=2024-08-14T10:50:24.092485274Z level=info msg="Executing migration" id="rename data_keys name column to label"
+logger=migrator t=2024-08-14T10:50:24.103597639Z level=info msg="Migration successfully executed" id="rename data_keys name column to label" duration=11.111844ms
+logger=migrator t=2024-08-14T10:50:24.107930599Z level=info msg="Executing migration" id="rename data_keys id column back to name"
+logger=migrator t=2024-08-14T10:50:24.118932246Z level=info msg="Migration successfully executed" id="rename data_keys id column back to name" duration=11.00144ms
+logger=migrator t=2024-08-14T10:50:24.123165325Z level=info msg="Executing migration" id="create kv_store table v1"
+logger=migrator t=2024-08-14T10:50:24.123552983Z level=info msg="Migration successfully executed" id="create kv_store table v1" duration=387.448µs
+logger=migrator t=2024-08-14T10:50:24.127813888Z level=info msg="Executing migration" id="add index kv_store.org_id-namespace-key"
+logger=migrator t=2024-08-14T10:50:24.12830471Z level=info msg="Migration successfully executed" id="add index kv_store.org_id-namespace-key" duration=490.791µs
+logger=migrator t=2024-08-14T10:50:24.132849525Z level=info msg="Executing migration" id="update dashboard_uid and panel_id from existing annotations"
+logger=migrator t=2024-08-14T10:50:24.132957982Z level=info msg="Migration successfully executed" id="update dashboard_uid and panel_id from existing annotations" duration=111.279µs
+logger=migrator t=2024-08-14T10:50:24.13712449Z level=info msg="Executing migration" id="create permission table"
+logger=migrator t=2024-08-14T10:50:24.137539182Z level=info msg="Migration successfully executed" id="create permission table" duration=414.605µs
+logger=migrator t=2024-08-14T10:50:24.14221705Z level=info msg="Executing migration" id="add unique index permission.role_id"
+logger=migrator t=2024-08-14T10:50:24.142660744Z level=info msg="Migration successfully executed" id="add unique index permission.role_id" duration=443.514µs
+logger=migrator t=2024-08-14T10:50:24.14647464Z level=info msg="Executing migration" id="add unique index role_id_action_scope"
+logger=migrator t=2024-08-14T10:50:24.146912926Z level=info msg="Migration successfully executed" id="add unique index role_id_action_scope" duration=438.038µs
+logger=migrator t=2024-08-14T10:50:24.150618226Z level=info msg="Executing migration" id="create role table"
+logger=migrator t=2024-08-14T10:50:24.151002479Z level=info msg="Migration successfully executed" id="create role table" duration=384.038µs
+logger=migrator t=2024-08-14T10:50:24.155585934Z level=info msg="Executing migration" id="add column display_name"
+logger=migrator t=2024-08-14T10:50:24.158129028Z level=info msg="Migration successfully executed" id="add column display_name" duration=2.542864ms
+logger=migrator t=2024-08-14T10:50:24.162317468Z level=info msg="Executing migration" id="add column group_name"
+logger=migrator t=2024-08-14T10:50:24.164821684Z level=info msg="Migration successfully executed" id="add column group_name" duration=2.503759ms
+logger=migrator t=2024-08-14T10:50:24.168943514Z level=info msg="Executing migration" id="add index role.org_id"
+logger=migrator t=2024-08-14T10:50:24.169376719Z level=info msg="Migration successfully executed" id="add index role.org_id" duration=433.022µs
+logger=migrator t=2024-08-14T10:50:24.173323014Z level=info msg="Executing migration" id="add unique index role_org_id_name"
+logger=migrator t=2024-08-14T10:50:24.173756977Z level=info msg="Migration successfully executed" id="add unique index role_org_id_name" duration=433.6µs
+logger=migrator t=2024-08-14T10:50:24.177489853Z level=info msg="Executing migration" id="add index role_org_id_uid"
+logger=migrator t=2024-08-14T10:50:24.177931503Z level=info msg="Migration successfully executed" id="add index role_org_id_uid" duration=441.384µs
+logger=migrator t=2024-08-14T10:50:24.183439921Z level=info msg="Executing migration" id="create team role table"
+logger=migrator t=2024-08-14T10:50:24.183851466Z level=info msg="Migration successfully executed" id="create team role table" duration=412.832µs
+logger=migrator t=2024-08-14T10:50:24.187753627Z level=info msg="Executing migration" id="add index team_role.org_id"
+logger=migrator t=2024-08-14T10:50:24.188219074Z level=info msg="Migration successfully executed" id="add index team_role.org_id" duration=465.14µs
+logger=migrator t=2024-08-14T10:50:24.192900006Z level=info msg="Executing migration" id="add unique index team_role_org_id_team_id_role_id"
+logger=migrator t=2024-08-14T10:50:24.193358022Z level=info msg="Migration successfully executed" id="add unique index team_role_org_id_team_id_role_id" duration=456.445µs
+logger=migrator t=2024-08-14T10:50:24.197269816Z level=info msg="Executing migration" id="add index team_role.team_id"
+logger=migrator t=2024-08-14T10:50:24.197704993Z level=info msg="Migration successfully executed" id="add index team_role.team_id" duration=434.998µs
+logger=migrator t=2024-08-14T10:50:24.201595023Z level=info msg="Executing migration" id="create user role table"
+logger=migrator t=2024-08-14T10:50:24.201966764Z level=info msg="Migration successfully executed" id="create user role table" duration=371.69µs
+logger=migrator t=2024-08-14T10:50:24.206597428Z level=info msg="Executing migration" id="add index user_role.org_id"
+logger=migrator t=2024-08-14T10:50:24.207047663Z level=info msg="Migration successfully executed" id="add index user_role.org_id" duration=450.3µs
+logger=migrator t=2024-08-14T10:50:24.211985027Z level=info msg="Executing migration" id="add unique index user_role_org_id_user_id_role_id"
+logger=migrator t=2024-08-14T10:50:24.212426872Z level=info msg="Migration successfully executed" id="add unique index user_role_org_id_user_id_role_id" duration=441.743µs
+logger=migrator t=2024-08-14T10:50:24.216089228Z level=info msg="Executing migration" id="add index user_role.user_id"
+logger=migrator t=2024-08-14T10:50:24.216524183Z level=info msg="Migration successfully executed" id="add index user_role.user_id" duration=434.692µs
+logger=migrator t=2024-08-14T10:50:24.221142077Z level=info msg="Executing migration" id="create builtin role table"
+logger=migrator t=2024-08-14T10:50:24.221505719Z level=info msg="Migration successfully executed" id="create builtin role table" duration=363.613µs
+logger=migrator t=2024-08-14T10:50:24.22705126Z level=info msg="Executing migration" id="add index builtin_role.role_id"
+logger=migrator t=2024-08-14T10:50:24.227498351Z level=info msg="Migration successfully executed" id="add index builtin_role.role_id" duration=447.092µs
+logger=migrator t=2024-08-14T10:50:24.23193851Z level=info msg="Executing migration" id="add index builtin_role.name"
+logger=migrator t=2024-08-14T10:50:24.232399527Z level=info msg="Migration successfully executed" id="add index builtin_role.name" duration=461.101µs
+logger=migrator t=2024-08-14T10:50:24.237104716Z level=info msg="Executing migration" id="Add column org_id to builtin_role table"
+logger=migrator t=2024-08-14T10:50:24.239719204Z level=info msg="Migration successfully executed" id="Add column org_id to builtin_role table" duration=2.614411ms
+logger=migrator t=2024-08-14T10:50:24.244728358Z level=info msg="Executing migration" id="add index builtin_role.org_id"
+logger=migrator t=2024-08-14T10:50:24.245185789Z level=info msg="Migration successfully executed" id="add index builtin_role.org_id" duration=457.491µs
+logger=migrator t=2024-08-14T10:50:24.250294561Z level=info msg="Executing migration" id="add unique index builtin_role_org_id_role_id_role"
+logger=migrator t=2024-08-14T10:50:24.25074517Z level=info msg="Migration successfully executed" id="add unique index builtin_role_org_id_role_id_role" duration=451.784µs
+logger=migrator t=2024-08-14T10:50:24.254542288Z level=info msg="Executing migration" id="Remove unique index role_org_id_uid"
+logger=migrator t=2024-08-14T10:50:24.254956443Z level=info msg="Migration successfully executed" id="Remove unique index role_org_id_uid" duration=413.971µs
+logger=migrator t=2024-08-14T10:50:24.259521582Z level=info msg="Executing migration" id="add unique index role.uid"
+logger=migrator t=2024-08-14T10:50:24.259968855Z level=info msg="Migration successfully executed" id="add unique index role.uid" duration=447.272µs
+logger=migrator t=2024-08-14T10:50:24.264051404Z level=info msg="Executing migration" id="create seed assignment table"
+logger=migrator t=2024-08-14T10:50:24.264399942Z level=info msg="Migration successfully executed" id="create seed assignment table" duration=348.403µs
+logger=migrator t=2024-08-14T10:50:24.269633928Z level=info msg="Executing migration" id="add unique index builtin_role_role_name"
+logger=migrator t=2024-08-14T10:50:24.270120057Z level=info msg="Migration successfully executed" id="add unique index builtin_role_role_name" duration=486.023µs
+logger=migrator t=2024-08-14T10:50:24.273881735Z level=info msg="Executing migration" id="add column hidden to role table"
+logger=migrator t=2024-08-14T10:50:24.27655901Z level=info msg="Migration successfully executed" id="add column hidden to role table" duration=2.676703ms
+logger=migrator t=2024-08-14T10:50:24.280423502Z level=info msg="Executing migration" id="permission kind migration"
+logger=migrator t=2024-08-14T10:50:24.283088761Z level=info msg="Migration successfully executed" id="permission kind migration" duration=2.664894ms
+logger=migrator t=2024-08-14T10:50:24.286869832Z level=info msg="Executing migration" id="permission attribute migration"
+logger=migrator t=2024-08-14T10:50:24.289489773Z level=info msg="Migration successfully executed" id="permission attribute migration" duration=2.619648ms
+logger=migrator t=2024-08-14T10:50:24.293531016Z level=info msg="Executing migration" id="permission identifier migration"
+logger=migrator t=2024-08-14T10:50:24.296238978Z level=info msg="Migration successfully executed" id="permission identifier migration" duration=2.707406ms
+logger=migrator t=2024-08-14T10:50:24.300362935Z level=info msg="Executing migration" id="add permission identifier index"
+logger=migrator t=2024-08-14T10:50:24.300834471Z level=info msg="Migration successfully executed" id="add permission identifier index" duration=471.658µs
+logger=migrator t=2024-08-14T10:50:24.305577129Z level=info msg="Executing migration" id="add permission action scope role_id index"
+logger=migrator t=2024-08-14T10:50:24.306037669Z level=info msg="Migration successfully executed" id="add permission action scope role_id index" duration=460.365µs
+logger=migrator t=2024-08-14T10:50:24.311170964Z level=info msg="Executing migration" id="remove permission role_id action scope index"
+logger=migrator t=2024-08-14T10:50:24.311591638Z level=info msg="Migration successfully executed" id="remove permission role_id action scope index" duration=419.245µs
+logger=migrator t=2024-08-14T10:50:24.315495114Z level=info msg="Executing migration" id="create query_history table v1"
+logger=migrator t=2024-08-14T10:50:24.315944585Z level=info msg="Migration successfully executed" id="create query_history table v1" duration=449.362µs
+logger=migrator t=2024-08-14T10:50:24.319728736Z level=info msg="Executing migration" id="add index query_history.org_id-created_by-datasource_uid"
+logger=migrator t=2024-08-14T10:50:24.320203727Z level=info msg="Migration successfully executed" id="add index query_history.org_id-created_by-datasource_uid" duration=474.744µs
+logger=migrator t=2024-08-14T10:50:24.32468509Z level=info msg="Executing migration" id="alter table query_history alter column created_by type to bigint"
+logger=migrator t=2024-08-14T10:50:24.324715486Z level=info msg="Migration successfully executed" id="alter table query_history alter column created_by type to bigint" duration=31.049µs
+logger=migrator t=2024-08-14T10:50:24.328706482Z level=info msg="Executing migration" id="rbac disabled migrator"
+logger=migrator t=2024-08-14T10:50:24.328720746Z level=info msg="Migration successfully executed" id="rbac disabled migrator" duration=14.734µs
+logger=migrator t=2024-08-14T10:50:24.332823016Z level=info msg="Executing migration" id="teams permissions migration"
+logger=migrator t=2024-08-14T10:50:24.332993135Z level=info msg="Migration successfully executed" id="teams permissions migration" duration=170.17µs
+logger=migrator t=2024-08-14T10:50:24.336799794Z level=info msg="Executing migration" id="dashboard permissions"
+logger=migrator t=2024-08-14T10:50:24.337012145Z level=info msg="Migration successfully executed" id="dashboard permissions" duration=212.642µs
+logger=migrator t=2024-08-14T10:50:24.341094158Z level=info msg="Executing migration" id="dashboard permissions uid scopes"
+logger=migrator t=2024-08-14T10:50:24.341341428Z level=info msg="Migration successfully executed" id="dashboard permissions uid scopes" duration=245.726µs
+logger=migrator t=2024-08-14T10:50:24.345523368Z level=info msg="Executing migration" id="drop managed folder create actions"
+logger=migrator t=2024-08-14T10:50:24.345615986Z level=info msg="Migration successfully executed" id="drop managed folder create actions" duration=92.84µs
+logger=migrator t=2024-08-14T10:50:24.34991323Z level=info msg="Executing migration" id="alerting notification permissions"
+logger=migrator t=2024-08-14T10:50:24.350132078Z level=info msg="Migration successfully executed" id="alerting notification permissions" duration=219.318µs
+logger=migrator t=2024-08-14T10:50:24.354243239Z level=info msg="Executing migration" id="create query_history_star table v1"
+logger=migrator t=2024-08-14T10:50:24.35461038Z level=info msg="Migration successfully executed" id="create query_history_star table v1" duration=367.154µs
+logger=migrator t=2024-08-14T10:50:24.360424623Z level=info msg="Executing migration" id="add index query_history.user_id-query_uid"
+logger=migrator t=2024-08-14T10:50:24.360942414Z level=info msg="Migration successfully executed" id="add index query_history.user_id-query_uid" duration=518.83µs
+logger=migrator t=2024-08-14T10:50:24.365162444Z level=info msg="Executing migration" id="add column org_id in query_history_star"
+logger=migrator t=2024-08-14T10:50:24.367869892Z level=info msg="Migration successfully executed" id="add column org_id in query_history_star" duration=2.707006ms
+logger=migrator t=2024-08-14T10:50:24.37259151Z level=info msg="Executing migration" id="alter table query_history_star_mig column user_id type to bigint"
+logger=migrator t=2024-08-14T10:50:24.37261948Z level=info msg="Migration successfully executed" id="alter table query_history_star_mig column user_id type to bigint" duration=28.453µs
+logger=migrator t=2024-08-14T10:50:24.376662838Z level=info msg="Executing migration" id="create correlation table v1"
+logger=migrator t=2024-08-14T10:50:24.377103921Z level=info msg="Migration successfully executed" id="create correlation table v1" duration=441.952µs
+logger=migrator t=2024-08-14T10:50:24.381734928Z level=info msg="Executing migration" id="add index correlations.uid"
+logger=migrator t=2024-08-14T10:50:24.382229967Z level=info msg="Migration successfully executed" id="add index correlations.uid" duration=494.717µs
+logger=migrator t=2024-08-14T10:50:24.386051017Z level=info msg="Executing migration" id="add index correlations.source_uid"
+logger=migrator t=2024-08-14T10:50:24.386501341Z level=info msg="Migration successfully executed" id="add index correlations.source_uid" duration=450.251µs
+logger=migrator t=2024-08-14T10:50:24.390181648Z level=info msg="Executing migration" id="add correlation config column"
+logger=migrator t=2024-08-14T10:50:24.392928769Z level=info msg="Migration successfully executed" id="add correlation config column" duration=2.746596ms
+logger=migrator t=2024-08-14T10:50:24.39704615Z level=info msg="Executing migration" id="drop index IDX_correlation_uid - v1"
+logger=migrator t=2024-08-14T10:50:24.397484365Z level=info msg="Migration successfully executed" id="drop index IDX_correlation_uid - v1" duration=437.082µs
+logger=migrator t=2024-08-14T10:50:24.40207175Z level=info msg="Executing migration" id="drop index IDX_correlation_source_uid - v1"
+logger=migrator t=2024-08-14T10:50:24.402490338Z level=info msg="Migration successfully executed" id="drop index IDX_correlation_source_uid - v1" duration=418.557µs
+logger=migrator t=2024-08-14T10:50:24.405979082Z level=info msg="Executing migration" id="Rename table correlation to correlation_tmp_qwerty - v1"
+logger=migrator t=2024-08-14T10:50:24.413917056Z level=info msg="Migration successfully executed" id="Rename table correlation to correlation_tmp_qwerty - v1" duration=7.93775ms
+logger=migrator t=2024-08-14T10:50:24.418001431Z level=info msg="Executing migration" id="create correlation v2"
+logger=migrator t=2024-08-14T10:50:24.418504805Z level=info msg="Migration successfully executed" id="create correlation v2" duration=502.934µs
+logger=migrator t=2024-08-14T10:50:24.422287061Z level=info msg="Executing migration" id="create index IDX_correlation_uid - v2"
+logger=migrator t=2024-08-14T10:50:24.42273509Z level=info msg="Migration successfully executed" id="create index IDX_correlation_uid - v2" duration=447.812µs
+logger=migrator t=2024-08-14T10:50:24.427936492Z level=info msg="Executing migration" id="create index IDX_correlation_source_uid - v2"
+logger=migrator t=2024-08-14T10:50:24.428396523Z level=info msg="Migration successfully executed" id="create index IDX_correlation_source_uid - v2" duration=459.859µs
+logger=migrator t=2024-08-14T10:50:24.432108979Z level=info msg="Executing migration" id="create index IDX_correlation_org_id - v2"
+logger=migrator t=2024-08-14T10:50:24.432556201Z level=info msg="Migration successfully executed" id="create index IDX_correlation_org_id - v2" duration=447.219µs
+logger=migrator t=2024-08-14T10:50:24.436356234Z level=info msg="Executing migration" id="copy correlation v1 to v2"
+logger=migrator t=2024-08-14T10:50:24.436468802Z level=info msg="Migration successfully executed" id="copy correlation v1 to v2" duration=112.578µs
+logger=migrator t=2024-08-14T10:50:24.440226658Z level=info msg="Executing migration" id="drop correlation_tmp_qwerty"
+logger=migrator t=2024-08-14T10:50:24.440564982Z level=info msg="Migration successfully executed" id="drop correlation_tmp_qwerty" duration=338.121µs
+logger=migrator t=2024-08-14T10:50:24.44465488Z level=info msg="Executing migration" id="add provisioning column"
+logger=migrator t=2024-08-14T10:50:24.447401399Z level=info msg="Migration successfully executed" id="add provisioning column" duration=2.746037ms
+logger=migrator t=2024-08-14T10:50:24.451510436Z level=info msg="Executing migration" id="create entity_events table"
+logger=migrator t=2024-08-14T10:50:24.451891066Z level=info msg="Migration successfully executed" id="create entity_events table" duration=380.569µs
+logger=migrator t=2024-08-14T10:50:24.455874152Z level=info msg="Executing migration" id="create dashboard public config v1"
+logger=migrator t=2024-08-14T10:50:24.456323512Z level=info msg="Migration successfully executed" id="create dashboard public config v1" duration=449.134µs
+logger=migrator t=2024-08-14T10:50:24.461079386Z level=info msg="Executing migration" id="drop index UQE_dashboard_public_config_uid - v1"
+logger=migrator t=2024-08-14T10:50:24.461263071Z level=warn msg="Skipping migration: Already executed, but not recorded in migration log" id="drop index UQE_dashboard_public_config_uid - v1"
+logger=migrator t=2024-08-14T10:50:24.465500857Z level=info msg="Executing migration" id="drop index IDX_dashboard_public_config_org_id_dashboard_uid - v1"
+logger=migrator t=2024-08-14T10:50:24.465679348Z level=warn msg="Skipping migration: Already executed, but not recorded in migration log" id="drop index IDX_dashboard_public_config_org_id_dashboard_uid - v1"
+logger=migrator t=2024-08-14T10:50:24.469727433Z level=info msg="Executing migration" id="Drop old dashboard public config table"
+logger=migrator t=2024-08-14T10:50:24.470080618Z level=info msg="Migration successfully executed" id="Drop old dashboard public config table" duration=354.133µs
+logger=migrator t=2024-08-14T10:50:24.474168519Z level=info msg="Executing migration" id="recreate dashboard public config v1"
+logger=migrator t=2024-08-14T10:50:24.474612458Z level=info msg="Migration successfully executed" id="recreate dashboard public config v1" duration=443.753µs
+logger=migrator t=2024-08-14T10:50:24.479055113Z level=info msg="Executing migration" id="create index UQE_dashboard_public_config_uid - v1"
+logger=migrator t=2024-08-14T10:50:24.479555265Z level=info msg="Migration successfully executed" id="create index UQE_dashboard_public_config_uid - v1" duration=500.287µs
+logger=migrator t=2024-08-14T10:50:24.485199745Z level=info msg="Executing migration" id="create index IDX_dashboard_public_config_org_id_dashboard_uid - v1"
+logger=migrator t=2024-08-14T10:50:24.485674773Z level=info msg="Migration successfully executed" id="create index IDX_dashboard_public_config_org_id_dashboard_uid - v1" duration=475.969µs
+logger=migrator t=2024-08-14T10:50:24.489361273Z level=info msg="Executing migration" id="drop index UQE_dashboard_public_config_uid - v2"
+logger=migrator t=2024-08-14T10:50:24.48979225Z level=info msg="Migration successfully executed" id="drop index UQE_dashboard_public_config_uid - v2" duration=430.764µs
+logger=migrator t=2024-08-14T10:50:24.493806644Z level=info msg="Executing migration" id="drop index IDX_dashboard_public_config_org_id_dashboard_uid - v2"
+logger=migrator t=2024-08-14T10:50:24.494244184Z level=info msg="Migration successfully executed" id="drop index IDX_dashboard_public_config_org_id_dashboard_uid - v2" duration=437.504µs
+logger=migrator t=2024-08-14T10:50:24.498906457Z level=info msg="Executing migration" id="Drop public config table"
+logger=migrator t=2024-08-14T10:50:24.499245385Z level=info msg="Migration successfully executed" id="Drop public config table" duration=338.638µs
+logger=migrator t=2024-08-14T10:50:24.503684997Z level=info msg="Executing migration" id="Recreate dashboard public config v2"
+logger=migrator t=2024-08-14T10:50:24.504175712Z level=info msg="Migration successfully executed" id="Recreate dashboard public config v2" duration=490.477µs
+logger=migrator t=2024-08-14T10:50:24.507931091Z level=info msg="Executing migration" id="create index UQE_dashboard_public_config_uid - v2"
+logger=migrator t=2024-08-14T10:50:24.508412338Z level=info msg="Migration successfully executed" id="create index UQE_dashboard_public_config_uid - v2" duration=481.033µs
+logger=migrator t=2024-08-14T10:50:24.512127761Z level=info msg="Executing migration" id="create index IDX_dashboard_public_config_org_id_dashboard_uid - v2"
+logger=migrator t=2024-08-14T10:50:24.512613372Z level=info msg="Migration successfully executed" id="create index IDX_dashboard_public_config_org_id_dashboard_uid - v2" duration=484.392µs
+logger=migrator t=2024-08-14T10:50:24.516549168Z level=info msg="Executing migration" id="create index UQE_dashboard_public_config_access_token - v2"
+logger=migrator t=2024-08-14T10:50:24.517031234Z level=info msg="Migration successfully executed" id="create index UQE_dashboard_public_config_access_token - v2" duration=480.94µs
+logger=migrator t=2024-08-14T10:50:24.521707716Z level=info msg="Executing migration" id="Rename table dashboard_public_config to dashboard_public - v2"
+logger=migrator t=2024-08-14T10:50:24.529432839Z level=info msg="Migration successfully executed" id="Rename table dashboard_public_config to dashboard_public - v2" duration=7.724719ms
+logger=migrator t=2024-08-14T10:50:24.534535876Z level=info msg="Executing migration" id="add annotations_enabled column"
+logger=migrator t=2024-08-14T10:50:24.537311954Z level=info msg="Migration successfully executed" id="add annotations_enabled column" duration=2.775841ms
+logger=migrator t=2024-08-14T10:50:24.542281738Z level=info msg="Executing migration" id="add time_selection_enabled column"
+logger=migrator t=2024-08-14T10:50:24.545039303Z level=info msg="Migration successfully executed" id="add time_selection_enabled column" duration=2.757128ms
+logger=migrator t=2024-08-14T10:50:24.549161Z level=info msg="Executing migration" id="delete orphaned public dashboards"
+logger=migrator t=2024-08-14T10:50:24.549266761Z level=info msg="Migration successfully executed" id="delete orphaned public dashboards" duration=105.783µs
+logger=migrator t=2024-08-14T10:50:24.553492315Z level=info msg="Executing migration" id="add share column"
+logger=migrator t=2024-08-14T10:50:24.556286712Z level=info msg="Migration successfully executed" id="add share column" duration=2.794002ms
+logger=migrator t=2024-08-14T10:50:24.561320285Z level=info msg="Executing migration" id="backfill empty share column fields with default of public"
+logger=migrator t=2024-08-14T10:50:24.56141314Z level=info msg="Migration successfully executed" id="backfill empty share column fields with default of public" duration=99.205µs
+logger=migrator t=2024-08-14T10:50:24.565621973Z level=info msg="Executing migration" id="create file table"
+logger=migrator t=2024-08-14T10:50:24.56604981Z level=info msg="Migration successfully executed" id="create file table" duration=427.662µs
+logger=migrator t=2024-08-14T10:50:24.571624149Z level=info msg="Executing migration" id="file table idx: path natural pk"
+logger=migrator t=2024-08-14T10:50:24.572072217Z level=info msg="Migration successfully executed" id="file table idx: path natural pk" duration=447.979µs
+logger=migrator t=2024-08-14T10:50:24.575914937Z level=info msg="Executing migration" id="file table idx: parent_folder_path_hash fast folder retrieval"
+logger=migrator t=2024-08-14T10:50:24.576371287Z level=info msg="Migration successfully executed" id="file table idx: parent_folder_path_hash fast folder retrieval" duration=456.076µs
+logger=migrator t=2024-08-14T10:50:24.580025359Z level=info msg="Executing migration" id="create file_meta table"
+logger=migrator t=2024-08-14T10:50:24.580414715Z level=info msg="Migration successfully executed" id="create file_meta table" duration=388.205µs
+logger=migrator t=2024-08-14T10:50:24.585154821Z level=info msg="Executing migration" id="file table idx: path key"
+logger=migrator t=2024-08-14T10:50:24.585643543Z level=info msg="Migration successfully executed" id="file table idx: path key" duration=488.852µs
+logger=migrator t=2024-08-14T10:50:24.589425532Z level=info msg="Executing migration" id="set path collation in file table"
+logger=migrator t=2024-08-14T10:50:24.589454897Z level=info msg="Migration successfully executed" id="set path collation in file table" duration=29.926µs
+logger=migrator t=2024-08-14T10:50:24.593412802Z level=info msg="Executing migration" id="migrate contents column to mediumblob for MySQL"
+logger=migrator t=2024-08-14T10:50:24.593441295Z level=info msg="Migration successfully executed" id="migrate contents column to mediumblob for MySQL" duration=28.978µs
+logger=migrator t=2024-08-14T10:50:24.597776393Z level=info msg="Executing migration" id="managed permissions migration"
+logger=migrator t=2024-08-14T10:50:24.598019076Z level=info msg="Migration successfully executed" id="managed permissions migration" duration=242.496µs
+logger=migrator t=2024-08-14T10:50:24.601950104Z level=info msg="Executing migration" id="managed folder permissions alert actions migration"
+logger=migrator t=2024-08-14T10:50:24.602042674Z level=info msg="Migration successfully executed" id="managed folder permissions alert actions migration" duration=92.995µs
+logger=migrator t=2024-08-14T10:50:24.606071888Z level=info msg="Executing migration" id="RBAC action name migrator"
+logger=migrator t=2024-08-14T10:50:24.606663489Z level=info msg="Migration successfully executed" id="RBAC action name migrator" duration=591.275µs
+logger=migrator t=2024-08-14T10:50:24.610423171Z level=info msg="Executing migration" id="Add UID column to playlist"
+logger=migrator t=2024-08-14T10:50:24.613269122Z level=info msg="Migration successfully executed" id="Add UID column to playlist" duration=2.844641ms
+logger=migrator t=2024-08-14T10:50:24.617102614Z level=info msg="Executing migration" id="Update uid column values in playlist"
+logger=migrator t=2024-08-14T10:50:24.61717881Z level=info msg="Migration successfully executed" id="Update uid column values in playlist" duration=76.263µs
+logger=migrator t=2024-08-14T10:50:24.620918589Z level=info msg="Executing migration" id="Add index for uid in playlist"
+logger=migrator t=2024-08-14T10:50:24.621391878Z level=info msg="Migration successfully executed" id="Add index for uid in playlist" duration=472.964µs
+logger=migrator t=2024-08-14T10:50:24.625194751Z level=info msg="Executing migration" id="update group index for alert rules"
+logger=migrator t=2024-08-14T10:50:24.625364751Z level=info msg="Migration successfully executed" id="update group index for alert rules" duration=169.632µs
+logger=migrator t=2024-08-14T10:50:24.629274595Z level=info msg="Executing migration" id="managed folder permissions alert actions repeated migration"
+logger=migrator t=2024-08-14T10:50:24.62938283Z level=info msg="Migration successfully executed" id="managed folder permissions alert actions repeated migration" duration=108.736µs
+logger=migrator t=2024-08-14T10:50:24.633611014Z level=info msg="Executing migration" id="admin only folder/dashboard permission"
+logger=migrator t=2024-08-14T10:50:24.633840066Z level=info msg="Migration successfully executed" id="admin only folder/dashboard permission" duration=229.028µs
+logger=migrator t=2024-08-14T10:50:24.638208396Z level=info msg="Executing migration" id="add action column to seed_assignment"
+logger=migrator t=2024-08-14T10:50:24.641138792Z level=info msg="Migration successfully executed" id="add action column to seed_assignment" duration=2.929922ms
+logger=migrator t=2024-08-14T10:50:24.645269462Z level=info msg="Executing migration" id="add scope column to seed_assignment"
+logger=migrator t=2024-08-14T10:50:24.648203809Z level=info msg="Migration successfully executed" id="add scope column to seed_assignment" duration=2.934227ms
+logger=migrator t=2024-08-14T10:50:24.652244342Z level=info msg="Executing migration" id="remove unique index builtin_role_role_name before nullable update"
+logger=migrator t=2024-08-14T10:50:24.652686443Z level=info msg="Migration successfully executed" id="remove unique index builtin_role_role_name before nullable update" duration=441.959µs
+logger=migrator t=2024-08-14T10:50:24.65654766Z level=info msg="Executing migration" id="update seed_assignment role_name column to nullable"
+logger=migrator t=2024-08-14T10:50:24.68504197Z level=info msg="Migration successfully executed" id="update seed_assignment role_name column to nullable" duration=28.497622ms
+logger=migrator t=2024-08-14T10:50:24.689490492Z level=info msg="Executing migration" id="add unique index builtin_role_name back"
+logger=migrator t=2024-08-14T10:50:24.689973877Z level=info msg="Migration successfully executed" id="add unique index builtin_role_name back" duration=483.374µs
+logger=migrator t=2024-08-14T10:50:24.69406287Z level=info msg="Executing migration" id="add unique index builtin_role_action_scope"
+logger=migrator t=2024-08-14T10:50:24.694526512Z level=info msg="Migration successfully executed" id="add unique index builtin_role_action_scope" duration=463.612µs
+logger=migrator t=2024-08-14T10:50:24.6986555Z level=info msg="Executing migration" id="add primary key to seed_assigment"
+logger=migrator t=2024-08-14T10:50:24.707539519Z level=info msg="Migration successfully executed" id="add primary key to seed_assigment" duration=8.883827ms
+logger=migrator t=2024-08-14T10:50:24.712383891Z level=info msg="Executing migration" id="add origin column to seed_assignment"
+logger=migrator t=2024-08-14T10:50:24.715206806Z level=info msg="Migration successfully executed" id="add origin column to seed_assignment" duration=2.822622ms
+logger=migrator t=2024-08-14T10:50:24.719589441Z level=info msg="Executing migration" id="add origin to plugin seed_assignment"
+logger=migrator t=2024-08-14T10:50:24.719719451Z level=info msg="Migration successfully executed" id="add origin to plugin seed_assignment" duration=130.353µs
+logger=migrator t=2024-08-14T10:50:24.723692941Z level=info msg="Executing migration" id="prevent seeding OnCall access"
+logger=migrator t=2024-08-14T10:50:24.723768371Z level=info msg="Migration successfully executed" id="prevent seeding OnCall access" duration=75.83µs
+logger=migrator t=2024-08-14T10:50:24.727974572Z level=info msg="Executing migration" id="managed folder permissions alert actions repeated fixed migration"
+logger=migrator t=2024-08-14T10:50:24.728063833Z level=info msg="Migration successfully executed" id="managed folder permissions alert actions repeated fixed migration" duration=89.459µs
+logger=migrator t=2024-08-14T10:50:24.732281809Z level=info msg="Executing migration" id="managed folder permissions library panel actions migration"
+logger=migrator t=2024-08-14T10:50:24.732367671Z level=info msg="Migration successfully executed" id="managed folder permissions library panel actions migration" duration=86.027µs
+logger=migrator t=2024-08-14T10:50:24.736513489Z level=info msg="Executing migration" id="migrate external alertmanagers to datsourcse"
+logger=migrator t=2024-08-14T10:50:24.73659549Z level=info msg="Migration successfully executed" id="migrate external alertmanagers to datsourcse" duration=82.318µs
+logger=migrator t=2024-08-14T10:50:24.7409075Z level=info msg="Executing migration" id="create folder table"
+logger=migrator t=2024-08-14T10:50:24.741343167Z level=info msg="Migration successfully executed" id="create folder table" duration=435.421µs
+logger=migrator t=2024-08-14T10:50:24.746656829Z level=info msg="Executing migration" id="Add index for parent_uid"
+logger=migrator t=2024-08-14T10:50:24.747107548Z level=info msg="Migration successfully executed" id="Add index for parent_uid" duration=450.576µs
+logger=migrator t=2024-08-14T10:50:24.751123413Z level=info msg="Executing migration" id="Add unique index for folder.uid and folder.org_id"
+logger=migrator t=2024-08-14T10:50:24.751587018Z level=info msg="Migration successfully executed" id="Add unique index for folder.uid and folder.org_id" duration=463.328µs
+logger=migrator t=2024-08-14T10:50:24.756564654Z level=info msg="Executing migration" id="Update folder title length"
+logger=migrator t=2024-08-14T10:50:24.756577197Z level=info msg="Migration successfully executed" id="Update folder title length" duration=14.664µs
+logger=migrator t=2024-08-14T10:50:24.761975949Z level=info msg="Executing migration" id="Add unique index for folder.title and folder.parent_uid"
+logger=migrator t=2024-08-14T10:50:24.762496917Z level=info msg="Migration successfully executed" id="Add unique index for folder.title and folder.parent_uid" duration=521.153µs
+logger=migrator t=2024-08-14T10:50:24.767913839Z level=info msg="Executing migration" id="Remove unique index for folder.title and folder.parent_uid"
+logger=migrator t=2024-08-14T10:50:24.768361292Z level=info msg="Migration successfully executed" id="Remove unique index for folder.title and folder.parent_uid" duration=447.568µs
+logger=migrator t=2024-08-14T10:50:24.772577275Z level=info msg="Executing migration" id="Add unique index for title, parent_uid, and org_id"
+logger=migrator t=2024-08-14T10:50:24.773059831Z level=info msg="Migration successfully executed" id="Add unique index for title, parent_uid, and org_id" duration=482.462µs
+logger=migrator t=2024-08-14T10:50:24.777363218Z level=info msg="Executing migration" id="Sync dashboard and folder table"
+logger=migrator t=2024-08-14T10:50:24.777565226Z level=info msg="Migration successfully executed" id="Sync dashboard and folder table" duration=202.041µs
+logger=migrator t=2024-08-14T10:50:24.781521944Z level=info msg="Executing migration" id="Remove ghost folders from the folder table"
+logger=migrator t=2024-08-14T10:50:24.781636671Z level=info msg="Migration successfully executed" id="Remove ghost folders from the folder table" duration=115.284µs
+logger=migrator t=2024-08-14T10:50:24.786091784Z level=info msg="Executing migration" id="Remove unique index UQE_folder_uid_org_id"
+logger=migrator t=2024-08-14T10:50:24.786538737Z level=info msg="Migration successfully executed" id="Remove unique index UQE_folder_uid_org_id" duration=446.972µs
+logger=migrator t=2024-08-14T10:50:24.790876843Z level=info msg="Executing migration" id="Add unique index UQE_folder_org_id_uid"
+logger=migrator t=2024-08-14T10:50:24.791346323Z level=info msg="Migration successfully executed" id="Add unique index UQE_folder_org_id_uid" duration=469.299µs
+logger=migrator t=2024-08-14T10:50:24.79575453Z level=info msg="Executing migration" id="Remove unique index UQE_folder_title_parent_uid_org_id"
+logger=migrator t=2024-08-14T10:50:24.796192834Z level=info msg="Migration successfully executed" id="Remove unique index UQE_folder_title_parent_uid_org_id" duration=438µs
+logger=migrator t=2024-08-14T10:50:24.801247418Z level=info msg="Executing migration" id="Add unique index UQE_folder_org_id_parent_uid_title"
+logger=migrator t=2024-08-14T10:50:24.801702844Z level=info msg="Migration successfully executed" id="Add unique index UQE_folder_org_id_parent_uid_title" duration=454.986µs
+logger=migrator t=2024-08-14T10:50:24.806908401Z level=info msg="Executing migration" id="Remove index IDX_folder_parent_uid_org_id"
+logger=migrator t=2024-08-14T10:50:24.807342915Z level=info msg="Migration successfully executed" id="Remove index IDX_folder_parent_uid_org_id" duration=434.505µs
+logger=migrator t=2024-08-14T10:50:24.811900606Z level=info msg="Executing migration" id="create anon_device table"
+logger=migrator t=2024-08-14T10:50:24.812280303Z level=info msg="Migration successfully executed" id="create anon_device table" duration=379.588µs
+logger=migrator t=2024-08-14T10:50:24.816285336Z level=info msg="Executing migration" id="add unique index anon_device.device_id"
+logger=migrator t=2024-08-14T10:50:24.816784323Z level=info msg="Migration successfully executed" id="add unique index anon_device.device_id" duration=498.808µs
+logger=migrator t=2024-08-14T10:50:24.821391095Z level=info msg="Executing migration" id="add index anon_device.updated_at"
+logger=migrator t=2024-08-14T10:50:24.821839738Z level=info msg="Migration successfully executed" id="add index anon_device.updated_at" duration=448.374µs
+logger=migrator t=2024-08-14T10:50:24.826999946Z level=info msg="Executing migration" id="create signing_key table"
+logger=migrator t=2024-08-14T10:50:24.82739221Z level=info msg="Migration successfully executed" id="create signing_key table" duration=392.096µs
+logger=migrator t=2024-08-14T10:50:24.831467128Z level=info msg="Executing migration" id="add unique index signing_key.key_id"
+logger=migrator t=2024-08-14T10:50:24.831924472Z level=info msg="Migration successfully executed" id="add unique index signing_key.key_id" duration=457.244µs
+logger=migrator t=2024-08-14T10:50:24.836799361Z level=info msg="Executing migration" id="set legacy alert migration status in kvstore"
+logger=migrator t=2024-08-14T10:50:24.837240509Z level=info msg="Migration successfully executed" id="set legacy alert migration status in kvstore" duration=441.326µs
+logger=migrator t=2024-08-14T10:50:24.842411858Z level=info msg="Executing migration" id="migrate record of created folders during legacy migration to kvstore"
+logger=migrator t=2024-08-14T10:50:24.842527763Z level=info msg="Migration successfully executed" id="migrate record of created folders during legacy migration to kvstore" duration=116.18µs
+logger=migrator t=2024-08-14T10:50:24.846670764Z level=info msg="Executing migration" id="Add folder_uid for dashboard"
+logger=migrator t=2024-08-14T10:50:24.849568715Z level=info msg="Migration successfully executed" id="Add folder_uid for dashboard" duration=2.897524ms
+logger=migrator t=2024-08-14T10:50:24.854759767Z level=info msg="Executing migration" id="Populate dashboard folder_uid column"
+logger=migrator t=2024-08-14T10:50:24.855078311Z level=info msg="Migration successfully executed" id="Populate dashboard folder_uid column" duration=319µs
+logger=migrator t=2024-08-14T10:50:24.859410019Z level=info msg="Executing migration" id="Add unique index for dashboard_org_id_folder_uid_title"
+logger=migrator t=2024-08-14T10:50:24.859417044Z level=info msg="Migration successfully executed" id="Add unique index for dashboard_org_id_folder_uid_title" duration=7.556µs
+logger=migrator t=2024-08-14T10:50:24.863307271Z level=info msg="Executing migration" id="Delete unique index for dashboard_org_id_folder_id_title"
+logger=migrator t=2024-08-14T10:50:24.863748451Z level=info msg="Migration successfully executed" id="Delete unique index for dashboard_org_id_folder_id_title" duration=441.023µs
+logger=migrator t=2024-08-14T10:50:24.868030478Z level=info msg="Executing migration" id="Delete unique index for dashboard_org_id_folder_uid_title"
+logger=migrator t=2024-08-14T10:50:24.868037223Z level=info msg="Migration successfully executed" id="Delete unique index for dashboard_org_id_folder_uid_title" duration=8.919µs
+logger=migrator t=2024-08-14T10:50:24.872425815Z level=info msg="Executing migration" id="Add unique index for dashboard_org_id_folder_uid_title_is_folder"
+logger=migrator t=2024-08-14T10:50:24.872928301Z level=info msg="Migration successfully executed" id="Add unique index for dashboard_org_id_folder_uid_title_is_folder" duration=502.177µs
+logger=migrator t=2024-08-14T10:50:24.877670467Z level=info msg="Executing migration" id="Restore index for dashboard_org_id_folder_id_title"
+logger=migrator t=2024-08-14T10:50:24.878186959Z level=info msg="Migration successfully executed" id="Restore index for dashboard_org_id_folder_id_title" duration=517.17µs
+logger=migrator t=2024-08-14T10:50:24.883897006Z level=info msg="Executing migration" id="create sso_setting table"
+logger=migrator t=2024-08-14T10:50:24.884367638Z level=info msg="Migration successfully executed" id="create sso_setting table" duration=469.203µs
+logger=migrator t=2024-08-14T10:50:24.888765643Z level=info msg="Executing migration" id="copy kvstore migration status to each org"
+logger=migrator t=2024-08-14T10:50:24.88909434Z level=info msg="Migration successfully executed" id="copy kvstore migration status to each org" duration=329.085µs
+logger=migrator t=2024-08-14T10:50:24.893471026Z level=info msg="Executing migration" id="add back entry for orgid=0 migrated status"
+logger=migrator t=2024-08-14T10:50:24.893585727Z level=info msg="Migration successfully executed" id="add back entry for orgid=0 migrated status" duration=115.088µs
+logger=migrator t=2024-08-14T10:50:24.897478043Z level=info msg="Executing migration" id="alter kv_store.value to longtext"
+logger=migrator t=2024-08-14T10:50:24.897505452Z level=info msg="Migration successfully executed" id="alter kv_store.value to longtext" duration=27.717µs
+logger=migrator t=2024-08-14T10:50:24.901616723Z level=info msg="Executing migration" id="add notification_settings column to alert_rule table"
+logger=migrator t=2024-08-14T10:50:24.904561663Z level=info msg="Migration successfully executed" id="add notification_settings column to alert_rule table" duration=2.943565ms
+logger=migrator t=2024-08-14T10:50:24.908907348Z level=info msg="Executing migration" id="add notification_settings column to alert_rule_version table"
+logger=migrator t=2024-08-14T10:50:24.911866026Z level=info msg="Migration successfully executed" id="add notification_settings column to alert_rule_version table" duration=2.957594ms
+logger=migrator t=2024-08-14T10:50:24.91572872Z level=info msg="Executing migration" id="removing scope from alert.instances:read action migration"
+logger=migrator t=2024-08-14T10:50:24.915880718Z level=info msg="Migration successfully executed" id="removing scope from alert.instances:read action migration" duration=152.204µs
+logger=migrator t=2024-08-14T10:50:24.920089355Z level=info msg="migrations completed" performed=551 skipped=0 duration=2.829386527s
+logger=sqlstore t=2024-08-14T10:50:24.923806687Z level=info msg="Created default admin" user=gf_admin
+logger=sqlstore t=2024-08-14T10:50:24.923917697Z level=info msg="Created default organization"
+logger=secrets t=2024-08-14T10:50:24.928730585Z level=info msg="Envelope encryption state" enabled=true currentprovider=secretKey.v1
+logger=plugin.store t=2024-08-14T10:50:24.940165756Z level=info msg="Loading plugins..."
+logger=local.finder t=2024-08-14T10:50:24.957158973Z level=warn msg="Skipping finding plugins as directory does not exist" path=/usr/share/grafana/plugins-bundled
+logger=plugin.store t=2024-08-14T10:50:24.957168064Z level=info msg="Plugins loaded" count=55 duration=17.002694ms
+logger=query_data t=2024-08-14T10:50:24.958330994Z level=info msg="Query Service initialization"
+logger=live.push_http t=2024-08-14T10:50:24.959973503Z level=info msg="Live Push Gateway initialization"
+logger=ngalert.migration t=2024-08-14T10:50:24.965090992Z level=info msg=Starting
+logger=ngalert.migration t=2024-08-14T10:50:24.965301777Z level=info msg="Applying transition" currentType=Legacy desiredType=UnifiedAlerting cleanOnDowngrade=false cleanOnUpgrade=false
+logger=ngalert.migration orgID=1 t=2024-08-14T10:50:24.965486564Z level=info msg="Migrating alerts for organisation"
+logger=ngalert.migration orgID=1 t=2024-08-14T10:50:24.965746668Z level=info msg="Alerts found to migrate" alerts=0
+logger=ngalert.migration t=2024-08-14T10:50:24.966470324Z level=info msg="Completed alerting migration"
+logger=ngalert.state.manager t=2024-08-14T10:50:24.985121534Z level=info msg="Running in alternative execution of Error/NoData mode"
+logger=infra.usagestats.collector t=2024-08-14T10:50:24.985959046Z level=info msg="registering usage stat providers" usageStatsProvidersLen=2
+logger=provisioning.datasources t=2024-08-14T10:50:24.986467837Z level=info msg="inserting datasource from configuration" name=Prometheus uid=PBFA97CFB590B2093
+logger=provisioning.alerting t=2024-08-14T10:50:24.994239511Z level=info msg="starting to provision alerting"
+logger=accesscontrol t=2024-08-14T10:50:24.994549926Z level=warn msg="No entity set for access control evaluation"
+logger=accesscontrol t=2024-08-14T10:50:24.994556748Z level=warn msg="No entity set for access control evaluation"
+logger=folder-service t=2024-08-14T10:50:25.014593685Z level=warn msg="failed to parse user ID" namespaceID=user userID=0 error="identifier is not initialized"
+logger=provisioning.alerting t=2024-08-14T10:50:25.037140273Z level=info msg="finished to provision alerting"
+logger=grafanaStorageLogger t=2024-08-14T10:50:25.037227103Z level=info msg="Storage starting"
+logger=ngalert.state.manager t=2024-08-14T10:50:25.037504094Z level=info msg="Warming state cache for startup"
+logger=ngalert.multiorg.alertmanager t=2024-08-14T10:50:25.037621046Z level=info msg="Starting MultiOrg Alertmanager"
+logger=ngalert.state.manager t=2024-08-14T10:50:25.037690771Z level=info msg="State cache has been initialized" states=0 duration=186.175µs
+logger=ngalert.scheduler t=2024-08-14T10:50:25.037702917Z level=info msg="Starting scheduler" tickInterval=10s maxAttempts=1
+logger=ticker t=2024-08-14T10:50:25.037722923Z level=info msg=starting first_tick=2024-08-14T10:50:30Z
+logger=provisioning.dashboard t=2024-08-14T10:50:25.038089659Z level=info msg="starting to provision dashboards"
+logger=http.server t=2024-08-14T10:50:25.038575634Z level=info msg="HTTP Server Listen" address=[::]:3000 protocol=http subUrl= socket=
+logger=folder-service t=2024-08-14T10:50:25.038819485Z level=warn msg="failed to parse user ID" namespaceID=user userID=0 error="identifier is not initialized"
+logger=sqlstore.transactions t=2024-08-14T10:50:25.063647884Z level=info msg="Database locked, sleeping then retrying" error="database is locked" retry=0 code="database is locked"
+logger=plugins.update.checker t=2024-08-14T10:50:25.070268194Z level=info msg="Update check succeeded" duration=32.82933ms
+logger=grafana.update.checker t=2024-08-14T10:50:25.072586291Z level=info msg="Update check succeeded" duration=35.096758ms
+logger=provisioning.dashboard type=file name=Dashboards t=2024-08-14T10:50:25.103823303Z level=error msg="failed to load dashboard from " file=/var/lib/grafana/dashboards/PostGre/9628_rev7.json error="invalid character '/' looking for beginning of value"
+logger=folder-service t=2024-08-14T10:50:25.104231361Z level=warn msg="failed to parse user ID" namespaceID=user userID=0 error="identifier is not initialized"
+logger=grafana-apiserver t=2024-08-14T10:50:25.125428531Z level=info msg="Adding GroupVersion playlist.grafana.app v0alpha1 to ResourceManager"
+logger=grafana-apiserver t=2024-08-14T10:50:25.125661725Z level=info msg="Adding GroupVersion featuretoggle.grafana.app v0alpha1 to ResourceManager"
+logger=sqlstore.transactions t=2024-08-14T10:50:25.140339444Z level=info msg="Database locked, sleeping then retrying" error="database is locked" retry=0 code="database is locked"
+logger=provisioning.dashboard t=2024-08-14T10:50:25.182446339Z level=info msg="finished to provision dashboards"
+logger=authn.service t=2024-08-14T10:50:28.939887469Z level=warn msg="Failed to authenticate request" client=auth.client.session error="user token not found"
+logger=context userId=0 orgId=0 uname= t=2024-08-14T10:50:28.939918354Z level=warn msg=Unauthorized error="user token not found" remote_addr=172.18.0.1 traceID=
+logger=context userId=0 orgId=0 uname= t=2024-08-14T10:50:28.939946942Z level=info msg="Request Completed" method=GET path=/api/datasources/uid/PBFA97CFB590B2093/resources/api/v1/query status=401 remote_addr=172.18.0.1 time_ms=0 duration=418.895µs size=40 referer="http://localhost:3000/d/000000039/postgresql-database?orgId=1&refresh=10s" handler=/api/datasources/uid/:uid/resources/* status_source=server
+logger=authn.service t=2024-08-14T10:50:28.939949434Z level=warn msg="Failed to authenticate request" client=auth.client.session error="user token not found"
+logger=context userId=0 orgId=0 uname= t=2024-08-14T10:50:28.939981378Z level=warn msg=Unauthorized error="user token not found" remote_addr=172.18.0.1 traceID=
+logger=context userId=0 orgId=0 uname= t=2024-08-14T10:50:28.940007495Z level=info msg="Request Completed" method=GET path=/api/datasources/uid/PBFA97CFB590B2093/resources/api/v1/query status=401 remote_addr=172.18.0.1 time_ms=0 duration=480.768µs size=40 referer="http://localhost:3000/d/000000039/postgresql-database?orgId=1&refresh=10s" handler=/api/datasources/uid/:uid/resources/* status_source=server
+logger=authn.service t=2024-08-14T10:50:28.978320936Z level=warn msg="Failed to authenticate request" client=auth.client.session error="user token not found"
+logger=context userId=0 orgId=0 uname= t=2024-08-14T10:50:28.978518403Z level=error msg=Unauthorized error="user token not found" remote_addr=172.18.0.1 traceID=
+logger=context userId=0 orgId=0 uname= t=2024-08-14T10:50:28.978544163Z level=info msg="Request Completed" method=POST path=/api/user/auth-tokens/rotate status=401 remote_addr=172.18.0.1 time_ms=0 duration=514.644µs size=39 referer="http://localhost:3000/d/000000039/postgresql-database?orgId=1&refresh=10s" handler=/api/user/auth-tokens/rotate status_source=server
+logger=authn.service t=2024-08-14T10:50:29.001448862Z level=warn msg="Failed to authenticate request" client=auth.client.session error="user token not found"
+logger=context userId=0 orgId=0 uname= t=2024-08-14T10:50:29.001521572Z level=info msg="Request Completed" method=GET path=/d/000000039/postgresql-database status=302 remote_addr=172.18.0.1 time_ms=0 duration=383.288µs size=29 referer= handler=/d/:uid/:slug status_source=server
+logger=authn.service t=2024-08-14T10:50:29.006525171Z level=warn msg="Failed to authenticate request" client=auth.client.session error="user token not found"
+logger=authn.service t=2024-08-14T10:50:29.013693925Z level=warn msg="Failed to authenticate request" client=auth.client.session error="user token not found"
+logger=context userId=0 orgId=0 uname= t=2024-08-14T10:50:29.013737468Z level=warn msg=Unauthorized error="user token not found" remote_addr=172.18.0.1 traceID=
+logger=context userId=0 orgId=0 uname= t=2024-08-14T10:50:29.013764601Z level=info msg="Request Completed" method=POST path=/api/ds/query status=401 remote_addr=172.18.0.1 time_ms=0 duration=341.685µs size=40 referer="http://localhost:3000/d/000000039/postgresql-database?orgId=1&refresh=10s" handler=/api/ds/query status_source=server
+logger=authn.service t=2024-08-14T10:50:29.01592005Z level=warn msg="Failed to authenticate request" client=auth.client.session error="user token not found"
+logger=context userId=0 orgId=0 uname= t=2024-08-14T10:50:29.015945681Z level=warn msg=Unauthorized error="user token not found" remote_addr=172.18.0.1 traceID=
+logger=context userId=0 orgId=0 uname= t=2024-08-14T10:50:29.015973969Z level=info msg="Request Completed" method=POST path=/api/ds/query status=401 remote_addr=172.18.0.1 time_ms=0 duration=278.432µs size=40 referer="http://localhost:3000/d/000000039/postgresql-database?orgId=1&refresh=10s" handler=/api/ds/query status_source=server
+logger=authn.service t=2024-08-14T10:50:29.018804079Z level=warn msg="Failed to authenticate request" client=auth.client.session error="user token not found"
+logger=context userId=0 orgId=0 uname= t=2024-08-14T10:50:29.018851125Z level=warn msg=Unauthorized error="user token not found" remote_addr=172.18.0.1 traceID=
+logger=context userId=0 orgId=0 uname= t=2024-08-14T10:50:29.018888993Z level=info msg="Request Completed" method=POST path=/api/ds/query status=401 remote_addr=172.18.0.1 time_ms=0 duration=391.164µs size=40 referer="http://localhost:3000/d/000000039/postgresql-database?orgId=1&refresh=10s" handler=/api/ds/query status_source=server
+logger=authn.service t=2024-08-14T10:50:29.020084347Z level=warn msg="Failed to authenticate request" client=auth.client.session error="user token not found"
+logger=context userId=0 orgId=0 uname= t=2024-08-14T10:50:29.020108823Z level=warn msg=Unauthorized error="user token not found" remote_addr=172.18.0.1 traceID=
+logger=context userId=0 orgId=0 uname= t=2024-08-14T10:50:29.020131239Z level=info msg="Request Completed" method=POST path=/api/ds/query status=401 remote_addr=172.18.0.1 time_ms=0 duration=275.023µs size=40 referer="http://localhost:3000/d/000000039/postgresql-database?orgId=1&refresh=10s" handler=/api/ds/query status_source=server
+logger=authn.service t=2024-08-14T10:50:29.026129948Z level=warn msg="Failed to authenticate request" client=auth.client.session error="user token not found"
+logger=context userId=0 orgId=0 uname= t=2024-08-14T10:50:29.026225762Z level=warn msg=Unauthorized error="user token not found" remote_addr=172.18.0.1 traceID=
+logger=context userId=0 orgId=0 uname= t=2024-08-14T10:50:29.026307742Z level=info msg="Request Completed" method=POST path=/api/ds/query status=401 remote_addr=172.18.0.1 time_ms=1 duration=1.389743ms size=40 referer="http://localhost:3000/d/000000039/postgresql-database?orgId=1&refresh=10s" handler=/api/ds/query status_source=server
+logger=provisioning.dashboard type=file name=Dashboards t=2024-08-14T10:50:35.184551351Z level=error msg="failed to load dashboard from " file=/var/lib/grafana/dashboards/PostGre/9628_rev7.json error="invalid character '/' looking for beginning of value"
+logger=authn.service t=2024-08-14T10:50:39.57760003Z level=warn msg="Failed to authenticate request" client=auth.client.session error="user token not found"
+logger=context userId=1 orgId=1 uname=gf_admin t=2024-08-14T10:50:40.133952908Z level=error msg="Dashboard not found" error="Dashboard not found" remote_addr=172.18.0.1 traceID=
+logger=context userId=1 orgId=1 uname=gf_admin t=2024-08-14T10:50:40.133992539Z level=info msg="Request Completed" method=GET path=/api/dashboards/uid/000000039 status=404 remote_addr=172.18.0.1 time_ms=0 duration=902.829µs size=46 referer="http://localhost:3000/d/000000039/postgresql-database?orgId=1&refresh=10s" handler=/api/dashboards/uid/:uid status_source=server
+logger=context userId=1 orgId=1 uname=gf_admin t=2024-08-14T10:50:40.144324128Z level=error msg="Dashboard not found" error="Dashboard not found" remote_addr=172.18.0.1 traceID=
+logger=context userId=1 orgId=1 uname=gf_admin t=2024-08-14T10:50:40.14438084Z level=info msg="Request Completed" method=GET path=/api/dashboards/uid/000000039 status=404 remote_addr=172.18.0.1 time_ms=9 duration=9.56988ms size=46 referer="http://localhost:3000/d/000000039/postgresql-database?orgId=1&refresh=10s" handler=/api/dashboards/uid/:uid status_source=server
+logger=context userId=1 orgId=1 uname=gf_admin t=2024-08-14T10:50:40.28260781Z level=error msg="Invalid dashboard UID in annotation request" error="Dashboard not found" remote_addr=172.18.0.1 traceID=
+logger=context userId=1 orgId=1 uname=gf_admin t=2024-08-14T10:50:40.282635815Z level=info msg="Request Completed" method=GET path=/api/annotations status=400 remote_addr=172.18.0.1 time_ms=0 duration=565.068µs size=70 referer="http://localhost:3000/d/000000039/postgresql-database?orgId=1&refresh=10s" handler=/api/annotations status_source=server
+logger=provisioning.dashboard type=file name=Dashboards t=2024-08-14T10:50:45.184405042Z level=error msg="failed to load dashboard from " file=/var/lib/grafana/dashboards/PostGre/9628_rev7.json error="invalid character '/' looking for beginning of value"
+logger=provisioning.dashboard type=file name=Dashboards t=2024-08-14T10:50:55.186063322Z level=error msg="failed to load dashboard from " file=/var/lib/grafana/dashboards/PostGre/9628_rev7.json error="invalid character '/' looking for beginning of value"
