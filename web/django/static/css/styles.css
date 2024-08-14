@@ -3,7 +3,6 @@ body, html {
   padding: 0;
   height: 100%;
   background-color: #212529;
-
 }
 
 .qd_connect {
@@ -197,16 +196,16 @@ a:active {
 }
 
 .radiogroup input[type="radio"]:checked + label img {
-  border: 2px solid rgb(241,185,77);
+  border: 2px solid var(--bs-primary);
   border-radius: 23px;
 }
 
 .radiogroup input[type="radio"]:checked + label i {
-  border: 2px solid rgb(241,185,77);
+  border: 2px solid var(--bs-primary);
 }
 
 .radiogroup input[type="radio"]:checked + label svg {
-  border: 2px solid rgb(241,185,77);
+  border: 2px solid var(--bs-primary);
 }
 
 input[type="file"] {
@@ -220,5 +219,72 @@ input[type="file"] {
 .refreshButton:hover {
   transform: rotate(-360deg);
   transition: transform 0.5s ease;
+}
+
+.actionBtn {
+  background: rgba(0,0,0,0);
+  border-radius: 20px;
+  width: 90%;
+  height: 100%;
+  border-style: none;
+}
+
+.seeProfile:hover {
+  border-style: solid;
+  border-width: 1px;
+  background: rgba(0,0,0,0);
+  border-color: #ffffff;
+}
+
+.blockFriend:hover {
+  border-style: solid;
+  border-width: 1px;
+  background: rgba(0,0,0,0);
+  border-color: var(--bs-orange);
+}
+
+.unblockFriend:hover {
+  border-style: solid;
+  border-width: 1px;
+  background: rgba(0,0,0,0);
+  border-color: var(--bs-primary);
+}
+
+.removeFriend:hover {
+  border-style: solid;
+  border-width: 1px;
+  background: rgba(0,0,0,0);
+  border-color: var(--bs-form-invalid-color);
+}
+
+.inviteFriend:hover {
+  border-style: solid;
+  border-width: 1px;
+  background: rgba(0,0,0,0);
+  border-color: var(--bs-info-border-subtle);
+}
+
+.seeProfile {
+  box-shadow: 0px 0px 4px 1px #ffffff;
+}
+
+.blockFriend {
+  box-shadow: 0px 0px 4px 1px var(--bs-orange);
+}
+
+.unblockFriend {
+  box-shadow: 0px 0px 4px 1px var(--bs-primary);
+}
+
+.removeFriend {
+  box-shadow: 0px 0px 4px 1px var(--bs-form-invalid-color);
+}
+
+.inviteFriend {
+  box-shadow: 0px 0px 4px 1px var(--bs-info-border-subtle);
+}
+
+.friendItemLink:hover .friendItem {
+  background-color: var(--bs-gray-800);
 }
 

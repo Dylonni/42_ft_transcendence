@@ -49,8 +49,8 @@
 				{% for friend in friends %}
 				{% if friend.status == 'Online' %}
 				<!-- TODO: change background of selected user with this rule , background: #102c1f -->
-				<a class="d-xxl-flex justify-content-xxl-start align-items-xxl-center" href="#" style="width: 100%;height: 85px;border-style: none;">
-					<div class="d-flex d-xl-flex flex-row justify-content-start align-items-center justify-content-lg-start align-items-lg-center align-items-xl-center justify-content-xxl-start" id="frienditemOnline" style="height: 85px;width: 100%;border-radius: 0px;margin-left: 0px;margin-right: 0px;padding-left: 10px;padding-right: 10px;">
+				<a class="d-xxl-flex justify-content-xxl-start align-items-xxl-center friendItemLink" href="#" style="width: 100%;height: 85px;border-style: none;">
+					<div class="d-flex d-xl-flex flex-row justify-content-start align-items-center justify-content-lg-start align-items-lg-center align-items-xl-center justify-content-xxl-start friendItem" id="frienditemOnline" style="height: 85px;width: 100%;border-radius: 0px;margin-left: 0px;margin-right: 0px;padding-left: 10px;padding-right: 10px;">
 						<div class="d-flex d-xl-flex justify-content-center align-items-center justify-content-sm-center justify-content-xl-center align-items-xl-center justify-content-xxl-center" style="border-radius: 0px;padding-top: 0px;margin-bottom: 0px;height: 60px;width: 40%;margin-top: 0px;position: sticky;">
 							<div style="width: 60px;height: 60px;">
 								<img height="60" src="{{ friend.avatar.url }}" style="border-radius: 50%;z-index: 999;width: 100%;height: 100%;box-shadow: 0px 0px 6px 1px rgb(51,255,0);border: 2px solid rgb(51,255,0) ;" width="60"/>
@@ -76,8 +76,35 @@
 					</div>
 				</a>
 				{% elif friend.status == 'Playing' %}
-				<a class="d-xxl-flex justify-content-xxl-start align-items-xxl-center" href="#" style="width: 100%;height: 85px;border-style: none;">
-					<div class="d-flex d-xl-flex flex-row justify-content-start align-items-center justify-content-lg-start align-items-lg-center align-items-xl-center justify-content-xxl-start" id="friendItemPlaying" style="height: 85px;width: 100%;border-radius: 0px;background: var(--bs-body-color);margin-left: 0px;margin-right: 0px;padding-left: 10px;padding-right: 10px;">
+				<a class="d-xxl-flex justify-content-xxl-start align-items-xxl-center friendItemLink" href="#" style="width: 100%;height: 85px;border-style: none;">
+					<div class="d-flex d-xl-flex flex-row justify-content-start align-items-center justify-content-lg-start align-items-lg-center align-items-xl-center justify-content-xxl-start friendItem" id="friendItemPlaying" style="height: 85px;width: 100%;border-radius: 0px;background: var(--bs-body-color);margin-left: 0px;margin-right: 0px;padding-left: 10px;padding-right: 10px;">
+						<div class="d-flex d-xl-flex justify-content-center align-items-center justify-content-sm-center justify-content-xl-center align-items-xl-center justify-content-xxl-center" style="border-radius: 0px;padding-top: 0px;margin-bottom: 0px;height: 60px;width: 40%;margin-top: 0px;position: sticky;">
+							<div style="width: 60px;height: 60px;">
+								<img height="60" src="assets/img/icon5.webp" style="border-radius: 50%;z-index: 999;width: 100%;height: 100%;border: 2px solid #29c9ea;box-shadow: 0px 0px 6px 2px #29c9ea;" width="60"/>
+							</div>
+							{% if friend.has_unread_messages %}
+							<div style="width:10px;height:10px;background:#ff0000;border-radius:8px;margin:0px;padding-right:0px;margin-bottom:45px;margin-right:0px;margin-left:0px;">
+							</div>
+							{% else %}
+							<div style="width:10px;height:10px;background:#ff000000;border-radius:8px;margin:0px;padding-right:0px;margin-bottom:45px;margin-right:0px;margin-left:0px;">
+							</div>
+							{% endif %}
+						</div>
+						<div class="text-truncate d-flex d-sm-flex d-xl-flex flex-column justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-xl-center align-items-xl-start" style="width: 100%;height: 100%;margin-bottom: 0px;margin-right: 0px;margin-left: 0px;">
+							<h1 class="text-truncate fs-5" id="friendPlayingId" style="color: var(--bs-body-bg);margin-bottom: 0px;margin-top: 0px;width: 100%;font-weight: bold;">
+								{{ friend.alias }}
+							</h1>
+							<h1 class="text-truncate fs-6" id="friendPlayingMsg" style="color: var(--bs-gray-500);margin-bottom: 0px;margin-top: 0px;width: 100%;">
+								{% if friend.get_last_message %}
+								{{ friend.get_last_speaker }}: {{ friend.get_last_message }}
+								{% endif %}
+							</h1>
+						</div>
+					</div>
+				</a>
+				{% elif friend.status == 'Waiting' %}
+				<a class="d-xxl-flex justify-content-xxl-start align-items-xxl-center friendItemLink" href="#" style="width: 100%;height: 85px;border-style: none;">
+					<div class="d-flex d-xl-flex flex-row justify-content-start align-items-center justify-content-lg-start align-items-lg-center align-items-xl-center justify-content-xxl-start friendItem" id="friendItemWaiting" style="height: 85px;width: 100%;border-radius: 0px;background: var(--bs-body-color);margin-left: 0px;margin-right: 0px;padding-left: 10px;padding-right: 10px;">
 						<div class="d-flex d-xl-flex justify-content-center align-items-center justify-content-sm-center justify-content-xl-center align-items-xl-center justify-content-xxl-center" style="border-radius: 0px;padding-top: 0px;margin-bottom: 0px;height: 60px;width: 40%;margin-top: 0px;position: sticky;">
 							<div style="width: 60px;height: 60px;">
 								<img height="60" src="assets/img/icon5.webp" style="border-radius: 50%;z-index: 999;width: 100%;height: 100%;border: 2px solid var(--bs-orange);box-shadow: 0px 0px 6px 2px var(--bs-orange);" width="60"/>
@@ -103,8 +130,8 @@
 					</div>
 				</a>
 				{% else %}
-				<a class="d-xxl-flex justify-content-xxl-start align-items-xxl-center" href="#" style="width: 100%;height: 85px;border-style: none;">
-					<div class="d-flex d-xl-flex flex-row justify-content-start align-items-center justify-content-lg-start align-items-lg-center align-items-xl-center justify-content-xxl-start" id="friendItemOffline" style="height: 85px;width: 100%;border-radius: 0px;background: var(--bs-body-color);margin-left: 0px;margin-right: 0px;opacity: 0.50;padding-left: 10px;padding-right: 10px;">
+				<a class="d-xxl-flex justify-content-xxl-start align-items-xxl-center friendItemLink" href="#" style="width: 100%;height: 85px;border-style: none;">
+					<div class="d-flex d-xl-flex flex-row justify-content-start align-items-center justify-content-lg-start align-items-lg-center align-items-xl-center justify-content-xxl-start friendItem" id="friendItemOffline" style="height: 85px;width: 100%;border-radius: 0px;background: var(--bs-body-color);margin-left: 0px;margin-right: 0px;opacity: 0.50;padding-left: 10px;padding-right: 10px;">
 						<div class="d-flex d-xl-flex justify-content-center align-items-center justify-content-sm-center justify-content-xl-center align-items-xl-center justify-content-xxl-center" style="border-radius: 0px;padding-top: 0px;margin-bottom: 0px;height: 60px;width: 40%;margin-top: 0px;position: sticky;">
 							<div style="width: 60px;height: 60px;">
 								<img height="60" src="assets/img/Icontry.webp" style="border-radius: 50%;z-index: 999;width: 100%;height: 100%;border: 2px none rgb(51,255,0);opacity: 1;" width="60"/>
@@ -152,9 +179,13 @@
 						<span style="color: var(--bs-dark-border-subtle);margin-top: 0px;margin-bottom: 0px;">
 							{% translate 'Offline' %}
 						</span>
-						{% else %}
+						{% elif current_friend.status == 'Waiting' %}
 						<span class="d-xxl-flex justify-content-xxl-center align-items-xxl-center" style="color: var(--bs-orange);margin-top: 0px;margin-bottom: 0px;">
-							{% translate 'Playing' %}
+							{% translate 'In a room' %}
+						</span>
+						{% else %}
+						<span class="d-xxl-flex justify-content-xxl-center align-items-xxl-center" style="color: #29c9ea;margin-top: 0px;margin-bottom: 0px;">
+							{% translate 'In game' %}
 						</span>
 						{% endif %}
 					</h1>
@@ -258,19 +289,19 @@
 		</div>
 		<div class="col-12 col-sm-12 col-md-12 col-lg-2 col-xl-2 col-xxl-2 d-sm-flex flex-column" style="height: 100%;padding-left: 12px;margin-bottom: 10px;">
 			{% if current_friend %}
-			<div class="d-flex d-md-flex d-xl-flex flex-column justify-content-center align-items-center justify-content-md-center align-items-md-center align-items-xxl-center" id="currentConv" style="width: 100%;height: 70%;margin-top: 0px;border-radius: 19px;background: var(--bs-body-color);box-shadow: 0px 0px 6px 2px #2b7050;border: 2px none #2b7050;">
+			<div class="d-flex d-md-flex d-xl-flex flex-column justify-content-center align-items-center justify-content-md-center align-items-md-center align-items-xxl-center" id="currentConv" style="width: 100%;height: 100%;margin-top: 0px;border-radius: 19px;background: var(--bs-body-color);box-shadow: 0px 0px 6px 2px #2b7050;border: 2px none #2b7050;">
 				<div class="d-flex d-xl-flex flex-column justify-content-center align-items-center justify-content-sm-center justify-content-lg-center align-items-lg-center align-items-xl-center justify-content-xxl-center" id="currentFriend" style="height: 100%;width: 100%;border-radius: 0px;margin-left: 0px;margin-right: 0px;padding-left: 9px;padding-right: 9px;margin-top: 0px;margin-bottom: 0px;">
 					<div class="d-xl-flex justify-content-xl-center align-items-xl-center" style="border-radius: 0px;padding-top: 0px;height: 100px;width: 100px;position: sticky;margin-top: 10px;margin-bottom: 10px;">
-						<img height="87" src="{{ current_friend.avatar_url }}" style="border-radius: 50%;z-index: 999;width: 100%;height: 100%;" width="88"/>
+						<img  width="88" height="88" src="{{ current_friend.avatar_url }}" style="border-radius: 50%;z-index: 999;width: 100%;height: 100%;"/>
 					</div>
 					<h1 class="fs-5" style="font-weight: bold;color: var(--bs-body-bg);">
 						{{ current_friend.alias }}
 					</h1>
 				</div>
-				<div class="d-flex d-xl-flex flex-column justify-content-center align-items-center justify-content-sm-center justify-content-md-center justify-content-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-start align-items-xxl-center" style="width: 100%;height: 100%;z-index: 999;margin-left: 0px;margin-top: 0px;margin-bottom: 0px;padding-top: 0px;padding-bottom: 0px;">
-					<div class="d-flex justify-content-center align-items-center" style="width: 100%;margin-top: 5px;margin-bottom: 5px;height: 100%;">
-						<a class="btn btn-primary d-xxl-flex justify-content-xxl-center align-items-xxl-center" href="/profiles/{{ current_friend.id }}/" style="background: rgba(33,37,41,0);border-radius: 20px;z-index: 999;margin-right: 0px;width: 90%;border-style: none;border-color: var(--bs-btn-disabled-color);box-shadow: 0px 0px 4px 1px var(--bs-btn-disabled-color);">
-							<svg class="icon icon-tabler icon-tabler-user-circle" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 25px;padding-top: 0px;color: var(--bs-body-bg);margin-left: 0px;margin-right: 38px;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
+				<div class="d-flex d-xl-flex flex-column justify-content-start align-items-center" style="width: 100%;height: 100%;">
+					<div class="d-flex justify-content-center align-items-center" style="width: 100%;margin-top: 10px;margin-bottom: 10px;height: 100%;">
+						<a class="d-flex justify-content-center align-items-center text-decoration-none actionBtn seeProfile" style="color: var(--bs-body-bg);" href="/profiles/{{ current_friend.id }}/">
+							<svg class="icon icon-tabler icon-tabler-user-circle" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 28px;padding-top: 0px;color: var(--bs-body-bg);margin-left: 0px;margin-right: 38px;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
 								<path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
 								<path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
 								<path d="M12 10m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"></path>
@@ -280,9 +311,9 @@
 						</a>
 					</div>
 					{% if current_friend.is_blocked %}
-					<div class="d-flex justify-content-center align-items-center" style="width: 100%;margin-top: 5px;margin-bottom: 5px;height: 100%;">
-						<a class="btn btn-primary d-xxl-flex justify-content-xxl-center align-items-xxl-center" href="/api/profiles/{{ current_friend.id }}/blocks/" style="background: rgba(33,37,41,0);border-radius: 20px;z-index: 999;margin-right: 0px;width: 90%;box-shadow: 0px 0px 4px 1px var(--bs-primary);border-style: none;border-color: rgb(255,152,0);">
-							<svg class="icon icon-tabler icon-tabler-user-off" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" style="font-size: 25px;padding-top: 0px;margin-left: 0px;color: var(--bs-primary);margin-right: 10px;">
+					<div class="d-flex justify-content-center align-items-center" style="width: 100%;margin-top: 10px;margin-bottom: 10px;height: 100%;">
+						<a class="d-flex justify-content-center align-items-center text-decoration-none actionBtn unblockFriend" style="color: var(--bs-body-bg);" href="/api/profiles/{{ current_friend.id }}/blocks/">
+							<svg class="icon icon-tabler icon-tabler-user-off" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" style="font-size: 28px;padding-top: 0px;margin-left: 0px;color: var(--bs-primary);margin-right: 10px;">
 								<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
 								<path d="M8.18 8.189a4.01 4.01 0 0 0 2.616 2.627m3.507 -.545a4 4 0 1 0 -5.59 -5.552"></path>
 								<path d="M6 21v-2a4 4 0 0 1 4 -4h4c.412 0 .81 .062 1.183 .178m2.633 2.618c.12 .38 .184 .785 .184 1.204v2"></path>
@@ -292,9 +323,9 @@
 						</a>
 					</div>
 					{% else %}
-					<div class="d-flex justify-content-center align-items-center" style="width: 100%;margin-top: 5px;margin-bottom: 5px;height: 100%;">
-						<a class="btn btn-primary d-xxl-flex justify-content-xxl-center align-items-xxl-center" href="/api/profiles/{{ current_friend.id }}/blocks/" style="background: rgba(33,37,41,0);border-radius: 20px;z-index: 999;margin-right: 0px;width: 90%;box-shadow: 0px 0px 4px 1px rgb(255,152,0);border-style: none;border-color: rgb(255,152,0);">
-							<svg class="icon icon-tabler icon-tabler-user-cancel" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 25px;padding-top: 0px;margin-left: 0px;color: var(--bs-orange);margin-right: 28px;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
+					<div class="d-flex justify-content-center align-items-center" style="width: 100%;margin-top: 10px;margin-bottom: 10px;height: 100%;">
+						<a class="d-flex justify-content-center align-items-center text-decoration-none actionBtn blockFriend" style="color: var(--bs-body-bg);" href="/api/profiles/{{ current_friend.id }}/blocks/">
+							<svg class="icon icon-tabler icon-tabler-user-cancel" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 28px;color: var(--bs-orange);margin-right: 28px;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
 								<path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
 								<path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
 								<path d="M6 21v-2a4 4 0 0 1 4 -4h3.5"></path>
@@ -305,9 +336,9 @@
 						</a>
 					</div>
 					{% endif %}
-					<div class="d-flex justify-content-center align-items-center" style="width: 100%;margin-top: 5px;margin-bottom: 5px;height: 100%;">
-						<a class="btn btn-primary d-xxl-flex justify-content-xxl-center align-items-xxl-center" href="/api/profiles/{{ current_friend.id }}/friends/" style="background: rgba(13,110,253,0);border-radius: 20px;z-index: 999;margin-left: 0px;margin-right: 0px;width: 90%;border: 1px none rgb(255,0,0);box-shadow: 0px 0px 4px 1px rgb(255,0,0);">
-							<svg class="icon icon-tabler icon-tabler-trash-x" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 25px;margin-left: 3px;color: var(--bs-form-invalid-color);margin-right: 13px;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
+					<div class="d-flex justify-content-center align-items-center" style="width: 100%;margin-top: 10px;margin-bottom: 10px;height: 100%;">
+						<a class="d-flex justify-content-center align-items-center text-decoration-none actionBtn removeFriend" style="color: var(--bs-body-bg);" href="/api/profiles/{{ current_friend.id }}/friends/">
+							<svg class="icon icon-tabler icon-tabler-trash-x" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 28px;color: var(--bs-form-invalid-color);margin-right: 13px;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
 								<path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
 								<path d="M4 7h16"></path>
 								<path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>
@@ -317,10 +348,10 @@
 							{% translate 'Remove Friend' %}
 						</a>
 					</div>
-					<div class="d-flex justify-content-center align-items-center" style="width: 100%;margin-top: 5px;margin-bottom: 5px;height: 100%;">
-						{% if profile.status == 'Playing' %}
-						<a class="btn btn-primary d-xxl-flex justify-content-xxl-center align-items-xxl-center" style="background: rgba(13,110,253,0);border-radius: 20px;z-index: 999;margin-left: 0px;width: 90%;border: 1px none var(--bs-info-border-subtle);box-shadow: 0px 0px 4px 1px var(--bs-info-border-subtle);">
-							<svg class="icon icon-tabler icon-tabler-device-gamepad" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 25px;color: var(--bs-info-border-subtle);margin-right: 30px;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
+					<div class="d-flex justify-content-center align-items-center" style="width: 100%;margin-top: 10px;margin-bottom: 10px;height: 100%;">
+						{% if profile.status == 'Waiting' %}
+						<a class="d-flex justify-content-center align-items-center text-decoration-none actionBtn inviteFriend" style="color: var(--bs-body-bg);">
+							<svg class="icon icon-tabler icon-tabler-device-gamepad" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 28px;color: var(--bs-info-border-subtle);margin-right: 30px;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
 								<path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
 								<path d="M2 6m0 2a2 2 0 0 1 2 -2h16a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-16a2 2 0 0 1 -2 -2z"></path>
 								<path d="M6 12h4m-2 -2v4"></path>
