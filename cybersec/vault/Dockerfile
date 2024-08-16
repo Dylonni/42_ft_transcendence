@@ -10,6 +10,8 @@ RUN mkdir -p /vault/config/policies
 
 COPY ./config/vault.hcl /vault/config/vault.hcl
 COPY ./config/policies/django-policy.hcl /vault/config/policies/django-policy.hcl
+COPY ./config/policies/admin-policy.hcl /vault/config/policies/admin-policy.hcl
+
 COPY ./tools/init.sh .
 
 
