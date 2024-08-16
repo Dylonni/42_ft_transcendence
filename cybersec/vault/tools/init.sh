@@ -5,6 +5,7 @@ sleep 5
 
 mkdir -p /vault/output
 mkdir -p /vault/secrets/django
+mkdir -p /vault/secrets/mon/grafana
 
 if vault status | grep -q 'Initialized.*true'; then
     echo "Vault is already initialized."
@@ -36,7 +37,7 @@ else
     vault token create -ttl=1h -policy=django-policy -display-name=django > /vault/secrets/django/token
 
     vault policy write admin-policy /vault/config/policies/admin-policy.hcl
-    vault token create -policy=admin-policy -display-name=admin
+    vault token create -policy=admin-policy -display-name=admin > /vault/output/admin.txt
 
 
 

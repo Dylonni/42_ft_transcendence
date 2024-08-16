@@ -21,7 +21,7 @@ vault write auth/token/revoke-accessor accessor=<token accessor>
 
 ### retrieve token capabilities for a given path
 vault token capabilities -accessor <token accessor> <path>
-	-> for the path, try either sys/auth/approle (should work) or identity/identity (should be denied)
+	-> for the path, try either sys/auth/approle (should work) or identity/entity (should be denied)
 
 
 
@@ -87,11 +87,4 @@ vault kv metadata delete -mount=secret <path>
 
 
 # below needs to be checked :
-
-
-
-
-
-
-
 
