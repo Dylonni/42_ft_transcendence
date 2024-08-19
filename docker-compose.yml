@@ -34,8 +34,8 @@ services:
       # - "9200:9200" # Elasticsearch - no need to expose
       # - "5001:5001" # Logstash - no need to expose
       # - "5601:5601" # Kibana - shows "elasticsearch", which is normal
-    # volumes:
-    #   - shared_elk:/etc/ssl/certs
+    volumes:
+      - shared-certs:/etc/ssl/shared
 
   vault:
     build: ./cybersec/vault
@@ -52,7 +52,7 @@ services:
       - backend
     volumes:
       - django-token:/vault/secrets/django
-      # - shared_elk:/etc/ssl/certs # to be removed
+      - shared-certs:/etc/ssl/shared
       # - grafana-token:/vault/secrets/mon/grafana
 
 
@@ -132,8 +132,6 @@ services:
       - prometheus
     networks:
       - backend
-    # volumes:
-    #   - am-data:/data
     command: --config.file=/etc/alertmanager/alertmanager.yml --log.level=debug --web.listen-address=:9093 --cluster.listen-address=
 
 # ELK STACK
@@ -258,16 +256,12 @@ services:
 volumes:
   pg-data:
     name: pg-data
-  # am-data:
-  #   name: am-data
   django-token:
     name: django-token
-  vault-certs:
-    name: vault-certs
+  shared-certs:
+    name: shared-certs
   elk-data:
     name: elk-data
-  # shared_elk:
-  #   name: shared_elk
   # grafana-token:
   #   name: grafana-token
 

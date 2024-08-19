@@ -20,6 +20,14 @@ when cache hit rate drops below 80%
 
 
 
+container absent
+site high memory usage => use a gauge
+site netwrk traffic => gauge, histogram
+site error rates => counter
+site latency => histogram
+site response rate => histogram
+site down => gauge, histogram
+
 
 
 database :
