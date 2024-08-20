@@ -219,16 +219,36 @@ class PasswordResetConfirmView(APIView):
 
 password_reset_confirm = PasswordResetConfirmView.as_view()
 
+# class FortyTwoLoginView(APIView): #OG
+#     permission_classes = (AllowAny,)
+    
+#     def get(self, request, *args, **kwargs):
+#         redirect_uri = quote('http://localhost:8080/api/oauth/42/callback/', safe='')
+#         authorization_url = f'https://api.intra.42.fr/oauth/authorize?client_id={settings.FORTYTWO_ID}&redirect_uri={redirect_uri}&response_type=code'
+#         return redirect(authorization_url)
 
-class FortyTwoLoginView(APIView):
+# class FortyTwoLoginView(APIView): #mine 8080
+#     permission_classes = (AllowAny,)
+    
+#     def get(self, request, *args, **kwargs):
+#         redirect_uri = quote('https://localhost:8080/api/oauth/42/callback/', safe='')
+#         authorization_url = f'https://api.intra.42.fr/oauth/authorize?client_id={settings.FORTYTWO_ID}&redirect_uri={redirect_uri}&response_type=code'
+#         return redirect(authorization_url)
+
+class FortyTwoLoginView(APIView): #mine 8443
     permission_classes = (AllowAny,)
     
     def get(self, request, *args, **kwargs):
-        redirect_uri = quote('http://localhost:8080/api/oauth/42/callback/', safe='')
+        redirect_uri = quote('https://localhost:8443/api/oauth/42/callback/', safe='')
         authorization_url = f'https://api.intra.42.fr/oauth/authorize?client_id={settings.FORTYTWO_ID}&redirect_uri={redirect_uri}&response_type=code'
         return redirect(authorization_url)
 
 fortytwo_login = FortyTwoLoginView.as_view()
+
+
+
+            # 'redirect_uri': 'http://localhost:8080/api/oauth/42/callback/', OG
+            # 'redirect_uri': 'http://localhost:8080/api/oauth/42/callback/', mine 8080
 
 
 class FortyTwoCallbackView(APIView):
@@ -238,7 +258,7 @@ class FortyTwoCallbackView(APIView):
             'client_id': settings.FORTYTWO_ID,
             'client_secret': settings.FORTYTWO_SECRET,
             'code': request.GET.get('code'),
-            'redirect_uri': 'http://localhost:8080/api/oauth/42/callback/',
+            'redirect_uri': 'https://localhost:8443/api/oauth/42/callback/',
         })
         
         token_response = response.json()
