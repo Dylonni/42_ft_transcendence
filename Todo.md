@@ -9,14 +9,13 @@
     NAVBAR
 - [ ] Rework the navbar by adding a page to localplay
 - [ ] Make the navbar show icons depending on context
-- [ ] Put tooltips on every icon
 
     HOME
 - [X] Create a modal for "Create GameRoom"
 - [X] Add dropdown for languages (FR, EN, JP)
-- [ ] Move Player search to the right side
+- [X] Move Player search to the right side
 - [ ] Add a background for "Search Game"
-- [ ] Remove the "Stats Indicator" , Create a Rank indicator
+- [X] Remove the "Stats Indicator" , Create a Rank indicator
 - [ ] Find a way to display all Rooms with tabs
 
     GAME
@@ -40,7 +39,7 @@
     SOCIAL
 - [X] Show player context (online, offline, ingame)
 - [X] Rework page
-- [ ] ADD another status "Waiting" , replace playing color by blue , waiting in orange
+- [X] ADD another status "Waiting" , replace playing color by blue , waiting in orange
 - [ ] Make the chat focus last message
 
     LEADERBOARD
@@ -62,7 +61,7 @@
 - [X] Fix the way to change persons Avatar/Nickname
 - [X] Add players default language
 
-    RANDOM CODE
+    CHANGE PASS/MAIL - RANDOM CODE
 - [ ] Create modal to verify code for mail/password change
 
 Reminder for Pipenv install in django:
