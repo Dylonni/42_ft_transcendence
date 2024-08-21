@@ -34,12 +34,12 @@
         </div>
     </div>
 </header>
-<section class="pulse animated position-relative py-4 py-xl-5">
+<section class="position-relative py-4 py-xl-5">
     <div id="content">
         <div class="container">
             <div class="row d-flex justify-content-center">
                 <div class="col-md-6 col-xl-4" style="filter: blur(0px);">
-                    <div class="card mb-5">
+                    <div class="card mb-5 pulse animated">
                         <div class="card-body d-flex flex-column align-items-center" style="filter: blur(0px);">
                             <form action="/api/auth/register/" class="text-center auth-form" method="post">
                                 {% csrf_token %}
@@ -59,13 +59,13 @@
                                     </label>
                                 </div>
                                 <div class="mb-3 form-floating">
-                                    <input class="form-control" id="floatingPassword-register" maxlength="254" minlength="6" name="password" pattern="^[\w\W]{6,254}$" placeholder=" " required="" title="Password must include at least 6 Characters long" type="password"/>
-                                    <label class="form-label" for="floatingMail-register">
+                                    <input id="floatingPassword-register" class="form-control form-control form-control form-control" type="password" maxlength="254" minlength="6" name="password" placeholder=" " required />
+                                    <label class="form-label" for="floatingMail-register" style="width: 100%;">
                                         {% translate 'Password' %}
                                     </label>
-                                    <div class="form-check" style="width: 110.078px;margin-left: 0px;margin-bottom: 0px;height: 29px;padding-top: 2px;">
-                                        <input class="form-check-input" id="formCheck-3" onclick="showPassword()" style="margin-left: -23px;width: 16px;margin-right: 0px;margin-top: 5px;" type="checkbox"/>
-                                        <label class="form-check-label" for="formCheck-3" style="margin-left: 0px;font-size: 12px;margin-top: 0px;margin-bottom: 5px;">
+                                    <div class="text-nowrap d-flex justify-content-start align-items-center form-check">
+                                        <input id="formCheck-1" class="form-check-input" type="checkbox" onclick="showPassword()" style="width: 16px;margin-right: 10px;" />
+                                        <label class="text-nowrap text-start form-check-label" for="formCheck-1" style="font-size: 12px">
                                             {% translate 'Show password' %}
                                         </label>
                                     </div>
@@ -76,7 +76,7 @@
                                     </button>
                                 </div>
                                 <p class="text-muted">
-                                    {% translate 'Already Registered ?' %}'
+                                    {% translate 'Already Registered ?' %}
                                     <a href="/login/">
                                         {% translate 'Sign in here' %}
                                     </a>

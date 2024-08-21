@@ -40,12 +40,12 @@
         </div>
     </div>
 </header>
-<section class="pulse animated position-relative py-4 py-xl-5">
+<section class="position-relative py-4 py-xl-5">
     <div>
         <div class="container">
             <div class="row d-flex justify-content-center">
                 <div class="col-md-6 col-xl-4">
-                    <div class="card mb-5" style="border-top-left-radius: 22px;border-top-right-radius: 22px;border-style: none;">
+                    <div class="card mb-5 pulse animated" style="border-top-left-radius: 22px;border-top-right-radius: 22px;border-style: none;">
                         <h2 class="d-flex d-xl-flex justify-content-center align-items-center justify-content-xl-center align-items-xl-center" style="padding-bottom: 20px;background: var(--bs-emphasis-color);color: var(--bs-body-bg);border-top-left-radius: 19px;border-top-right-radius: 19px;">
                             {% translate 'Log in' %}
                         </h2>
@@ -59,13 +59,13 @@
                                     </label>
                                 </div>
                                 <div class="mb-3 form-floating">
-                                    <input class="form-control" id="floatingPassword-register" maxlength="254" minlength="6" name="password" placeholder=" " required="" type="password"/>
-                                    <label class="form-label" for="floatingPassword-register">
+                                    <input id="floatingPassword-register" class="form-control form-control form-control form-control" type="password" maxlength="254" minlength="6" name="password" placeholder=" " required />
+                                    <label class="form-label" for="floatingMail-register" style="width: 100%;">
                                         {% translate 'Password' %}
                                     </label>
-                                    <div class="form-check" style="width:110.078px;margin-left:0px;margin-bottom:0px;height:29px;padding-top:2px;">
-                                        <input class="form-check-input" id="formCheck-1" onclick="showPassword()" style="margin-left:-23px;width:16px;margin-right:0px;margin-top:5px;" type="checkbox"/>
-                                        <label class="form-check-label" for="formCheck-1" style="margin-left:0px;font-size:12px;margin-top:0px;margin-bottom:5px;">
+                                    <div class="text-nowrap d-flex justify-content-start align-items-center form-check">
+                                        <input id="formCheck-1" class="form-check-input" type="checkbox" onclick="showPassword()" style="width: 16px;margin-right: 10px;" />
+                                        <label class="text-nowrap text-start form-check-label" for="formCheck-1" style="font-size: 12px">
                                             {% translate 'Show password' %}
                                         </label>
                                     </div>
@@ -86,7 +86,7 @@
                                 </div>
                                 <span class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center input-group" style="height:35px;width:264.062px;padding-left:0px;margin-left:0px;padding-bottom:40px;">
                                     <a class="d-xl-flex" href="/forgot-password/" style="font-size: 14px;">
-                                        {% translate 'Forgot your password ?' %}'
+                                        {% translate 'Forgot your password ?' %}
                                     </a>
                                 </span>
                             </form>
@@ -115,7 +115,7 @@
                                 </div>
                             </div>
                             <p class="text-muted" style="margin-bottom: 0px;">
-                                {% translate 'Not Registered ?' %}'
+                                {% translate 'Not Registered ?' %}
                                 <a href="/register/">
                                     {% translate 'Create an account' %}
                                 </a>
