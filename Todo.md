@@ -14,7 +14,7 @@
 - [X] Create a modal for "Create GameRoom"
 - [X] Add dropdown for languages (FR, EN, JP)
 - [X] Move Player search to the right side
-- [ ] Add a background for "Search Game"
+- [X] Add a background for "Search Game"
 - [X] Remove the "Stats Indicator" , Create a Rank indicator
 - [ ] Find a way to display all Rooms with tabs
 
@@ -34,7 +34,7 @@
     PROFILE
 - [ ] Add a profile list page when searching
 - [ ] Fix buttons according to context
-- [ ] Make a chart to check games won, games lost and more
+- [X] Make a chart to check games won, games lost and more
 
     SOCIAL
 - [X] Show player context (online, offline, ingame)
