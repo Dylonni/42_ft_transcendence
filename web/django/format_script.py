@@ -26,7 +26,7 @@ def reformat_html_in_directory(directory_path):
 
 
 # Reformatte le fichier spécifié
-file_path = 'templates/home2.html'
+file_path = 'templates/gameroom2.html'
 reformat_html_file(file_path)
 
 
@@ -34,4 +34,4 @@ reformat_html_file(file_path)
 # directory_path = 'templates'
 # reformat_html_in_directory(directory_path)
 
-#Change space size to 1 -> convert to tab -> change tab size to 4
+#Convert to space -> Change space size to 1 -> Convert to tab -> Change tab size to 4
