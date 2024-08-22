@@ -26,10 +26,12 @@ def reformat_html_in_directory(directory_path):
 
 
 # Reformatte le fichier spécifié
-file_path = 'templates/social.html'
+file_path = 'templates/home2.html'
 reformat_html_file(file_path)
 
 
 # Reformatte tous les fichiers dans le dossier spécifié
 # directory_path = 'templates'
 # reformat_html_in_directory(directory_path)
+
+#Change space size to 1 -> convert to tab -> change tab size to 4

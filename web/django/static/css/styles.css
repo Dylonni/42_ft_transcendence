@@ -101,7 +101,7 @@ body, html {
   transition: transform 0.5s ease;
 }
 
-#inputsearch:focus, #gamesearch:focus, #chatInput:focus {
+#searchProfileInput:focus, #searchGameInput:focus, #chatInput:focus {
   outline: none;
 }
 
@@ -288,3 +288,33 @@ input[type="file"] {
   background-color: var(--bs-gray-800);
 }
 
+.createGame::after, .createGame::before {
+  content: '';
+  position: absolute;
+  height: 102%;
+  width: 102%;
+  background-image: conic-gradient(from var(--angle), transparent, rgb(145,189,254));
+  z-index: -1;
+  border-radius: 10px;
+  animation: 2.5s spin linear infinite;
+}
+
+.createGame::before {
+  filter: blur(1.5rem);
+  opacity: 0.5;
+}
+
+@keyframes spin {
+  from {
+    --angle: 0deg;
+  }
+  to {
+    --angle: 360deg;
+  }
+}
+
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}

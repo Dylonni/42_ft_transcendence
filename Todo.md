@@ -48,8 +48,10 @@
 
     NOTIFICATION
 - [X] Add a little notifcation center
+- [ ] Rework notification center
+- [ ] Add a tab to see friend requests
 
--   CREATE_GAME
+    CREATE_GAME
 - [X] Fix formData being empty on chrome
 
     SETTINGS
