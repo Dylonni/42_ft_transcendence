@@ -1,0 +1,25 @@
+mise en place politique d'archivage (via django ?)
+	quand suppression de compte, check s'il y a eu une sauvegarde depuis la creation
+		si oui : conserver le django ID pouvoir supprimer si la sauvegarde doit etre utilisee
+
+limiter acces database et encore plus acces aux backups
+	-> qui peut acceder aux backups et les traiter
+
+
+	=> Mesures de sécurité techniques :
+Mesures de traçabilité
+Mesures de protection des logiciels
+Sauvegarde des données
+Chiffrement des données
+Contrôle d'accès des utilisateurs
+Contrôle des sous-traitants
+Autres mesures (à préciser)
+
+
+
+
+for project
+	users can view/edit/delete personal info
+		=> email address can be viewed/updated from profile/settings . is deleted with accouunt suppression
+		=> 42-intranet data can be unlinked from profile/settings, then data is no longer accessed
+		=> easy to find "delete my account", "contact team", "privacy policy"

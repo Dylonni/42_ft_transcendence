@@ -55,5 +55,10 @@ path "sys/mounts/*"
 # List existing secrets engines.
 path "sys/mounts"
 {
-  capabilities = ["read"]
+  capabilities = ["read", "list"]
+}
+
+# Work with pki secrets engine
+path "pki*" {
+  capabilities = [ "create", "read", "update", "delete", "list", "sudo", "patch" ]
 }
