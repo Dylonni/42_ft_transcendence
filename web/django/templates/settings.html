@@ -4,6 +4,7 @@
 {% block title %}{% translate "Settings" %}{% endblock %}
 {% block content %}
 {% include "sidebar.html" %}
+{% include "notifs/notifications.html" %}
 <div class="container">
     <div class="row d-xxl-flex" style="height: 105px;">
         <div class="col-md-12 d-flex d-sm-flex d-md-flex d-xxl-flex justify-content-center align-items-start justify-content-sm-center align-items-sm-start justify-content-md-center align-items-md-start justify-content-xxl-center align-items-xxl-start" style="padding-left: 0px;padding-right: 0px;padding-top: 0px;padding-bottom: 0px;margin-top: 0px;height: 100%;text-shadow: 0px 0px 4px var(--bs-body-bg);">
@@ -35,7 +36,7 @@
                             <img height="166" src="{{ profile.get_avatar_url }}" style="height: 100%;width: 100%;border-radius: 50%;" width="169"/>
                         </div>
                         <div class="d-flex d-xxl-flex flex-row justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="width: 70%;">
-                            <form id="alias-form" class="d-flex d-xxl-flex justify-content-center justify-content-xxl-center align-items-xxl-center" action="/api/profiles/me/alias/" method="post" style="width: 100%;background: var(--bs-body-bg);border-radius: 5px;">
+                            <form id="changeAliasForm" class="d-flex d-xxl-flex justify-content-center justify-content-xxl-center align-items-xxl-center" action="/api/profiles/me/alias/" method="post" style="width: 100%;background: var(--bs-body-bg);border-radius: 5px;">
                                 <input name="alias" class="form-control" maxlength="20" placeholder="{{ profile.alias }}" style="background: var(--bs-body-bg);color: var(--bs-emphasis-color);border-style: none;border-top-right-radius: 0px;border-bottom-right-radius: 0px;margin-left: 0px;" type="text"/>
                                 <button class="btn btn-primary d-flex d-xxl-flex align-items-center justify-content-xxl-center align-items-xxl-center" style="background: var(--bs-btn-disabled-color);height: 100%;width: 45px;border-style: none;padding-left: 0px;padding-right: 0px;margin-left: 0px;margin-right: 11px;" type="submit">
                                     <svg class="icon icon-tabler icon-tabler-pencil" fill="none" height="1em" id="modifyIcon" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 36px;border-top-right-radius: 6px;border-bottom-right-radius: 6px;color: var(--bs-emphasis-color);" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
@@ -46,7 +47,7 @@
                                 </button>
                             </form>
                         </div>
-                        <span class="d-none d-xxl-none" id="aliasAlreadyTaken" style="color: #f74902;margin-top: 15px;margin-bottom: 0px;text-align: center;">
+                        <span class="d-none d-xxl-none" id="changeAliasErrorMsg" style="color: #f74902;margin-top: 15px;margin-bottom: 0px;text-align: center;">
                             {% translate 'This user alias is already taken, try another one' %}
                         </span>
                     </div>
@@ -59,41 +60,41 @@
                     </div>
                     <section class="d-flex justify-content-center align-items-center justify-content-sm-center justify-content-xxl-center" style="height: 100%;width: 100%;margin-bottom: -1px;margin-top: 0px;">
                         <div class="d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="width: 100px;height: 99px;border-radius: 0px;margin-left: 6px;margin-right: 0px;">
-                            <a class="d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" href="/api/profiles/me/avatar/?id=1" id="avatar-1">
+                            <a class="d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" href="/api/profiles/me/avatar/?id=1" id="changeAvatar1">
                                 <img class="img-fluid" src="{% static 'img/avatar1.webp' %}" style="border-radius: 50%;width: 90%;height: 90%;border-style: solid;border-color: var(--bs-body-bg);"/>
                             </a>
                         </div>
                         <div class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="width: 100px;height: 99px;border-radius: 0px;margin-left: 6px;margin-right: 0px;">
-                            <a class="d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" href="/api/profiles/me/avatar/?id=2" id="avatar-2">
+                            <a class="d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" href="/api/profiles/me/avatar/?id=2" id="changeAvatar2">
                                 <img class="d-xxl-flex img-fluid" src="{% static 'img/avatar2.webp' %}" style="border-radius: 50%;width: 90%;height: 90%;border-style: solid;border-color: var(--bs-body-bg);"/>
                             </a>
                         </div>
                         <div class="d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="width: 100px;height: 99px;border-radius: 0px;margin-left: 6px;padding-right: 0px;margin-right: 0px;">
-                            <a class="d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" href="/api/profiles/me/avatar/?id=3" id="avatar-3">
+                            <a class="d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" href="/api/profiles/me/avatar/?id=3" id="changeAvatar3">
                                 <img class="d-xxl-flex img-fluid" src="{% static 'img/avatar3.webp' %}" style="border-radius: 50%;width: 90%;height: 90%;border-style: solid;border-color: var(--bs-body-bg);"/>
                             </a>
                         </div>
                     </section>
                     <section class="d-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="height: 100%;width: 100%;margin-top: 0px;margin-bottom: 0px;">
                         <div class="d-flex d-sm-flex d-md-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-xxl-center align-items-xxl-center" style="width: 100px;height: 99px;border-radius: 0px;margin-left: 6px;margin-right: 0px;">
-                            <a class="d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" href="/api/profiles/me/avatar/?id=4" id="avatar-4">
+                            <a class="d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" href="/api/profiles/me/avatar/?id=4" id="changeAvatar4">
                                 <img class="d-md-flex d-xxl-flex img-fluid" src="{% static 'img/avatar4.webp' %}" style="border-radius: 50%;width: 90%;height: 90%;border-style: solid;border-color: var(--bs-body-bg);"/>
                             </a>
                         </div>
                         <div class="d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="width: 100px;height: 99px;border-radius: 0px;margin-left: 6px;margin-right: 0px;">
                             {% if profile.user.fortytwo_avatar_url %}
-                            <a class="d-flex justify-content-center align-items-sm-center" href="/api/profiles/me/avatar/?id=fortytwo" id="avatar-fortytwo">
+                            <a class="d-flex justify-content-center align-items-sm-center" href="/api/profiles/me/avatar/?id=fortytwo" id="changeAvatarFortytwo">
                                 <img class="d-xxl-flex img-fluid" src="{{ profile.user.fortytwo_avatar_url }}" style="border-radius: 50%;width: 90%;height: 90%;border-style: solid;border-color: var(--bs-body-bg);"/>
                             </a>
                             {% else %}
-                            <a class="d-flex justify-content-center align-items-sm-center" href="/api/oauth/42/login/" id="login-42">
+                            <a class="d-flex justify-content-center align-items-sm-center" href="/api/oauth/42/login/">
                                 <img class="d-xxl-flex img-fluid" src="{% static '/img/42.webp' %}" style="border-radius: 50%;width: 90%;height: 90%;border-style: solid;border-color: var(--bs-body-bg);"/>
                             </a>
                             {% endif %}
                         </div>
                         <div class="d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="width: 92px;height: 91px;border-radius: 50%;margin-left: 6px;padding-right: 0px;margin-right: 0px;border-style: solid;border-color: var(--bs-body-bg);">
                             <label class="form-label d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" id="photoUpload" style="width: 90%;height: 90%;margin-bottom: 0px;">
-                                <input accept="image/*" id="avatar-upload" type="file">
+                                <input accept="image/*" id="uploadAvatarInput" type="file">
                                     <svg class="icon icon-tabler icon-tabler-photo-plus" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 45px;color: var(--bs-body-bg);" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
                                         <path d="M15 8h.01"></path>
@@ -108,7 +109,7 @@
                         </div>
                     </section>
                 </div>
-                <span class="d-none d-xxl-none" id="wrongAvatarSize" style="color: #f74902;text-align: center;margin-top: 0px;margin-bottom: 10px;">
+                <span class="d-none d-xxl-none" id="uploadAvatarErrorMsg" style="color: #f74902;text-align: center;margin-top: 0px;margin-bottom: 10px;">
                     {% translate 'Your image must not exceed 500KB in size and 1024x1024 in dimensions' %}
                 </span>
             </div>
@@ -202,7 +203,7 @@
                                                 </svg>
                                             </span>
                                         </div>
-                                        <a class="btn btn-primary d-flex d-xxl-flex justify-content-end align-items-center justify-content-xxl-end align-items-xxl-center" id="login-42" href="/api/oauth/42/login/" style="background: rgba(13,110,253,0);color: rgb(13,202,240);border-style: none;">
+                                        <a class="btn btn-primary d-flex d-xxl-flex justify-content-end align-items-center justify-content-xxl-end align-items-xxl-center" href="/api/oauth/42/login/" style="background: rgba(13,110,253,0);color: rgb(13,202,240);border-style: none;">
                                             {% translate 'Link to 42' %}
                                         </a>
                                     </div>
@@ -212,10 +213,10 @@
                         </section>
                         <section class="d-flex justify-content-center align-items-center" id="templateSecNormalAcc" style="width: 100%;height: 100%;background: rgba(0,0,0,0.15);border-radius: 10px;margin-top: 10px;margin-bottom: 10px;margin-left: 5px;margin-right: 5px;padding-top: 0px;padding-bottom: 0px;">
                             <div class="d-flex flex-column justify-content-center align-items-start align-items-sm-start" style="width: 100%;padding-bottom: 20px;height: 100%;margin-top: 0px;margin-bottom: 0px;padding-left: 0px;padding-right: 0px;padding-top: 10px;margin-left: 0px;margin-right: 5px;">
-                                <button class="btn btn-primary link-info d-sm-flex d-md-flex justify-content-sm-center justify-content-md-center align-items-md-center" data-bs-target="#modalModifyCred" data-bs-toggle="modal" style="background: #21252900;border-radius: 15px;border-style: none;border-color: var(--bs-highlight-color);margin-top: 10px;margin-bottom: 10px;" type="submit">
+                                <button id="changeEmailBtn" class="btn btn-primary link-info d-sm-flex d-md-flex justify-content-sm-center justify-content-md-center align-items-md-center" data-bs-target="#modalModifyCred" data-bs-toggle="modal" style="background: #21252900;border-radius: 15px;border-style: none;border-color: var(--bs-highlight-color);margin-top: 10px;margin-bottom: 10px;" type="submit">
                                     {% translate 'Modify Email' %}
                                 </button>
-                                <button class="btn btn-primary link-info d-sm-flex d-md-flex justify-content-sm-center justify-content-md-center align-items-md-center" data-bs-target="#modalModifyCred" data-bs-toggle="modal" style="background: #21252900;border-radius: 15px;border-style: none;border-color: var(--bs-highlight-color);margin-bottom: 10px;margin-top: 10px;" type="submit">
+                                <button id="changePasswordBtn" class="btn btn-primary link-info d-sm-flex d-md-flex justify-content-sm-center justify-content-md-center align-items-md-center" data-bs-target="#modalModifyCred" data-bs-toggle="modal" style="background: #21252900;border-radius: 15px;border-style: none;border-color: var(--bs-highlight-color);margin-bottom: 10px;margin-top: 10px;" type="submit">
                                     {% translate 'Modify Password' %}
                                 </button>
                                 <div class="dropdown" style="width: 100%;">
@@ -230,7 +231,7 @@
                                     <div class="dropdown-menu">
                                         {% get_available_languages as LANGUAGES %}
                                         {% for lang in LANGUAGES %}
-                                        <a class="dropdown-item text-uppercase" id="lang-{{ lang.0 }}-default">
+                                        <a class="dropdown-item text-uppercase" id="changeDefaultLang_{{ lang.0 }}">
                                             {{ lang.0 }}
                                         </a>
                                         {% endfor %}
@@ -261,20 +262,20 @@
                 </div>
                 <div class="overflow-auto" style="height: 100%;max-height: 765px;">
                     {% if profile.get_blocked_profiles %}
-                    {% for profile in profile.get_blocked_profiles %}
+                    {% for profile_block in profile.get_blocked_profiles %}
                     <div id="templateBlocked" class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="border-bottom-style: solid;border-radius: 26px;">
                         <div class="d-flex justify-content-center align-items-center" style="width: 20%;height: 100%;">
                             <div style="width: 50px;height: 50px;">
-                                <img style="width: 100%;height: 100%;border-radius: 50%;" src="{{ profile.get_avatar_url }}" />
+                                <img style="width: 100%;height: 100%;border-radius: 50%;" src="{{ profile_block.blocked.get_avatar_url }}" />
                             </div>
                         </div>
                         <div class="text-truncate d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="width: 60%;height: 100%;color: var(--bs-body-bg);">
                             <h1 class="text-truncate fs-3" style="color: var(--bs-body-bg);margin-bottom: 0px;padding-bottom: 0px;">
-                                {{ profile.alias }}
+                                {{ profile_block.blocked.alias }}
                             </h1>
                         </div>
                         <div class="d-flex justify-content-center align-items-center" style="width: 20%;height: 100%;border-bottom-style: none;">
-                            <button class="btn btn-primary d-flex justify-content-center align-items-center" type="button" style="background: rgba(13,110,253,0);border-style: none;">
+                            <button data-block-id="{{ profile_block.id }}" class="btn btn-primary d-flex justify-content-center align-items-center" type="button" style="background: rgba(13,110,253,0);border-style: none;">
                                 <svg class="icon icon-tabler icon-tabler-user-off text-primary" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" data-bs-toggle="tooltip" data-bss-tooltip data-bs-placement="right" style="border-bottom-style: none;font-size: 40px;" title="Unblock">
                                     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                                     <path d="M8.18 8.189a4.01 4.01 0 0 0 2.616 2.627m3.507 -.545a4 4 0 1 0 -5.59 -5.552"></path>
@@ -386,7 +387,7 @@
                 <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button">
                 </button>
             </div>
-            <form id="delete-account-form" method="post" action="/api/profiles/me/">
+            <form id="deleteAccountForm" action="/api/profiles/me/">
                 <div class="modal-body">
                     <p class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="font-size: 1em;">
                         {% translate 'Please enter your password to confirm your account deletion' %}
@@ -396,7 +397,7 @@
                         <label class="form-label" for="floatingMail-register">
                             {% translate 'Password' %}
                         </label>
-                        <div class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center d-none d-xxl-none" id="wrongcredDel">
+                        <div class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center d-none d-xxl-none" id="deleteAccountErrorMsg">
                             <p style="color: #e8112d;font-size: 1em;">
                                 {% translate 'Wrong credentials. Please try again' %}
                             </p>
@@ -452,10 +453,10 @@
             </div>
             <div class="modal-footer">
                 <button class="btn btn-light" data-bs-dismiss="modal" type="button">
-                    Cancel
+                    {% translate 'Cancel' %}
                 </button>
-                <a class="btn btn-primary" data-bs-dismiss="modal" href="/api/oauth/42/unlink/" id="fortytwo-unlink">
-                    Unlink
+                <a class="btn btn-primary" data-bs-dismiss="modal" href="/api/oauth/42/unlink/" id="unlinkFortytwo">
+                    {% translate 'Unlink' %}
                 </a>
             </div>
         </div>

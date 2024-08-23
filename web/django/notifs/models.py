@@ -13,26 +13,23 @@ class Notification(BaseInteraction):
         GAME_MESSAGE = 'Game Message', _('Game Message')
     
     category = models.CharField(
-        verbose_name=_('category'),
         max_length=20,
         choices=NotificationCategories.choices,
         default=NotificationCategories.GAME_INVITATION,
     )
-    content = models.TextField(
-        verbose_name=_('content'),
-        blank=False,
+    object_id = models.UUIDField(
         null=True,
+        blank=True,
     )
     read = models.BooleanField(
-        verbose_name=_('read'),
         default=False,
     )
     
-    objects = NotificationManager()
+    objects: NotificationManager = NotificationManager()
     
     class Meta:
-        verbose_name = _('notification')
-        verbose_name_plural = _('notifications')
+        verbose_name = 'notification'
+        verbose_name_plural = 'notifications'
         ordering = ['created_at']
     
     def __str__(self):

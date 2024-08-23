@@ -6,14 +6,12 @@ from django.utils.translation import gettext_lazy as _
 
 class BaseModel(models.Model):
     id = models.UUIDField(
-        verbose_name=_('id'),
         primary_key=True,
         unique=True,
         default=uuid.uuid4,
         editable=False,
     )
     created_at = models.DateTimeField(
-        verbose_name=_('created at'),
         default=timezone.now,
     )
     
@@ -27,13 +25,11 @@ class BaseModel(models.Model):
 class BaseInteraction(BaseModel):
     sender = models.ForeignKey(
         to='profiles.Profile',
-        verbose_name=_('sender'),
         on_delete=models.CASCADE,
         related_name='%(class)s_sent',
     )
     receiver = models.ForeignKey(
         to='profiles.Profile',
-        verbose_name=_('receiver'),
         on_delete=models.CASCADE,
         related_name='%(class)s_received',
     )

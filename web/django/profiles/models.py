@@ -19,65 +19,57 @@ def upload_avatar(instance, filename):
 
 class Profile(BaseModel):
     class StatusChoices(models.TextChoices):
-        CONNECTED = 'Connected', _('Connected')
+        ONLINE = 'Online', _('Online')
+        WAITING = 'Waiting', _('Waiting')
         PLAYING = 'Playing', _('Playing')
-        DISCONNECTED = 'Disconnected', _('Disconnected')
+        OFFLINE = 'Offline', _('Offline')
     
     user = models.OneToOneField(
         to=UserModel,
-        verbose_name=_('user'),
         on_delete=models.CASCADE,
         related_name='profile',
     )
     alias = models.CharField(
-        verbose_name=_('alias'),
         max_length=150,
         unique=True,
     )
     avatar = models.ImageField(
-        verbose_name=_('avatar'),
         null=True,
         upload_to=upload_avatar,
         storage=OverwriteStorage(), 
     )
     avatar_url = models.CharField(
-        verbose_name=_('avatar url'),
         max_length=150,
         null=True,
         blank=True,
     )
     status = models.CharField(
-        verbose_name=_('status'),
         choices=StatusChoices.choices,
-        default=StatusChoices.DISCONNECTED,
+        default=StatusChoices.OFFLINE,
     )
     default_lang = models.CharField(
-        verbose_name=_('default language'),
         max_length=40,
         default='en',
     )
     game = models.ForeignKey(
         to='games.Game',
-        verbose_name=_('game'),
         on_delete=models.CASCADE,
         null=True,
         blank=True,
         related_name='players',
     )
     elo = models.PositiveSmallIntegerField(
-        verbose_name=_('elo'),
         default=1000,
     )
     is_ready = models.BooleanField(
-        verbose_name=_('ready'),
         default=False,
     )
     
-    objects = ProfileManager()
+    objects: ProfileManager = ProfileManager()
     
     class Meta:
-        verbose_name = _("profile")
-        verbose_name_plural = _("profiles")
+        verbose_name = 'profile'
+        verbose_name_plural = 'profiles'
     
     def __str__(self):
         return self.alias
@@ -89,6 +81,11 @@ class Profile(BaseModel):
     
     def get_blocked_profiles(self):
         return self.blocked_profiles.all()
+    
+    def get_invited_profiles(self):
+        if self.game:
+            return self.game.gameinvite_sent.filter(sender=self)
+        return None
     
     def set_avatar_url(self, id='1', path=''):
         if id == 'fortytwo':
@@ -105,8 +102,22 @@ class Profile(BaseModel):
         self.default_lang = lang
         self.save()
     
+    def is_friend(self, profile):
+        is_profile1_friend = self.friendships_as_profile1.filter(profile1=self, profile2=profile, removed_by__isnull=True).exists()
+        is_profile2_friend = self.friendships_as_profile2.filter(profile1=profile, profile2=self, removed_by__isnull=True).exists()
+        return is_profile1_friend or is_profile2_friend
+    
+    def has_blocked(self, profile):
+        return self.blocked_profiles.filter(blocker=self, blocked=profile).exists()
+    
+    def get_block(self, profile):
+        return self.blocked_profiles.filter(blocker=self, blocked=profile).first()
+    
     def is_host(self):
         return self.game and self.game.host == self
+    
+    def has_unread_messages(self):
+        return self.friendmessage_sent.filter(read=False).exists()
     
     def join_game(self, game):
         self.game = game
@@ -145,22 +156,20 @@ class Profile(BaseModel):
 class ProfileBlock(BaseModel):
     blocker = models.ForeignKey(
         to='profiles.Profile',
-        verbose_name=_('blocker'),
         on_delete=models.CASCADE,
         related_name='blocked_profiles',
     )
     blocked = models.ForeignKey(
         to='profiles.Profile',
-        verbose_name=_('blocked'),
         on_delete=models.CASCADE,
         related_name='blocking_profiles',
     )
     
-    objects = ProfileBlockManager()
+    objects: ProfileBlockManager = ProfileBlockManager()
     
     class Meta:
-        verbose_name = _("profile block")
-        verbose_name_plural = _("profile blocks")
+        verbose_name = 'profile block'
+        verbose_name_plural = 'profile blocks'
     
     def __str__(self):
         return f'{self.blocker} blocked {self.blocked}'

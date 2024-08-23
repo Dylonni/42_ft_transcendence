@@ -14,95 +14,80 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     username_validator = UnicodeUsernameValidator()
     
     id = models.UUIDField(
-        verbose_name=_('id'),
         primary_key=True,
         unique=True,
         default=uuid.uuid4,
         editable=False,
     )
     username = models.CharField(
-        verbose_name=_('username'),
         max_length=150,
         unique=True,
     )
     email = models.EmailField(
-        verbose_name=_('email address'),
         unique=True,
     )
     fortytwo_id = models.CharField(
-        verbose_name=_('42 id'),
         null=True,
         blank=True,
         editable=False,
     )
     fortytwo_access_token = models.TextField(
-        verbose_name=_('42 access token'),
         null=True,
         blank=True,
         editable=False,
     )
     fortytwo_refresh_token = models.TextField(
-        verbose_name=_('42 refresh token'),
         null=True,
         blank=True,
         editable=False,
     )
     fortytwo_avatar_url = models.CharField(
-        verbose_name=_('42 avatar url'),
         null=True,
         blank=True,
     )
     fortytwo_coalition_cover_url = models.CharField(
-        verbose_name=_('42 coalition cover url'),
         null=True,
         blank=True,
     )
     fortytwo_coalition_color = models.CharField(
-        verbose_name=_('42 coalition color'),
         null=True,
         blank=True,
     )
     date_joined = models.DateTimeField(
-        verbose_name=_('date joined'),
         default=timezone.now,
         db_index=True,
     )
     is_staff = models.BooleanField(
-        verbose_name=_('staff status'),
         default=False,
     )
     is_active = models.BooleanField(
-        verbose_name=_('active'),
         default=True,
     )
     is_verified = models.BooleanField(
-        verbose_name=_('verified'),
         default=False,
     )
     groups = models.ManyToManyField(
         to=Group,
-        verbose_name=_('groups'),
         blank=True,
         related_name='custom_user_set',
         related_query_name='custom_user',
     )
     user_permissions = models.ManyToManyField(
         to=Permission,
-        verbose_name=_('user permissions'),
         blank=True,
         related_name='custom_user_set',
         related_query_name='custom_user',
     )
     
-    objects = CustomUserManager()
+    objects: CustomUserManager = CustomUserManager()
     
     EMAIL_FIELD = 'email'
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email']
     
     class Meta:
-        verbose_name = _('custom user')
-        verbose_name_plural = _('custom users')
+        verbose_name = 'custom user'
+        verbose_name_plural = 'custom users'
     
     def clean(self):
         super().clean()

@@ -1,5 +1,6 @@
 import random
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 
 class ProfileManager(models.Manager):
@@ -29,7 +30,7 @@ class ProfileManager(models.Manager):
             profile.status = status
             profile.save()
         except self.model.DoesNotExist:
-            raise ValueError('No profile found to set status.')
+            raise ValueError(_('No profile found to set status.'))
     
     def search_by_alias(self, alias):
         return self.filter(alias__istartswith=alias)
@@ -59,10 +60,7 @@ class ProfileBlockManager(models.Manager):
     def get_blocked_profiles(self, blocker):
         return self.filter(blocker=blocker)
     
-    def is_blocked(self, blocker, blocked):
-        return self.filter(blocker=blocker, blocked=blocked).exists()
-    
     def create_block(self, blocker, blocked):
-        if self.is_blocked(blocker, blocked):
-            raise ValueError('Profile is already blocked.')
+        if self.filter(blocker=blocker, blocked=blocked).exists():
+            raise ValueError(_('Profile is already blocked.'))
         return self.create(blocker=blocker, blocked=blocked)

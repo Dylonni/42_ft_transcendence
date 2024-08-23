@@ -1,0 +1,53 @@
+{% load static %}
+{% load i18n %}
+{% if message.sender != profile %}
+<div class="d-flex d-xxl-flex align-items-end justify-content-xxl-start align-items-xxl-end chatEl" id="templateFriendMsg" style="height: auto;width: 100%;margin-top: 0px;margin-bottom: 0px;">
+	<div class="d-xxl-flex justify-content-xxl-center align-items-xxl-center" style="border-radius: 0px;width: 50px;height: 50px;padding-left: 0px;margin-top: 0px;margin-bottom: 0px;margin-left: 15px;margin-right: 10px;">
+		<img height="135" src="{{ current_friend.avatar_url }}" style="width: 100%;height: 100%;border-radius: 50%;border-style: none;border-color: var(--bs-body-bg);" width="93"/>
+	</div>
+	<div class="text-break flex-column justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="border-radius: 20px;border-bottom-right-radius: 19px;border-top-left-radius: 19px;border-top-right-radius: 19px;border-bottom-left-radius: 0px;font-size: 19px;display: inline-block;max-width: 50%;background: var(--bs-gray-700);margin-bottom: 35px;margin-top: 5px;">
+		<div class="d-flex d-xxl-flex justify-content-xxl-center align-items-xxl-center message-wrapper" style="margin-left: 0px;margin-right: 0px;padding-top: 10px;padding-bottom: 10px;padding-left: 15px;padding-right: 15px;">
+			<p class="wrapbox" style="color: var(--bs-body-bg);width: 100%;margin-bottom: 0px;">
+				{{ message.content }}
+			</p>
+		</div>
+		<div class="d-flex d-xl-flex d-xxl-flex justify-content-end justify-content-xl-end justify-content-xxl-end" style="width: 100%;margin-right: 0px;margin-left: 0px;padding-left: 10px;padding-right: 10px;">
+			<span style="font-size: 18px;color: rgba(255,255,255,0.5);margin-bottom: 5px;margin-left: 10px;margin-right: 10px;">
+				{{ message.created_at }}
+			</span>
+		</div>
+	</div>
+</div>
+{% else %}
+<div class="d-flex d-xxl-flex justify-content-end align-items-center justify-content-xxl-end align-items-xxl-center" id="template-my-msg-1-chatEl" style="height: auto;width: 100%;margin-bottom: 15px;margin-top: 0px;">
+	<div class="text-break flex-column justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="background: #2b7050;border-radius: 20px;border-bottom-right-radius: 0px;border-top-left-radius: 19px;border-top-right-radius: 19px;border-bottom-left-radius: 19px;font-size: 19px;display: inline;max-width: 50%;margin-right: 15px;">
+		<div class="d-flex d-xxl-flex justify-content-xxl-center align-items-xxl-center message-wrapper" style="margin-right: 0px;padding-top: 10px;padding-bottom: 10px;padding-left: 15px;padding-right: 15px;margin-left: 0px;">
+			<p class="d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-end justify-content-sm-end justify-content-md-end justify-content-lg-end justify-content-xl-end justify-content-xxl-end wrapbox" style="color: var(--bs-body-bg);width: 100%;text-shadow: 0px 0px 2px var(--bs-emphasis-color);margin-bottom: 0px;">
+				{{ message.content }}
+			</p>
+		</div>
+		<div class="d-flex d-xl-flex d-xxl-flex justify-content-end justify-content-xl-end justify-content-xxl-end" style="width: 100%;margin-left: 0px;margin-right: 0px;padding-right: 0px;padding-left: 10px;">
+			<span style="font-size: 18px;color: rgba(255,255,255,0.5);margin-bottom: 5px;margin-right: 10px;">
+				{{ message.created_at }}
+			</span>
+			{% if message.read %}
+			<span class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="font-size: 18px; margin-bottom: 5px;margin-right: 20px;">
+				<svg class="icon icon-tabler icon-tabler-checks" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="color: var(--bs-info);margin-right: 0px;font-size: 24px;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
+					<path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
+					<path d="M7 12l5 5l10 -10"></path>
+					<path d="M2 12l5 5m5 -5l5 -5"></path>
+				</svg>
+			</span>
+			{% else %}
+			<span class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="font-size: 18px; margin-bottom: 5px;margin-right: 20px;">
+				<svg class="icon icon-tabler icon-tabler-checks" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 24px;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
+					<path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
+					<path d="M7 12l5 5l10 -10"></path>
+					<path d="M2 12l5 5m5 -5l5 -5"></path>
+				</svg>
+			</span>
+			{% endif %}
+		</div>
+	</div>
+</div>
+{% endif %}

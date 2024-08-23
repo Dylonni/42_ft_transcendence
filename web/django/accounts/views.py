@@ -55,8 +55,7 @@ class UserLoginView(PublicView):
             serializer = UserLoginSerializer(data=request.data)
             serializer.is_valid(raise_exception=True)
             user = serializer.validated_data['user']
-            Profile.objects.set_user_status(user, Profile.StatusChoices.CONNECTED)
-            logger.info('User logged in.', extra={'user': user})
+            Profile.objects.set_user_status(user, Profile.StatusChoices.ONLINE)
             response_data = {'message': _('User logged in.'), 'redirect': '/home/'}
             response = Response(response_data, status=status.HTTP_200_OK)
             login(request, user)
@@ -71,8 +70,17 @@ user_login = UserLoginView.as_view()
 
 class UserLogoutView(PrivateView):
     def post(self, request: HttpRequest):
-        Profile.objects.set_user_status(request.user, Profile.StatusChoices.DISCONNECTED)
-        logger.info('User logged out.', extra={'user': request.user})
+        player = request.profile
+        game = player.game
+        if game:
+            player.leave_game()
+            if game.host == player:
+                new_host = game.players.exclude(id=player.id).first()
+                if new_host:
+                    game.set_host(new_host)
+                else:
+                    game.delete()
+        Profile.objects.set_user_status(request.user, Profile.StatusChoices.OFFLINE)
         response_data = {'message': _('User logged out.'), 'redirect': '/'}
         response = Response(response_data, status=status.HTTP_200_OK)
         logout(request)
@@ -90,7 +98,6 @@ class UserRegisterView(PublicView):
             serializer.is_valid(raise_exception=True)
             user = serializer.save()
             
-            logger.info('Account registered! Please check your email to activate your account.', extra={'user': user})
             response_data = {'message': _('Account registered! Please check your email to activate your account.')}
             response = Response(response_data, status=status.HTTP_201_CREATED)
             send_activation_mail(request, user)
@@ -115,8 +122,7 @@ class UserActivateView(PublicView):
         token_generator = EmailTokenGenerator()
         if user is not None and token_generator.check_token(user, token):
             user.set_as_verified()
-            Profile.objects.set_user_status(user, Profile.StatusChoices.CONNECTED)
-            logger.info('Account activated! User logged in.', extra={'user': user})
+            Profile.objects.set_user_status(user, Profile.StatusChoices.ONLINE)
             response = redirect('/home/')
             login(request, user)
             set_jwt_cookies_for_user(response, user)
@@ -137,8 +143,7 @@ class PasswordResetRequestView(PublicView):
         user = serializer.get_user()
         if user:
             send_password_reset_mail(request, user)
-        logger.info('Password reset request sent! Please check your email to reset your password.', extra={'user': user})
-        response_data = {'message': 'Password reset request sent! Please check your email to reset your password.'}
+        response_data = {'message': _('Password reset request sent! Please check your email to reset your password.')}
         return Response(response_data, status=status.HTTP_200_OK)
 
 
@@ -155,25 +160,14 @@ class PasswordResetView(PublicView):
         
         token_generator = EmailTokenGenerator()
         if user is not None and token_generator.check_token(user, token):
-            response = Response(
-                {
-                    'status': _('Set your new password.'),
-                    'redirect': '/password-reset/',
-                },
-                status=status.HTTP_200_OK,
-            )
+            response_data = {'message': _('Set your new password.'), 'redirect': '/password-reset/'}
+            response = Response(response_data, status=status.HTTP_200_OK)
             login(request, user)
             set_jwt_cookies_for_user(response, user)
             return response
         
-        response = Response(
-            {
-                'status': _('Password reset link is invalid!'),
-                'redirect': '/login/',
-            },
-            status=status.HTTP_400_BAD_REQUEST,
-        )
-        return response
+        response_data = {'message': _('Password reset link is invalid.'), 'redirect': '/login/'}
+        return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
 
 password_reset = PasswordResetView.as_view()
 
@@ -184,13 +178,8 @@ class PasswordResetConfirmView(PublicView):
         serializer = PasswordResetConfirmSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.save(password=serializer.validated_data['new_password'])
-        response = Response(
-            {
-                'status': _('Password changed!'),
-                'redirect': '/home/',
-            },
-            status=status.HTTP_200_OK,
-        )
+        response_data = {'message': _('Password changed.'), 'redirect': '/home/'}
+        response = Response(response_data, status=status.HTTP_200_OK)
         login(request, user)
         set_jwt_cookies_for_user(response, user)
         return response
@@ -259,7 +248,6 @@ class FortyTwoCallbackView(APIView):
                 user = UserModel.objects.get(id=user_id)
             else:
                 user = UserModel.objects.get(fortytwo_id=fortytwo_id)
-            logger.info('User logged in with 42.', extra={'user': user})
             user.update_fortytwo_infos(
                 fortytwo_id,
                 fortytwo_access_token,
@@ -268,7 +256,7 @@ class FortyTwoCallbackView(APIView):
                 fortytwo_coalition_cover_url,
                 fortytwo_coalition_color,
             )
-            Profile.objects.set_user_status(user, Profile.StatusChoices.CONNECTED)
+            Profile.objects.set_user_status(user, Profile.StatusChoices.ONLINE)
             response = redirect('/home/')
             login(request, user)
             set_jwt_cookies_for_user(response, user)

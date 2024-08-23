@@ -1,15 +1,21 @@
 import math
 import random
 from asgiref.sync import async_to_sync
+from channels.layers import get_channel_layer
 from django.db import models
 from django.db.models import Q
 from django.utils import timezone
+from django.utils.translation import gettext_lazy as _
 from notifs.consumers import NotifConsumer
 
 
 class GameManager(models.Manager):
-    def create_game(self, host):
-        return self.create(name=self.generate_name(), host=host)
+    def create_game(self, player):
+        if player.game:
+            raise ValueError(_('Player is already in a game.'))
+        game = self.create(name=self.generate_name(), host=player)
+        player.join_game(game)
+        return game
     
     def search_by_name(self, name):
         return self.filter(name__icontains=name)
@@ -20,6 +26,39 @@ class GameManager(models.Manager):
             name = f'Game_{number}'
             if not self.filter(name=name).exists():
                 return name
+    
+    def add_player(self, game, player):
+        if player.game:
+            raise ValueError(_('Player is already in a game.'))
+        elif game.is_full():
+            raise ValueError(_('Game is full. Unable to join.'))
+        player.join_game(game)
+        channel_layer = get_channel_layer()
+        async_to_sync(channel_layer.group_send)(
+            f'games_{game.id}',
+            {
+                'type': 'send_join_message',
+                'player_id': str(player.id),
+            }
+        )
+    
+    def remove_player(self, game, player):
+        player.leave_game()
+        if game.host == player:
+            new_host = game.players.exclude(id=player.id).first()
+            if new_host:
+                game.set_host(new_host)
+            else:
+                game.delete()
+        # TODO: remove player from game rounds if game has started
+        channel_layer = get_channel_layer()
+        async_to_sync(channel_layer.group_send)(
+            f'games_{game.id}',
+            {
+                'type': 'send_leave_message',
+                'player_id': str(player.id),
+            }
+        )
 
 
 class GameRoundManager(models.Manager):
@@ -90,35 +129,55 @@ class GameInviteManager(models.Manager):
     
     def create_invite(self, sender, receiver):
         if sender == receiver:
-            raise ValueError('Cannot send a game invite to yourself.')
+            raise ValueError(_('Cannot send a game invite to yourself.'))
         if self.filter(sender=sender, receiver=receiver).exists():
-            raise ValueError('Game invite already sent.')
+            raise ValueError(_('Game invite already sent.'))
         if self.filter(sender=receiver, receiver=sender).exists():
-            raise ValueError('Game invite already received.')
+            raise ValueError(_('Game invite already received.'))
         
         game_invite = self.create(sender=sender, receiver=receiver)
-        self.send_game_invite_notif(game_invite)
-        return game_invite
-    
-    def accept_invite(self, invite_id):
-        game_invite = self.get(id=invite_id)
-        # Add logic to add receiver in game_invite.game.id
-        game_invite.delete()
-    
-    def decline_invite(self, invite_id):
-        game_invite = self.get(id=invite_id)
-        game_invite.delete()
-    
-    def send_game_invite_notif(self, game_invite):
         consumer = NotifConsumer()
         async_to_sync(consumer.notify_profile)(
             sender=game_invite.sender,
             receiver=game_invite.receiver,
             category='Game Invitation',
-            content=f'{game_invite.sender} has invited you to play!',
+            object_id=game_invite.id,
         )
+        return game_invite
+    
+    def accept_invite(self, game_invite):
+        player = game_invite.receiver
+        game = game_invite.game
+        if player.game:
+            raise ValueError(_('Player is already in a game.'))
+        elif game.is_full():
+            raise ValueError(_('Game is full. Unable to join.'))
+        player.join_game(game)
+        consumer = NotifConsumer()
+        async_to_sync(consumer.remove_notification)(
+            category='Game Invite',
+            object_id=game_invite.id,
+        )
+        game_invite.delete()
+    
+    def decline_invite(self, game_invite):
+        consumer = NotifConsumer()
+        async_to_sync(consumer.remove_notification)(
+            category='Game Invite',
+            object_id=game_invite.id,
+        )
+        game_invite.delete()
 
 
-# TODO: complete class
 class GameMessageManager(models.Manager):
-    pass
+    def send_message(self, game, sender, content):
+        game_message = self.create(game=game, sender=sender, content=content)
+        channel_layer = get_channel_layer()
+        async_to_sync(channel_layer.group_send)(
+            f'games_{game.id}',
+            {
+                'type': 'broadcast',
+                'message_id': str(game_message.id),
+            }
+        )
+        return game_message

@@ -18,24 +18,16 @@ class GameListView(PrivateView):
     
     def post(self, request):
         serializer = GameSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        player = request.profile
-        
-        if player.game:
-            message = 'Player already in a game.'
-            extra = {'player': player}
-            logger.info(message, extra=extra)
-            response_data = {'message': _(message)}
+        if not serializer.is_valid():
+            response_data = {'error': serializer.errors}
+            return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
+        try:
+            game = Game.objects.create_game(request.profile)
+            response_data = {'message': _('Game created.'), 'redirect': f'/games/{game.id}/'}
             return Response(response_data, status=status.HTTP_201_CREATED)
-        
-        game = serializer.save(name=Game.objects.generate_name(), host=player)
-        player.join_game(game)
-        
-        message = 'Player created a game.'
-        extra = {'game': game, 'player': player}
-        logger.info(message, extra=extra)
-        response_data = {'message': _(message), 'redirect': f'/games/{game.id}/', 'game_id': game.id}
-        return Response(response_data, status=status.HTTP_201_CREATED)
+        except ValueError as e:
+            response_data = {'error': str(e)}
+            return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
 
 game_list = GameListView.as_view()
 
@@ -44,15 +36,10 @@ class GameSearchView(PrivateView):
     def get(self, request):
         name = request.query_params.get('name', '')
         games = Game.objects.search_by_name(name)
-        extra = {'name': name}
-        
-        if games.exists():
-            games_data = GameSerializer(games, many=True).data
-            return Response(games_data, status=status.HTTP_200_OK)
-        
-        message = 'No game rooms found.'
-        logger.info(message, extra=extra)
-        response_data = {'message': _(message)}
+        if not games.exists():
+            response_data = {'message': _('Game not found.')}
+            return Response(response_data, status=status.HTTP_200_OK)
+        response_data = {'data': GameSerializer(games, many=True).data}
         return Response(response_data, status=status.HTTP_200_OK)
 
 game_search = GameSearchView.as_view()
@@ -61,66 +48,36 @@ game_search = GameSearchView.as_view()
 class GameDetailView(PrivateView):
     def get(self, request, game_id):
         game = get_object_or_404(Game, id=game_id)
-        serializer = GameSerializer(game)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        response_data = {'data': GameSerializer(game).data}
+        return Response(response_data, status=status.HTTP_200_OK)
 
 game_detail = GameDetailView.as_view()
 
 
 class GameJoinView(PrivateView):
     def post(self, request, game_id):
-        game = get_object_or_404(Game, id=game_id)
-        player = request.profile
-        extra = {'game': game, 'player': player}
-        
-        if player in game.players.all():
-            message = 'Player is already in the game.'
-            logger.info(message, extra=extra)
-            response_data = {'message': _(message)}
+        try:
+            game = get_object_or_404(Game, id=game_id)
+            Game.objects.add_player(game, request.profile)
+            response_data = {'message': _('Game joined.'), 'redirect': f'/games/{game_id}/'}
             return Response(response_data, status=status.HTTP_200_OK)
-        if game.is_full():
-            message = 'Game is full. Unable to join.'
-            logger.info(message, extra=extra)
-            response_data = {'message': _(message)}
-            return Response(response_data, status=status.HTTP_200_OK)
-        
-        player.join_game(game)
-        message = 'Player joined the game.'
-        logger.info(message, extra=extra)
-        response_data = {'message': _(message), 'redirect':  f'/games/{game_id}/'}
-        return Response(response_data, status=status.HTTP_200_OK)
+        except ValueError as e:
+            response_data = {'error': str(e)}
+            return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
 
 game_join = GameJoinView.as_view()
 
 
 class GameLeaveView(PrivateView):
     def post(self, request, game_id):
-        game = get_object_or_404(Game, id=game_id)
-        player = request.profile
-        player.leave_game()
-        response_data = {'redirect': '/home/'}
-        extra = {'game': game, 'player': player}
-        
-        if game.host == player:
-            new_host = game.players.exclude(id=player.id).first()
-            if new_host:
-                game.set_host(new_host)
-                message = 'Player left the game. A new host has been chosen.'
-                extra['new_host'] = new_host
-                logger.info(message, extra=extra)
-                response_data['message'] = _(message)
-                return Response(response_data, status=status.HTTP_200_OK)
-            else:
-                game.delete()
-                message = 'Player left the game. The game has been deleted.'
-                logger.info(message, extra=extra)
-                response_data['message'] = _(message)
-                return Response(response_data, status=status.HTTP_200_OK)
-        
-        message = 'Player left the game.'
-        logger.info(message, extra=extra)
-        response_data['message'] = _(message)
-        return Response(response_data, status=status.HTTP_200_OK)
+        try:
+            game = get_object_or_404(Game, id=game_id)
+            Game.objects.remove_player(game, request.profile)
+            response_data = {'message': _('Game left.'), 'redirect': f'/home/'}
+            return Response(response_data, status=status.HTTP_200_OK)
+        except ValueError as e:
+            response_data = {'error': str(e)}
+            return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
 
 game_leave = GameLeaveView.as_view()
 
@@ -129,22 +86,14 @@ class GameStartView(PrivateView):
     def post(self, request, game_id):
         game = get_object_or_404(Game, id=game_id)
         player = request.profile
-        extra = {'game': game, 'player': player}
-        
-        if game.can_start(player):
-            # TODO: need to test
-            players = game.shuffle_players()
-            rounds = GameRound.objects.prepare_rounds(players, game)
-            rounds = GameRound.objects.start_game(players)
-            rounds_data = GameRoundSerializer(rounds, many=True).data
-            message = 'Player started the game.'
-            logger.info(message, extra=extra)
-            response_data = {'message': _(message)}
-            return Response(response_data, status=status.HTTP_200_OK)
-        
-        message = 'All players must be ready.'
-        logger.info(message, extra=extra)
-        response_data = {'message': _(message)}
+        if not game.can_start(player):
+            response_data = {'error': _('All players must be ready.')}
+            return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
+        players = game.shuffle_players()
+        rounds = GameRound.objects.prepare_rounds(players, game)
+        rounds = GameRound.objects.start_game(players)
+        rounds_data = GameRoundSerializer(rounds, many=True).data
+        response_data = {'message': _('Player started the game.')}
         return Response(response_data, status=status.HTTP_200_OK)
 
 game_start = GameStartView.as_view()
@@ -154,14 +103,29 @@ class GameReadyView(PrivateView):
     def post(self, request, game_id):
         game = get_object_or_404(Game, id=game_id)
         player = request.profile
-        extra = {'game': game, 'player': player}
-        
         if player.toggle_ready():
-            message = 'Player set ready.'
+            response_data = {'message': _('Player set ready.')}
         else:
-            message = 'Player canceled ready state.'
-        logger.info(message, extra=extra)
-        response_data = {'message': _(message)}
+            response_data = {'message': _('Player canceled ready state.')}
         return Response(response_data, status=status.HTTP_200_OK)
 
 game_ready = GameReadyView.as_view()
+
+
+class GameMessageListView(PrivateView):
+    def get(self, request, game_id):
+        game = get_object_or_404(Game, id=game_id)
+        serializer = GameMessageSerializer(game.messages, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    def post(self, request, game_id):
+        try:
+            game = get_object_or_404(Game, id=game_id)
+            GameMessage.objects.send_message(game, request.profile, request.data['message'])
+            response_data = {'message': _('Message sent.')}
+            return Response(response_data, status=status.HTTP_200_OK)
+        except ValueError as e:
+            response_data = {'error': str(e)}
+            return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
+
+game_message_list = GameMessageListView.as_view()

@@ -1,4 +1,5 @@
 import logging
+from asgiref.sync import async_to_sync
 from django.shortcuts import get_object_or_404
 from django.utils import translation
 from django.utils.translation import gettext_lazy as _
@@ -21,8 +22,10 @@ logger = logging.getLogger('django')
 class ProfileListView(PrivateView):
     def get(self, request):
         profiles = Profile.objects.all()
-        serializer = ProfileSerializer(profiles, many=True)
-        return Response(serializer.data)
+        if request.query_params.get('excludeself', None):
+            profiles = profiles.exclude(id=request.profile.id)
+        response_data = {'data': ProfileSerializer(profiles, many=True).data}
+        return Response(response_data, status=status.HTTP_200_OK)
 
 profile_list = ProfileListView.as_view()
 
@@ -31,35 +34,32 @@ class ProfileSearchView(PrivateView):
     def get(self, request):
         alias = request.query_params.get('alias', '')
         profiles = Profile.objects.search_by_alias(alias)
-        if profiles.exists():
-            logger.info(f'Profiles found for alias "{alias}".')
-            profiles_data = ProfileSerializer(profiles, many=True).data
-            return Response(profiles_data, status=status.HTTP_200_OK)
-        else:
-            logger.info(f'No profiles found for alias "{alias}".')
-            return Response(status=status.HTTP_204_NO_CONTENT)
+        if not profiles.exists():
+            response_data = {'message': _('Profile not found.')}
+            return Response(response_data, status=status.HTTP_200_OK)
+        response_data = {'data': ProfileSerializer(profiles, many=True).data}
+        return Response(response_data, status=status.HTTP_200_OK)
 
 profile_search = ProfileSearchView.as_view()
 
 
 class MyDetailView(PrivateView):
     def get(self, request):
-        serializer = ProfileSerializer(request.profile)
-        return Response(serializer.data)
+        response_data = {'data': ProfileSerializer(request.profile).data}
+        return Response(response_data, status=status.HTTP_200_OK)
     
-    def post(self, request):
-        if request.user.check_password(request.data['password']):
-            user = request.user
-            user.is_active = False
-            user.save()
-            response_data = {'message': _('Account deleted.'), 'redirect': '/'}
-            response = Response(response_data, status=status.HTTP_200_OK)
-            unset_jwt_cookies(response)
-            return response
-        else:
-            response_data = {'error': True}
-            response = Response(response_data, status=status.HTTP_200_OK)
-            return response
+    def delete(self, request):
+        if not request.user.check_password(request.data['password']):
+            response_data = {'error': _('Incorrect password.')}
+            return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
+        # TODO: delete friends, messages, replace match history with placeholder
+        user = request.user
+        user.is_active = False
+        user.save()
+        response_data = {'message': _('Account deleted.'), 'redirect': '/'}
+        response = Response(response_data, status=status.HTTP_200_OK)
+        unset_jwt_cookies(response)
+        return response
 
 my_detail = MyDetailView.as_view()
 
@@ -67,13 +67,12 @@ my_detail = MyDetailView.as_view()
 class MyAliasView(PrivateView):
     def post(self, request):
         serializer = ProfileSerializer(request.profile, data=request.data, partial=True)
-        if serializer.is_valid():
-            serializer.save()
-            logger.info('Alias updated.', extra={'profile': request.profile})
-            response_data = {'message': _('Alias updated.'), 'redirect': '/settings/'}
-            return Response(response_data, status=status.HTTP_200_OK)
-        response_data = {'error': _('Alias already taken.')}
-        return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
+        if not serializer.is_valid():
+            response_data = {'error': _('Alias already taken.')}
+            return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
+        serializer.save()
+        response_data = {'message': _('Alias updated.'), 'redirect': '/settings/'}
+        return Response(response_data, status=status.HTTP_200_OK)
 
 my_alias = MyAliasView.as_view()
 
@@ -89,8 +88,8 @@ class MyAvatarView(PrivateView):
             if serializer.is_valid():
                 serializer.save()
             else:
-                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        logger.info('Avatar updated.', extra={'profile': request.profile})
+                response_data = {'error': serializer.errors}
+                return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
         response_data = {'message': _('Avatar updated.'), 'redirect': '/settings/'}
         return Response(response_data, status=status.HTTP_200_OK)
 
@@ -99,11 +98,9 @@ my_avatar = MyAvatarView.as_view()
 
 class MyLangView(PrivateView):
     def post(self, request, lang):
-        path = '/settings/'
         request.profile.set_default_lang(lang)
         translation.activate(lang)
-        logger.info('Default language changed.', extra={'lang': lang})
-        response_data = {'message': _('Default language changed.'), 'redirect': path}
+        response_data = {'message': _('Default language changed.'), 'redirect': '/settings/'}
         response = Response(response_data, status=status.HTTP_200_OK)
         response.set_cookie(
             key='lang',
@@ -114,11 +111,29 @@ class MyLangView(PrivateView):
 my_lang = MyLangView.as_view()
 
 
+class MyEmailView(PrivateView):
+    def post(self, request):
+        # TODO: logic to send email
+        response_data = {'message': _('Email to change email sent.')}
+        return Response(response_data, status=status.HTTP_200_OK)
+
+my_email = MyEmailView.as_view()
+
+
+class MyPasswordView(PrivateView):
+    def post(self, request):
+        # TODO: logic to send email
+        response_data = {'message': _('Email to change password sent.')}
+        return Response(response_data, status=status.HTTP_200_OK)
+
+my_password = MyPasswordView.as_view()
+
+
 class ProfileDetailView(PrivateView):
     def get(self, request, profile_id):
         profile = get_object_or_404(Profile, id=profile_id)
-        serializer = ProfileSerializer(profile)
-        return Response(serializer.data)
+        response_data = {'data': ProfileSerializer(profile).data}
+        return Response(response_data, status=status.HTTP_200_OK)
 
 profile_detail = ProfileDetailView.as_view()
 
@@ -127,20 +142,19 @@ class ProfileInviteListView(PrivateView):
     def get(self, request, profile_id):
         profile = get_object_or_404(Profile, id=profile_id)
         received_invites = GameInvite.objects.get_received_invites(profile)
-        serializer = GameInviteSerializer(received_invites, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        response_data = {'data': GameInviteSerializer(received_invites, many=True).data}
+        return Response(response_data, status=status.HTTP_200_OK)
     
     def post(self, request, profile_id):
-        sender = get_object_or_404(Profile, id=request.profile.id)
-        receiver = get_object_or_404(Profile, id=profile_id)
         try:
-            game_invite = GameInvite.objects.create_invite(sender=sender, receiver=receiver)
-            logger.info(f'Game invite {game_invite.id} sent by {sender.alias} to {receiver.alias}.')
-            serializer = GameInviteSerializer(game_invite)
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            sender = get_object_or_404(Profile, id=request.profile.id)
+            receiver = get_object_or_404(Profile, id=profile_id)
+            GameInvite.objects.create_invite(sender=sender, receiver=receiver)
+            response_data = {'message': _('Game invitation sent.')}
+            return Response(response_data, status=status.HTTP_201_CREATED)
         except ValueError as e:
-            logger.warn(str(e))
-            return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+            response_data = {'error': str(e)}
+            return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
 
 profile_invite_list = ProfileInviteListView.as_view()
 
@@ -149,20 +163,19 @@ class ProfileBlockListView(PrivateView):
     def get(self, request, profile_id):
         profile = get_object_or_404(Profile, id=profile_id)
         blocked_profiles = ProfileBlock.objects.get_blocked_profiles(profile)
-        serializer = ProfileBlockSerializer(blocked_profiles, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        response_data = {'data': ProfileBlockSerializer(blocked_profiles, many=True).data}
+        return Response(response_data, status=status.HTTP_200_OK)
     
     def post(self, request, profile_id):
-        blocker = get_object_or_404(Profile, id=request.profile.id)
-        blocked = get_object_or_404(Profile, id=profile_id)
         try:
-            profile_block = ProfileBlock.objects.create_block(blocker=blocker, blocked=blocked)
-            logger.info(f'Profile block {profile_block.id} executed by {blocker.alias} against {blocked.alias}.')
-            serializer = ProfileBlockSerializer(profile_block)
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            blocker = get_object_or_404(Profile, id=request.profile.id)
+            blocked = get_object_or_404(Profile, id=profile_id)
+            ProfileBlock.objects.create_block(blocker=blocker, blocked=blocked)
+            response_data = {'message': _('Profile blocked.')}
+            return Response(response_data, status=status.HTTP_201_CREATED)
         except ValueError as e:
-            logger.warn(str(e))
-            return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+            response_data = {'error': str(e)}
+            return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
 
 profile_block_list = ProfileBlockListView.as_view()
 
@@ -171,25 +184,24 @@ class ProfileRequestListView(PrivateView):
     def get(self, request, profile_id):
         profile = get_object_or_404(Profile, id=profile_id)
         pending_requests = FriendRequest.objects.get_pending_requests(profile)
-        serializer = FriendRequestSerializer(pending_requests, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        response_data = {'data': FriendRequestSerializer(pending_requests, many=True).data}
+        return Response(response_data, status=status.HTTP_200_OK)
     
     def post(self, request, profile_id):
-        sender = get_object_or_404(Profile, id=request.profile.id)
-        receiver = get_object_or_404(Profile, id=profile_id)
         try:
-            friend_request = FriendRequest.objects.create_request(sender=sender, receiver=receiver)
-            logger.info(f'Friend request {friend_request.id} sent by {sender.alias} to {receiver.alias}.')
-            serializer = FriendRequestSerializer(friend_request)
-            
-            # TODO: remove later, only for testing purposes
-            Friendship.objects.create_friendship_from_request(friend_request)
-            logger.info(f'Friend request {friend_request.id} accepted by {receiver.alias}.')
-            FriendRequest.objects.remove_request(friend_request)
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            sender = get_object_or_404(Profile, id=request.profile.id)
+            receiver = get_object_or_404(Profile, id=profile_id)
+            friend_request = FriendRequest.objects.filter(sender=receiver, receiver=sender).first()
+            if friend_request:
+                Friendship.objects.create_friendship_from_request(friend_request)
+                response_data = {'message': _('Friend request accepted.')}
+                return Response(response_data, status=status.HTTP_200_OK)
+            FriendRequest.objects.create_request(sender=sender, receiver=receiver)
+            response_data = {'message': _('Friend request sent.')}
+            return Response(response_data, status=status.HTTP_201_CREATED)
         except ValueError as e:
-            logger.warn(str(e))
-            return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+            response_data = {'error': str(e)}
+            return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
 
 profile_request_list = ProfileRequestListView.as_view()
 
@@ -198,8 +210,8 @@ class ProfileFriendListView(PrivateView):
     def get(self, request, profile_id):
         profile = get_object_or_404(Profile, id=profile_id)
         friendships = Friendship.objects.get_friendships(profile)
-        serializer = FriendshipSerializer(friendships, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        response_data = {'data': FriendshipSerializer(friendships, many=True).data}
+        return Response(response_data, status=status.HTTP_200_OK)
 
 profile_friend_list = ProfileFriendListView.as_view()
 
@@ -207,8 +219,8 @@ profile_friend_list = ProfileFriendListView.as_view()
 class MyInviteListView(PrivateView):
     def get(self, request):
         received_invites = GameInvite.objects.get_received_invites(request.profile)
-        serializer = GameInviteSerializer(received_invites, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        response_data = {'data': GameInviteSerializer(received_invites, many=True).data}
+        return Response(response_data, status=status.HTTP_200_OK)
 
 my_invite_list = MyInviteListView.as_view()
 
@@ -216,21 +228,24 @@ my_invite_list = MyInviteListView.as_view()
 class MyInviteDetailView(PrivateView):
     def post(self, request, invite_id):
         try:
-            GameInvite.objects.accept_invite(invite_id)
-            logger.info(f'Game invite {invite_id} accepted by {request.profile.alias}.')
-            return Response(status=status.HTTP_204_NO_CONTENT)
+            invite = get_object_or_404(GameInvite, id=invite_id)
+            game_id = invite.game.id
+            GameInvite.objects.accept_invite(invite)
+            response_data = {'message': _('Game invitation accepted.'), 'redirect': f'/games/{game_id}/'}
+            return Response(response_data, status=status.HTTP_200_OK)
         except ValueError as e:
-            logger.warn(str(e))
-            return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+            response_data = {'error': str(e)}
+            return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
     
     def delete(self, request, invite_id):
         try:
-            GameInvite.objects.decline_invite(invite_id)
-            logger.info(f'Game invite {invite_id} declined by {request.profile.alias}.')
-            return Response(status=status.HTTP_204_NO_CONTENT)
+            invite = get_object_or_404(GameInvite, id=invite_id)
+            GameInvite.objects.decline_invite(invite)
+            response_data = {'message': _('Game invitation declined.')}
+            return Response(response_data, status=status.HTTP_200_OK)
         except ValueError as e:
-            logger.warn(str(e))
-            return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+            response_data = {'error': str(e)}
+            return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
 
 my_invite_detail = MyInviteDetailView.as_view()
 
@@ -238,21 +253,18 @@ my_invite_detail = MyInviteDetailView.as_view()
 class MyBlockListView(PrivateView):
     def get(self, request):
         blocked_profiles = ProfileBlock.objects.get_blocked_profiles(request.profile)
-        serializer = ProfileBlockSerializer(blocked_profiles, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        response_data = {'data': ProfileBlockSerializer(blocked_profiles, many=True).data}
+        return Response(response_data, status=status.HTTP_200_OK)
 
 my_block_list = MyBlockListView.as_view()
 
 
 class MyBlockDetailView(PrivateView):
     def delete(self, request, block_id):
-        try:
-            ProfileBlock.objects.remove_block(block_id)
-            logger.info(f'Profile block {block_id} removed by {request.profile.alias}.')
-            return Response(status=status.HTTP_204_NO_CONTENT)
-        except ValueError as e:
-            logger.warn(str(e))
-            return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+        block = get_object_or_404(ProfileBlock, id=block_id)
+        block.delete()
+        response_data = {'message': _('Profile unblocked.')}
+        return Response(response_data, status=status.HTTP_200_OK)
 
 my_block_detail = MyBlockDetailView.as_view()
 
@@ -260,8 +272,8 @@ my_block_detail = MyBlockDetailView.as_view()
 class MyRequestListView(PrivateView):
     def get(self, request):
         pending_requests = FriendRequest.objects.get_pending_requests(request.profile)
-        serializer = FriendRequestSerializer(pending_requests, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        response_data = {'data': FriendRequestSerializer(pending_requests, many=True).data}
+        return Response(response_data, status=status.HTTP_200_OK)
 
 my_request_list = MyRequestListView.as_view()
 
@@ -269,21 +281,23 @@ my_request_list = MyRequestListView.as_view()
 class MyRequestDetailView(PrivateView):
     def post(self, request, request_id):
         try:
-            FriendRequest.objects.accept_request(request_id)
-            logger.info(f'Friend request {request_id} accepted by {request.profile.alias}.')
-            return Response(status=status.HTTP_204_NO_CONTENT)
+            friend_request = get_object_or_404(FriendRequest, id=request_id)
+            Friendship.objects.create_friendship_from_request(friend_request)
+            response_data = {'message': _('Friend request accepted.')}
+            return Response(response_data, status=status.HTTP_200_OK)
         except ValueError as e:
-            logger.warn(str(e))
-            return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+            response_data = {'error': str(e)}
+            return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
     
     def delete(self, request, request_id):
         try:
-            FriendRequest.objects.decline_request(request_id)
-            logger.info(f'Friend request {request_id} declined by {request.profile.alias}.')
-            return Response(status=status.HTTP_204_NO_CONTENT)
+            friend_request = get_object_or_404(FriendRequest, id=request_id)
+            FriendRequest.objects.decline_request(friend_request)
+            response_data = {'message': _('Friend request declined.')}
+            return Response(response_data, status=status.HTTP_200_OK)
         except ValueError as e:
-            logger.warn(str(e))
-            return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+            response_data = {'error': str(e)}
+            return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
 
 my_request_detail = MyRequestDetailView.as_view()
 
@@ -291,8 +305,8 @@ my_request_detail = MyRequestDetailView.as_view()
 class MyFriendListView(PrivateView):
     def get(self, request):
         friendships = Friendship.objects.get_friendships(request.profile)
-        serializer = FriendshipSerializer(friendships, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        response_data = {'data': FriendshipSerializer(friendships, many=True).data}
+        return Response(response_data, status=status.HTTP_200_OK)
 
 my_friend_list = MyFriendListView.as_view()
 
@@ -300,47 +314,31 @@ my_friend_list = MyFriendListView.as_view()
 class MyFriendDetailView(PrivateView):
     def delete(self, request, friendship_id):
         try:
-            Friendship.objects.remove_friendship(friendship_id)
-            logger.info(f'Friendship {friendship_id} removed by {request.profile.alias}.')
-            return Response(status=status.HTTP_204_NO_CONTENT)
+            friendship = get_object_or_404(Friendship, id=friendship_id)
+            Friendship.objects.remove_friendship(friendship, request.profile)
+            response_data = {'message': _('Friend removed.'), 'redirect': '/friends/'}
+            return Response(response_data, status=status.HTTP_200_OK)
         except ValueError as e:
-            logger.warn(str(e))
-            return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+            response_data = {'error': str(e)}
+            return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
 
 my_friend_detail = MyFriendDetailView.as_view()
 
 
 class MyFriendMessageListView(PrivateView):
     def get(self, request, friendship_id):
-        messages = FriendMessage.objects.get_messages(friendship_id)
-        serializer = FriendMessageSerializer(messages, many=True)
+        friendship = get_object_or_404(Friendship, id=friendship_id)
+        serializer = FriendMessageSerializer(friendship.messages, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     
     def post(self, request, friendship_id):
         try:
-            sender = request.profile
-            receiver = Friendship.objects.get_other(friendship_id, sender)
-            friendship = Friendship.objects.get(id=friendship_id)
-            message = request.data['message']
-            friend_message = FriendMessage.objects.send_message(sender, receiver, message, friendship)
-            logger.info(f'Friend message {friend_message.id} sent by {sender.alias} to {friend_message.receiver.alias}.')
-            return Response(status=status.HTTP_204_NO_CONTENT)
+            friendship = get_object_or_404(Friendship, id=friendship_id)
+            FriendMessage.objects.send_message(friendship, request.profile, request.data['message'])
+            response_data = {'message': _('Message sent.')}
+            return Response(response_data, status=status.HTTP_200_OK)
         except ValueError as e:
-            logger.warn(str(e))
-            return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+            response_data = {'error': str(e)}
+            return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
 
 my_friend_message_list = MyFriendMessageListView.as_view()
-
-
-class MyFriendMessageDetailView(PrivateView):
-    # TODO: add method to edit message
-    def delete(self, request, friendship_id, message_id):
-        try:
-            FriendMessage.objects.remove_message(message_id)
-            logger.info(f'Friend message {message_id} removed by {request.profile.alias}.')
-            return Response(status=status.HTTP_204_NO_CONTENT)
-        except ValueError as e:
-            logger.warn(str(e))
-            return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
-
-my_friend_message_detail = MyFriendMessageDetailView.as_view()

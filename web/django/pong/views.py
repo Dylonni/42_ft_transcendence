@@ -1,7 +1,7 @@
 import logging
 from django.contrib.auth import get_user_model
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from django.template.loader import render_to_string
 from django.utils import translation
 from django.utils.translation import gettext as _
@@ -10,7 +10,7 @@ from rest_framework import status
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from profiles.models import Profile
+from profiles.models import Profile, ProfileBlock
 from friends.models import Friendship, FriendMessage
 from games.models import Game
 from notifs.models import Notification
@@ -34,7 +34,7 @@ def get_profile_context(request, profile_id=None):
     except Profile.DoesNotExist:
         return context
 
-def get_friend_context(request, profile_id=None):
+def get_friend_context(request):
     context = get_profile_context(request)
     try:
         profile = context.get('profile', None)
@@ -42,6 +42,18 @@ def get_friend_context(request, profile_id=None):
             return context
         friendships_ids = Friendship.objects.get_friendships_ids(profile)
         context['friends'] = Profile.objects.filter(id__in=friendships_ids)
+        return context
+    except Profile.DoesNotExist:
+        return context
+
+def get_friendship_context(request):
+    context = get_profile_context(request)
+    try:
+        profile = context.get('profile', None)
+        if profile is None:
+            return context
+        friendships = Friendship.objects.get_friendships(profile)
+        context['friendships'] = friendships
         return context
     except Profile.DoesNotExist:
         return context
@@ -57,6 +69,12 @@ def get_game_context(context={}):
         return context
     except Game.DoesNotExist:
         return context
+
+def get_notif_context(request, context={}):
+    notifications = Notification.objects.get_notifications_for_profile(request.profile)
+    context['notifs'] = notifications
+    context['has_unread_notifs'] = notifications.filter(read=False).exists()
+    return context
 
 def render_with_sub_template(request, path, title, context={}):
     sub_template = render_to_string(path, context, request)
@@ -134,7 +152,7 @@ class HomeView(PrivateView):
     def get(self, request):
         context = get_profile_context(request)
         context = get_game_context(context)
-        context['notifs'] = Notification.objects.get_notifications_for_profile(request.profile.id)
+        context = get_notif_context(request, context)
         return render(request, 'home.html', context)
 
 home = HomeView.as_view()
@@ -158,8 +176,10 @@ customize_game = CustomizeGameView.as_view()
 
 class GameRoomView(PrivateView):
     def get(self, request, game_id):
-        context = get_profile_context(request)
-        context['game'] = Game.objects.get(id=game_id)
+        game = get_object_or_404(Game, id=game_id)
+        context = get_friend_context(request)
+        context['game'] = game
+        context['players'] = game.players.all()
         return render(request, 'game_room.html', context)
 
 game_room = GameRoomView.as_view()
@@ -168,6 +188,8 @@ game_room = GameRoomView.as_view()
 class ProfileView(PrivateView):
     def get(self, request):
         context = get_profile_context(request)
+        context['is_self'] = True
+        context = get_notif_context(request, context)
         return render(request, 'profile.html', context)
 
 profile = ProfileView.as_view()
@@ -175,7 +197,14 @@ profile = ProfileView.as_view()
 
 class ProfileOtherView(PrivateView):
     def get(self, request, profile_id):
+        profile = get_object_or_404(Profile, id=profile_id)
         context = get_profile_context(request, profile_id)
+        context = get_notif_context(request, context)
+        context['is_self'] = request.profile.id == profile_id
+        context['is_friend'] = request.profile.is_friend(context['profile'])
+        if context['is_friend']:
+            context['friendship'] = Friendship.objects.get_friendship(request.profile, profile)
+        context['profile_block'] = request.profile.get_block(context['profile'])
         return render(request, 'profile.html', context)
 
 profile_other = ProfileOtherView.as_view()
@@ -185,6 +214,7 @@ class LeaderboardView(PrivateView):
     def get(self, request):
         context = get_profile_context(request)
         context['players'] = Profile.objects.get_ranked_profiles()
+        context = get_notif_context(request, context)
         return render(request, 'leaderboard.html', context)
 
 leaderboard = LeaderboardView.as_view()
@@ -192,27 +222,23 @@ leaderboard = LeaderboardView.as_view()
 
 class SocialView(PrivateView):
     def get(self, request):
-        friendships_ids = Friendship.objects.get_friendships_ids(request.profile)
-        if friendships_ids:
-            first_friend_id = next(iter(friendships_ids))
-            first_friend = Profile.objects.get(id=first_friend_id)
-            friendship_id = Friendship.objects.get_friendship_id(request.profile, first_friend)
-            if friendship_id:
-                return redirect(f'/friends/{friendship_id}/')
-        # context = {'profile': request.profile}
-        # friendship_id = request.query_params.get('id', '')
-        # context['messages'] = FriendMessage.objects.get_messages(friendship_id)
-        return render(request, 'social.html')
+        context = get_friendship_context(request)
+        context = get_notif_context(request, context)
+        return render(request, 'friends/social.html', context)
 
 social = SocialView.as_view()
 
 
 class SocialFriendView(PrivateView):
-    def get(self, request, friend_id):
-        context = get_friend_context(request)
-        friendship_id = request.query_params.get('id', '')
+    def get(self, request, friendship_id):
+        friendship = get_object_or_404(Friendship, id=friendship_id)
+        context = get_friendship_context(request)
         context['messages'] = FriendMessage.objects.get_messages(friendship_id)
-        return render(request, 'social.html', context)
+        context['current_friend'] = Friendship.objects.get_other(friendship_id, request.profile)
+        context['friendship'] = friendship
+        context['profile_block'] = request.profile.get_block(context['current_friend'])
+        context = get_notif_context(request, context)
+        return render(request, 'friends/social.html', context)
 
 social_friend = SocialFriendView.as_view()
 
@@ -220,6 +246,7 @@ social_friend = SocialFriendView.as_view()
 class SettingsView(PrivateView):
     def get(self, request):
         context = get_profile_context(request)
+        context = get_notif_context(request, context)
         return render(request, 'settings.html', context)
 
 settings = SettingsView.as_view()
@@ -227,9 +254,8 @@ settings = SettingsView.as_view()
 
 class LangReloadView(PublicView):
     def post(self, request, lang):
-        path = request.data.get('path')
+        path = request.data['path']
         translation.activate(lang)
-        logger.info('Language changed.', extra={'lang': lang})
         response_data = {'message': _('Language changed.'), 'redirect': path}
         response = Response(response_data, status=status.HTTP_200_OK)
         response.set_cookie(
