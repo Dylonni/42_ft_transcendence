@@ -150,6 +150,8 @@ forgot_password = ForgotPasswordView.as_view()
 
 class HomeView(PrivateView):
     def get(self, request):
+        if request.profile.game:
+            return redirect(f'/games/{request.profile.game.id}/', True)
         context = get_profile_context(request)
         context = get_game_context(context)
         context = get_notif_context(request, context)
@@ -160,6 +162,8 @@ home = HomeView.as_view()
 
 class SelectGameView(PrivateView):
     def get(self, request):
+        if request.profile.game:
+            return redirect(f'/games/{request.profile.game.id}/', True)
         context = get_profile_context(request)
         return render(request, 'modeselect.html', context)
 

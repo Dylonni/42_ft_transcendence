@@ -97,7 +97,7 @@ class Profile(BaseModel):
         self.save()
     
     def set_default_lang(self, lang='en'):
-        if not any(code == lang for code, _ in settings.LANGUAGES):
+        if lang not in dict(settings.LANGUAGES):
             lang = 'en'
         self.default_lang = lang
         self.save()

@@ -17,12 +17,11 @@ class LangVerificationMixin:
     def dispatch(self, request: HttpRequest, *args, **kwargs):
         response = super().dispatch(request, *args, **kwargs)
         lang = request.COOKIES.get('lang', 'en')
-        if lang not in settings.LANGUAGES:
+        if lang not in dict(settings.LANGUAGES):
             response.set_cookie(
                 key='lang',
                 value='en',
             )
-            # logger.info(f'Setting language to: "{lang}".')
             translation.activate(lang)
         return response
 
@@ -65,7 +64,7 @@ class JWTCookieAuthenticationMixin:
             request.user = UserModel.objects.get(id=user_id)
             request.profile = Profile.objects.get(user__id=user_id)
             lang = request.profile.default_lang
-            if lang != request.COOKIES.get('lang', 'en') and lang in settings.LANGUAGES:
+            if lang != request.COOKIES.get('lang', 'en') and lang in dict(settings.LANGUAGES):
                 response.set_cookie(
                     key='lang',
                     value=lang,
