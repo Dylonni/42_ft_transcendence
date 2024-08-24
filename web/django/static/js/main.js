@@ -167,6 +167,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const notifList = document.getElementById('notifList');
             if (notifList) {
                 notifList.innerHTML += element;
+                setNotifHandlers(); // MAYBE: optimize
             }
             const notifBtn = document.getElementById('notiftoggle');
             if (notifBtn && !notifBtn.checked) {
@@ -409,121 +410,119 @@ document.addEventListener("DOMContentLoaded", () => {
                 .catch(error => console.error('Error creating game:', error));
             });
         }
-
-        var toastTriggers = document.querySelectorAll('[data-bs-toggle="toast"]');
-        for (let toastTrigger of toastTriggers) {
-            toastTrigger.addEventListener('click', function () {
-                var toastSelector = toastTrigger.getAttribute('data-bs-target');
-                if (!toastSelector) return;
-                try {
-                    var toastEl = document.querySelector(toastSelector);
-                    if (!toastEl) return;
-                    var toast = new bootstrap.Toast(toastEl);
-                    toast.show();
-                }
-                catch(e) {
-                    console.error(e);
-                }
-            })
-        }
     };
 
     const setNotifHandlers = () => {
         const notifBtn = document.getElementById('notiftoggle');
         if (notifBtn) {
-            notifBtn.addEventListener('change', (event) => {
-                if (notifBtn.checked && notifSocket) {
-                    const message = {
-                        notification: {
-                            command: 'notifs_read'
-                        }
-                    };
-                    notifSocket.send(JSON.stringify(message));
-                }
-            });
+            if (!notifBtn.dataset.hasListener) {
+                notifBtn.addEventListener('change', (event) => {
+                    if (notifBtn.checked && notifSocket) {
+                        const message = {
+                            notification: {
+                                command: 'notifs_read'
+                            }
+                        };
+                        notifSocket.send(JSON.stringify(message));
+                    }
+                });
+            }
+            notifBtn.dataset.hasListener = 'true';
         }
 
         document.querySelectorAll('.accept-friend-btn').forEach(acceptFriendBtn => {
-            acceptFriendBtn.addEventListener('click', (event) => {
-                if (notifSocket) {
+            if (!acceptFriendBtn.dataset.hasListener) {
+                acceptFriendBtn.addEventListener('click', (event) => {
                     const requestId = acceptFriendBtn.dataset.objectId;
-                    fetch(`/api/profiles/me/requests/${requestId}/`, {
-                        method: 'POST',
-                        headers: {
-                            'X-Requested-With': 'XMLHttpRequest',
-                        },
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        console.log('Friend request accepted:', data);
-                        acceptFriendBtn.parentElement.parentElement.remove();
-                    })
-                    .catch(error => console.error('Error accepting friend request:', error));
-                }
-            });
+                    if (requestId) {
+                        fetch(`/api/profiles/me/requests/${requestId}/`, {
+                            method: 'POST',
+                            headers: {
+                                'X-Requested-With': 'XMLHttpRequest',
+                            },
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log('Friend request accepted:', data);
+                            acceptFriendBtn.parentElement.parentElement.remove();
+                        })
+                        .catch(error => console.error('Error accepting friend request:', error));
+                    }
+                });
+                acceptFriendBtn.dataset.hasListener = 'true';
+            }
         });
 
         document.querySelectorAll('.decline-friend-btn').forEach(declineFriendBtn => {
-            declineFriendBtn.addEventListener('click', (event) => {
-                if (notifSocket) {
+            if (!declineFriendBtn.dataset.hasListener) {
+                declineFriendBtn.addEventListener('click', (event) => {
                     const requestId = declineFriendBtn.dataset.objectId;
-                    fetch(`/api/profiles/me/requests/${requestId}/`, {
-                        method: 'DELETE',
-                        headers: {
-                            'X-Requested-With': 'XMLHttpRequest',
-                        },
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        console.log('Friend request declined:', data);
-                        declineFriendBtn.parentElement.parentElement.remove();
-                    })
-                    .catch(error => console.error('Error declining friend request:', error));
-                }
-            });
+                    if (requestId) {
+                        fetch(`/api/profiles/me/requests/${requestId}/`, {
+                            method: 'DELETE',
+                            headers: {
+                                'X-Requested-With': 'XMLHttpRequest',
+                            },
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log('Friend request declined:', data);
+                            declineFriendBtn.parentElement.parentElement.remove();
+                        })
+                        .catch(error => console.error('Error declining friend request:', error));
+                    }
+                });
+                declineFriendBtn.dataset.hasListener = 'true';
+            }
         });
 
         document.querySelectorAll('.accept-game-btn').forEach(acceptGameBtn => {
-            acceptGameBtn.addEventListener('click', (event) => {
-                if (notifSocket) {
+            if (!acceptGameBtn.dataset.hasListener) {
+                acceptGameBtn.addEventListener('click', (event) => {
                     const inviteId = acceptGameBtn.dataset.objectId;
-                    fetch(`/api/profiles/me/invites/${inviteId}/`, {
-                        method: 'POST',
-                        headers: {
-                            'X-Requested-With': 'XMLHttpRequest',
-                        },
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        console.log('Game invite accepted:', data);
-                        acceptGameBtn.parentElement.parentElement.remove();
-                        if ('redirect' in data) {
-                            navigateTo(data.redirect);
-                        }
-                    })
-                    .catch(error => console.error('Error accepting game invite:', error));
-                }
-            });
+                    if (inviteId) {
+                        fetch(`/api/profiles/me/invites/${inviteId}/`, {
+                            method: 'POST',
+                            headers: {
+                                'X-Requested-With': 'XMLHttpRequest',
+                            },
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log('Game invite accepted:', data);
+                            acceptGameBtn.parentElement.parentElement.remove();
+                            if ('redirect' in data) {
+                                navigateTo(data.redirect);
+                            }
+                        })
+                        .catch(error => console.error('Error accepting game invite:', error));
+                    }
+                });
+                acceptGameBtn.dataset.hasListener = 'true';
+            }
         });
 
         document.querySelectorAll('.decline-game-btn').forEach(declineGameBtn => {
-            declineGameBtn.addEventListener('click', (event) => {
-                if (notifSocket) {
+            if (!declineGameBtn.dataset.hasListener) {
+                declineGameBtn.addEventListener('click', (event) => {
                     const inviteId = declineGameBtn.dataset.objectId;
-                    fetch(`/api/profiles/me/invites/${inviteId}/`, {
-                        method: 'DELETE',
-                        headers: {
-                            'X-Requested-With': 'XMLHttpRequest',
-                        },
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        console.log('Game invite declined:', data);
-                        declineGameBtn.parentElement.parentElement.remove();
-                    })
-                    .catch(error => console.error('Error declining game invite:', error));
-                }
-            });
+                    if (inviteId) {
+                        fetch(`/api/profiles/me/invites/${inviteId}/`, {
+                            method: 'DELETE',
+                            headers: {
+                                'X-Requested-With': 'XMLHttpRequest',
+                            },
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log('Game invite declined:', data);
+                            declineGameBtn.parentElement.parentElement.remove();
+                        })
+                        .catch(error => console.error('Error declining game invite:', error));
+                    }
+                });
+                declineGameBtn.dataset.hasListener = 'true';
+            }
         });
     };
 
@@ -574,20 +573,23 @@ document.addEventListener("DOMContentLoaded", () => {
         document.querySelectorAll('.join-game-btn').forEach(joinGameBtn => {
             joinGameBtn.addEventListener('click', (event) => {
                 event.preventDefault();
-                fetch(`/api/games/${joinGameBtn.dataset.gameId}/join/`, {
-                    method: 'POST',
-                    headers: {
-                        'X-Requested-With': 'XMLHttpRequest',
-                    },
-                })
-                .then(response => response.json())
-                .then(data => {
-                    console.log('Game joined:', data);
-                    if ('redirect' in data) {
-                        navigateTo(data.redirect);
-                    }
-                })
-                .catch(error => console.error('Error searching game:', error));
+                const gameId = joinGameBtn.dataset.gameId;
+                if (gameId) {
+                    fetch(`/api/games/${gameId}/join/`, {
+                        method: 'POST',
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest',
+                        },
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Game joined:', data);
+                        if ('redirect' in data) {
+                            navigateTo(data.redirect);
+                        }
+                    })
+                    .catch(error => console.error('Error searching game:', error));
+                }
             });
         });
     }
@@ -909,24 +911,26 @@ document.addEventListener("DOMContentLoaded", () => {
             if (chatForm) {
                 chatForm.addEventListener('submit', (event) => {
                     event.preventDefault();
-                    const formData = new FormData(event.target);
                     const friendshipId = chatForm.dataset.friendshipId;
-                    fetch(`/api/profiles/me/friends/${friendshipId}/messages/`, {
-                        method: 'POST',
-                        headers: {
-                            'X-Requested-With': 'XMLHttpRequest',
-                        },
-                        body: formData,
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        console.log(data);
-                        const chatInput = document.getElementById('chatInput');
-                        if (chatInput) {
-                            chatInput.value = '';
-                        }
-                    })
-                    .catch(error => console.error(`Error sending message to friend:`, error));
+                    if (friendshipId) {
+                        const formData = new FormData(event.target);
+                        fetch(`/api/profiles/me/friends/${friendshipId}/messages/`, {
+                            method: 'POST',
+                            headers: {
+                                'X-Requested-With': 'XMLHttpRequest',
+                            },
+                            body: formData,
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log(data);
+                            const chatInput = document.getElementById('chatInput');
+                            if (chatInput) {
+                                chatInput.value = '';
+                            }
+                        })
+                        .catch(error => console.error(`Error sending message to friend:`, error));
+                    }
                 });
             }
         }

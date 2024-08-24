@@ -9,4 +9,6 @@ def create_super_user(sender, **kwargs):
 	for admin in ['acloos', 'daumis', 'psan']:
 		if not user_model.objects.filter(username=f'42_{admin}').exists():
 			user = user_model.objects.create_user(f'42_{admin}', f'{admin}@42.fr', f'42_{admin}', is_verified=True, is_active=True)
-			profile_model.objects.create_from_user(user)
+			profile = profile_model.objects.create_from_user(user)
+			profile.alias = admin
+			profile.save()
