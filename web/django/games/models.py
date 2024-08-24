@@ -1,5 +1,5 @@
 import random
-from django.core.validators import MaxValueValidator
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from pong.models import BaseModel, BaseInteraction
@@ -12,6 +12,21 @@ from .managers import (
 
 
 class Game(BaseModel):
+    class SizeChoices(models.TextChoices):
+        SMALL = 'Small', _('Small')
+        MEDIUM = 'Medium', _('Medium')
+        LARGE = 'Large', _('Large')
+    
+    class SpeedChoices(models.TextChoices):
+        SLOW = 'Slow', _('Slow')
+        NORMAL = 'Normal', _('Normal')
+        FAST = 'Fast', _('Fast')
+    
+    class DifficultyChoices(models.TextChoices):
+        EASY = 'Easy', _('Easy')
+        NORMAL = 'Normal', _('Normal')
+        HARD = 'Hard', _('Hard')
+    
     name = models.CharField(
         max_length=255,
         null=True,
@@ -26,27 +41,27 @@ class Game(BaseModel):
     )
     player_limit = models.PositiveSmallIntegerField(
         default=1,
-        validators=[MaxValueValidator(8)],
+        validators=[MinValueValidator(1), MaxValueValidator(8)],
     )
     win_score = models.PositiveSmallIntegerField(
         default=5,
-        validators=[MaxValueValidator(30)],
+        validators=[MinValueValidator(1), MaxValueValidator(30)],
     )
-    ball_size = models.PositiveSmallIntegerField(
-        default=1,
-        validators=[MaxValueValidator(2)],
+    ball_size = models.CharField(
+        choices=SizeChoices.choices,
+        default=SizeChoices.MEDIUM,
     )
-    ball_speed = models.PositiveSmallIntegerField(
-        default=1,
-        validators=[MaxValueValidator(2)],
+    ball_speed = models.CharField(
+        choices=SpeedChoices.choices,
+        default=SpeedChoices.NORMAL,
     )
-    paddle_length = models.PositiveSmallIntegerField(
-        default=1,
-        validators=[MaxValueValidator(2)],
+    paddle_size = models.CharField(
+        choices=SizeChoices.choices,
+        default=SizeChoices.MEDIUM,
     )
-    ai_difficulty = models.PositiveSmallIntegerField(
-        default=1,
-        validators=[MaxValueValidator(2)],
+    ai_difficulty = models.CharField(
+        choices=DifficultyChoices.choices,
+        default=DifficultyChoices.NORMAL,
     )
     map_choice = models.PositiveSmallIntegerField(
         default=0,

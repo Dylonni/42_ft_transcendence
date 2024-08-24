@@ -22,7 +22,7 @@ class GameListView(PrivateView):
             response_data = {'error': serializer.errors}
             return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
         try:
-            game = Game.objects.create_game(request.profile)
+            game = Game.objects.set_game_infos(serializer.save(), request.profile)
             response_data = {'message': _('Game created.'), 'redirect': f'/games/{game.id}/'}
             return Response(response_data, status=status.HTTP_201_CREATED)
         except ValueError as e:

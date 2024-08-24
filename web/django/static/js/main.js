@@ -376,7 +376,7 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
 
-        let logoutBtn = document.querySelector('.logout-btn');
+        const logoutBtn = document.querySelector('.logout-btn');
         if (logoutBtn) {
             logoutBtn.addEventListener('click', (event) => {
                 event.preventDefault();
@@ -385,6 +385,26 @@ document.addEventListener("DOMContentLoaded", () => {
                     'POST',
                 );
                 closeAllWebSockets();
+            });
+        }
+
+        const playerLimitInput = document.getElementById('playerLimitInput');
+        if (playerLimitInput) {
+            playerLimitInput.addEventListener('input', (event) => {
+                const playerLimitSpan = document.getElementById('playerLimitSpan');
+                if (playerLimitSpan) {
+                    playerLimitSpan.textContent = event.target.value;
+                }
+            });
+        }
+
+        const winScoreInput = document.getElementById('winScoreInput');
+        if (winScoreInput) {
+            winScoreInput.addEventListener('input', (event) => {
+                const winScoreSpan = document.getElementById('winScoreSpan');
+                if (winScoreSpan) {
+                    winScoreSpan.textContent = event.target.value;
+                }
             });
         }
 

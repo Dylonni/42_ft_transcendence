@@ -76,13 +76,13 @@
                                     </svg>
                                 </h1>
                                 <div class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center">
-                                    <span class="d-flex d-xxl-flex align-items-center justify-content-xxl-center align-items-xxl-center" style="color: #75aadb;font-size: 15px;font-weight: bold;height: 40px;">
-                                        #value
+                                    <span id="playerLimitSpan" class="d-flex d-xxl-flex align-items-center justify-content-xxl-center align-items-xxl-center" style="color: #75aadb;font-size: 15px;font-weight: bold;height: 40px;">
+                                        2
                                     </span>
                                 </div>
                                 <div class="d-flex d-xxl-flex flex-column justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="width: 80%;">
                                     <div style="width: 100%;margin-bottom: 10px;">
-                                        <input class="form-range" max="8" min="2" name="players" step="1" type="range" value="2"/>
+                                        <input id="playerLimitInput" class="form-range" max="8" min="2" name="player_limit" step="1" type="range" value="2"/>
                                         <div class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="width: 100%;">
                                             <span class="d-flex d-xxl-flex justify-content-start align-items-center justify-content-xxl-start align-items-xxl-center" style="color: var(--bs-body-bg);width: 50%;">
                                                 2
@@ -107,8 +107,8 @@
                                     </svg>
                                 </h1>
                                 <div class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center">
-                                    <span class="d-flex d-xxl-flex align-items-center justify-content-xxl-center align-items-xxl-center" style="color: #ffc61e;font-size: 15px;font-weight: bold;height: 40px;">
-                                        #value
+                                    <span id="winScoreSpan" class="d-flex d-xxl-flex align-items-center justify-content-xxl-center align-items-xxl-center" style="color: #ffc61e;font-size: 15px;font-weight: bold;height: 40px;">
+                                        5
                                     </span>
                                     <span class="d-flex d-xxl-flex align-items-center justify-content-xxl-center align-items-xxl-center" style="color: #ffc61e;font-size: 15px;font-weight: bold;height: 40px;">
                                         points
@@ -116,7 +116,7 @@
                                 </div>
                                 <div class="d-flex d-xxl-flex flex-column justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="width: 80%;">
                                     <div style="width: 100%;margin-bottom: 10px;">
-                                        <input class="form-range" max="30" min="1" name="winscore" step="1" type="range" value="5"/>
+                                        <input id="winScoreInput" class="form-range" max="30" min="1" name="win_score" step="1" type="range" value="5"/>
                                         <div class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="width: 100%;">
                                             <span class="d-flex d-xxl-flex justify-content-start align-items-center justify-content-xxl-start align-items-xxl-center" style="color: var(--bs-body-bg);width: 33%;">
                                                 1
@@ -138,19 +138,19 @@
                             </h1>
                             <div class="d-flex d-xxl-flex flex-row justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center radiogroup" style="width: 60%">
                                 <div class="form-check d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="padding-left: 0px;margin-bottom: 0px;margin-left: 0px;margin-right: 0px;width: 33%;">
-                                    <input class="form-check-input ballsize" id="formCheckBsizeSmall" name="ballsize" type="radio" value="0"/>
+                                    <input class="form-check-input ballsize" id="formCheckBsizeSmall" name="ball_size" type="radio" value="Small"/>
                                     <label class="form-check-label" for="formCheckBsizeSmall">
                                         <img class="ballImg" height="17" src="{% static '/img/ball.webp' %}" style="width: 18px;height: 18px;" width="17"/>
                                     </label>
                                 </div>
                                 <div class="form-check d-flex justify-content-center align-items-center" style="padding-left: 0px;padding-bottom: 0px;margin-bottom: 0px;width: 33%;margin-left: 15px;margin-right: 15px;">
-                                    <input checked="" class="form-check-input ballsize" id="formCheckBsizeMedium" name="ballsize" type="radio" value="1"/>
+                                    <input checked="" class="form-check-input ballsize" id="formCheckBsizeMedium" name="ball_size" type="radio" value="Medium"/>
                                     <label class="form-check-label" for="formCheckBsizeMedium">
                                         <img class="ballImg" height="27" src="{% static '/img/ball.webp' %}" style="width: 28px;height: 28px;" width="27"/>
                                     </label>
                                 </div>
                                 <div class="form-check d-flex justify-content-center align-items-center" style="margin-bottom: 0px;padding-left: 0px;width: 33%;">
-                                    <input class="form-check-input ballsize" id="formCheckBsizeLarge" name="ballsize" type="radio" value="2"/>
+                                    <input class="form-check-input ballsize" id="formCheckBsizeLarge" name="ball_size" type="radio" value="Large"/>
                                     <label class="form-check-label" for="formCheckBsizeLarge">
                                         <img class="ballImg" height="46" src="{% static '/img/ball.webp' %}" style="margin-left: 0px;margin-right: 0px;width: 38px;height: 38px;" width="46"/>
                                     </label>
@@ -174,17 +174,17 @@
                             </h1>
                             <div class="d-flex d-xxl-flex flex-row justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center radiogroup" style="width: 60%">
                                 <div class="form-check d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="padding-left: 0px;margin-bottom: 0px;margin-left: 0px;margin-right: 0px;width: 33%;">
-                                    <input class="form-check-input" id="formCheckBsSlow" name="ballSpeed" style="margin-left: 0px;margin-top: 0px;" type="radio" value="0"/>
+                                    <input class="form-check-input" id="formCheckBsSlow" name="ball_speed" style="margin-left: 0px;margin-top: 0px;" type="radio" value="Slow"/>
                                     <label class="form-check-label" for="formCheckBsSlow">
                                     </label>
                                 </div>
                                 <div class="form-check d-flex justify-content-center align-items-center" style="padding-left: 0px;padding-bottom: 0px;margin-bottom: 0px;width: 33%;margin-left: 0px;margin-right: 0px;">
-                                    <input checked="" class="form-check-input" id="formCheckBsNormal" name="ballSpeed" style="margin-left: 0px;margin-top: 0px;" type="radio" value="1"/>
+                                    <input checked="" class="form-check-input" id="formCheckBsNormal" name="ball_speed" style="margin-left: 0px;margin-top: 0px;" type="radio" value="Normal"/>
                                     <label class="form-check-label" for="formCheckBsNormal">
                                     </label>
                                 </div>
                                 <div class="form-check d-flex justify-content-center align-items-center" style="margin-bottom: 0px;padding-left: 0px;width: 33%;">
-                                    <input class="form-check-input" id="formCheckBsFast" name="ballSpeed" style="margin-left: 0px;margin-top: 0px;" type="radio" value="2"/>
+                                    <input class="form-check-input" id="formCheckBsFast" name="ball_speed" style="margin-left: 0px;margin-top: 0px;" type="radio" value="Fast"/>
                                     <label class="form-check-label" for="formCheckBsFast">
                                     </label>
                                 </div>
@@ -207,21 +207,21 @@
                             </h1>
                             <div class="d-flex d-xxl-flex flex-row justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center radiogroup" style="width: 76%;height: 61px;">
                                 <div class="form-check d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="padding-left: 0px;margin-left: 0px;margin-bottom: 0px;margin-right: 0px;height: 74px;width: 33%;">
-                                    <input class="form-check-input pdsize" id="formCheckPdsizeSmall" name="pdsize" type="radio" value="0"/>
+                                    <input class="form-check-input pdsize" id="formCheckPdsizeSmall" name="paddle_size" type="radio" value="Small"/>
                                     <label class="form-check-label" for="formCheckPdsizeSmall">
                                         <i class="far fa-window-minimize" style="font-size: 32px;color: var(--bs-code-color);padding-top: 18px;margin-top: 17px;">
                                         </i>
                                     </label>
                                 </div>
                                 <div class="form-check d-flex justify-content-center align-items-center" style="padding-left: 0px;padding-bottom: 0px;margin-left: 15px;margin-bottom: 0px;margin-right: 15px;height: 74px;width: 33%;">
-                                    <input checked="" class="form-check-input pdsize" id="formCheckPdsizeMedium" name="pdsize" type="radio" value="1"/>
+                                    <input checked="" class="form-check-input pdsize" id="formCheckPdsizeMedium" name="paddle_size" type="radio" value="Medium"/>
                                     <label class="form-check-label" for="formCheckPdsizeMedium">
                                         <i class="far fa-window-minimize" style="font-size: 57px;color: var(--bs-code-color);width: 100%;margin-top: 17px;">
                                         </i>
                                     </label>
                                 </div>
                                 <div class="form-check d-flex justify-content-center align-items-center" style="margin-bottom: 0px;padding-left: 0px;width: 33%;height: 74px;">
-                                    <input class="form-check-input pdsize" id="formCheckPdsizeLarge" name="pdsize" type="radio" value="2"/>
+                                    <input class="form-check-input pdsize" id="formCheckPdsizeLarge" name="paddle_size" type="radio" value="Large"/>
                                     <label class="form-check-label" for="formCheckPdsizeLarge" style="font-size: 26px;">
                                         <i class="far fa-window-minimize" style="font-size: 77px;color: var(--bs-code-color);margin-bottom: 0px;padding-bottom: 0px;">
                                         </i>
@@ -258,7 +258,7 @@
                             </h1>
                             <div class="d-flex d-xxl-flex flex-row justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center radiogroup" style="width: 80%;height: 55px;">
                                 <div class="form-check d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="padding-left: 0px;margin-left: 0px;margin-bottom: 0px;margin-right: 0px;height: 74px;width: 33%;">
-                                    <input class="form-check-input aidiff" id="formCheckAiDiffEasy" name="aidiff" type="radio" value="0"/>
+                                    <input class="form-check-input aidiff" id="formCheckAiDiffEasy" name="ai_difficulty" type="radio" value="Easy"/>
                                     <label class="form-check-label" for="formCheckAiDiffEasy">
                                         <svg class="icon icon-tabler icon-tabler-robot-face" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 50px;color: var(--bs-form-valid-color);width: 100%;margin-top: 0px;padding-top: 0px;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
@@ -272,7 +272,7 @@
                                     </label>
                                 </div>
                                 <div class="form-check d-flex justify-content-center align-items-center" style="padding-left: 0px;padding-bottom: 0px;margin-bottom: 0px;height: 74px;width: 33%;margin-right: 0px;margin-left: 0px;">
-                                    <input checked="" class="form-check-input aidiff" id="formCheckAiDiffNormal" name="aidiff" type="radio" value="1"/>
+                                    <input checked="" class="form-check-input aidiff" id="formCheckAiDiffNormal" name="ai_difficulty" type="radio" value="Normal"/>
                                     <label class="form-check-label" for="formCheckAiDiffNormal">
                                         <svg class="icon icon-tabler icon-tabler-robot-face" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 50px;color: var(--bs-orange);width: 100%;margin-top: 0px;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
@@ -286,7 +286,7 @@
                                     </label>
                                 </div>
                                 <div class="form-check d-flex justify-content-center align-items-center" style="margin-bottom: 0px;padding-left: 0px;width: 33%;height: 74px;">
-                                    <input class="form-check-input aidiff" id="formCheckAiDiffHard" name="aidiff" type="radio" value="2"/>
+                                    <input class="form-check-input aidiff" id="formCheckAiDiffHard" name="ai_difficulty" type="radio" value="Hard"/>
                                     <label class="form-check-label" for="formCheckAiDiffHard" style="font-size: 26px;">
                                         <svg class="icon icon-tabler icon-tabler-robot-face" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 50px;color: var(--bs-form-invalid-color);margin-bottom: 0px;padding-bottom: 0px;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
@@ -383,17 +383,17 @@
                             </h1>
                             <div class="d-flex d-xxl-flex flex-row justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center radiogroup" style="width: 76%;height: 55px;">
                                 <div class="form-check d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="padding-left: 0px;margin-left: 0px;margin-bottom: 0px;margin-right: 0px;height: 55px;width: 33%;">
-                                    <input class="form-check-input powerup" id="formCheckPup1" name="powerup" style="margin-left: 0px;margin-top: 0px;" type="radio"/>
+                                    <input class="form-check-input powerup" id="formCheckPup1" name="power_ups" style="margin-left: 0px;margin-top: 0px;" type="radio"/>
                                     <label class="form-check-label" for="formCheckPup1">
                                     </label>
                                 </div>
                                 <div class="form-check d-flex justify-content-center align-items-center" style="padding-left: 0px;padding-bottom: 0px;margin-bottom: 0px;height: 55px;width: 33%;margin-right: 0px;margin-left: 0px;">
-                                    <input class="form-check-input powerup" id="formCheckPup2" name="powerup" style="margin-left: 0px;margin-top: 0px;" type="radio"/>
+                                    <input class="form-check-input powerup" id="formCheckPup2" name="power_ups" style="margin-left: 0px;margin-top: 0px;" type="radio"/>
                                     <label class="form-check-label" for="formCheckPup2">
                                     </label>
                                 </div>
                                 <div class="form-check d-flex justify-content-center align-items-center" style="margin-bottom: 0px;padding-left: 0px;width: 33%;height: 55px;">
-                                    <input class="form-check-input powerup" id="formCheckPup3" name="powerup" style="margin-left: 0px;margin-top: 0px;" type="radio"/>
+                                    <input class="form-check-input powerup" id="formCheckPup3" name="power_ups" style="margin-left: 0px;margin-top: 0px;" type="radio"/>
                                     <label class="form-check-label" for="formCheckPup3" style="font-size: 26px;">
                                     </label>
                                 </div>
@@ -423,17 +423,17 @@
                             </h1>
                             <div class="d-flex d-xxl-flex flex-row justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center radiogroup" style="width: 76%;height: 55px;">
                                 <div class="form-check d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="padding-left: 0px;margin-left: 0px;margin-bottom: 0px;margin-right: 0px;height: 55px;width: 33%;">
-                                    <input class="form-check-input event" id="formCheckEvent1" name="event" style="margin-left: 0px;margin-top: 0px;" type="radio"/>
+                                    <input class="form-check-input event" id="formCheckEvent1" name="game_events" style="margin-left: 0px;margin-top: 0px;" type="radio"/>
                                     <label class="form-check-label" for="formCheckEvent1">
                                     </label>
                                 </div>
                                 <div class="form-check d-flex justify-content-center align-items-center" style="padding-left: 0px;padding-bottom: 0px;margin-bottom: 0px;height: 55px;width: 33%;margin-right: 0px;margin-left: 0px;">
-                                    <input class="form-check-input event" id="formCheckEvent2" name="event" style="margin-left: 0px;margin-top: 0px;" type="radio"/>
+                                    <input class="form-check-input event" id="formCheckEvent2" name="game_events" style="margin-left: 0px;margin-top: 0px;" type="radio"/>
                                     <label class="form-check-label" for="formCheckEvent2">
                                     </label>
                                 </div>
                                 <div class="form-check d-flex justify-content-center align-items-center" style="margin-bottom: 0px;padding-left: 0px;width: 33%;height: 55px;">
-                                    <input class="form-check-input event" id="formCheckEvent3" name="event" style="margin-left: 0px;margin-top: 0px;" type="radio"/>
+                                    <input class="form-check-input event" id="formCheckEvent3" name="game_events" style="margin-left: 0px;margin-top: 0px;" type="radio"/>
                                     <label class="form-check-label" for="formCheckEvent3" style="font-size: 26px;">
                                     </label>
                                 </div>
