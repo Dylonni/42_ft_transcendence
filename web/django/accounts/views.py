@@ -222,7 +222,6 @@ class FortyTwoCallbackView(APIView):
         })
         token_response = response.json()
         fortytwo_access_token = token_response.get('access_token')
-        fortytwo_refresh_token = token_response.get('refresh_token')
         if not fortytwo_access_token:
             logger.error('No access token received from 42 API.')
             return redirect('/login/?fortytwo=notoken')
@@ -249,9 +248,6 @@ class FortyTwoCallbackView(APIView):
             else:
                 user = UserModel.objects.get(fortytwo_id=fortytwo_id)
             user.update_fortytwo_infos(
-                fortytwo_id,
-                fortytwo_access_token,
-                fortytwo_refresh_token,
                 fortytwo_avatar_url,
                 fortytwo_coalition_cover_url,
                 fortytwo_coalition_color,

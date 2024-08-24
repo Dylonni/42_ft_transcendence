@@ -5,7 +5,7 @@
 {% block content %}
 {% include "sidebar.html" %}
 {% include "notifs/notifications.html" %}
-{% if profile.user.fortytwo_id %}
+{% if profile.user.fortytwo_avatar_url %}
 <div class="container" style='background: url("{{ profile.user.fortytwo_coalition_cover_url }}") bottom;border-radius: 20px;padding-left: 0px;padding-right: 0px;padding-top: 5px;padding-bottom: 0px;margin-bottom: 0px;'>
 	<div class="row d-md-flex d-xl-flex d-xxl-flex justify-content-md-center justify-content-xl-center justify-content-xxl-center" style="border-radius: 19px;background: rgba(255,255,255,0);opacity: 1;filter: blur(0px);backdrop-filter: opacity(1) blur(7px);-webkit-backdrop-filter: opacity(1) blur(7px);box-shadow: 0px 0px 6px 2px {{ profile.user.fortytwo_coalition_color }};margin-left: 0px;margin-right: 0px;padding-top: 0px;padding-bottom: 0px;padding-left: 0px;padding-right: 0px;margin-bottom: 0px;margin-top: 0px;border: 2px none {{ profile.user.fortytwo_coalition_color }};">
 		<div class="col-sm-12 col-md-10 col-lg-6 col-xl-6 col-xxl-5 d-xxl-flex justify-content-xxl-center align-items-xxl-center" style="padding-left: 0px;padding-right: 0px;margin-top: 10px;margin-bottom: 10px;">
