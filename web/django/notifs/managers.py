@@ -17,11 +17,7 @@ class NotificationManager(models.Manager):
                 'type': 'send_notification',
                 'notification': {
                     'id': str(notification.id),
-                    'sender': notification.sender.alias,
-                    'receiver': notification.receiver.alias,
                     'category': notification.category,
-                    'object_id': notification.object_id,
-                    'created_at': notification.created_at.isoformat(),
                 }
             }
         )

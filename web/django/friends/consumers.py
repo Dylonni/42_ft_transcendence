@@ -43,7 +43,7 @@ class FriendChatConsumer(AsyncWebsocketConsumer):
             await self.close()
             return
         self.friendship_id = self.scope['url_route']['kwargs']['friendship_id']
-        self.room_name = f"friends_{self.friendship_id}"
+        self.room_name = f'friends_{self.friendship_id}'
         logger.info(f"User {self.user} connecting to room {self.room_name}")
         await self.channel_layer.group_add(
             self.room_name,

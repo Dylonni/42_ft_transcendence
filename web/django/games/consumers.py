@@ -18,7 +18,7 @@ class GameChatConsumer(AsyncWebsocketConsumer):
             await self.close()
             return
         self.game_id = self.scope['url_route']['kwargs']['game_id']
-        self.room_name = f'games_{self.game_id}'
+        self.room_name = f'games_chat_{self.game_id}'
         logger.info(f'User {self.user} connecting to room {self.room_name}')
         await self.channel_layer.group_add(
             self.room_name,
@@ -93,7 +93,7 @@ class GamePlayConsumer(AsyncWebsocketConsumer):
             await self.close()
             return
         self.game_id = self.scope['url_route']['kwargs']['game_id']
-        self.room_name = f'play_{self.game_id}'
+        self.room_name = f'games_play_{self.game_id}'
         await self.channel_layer.group_add(
             self.room_name,
             self.channel_name

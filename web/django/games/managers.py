@@ -35,7 +35,7 @@ class GameManager(models.Manager):
         player.join_game(game)
         channel_layer = get_channel_layer()
         async_to_sync(channel_layer.group_send)(
-            f'games_{game.id}',
+            f'games_chat_{game.id}',
             {
                 'type': 'send_join_message',
                 'player_id': str(player.id),
@@ -53,7 +53,7 @@ class GameManager(models.Manager):
         # TODO: remove player from game rounds if game has started
         channel_layer = get_channel_layer()
         async_to_sync(channel_layer.group_send)(
-            f'games_{game.id}',
+            f'games_chat_{game.id}',
             {
                 'type': 'send_leave_message',
                 'player_id': str(player.id),
@@ -174,7 +174,7 @@ class GameMessageManager(models.Manager):
         game_message = self.create(game=game, sender=sender, content=content)
         channel_layer = get_channel_layer()
         async_to_sync(channel_layer.group_send)(
-            f'games_{game.id}',
+            f'games_chat_{game.id}',
             {
                 'type': 'broadcast',
                 'message_id': str(game_message.id),

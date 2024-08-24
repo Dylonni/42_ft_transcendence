@@ -15,7 +15,7 @@ class NotifConsumer(AsyncWebsocketConsumer):
         if not self.user.is_authenticated:
             await self.close()
             return
-        self.room_name = f'users_{self.user.id}'
+        self.room_name = f'notifs_{self.user.id}'
         logger.info(f'User {self.user} connecting to notifications.')
         await self.channel_layer.group_add(
             self.room_name,
@@ -55,7 +55,7 @@ class NotifConsumer(AsyncWebsocketConsumer):
     def notify_profile(self, sender, receiver, category, object_id):
         try:
             notification_model = apps.get_model('notifs.Notification')
-            notification = notification_model.objects.filter(sender=sender, receiver=receiver, category=category, object_id=object_id)
+            notification = notification_model.objects.filter(sender=sender, receiver=receiver, category=category, object_id=object_id).first()
             if not notification.exists():
                 notification_model.objects.send_notification(sender, receiver, category, object_id)
         except LookupError:
