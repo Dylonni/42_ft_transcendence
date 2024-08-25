@@ -6,7 +6,7 @@
 {% include "sidebar.html" %}
 {% include "notifs/notifications.html" %}
 {% if profile.user.fortytwo_coalition_cover_url %}
-<div class="container" style='background: url("{{ profile.user.fortytwo_coalition_cover_url }}") bottom;border-radius: 20px;padding-left: 0px;padding-right: 0px;padding-top: 5px;padding-bottom: 0px;margin-bottom: 0px;'>
+<div class="container" style='background: url("{{ profile.user.fortytwo_coalition_cover_url }}") bottom;border-radius: 20px;padding-left: 0px;padding-right: 0px;padding-top: 10px;padding-bottom: 0px;margin-bottom: 0px;'>
 	<div class="row d-md-flex d-xl-flex d-xxl-flex justify-content-md-center justify-content-xl-center justify-content-xxl-center" style="border-radius: 19px;background: rgba(255,255,255,0);opacity: 1;filter: blur(0px);backdrop-filter: opacity(1) blur(7px);-webkit-backdrop-filter: opacity(1) blur(7px);box-shadow: 0px 0px 6px 2px {{ profile.user.fortytwo_coalition_color }};margin-left: 0px;margin-right: 0px;padding-top: 0px;padding-bottom: 0px;padding-left: 0px;padding-right: 0px;margin-bottom: 0px;margin-top: 0px;border: 2px none {{ profile.user.fortytwo_coalition_color }};">
 		<div class="col-sm-12 col-md-10 col-lg-6 col-xl-6 col-xxl-5 d-xxl-flex justify-content-xxl-center align-items-xxl-center" style="padding-left: 0px;padding-right: 0px;margin-top: 10px;margin-bottom: 10px;">
 			<div class="text-truncate d-flex d-xxl-flex align-items-center align-items-xxl-start" style="height: 100%;width: 100%;max-width: none;">
@@ -185,22 +185,22 @@
 			</h3>
 		</div>
 		<div class="col-md-12 col-lg-6 col-xl-7 col-xxl-6 d-lg-flex" style="margin-top: 10px;margin-bottom: 10px;margin-left: 0px;margin-right: 0px;border-radius: 20px;padding-left: 11px;padding-right: 11px;">
-			<div style="width: 100%;height: 100%;background: rgba(52,58,64,0.3);border-radius: 19px;">
+			<div style="width: 100%;height: 100%;background: rgba(0, 0, 0, 0.35);border-radius: 19px;">
 				<div>
 					<ul class="nav nav-tabs" role="tablist" style="border-style: none;border-bottom-width: 2px;border-bottom-style: none;">
 						<li class="nav-item" role="presentation">
-							<a class="nav-link" data-bs-toggle="tab" href="#tab-1" role="tab" style="background: rgba(255,255,255,0);color: {{ profile.user.fortytwo_coalition_color }};">
+							<a class="nav-link active" data-bs-toggle="tab" href="#tab-1" role="tab" style="background: rgba(255,255,255,0);color: {{ profile.user.fortytwo_coalition_color }};">
 								Winrate
 							</a>
 						</li>
 						<li class="nav-item" role="presentation">
-							<a class="nav-link active" data-bs-toggle="tab" href="#tab-2" role="tab" style="color: {{ profile.user.fortytwo_coalition_color }};background: rgba(255,255,255,0);">
+							<a class="nav-link" data-bs-toggle="tab" href="#tab-2" role="tab" style="color: {{ profile.user.fortytwo_coalition_color }};background: rgba(255,255,255,0);">
 								Points
 							</a>
 						</li>
 					</ul>
 					<div class="tab-content">
-						<div class="tab-pane" id="tab-1" role="tabpanel">
+						<div class="tab-pane active" id="tab-1" role="tabpanel">
 							<div class="d-flex justify-content-center align-items-center" style="height: 100%;width: 100%;">
 								<div style="width: 100%;height: 100%;">
 									<svg class="icon icon-tabler icon-tabler-chart-pie" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 250px;color: var(--bs-body-bg);width: 85%;height: 85%;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
@@ -228,7 +228,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="tab-pane active" id="tab-2" role="tabpanel">
+						<div class="tab-pane" id="tab-2" role="tabpanel">
 							<div class="d-flex justify-content-center align-items-center" style="height: 100%;width: 100%;">
 								<div style="width: 100%;height: 100%;">
 									<svg class="icon icon-tabler icon-tabler-chart-line" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 250px;color: var(--bs-body-bg);width: 85%;height: 85%;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
@@ -255,7 +255,7 @@
 			</div>
 		</div>
 		<div class="col-md-12 col-lg-6 col-xl-5 col-xxl-6 d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex flex-column justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center" style="color: var(--bs-body-bg);margin-top: 10px;margin-bottom: 10px;margin-left: 0px;margin-right: 0px;padding-left: 10px;padding-right: 10px;">
-			<div class="d-md-flex d-xxl-flex flex-column justify-content-md-center justify-content-xxl-center align-items-xxl-center" style="padding-top: 0px;padding-bottom: 0px;width: 100%;height: 100%;background: rgba(52,58,64,0.3);margin-top: 0px;margin-bottom: 0px;border-radius: 19px;margin-left: 0px;margin-right: 0px;padding-left: 0px;padding-right: 0px;">
+			<div class="d-md-flex d-xxl-flex flex-column justify-content-md-center justify-content-xxl-center align-items-xxl-center" style="padding-top: 0px;padding-bottom: 0px;width: 100%;height: 100%;background: rgba(0, 0, 0, 0.35);margin-top: 0px;margin-bottom: 0px;border-radius: 19px;margin-left: 0px;margin-right: 0px;padding-left: 0px;padding-right: 0px;">
 				<h4 class="text-nowrap d-flex d-xxl-flex justify-content-start align-items-center justify-content-md-center justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-xxl-center" style="width: 100%;margin-bottom: 15px;margin-top: 15px;">
 					<svg class="icon icon-tabler icon-tabler-device-gamepad-2" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 35px;margin-left: 15px;margin-right: 15px;color: var(--bs-primary-border-subtle);" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
 						<path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
@@ -266,7 +266,7 @@
 						<path d="M14 10h2"></path>
 					</svg>
 					Total Games Played
-					<span class="text-truncate" data-bs-placement="bottom" data-bs-toggle="tooltip" data-bss-tooltip="" style="color: var(--bs-primary-border-subtle);max-width: 246px;" title="#Gamesplayed">
+					<span class="text-truncate" data-bs-placement="bottom" data-bs-toggle="tooltip" data-bss-tooltip="" style="color: var(--bs-primary-border-subtle);max-width: 246px;margin-left: 10px;" title="#Gamesplayed">
 						{{ profile.get_total_games }}
 					</span>
 				</h4>
@@ -276,7 +276,7 @@
 						<path d="M17 3a1 1 0 0 1 .993 .883l.007 .117v2.17a3 3 0 1 1 0 5.659v.171a6.002 6.002 0 0 1 -5 5.917v2.083h3a1 1 0 0 1 .117 1.993l-.117 .007h-8a1 1 0 0 1 -.117 -1.993l.117 -.007h3v-2.083a6.002 6.002 0 0 1 -4.996 -5.692l-.004 -.225v-.171a3 3 0 0 1 -3.996 -2.653l-.003 -.176l.005 -.176a3 3 0 0 1 3.995 -2.654l-.001 -2.17a1 1 0 0 1 1 -1h10zm-12 5a1 1 0 1 0 0 2a1 1 0 0 0 0 -2zm14 0a1 1 0 1 0 0 2a1 1 0 0 0 0 -2z" fill="currentColor" stroke-width="0"></path>
 					</svg>
 					Won Tournaments
-					<span class="text-truncate" data-bs-placement="bottom" data-bs-toggle="tooltip" data-bss-tooltip="" style="color: #fcbf49;margin-left: 0px;max-width: 246px;" title="#Wontournaments">
+					<span class="text-truncate" data-bs-placement="bottom" data-bs-toggle="tooltip" data-bss-tooltip="" style="color: #fcbf49;margin-left: 0px;max-width: 246px;margin-left: 10px;" title="#Wontournaments">
 						{{ profile.get_won_tournaments }}
 					</span>
 				</h4>
@@ -286,7 +286,7 @@
 						<path d="M12 12c2 -2.96 0 -7 -1 -8c0 3.038 -1.773 4.741 -3 6c-1.226 1.26 -2 3.24 -2 5a6 6 0 1 0 12 0c0 -1.532 -1.056 -3.94 -2 -5c-1.786 3 -2.791 3 -4 2z"></path>
 					</svg>
 					Best Winning Streak
-					<span class="text-truncate" data-bs-placement="bottom" data-bs-toggle="tooltip" data-bss-tooltip="" style="color: var(--bs-red);margin-left: 0px;max-width: 246px;" title="#Streak">
+					<span class="text-truncate" data-bs-placement="bottom" data-bs-toggle="tooltip" data-bss-tooltip="" style="color: var(--bs-red);margin-left: 0px;max-width: 246px;margin-left: 10px;" title="#Streak">
 						{{ profile.get_winning_streak }}
 					</span>
 				</h4>
@@ -295,7 +295,7 @@
 	</div>
 </div>
 {% else %}
-<div class="container" style="padding-left: 0px;padding-right: 0px;border-radius: 20px;background: linear-gradient(-15deg, rgba(255,255,255,0) 2%, #0d0d0d 54%, rgba(255,255,255,0));padding-top: 5px;margin-bottom: 10px;">
+<div class="container" style="padding-left: 0px;padding-right: 0px;border-radius: 20px;background: linear-gradient(-15deg, rgba(255,255,255,0) 2%, #0d0d0d 54%, rgba(255,255,255,0));padding-top: 10px;margin-bottom: 10px;">
 	<div class="row d-md-flex d-xl-flex d-xxl-flex justify-content-md-center justify-content-xl-center justify-content-xxl-center" style="border-radius: 19px;background: rgba(255,255,255,0);opacity: 1;filter: blur(0px);backdrop-filter: opacity(1) blur(7px);-webkit-backdrop-filter: opacity(1) blur(7px);box-shadow: 0px 0px 6px 2px var(--bs-primary-border-subtle);margin-left: 0px;margin-right: 0px;padding-top: 0px;padding-bottom: 0px;padding-left: 0px;padding-right: 0px;margin-bottom: 0px;margin-top: 0px;border: 2px none var(--bs-primary-border-subtle);">
 		<div class="col-sm-12 col-md-11 col-lg-6 col-xl-6 col-xxl-5 d-xxl-flex justify-content-xxl-center align-items-xxl-center" style="padding-left: 0px;padding-right: 0px;margin-top: 10px;margin-bottom: 10px;">
 			<div class="text-truncate d-flex d-xxl-flex align-items-center align-items-xxl-start" style="height: 100%;width: 100%;max-width: none;">
@@ -474,22 +474,22 @@
 			</h3>
 		</div>
 		<div class="col-md-12 col-lg-6 col-xl-7 col-xxl-6 d-lg-flex" style="margin-top: 10px;margin-bottom: 10px;margin-left: 0px;margin-right: 0px;border-radius: 20px;padding-left: 11px;padding-right: 11px;">
-			<div style="width: 100%;height: 100%;background: rgba(52,58,64,0.3);border-radius: 19px;">
+			<div style="width: 100%;height: 100%;background: rgba(0, 0, 0, 0.35);border-radius: 19px;">
 				<div>
 					<ul class="nav nav-tabs" role="tablist" style="border-style: none;border-bottom-width: 2px;border-bottom-style: none;">
 						<li class="nav-item" role="presentation">
-							<a class="nav-link" data-bs-toggle="tab" href="#tab-1" role="tab" style="background: rgba(255,255,255,0);color: var(--bs-primary-border-subtle);">
+							<a class="nav-link active" data-bs-toggle="tab" href="#tab-1" role="tab" style="background: rgba(255,255,255,0);color: var(--bs-primary-border-subtle);">
 								Winrate
 							</a>
 						</li>
 						<li class="nav-item" role="presentation">
-							<a class="nav-link active" data-bs-toggle="tab" href="#tab-2" role="tab" style="color: var(--bs-primary-border-subtle);background: rgba(255,255,255,0);">
+							<a class="nav-link" data-bs-toggle="tab" href="#tab-2" role="tab" style="color: var(--bs-primary-border-subtle);background: rgba(255,255,255,0);">
 								Points
 							</a>
 						</li>
 					</ul>
 					<div class="tab-content">
-						<div class="tab-pane" id="tab-1" role="tabpanel">
+						<div class="tab-pane active" id="tab-1" role="tabpanel">
 							<div class="d-flex justify-content-center align-items-center" style="height: 100%;width: 100%;">
 								<div style="width: 100%;height: 100%;">
 									<svg class="icon icon-tabler icon-tabler-chart-pie" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 250px;color: var(--bs-body-bg);width: 85%;height: 85%;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
@@ -517,7 +517,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="tab-pane active" id="tab-2" role="tabpanel">
+						<div class="tab-pane" id="tab-2" role="tabpanel">
 							<div class="d-flex justify-content-center align-items-center" style="height: 100%;width: 100%;">
 								<div style="width: 100%;height: 100%;">
 									<svg class="icon icon-tabler icon-tabler-chart-line" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 250px;color: var(--bs-body-bg);width: 85%;height: 85%;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
@@ -544,7 +544,7 @@
 			</div>
 		</div>
 		<div class="col-md-12 col-lg-6 col-xl-5 col-xxl-6 d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex flex-column justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center" style="color: var(--bs-body-bg);margin-top: 10px;margin-bottom: 10px;margin-left: 0px;margin-right: 0px;padding-left: 10px;padding-right: 10px;">
-			<div class="d-md-flex d-xxl-flex flex-column justify-content-md-center justify-content-xxl-center align-items-xxl-center" style="padding-top: 0px;padding-bottom: 0px;width: 100%;height: 100%;background: rgba(52,58,64,0.3);margin-top: 0px;margin-bottom: 0px;border-radius: 19px;margin-left: 0px;margin-right: 0px;padding-left: 0px;padding-right: 0px;">
+			<div class="d-md-flex d-xxl-flex flex-column justify-content-md-center justify-content-xxl-center align-items-xxl-center" style="padding-top: 0px;padding-bottom: 0px;width: 100%;height: 100%;background: rgba(0, 0, 0, 0.35);margin-top: 0px;margin-bottom: 0px;border-radius: 19px;margin-left: 0px;margin-right: 0px;padding-left: 0px;padding-right: 0px;">
 				<h4 class="text-nowrap d-flex d-xxl-flex justify-content-start align-items-center justify-content-md-center justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-xxl-center" style="width: 100%;margin-bottom: 15px;margin-top: 15px;">
 					<svg class="icon icon-tabler icon-tabler-device-gamepad-2" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 35px;margin-left: 15px;margin-right: 15px;color: var(--bs-primary-border-subtle);" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
 						<path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
@@ -555,7 +555,7 @@
 						<path d="M14 10h2"></path>
 					</svg>
 					Total Games Played
-					<span class="text-truncate" data-bs-placement="bottom" data-bs-toggle="tooltip" data-bss-tooltip="" style="color: var(--bs-primary-border-subtle);max-width: 246px;" title="#Gamesplayed">
+					<span class="text-truncate" data-bs-placement="bottom" data-bs-toggle="tooltip" data-bss-tooltip="" style="color: var(--bs-primary-border-subtle);max-width: 246px;margin-left: 10px;" title="#Gamesplayed">
 						{{ profile.get_total_games }}
 					</span>
 				</h4>
@@ -565,7 +565,7 @@
 						<path d="M17 3a1 1 0 0 1 .993 .883l.007 .117v2.17a3 3 0 1 1 0 5.659v.171a6.002 6.002 0 0 1 -5 5.917v2.083h3a1 1 0 0 1 .117 1.993l-.117 .007h-8a1 1 0 0 1 -.117 -1.993l.117 -.007h3v-2.083a6.002 6.002 0 0 1 -4.996 -5.692l-.004 -.225v-.171a3 3 0 0 1 -3.996 -2.653l-.003 -.176l.005 -.176a3 3 0 0 1 3.995 -2.654l-.001 -2.17a1 1 0 0 1 1 -1h10zm-12 5a1 1 0 1 0 0 2a1 1 0 0 0 0 -2zm14 0a1 1 0 1 0 0 2a1 1 0 0 0 0 -2z" fill="currentColor" stroke-width="0"></path>
 					</svg>
 					Won Tournaments
-					<span class="text-truncate" data-bs-placement="bottom" data-bs-toggle="tooltip" data-bss-tooltip="" style="color: #fcbf49;margin-left: 0px;max-width: 246px;" title="#Wontournaments">
+					<span class="text-truncate" data-bs-placement="bottom" data-bs-toggle="tooltip" data-bss-tooltip="" style="color: #fcbf49;margin-left: 0px;max-width: 246px;margin-left: 10px;" title="#Wontournaments">
 						{{ profile.get_won_tournaments }}
 					</span>
 				</h4>
@@ -575,7 +575,7 @@
 						<path d="M12 12c2 -2.96 0 -7 -1 -8c0 3.038 -1.773 4.741 -3 6c-1.226 1.26 -2 3.24 -2 5a6 6 0 1 0 12 0c0 -1.532 -1.056 -3.94 -2 -5c-1.786 3 -2.791 3 -4 2z"></path>
 					</svg>
 					Best Winning Streak
-					<span class="text-truncate" data-bs-placement="bottom" data-bs-toggle="tooltip" data-bss-tooltip="" style="color: var(--bs-red);margin-left: 0px;max-width: 246px;" title="#Streak">
+					<span class="text-truncate" data-bs-placement="bottom" data-bs-toggle="tooltip" data-bss-tooltip="" style="color: var(--bs-red);margin-left: 0px;max-width: 246px;margin-left: 10px;" title="#Streak">
 						{{ profile.get_winning_streak }}
 					</span>
 				</h4>

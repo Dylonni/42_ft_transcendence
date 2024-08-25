@@ -17,8 +17,8 @@ body, html {
   color: #5abfea;
 }
 
-.icon-tabler-user:hover, .icon-tabler-user.active {
-  color: #ff8a00;
+.icon-tabler-user-circle:hover, .icon-tabler-user-circle.active {
+  color: var(--bs-primary-border-subtle);
 }
 
 .icon-tabler-list-numbers:hover, .icon-tabler-list-numbers.active {
