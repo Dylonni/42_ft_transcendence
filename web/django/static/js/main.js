@@ -1174,6 +1174,7 @@ const pongGame = () => {
 	// Constants
 	const WIDTH = canvas.width;
 	const HEIGHT = canvas.height;
+    const MIDDLE = canvas.width / 2;
 
 	// Paddle properties
 	const paddleWidth = 10;
@@ -1209,6 +1210,7 @@ const pongGame = () => {
     let upArrowPressed = false;
 	let downArrowPressed = false;
 
+    let mouseX = null;
     let mouseY = null;
     let mouseClickActive = false;
     let isBot = false;
@@ -1232,6 +1234,7 @@ const pongGame = () => {
 
     canvas.addEventListener('mousemove', (event) => {
         const rect = canvas.getBoundingClientRect();
+        mouseX = event.clientX - rect.left;
         mouseY = event.clientY - rect.top - paddleHeight / 2;
     });
 
@@ -1279,7 +1282,7 @@ const pongGame = () => {
             player1Y -= paddleSpeed;
         } else if (sPressed && player1Y < HEIGHT - paddleHeight) {
             player1Y += paddleSpeed;
-        } else if (mouseClickActive && mouseY !== null) {
+        } else if (mouseClickActive && mouseY !== null && mouseX < MIDDLE) {
             if (player1Y < mouseY) {
                 player1Y += paddleSpeed;
                 if (player1Y > mouseY) player1Y = mouseY;
@@ -1289,19 +1292,21 @@ const pongGame = () => {
             }
         }
 
-        // if (upArrowPressed && player2Y > 0) {
-        //     player2Y -= paddleSpeed;
-        // } else if (downArrowPressed && player2Y < HEIGHT - paddleHeight) {
-        //     player2Y += paddleSpeed;
-        // } else if (mouseClickActive && mouseY !== null) {
-        //     if (player2Y < mouseY) {
-        //         player2Y += paddleSpeed;
-        //         if (player2Y > mouseY) player2Y = mouseY;
-        //     } else if (player2Y > mouseY) {
-        //         player2Y -= paddleSpeed;
-        //         if (player2Y < mouseY) player1Y = mouseY;
-        //     }
-        // }
+        if (!isBot) {
+            if (upArrowPressed && player2Y > 0) {
+                player2Y -= paddleSpeed;
+            } else if (downArrowPressed && player2Y < HEIGHT - paddleHeight) {
+                player2Y += paddleSpeed;
+            } else if (mouseClickActive && mouseY !== null && mouseX > MIDDLE) {
+                if (player2Y < mouseY) {
+                    player2Y += paddleSpeed;
+                    if (player2Y > mouseY) player2Y = mouseY;
+                } else if (player2Y > mouseY) {
+                    player2Y -= paddleSpeed;
+                    if (player2Y < mouseY) player2Y = mouseY;
+                }
+            }
+        }
 
 		// Move ball
 		ballX += ballSpeedX;
