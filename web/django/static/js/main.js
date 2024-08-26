@@ -50,7 +50,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 contentDiv.removeChild(contentDiv.firstChild);
             }
             newContent.forEach(node => {
-                contentDiv.appendChild(node.cloneNode(true));
+                if (node.nodeName.toLowerCase() !== 'script') {
+                    contentDiv.appendChild(node.cloneNode(true));
+                }
             });
             document.title = newDocument.title;
             removeExtraScripts();

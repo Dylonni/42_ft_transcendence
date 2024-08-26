@@ -71,7 +71,7 @@ def get_game_context(context={}):
         return context
 
 def get_notif_context(request, context={}):
-    if request.profile:
+    if not request.profile:
         return context
     notifications = Notification.objects.get_notifications_for_profile(request.profile)
     context['notifs'] = notifications
@@ -168,6 +168,7 @@ class SelectGameView(PrivateView):
         if request.profile.game:
             return redirect(f'/games/{request.profile.game.id}/', True)
         context = get_profile_context(request)
+        context = get_notif_context(request, context)
         return render(request, 'modeselect.html', context)
 
 select_game = SelectGameView.as_view()
@@ -178,6 +179,7 @@ class CustomizeGameView(PrivateView):
         if request.profile.game:
             return redirect(f'/games/{request.profile.game.id}/', True)
         context = get_profile_context(request)
+        context = get_notif_context(request, context)
         return render(request, 'customize_game.html', context)
 
 customize_game = CustomizeGameView.as_view()
@@ -191,6 +193,7 @@ class GameRoomView(PrivateView):
         context = get_friend_context(request)
         context['game'] = game
         context['players'] = game.players.all()
+        context = get_notif_context(request, context)
         return render(request, 'game_room.html', context)
 
 game_room = GameRoomView.as_view()
