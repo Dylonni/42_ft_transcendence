@@ -16,7 +16,7 @@
 - [X] Move Player search to the right side
 - [X] Add a background for "Search Game"
 - [X] Remove the "Stats Indicator" , Create a Rank indicator
-- [ ] Find a way to display all Rooms with tabs
+- [X] Find a way to display all Rooms with tabs
 
     GAME
 - [X] Create a gameroom with enough space to play and chat on the right side
@@ -40,7 +40,7 @@
 - [X] Show player context (online, offline, ingame)
 - [X] Rework page
 - [X] ADD another status "Waiting" , replace playing color by blue , waiting in orange
-- [ ] Make the chat focus last message
+- [X] Make the chat focus last message
 
     LEADERBOARD
 - [ ] Make better 2nd and third place

@@ -54,33 +54,36 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             });
             document.title = newDocument.title;
-            removeExtraScripts();
-            loadPageScripts(newDocument);
             attachHandlers();
+            initializeBsElements();
         })
         .catch(error => console.error('Error fetching content:', error));
     };
 
-    const removeExtraScripts = () => {
-        const scriptElements = document.querySelectorAll('script');
-        scriptElements.forEach(scriptElement => {
-            const src = scriptElement.src;
-            if (src && !src.includes('main.js')) {
-                scriptElement.parentNode.removeChild(scriptElement);
-            }
+    const initializeBsElements = () => {
+        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+        const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl,  {trigger: 'hover'}));
+        var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
+        var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+            return new bootstrap.Popover(popoverTriggerEl);
         });
-    };
-
-    const loadPageScripts = (newDocument) => {
-        const scriptElements = newDocument.querySelectorAll('script');
-        scriptElements.forEach(scriptElement => {
-            const src = scriptElement.src;
-            if (!src.includes('main.js')) {
-                const newScript = document.createElement('script');
-                newScript.src = src;
-                document.body.appendChild(newScript);
-            }
-        });
+    
+        var toastTriggers = document.querySelectorAll('[data-bs-toggle="toast"]');
+        for (let toastTrigger of toastTriggers) {
+            toastTrigger.addEventListener('click', function () {
+                var toastSelector = toastTrigger.getAttribute('data-bs-target');
+                if (!toastSelector) return;
+                try {
+                    var toastEl = document.querySelector(toastSelector);
+                    if (!toastEl) return;
+                    var toast = new bootstrap.Toast(toastEl);
+                    toast.show();
+                }
+                catch(e) {
+                    console.error(e);
+                }
+            });
+        }
     }
 
     const getCookie = (name) => {
@@ -343,6 +346,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         setNotifHandlers();
+        authPages();
 
         const pongCanvas = document.getElementById('pongCanvas');
         if (pongCanvas) {
@@ -548,6 +552,22 @@ document.addEventListener("DOMContentLoaded", () => {
                 declineGameBtn.dataset.hasListener = 'true';
             }
         });
+    };
+
+    const authPages = () => {
+        const showPasswordBtn = document.getElementById('showPassword');
+        if (showPasswordBtn) {
+            showPasswordBtn.addEventListener('click', (event) => {
+                const showInput = document.getElementById('floatingPassword-register');
+                if (showInput) {
+                    if (showInput.type == 'password'){
+                        showInput.type = 'text';
+                    } else {
+                        showInput.type = 'password';
+                    }
+                }
+            });
+        }
     };
 
     const homePage = () => {
@@ -829,6 +849,17 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             });
         }
+        
+        new EmojiPicker({
+            trigger: [
+                {
+                    selector: ['.emojiPick'],
+                    insertInto: '.chatInput' // If there is only one '.selector', than it can be used without array
+                },
+            ],
+            closeButton: true,
+            closeOnSelect: true,
+        });
 
         const path = window.location.pathname;
         const pathParts = path.split('/');
@@ -837,6 +868,7 @@ document.addEventListener("DOMContentLoaded", () => {
             openFriendChatWebSocket(friendshipId);
 
             // TODO: remove red dot on friend selected
+
 
             const messageSection = document.getElementById('messageSection');
             if (messageSection) {

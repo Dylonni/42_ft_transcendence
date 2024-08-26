@@ -64,8 +64,8 @@
                                         {% translate 'Password' %}
                                     </label>
                                     <div class="text-nowrap d-flex justify-content-start align-items-center form-check">
-                                        <input id="formCheck-1" class="form-check-input" type="checkbox" onclick="showPassword()" style="width: 16px;margin-right: 10px;" />
-                                        <label class="text-nowrap text-start form-check-label" for="formCheck-1" style="font-size: 12px">
+                                        <input id="showPassword" class="form-check-input" type="checkbox" style="width: 16px;margin-right: 10px;" />
+                                        <label class="text-nowrap text-start form-check-label" for="showPassword" style="font-size: 12px">
                                             {% translate 'Show password' %}
                                         </label>
                                     </div>
@@ -89,10 +89,4 @@
         </div>
     </div>
 </section>
-<script src="{% static '/bootstrap/js/bootstrap.min.js' %}">
-</script>
-<script src="{% static '/js/bs-init.js' %}">
-</script>
-<script src="{% static '/js/buttons.js' %}">
-</script>
 {% endblock %}
