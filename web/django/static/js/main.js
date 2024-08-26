@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
     const contentDiv = document.getElementById('content');
-    const loadedScripts = new Set();
     let notifSocket = null;
     let friendListSocket = null;
     let friendChatSocket = null;
@@ -68,7 +67,6 @@ document.addEventListener("DOMContentLoaded", () => {
             const src = scriptElement.src;
             if (src && !src.includes('main.js')) {
                 scriptElement.parentNode.removeChild(scriptElement);
-                loadedScripts.delete(src);
             }
         });
     };
@@ -77,11 +75,10 @@ document.addEventListener("DOMContentLoaded", () => {
         const scriptElements = newDocument.querySelectorAll('script');
         scriptElements.forEach(scriptElement => {
             const src = scriptElement.src;
-            if (!loadedScripts.has(src) && !src.includes('main.js')) {
+            if (!src.includes('main.js')) {
                 const newScript = document.createElement('script');
                 newScript.src = src;
                 document.body.appendChild(newScript);
-                loadedScripts.add(src);
             }
         });
     }
@@ -1175,20 +1172,29 @@ const pongGame = () => {
     let countdown = 3;
 
 	// Key state
-	let upArrowPressed = false;
+	let zPressed = false;
+	let sPressed = false;
+    let upArrowPressed = false;
 	let downArrowPressed = false;
 
     let mouseY = null;
     let mouseClickActive = false;
+    let isBot = false;
 
 	// Event listeners for key presses
 	document.addEventListener('keydown', (event) => {
+        if (event.key === 'z') zPressed = true;
+		if (event.key === 's') sPressed = true;
+
 		if (event.key === 'ArrowUp') upArrowPressed = true;
 		if (event.key === 'ArrowDown') downArrowPressed = true;
 	});
 
 	document.addEventListener('keyup', (event) => {
-		if (event.key === 'ArrowUp') upArrowPressed = false;
+		if (event.key === 'Z') zPressed = false;
+		if (event.key === 'S') sPressed = false;
+
+        if (event.key === 'ArrowUp') upArrowPressed = false;
 		if (event.key === 'ArrowDown') downArrowPressed = false;
 	});
 
@@ -1237,9 +1243,9 @@ const pongGame = () => {
         if (!gameRunning) return;
 
 		// Move paddles
-		if (upArrowPressed && player1Y > 0) {
+		if (zPressed && player1Y > 0) {
             player1Y -= paddleSpeed;
-        } else if (downArrowPressed && player1Y < HEIGHT - paddleHeight) {
+        } else if (sPressed && player1Y < HEIGHT - paddleHeight) {
             player1Y += paddleSpeed;
         } else if (mouseClickActive && mouseY !== null) {
             if (player1Y < mouseY) {
@@ -1250,6 +1256,20 @@ const pongGame = () => {
                 if (player1Y < mouseY) player1Y = mouseY;
             }
         }
+
+        // if (upArrowPressed && player2Y > 0) {
+        //     player2Y -= paddleSpeed;
+        // } else if (downArrowPressed && player2Y < HEIGHT - paddleHeight) {
+        //     player2Y += paddleSpeed;
+        // } else if (mouseClickActive && mouseY !== null) {
+        //     if (player2Y < mouseY) {
+        //         player2Y += paddleSpeed;
+        //         if (player2Y > mouseY) player2Y = mouseY;
+        //     } else if (player2Y > mouseY) {
+        //         player2Y -= paddleSpeed;
+        //         if (player2Y < mouseY) player1Y = mouseY;
+        //     }
+        // }
 
 		// Move ball
 		ballX += ballSpeedX;
@@ -1267,11 +1287,13 @@ const pongGame = () => {
 		}
 
 		// AI paddle movement (simple AI)
-		if (player2Y + paddleHeight / 2 < ballY) {
-			player2Y += paddleSpeed;
-		} else if (player2Y + paddleHeight / 2 > ballY) {
-			player2Y -= paddleSpeed;
-		}
+        if (isBot) {
+            if (player2Y + paddleHeight / 2 < ballY) {
+                player2Y += paddleSpeed;
+            } else if (player2Y + paddleHeight / 2 > ballY) {
+                player2Y -= paddleSpeed;
+            }
+        }
 
 		// Score and reset ball
 		if (ballX <= 0) {

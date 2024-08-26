@@ -12,10 +12,10 @@ if (window.innerWidth < 768) {
 document.addEventListener('DOMContentLoaded', function() {
 	const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
 	const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl,  {trigger: 'hover'}));
-	var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+	var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
 	var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
-		return new bootstrap.Popover(popoverTriggerEl)
-	})
+		return new bootstrap.Popover(popoverTriggerEl);
+	});
 
 	var toastTriggers = document.querySelectorAll('[data-bs-toggle="toast"]');
         for (let toastTrigger of toastTriggers) {
@@ -31,6 +31,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 catch(e) {
                     console.error(e);
                 }
-            })
+            });
         }
 }, false);
