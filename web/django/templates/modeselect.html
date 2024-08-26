@@ -4,6 +4,7 @@
 {% block title %}{% translate "Transcendence" %}{% endblock %}
 {% block content %}
 {% include "sidebar.html" %}
+{% include "notifs/notifications.html" %}
 <div class="container" style="padding-top: 5vh;padding-bottom: 10vh;">
     <div class="row">
         <div class="col-md-12">
@@ -21,7 +22,7 @@
             {% if profile %}
             <a id="navCustomize0" href="/customize/?mode=0">
             {% else %}
-            <a id="navMode0" href="/mode/?mode=0">
+            <a id="navMode0" href="/play/">
             {% endif %}
                 <div class="card cardmode" id="vsAi" style="height: 435px;border-top-left-radius: 16px;border-top-right-radius: 16px;border-style: none;background: var(--bs-emphasis-color);">
                     <h4 class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="color: var(--bs-body-bg);">
@@ -37,7 +38,7 @@
             {% if profile %}
             <a id="navCustomize1" href="/customize/?mode=1">
             {% else %}
-            <a id="navMode1" href="/mode/?mode=1">
+            <a id="navMode0" href="/play/">
             {% endif %}
                 <div class="card cardmode" id="vsAi" style="height: 435px;border-top-left-radius: 16px;border-top-right-radius: 16px;border-style: none;background: var(--bs-emphasis-color);">
                     <h4 class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="color: var(--bs-body-bg);">

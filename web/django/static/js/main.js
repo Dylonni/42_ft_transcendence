@@ -345,6 +345,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
         setNotifHandlers();
 
+        const pongCanvas = document.getElementById('pongCanvas');
+        if (pongCanvas) {
+            pongGame();
+        }
+
         document.querySelectorAll('a').forEach(anchor => {
             if (anchor.id.startsWith('nav')) {
                 anchor.addEventListener('click', (event) => {
@@ -1130,3 +1135,227 @@ document.addEventListener("DOMContentLoaded", () => {
     
     attachHandlers();
 });
+
+const pongGame = () => {
+	const canvas = document.getElementById('pongCanvas');
+	const ctx = canvas.getContext('2d');
+
+	// Constants
+	const WIDTH = canvas.width;
+	const HEIGHT = canvas.height;
+
+	// Paddle properties
+	const paddleWidth = 10;
+	const paddleHeight = 70;
+	const paddleSpeed = 8;
+
+	// Ball properties
+	const ballSize = 10;
+	let ballSpeedX = 4;
+	let ballSpeedY = 4;
+
+    const maxScore = 2;
+
+	// Paddle positions
+	let player1Y = (HEIGHT - paddleHeight) / 2;
+	let player2Y = (HEIGHT - paddleHeight) / 2;
+
+	// Ball position
+	let ballX = WIDTH / 2;
+	let ballY = HEIGHT / 2;
+
+	// Player scores
+	let player1Score = 0;
+	let player2Score = 0;
+
+    let gameRunning = true;
+    let message = null;
+    let countdown = 3;
+
+	// Key state
+	let upArrowPressed = false;
+	let downArrowPressed = false;
+
+    let mouseY = null;
+    let mouseClickActive = false;
+
+	// Event listeners for key presses
+	document.addEventListener('keydown', (event) => {
+		if (event.key === 'ArrowUp') upArrowPressed = true;
+		if (event.key === 'ArrowDown') downArrowPressed = true;
+	});
+
+	document.addEventListener('keyup', (event) => {
+		if (event.key === 'ArrowUp') upArrowPressed = false;
+		if (event.key === 'ArrowDown') downArrowPressed = false;
+	});
+
+    canvas.addEventListener('mousemove', (event) => {
+        const rect = canvas.getBoundingClientRect();
+        mouseY = event.clientY - rect.top - paddleHeight / 2;
+    });
+
+    canvas.addEventListener('mousedown', () => {
+        mouseClickActive = true;
+    });
+    
+    canvas.addEventListener('mouseup', () => {
+        mouseClickActive = false;
+    });
+
+    function pressEnter(event) {
+        if (event.key === 'Enter') {
+            resetGame();
+        }
+    }
+
+    function resetGame() {
+        // Reset scores
+        player1Score = 0;
+        player2Score = 0;
+    
+        // Reset ball position and speed
+        resetBall();
+    
+        // Resume game
+        gameRunning = true;
+        message = null;
+        document.removeEventListener('keydown', pressEnter);
+    }
+
+	// Game loop
+	function gameLoop() {
+		update();
+		draw();
+		requestAnimationFrame(gameLoop);
+	}
+
+	// Update positions
+	function update() {
+        if (!gameRunning) return;
+
+		// Move paddles
+		if (upArrowPressed && player1Y > 0) {
+            player1Y -= paddleSpeed;
+        } else if (downArrowPressed && player1Y < HEIGHT - paddleHeight) {
+            player1Y += paddleSpeed;
+        } else if (mouseClickActive && mouseY !== null) {
+            if (player1Y < mouseY) {
+                player1Y += paddleSpeed;
+                if (player1Y > mouseY) player1Y = mouseY;
+            } else if (player1Y > mouseY) {
+                player1Y -= paddleSpeed;
+                if (player1Y < mouseY) player1Y = mouseY;
+            }
+        }
+
+		// Move ball
+		ballX += ballSpeedX;
+		ballY += ballSpeedY;
+
+		// Ball collision with top and bottom
+		if (ballY <= 0 || ballY >= HEIGHT - ballSize) ballSpeedY = -ballSpeedY;
+
+		// Ball collision with paddles
+		if (ballX <= paddleWidth && ballY >= player1Y && ballY <= player1Y + paddleHeight) {
+			ballSpeedX = -ballSpeedX;
+		}
+		if (ballX >= WIDTH - paddleWidth - ballSize && ballY >= player2Y && ballY <= player2Y + paddleHeight) {
+			ballSpeedX = -ballSpeedX;
+		}
+
+		// AI paddle movement (simple AI)
+		if (player2Y + paddleHeight / 2 < ballY) {
+			player2Y += paddleSpeed;
+		} else if (player2Y + paddleHeight / 2 > ballY) {
+			player2Y -= paddleSpeed;
+		}
+
+		// Score and reset ball
+		if (ballX <= 0) {
+			player2Score++;
+			if (player2Score >= maxScore) {
+                gameRunning = false;
+                message = 'Player 2 Wins! Press Enter to Retry';
+                document.addEventListener('keydown', pressEnter);
+            } else {
+                resetBall();
+            }
+		} else if (ballX >= WIDTH - ballSize) {
+			player1Score++;
+			if (player1Score >= maxScore) {
+                gameRunning = false;
+                message = 'Player 1 Wins! Press Enter to Retry';
+                document.addEventListener('keydown', pressEnter);
+            } else {
+                resetBall();
+            }
+		}
+	}
+
+	// Draw everything
+	function draw() {
+		ctx.clearRect(0, 0, WIDTH, HEIGHT);
+
+		// Draw paddles
+		ctx.fillStyle = 'white';
+		ctx.fillRect(0, player1Y, paddleWidth, paddleHeight); // Left paddle (Player 1)
+		ctx.fillRect(WIDTH - paddleWidth, player2Y, paddleWidth, paddleHeight); // Right paddle (AI)
+
+		// Draw ball
+		ctx.fillRect(ballX, ballY, ballSize, ballSize);
+
+		// Draw net
+		for (let i = 0; i < HEIGHT; i += 20) {
+			ctx.fillRect(WIDTH / 2 - 1, i, 2, 10);
+		}
+
+		// Draw scores
+		ctx.font = '20px Arial';
+		ctx.fillText(player1Score, WIDTH / 4, 30);
+		ctx.fillText(player2Score, 3 * WIDTH / 4, 30);
+
+        if (message) {
+            ctx.font = '30px Arial';
+            ctx.fillStyle = 'white';
+            ctx.textAlign = 'center';
+            ctx.fillText(message, WIDTH / 2, HEIGHT / 2);
+        }
+
+        if (countdown > 0) {
+            ctx.font = '50px Arial';
+            ctx.fillStyle = 'white';
+            ctx.textAlign = 'center';
+            ctx.fillText(countdown, WIDTH / 2, HEIGHT / 2);
+        }
+	}
+
+	// Reset ball to the center
+	function resetBall() {
+		ballX = WIDTH / 2;
+		ballY = HEIGHT / 2;
+
+		let tempSpeedX = ballSpeedX;
+        let tempSpeedY = ballSpeedY;
+        ballSpeedX = 0;
+        ballSpeedY = 0;
+
+        countdown = 4;
+
+        function doCountdown() {
+            countdown--;
+            if (countdown <= 0) {
+                ballSpeedX = -tempSpeedX;
+                ballSpeedY = tempSpeedY;
+            } else {
+                setTimeout(doCountdown, 1000);
+            }
+        }
+
+        doCountdown();
+	}
+
+	// Start the game loop
+    resetGame();
+	gameLoop();
+};
