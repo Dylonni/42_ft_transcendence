@@ -56,7 +56,7 @@ class NotifConsumer(AsyncWebsocketConsumer):
         try:
             notification_model = apps.get_model('notifs.Notification')
             notification = notification_model.objects.filter(sender=sender, receiver=receiver, category=category, object_id=object_id).first()
-            if not notification.exists():
+            if not notification:
                 notification_model.objects.send_notification(sender, receiver, category, object_id)
         except LookupError:
             logger.info('Error sending notification.')
