@@ -73,6 +73,9 @@ class GameManager(models.Manager):
 
 
 class GameRoundManager(models.Manager):
+    def get_last_matches(self, player):
+        return self.filter(Q(player1=player) | Q(player2=player)).order_by('-started_at')[:20]
+    
     def create_round(self, player1, player2):
         round = self.create(player1=player1, player2=player2)
         return round
