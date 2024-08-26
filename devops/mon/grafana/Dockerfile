@@ -20,4 +20,8 @@ COPY provisioning/dashboards/Django/17658_rev2.json /var/lib/grafana/dashboards/
 ### if managing to API call for secrets
 # RUN mkdir -p /var/lib/grafana/secrets
 
+COPY provisioning/dashboards/15495_rev1.json /var/lib/grafana/dashboards/15495_rev1.json
+
+
+
 EXPOSE 3000

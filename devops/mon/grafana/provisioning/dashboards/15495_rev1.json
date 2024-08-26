@@ -1,0 +1,516 @@
+{
+  "__inputs": [],
+  "__requires": [
+    {
+      "type": "panel",
+      "id": "bargauge",
+      "name": "Bar gauge",
+      "version": ""
+    },
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "8.1.7"
+    },
+    {
+      "type": "panel",
+      "id": "logs",
+      "name": "Logs",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "stat",
+      "name": "Stat",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "timeseries",
+      "name": "Time series",
+      "version": ""
+    }
+  ],
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "gnetId": 15495,
+  "graphTooltip": 0,
+  "id": null,
+  "iteration": 1641551116579,
+  "links": [
+    {
+      "asDropdown": true,
+      "icon": "external link",
+      "includeVars": false,
+      "keepTime": false,
+      "tags": [],
+      "targetBlank": false,
+      "title": "Dashboards",
+      "tooltip": "",
+      "type": "dashboards",
+      "url": ""
+    }
+  ],
+  "panels": [
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-BlYlRd"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 6,
+        "x": 0,
+        "y": 0
+      },
+      "id": 8,
+      "interval": null,
+      "maxDataPoints": 1,
+      "options": {
+        "displayMode": "gradient",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "text": {}
+      },
+      "pluginVersion": "8.1.7",
+      "targets": [
+        {
+          "expr": "sum by (client) (count_over_time({job=\"nginx_error\"} |= \"$service\" |= \"ModSecurity\" |= \"coreruleset\" | pattern \"<date> <time> [<level>] <_> <_> ModSecurity: <modsec_action> [file \\\"/usr/local/etc/modsecurity/coreruleset/rules/<rule_set>.conf<_> [id \\\"<rule_id>\\\"<_>[ver \\\"<owasp_version>\\\"]<_>, client: <client>, server: <server>, request: \\\"<request_method> <ressource> <http_version>\\\", <_>\" |  __error__=\"\" [$__interval]))\n",
+          "legendFormat": "{{client}}",
+          "refId": "A"
+        }
+      ],
+      "title": "Top Attackers",
+      "transformations": [],
+      "type": "bargauge"
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 32,
+            "gradientMode": "hue",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "always",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 9,
+        "x": 6,
+        "y": 0
+      },
+      "id": 7,
+      "maxDataPoints": null,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "pluginVersion": "8.1.7",
+      "targets": [
+        {
+          "expr": "sum by (level) (count_over_time({job=\"nginx_error\"}|= \"$service\" |= \"ModSecurity\" |= \"coreruleset\" | pattern \"<date> <time> [<level>] <_> ModSecurity: <modsec_action> [file \\\"/usr/local/etc/modsecurity/coreruleset/rules/<rule_set>.conf<_> [id \\\"<rule_id>\\\"<_> [msg \\\"<msg>\\\"] <_>[ver \\\"<owasp_version>\\\"]<_>] [tag <tags>] [host<_>, client: <client>, server: <server>, request: \\\"<request_method> <ressource> <http_version>\\\", <_>\" | __error__=\"\" [$__interval]))",
+          "hide": false,
+          "legendFormat": "Level {{level}}",
+          "refId": "A"
+        },
+        {
+          "expr": "sum by (level) ({job=\"nginx_error\"}|= \"$service\" |= \"ModSecurity\"|= \"error\" |= \"coreruleset\" | pattern \"<date> <time> [<level>] <_> ModSecurity: <modsec_action> [file \\\"/usr/local/etc/modsecurity/coreruleset/rules/<rule_set>.conf<_> [id \\\"<rule_id>\\\"<_> [msg \\\"<msg>\\\"] <_>[ver \\\"<owasp_version>\\\"]<_>] [tag <tags>] [host<_>, client: <client>, server: <server>, request: \\\"<request_method> <ressource> <http_version>\\\", <_>\")",
+          "hide": true,
+          "refId": "B"
+        }
+      ],
+      "thresholds": [],
+      "title": "ModSec Activity",
+      "type": "timeseries"
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-BlYlRd"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 22,
+        "w": 9,
+        "x": 15,
+        "y": 0
+      },
+      "id": 5,
+      "interval": null,
+      "maxDataPoints": 10,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {
+          "titleSize": 14
+        },
+        "textMode": "value_and_name"
+      },
+      "pluginVersion": "8.1.7",
+      "targets": [
+        {
+          "expr": "sum by (server,msg, rule_id) (count_over_time({job=\"nginx_error\"} |= \"$service\" |= \"ModSecurity\" |= \"coreruleset\" | pattern \"<date> <time> [<level>] <_> ModSecurity: <modsec_action> [file \\\"/usr/local/etc/modsecurity/coreruleset/rules/<rule_set>.conf<_> [id \\\"<rule_id>\\\"<_> [msg \\\"<msg>\\\"] <_>[ver \\\"<owasp_version>\\\"]<_>] [tag <tags>] [host<_>, client: <client>, server: <server>, request: \\\"<request_method> <ressource> <http_version>\\\", <_>\" |  __error__=\"\" [$__interval]))\n",
+          "legendFormat": "{{rule_id}} {{server}} {{msg}}",
+          "refId": "A"
+        }
+      ],
+      "title": "RuleId's at Vhost",
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": null,
+      "gridPos": {
+        "h": 13,
+        "w": 15,
+        "x": 0,
+        "y": 9
+      },
+      "id": 4,
+      "options": {
+        "dedupStrategy": "none",
+        "enableLogDetails": true,
+        "prettifyLogMessage": false,
+        "showCommonLabels": true,
+        "showLabels": false,
+        "showTime": false,
+        "sortOrder": "Descending",
+        "wrapLogMessage": false
+      },
+      "targets": [
+        {
+          "expr": "{job=\"nginx_error\"}|= \"$service\" |= \"ModSecurity\" |= \"coreruleset\" | pattern \"<date> <time> [<level>] <_> ModSecurity: <modsec_action> [file \\\"/usr/local/etc/modsecurity/coreruleset/rules/<rule_set>.conf<_> [id \\\"<rule_id>\\\"<_> [msg \\\"<msg>\\\"] <_>[ver \\\"<owasp_version>\\\"]<_>] [tag <tags>] [host<_>, client: <client>, server: <server>, request: \\\"<request_method> <ressource> <http_version>\\\", <_>\"\n\n| line_format \"?️ {{.date}} {{.time}} ? {{.server}} {{.request_method}} {{.ressource}} ❗️☠️ {{.client}} ☠️️❗️ \\n➡️ RuleSet: {{.rule_set}} RuleId: {{.rule_id}} {{.msg}}\\n?️ [tag {{.tags}}]\"",
+          "refId": "A"
+        }
+      ],
+      "title": "Error Logs  ➡️ only ModSecurity",
+      "type": "logs"
+    },
+    {
+      "collapsed": true,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 22
+      },
+      "id": 12,
+      "panels": [
+        {
+          "datasource": null,
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "continuous-BlPu"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 14,
+            "w": 24,
+            "x": 0,
+            "y": 24
+          },
+          "id": 10,
+          "options": {
+            "colorMode": "background",
+            "graphMode": "none",
+            "justifyMode": "auto",
+            "orientation": "horizontal",
+            "reduceOptions": {
+              "calcs": [
+                "sum"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "text": {
+              "titleSize": 12,
+              "valueSize": 12
+            },
+            "textMode": "auto"
+          },
+          "pluginVersion": "8.1.7",
+          "targets": [
+            {
+              "expr": "topk (2, sum by (server, ressource, rule_id, tags) (count_over_time({job=\"nginx_error\"}|= \"$service\" |= \"ModSecurity\" |= \"coreruleset\" | pattern \"<date> <time> [<level>] <_> ModSecurity: <modsec_action> [file \\\"/usr/local/etc/modsecurity/coreruleset/rules/<rule_set>.conf<_> [id \\\"<rule_id>\\\"<_> [msg \\\"<msg>\\\"] <_>[ver \\\"<owasp_version>\\\"]<_>] [tag <tags>] [host<_>, client: <client>, server: <server>, request: \\\"<request_method> <ressource> <http_version>\\\", <_>\"[$__interval])))\n",
+              "legendFormat": "{{rule_id}} {{server}}{{ressource}}  ➡️  Tags: [{{tags}}]",
+              "refId": "A"
+            }
+          ],
+          "title": "Exact Rule Infos",
+          "type": "stat"
+        },
+        {
+          "datasource": null,
+          "gridPos": {
+            "h": 12,
+            "w": 24,
+            "x": 0,
+            "y": 38
+          },
+          "id": 6,
+          "options": {
+            "dedupStrategy": "none",
+            "enableLogDetails": true,
+            "prettifyLogMessage": true,
+            "showCommonLabels": true,
+            "showLabels": false,
+            "showTime": false,
+            "sortOrder": "Descending",
+            "wrapLogMessage": false
+          },
+          "targets": [
+            {
+              "expr": "{job=\"nginx_error\"}",
+              "refId": "A"
+            }
+          ],
+          "title": "Error Logs all",
+          "type": "logs"
+        }
+      ],
+      "title": "Details",
+      "type": "row"
+    }
+  ],
+  "refresh": "5s",
+  "schemaVersion": 30,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "allValue": " ",
+        "current": {
+          "selected": true,
+          "text": "All",
+          "value": "$__all"
+        },
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": true,
+        "label": "Service",
+        "multi": false,
+        "name": "service",
+        "options": [
+          {
+            "selected": true,
+            "text": "All",
+            "value": "$__all"
+          },
+          {
+            "selected": false,
+            "text": "cloud",
+            "value": "cloud"
+          },
+          {
+            "selected": false,
+            "text": "wiki",
+            "value": "wiki"
+          },
+          {
+            "selected": false,
+            "text": "grafana",
+            "value": "grafana"
+          },
+          {
+            "selected": false,
+            "text": "shop",
+            "value": "shop"
+          },
+          {
+            "selected": false,
+            "text": "mineos",
+            "value": "mineos"
+          },
+          {
+            "selected": false,
+            "text": "sonarr",
+            "value": "sonarr"
+          },
+          {
+            "selected": false,
+            "text": "radarr",
+            "value": "radarr"
+          },
+          {
+            "selected": false,
+            "text": "gitea",
+            "value": "gitea"
+          },
+          {
+            "selected": false,
+            "text": "mountaineering",
+            "value": "mountaineering"
+          },
+          {
+            "selected": false,
+            "text": "heimdall",
+            "value": "heimdall"
+          },
+          {
+            "selected": false,
+            "text": "yurt",
+            "value": "yurt"
+          }
+        ],
+        "query": "cloud,wiki,grafana,shop,mineos,sonarr,radarr,gitea,mountaineering,heimdall,yurt",
+        "queryValue": "",
+        "skipUrlSync": false,
+        "type": "custom"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-3h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "NGINX ModSecurity OWASP CRS V0.0",
+  "uid": "Ur3f16c7z",
+  "version": 90,
+  "description": "Dashboard to work with ModSecurity and the OWASP Coreruleset."
+}

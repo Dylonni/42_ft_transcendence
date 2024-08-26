@@ -17,6 +17,7 @@ services:
       - prometheus
       - grafana
       - alert-manager
+      - loki
       # - elasticsearch
       # - logstash
       # - kibana
@@ -34,6 +35,7 @@ services:
       # - "9200:9200" # Elasticsearch - no need to expose
       # - "5001:5001" # Logstash - no need to expose
       # - "5601:5601" # Kibana - shows "elasticsearch", which is normal
+      - "3100:3100" # ModSecurity/Loki
     volumes:
       - shared-certs:/etc/ssl/shared
 
@@ -133,6 +135,16 @@ services:
     networks:
       - backend
     command: --config.file=/etc/alertmanager/alertmanager.yml --log.level=debug --web.listen-address=:9093 --cluster.listen-address=
+
+  loki:
+    build: ./devops/mon/loki
+    container_name: loki
+    # depends_on:
+    #   django:
+    #     condition: service_healthy
+    command: -config.file=/etc/loki/local-config.yaml
+    networks:
+      - backend
 
 # ELK STACK
   # elk_certs:
