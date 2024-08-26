@@ -54,6 +54,11 @@ class Friendship(BaseModel):
         elif profile == self.profile2:
             return self.profile1
         return None
+    
+    def is_outsider(self, profile):
+        if profile != self.profile1 and profile != self.profile2:
+            return True
+        return False
 
 
 class FriendRequest(BaseInteraction):

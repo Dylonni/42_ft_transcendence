@@ -12,7 +12,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from profiles.models import Profile, ProfileBlock
 from friends.models import Friendship, FriendMessage
-from games.models import Game
+from games.models import Game, GameRound
 from notifs.models import Notification
 from .mixins import JWTCookieAuthenticationMixin, LangVerificationMixin, RedirectIfAuthenticatedMixin
 
@@ -71,6 +71,8 @@ def get_game_context(context={}):
         return context
 
 def get_notif_context(request, context={}):
+    if request.profile:
+        return context
     notifications = Notification.objects.get_notifications_for_profile(request.profile)
     context['notifs'] = notifications
     context['has_unread_notifs'] = notifications.filter(read=False).exists()
@@ -111,6 +113,7 @@ index = IndexView.as_view()
 class ModeSelectView(PublicView):
     def get(self, request):
         context = get_profile_context(request)
+        context = get_notif_context(request, context)
         return render(request, 'customize_game.html', context)
 
 mode_select = ModeSelectView.as_view()
@@ -172,6 +175,8 @@ select_game = SelectGameView.as_view()
 
 class CustomizeGameView(PrivateView):
     def get(self, request):
+        if request.profile.game:
+            return redirect(f'/games/{request.profile.game.id}/', True)
         context = get_profile_context(request)
         return render(request, 'customize_game.html', context)
 
@@ -181,6 +186,8 @@ customize_game = CustomizeGameView.as_view()
 class GameRoomView(PrivateView):
     def get(self, request, game_id):
         game = get_object_or_404(Game, id=game_id)
+        if request.profile not in game.players.all():
+            return redirect('/home/')
         context = get_friend_context(request)
         context['game'] = game
         context['players'] = game.players.all()
@@ -193,6 +200,7 @@ class ProfileView(PrivateView):
     def get(self, request):
         context = get_profile_context(request)
         context['is_self'] = True
+        context['rounds'] = GameRound.objects.get_last_matches(request.profile)
         context = get_notif_context(request, context)
         return render(request, 'profile.html', context)
 
@@ -209,6 +217,7 @@ class ProfileOtherView(PrivateView):
         if context['is_friend']:
             context['friendship'] = Friendship.objects.get_friendship(request.profile, profile)
         context['profile_block'] = request.profile.get_block(context['profile'])
+        context['rounds'] = GameRound.objects.get_last_matches(profile)
         return render(request, 'profile.html', context)
 
 profile_other = ProfileOtherView.as_view()
@@ -236,6 +245,8 @@ social = SocialView.as_view()
 class SocialFriendView(PrivateView):
     def get(self, request, friendship_id):
         friendship = get_object_or_404(Friendship, id=friendship_id)
+        if friendship.is_outsider(request.profile):
+            return redirect('/home/')
         context = get_friendship_context(request)
         context['messages'] = FriendMessage.objects.get_messages(friendship_id)
         context['current_friend'] = Friendship.objects.get_other(friendship_id, request.profile)
