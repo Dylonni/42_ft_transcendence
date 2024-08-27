@@ -12,10 +12,10 @@
         </h1>
     </header>
 </div>
-{% if profile %}
-<form action="/api/games/" id="createGameForm" method="post">
+{% if local %}
+<form id="createGameForm" data-game-type="local">
 {% else %}
-<form action="/api/offline/" id="createGameForm" method="post">
+<form action="/api/games/" id="createGameForm" method="post">
 {% endif %}
     <div class="container">
         <div class="row">
@@ -38,6 +38,7 @@
                     </h4>
                     <div class="card-body d-flex d-lg-flex d-xxl-flex flex-column justify-content-center align-items-center justify-content-lg-center align-items-lg-center justify-content-xxl-center align-items-xxl-center" style="background: #31373d;border-bottom-left-radius: 19px;border-bottom-right-radius: 19px;padding-top: 0px;padding-bottom: 0px;">
                         <div class="d-flex d-lg-flex d-xl-flex d-xxl-flex flex-column justify-content-center align-items-center flex-sm-row flex-md-row flex-lg-row justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="width: 100%;">
+                            {% if not local %}
                             <div class="d-flex d-xxl-flex flex-column justify-content-center align-items-center align-items-xxl-center" style="background: var(--bs-body-color);border-top-left-radius: 19px;border-top-right-radius: 19px;border-bottom-right-radius: 19px;border-bottom-left-radius: 19px;width: 50%;margin-top: 20px;margin-bottom: 20px;margin-left: 10px;margin-right: 10px;">
                                 <h1 class="fs-5 d-xxl-flex justify-content-xxl-center align-items-xxl-center" style="color: var(--bs-body-bg);margin-top: 10px;margin-bottom: 0px;">
                                     {% translate 'Players' %}
@@ -70,6 +71,7 @@
                                     </div>
                                 </div>
                             </div>
+                            {% endif %}
                             <div class="d-flex d-xxl-flex flex-column justify-content-center align-items-center align-items-xxl-center" style="background: var(--bs-body-color);border-top-left-radius: 19px;border-top-right-radius: 19px;border-bottom-right-radius: 19px;border-bottom-left-radius: 19px;width: 50%;margin-top: 20px;margin-bottom: 20px;margin-left: 10px;margin-right: 10px;">
                                 <h1 class="fs-5 d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="color: var(--bs-body-bg);margin-top: 10px;margin-bottom: 0px;">
                                     {% translate 'Score to win' %}

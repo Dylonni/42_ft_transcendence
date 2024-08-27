@@ -35,8 +35,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const renderPage = () => {
         let path = window.location.pathname;
-        console.log(path);
-        fetch(`${path}`, {
+        let search = window.location.search;
+        fetch(`${path}${search}`, {
             headers: {
                 'X-Requested-With': 'XMLHttpRequest',
             },
@@ -341,8 +341,6 @@ document.addEventListener("DOMContentLoaded", () => {
             case 'settings':
                 settingsPage();
                 break;
-            default:
-                console.log(`subdir = ${subdirectory}`);
         }
 
         setNotifHandlers();
@@ -421,21 +419,26 @@ document.addEventListener("DOMContentLoaded", () => {
             createGameForm.addEventListener('submit', (event) => {
                 event.preventDefault();
                 const formData = new FormData(event.target);
-                fetch(event.target.action, {
-                    method: event.target.method,
-                    headers: {
-                        'X-Requested-With': 'XMLHttpRequest',
-                    },
-                    body: formData,
-                })
-                .then(response => response.json())
-                .then(data => {
-                    console.log('Game created:', data);
-                    if ('redirect' in data) {
-                        navigateTo(data.redirect);
-                    }
-                })
-                .catch(error => console.error('Error creating game:', error));
+                if (createGameForm.hasAttribute('data-game-type')) {
+                    saveGameSettings(formData);
+                    navigateTo('/play/');
+                } else {
+                    fetch(event.target.action, {
+                        method: event.target.method,
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest',
+                        },
+                        body: formData,
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Game created:', data);
+                        if ('redirect' in data) {
+                            navigateTo(data.redirect);
+                        }
+                    })
+                    .catch(error => console.error('Error creating game:', error));
+                }
             });
         }
     };
@@ -1167,34 +1170,71 @@ document.addEventListener("DOMContentLoaded", () => {
     attachHandlers();
 });
 
+const saveGameSettings = (formData) => {
+    const formDataObj = {};
+    formData.forEach((value, key) => {
+        formDataObj[key] = value;
+    });
+    localStorage.setItem('winScore', formDataObj.win_score);
+    localStorage.setItem('ballSize', formDataObj.ball_size);
+    localStorage.setItem('ballSpeed', formDataObj.ball_speed);
+    localStorage.setItem('paddleSize', formDataObj.paddle_size);
+    localStorage.setItem('aiDifficulty', formDataObj.ai_difficulty);
+};
+
+const loadGameSettings = () => {
+    const settings = {};
+    settings.winScore = parseInt(localStorage.getItem('winScore')) || 5;
+    const ballSize = localStorage.getItem('ballSize');
+    settings.ballSize = 10;
+    if (ballSize === 'Small') settings.ballSize = 10;
+    if (ballSize === 'Medium') settings.ballSize = 15;
+    if (ballSize === 'Large') settings.ballSize = 20;
+    const ballSpeed = localStorage.getItem('ballSpeed');
+    settings.ballSpeed = 4;
+    if (ballSpeed === 'Slow') settings.ballSpeed = 4;
+    if (ballSpeed === 'Normal') settings.ballSpeed = 6;
+    if (ballSpeed === 'Fast') settings.ballSpeed = 8;
+    const paddleSize = localStorage.getItem('paddleSize');
+    settings.paddleSize = 70;
+    if (paddleSize === 'Small') settings.paddleSize = 70;
+    if (paddleSize === 'Medium') settings.paddleSize = 85;
+    if (paddleSize === 'Large') settings.paddleSize = 100;
+    settings.aiDifficulty = localStorage.getItem('aiDifficulty') || 'Easy';
+    return settings;
+};
+
 const pongGame = () => {
 	const canvas = document.getElementById('pongCanvas');
 	const ctx = canvas.getContext('2d');
+    const settings = loadGameSettings();
 
 	// Constants
 	const WIDTH = canvas.width;
 	const HEIGHT = canvas.height;
-    const MIDDLE = canvas.width / 2;
+    const HALFWIDTH = canvas.width / 2;
+    const HALFHEIGHT = canvas.height / 2;
 
 	// Paddle properties
-	const paddleWidth = 10;
-	const paddleHeight = 70;
-	const paddleSpeed = 8;
+	let paddleWidth = 10;
+	let paddleHeight = settings.paddleSize;
+	let paddleSpeed = 8;
 
 	// Ball properties
-	const ballSize = 10;
-	let ballSpeedX = 4;
-	let ballSpeedY = 4;
+	let ballSize = settings.ballSize;
+    let ballSpeed = settings.ballSpeed;
+	let ballSpeedX = settings.ballSpeed;
+	let ballSpeedY = settings.ballSpeed;
 
-    const maxScore = 2;
+    let winScore = settings.winScore;
 
 	// Paddle positions
 	let player1Y = (HEIGHT - paddleHeight) / 2;
 	let player2Y = (HEIGHT - paddleHeight) / 2;
 
 	// Ball position
-	let ballX = WIDTH / 2;
-	let ballY = HEIGHT / 2;
+	let ballX = (WIDTH - ballSize) / 2;
+	let ballY = (HEIGHT - ballSize) / 2;
 
 	// Player scores
 	let player1Score = 0;
@@ -1213,9 +1253,20 @@ const pongGame = () => {
     let mouseX = null;
     let mouseY = null;
     let mouseClickActive = false;
-    let isBot = false;
+    let isBot = true;
+    let aiDifficulty = settings.aiDifficulty;
 
-	// Event listeners for key presses
+    let hasDelay = true;
+    let lastHitTime = 0;
+    let moveDelay = 100;
+
+    let isHit = null;
+    let lastHitPosX = null;
+    let lastHitPosY = null;
+    let lastHitSpdX = null;
+    let lastHitSpdY = null;
+    let predictionY = HALFHEIGHT;
+
 	document.addEventListener('keydown', (event) => {
         if (event.key === 'z') zPressed = true;
 		if (event.key === 's') sPressed = true;
@@ -1225,8 +1276,8 @@ const pongGame = () => {
 	});
 
 	document.addEventListener('keyup', (event) => {
-		if (event.key === 'Z') zPressed = false;
-		if (event.key === 'S') sPressed = false;
+		if (event.key === 'z') zPressed = false;
+		if (event.key === 's') sPressed = false;
 
         if (event.key === 'ArrowUp') upArrowPressed = false;
 		if (event.key === 'ArrowDown') downArrowPressed = false;
@@ -1252,18 +1303,61 @@ const pongGame = () => {
         }
     }
 
+    function setDifficulty() {
+        switch (aiDifficulty) {
+            case 'Easy':
+                hasDelay = true;
+                moveDelay = 1000;
+                break;
+            case 'Normal':
+                hasDelay = true;
+                moveDelay = 300;
+                break;
+            case 'Hard':
+                hasDelay = false;
+                moveDelay = 0;
+                break;
+            default:
+                hasDelay = true;
+                moveDelay = 1000;
+        }
+    }
+
     function resetGame() {
-        // Reset scores
         player1Score = 0;
         player2Score = 0;
-    
-        // Reset ball position and speed
         resetBall();
     
-        // Resume game
         gameRunning = true;
         message = null;
         document.removeEventListener('keydown', pressEnter);
+    }
+
+    function predict() {
+        if (isHit) {
+            let predPosX = lastHitPosX;
+            let predPosY = lastHitPosY;
+            let predSpdX = lastHitSpdX;
+            let predSpdY = lastHitSpdY;
+            isHit = false;
+            while (predPosX < WIDTH) {
+                predPosX += predSpdX;
+                predPosY += predSpdY;
+                if (predPosY <= 0 || predPosY >= HEIGHT - ballSize) predSpdY = -predSpdY;
+            }
+            predictionY = predPosY - (paddleHeight / 2);
+        }
+        if (hasDelay) {
+            const currentTime = Date.now();
+            if (currentTime - lastHitTime < moveDelay) return;
+        }
+        if (player2Y < predictionY) {
+            player2Y += paddleSpeed;
+            if (player2Y > predictionY) player2Y = predictionY;
+        } else if (player2Y > predictionY) {
+            player2Y -= paddleSpeed;
+            if (player2Y < predictionY) player2Y = predictionY;
+        }
     }
 
 	// Game loop
@@ -1282,7 +1376,7 @@ const pongGame = () => {
             player1Y -= paddleSpeed;
         } else if (sPressed && player1Y < HEIGHT - paddleHeight) {
             player1Y += paddleSpeed;
-        } else if (mouseClickActive && mouseY !== null && mouseX < MIDDLE) {
+        } else if (mouseClickActive && mouseY !== null && mouseX < HALFWIDTH) {
             if (player1Y < mouseY) {
                 player1Y += paddleSpeed;
                 if (player1Y > mouseY) player1Y = mouseY;
@@ -1297,7 +1391,7 @@ const pongGame = () => {
                 player2Y -= paddleSpeed;
             } else if (downArrowPressed && player2Y < HEIGHT - paddleHeight) {
                 player2Y += paddleSpeed;
-            } else if (mouseClickActive && mouseY !== null && mouseX > MIDDLE) {
+            } else if (mouseClickActive && mouseY !== null && mouseX > HALFWIDTH) {
                 if (player2Y < mouseY) {
                     player2Y += paddleSpeed;
                     if (player2Y > mouseY) player2Y = mouseY;
@@ -1317,25 +1411,26 @@ const pongGame = () => {
 
 		// Ball collision with paddles
 		if (ballX <= paddleWidth && ballY >= player1Y && ballY <= player1Y + paddleHeight) {
-			ballSpeedX = -ballSpeedX;
+			ballX = paddleWidth;
+            ballSpeedX = -ballSpeedX + 1;
+            ballSpeedY = ballSpeedY < 0 ? ballSpeedY - 1 : ballSpeedY + 1;
+            setBallAsHit();
 		}
 		if (ballX >= WIDTH - paddleWidth - ballSize && ballY >= player2Y && ballY <= player2Y + paddleHeight) {
-			ballSpeedX = -ballSpeedX;
+			ballX = WIDTH - paddleWidth - ballSize;
+            ballSpeedX = -ballSpeedX - 1;
+            ballSpeedY = ballSpeedY < 0 ? ballSpeedY - 1 : ballSpeedY + 1;
 		}
 
-		// AI paddle movement (simple AI)
+		// AI paddle movement
         if (isBot) {
-            if (player2Y + paddleHeight / 2 < ballY) {
-                player2Y += paddleSpeed;
-            } else if (player2Y + paddleHeight / 2 > ballY) {
-                player2Y -= paddleSpeed;
-            }
+            predict();
         }
 
 		// Score and reset ball
 		if (ballX <= 0) {
 			player2Score++;
-			if (player2Score >= maxScore) {
+			if (player2Score >= winScore) {
                 gameRunning = false;
                 message = 'Player 2 Wins! Press Enter to Retry';
                 document.addEventListener('keydown', pressEnter);
@@ -1344,7 +1439,7 @@ const pongGame = () => {
             }
 		} else if (ballX >= WIDTH - ballSize) {
 			player1Score++;
-			if (player1Score >= maxScore) {
+			if (player1Score >= winScore) {
                 gameRunning = false;
                 message = 'Player 1 Wins! Press Enter to Retry';
                 document.addEventListener('keydown', pressEnter);
@@ -1391,13 +1486,21 @@ const pongGame = () => {
         }
 	}
 
+    function setBallAsHit() {
+        lastHitPosX = ballX;
+        lastHitPosY = ballY;
+        lastHitSpdX = ballSpeedX;
+        lastHitSpdY = ballSpeedY;
+        isHit = true;
+        lastHitTime = Date.now();
+    }
+
 	// Reset ball to the center
 	function resetBall() {
-		ballX = WIDTH / 2;
-		ballY = HEIGHT / 2;
+		ballX = (WIDTH - ballSize) / 2;
+        ballY = (HEIGHT - ballSize) / 2;
 
 		let tempSpeedX = ballSpeedX;
-        let tempSpeedY = ballSpeedY;
         ballSpeedX = 0;
         ballSpeedY = 0;
 
@@ -1406,8 +1509,13 @@ const pongGame = () => {
         function doCountdown() {
             countdown--;
             if (countdown <= 0) {
-                ballSpeedX = -tempSpeedX;
-                ballSpeedY = tempSpeedY;
+                const angle = Math.random() * Math.PI / 2 - Math.PI / 4;
+                const direction = tempSpeedX < 0 ? 1 : -1;
+                ballSpeedX = direction * ballSpeed * Math.cos(angle);
+                ballSpeedY = ballSpeed * Math.sin(angle);
+                if (ballSpeedX > 0) {
+                    setBallAsHit();
+                }
             } else {
                 setTimeout(doCountdown, 1000);
             }
@@ -1417,6 +1525,7 @@ const pongGame = () => {
 	}
 
 	// Start the game loop
+    setDifficulty();
     resetGame();
 	gameLoop();
 };

@@ -119,7 +119,7 @@ class ModeSelectView(PublicView):
 mode_select = ModeSelectView.as_view()
 
 
-class PlayView(PublicView):
+class PlayView(LangVerificationMixin, APIView):
     def get(self, request):
         return render(request, 'play.html')
 
@@ -180,6 +180,9 @@ class CustomizeGameView(PrivateView):
             return redirect(f'/games/{request.profile.game.id}/', True)
         context = get_profile_context(request)
         context = get_notif_context(request, context)
+        logger.info(request.query_params)
+        if request.query_params.get('local', None):
+            context['local'] = True
         return render(request, 'customize_game.html', context)
 
 customize_game = CustomizeGameView.as_view()
