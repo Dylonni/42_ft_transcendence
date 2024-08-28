@@ -12,11 +12,11 @@ logger = logging.getLogger('django')
 class NotifConsumer(AsyncWebsocketConsumer):
     async def connect(self):
         self.user = self.scope['user']
-        if not self.user.is_authenticated:
+        self.profile = await self.get_profile(self.user)
+        if not self.user.is_authenticated or not self.profile:
             await self.close()
             return
-        self.room_name = f'notifs_{self.user.id}'
-        logger.info(f'User {self.user} connecting to notifications.')
+        self.room_name = f'notifs_{self.profile.id}'
         await self.channel_layer.group_add(
             self.room_name,
             self.channel_name
@@ -24,7 +24,6 @@ class NotifConsumer(AsyncWebsocketConsumer):
         await self.accept()
     
     async def disconnect(self, code):
-        logger.info(f'User {self.user} disconnecting from notifications with close code {code}.')
         await self.channel_layer.group_discard(
             self.room_name,
             self.channel_name
@@ -34,13 +33,11 @@ class NotifConsumer(AsyncWebsocketConsumer):
         text_data_json = json.loads(text_data)
         notification = text_data_json.get('notification', {})
         command = notification.get('command', None)
-        logger.info(f'Notification received with command: {command}')
         if (command == 'notifs_read'):
             await self.mark_all_notifications_as_read()
     
     async def send_notification(self, event):
         notif = event['notification']
-        logger.info(f'Sending notification to user {self.user}: {notif}')
         category = notif['category']
         notif = await self.get_notification(notif['id'])
         context = {'notif': notif}
@@ -50,6 +47,14 @@ class NotifConsumer(AsyncWebsocketConsumer):
             case 'Friend Request':
                 rendered_html = await sync_to_async(render_to_string)('notifs/notif_friend_request.html', context)
         await self.send(text_data=json.dumps({'element': rendered_html}))
+    
+    @database_sync_to_async
+    def get_profile(self, user):
+        try:
+            profile_model = apps.get_model('profiles.Profile')
+            return profile_model.objects.filter(user=user).first()
+        except LookupError:
+            logger.info('Error getting profile.')
     
     @database_sync_to_async
     def notify_profile(self, sender, receiver, category, object_id):

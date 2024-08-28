@@ -26,6 +26,7 @@ from rest_framework_simplejwt.tokens import AccessToken
 from urllib.parse import quote
 from pong.views import PrivateView, PublicView
 from profiles.models import Profile
+from games.models import Game
 from .serializers import (
     PasswordResetConfirmSerializer,
     PasswordResetRequestSerializer,
@@ -73,13 +74,7 @@ class UserLogoutView(PrivateView):
         player = request.profile
         game = player.game
         if game:
-            player.leave_game()
-            if game.host == player:
-                new_host = game.players.exclude(id=player.id).first()
-                if new_host:
-                    game.set_host(new_host)
-                else:
-                    game.delete()
+            Game.objects.remove_player(game, player)
         Profile.objects.set_user_status(request.user, Profile.StatusChoices.OFFLINE)
         response_data = {'message': _('User logged out.'), 'redirect': '/'}
         response = Response(response_data, status=status.HTTP_200_OK)

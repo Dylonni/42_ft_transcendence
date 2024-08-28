@@ -1,6 +1,7 @@
 import random
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
+from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from pong.models import BaseModel, BaseInteraction
 from .managers import (
@@ -105,6 +106,27 @@ class Game(BaseModel):
     def __str__(self):
         return self.name
     
+    def get_ball_size(self):
+        if self.ball_size == self.SizeChoices.SMALL:
+            return 10
+        elif self.ball_size == self.SizeChoices.MEDIUM:
+            return 15
+        return 20
+    
+    def get_ball_speed(self):
+        if self.ball_speed == self.SpeedChoices.SLOW:
+            return 4
+        elif self.ball_speed == self.SpeedChoices.NORMAL:
+            return 6
+        return 8
+    
+    def get_paddle_size(self):
+        if self.paddle_size == self.SizeChoices.SMALL:
+            return 70
+        elif self.paddle_size == self.SizeChoices.MEDIUM:
+            return 85
+        return 100
+    
     def get_player_count(self):
         return self.players.count()
     
@@ -123,7 +145,7 @@ class Game(BaseModel):
     def can_start(self, player):
         is_host = player == self.host
         is_full = self.is_full()
-        all_ready = all(player.is_ready for player in self.players)
+        all_ready = True #all(player.is_ready for player in self.players)
         return is_host and is_full and all_ready
     
     def set_host(self, new_host):
@@ -131,10 +153,22 @@ class Game(BaseModel):
         self.save()
         return self
     
-    def shuffle_players(self):
-        players = self.players
-        random.shuffle(self.players)
-        return players
+    def start(self):
+        self.current_order = 1
+        self.started_at = timezone.now()
+        self.save()
+        for player in self.players.all():
+            player.set_status(player.StatusChoices.PLAYING)
+    
+    def end(self):
+        self.ended_at = timezone.now()
+        self.save()
+    
+    def get_currently_playing(self):
+        round = self.rounds.filter(order=self.current_order).first()
+        if round:
+            return [round.player1, round.player2]
+        return None
 
 
 class GameRound(BaseModel):
@@ -150,11 +184,13 @@ class GameRound(BaseModel):
         to='profiles.Profile',
         on_delete=models.CASCADE,
         related_name='player1_rounds',
+        null=True,
     )
     player2 = models.ForeignKey(
         to='profiles.Profile',
         on_delete=models.CASCADE,
         related_name='player2_rounds',
+        null=True,
     )
     score1 = models.PositiveSmallIntegerField(
         default=0,
@@ -168,13 +204,6 @@ class GameRound(BaseModel):
         blank=True,
         on_delete=models.SET_NULL,
         related_name='rounds_won',
-    )
-    next_round = models.ForeignKey(
-        to='self',
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name='previous_rounds',
     )
     started_at = models.DateTimeField(
         blank=True,
@@ -204,6 +233,14 @@ class GameRound(BaseModel):
     
     def set_winner(self, winner):
         self.winner = winner
+        self.save()
+    
+    def start(self):
+        self.started_at = timezone.now()
+        self.save()
+    
+    def end(self):
+        self.ended_at = timezone.now()
         self.save()
 
 

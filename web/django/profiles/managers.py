@@ -54,6 +54,18 @@ class ProfileManager(models.Manager):
     
     def get_ranked_profiles(self):
         return self.order_by('-elo')
+    
+    def get_available_friends(self, profile):
+        friends_as_profile1 = profile.friendships_as_profile1.filter(
+            removed_by__isnull=True,
+            profile2__status=profile.StatusChoices.ONLINE,
+        ).values_list('profile2', flat=True)
+        friends_as_profile2 = profile.friendships_as_profile2.filter(
+            removed_by__isnull=True,
+            profile1__status=profile.StatusChoices.ONLINE,
+        ).values_list('profile1', flat=True)
+        friend_ids = friends_as_profile1.union(friends_as_profile2)
+        return self.filter(id__in=friend_ids)
 
 
 class ProfileBlockManager(models.Manager):

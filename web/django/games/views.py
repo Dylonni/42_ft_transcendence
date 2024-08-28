@@ -89,11 +89,11 @@ class GameStartView(PrivateView):
         if not game.can_start(player):
             response_data = {'error': _('All players must be ready.')}
             return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
-        players = game.shuffle_players()
-        rounds = GameRound.objects.prepare_rounds(players, game)
-        rounds = GameRound.objects.start_game(players)
-        rounds_data = GameRoundSerializer(rounds, many=True).data
-        response_data = {'message': _('Player started the game.')}
+        GameRound.objects.start_game(game)
+        round = Game.objects.get_next_round(game)
+        game.start()
+        round_data = GameRoundSerializer(round).data
+        response_data = {'message': _('Game started.'), 'data': round_data}
         return Response(response_data, status=status.HTTP_200_OK)
 
 game_start = GameStartView.as_view()

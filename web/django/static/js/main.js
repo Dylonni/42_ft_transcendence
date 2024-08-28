@@ -262,11 +262,10 @@ document.addEventListener("DOMContentLoaded", () => {
         gameChatSocket.onmessage = (event) => {
             const data = JSON.parse(event.data);
             const element = data['element'];
-            // TODO: update on player joined/left or message sent/received
-            // const playerSection = document.getElementById('playerSection');
-            // if (playerSection) {
-            //     playerSection.innerHTML += element;
-            // }
+            const playerSection = document.getElementById('playerSection');
+            if (playerSection) {
+                playerSection.innerHTML = element;
+            }
         };
 
         gameChatSocket.onclose = () => {
@@ -290,7 +289,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const action = data['action'];
             if (action === 'update_state') {
                 gameState = data.game_state;
-                renderGame();
+                renderGame(gameState);
             }
         };
 
@@ -678,7 +677,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
             }
 
-            document.querySelectorAll('.invite-friend-button').forEach(inviteFriendBtn => {
+            document.querySelectorAll('.invite-friend-btn').forEach(inviteFriendBtn => {
                 inviteFriendBtn.addEventListener('click', (event) => {
                     event.preventDefault();
                     const profileId = inviteFriendBtn.dataset.profileId;
@@ -692,7 +691,6 @@ document.addEventListener("DOMContentLoaded", () => {
                         .then(response => response.json())
                         .then(data => {
                             console.log('Friend invited:', data);
-                            navigateTo(window.location.pathname);
                         })
                         .catch(error => console.error('Error inviting friend:', error));
                     }
@@ -722,7 +720,25 @@ document.addEventListener("DOMContentLoaded", () => {
             if (startGameBtn) {
                 startGameBtn.addEventListener('click', (event) => {
                     event.preventDefault();
-                    // TODO
+                    fetch(`/api/games/${gameId}/start/`, {
+                        method: 'POST',
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest',
+                        },
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Game started:', data);
+                        const pongDiv = document.getElementById('pongDiv');
+                        if (pongDiv) {
+                            pongDiv.classList.remove('d-none', 'd-xxl-none');
+                        }
+                        const gameInfoDiv = document.getElementById('gameInfoDiv');
+                        if (gameInfoDiv) {
+                            gameInfoDiv.classList.add('d-none', 'd-xxl-none');
+                        }
+                    })
+                    .catch(error => console.error('Error starting game:', error));
                 });
             }
 
@@ -731,8 +747,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 ctx = playCanvas.getContext('2d');
                 playCanvas.addEventListener('mousemove', (event) => {
                     const rect = playCanvas.getBoundingClientRect();
-                    const y = event.clientY - rect.top;
-                    // TODO: send action through websocket
+                    const mouseY = event.clientY - rect.top;
+                    if (gamePlaySocket) {
+                        const message = {player: 'player1', action: 'move_paddle', position: mouseY};
+                        gamePlaySocket.send(JSON.stringify(message));
+                    }
                 });
 
                 playCanvas.addEventListener('touchmove', (event) => {

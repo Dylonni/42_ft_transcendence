@@ -196,6 +196,7 @@ class GameRoomView(PrivateView):
         context = get_friend_context(request)
         context['game'] = game
         context['players'] = game.players.all()
+        context['available_friends'] = Profile.objects.get_available_friends(request.profile)
         context = get_notif_context(request, context)
         return render(request, 'game_room.html', context)
 

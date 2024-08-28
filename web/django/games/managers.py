@@ -44,6 +44,8 @@ class GameManager(models.Manager):
         )
     
     def remove_player(self, game, player):
+        if player not in game.players.all():
+            raise ValueError(_('Player is not in the game.'))
         player.leave_game()
         if game.players.count() == 0:
             game.delete()
@@ -59,8 +61,14 @@ class GameManager(models.Manager):
             {
                 'type': 'send_leave_message',
                 'player_id': str(player.id),
+                'game_id': str(game.id),
             }
         )
+    
+    def get_next_round(self, game):
+        game.current_order += 1
+        game.save()
+        return game.rounds.filter(order=game.current_order).first()
     
     def _generate_name(self):
         if self.filter(started_at=None).count() > 100:
@@ -74,60 +82,36 @@ class GameManager(models.Manager):
 
 class GameRoundManager(models.Manager):
     def get_last_matches(self, player):
-        return self.filter(Q(player1=player) | Q(player2=player)).order_by('-started_at')[:20]
+        return self.filter(Q(player1=player) | Q(player2=player), ended_at__isnull=False).order_by('-started_at')[:20]
     
-    def create_round(self, player1, player2):
-        round = self.create(player1=player1, player2=player2)
-        return round
-    
-    def prepare_rounds(self, players, game):
+    def prepare_rounds(self, game):
+        players = list(game.players.all())
+        random.shuffle(players)
         total_players = len(players)
         total_rounds = total_players - 1
-        series = math.ceil(math.log2(total_players))
-        order = total_rounds + series
         rounds = []
-        next_rounds = [None]
-        for round_num in range(1, rounds + 1):
-            current_serie_rounds = []
-            for i in range(2**(round_num - 1)):
-                next_round = next_rounds.pop(0)
-                if round_num == rounds:
-                    if 2 * i + 1 < total_players:
-                        player1 = players[2 * i]
-                        player2 = players[2 * i + 1]
-                        round = self.create_round(player1=player1, player2=player2, order=order, next_round=next_round)
-                    else:
-                        round = self.create_round(player1=players[2 * i], player2=None, order=order, next_round=next_round)
-                else:
-                    round = self.create_round(player1=None, player2=None, order=order, next_round=next_round)
-                    current_serie_rounds.append(round)
-                    current_serie_rounds.append(round)
-                rounds.append(round)
-                order -= 1
-            next_rounds.extend(current_serie_rounds)
-        game.current_order = 1
-        game.started_at = timezone.now()
-        game.save()
+        for round_num in range(total_rounds):
+            round = self.create(game=game, order=round_num)
+            rounds.append(round)
+        round_num = 0
+        for player in players:
+            if not rounds[round_num].player1:
+                rounds[round_num].player1 = player
+                rounds[round_num].save()
+            elif not rounds[round_num].player2:
+                rounds[round_num].player2 = player
+                rounds[round_num].save()
+            else:
+                round_num += 1
         return rounds
     
-    def start_game(self, players):
-        rounds = self.prepare_rounds(players)
-        if rounds:
-            first_round = rounds[0]
-            first_round.started = True
-            first_round.save()
-            first_round.player1.set_waiting()
-            first_round.player2.set_waiting()
-            first_round.player1.save()
-            first_round.player2.save()
-            for player in players:
-                if player != first_round.player1 and player != first_round.player2:
-                    player.set_watching()
-                    player.save()
-        return rounds
+    def start_game(self, game):
+        if game.started_at:
+            raise ValueError(_('Game has already started.'))
+        self.prepare_rounds(game)
+        # TODO: send prepare message
 
 
-# TODO: complete class
 class GameInviteManager(models.Manager):
     def get_invite(self, sender, receiver):
         return self.filter(
@@ -144,12 +128,14 @@ class GameInviteManager(models.Manager):
     def create_invite(self, sender, receiver):
         if sender == receiver:
             raise ValueError(_('Cannot send a game invite to yourself.'))
+        if not sender.game:
+            raise ValueError(_('Sender is not in a game.'))
         if self.filter(sender=sender, receiver=receiver).exists():
             raise ValueError(_('Game invite already sent.'))
         if self.filter(sender=receiver, receiver=sender).exists():
             raise ValueError(_('Game invite already received.'))
         
-        game_invite = self.create(sender=sender, receiver=receiver)
+        game_invite = self.create(sender=sender, receiver=receiver, game=sender.game)
         consumer = NotifConsumer()
         async_to_sync(consumer.notify_profile)(
             sender=game_invite.sender,

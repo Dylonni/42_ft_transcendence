@@ -121,11 +121,18 @@ class Profile(BaseModel):
     
     def join_game(self, game):
         self.game = game
+        self.status = self.StatusChoices.WAITING
         self.save()
     
     def leave_game(self):
         self.game = None
+        self.status = self.StatusChoices.ONLINE
         self.save()
+    
+    def set_status(self, status):
+        if status in self.StatusChoices:
+            self.status = status
+            self.save()
     
     def update_elo(self, new_elo):
         self.elo = new_elo
