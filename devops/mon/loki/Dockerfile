@@ -2,7 +2,7 @@ FROM grafana/loki:2.9.10
 
 
 
-COPY local-config.yaml /etc/loki/local-config.yaml
+COPY config/local-config.yaml /etc/loki/local-config.yaml
 
 
 EXPOSE 3100

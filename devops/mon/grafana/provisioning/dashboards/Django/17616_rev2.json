@@ -1,8 +1,25 @@
 {
-  "__inputs": [],
-  "__requires": [],
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
   "description": "A dashboard that monitors Django which focuses on giving a overview for requests. It is created using the [Django-mixin](https://github.com/adinhodovic/django-mixin).",
   "editable": true,
+  "fiscalYearStartMonth": 0,
+  "gnetId": 17616,
+  "graphTooltip": 0,
   "links": [
     {
       "tags": [
@@ -34,11 +51,13 @@
       },
       "fieldConfig": {
         "defaults": {
+          "mappings": [],
           "thresholds": {
+            "mode": "absolute",
             "steps": [
               {
                 "color": "red",
-                "value": 0
+                "value": null
               },
               {
                 "color": "green",
@@ -47,7 +66,8 @@
             ]
           },
           "unit": "reqps"
-        }
+        },
+        "overrides": []
       },
       "gridPos": {
         "h": 4,
@@ -57,20 +77,30 @@
       },
       "id": 2,
       "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
-          ]
-        }
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "v10.2.0",
+      "pluginVersion": "10.4.4",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
             "uid": "$datasource"
           },
-          "expr": "round(\n  sum(\n    rate(\n      django_http_requests_total_by_view_transport_method_total{\n        namespace=~\"$namespace\",\n        job=~\"$job\",\n        view=~\"$view\",\n        view!~\"<unnamed view>|health_check:health_check_home|prometheus-django-metrics\",\n        method=~\"$method\"\n      }[$__rate_interval]\n    )\n  ), 0.001\n)\n"
+          "expr": "round(\n  sum(\n    rate(\n      django_http_requests_total_by_view_transport_method_total{\n        namespace=~\"$namespace\",\n        job=~\"$job\",\n        view=~\"$view\",\n        view!~\"<unnamed view>|health_check:health_check_home|prometheus-django-metrics\",\n        method=~\"$method\"\n      }[$__rate_interval]\n    )\n  ), 0.001\n)\n",
+          "refId": "A"
         }
       ],
       "title": "Request Volume",
@@ -83,11 +113,13 @@
       },
       "fieldConfig": {
         "defaults": {
+          "mappings": [],
           "thresholds": {
+            "mode": "absolute",
             "steps": [
               {
                 "color": "red",
-                "value": 0.9
+                "value": null
               },
               {
                 "color": "yellow",
@@ -100,7 +132,8 @@
             ]
           },
           "unit": "percentunit"
-        }
+        },
+        "overrides": []
       },
       "gridPos": {
         "h": 4,
@@ -110,20 +143,30 @@
       },
       "id": 3,
       "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
-          ]
-        }
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "v10.2.0",
+      "pluginVersion": "10.4.4",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
             "uid": "$datasource"
           },
-          "expr": "sum(\n  rate(\n    django_http_responses_total_by_status_view_method_total{\n      namespace=~\"$namespace\",\n      job=~\"$job\",\n      view=~\"$view\",\n      view!~\"<unnamed view>|health_check:health_check_home|prometheus-django-metrics\",\n      method=~\"$method\",\n      status!~\"[4-5].*\"\n    }[$__rate_interval]\n  )\n) /\nsum(\n  rate(\n    django_http_responses_total_by_status_view_method_total{\n      namespace=~\"$namespace\",\n      job=~\"$job\",\n      view=~\"$view\",\n      view!~\"<unnamed view>|health_check:health_check_home|prometheus-django-metrics\",\n      method=~\"$method\"\n    }[$__rate_interval]\n  )\n)\n"
+          "expr": "sum(\n  rate(\n    django_http_responses_total_by_status_view_method_total{\n      namespace=~\"$namespace\",\n      job=~\"$job\",\n      view=~\"$view\",\n      view!~\"<unnamed view>|health_check:health_check_home|prometheus-django-metrics\",\n      method=~\"$method\",\n      status!~\"[4-5].*\"\n    }[$__rate_interval]\n  )\n) /\nsum(\n  rate(\n    django_http_responses_total_by_status_view_method_total{\n      namespace=~\"$namespace\",\n      job=~\"$job\",\n      view=~\"$view\",\n      view!~\"<unnamed view>|health_check:health_check_home|prometheus-django-metrics\",\n      method=~\"$method\"\n    }[$__rate_interval]\n  )\n)\n",
+          "refId": "A"
         }
       ],
       "title": "Success Rate (non 4-5xx responses)",
@@ -136,11 +179,13 @@
       },
       "fieldConfig": {
         "defaults": {
+          "mappings": [],
           "thresholds": {
+            "mode": "absolute",
             "steps": [
               {
                 "color": "green",
-                "value": 0
+                "value": null
               },
               {
                 "color": "yellow",
@@ -153,7 +198,8 @@
             ]
           },
           "unit": "s"
-        }
+        },
+        "overrides": []
       },
       "gridPos": {
         "h": 4,
@@ -163,20 +209,30 @@
       },
       "id": 4,
       "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
-          ]
-        }
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "v10.2.0",
+      "pluginVersion": "10.4.4",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
             "uid": "$datasource"
           },
-          "expr": "histogram_quantile(0.95,\n  sum (\n    irate(\n      django_http_requests_latency_seconds_by_view_method_bucket{\n        namespace=~\"$namespace\",\n        job=~\"$job\",\n        view!~\"<unnamed view>|health_check:health_check_home|prometheus-django-metrics\",\n      }[$__rate_interval]\n    )\n  ) by (job, le)\n)\n"
+          "expr": "histogram_quantile(0.95,\n  sum (\n    irate(\n      django_http_requests_latency_seconds_by_view_method_bucket{\n        namespace=~\"$namespace\",\n        job=~\"$job\",\n        view!~\"<unnamed view>|health_check:health_check_home|prometheus-django-metrics\",\n      }[$__rate_interval]\n    )\n  ) by (job, le)\n)\n",
+          "refId": "A"
         }
       ],
       "title": "Request Latency (P95)",
@@ -187,26 +243,30 @@
         "type": "datasource",
         "uid": "-- Mixed --"
       },
+      "description": "",
       "fieldConfig": {
         "defaults": {
+          "mappings": [],
           "thresholds": {
+            "mode": "absolute",
             "steps": [
               {
-                "color": "red",
-                "value": 0.1
+                "color": "green",
+                "value": null
               },
               {
                 "color": "yellow",
-                "value": 0.2
+                "value": 2500
               },
               {
-                "color": "green",
-                "value": 0.3
+                "color": "red",
+                "value": 5000
               }
             ]
           },
-          "unit": "decbytes"
-        }
+          "unit": "s"
+        },
+        "overrides": []
       },
       "gridPos": {
         "h": 4,
@@ -214,25 +274,37 @@
         "x": 18,
         "y": 1
       },
-      "id": 5,
+      "id": 17,
       "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
-          ]
-        }
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "v10.2.0",
+      "pluginVersion": "10.4.4",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
             "uid": "$datasource"
           },
-          "expr": "histogram_quantile(0.95,\n  sum (\n    rate (\n        django_http_requests_body_total_bytes_bucket {\n          namespace=~\"$namespace\",\n          job=~\"$job\",\n        }[$__rate_interval]\n    )\n  ) by (job, le)\n)\n"
+          "editorMode": "code",
+          "expr": "histogram_quantile(0.50,\n  sum (\n    irate(\n      django_http_requests_latency_seconds_by_view_method_bucket{\n        namespace=~\"$namespace\",\n        job=~\"$job\",\n        view!~\"<unnamed view>|health_check:health_check_home|prometheus-django-metrics\",\n      }[$__rate_interval]\n    )\n  ) by (job, le)\n)\n",
+          "range": true,
+          "refId": "A"
         }
       ],
-      "title": "Request Body Size (P95)",
+      "title": "Request Latency (P50)",
       "type": "stat"
     },
     {
@@ -254,12 +326,54 @@
       },
       "fieldConfig": {
         "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
           "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
             "fillOpacity": 100,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
             "spanNulls": false,
             "stacking": {
+              "group": "A",
               "mode": "value"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
             }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
           },
           "unit": "reqps"
         },
@@ -343,7 +457,8 @@
             "uid": "$datasource"
           },
           "expr": "round(\n  sum(\n    rate(\n      django_http_responses_total_by_status_view_method_total{\n        namespace=~\"$namespace\",\n        job=~\"$job\",\n        view=~\"$view\",\n        view!~\"<unnamed view>|health_check:health_check_home|prometheus-django-metrics\",\n        method=~\"$method\",\n        status=~\"2.*\",\n        view!~\"admin.*\",\n      }[$__rate_interval]\n    ) > 0\n  ) by (namespace, job, view), 0.001\n)\n",
-          "legendFormat": "{{ view }} / 2xx"
+          "legendFormat": "{{ view }} / 2xx",
+          "refId": "A"
         },
         {
           "datasource": {
@@ -351,7 +466,8 @@
             "uid": "$datasource"
           },
           "expr": "round(\n  sum(\n    rate(\n      django_http_responses_total_by_status_view_method_total{\n        namespace=~\"$namespace\",\n        job=~\"$job\",\n        view=~\"$view\",\n        view!~\"<unnamed view>|health_check:health_check_home|prometheus-django-metrics\",\n        method=~\"$method\",\n        status=~\"4.*\",\n        view!~\"admin.*\",\n      }[$__rate_interval]\n    ) > 0\n  ) by (namespace, job, view), 0.001\n)\n",
-          "legendFormat": "{{ view }} / 4xx"
+          "legendFormat": "{{ view }} / 4xx",
+          "refId": "B"
         },
         {
           "datasource": {
@@ -359,7 +475,8 @@
             "uid": "$datasource"
           },
           "expr": "round(\n  sum(\n    rate(\n      django_http_responses_total_by_status_view_method_total{\n        namespace=~\"$namespace\",\n        job=~\"$job\",\n        view=~\"$view\",\n        view!~\"<unnamed view>|health_check:health_check_home|prometheus-django-metrics\",\n        method=~\"$method\",\n        status=~\"5.*\",\n        view!~\"admin.*\",\n      }[$__rate_interval]\n    ) > 0\n  ) by (namespace, job, view), 0.001\n)\n",
-          "legendFormat": "{{ view }} / 5xx"
+          "legendFormat": "{{ view }} / 5xx",
+          "refId": "C"
         }
       ],
       "title": "API & Other Views Response Status",
@@ -372,6 +489,27 @@
       },
       "fieldConfig": {
         "defaults": {
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
           "unit": "dtdurations"
         },
         "overrides": [
@@ -404,9 +542,17 @@
       },
       "id": 8,
       "options": {
+        "cellHeight": "sm",
         "footer": {
-          "enablePagination": true
+          "countRows": false,
+          "enablePagination": true,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
         },
+        "showHeader": true,
         "sortBy": [
           {
             "desc": true,
@@ -414,7 +560,7 @@
           }
         ]
       },
-      "pluginVersion": "v10.2.0",
+      "pluginVersion": "10.4.4",
       "targets": [
         {
           "datasource": {
@@ -423,7 +569,8 @@
           },
           "expr": "histogram_quantile(0.50,\n  sum(\n    rate(\n      django_http_requests_latency_seconds_by_view_method_bucket{\n        namespace=~\"$namespace\",\n        job=~\"$job\",\n        view=~\"$view\",\n        view!~\"<unnamed view>|health_check:health_check_home|prometheus-django-metrics|\",\n        view!~\"admin.*\",\n        method=~\"$method\"\n      }[$__rate_interval]\n    ) > 0\n  ) by (namespace, job, view, le)\n)\n",
           "format": "table",
-          "instant": true
+          "instant": true,
+          "refId": "A"
         },
         {
           "datasource": {
@@ -432,7 +579,8 @@
           },
           "expr": "histogram_quantile(0.95,\n  sum(\n    rate(\n      django_http_requests_latency_seconds_by_view_method_bucket{\n        namespace=~\"$namespace\",\n        job=~\"$job\",\n        view=~\"$view\",\n        view!~\"<unnamed view>|health_check:health_check_home|prometheus-django-metrics|\",\n        view!~\"admin.*\",\n        method=~\"$method\"\n      }[$__rate_interval]\n    ) > 0\n  ) by (namespace, job, view, le)\n)\n",
           "format": "table",
-          "instant": true
+          "instant": true,
+          "refId": "B"
         },
         {
           "datasource": {
@@ -441,7 +589,8 @@
           },
           "expr": "histogram_quantile(0.99,\n  sum(\n    rate(\n      django_http_requests_latency_seconds_by_view_method_bucket{\n        namespace=~\"$namespace\",\n        job=~\"$job\",\n        view=~\"$view\",\n        view!~\"<unnamed view>|health_check:health_check_home|prometheus-django-metrics|\",\n        view!~\"admin.*\",\n        method=~\"$method\"\n      }[$__rate_interval]\n    ) > 0\n  ) by (namespace, job, view, le)\n)\n",
           "format": "table",
-          "instant": true
+          "instant": true,
+          "refId": "C"
         }
       ],
       "title": "API & Other Views Request Latency",
@@ -495,12 +644,54 @@
       },
       "fieldConfig": {
         "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
           "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
             "fillOpacity": 100,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
             "spanNulls": false,
             "stacking": {
+              "group": "A",
               "mode": "value"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
             }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
           },
           "unit": "reqps"
         },
@@ -584,7 +775,8 @@
             "uid": "$datasource"
           },
           "expr": "round(\n  sum(\n    rate(\n      django_http_responses_total_by_status_view_method_total{\n        namespace=~\"$namespace\",\n        job=~\"$job\",\n        view=~\"$view\",\n        view!~\"<unnamed view>|health_check:health_check_home|prometheus-django-metrics\",\n        method=~\"$method\",\n        status=~\"2.*\",\n        view=~\"admin.*\",\n      }[$__rate_interval]\n    ) > 0\n  ) by (namespace, job, view), 0.001\n)\n",
-          "legendFormat": "{{ view }} / 2xx"
+          "legendFormat": "{{ view }} / 2xx",
+          "refId": "A"
         },
         {
           "datasource": {
@@ -592,7 +784,8 @@
             "uid": "$datasource"
           },
           "expr": "round(\n  sum(\n    rate(\n      django_http_responses_total_by_status_view_method_total{\n        namespace=~\"$namespace\",\n        job=~\"$job\",\n        view=~\"$view\",\n        view!~\"<unnamed view>|health_check:health_check_home|prometheus-django-metrics\",\n        method=~\"$method\",\n        status=~\"4.*\",\n        view=~\"admin.*\",\n      }[$__rate_interval]\n    ) > 0\n  ) by (namespace, job, view), 0.001\n)\n",
-          "legendFormat": "{{ view }} / 4xx"
+          "legendFormat": "{{ view }} / 4xx",
+          "refId": "B"
         },
         {
           "datasource": {
@@ -600,7 +793,8 @@
             "uid": "$datasource"
           },
           "expr": "round(\n  sum(\n    rate(\n      django_http_responses_total_by_status_view_method_total{\n        namespace=~\"$namespace\",\n        job=~\"$job\",\n        view=~\"$view\",\n        view!~\"<unnamed view>|health_check:health_check_home|prometheus-django-metrics\",\n        method=~\"$method\",\n        status=~\"5.*\",\n        view=~\"admin.*\",\n      }[$__rate_interval]\n    ) > 0\n  ) by (namespace, job, view), 0.001\n)\n",
-          "legendFormat": "{{ view }} / 5xx"
+          "legendFormat": "{{ view }} / 5xx",
+          "refId": "C"
         }
       ],
       "title": "Admin Views Response Status",
@@ -613,6 +807,27 @@
       },
       "fieldConfig": {
         "defaults": {
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
           "unit": "dtdurations"
         },
         "overrides": [
@@ -645,9 +860,17 @@
       },
       "id": 11,
       "options": {
+        "cellHeight": "sm",
         "footer": {
-          "enablePagination": true
+          "countRows": false,
+          "enablePagination": true,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
         },
+        "showHeader": true,
         "sortBy": [
           {
             "desc": true,
@@ -655,7 +878,7 @@
           }
         ]
       },
-      "pluginVersion": "v10.2.0",
+      "pluginVersion": "10.4.4",
       "targets": [
         {
           "datasource": {
@@ -664,7 +887,8 @@
           },
           "expr": "histogram_quantile(0.50,\n  sum(\n    rate(\n      django_http_requests_latency_seconds_by_view_method_bucket{\n        namespace=~\"$namespace\",\n        job=~\"$job\",\n        view=~\"$view\",\n        view!~\"<unnamed view>|health_check:health_check_home|prometheus-django-metrics|\",\n        view=~\"admin.*\",\n        method=~\"$method\"\n      }[$__rate_interval]\n    ) > 0\n  ) by (namespace, job, view, le)\n)\n",
           "format": "table",
-          "instant": true
+          "instant": true,
+          "refId": "A"
         },
         {
           "datasource": {
@@ -673,7 +897,8 @@
           },
           "expr": "histogram_quantile(0.95,\n  sum(\n    rate(\n      django_http_requests_latency_seconds_by_view_method_bucket{\n        namespace=~\"$namespace\",\n        job=~\"$job\",\n        view=~\"$view\",\n        view!~\"<unnamed view>|health_check:health_check_home|prometheus-django-metrics|\",\n        view=~\"admin.*\",\n        method=~\"$method\"\n      }[$__rate_interval]\n    ) > 0\n  ) by (namespace, job, view, le)\n)\n",
           "format": "table",
-          "instant": true
+          "instant": true,
+          "refId": "B"
         },
         {
           "datasource": {
@@ -682,7 +907,8 @@
           },
           "expr": "histogram_quantile(0.99,\n  sum(\n    rate(\n      django_http_requests_latency_seconds_by_view_method_bucket{\n        namespace=~\"$namespace\",\n        job=~\"$job\",\n        view=~\"$view\",\n        view!~\"<unnamed view>|health_check:health_check_home|prometheus-django-metrics|\",\n        view=~\"admin.*\",\n        method=~\"$method\"\n      }[$__rate_interval]\n    ) > 0\n  ) by (namespace, job, view, le)\n)\n",
           "format": "table",
-          "instant": true
+          "instant": true,
+          "refId": "C"
         }
       ],
       "title": "Admin Request Latency",
@@ -727,7 +953,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 26
+        "y": 27
       },
       "id": 12,
       "title": "Weekly Breakdown",
@@ -768,7 +994,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 27
+        "y": 28
       },
       "id": 13,
       "options": {
@@ -791,7 +1017,8 @@
           },
           "expr": "round(\n  topk(10,\n    sum by (namespace, job, view) (\n      increase(\n        django_http_exceptions_total_by_view_total{\n          namespace=~\"$namespace\",\n          job=~\"$job\",\n          view!~\"<unnamed view>|health_check:health_check_home|prometheus-django-metrics\",\n        }[1w]\n      ) > 0\n    )\n  )\n)\n",
           "format": "table",
-          "instant": true
+          "instant": true,
+          "refId": "A"
         }
       ],
       "title": "Top Exceptions by View (1w)",
@@ -825,13 +1052,14 @@
       "fieldConfig": {
         "defaults": {
           "unit": "short"
-        }
+        },
+        "overrides": []
       },
       "gridPos": {
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 27
+        "y": 28
       },
       "id": 14,
       "options": {
@@ -854,7 +1082,8 @@
           },
           "expr": "round(\n  topk(10,\n    sum by (namespace, job, type) (\n      increase(\n        django_http_exceptions_total_by_type_total{\n          namespace=~\"$namespace\",\n          job=~\"$job\",\n        }[1w]\n      ) > 0\n    )\n  )\n)\n",
           "format": "table",
-          "instant": true
+          "instant": true,
+          "refId": "A"
         }
       ],
       "title": "Top Exceptions by Type (1w)",
@@ -915,7 +1144,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 35
+        "y": 36
       },
       "id": 15,
       "options": {
@@ -938,7 +1167,8 @@
           },
           "expr": "round(\n  topk(10,\n    sum by (namespace, job, view) (\n      increase(\n        django_http_responses_total_by_status_view_method_total{\n          namespace=~\"$namespace\",\n          job=~\"$job\",\n          view!~\"<unnamed view>|health_check:health_check_home|prometheus-django-metrics\",\n          method=~\"$method\"\n        }[1w]\n      ) > 0\n    )\n  )\n)\n",
           "format": "table",
-          "instant": true
+          "instant": true,
+          "refId": "A"
         }
       ],
       "title": "Top Responses By View (1w)",
@@ -972,13 +1202,14 @@
       "fieldConfig": {
         "defaults": {
           "unit": "short"
-        }
+        },
+        "overrides": []
       },
       "gridPos": {
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 35
+        "y": 36
       },
       "id": 16,
       "options": {
@@ -1001,7 +1232,8 @@
           },
           "expr": "topk(10,\n  round(\n    sum by (namespace, job, templatename) (\n      increase(\n        django_http_responses_total_by_templatename_total{\n          namespace=~\"$namespace\",\n          job=~\"$job\",\n          templatename!~\".*'health_check/index.html'.*|None\"\n        }[1w]\n      ) > 0\n    )\n  )\n)\n",
           "format": "table",
-          "instant": true
+          "instant": true,
+          "refId": "A"
         }
       ],
       "title": "Top Templates (1w)",
@@ -1028,7 +1260,7 @@
       "type": "table"
     }
   ],
-  "schemaVersion": 36,
+  "schemaVersion": 39,
   "tags": [
     "django",
     "django-mixin"
@@ -1036,64 +1268,117 @@
   "templating": {
     "list": [
       {
+        "current": {
+          "selected": false,
+          "text": "Prometheus",
+          "value": "PBFA97CFB590B2093"
+        },
+        "hide": 0,
+        "includeAll": false,
         "label": "Data source",
+        "multi": false,
         "name": "datasource",
+        "options": [],
         "query": "prometheus",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
         "type": "datasource"
       },
       {
+        "current": {
+          "isNone": true,
+          "selected": false,
+          "text": "None",
+          "value": ""
+        },
         "datasource": {
           "type": "prometheus",
           "uid": "${datasource}"
         },
+        "definition": "",
+        "hide": 0,
         "includeAll": false,
         "label": "Namespace",
         "multi": false,
         "name": "namespace",
+        "options": [],
         "query": "label_values(django_http_responses_total_by_status_view_method_total{}, namespace)",
         "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
         "sort": 1,
         "type": "query"
       },
       {
+        "current": {
+          "selected": false,
+          "text": "django",
+          "value": "django"
+        },
         "datasource": {
           "type": "prometheus",
           "uid": "${datasource}"
         },
+        "definition": "",
+        "hide": 0,
         "includeAll": false,
         "label": "Job",
         "multi": false,
         "name": "job",
+        "options": [],
         "query": "label_values(django_http_responses_total_by_status_view_method_total{namespace=~\"$namespace\"}, job)",
         "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
         "sort": 1,
         "type": "query"
       },
       {
+        "current": {
+          "selected": false,
+          "text": "All",
+          "value": "$__all"
+        },
         "datasource": {
           "type": "prometheus",
           "uid": "${datasource}"
         },
+        "definition": "",
+        "hide": 0,
         "includeAll": true,
         "label": "View",
         "multi": true,
         "name": "view",
+        "options": [],
         "query": "label_values(django_http_responses_total_by_status_view_method_total{namespace=~\"$namespace\", job=~\"$job\", view!~\"<unnamed view>|health_check:health_check_home|prometheus-django-metrics\"}, view)",
         "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
         "sort": 1,
         "type": "query"
       },
       {
+        "current": {
+          "selected": false,
+          "text": "All",
+          "value": "$__all"
+        },
         "datasource": {
           "type": "prometheus",
           "uid": "${datasource}"
         },
+        "definition": "",
+        "hide": 0,
         "includeAll": true,
         "label": "Method",
         "multi": true,
         "name": "method",
+        "options": [],
         "query": "label_values(django_http_responses_total_by_status_view_method_total{namespace=~\"$namespace\", job=~\"$job\", view=~\"$view\"}, method)",
         "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
         "sort": 1,
         "type": "query"
       }
@@ -1103,8 +1388,10 @@
     "from": "now-1h",
     "to": "now"
   },
+  "timepicker": {},
   "timezone": "utc",
   "title": "Django / Requests / Overview for admin and API views",
   "uid": "django-requests-jkwq",
-  "gnetId": 17616
+  "version": 1,
+  "weekStart": ""
 }

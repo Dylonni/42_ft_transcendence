@@ -1,4 +1,21 @@
-# AIPD
+2 PIA
+	- adresse courriel pour inscription
+	- donnees api42 pour personnalisation profil (photo profil, banniere+couleur de coalition, 42 UID)
+
+
+
+# Analyse d'Impact relative a la Protection des Donnees / Privacy Impact Assessment
+
+
+objectifs
+	description detaille du traitment des donnees
+	evaluation conformite rgpd
+	identification des risques pour les droits/libertes des personnes concernees
+	(au besoin) traitement de ces risques pour les reduire a un niveau acceptable
+
+
+
+
 
 traitement de donnees pour inscription au site
 
