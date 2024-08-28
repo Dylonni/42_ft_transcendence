@@ -4,7 +4,7 @@ try to see if a filezilla container would work with the infinity site ?
 
 cybersec
     nginx
-        add "modsecurity on" to all config files
+        add "modsecurity on" to all config files   ==> done
         change the "return 301" into "rewrite" ?
     
     RGPD

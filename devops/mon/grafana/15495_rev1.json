@@ -1,42 +1,12 @@
 {
-  "__inputs": [],
-  "__requires": [
-    {
-      "type": "panel",
-      "id": "bargauge",
-      "name": "Bar gauge",
-      "version": ""
-    },
-    {
-      "type": "grafana",
-      "id": "grafana",
-      "name": "Grafana",
-      "version": "8.1.7"
-    },
-    {
-      "type": "panel",
-      "id": "logs",
-      "name": "Logs",
-      "version": ""
-    },
-    {
-      "type": "panel",
-      "id": "stat",
-      "name": "Stat",
-      "version": ""
-    },
-    {
-      "type": "panel",
-      "id": "timeseries",
-      "name": "Time series",
-      "version": ""
-    }
-  ],
   "annotations": {
     "list": [
       {
         "builtIn": 1,
-        "datasource": "-- Grafana --",
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
         "enable": true,
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
@@ -51,11 +21,11 @@
       }
     ]
   },
+  "description": "Dashboard to work with ModSecurity and the OWASP Coreruleset.",
   "editable": true,
+  "fiscalYearStartMonth": 0,
   "gnetId": 15495,
   "graphTooltip": 0,
-  "id": null,
-  "iteration": 1641551116579,
   "links": [
     {
       "asDropdown": true,
@@ -72,7 +42,10 @@
   ],
   "panels": [
     {
-      "datasource": null,
+      "datasource": {
+        "type": "loki",
+        "uid": "${datasource}"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -102,10 +75,13 @@
         "y": 0
       },
       "id": 8,
-      "interval": null,
       "maxDataPoints": 1,
       "options": {
         "displayMode": "gradient",
+        "maxVizHeight": 300,
+        "minVizHeight": 16,
+        "minVizWidth": 8,
+        "namePlacement": "auto",
         "orientation": "horizontal",
         "reduceOptions": {
           "calcs": [
@@ -115,28 +91,39 @@
           "values": false
         },
         "showUnfilled": true,
-        "text": {}
+        "sizing": "auto",
+        "text": {},
+        "valueMode": "color"
       },
-      "pluginVersion": "8.1.7",
+      "pluginVersion": "10.4.4",
       "targets": [
         {
-          "expr": "sum by (client) (count_over_time({job=\"nginx_error\"} |= \"$service\" |= \"ModSecurity\" |= \"coreruleset\" | pattern \"<date> <time> [<level>] <_> <_> ModSecurity: <modsec_action> [file \\\"/usr/local/etc/modsecurity/coreruleset/rules/<rule_set>.conf<_> [id \\\"<rule_id>\\\"<_>[ver \\\"<owasp_version>\\\"]<_>, client: <client>, server: <server>, request: \\\"<request_method> <ressource> <http_version>\\\", <_>\" |  __error__=\"\" [$__interval]))\n",
-          "legendFormat": "{{client}}",
+          "datasource": {
+            "type": "loki",
+            "uid": "${datasource}"
+          },
+          "expr": "{job=\"nginx_error\", __name__=\"sum \"}",
+          "queryType": "range",
           "refId": "A"
         }
       ],
       "title": "Top Attackers",
-      "transformations": [],
       "type": "bargauge"
     },
     {
-      "datasource": null,
+      "datasource": {
+        "type": "loki",
+        "uid": "${datasource}"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -148,6 +135,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "smooth",
             "lineStyle": {
               "fill": "solid"
@@ -191,28 +179,36 @@
         "y": 0
       },
       "id": 7,
-      "maxDataPoints": null,
       "options": {
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "bottom"
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
-          "mode": "single"
+          "mode": "single",
+          "sort": "none"
         }
       },
       "pluginVersion": "8.1.7",
       "targets": [
         {
-          "expr": "sum by (level) (count_over_time({job=\"nginx_error\"}|= \"$service\" |= \"ModSecurity\" |= \"coreruleset\" | pattern \"<date> <time> [<level>] <_> ModSecurity: <modsec_action> [file \\\"/usr/local/etc/modsecurity/coreruleset/rules/<rule_set>.conf<_> [id \\\"<rule_id>\\\"<_> [msg \\\"<msg>\\\"] <_>[ver \\\"<owasp_version>\\\"]<_>] [tag <tags>] [host<_>, client: <client>, server: <server>, request: \\\"<request_method> <ressource> <http_version>\\\", <_>\" | __error__=\"\" [$__interval]))",
-          "hide": false,
-          "legendFormat": "Level {{level}}",
+          "datasource": {
+            "type": "loki",
+            "uid": "${datasource}"
+          },
+          "expr": "{job=\"nginx_error\", __name__=\"sum \"}",
+          "queryType": "range",
           "refId": "A"
         },
         {
-          "expr": "sum by (level) ({job=\"nginx_error\"}|= \"$service\" |= \"ModSecurity\"|= \"error\" |= \"coreruleset\" | pattern \"<date> <time> [<level>] <_> ModSecurity: <modsec_action> [file \\\"/usr/local/etc/modsecurity/coreruleset/rules/<rule_set>.conf<_> [id \\\"<rule_id>\\\"<_> [msg \\\"<msg>\\\"] <_>[ver \\\"<owasp_version>\\\"]<_>] [tag <tags>] [host<_>, client: <client>, server: <server>, request: \\\"<request_method> <ressource> <http_version>\\\", <_>\")",
-          "hide": true,
+          "datasource": {
+            "type": "loki",
+            "uid": "${datasource}"
+          },
+          "expr": "{job=\"nginx_error\", __name__=\"sum \"}",
+          "queryType": "range",
           "refId": "B"
         }
       ],
@@ -221,7 +217,10 @@
       "type": "timeseries"
     },
     {
-      "datasource": null,
+      "datasource": {
+        "type": "loki",
+        "uid": "${datasource}"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -251,7 +250,6 @@
         "y": 0
       },
       "id": 5,
-      "interval": null,
       "maxDataPoints": 10,
       "options": {
         "colorMode": "background",
@@ -265,25 +263,33 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {
           "titleSize": 14
         },
-        "textMode": "value_and_name"
+        "textMode": "value_and_name",
+        "wideLayout": true
       },
-      "pluginVersion": "8.1.7",
+      "pluginVersion": "10.4.4",
       "targets": [
         {
-          "expr": "sum by (server,msg, rule_id) (count_over_time({job=\"nginx_error\"} |= \"$service\" |= \"ModSecurity\" |= \"coreruleset\" | pattern \"<date> <time> [<level>] <_> ModSecurity: <modsec_action> [file \\\"/usr/local/etc/modsecurity/coreruleset/rules/<rule_set>.conf<_> [id \\\"<rule_id>\\\"<_> [msg \\\"<msg>\\\"] <_>[ver \\\"<owasp_version>\\\"]<_>] [tag <tags>] [host<_>, client: <client>, server: <server>, request: \\\"<request_method> <ressource> <http_version>\\\", <_>\" |  __error__=\"\" [$__interval]))\n",
-          "legendFormat": "{{rule_id}} {{server}} {{msg}}",
+          "datasource": {
+            "type": "loki",
+            "uid": "${datasource}"
+          },
+          "expr": "{job=\"nginx_error\", __name__=\"sum \"}",
+          "queryType": "range",
           "refId": "A"
         }
       ],
       "title": "RuleId's at Vhost",
-      "transformations": [],
       "type": "stat"
     },
     {
-      "datasource": null,
+      "datasource": {
+        "type": "loki",
+        "uid": "${datasource}"
+      },
       "gridPos": {
         "h": 13,
         "w": 15,
@@ -303,7 +309,12 @@
       },
       "targets": [
         {
+          "datasource": {
+            "type": "loki",
+            "uid": "${datasource}"
+          },
           "expr": "{job=\"nginx_error\"}|= \"$service\" |= \"ModSecurity\" |= \"coreruleset\" | pattern \"<date> <time> [<level>] <_> ModSecurity: <modsec_action> [file \\\"/usr/local/etc/modsecurity/coreruleset/rules/<rule_set>.conf<_> [id \\\"<rule_id>\\\"<_> [msg \\\"<msg>\\\"] <_>[ver \\\"<owasp_version>\\\"]<_>] [tag <tags>] [host<_>, client: <client>, server: <server>, request: \\\"<request_method> <ressource> <http_version>\\\", <_>\"\n\n| line_format \"?️ {{.date}} {{.time}} ? {{.server}} {{.request_method}} {{.ressource}} ❗️☠️ {{.client}} ☠️️❗️ \\n➡️ RuleSet: {{.rule_set}} RuleId: {{.rule_id}} {{.msg}}\\n?️ [tag {{.tags}}]\"",
+          "queryType": "range",
           "refId": "A"
         }
       ],
@@ -311,8 +322,11 @@
       "type": "logs"
     },
     {
-      "collapsed": true,
-      "datasource": null,
+      "collapsed": false,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -320,115 +334,137 @@
         "y": 22
       },
       "id": 12,
-      "panels": [
+      "panels": [],
+      "targets": [
         {
-          "datasource": null,
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "continuous-BlPu"
-              },
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": null
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
-                  }
-                ]
-              }
-            },
-            "overrides": []
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
           },
-          "gridPos": {
-            "h": 14,
-            "w": 24,
-            "x": 0,
-            "y": 24
-          },
-          "id": 10,
-          "options": {
-            "colorMode": "background",
-            "graphMode": "none",
-            "justifyMode": "auto",
-            "orientation": "horizontal",
-            "reduceOptions": {
-              "calcs": [
-                "sum"
-              ],
-              "fields": "",
-              "values": false
-            },
-            "text": {
-              "titleSize": 12,
-              "valueSize": 12
-            },
-            "textMode": "auto"
-          },
-          "pluginVersion": "8.1.7",
-          "targets": [
-            {
-              "expr": "topk (2, sum by (server, ressource, rule_id, tags) (count_over_time({job=\"nginx_error\"}|= \"$service\" |= \"ModSecurity\" |= \"coreruleset\" | pattern \"<date> <time> [<level>] <_> ModSecurity: <modsec_action> [file \\\"/usr/local/etc/modsecurity/coreruleset/rules/<rule_set>.conf<_> [id \\\"<rule_id>\\\"<_> [msg \\\"<msg>\\\"] <_>[ver \\\"<owasp_version>\\\"]<_>] [tag <tags>] [host<_>, client: <client>, server: <server>, request: \\\"<request_method> <ressource> <http_version>\\\", <_>\"[$__interval])))\n",
-              "legendFormat": "{{rule_id}} {{server}}{{ressource}}  ➡️  Tags: [{{tags}}]",
-              "refId": "A"
-            }
-          ],
-          "title": "Exact Rule Infos",
-          "type": "stat"
-        },
-        {
-          "datasource": null,
-          "gridPos": {
-            "h": 12,
-            "w": 24,
-            "x": 0,
-            "y": 38
-          },
-          "id": 6,
-          "options": {
-            "dedupStrategy": "none",
-            "enableLogDetails": true,
-            "prettifyLogMessage": true,
-            "showCommonLabels": true,
-            "showLabels": false,
-            "showTime": false,
-            "sortOrder": "Descending",
-            "wrapLogMessage": false
-          },
-          "targets": [
-            {
-              "expr": "{job=\"nginx_error\"}",
-              "refId": "A"
-            }
-          ],
-          "title": "Error Logs all",
-          "type": "logs"
+          "refId": "A"
         }
       ],
       "title": "Details",
       "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "${datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-BlPu"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 14,
+        "w": 24,
+        "x": 0,
+        "y": 23
+      },
+      "id": 10,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "text": {
+          "titleSize": 12,
+          "valueSize": 12
+        },
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.4.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "${datasource}"
+          },
+          "expr": "{job=\"nginx_error\", __name__=\" \"}",
+          "queryType": "range",
+          "refId": "A"
+        }
+      ],
+      "title": "Exact Rule Infos",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "${datasource}"
+      },
+      "gridPos": {
+        "h": 12,
+        "w": 24,
+        "x": 0,
+        "y": 37
+      },
+      "id": 6,
+      "options": {
+        "dedupStrategy": "none",
+        "enableLogDetails": true,
+        "prettifyLogMessage": true,
+        "showCommonLabels": true,
+        "showLabels": false,
+        "showTime": false,
+        "sortOrder": "Descending",
+        "wrapLogMessage": false
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "${datasource}"
+          },
+          "expr": "{job=\"nginx_error\"}",
+          "queryType": "range",
+          "refId": "A"
+        }
+      ],
+      "title": "Error Logs all",
+      "type": "logs"
     }
   ],
   "refresh": "5s",
-  "schemaVersion": 30,
-  "style": "dark",
+  "schemaVersion": 39,
   "tags": [],
   "templating": {
     "list": [
       {
         "allValue": " ",
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "All",
           "value": "$__all"
         },
-        "description": null,
-        "error": null,
         "hide": 0,
         "includeAll": true,
         "label": "Service",
@@ -500,6 +536,23 @@
         "queryValue": "",
         "skipUrlSync": false,
         "type": "custom"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "Loki",
+          "value": "P8E80F9AEF21F6940"
+        },
+        "hide": 0,
+        "includeAll": false,
+        "multi": false,
+        "name": "datasource",
+        "options": [],
+        "query": "loki",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "type": "datasource"
       }
     ]
   },
@@ -511,6 +564,6 @@
   "timezone": "",
   "title": "NGINX ModSecurity OWASP CRS V0.0",
   "uid": "Ur3f16c7z",
-  "version": 90,
-  "description": "Dashboard to work with ModSecurity and the OWASP Coreruleset."
+  "version": 1,
+  "weekStart": ""
 }
