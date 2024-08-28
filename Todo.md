@@ -1,17 +1,31 @@
-    LOGIN
+ensure all services have a health check
+check again for ssl/tls : when/where needed
+try to see if a filezilla container would work with the infinity site ?
 
-- [ ] Create a template for "forgot password" (mail input)
-- [ ] Make the "show password" work
+cybersec
+    nginx
+        add "modsecurity on" to all config files
+        change the "return 301" into "rewrite" ?
+    
+    RGPD
+        PIA
+        privacy notice
+        "feuille de route" on adding security features -> including db backup, all SOPs in case of breach etc
+        ensure data is handled in an "anonymized" way
+        how to contact team? how to request deletion of account ?
+    
+    vault
+        how to handle API keys for grafana ?
+            -> try to have as many of the .env vars handled by vault
 
-- [ ] Create a template for "confirm password" (password input) -> create a show password button
+devops
+    grafana
+        finalize dashboards for django
+        add a 403-error alert (django ? modsec ?)
+            -> check how to simulate sql injection, so as to show it's handled AND how alerting works
 
+    postgres
+        look into the "sslmode=disable" and how to remove it
 
-    HOME
-- [ ] Create a modal for "Create GameRoom"
-- [ ] Add dropdown for languages (FR, EN, JP)
-- [ ] Move Player search to the right side
-- [ ] Add a background for "Search Game"
-- [ ] Remove the "Stats Indicator" , Create a Rank indicator
-
-    TEMPLATES
-- [ ] Add {% static '' %} to all templates with {% load static %}
+    elk
+        ? do sth ?
