@@ -1,6 +1,8 @@
 mise en place politique d'archivage (via django ?)
 	quand suppression de compte, check s'il y a eu une sauvegarde depuis la creation
 		si oui : conserver le django ID pouvoir supprimer si la sauvegarde doit etre utilisee
+	conservation des conversations ?
+
 
 limiter acces database et encore plus acces aux backups
 	-> qui peut acceder aux backups et les traiter

@@ -20,7 +20,7 @@ cybersec
 
 devops
     grafana
-        finalize dashboards for django
+        finalize dashboards for django              ==> done
         add a 403-error alert (django ? modsec ?)
             -> check how to simulate sql injection, so as to show it's handled AND how alerting works
 
@@ -29,3 +29,15 @@ devops
 
     elk
         ? do sth ?
+
+
+
+
+
+questions pour la team
+
+    apres retrait des "printf debug", et sans modif du code : peut-on visualiser les donnes perso d'un compte ? (email, coa, 42id, photo profil)
+    pour chaque element de 42 : visibles uniquement par utilisateur? visibles aussi par les amis ? par tous les autres?
+
+
+

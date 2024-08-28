@@ -55,3 +55,80 @@ determiner:
 
 mesures existantes/prevues de mitigation des risques
 
+
+
+
+
+
+Step 4: How do we assess necessity and proportionality?                                     
+
+You should consider:
+
+    Do your plans help to achieve your purpose?
+    Is there any other reasonable way to achieve the same result?
+
+The Article 29 guidelines also say you should include how you  ensure data protection compliance, which are a good measure of necessity and proportionality. In particular, you should include relevant details of:
+
+    your lawful basis for the processing;
+    how you will prevent function creep;
+    how you intend to ensure data quality;
+    how you intend to ensure data minimisation;
+    how you intend to provide privacy information to individuals;
+    how you implement and support individuals' rights;
+    measures to ensure your processors comply; and
+    safeguards for international transfers.
+
+Further reading
+
+See annex 2 of WP29 Guidelines on Data Protection Impact Assessment (DPIA) and determining whether processing is “likely to result in a high risk” for the purposes of Regulation 2016/679 (WP248)
+Step 5: How do we identify and assess risks?   
+
+Consider the potential impact on individuals and any harm or damage your processing may cause – whether physical, emotional or material. In particular, look at whether the processing could contribute to:
+
+    inability to exercise rights (including but not limited to privacy rights);
+    inability to access services or opportunities;
+    loss of control over the use of personal data;
+    discrimination;
+    identity theft or fraud;
+    financial loss;
+    reputational damage;
+    physical harm;
+    loss of confidentiality;
+    re-identification of pseudonymised data; or
+    any other significant economic or social disadvantage
+
+You should include an assessment of the security risks, including sources of risk and the potential impact of each type of breach (including illegitimate access to, modification of or loss of personal data).
+
+To assess whether the risk is a high risk, you need to consider both the likelihood and severity of the possible harm. Harm does not have to be inevitable to qualify as a risk or a high risk. It must be more than remote, but any significant possibility of very serious harm may still be enough to qualify as a high risk. Equally, a high probability of widespread but more minor harm may still count as high risk.
+
+You must make an objective assessment of the risks. It is helpful to use a structured matrix to think about likelihood and severity of risks:
+
+The above matrix shows a structured way to assess risk. Your organisation may use a different method you can adapt for the same purpose.
+
+You may also want to consider your own corporate risks, such as the impact of regulatory action, reputational damage or loss of public trust.
+Further Reading
+
+    Relevant provisions in the UK GDPR - See Articles 35(7)(c) and Recitals 76 and 90
+
+    External link
+
+Step 6: How do we identify mitigating measures?               
+
+Against each risk identified, record its source. You should then consider options for reducing that risk. For example:
+
+    deciding not to collect certain types of data;
+    reducing the scope of the processing;
+    reducing retention periods;
+    taking additional technological security measures;
+    training staff to ensure risks are anticipated and managed;
+    anonymising or pseudonymising data where possible;
+    writing internal guidance or processes to avoid risks;
+    using a different technology;
+    putting clear data-sharing agreements into place;
+    making changes to privacy notices;
+    offering individuals the chance to opt out where appropriate; or
+    implementing new systems to help individuals to exercise their rights.
+
+This is not an exhaustive list, and you may be able to devise other ways to help reduce or avoid the risks. You should ask your DPO for advice.
+
+Record whether the measure would reduce or eliminate the risk. You can take into account the costs and benefits of each measure when deciding whether or not they are appropriate. 
