@@ -155,7 +155,7 @@ class GameInviteManager(models.Manager):
         player.join_game(game)
         consumer = NotifConsumer()
         async_to_sync(consumer.remove_notification)(
-            category='Game Invite',
+            category='Game Invitation',
             object_id=game_invite.id,
         )
         game_invite.delete()
@@ -163,7 +163,7 @@ class GameInviteManager(models.Manager):
     def decline_invite(self, game_invite):
         consumer = NotifConsumer()
         async_to_sync(consumer.remove_notification)(
-            category='Game Invite',
+            category='Game Invitation',
             object_id=game_invite.id,
         )
         game_invite.delete()
