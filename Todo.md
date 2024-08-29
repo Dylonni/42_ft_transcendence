@@ -13,6 +13,7 @@ cybersec
             look into terms of use
             can users report someone?
             for all published docs and policies : define contact email(s)
+        terms of use
         PIA
         privacy policy
             !! our privacy policy does include a Cookie Policy
