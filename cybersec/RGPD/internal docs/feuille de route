@@ -1,27 +1,39 @@
-mise en place politique d'archivage (via django ?)
+1 / mise en place politique d'archivage (via django ?)
+
 	quand suppression de compte, check s'il y a eu une sauvegarde depuis la creation
 		si oui : conserver le django ID pouvoir supprimer si la sauvegarde doit etre utilisee
 	conservation des conversations ?
 
 
-limiter acces database et encore plus acces aux backups
-	-> qui peut acceder aux backups et les traiter
+
+2 / Mesures de sécurité techniques :
+
+Mesures de traçabilité => qui accede a quoi et quand ? => log admin access for vault, website, postgres
+
+Mesures de protection des logiciels =>
+	=> phishing? on gere pas (on demande pas de donnees sensibles)
+	=> DDoS? euh a voir
+		==> comment on gere?
+			==> the WAF should be configured to limit the rate of requests and block malicious traffic
+				-> need to update the Access Control List
+			==> limit the number of service requests received by the network
+	=> attaque de services clouds? y'a pas de teletravail a gerer, pas d'echange d'infos, etc ===> on gere pas
+	=> supply chain logicielle? on fait pas de cybercommerce, donc on gere pas
+
+Sauvegarde des données => une fois par semaine en aggregat de donnees ? et une fois tous les 6 mois pour une sauvegarde complete?
+
+Chiffrement des données => a voir avec Pascal
+
+Contrôle d'accès des utilisateurs => tout a un acces par personal creds, y compris acces aux backups
+
+Contrôle des sous-traitants => on n'a pas de sous-traitants
 
 
-	=> Mesures de sécurité techniques :
-Mesures de traçabilité
-Mesures de protection des logiciels
-Sauvegarde des données
-Chiffrement des données
-Contrôle d'accès des utilisateurs
-Contrôle des sous-traitants
-Autres mesures (à préciser)
 
-
-
+3 / else
 
 for project
 	users can view/edit/delete personal info
-		=> email address can be viewed/updated from profile/settings . is deleted with accouunt suppression
+		=> email address can be viewed/updated from profile/settings . is deleted with account suppression
 		=> 42-intranet data can be unlinked from profile/settings, then data is no longer accessed
 		=> easy to find "delete my account", "contact team", "privacy policy"

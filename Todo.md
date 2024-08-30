@@ -48,6 +48,8 @@ questions pour la team
 
     apres retrait des "printf debug", et sans modif du code : peut-on visualiser les donnes perso d'un compte ? (email, coa, 42id, photo profil)
 
+    adresse courriel de contact?
+
 reponses de la team
     pour chaque element de 42 : 
         42 id: visible par personne, suppression des que authentification ok

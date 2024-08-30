@@ -35,6 +35,8 @@ personal data processed:
 All:
 email address
 COOKIES !! what do we collect through cookies?
+    JWT tokens (access, refresh)
+    language preference
 
 42 studs:
 UID
