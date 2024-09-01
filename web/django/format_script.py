@@ -26,7 +26,7 @@ def reformat_html_in_directory(directory_path):
 
 
 # Reformatte le fichier spécifié
-file_path = 'templates/gameroom2.html'
+file_path = 'templates/games/game_chat.html'
 reformat_html_file(file_path)
 
 

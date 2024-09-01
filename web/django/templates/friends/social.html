@@ -133,6 +133,7 @@
 					{% endif %}
 				</section>
 			</div>
+			{% if frienship %}
 			<form data-friendship-id="{{ friendship.id }}" id="chatForm" class="d-flex flex-row align-items-center justify-content-xxl-start" style="border-radius: 19px;background: #111314;border-top-left-radius: 0px;border-top-right-radius: 0px;height: 70px;border-width: 0px;border-color: var(--bs-body-bg);width: 100%;box-shadow: 0px 0px 6px 2px #2b7050;">
 				<div class="d-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="width: 100%;height: 100%;">
 					<button class="btn btn-primary d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center emojiPick" id="emojiPick" style="background: rgba(13,110,253,0);border-style: none;" type="button">
@@ -156,6 +157,7 @@
 					</button>
 				</div>
 			</form>
+			{% endif %}
 		</div>
 		<div class="col-12 col-sm-12 col-md-12 col-lg-2 col-xl-2 col-xxl-2 d-sm-flex flex-column" style="height: 100%;padding-left: 12px;margin-bottom: 10px;">
 			{% if current_friend %}

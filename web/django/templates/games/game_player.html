@@ -2,7 +2,7 @@
 {% load i18n %}
 {% for player in game.players.all %}
 {% if game.host == player %}
-<div data-bs-container="div" class="d-flex d-xxl-flex flex-column justify-content-end justify-content-lg-center align-items-lg-center justify-content-xxl-end align-items-xxl-center" data-bs-placement="bottom" data-bs-toggle="tooltip" data-bss-tooltip="" id="roomOwner-1" style="width: 9%;height: 130px;backdrop-filter: opacity(1);-webkit-backdrop-filter: opacity(1);opacity: 1;margin-left: 15px;margin-right: 15px;" title="{{ game.host }}">
+<div data-bs-container="div" class="d-flex d-xxl-flex flex-column justify-content-end justify-content-lg-center align-items-lg-center justify-content-xxl-end align-items-xxl-center" data-bs-placement="bottom" data-bs-toggle="tooltip" data-bss-tooltip="" style="width: 9%;height: 130px;backdrop-filter: opacity(1);-webkit-backdrop-filter: opacity(1);opacity: 1;margin-left: 15px;margin-right: 15px;" title="{{ game.host }}">
 	<div class="d-flex justify-content-center align-items-center" style="width: 100%;">
 		<svg class="icon icon-tabler icon-tabler-crown" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 30px;color: var(--bs-primary-border-subtle);" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
 			<path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
@@ -39,25 +39,7 @@
 	<div class="d-flex d-lg-flex d-xxl-flex justify-content-center align-items-center align-items-sm-center align-items-md-center justify-content-lg-center align-items-lg-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="width: 100%;height: 70px;">
 		<img src="{{ player.get_avatar_url }}" style="border-radius: 50%;width: 60px;height: 60px;border-style: solid;border-color: var(--bs-gray-700);"/>
 	</div>
-	<div class="d-flex justify-content-center align-items-center" style="width: 100%; height: auto;min-height: 30px;">
-		{% if player in game.get_currently_playing %}
-		<svg class="icon icon-tabler icon-tabler-swords rubberBand animated infinite" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 30px;color: rgb(188,13,13);" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
-			<path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
-			<path d="M21 3v5l-11 9l-4 4l-3 -3l4 -4l9 -11z"></path>
-			<path d="M5 13l6 6"></path>
-			<path d="M14.32 17.32l3.68 3.68l3 -3l-3.365 -3.365"></path>
-			<path d="M10 5.5l-2 -2.5h-5v5l3 2.5"></path>
-		</svg>
-		{% else %}
-		<svg class="icon icon-tabler icon-tabler-swords rubberBand animated infinite d-none" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 30px;color: rgb(188,13,13);" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
-			<path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
-			<path d="M21 3v5l-11 9l-4 4l-3 -3l4 -4l9 -11z"></path>
-			<path d="M5 13l6 6"></path>
-			<path d="M14.32 17.32l3.68 3.68l3 -3l-3.365 -3.365"></path>
-			<path d="M10 5.5l-2 -2.5h-5v5l3 2.5"></path>
-		</svg>
-		{% endif %}
-	</div>
+	<div class="d-flex justify-content-center align-items-center" style="width: 100%; height: auto;min-height: 30px;"></div>
 </div>
 {% endif %}
 {% endfor %}

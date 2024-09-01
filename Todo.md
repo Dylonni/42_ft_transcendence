@@ -23,6 +23,7 @@
 - [X] Show a timer to indicate when the next match will be and the VS Panel
 - [ ] Integrate chat
 - [X] Possibility to invite a random player
+- [ ] Create a div to show current battling players (left and right)
 
     CUSTOMIZE GAME
 - [ ] Replace radio input for powerups and events by checkboxes
