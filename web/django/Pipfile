@@ -12,6 +12,9 @@ django-prometheus = "*"
 logstash-formatter = "*"
 hvac = "*"
 requests = "*"
+pillow = "*"
+channels = {extras = ["daphne"], version = "*"}
+channels-redis = "*"
 
 [dev-packages]
 

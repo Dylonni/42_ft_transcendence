@@ -1,0 +1,431 @@
+{% extends "index.html" %}
+{% load static %}
+{% load i18n %}
+{% block title %}{% translate "Customize your game" %}{% endblock %}
+{% block content %}
+{% include "sidebar.html" %}
+{% include "notifs/notifications.html" %}
+<div class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="margin-bottom: 20px;">
+    <header class="d-flex d-xl-flex justify-content-center align-items-center justify-content-xl-center align-items-xl-center" style="width: 40%;">
+        <h1 class="d-xl-flex justify-content-xl-center align-items-xl-center" style="color: var(--bs-body-bg);margin-left: 25px;margin-right: 25px;margin-bottom: 0px;">
+            {% translate 'Customize your game' %}
+        </h1>
+    </header>
+</div>
+{% if local %}
+<form id="createGameForm" data-game-type="local">
+{% else %}
+<form action="/api/games/" id="createGameForm" method="post">
+{% endif %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-lg-6 col-xl-6 col-xxl-6" style="padding-left: 40px;padding-right: 40px;">
+                <div class="card" style="background: var(--bs-emphasis-color);border-bottom-right-radius: 22px;border-bottom-left-radius: 22px;border-top-left-radius: 22px;border-top-right-radius: 22px;margin-top: 0px;margin-bottom: 0px;padding-top: 0px;padding-bottom: 0px;">
+                    <h4 class="fs-3 d-flex d-xl-flex justify-content-center justify-content-xl-center align-items-xl-center" style="color: var(--bs-body-bg);margin-bottom: 0px;">
+                        {% translate 'Game Options' %}
+                        <svg class="icon icon-tabler icon-tabler-adjustments" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 35px;margin-left: 10px;margin-right: 10px;margin-top: 5px;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
+                            <path d="M4 10a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path>
+                            <path d="M6 4v4"></path>
+                            <path d="M6 12v8"></path>
+                            <path d="M10 16a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path>
+                            <path d="M12 4v10"></path>
+                            <path d="M12 18v2"></path>
+                            <path d="M16 7a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path>
+                            <path d="M18 4v1"></path>
+                            <path d="M18 9v11"></path>
+                        </svg>
+                    </h4>
+                    <div class="card-body d-flex d-lg-flex d-xxl-flex flex-column justify-content-center align-items-center justify-content-lg-center align-items-lg-center justify-content-xxl-center align-items-xxl-center" style="background: #31373d;border-bottom-left-radius: 19px;border-bottom-right-radius: 19px;padding-top: 0px;padding-bottom: 0px;">
+                        <div class="d-flex d-lg-flex d-xl-flex d-xxl-flex flex-column justify-content-center align-items-center flex-sm-row flex-md-row flex-lg-row justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="width: 100%;">
+                            {% if not local %}
+                            <div class="d-flex d-xxl-flex flex-column justify-content-center align-items-center align-items-xxl-center" style="background: var(--bs-body-color);border-top-left-radius: 19px;border-top-right-radius: 19px;border-bottom-right-radius: 19px;border-bottom-left-radius: 19px;width: 50%;margin-top: 20px;margin-bottom: 20px;margin-left: 10px;margin-right: 10px;">
+                                <h1 class="fs-5 d-xxl-flex justify-content-xxl-center align-items-xxl-center" style="color: var(--bs-body-bg);margin-top: 10px;margin-bottom: 0px;">
+                                    {% translate 'Players' %}
+                                    <svg class="icon icon-tabler icon-tabler-users-group" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 25px;margin-left: 10px;margin-right: 10px;color: #75aadb;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
+                                        <path d="M10 13a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path>
+                                        <path d="M8 21v-1a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2v1"></path>
+                                        <path d="M15 5a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path>
+                                        <path d="M17 10h2a2 2 0 0 1 2 2v1"></path>
+                                        <path d="M5 5a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path>
+                                        <path d="M3 13v-1a2 2 0 0 1 2 -2h2"></path>
+                                    </svg>
+                                </h1>
+                                <div class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center">
+                                    <span id="playerLimitSpan" class="d-flex d-xxl-flex align-items-center justify-content-xxl-center align-items-xxl-center" style="color: #75aadb;font-size: 17px;font-weight: bold;height: 40px;">
+                                        2
+                                    </span>
+                                </div>
+                                <div class="d-flex d-xxl-flex flex-column justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="width: 80%;">
+                                    <div style="width: 100%;margin-bottom: 10px;">
+                                        <input id="playerLimitInput" class="form-range" max="8" min="2" name="player_limit" step="1" type="range" value="2"/>
+                                        <div class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="width: 100%;">
+                                            <span class="d-flex d-xxl-flex justify-content-start align-items-center justify-content-xxl-start align-items-xxl-center" style="color: var(--bs-body-bg);width: 50%;">
+                                                2
+                                            </span>
+                                            <span class="d-flex d-xxl-flex justify-content-end align-items-center justify-content-lg-end justify-content-xxl-end align-items-xxl-center" style="color: var(--bs-body-bg);width: 50%;">
+                                                8
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                            <div class="d-flex d-xxl-flex flex-column justify-content-center align-items-center align-items-xxl-center" style="background: var(--bs-body-color);border-top-left-radius: 19px;border-top-right-radius: 19px;border-bottom-right-radius: 19px;border-bottom-left-radius: 19px;width: 50%;margin-top: 20px;margin-bottom: 20px;margin-left: 10px;margin-right: 10px;">
+                                <h1 class="fs-5 d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="color: var(--bs-body-bg);margin-top: 10px;margin-bottom: 0px;">
+                                    {% translate 'Score to win' %}
+                                    <svg class="icon icon-tabler icon-tabler-target-arrow" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" style="font-size: 25px;margin-left: 10px;margin-right: 10px;color: #ffc61e;">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                        <path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"></path>
+                                        <path d="M12 7a5 5 0 1 0 5 5"></path>
+                                        <path d="M13 3.055a9 9 0 1 0 7.941 7.945"></path>
+                                        <path d="M15 6v3h3l3 -3h-3v-3z"></path>
+                                        <path d="M15 9l-3 3"></path>
+                                    </svg>
+                                </h1>
+                                <div class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center">
+                                    <span id="winScoreSpan" class="d-flex d-xxl-flex align-items-center justify-content-xxl-center align-items-xxl-center" style="color: #ffc61e;font-size: 17px;font-weight: bold;height: 40px;margin-right: 3px;">
+                                        5
+                                    </span>
+                                    <span class="d-flex d-xxl-flex align-items-center justify-content-xxl-center align-items-xxl-center" style="color: #ffc61e;font-size: 17px;font-weight: bold;height: 40px;">
+                                        points
+                                    </span>
+                                </div>
+                                <div class="d-flex d-xxl-flex flex-column justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="width: 80%;">
+                                    <div style="width: 100%;margin-bottom: 10px;">
+                                        <input id="winScoreInput" class="form-range" max="30" min="1" name="win_score" step="1" type="range" value="5"/>
+                                        <div class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="width: 100%;">
+                                            <span class="d-flex d-xxl-flex justify-content-start align-items-center justify-content-xxl-start align-items-xxl-center" style="color: var(--bs-body-bg);width: 33%;">
+                                                1
+                                            </span>
+                                            <span class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="color: var(--bs-body-bg);width: 33%;">
+                                                15
+                                            </span>
+                                            <span class="d-flex justify-content-end align-items-center" style="color: var(--bs-body-bg);width: 33%;">
+                                                30
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex d-xxl-flex flex-column justify-content-center align-items-center align-items-xxl-center" style="background: var(--bs-body-color);border-top-left-radius: 19px;border-top-right-radius: 19px;border-bottom-right-radius: 19px;border-bottom-left-radius: 19px;width: 100%;margin-top: 0px;margin-bottom: 10px;">
+                            <h1 class="fs-5 d-xxl-flex justify-content-xxl-center align-items-xxl-center" style="color: var(--bs-body-bg);margin-top: 10px;margin-bottom: 10px;">
+                                {% translate 'Ball size' %}
+                            </h1>
+                            <div class="d-flex d-xxl-flex flex-row justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center radiogroup" style="width: 60%">
+                                <div class="form-check d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="padding-left: 0px;margin-bottom: 0px;margin-left: 0px;margin-right: 0px;width: 33%;">
+                                    <input class="form-check-input ballsize" id="formCheckBsizeSmall" name="ball_size" type="radio" value="Small"/>
+                                    <label class="form-check-label" for="formCheckBsizeSmall">
+                                        <img class="ballImg" height="17" src="{% static '/img/ball.webp' %}" style="width: 18px;height: 18px;" width="17"/>
+                                    </label>
+                                </div>
+                                <div class="form-check d-flex justify-content-center align-items-center" style="padding-left: 0px;padding-bottom: 0px;margin-bottom: 0px;width: 33%;margin-left: 15px;margin-right: 15px;">
+                                    <input checked="" class="form-check-input ballsize" id="formCheckBsizeMedium" name="ball_size" type="radio" value="Medium"/>
+                                    <label class="form-check-label" for="formCheckBsizeMedium">
+                                        <img class="ballImg" height="27" src="{% static '/img/ball.webp' %}" style="width: 28px;height: 28px;" width="27"/>
+                                    </label>
+                                </div>
+                                <div class="form-check d-flex justify-content-center align-items-center" style="margin-bottom: 0px;padding-left: 0px;width: 33%;">
+                                    <input class="form-check-input ballsize" id="formCheckBsizeLarge" name="ball_size" type="radio" value="Large"/>
+                                    <label class="form-check-label" for="formCheckBsizeLarge">
+                                        <img class="ballImg" height="46" src="{% static '/img/ball.webp' %}" style="margin-left: 0px;margin-right: 0px;width: 38px;height: 38px;" width="46"/>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-center align-items-center" style="width: 60%;margin-bottom: 20px;">
+                                <span class="d-flex justify-content-center align-items-center" style="color: var(--bs-body-bg);width: 33%;font-weight: bold;">
+                                    {% translate 'Small' %}
+                                </span>
+                                <span class="d-flex justify-content-center align-items-center" style="color: var(--bs-body-bg);width: 33%;font-weight: bold;margin-left: 15px;margin-right: 15px;">
+                                    {% translate 'Medium' %}
+                                </span>
+                                <span class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="color: var(--bs-body-bg);width: 33%;font-weight: bold;">
+                                    {% translate 'Large' %}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="d-flex d-xxl-flex flex-column justify-content-center align-items-center align-items-xxl-center" style="background: var(--bs-body-color);border-top-left-radius: 19px;border-top-right-radius: 19px;border-bottom-right-radius: 19px;border-bottom-left-radius: 19px;height: 100px;width: 100%;margin-bottom: 10px;">
+                            <h1 class="fs-5 d-xxl-flex justify-content-xxl-center align-items-xxl-center" data-bs-toggle="tooltip" data-bss-tooltip="" style="color: var(--bs-body-bg);margin-top: 10px;margin-bottom: 10px;" title="This will define the ball launch speed for each round">
+                                {% translate 'Initial ball speed' %}
+                            </h1>
+                            <div class="d-flex d-xxl-flex flex-row justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center radiogroup" style="width: 60%">
+                                <div class="form-check d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="padding-left: 0px;margin-bottom: 0px;margin-left: 0px;margin-right: 0px;width: 33%;">
+                                    <input class="form-check-input" id="formCheckBsSlow" name="ball_speed" style="margin-left: 0px;margin-top: 0px;" type="radio" value="Slow"/>
+                                    <label class="form-check-label" for="formCheckBsSlow">
+                                    </label>
+                                </div>
+                                <div class="form-check d-flex justify-content-center align-items-center" style="padding-left: 0px;padding-bottom: 0px;margin-bottom: 0px;width: 33%;margin-left: 0px;margin-right: 0px;">
+                                    <input checked="" class="form-check-input" id="formCheckBsNormal" name="ball_speed" style="margin-left: 0px;margin-top: 0px;" type="radio" value="Normal"/>
+                                    <label class="form-check-label" for="formCheckBsNormal">
+                                    </label>
+                                </div>
+                                <div class="form-check d-flex justify-content-center align-items-center" style="margin-bottom: 0px;padding-left: 0px;width: 33%;">
+                                    <input class="form-check-input" id="formCheckBsFast" name="ball_speed" style="margin-left: 0px;margin-top: 0px;" type="radio" value="Fast"/>
+                                    <label class="form-check-label" for="formCheckBsFast">
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-center align-items-center" style="width: 60%;margin-bottom: 20px;">
+                                <span class="d-flex justify-content-center align-items-center" style="color: var(--bs-body-bg);width: 33%;font-weight: bold;">
+                                    {% translate 'Slow' %}
+                                </span>
+                                <span class="d-flex justify-content-center align-items-center" style="color: var(--bs-body-bg);width: 33%;font-weight: bold;margin-right: 0px;margin-left: 0px;">
+                                    {% translate 'Normal' %}
+                                </span>
+                                <span class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="color: var(--bs-body-bg);width: 33%;font-weight: bold;">
+                                    {% translate 'Fast' %}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="d-flex d-xxl-flex flex-column justify-content-center align-items-center align-items-xxl-center" style="background: var(--bs-body-color);border-top-left-radius: 19px;border-top-right-radius: 19px;border-bottom-right-radius: 19px;border-bottom-left-radius: 19px;width: 100%;margin-top: 0px;margin-bottom: 10px;padding-top: 0px;padding-bottom: 0px;">
+                            <h1 class="fs-5 d-xxl-flex justify-content-xxl-center align-items-xxl-center" style="color: var(--bs-body-bg);margin-bottom: 10px;margin-top: 10px;padding-top: 0px;">
+                                {% translate 'Paddle Size' %}
+                            </h1>
+                            <div class="d-flex d-xxl-flex flex-row justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center radiogroup" style="width: 76%;height: 61px;">
+                                <div class="form-check d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="padding-left: 0px;margin-left: 0px;margin-bottom: 0px;margin-right: 0px;height: 74px;width: 33%;">
+                                    <input class="form-check-input pdsize" id="formCheckPdsizeSmall" name="paddle_size" type="radio" value="Small"/>
+                                    <label class="form-check-label" for="formCheckPdsizeSmall">
+                                        <i class="far fa-window-minimize" style="font-size: 32px;color: var(--bs-code-color);padding-top: 18px;margin-top: 17px;">
+                                        </i>
+                                    </label>
+                                </div>
+                                <div class="form-check d-flex justify-content-center align-items-center" style="padding-left: 0px;padding-bottom: 0px;margin-left: 15px;margin-bottom: 0px;margin-right: 15px;height: 74px;width: 33%;">
+                                    <input checked="" class="form-check-input pdsize" id="formCheckPdsizeMedium" name="paddle_size" type="radio" value="Medium"/>
+                                    <label class="form-check-label" for="formCheckPdsizeMedium">
+                                        <i class="far fa-window-minimize" style="font-size: 57px;color: var(--bs-code-color);width: 100%;margin-top: 17px;">
+                                        </i>
+                                    </label>
+                                </div>
+                                <div class="form-check d-flex justify-content-center align-items-center" style="margin-bottom: 0px;padding-left: 0px;width: 33%;height: 74px;">
+                                    <input class="form-check-input pdsize" id="formCheckPdsizeLarge" name="paddle_size" type="radio" value="Large"/>
+                                    <label class="form-check-label" for="formCheckPdsizeLarge" style="font-size: 26px;">
+                                        <i class="far fa-window-minimize" style="font-size: 77px;color: var(--bs-code-color);margin-bottom: 0px;padding-bottom: 0px;">
+                                        </i>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-row justify-content-center align-items-center" style="width: 80%;padding-bottom: 0px;margin-bottom: 6px;margin-top: 11px;">
+                                <span class="d-flex justify-content-center align-items-center" style="color: var(--bs-body-bg);width: 33%;font-weight: bold;">
+                                    {% translate 'Small' %}
+                                </span>
+                                <span class="d-flex justify-content-center align-items-center" style="color: var(--bs-body-bg);width: 33%;font-weight: bold;margin-left: 0px;margin-right: 0px;">
+                                    {% translate 'Medium' %}
+                                </span>
+                                <span class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="color: var(--bs-body-bg);width: 33%;font-weight: bold;">
+                                    {% translate 'Large' %}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="d-flex d-xxl-flex flex-column justify-content-center align-items-center align-items-xxl-center" style="background: var(--bs-body-color);border-top-left-radius: 19px;border-top-right-radius: 19px;border-bottom-right-radius: 19px;border-bottom-left-radius: 19px;width: 100%;margin-top: 0px;margin-bottom: 10px;padding-top: 0px;padding-bottom: 0px;">
+                            <h1 class="fs-5 d-xxl-flex justify-content-xxl-center align-items-xxl-center" style="color: var(--bs-body-bg);margin-top: 10px;margin-bottom: 10px;">
+                                {% translate 'AI Difficulty' %}
+                                <svg class="icon icon-tabler icon-tabler-robot" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 30px;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
+                                    <path d="M6 4m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v4a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z"></path>
+                                    <path d="M12 2v2"></path>
+                                    <path d="M9 12v9"></path>
+                                    <path d="M15 12v9"></path>
+                                    <path d="M5 16l4 -2"></path>
+                                    <path d="M15 14l4 2"></path>
+                                    <path d="M9 18h6"></path>
+                                    <path d="M10 8v.01"></path>
+                                    <path d="M14 8v.01"></path>
+                                </svg>
+                            </h1>
+                            <div class="d-flex d-xxl-flex flex-row justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center radiogroup" style="width: 80%;height: 55px;">
+                                <div class="form-check d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="padding-left: 0px;margin-left: 0px;margin-bottom: 0px;margin-right: 0px;height: 74px;width: 33%;">
+                                    <input class="form-check-input aidiff" id="formCheckAiDiffEasy" name="ai_difficulty" type="radio" value="Easy"/>
+                                    <label class="form-check-label" for="formCheckAiDiffEasy">
+                                        <svg class="icon icon-tabler icon-tabler-robot-face" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 50px;color: var(--bs-form-valid-color);width: 100%;margin-top: 0px;padding-top: 0px;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
+                                            <path d="M6 5h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2z"></path>
+                                            <path d="M9 16c1 .667 2 1 3 1s2 -.333 3 -1"></path>
+                                            <path d="M9 7l-1 -4"></path>
+                                            <path d="M15 7l1 -4"></path>
+                                            <path d="M9 12v-1"></path>
+                                            <path d="M15 12v-1"></path>
+                                        </svg>
+                                    </label>
+                                </div>
+                                <div class="form-check d-flex justify-content-center align-items-center" style="padding-left: 0px;padding-bottom: 0px;margin-bottom: 0px;height: 74px;width: 33%;margin-right: 0px;margin-left: 0px;">
+                                    <input checked="" class="form-check-input aidiff" id="formCheckAiDiffNormal" name="ai_difficulty" type="radio" value="Normal"/>
+                                    <label class="form-check-label" for="formCheckAiDiffNormal">
+                                        <svg class="icon icon-tabler icon-tabler-robot-face" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 50px;color: var(--bs-orange);width: 100%;margin-top: 0px;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
+                                            <path d="M6 5h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2z"></path>
+                                            <path d="M9 16c1 .667 2 1 3 1s2 -.333 3 -1"></path>
+                                            <path d="M9 7l-1 -4"></path>
+                                            <path d="M15 7l1 -4"></path>
+                                            <path d="M9 12v-1"></path>
+                                            <path d="M15 12v-1"></path>
+                                        </svg>
+                                    </label>
+                                </div>
+                                <div class="form-check d-flex justify-content-center align-items-center" style="margin-bottom: 0px;padding-left: 0px;width: 33%;height: 74px;">
+                                    <input class="form-check-input aidiff" id="formCheckAiDiffHard" name="ai_difficulty" type="radio" value="Hard"/>
+                                    <label class="form-check-label" for="formCheckAiDiffHard" style="font-size: 26px;">
+                                        <svg class="icon icon-tabler icon-tabler-robot-face" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 50px;color: var(--bs-form-invalid-color);margin-bottom: 0px;padding-bottom: 0px;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
+                                            <path d="M6 5h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2z"></path>
+                                            <path d="M9 16c1 .667 2 1 3 1s2 -.333 3 -1"></path>
+                                            <path d="M9 7l-1 -4"></path>
+                                            <path d="M15 7l1 -4"></path>
+                                            <path d="M9 12v-1"></path>
+                                            <path d="M15 12v-1"></path>
+                                        </svg>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-row justify-content-center align-items-center" style="width: 80%;padding-bottom: 0px;margin-top: 12px;margin-bottom: 12px;">
+                                <span class="d-flex justify-content-center align-items-center" style="color: var(--bs-body-bg);width: 33%;font-weight: bold;">
+                                    {% translate 'Easy' %}
+                                </span>
+                                <span class="d-flex justify-content-center align-items-center" style="color: var(--bs-body-bg);width: 33%;font-weight: bold;margin-left: 0px;margin-right: 0px;">
+                                    {% translate 'Normal' %}
+                                </span>
+                                <span class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="color: var(--bs-body-bg);width: 33%;font-weight: bold;">
+                                    {% translate 'Hard' %}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-6 col-xl-6 col-xxl-6" style="padding-left: 40px;padding-right: 40px;">
+                <div class="card" style="background: var(--bs-emphasis-color);border-bottom-right-radius: 22px;border-bottom-left-radius: 22px;border-top-left-radius: 22px;border-top-right-radius: 22px;">
+                    <h4 class="fs-3 d-flex d-xl-flex justify-content-center justify-content-xl-center align-items-xl-center" style="color: var(--bs-body-bg);margin-bottom: 0px;">
+                        {% translate 'Arena Options' %}
+                        <svg class="icon icon-tabler icon-tabler-bolt" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="margin-left: 10px;margin-right: 10px;font-size: 35px;margin-top: 5px;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
+                            <path d="M13 3l0 7l6 0l-8 11l0 -7l-6 0l8 -11"></path>
+                        </svg>
+                    </h4>
+                    <div class="card-body d-flex flex-column justify-content-start align-items-center" style="background: #31373d;border-bottom-left-radius: 19px;border-bottom-right-radius: 19px;height: 744px;">
+                        <div class="d-flex d-xxl-flex flex-column justify-content-center align-items-center justify-content-xxl-start align-items-xxl-center" style="width: 100%;padding-bottom: 0px;margin-bottom: 20px;">
+                            <div>
+                                <h1 class="fs-5 d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="color: var(--bs-body-bg);margin-top: 15px;margin-bottom: 15px;">
+                                    {% translate 'Map' %}
+                                </h1>
+                            </div>
+                            <div class="d-flex d-xxl-flex flex-column justify-content-center align-items-center align-items-xxl-center" style="background: var(--bs-body-color);border-top-left-radius: 19px;border-top-right-radius: 19px;border-bottom-right-radius: 19px;border-bottom-left-radius: 19px;width: 85%;">
+                                <div class="carousel slide" data-bs-ride="false" id="carousel-1" style="width: 100%;border-radius: 0px;height: 200px;">
+                                    <div class="carousel-inner" style="border-radius: 19px;">
+                                        <div class="carousel-item active">
+                                            <img alt="Slide Image" class="w-100 d-block" height="200" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png" width="437"/>
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img alt="Slide Image" class="w-100 d-block" height="200" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png" width="437"/>
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img alt="Slide Image" class="w-100 d-block" height="200" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png" width="437"/>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <a class="carousel-control-prev" data-bs-slide="prev" href="#carousel-1" role="button" style="background: rgba(33,37,41,0.26);border-top-left-radius: 19px;border-bottom-left-radius: 19px;backdrop-filter: blur(100px);-webkit-backdrop-filter: blur(100px);">
+                                            <span class="carousel-control-prev-icon">
+                                            </span>
+                                            <span class="visually-hidden">
+                                                Previous
+                                            </span>
+                                        </a>
+                                        <a class="carousel-control-next" data-bs-slide="next" href="#carousel-1" role="button" style="background: rgba(33,37,41,0.26);backdrop-filter: blur(100px);-webkit-backdrop-filter: blur(100px);border-top-right-radius: 19px;border-bottom-right-radius: 19px;">
+                                            <span class="carousel-control-next-icon">
+                                            </span>
+                                            <span class="visually-hidden">
+                                                Next
+                                            </span>
+                                        </a>
+                                    </div>
+                                    <div class="carousel-indicators">
+                                        <button class="active" data-bs-slide-to="0" data-bs-target="#carousel-1" type="button">
+                                        </button>
+                                        <button data-bs-slide-to="1" data-bs-target="#carousel-1" type="button">
+                                        </button>
+                                        <button data-bs-slide-to="2" data-bs-target="#carousel-1" type="button">
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex d-xxl-flex flex-column justify-content-center align-items-center align-items-xxl-center" style="background: var(--bs-body-color);border-top-left-radius: 19px;border-top-right-radius: 19px;border-bottom-right-radius: 19px;border-bottom-left-radius: 19px;width: 100%;margin-left: 0px;margin-right: 0px;margin-top: 25px;margin-bottom: 25px;">
+                            <h1 class="fs-5 d-xxl-flex justify-content-xxl-center align-items-xxl-center" style="color: var(--bs-body-bg);margin-top: 0px;margin-bottom: 0px;">
+                                {% translate 'Powerups' %}
+                                <svg class="icon icon-tabler icon-tabler-rocket" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 30px;color: rgb(220,133,71);margin-left: 10px;margin-right: 10px;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
+                                    <path d="M4 13a8 8 0 0 1 7 7a6 6 0 0 0 3 -5a9 9 0 0 0 6 -8a3 3 0 0 0 -3 -3a9 9 0 0 0 -8 6a6 6 0 0 0 -5 3"></path>
+                                    <path d="M7 14a6 6 0 0 0 -3 6a6 6 0 0 0 6 -3"></path>
+                                    <path d="M15 9m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"></path>
+                                </svg>
+                            </h1>
+                            <div class="d-flex d-xxl-flex flex-row justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center radiogroup" style="width: 76%;height: 55px;">
+                                <div class="form-check d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="padding-left: 0px;margin-left: 0px;margin-bottom: 0px;margin-right: 0px;height: 55px;width: 33%;">
+                                    <input class="form-check-input powerup" id="formCheckPup1" name="power_ups" style="margin-left: 0px;margin-top: 0px;" type="radio"/>
+                                    <label class="form-check-label" for="formCheckPup1">
+                                    </label>
+                                </div>
+                                <div class="form-check d-flex justify-content-center align-items-center" style="padding-left: 0px;padding-bottom: 0px;margin-bottom: 0px;height: 55px;width: 33%;margin-right: 0px;margin-left: 0px;">
+                                    <input class="form-check-input powerup" id="formCheckPup2" name="power_ups" style="margin-left: 0px;margin-top: 0px;" type="radio"/>
+                                    <label class="form-check-label" for="formCheckPup2">
+                                    </label>
+                                </div>
+                                <div class="form-check d-flex justify-content-center align-items-center" style="margin-bottom: 0px;padding-left: 0px;width: 33%;height: 55px;">
+                                    <input class="form-check-input powerup" id="formCheckPup3" name="power_ups" style="margin-left: 0px;margin-top: 0px;" type="radio"/>
+                                    <label class="form-check-label" for="formCheckPup3" style="font-size: 26px;">
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-row justify-content-center align-items-center" style="width: 80%;padding-bottom: 0px;margin-bottom: 6px;margin-top: 0px;">
+                                <span class="d-flex justify-content-center align-items-center" style="color: var(--bs-body-bg);width: 33%;font-weight: bold;">
+                                    {% translate 'Paddle grow' %}
+                                </span>
+                                <span class="d-flex justify-content-center align-items-center" style="color: var(--bs-body-bg);width: 33%;font-weight: bold;margin-left: 0px;margin-right: 0px;">
+                                    {% translate 'Blockers' %}
+                                </span>
+                                <span class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="color: var(--bs-body-bg);width: 33%;font-weight: bold;">
+                                    {% translate 'Bouncy ball' %}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="margin-top: 0px;margin-bottom: 0px;padding-top: 15px;padding-bottom: 15px;">
+                <div class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xl-center justify-content-xxl-center align-items-xxl-center" style="width: 50%;">
+                    {% if profile %}
+                    <a id="navSelect" href="/select/">
+                    {% else %}
+                    <a id="navIndex" href="/">
+                    {% endif %}
+                        <button class="btn btn-primary d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="background: rgb(181,140,10);border-style: none;width: 150.422px;" type="button">
+                            <svg class="icon icon-tabler icon-tabler-chevron-left" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 34px;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
+                                <path d="M15 6l-6 6l6 6"></path>
+                            </svg>
+                            <span>
+                                {% translate 'Go Back' %}
+                            </span>
+                        </button>
+                    </a>
+                </div>
+                <div class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xl-center justify-content-xxl-center" style="width: 50%;">
+                    <button class="btn btn-primary d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" id="createGameBtn" style="border-style: none;background: rgb(58,119,40);" type="submit">
+                        <span>
+                            {% translate 'Create Game' %}
+                        </span>
+                        <svg class="icon icon-tabler icon-tabler-chevron-right" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 35px;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
+                            <path d="M9 6l6 6l-6 6"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock %}

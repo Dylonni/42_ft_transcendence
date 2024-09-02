@@ -1,0 +1,165 @@
+{% load static %}
+{% load i18n %}
+{% if not message.sender %}
+	{% if message.sender == profile %}
+	<div class="d-flex d-xxl-flex align-items-center align-items-xxl-center" style="height:auto;width:100%;padding-bottom:0px;margin-top:0px;margin-bottom:0px;">
+		<div class="text-break" style="height: 100%;width: 100%;margin-top: 0px;font-size: 19px;margin-left: 0px;margin-right: 0px;padding-top: 0px;border-top: 1px solid var(--bs-gray-800) ;border-bottom: 1px solid var(--bs-gray-800) ;">
+			<div style="width:100%;">
+				{% if message.sender == game.host %}
+				<h1 class="text-truncate fs-5" style="width: 225px;margin-left: 10px;color: var(--bs-primary-border-subtle);">
+					<a id="navProfileFromMessage_{{ message.id }}" href="/profiles/{{ message.sender.id }}/">
+						{{ message.sender.alias }}
+					</a>
+					:
+				</h1>
+				{% else %}
+				<h1 class="text-truncate fs-5" style="width: 225px;margin-left: 10px;color: var(--bs-orange);">
+					Me:
+				</h1>
+				{% endif %}
+			</div>
+			<div class="message-wrapper" style="height: 100%;width: 100%;margin-left: 0px;margin-right: 0px;padding-left: 10px;padding-right: 10px;">
+				<p class="wrapbox" style="margin-left:0px;color:var(--bs-body-bg);width:100%;">
+					msg
+				</p>
+			</div>
+		</div>
+	</div>
+	{% else %}
+	<div class="d-flex d-xxl-flex align-items-center align-items-xxl-center" style="height:auto;width:100%;padding-bottom:0px;margin-top:0px;margin-bottom:0px;">
+		<div class="text-break" style="height: 100%;width: 100%;margin-top: 0px;font-size: 19px;margin-left: 0px;margin-right: 0px;padding-top: 0px;border-top: 1px solid var(--bs-gray-800) ;border-bottom: 1px solid var(--bs-gray-800) ;">
+			<div style="width:100%;">
+				{% if message.sender == game.host %}
+				<h1 class="text-truncate fs-5" style="width: 225px;margin-left: 10px;color: var(--bs-primary-border-subtle);">
+					<a id="navProfileFromMessage_{{ message.id }}" href="/profiles/{{ message.sender.id }}/">
+						{{ message.sender.alias }}
+					</a>
+					:
+				</h1>
+				{% else %}
+				<h1 class="text-truncate fs-5" style="width: 225px;margin-left: 10px;color: var(--bs-body-bg);text-shadow: 2px 1px var(--bs-emphasis-color);border-style: none;">
+					<a id="navProfileFromMessage_{{ message.id }}" href="/profiles/{{ message.sender.id }}/">
+						{{ message.sender.alias }}
+					</a>
+					:
+				</h1>
+				{% endif %}
+			</div>
+			<div class="message-wrapper" style="height: 100%;width: 100%;margin-left: 0px;margin-right: 0px;padding-left: 10px;padding-right: 10px;">
+				<p class="wrapbox" style="margin-left:0px;color:var(--bs-body-bg);width:100%;">
+					msg
+				</p>
+			</div>
+		</div>
+	</div>
+	{% endif %}
+{% else %}
+<div class="d-flex d-xxl-flex align-items-center align-items-xxl-center" style="height:auto;width:100%;padding-bottom:0px;margin-top:0px;margin-bottom:0px;">
+	<div class="text-break" style="height: 100%;width: 100%;margin-top: 0px;font-size: 19px;margin-left: 0px;margin-right: 0px;padding-top: 0px;border-top: 1px solid var(--bs-gray-800) ;border-bottom: 1px solid var(--bs-gray-800) ;">
+		<div class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="width: 100%;border-top: 1px solid var(--bs-gray-800) ;border-bottom: 1px solid var(--bs-gray-800) ;">
+			<h1 class="text-truncate fs-5 d-flex justify-content-center align-items-center" style="width: 100%;margin-left: 10px;color: var(--bs-yellow);">
+				<svg class="icon icon-tabler icon-tabler-speakerphone" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="margin-right: 5px;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
+					<path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
+					<path d="M18 8a3 3 0 0 1 0 6"></path>
+					<path d="M10 8v11a1 1 0 0 1 -1 1h-1a1 1 0 0 1 -1 -1v-5"></path>
+					<path d="M12 8h0l4.524 -3.77a.9 .9 0 0 1 1.476 .692v12.156a.9 .9 0 0 1 -1.476 .692l-4.524 -3.77h-8a1 1 0 0 1 -1 -1v-4a1 1 0 0 1 1 -1h8"></path>
+				</svg>
+				{% translate 'Game Announcement' %}
+			</h1>
+		</div>
+		<div class="message-wrapper" style="height: 100%;width: 100%;margin-left: 0px;margin-right: 0px;padding-left: 10px;padding-right: 10px;">
+			{% if category == 'join' %}
+			<p class="text-center d-xxl-flex flex-wrap justify-content-xxl-center align-items-xxl-center wrapbox" style="margin-left:0px;color:var(--bs-body-bg);width:100%;">
+				<svg class="icon icon-tabler icon-tabler-door-enter text-primary" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 25px;margin-right: 5px;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
+					<path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
+					<path d="M13 12v.01"></path>
+					<path d="M3 21h18"></path>
+					<path d="M5 21v-16a2 2 0 0 1 2 -2h6m4 10.5v7.5"></path>
+					<path d="M21 7h-7m3 -3l-3 3l3 3"></path>
+				</svg>
+				<span style="font-weight: bold;margin-right: 5px;">
+					<a id="navProfileFromMessage_{{ message.id }}" href="/profiles/{{ message.sender.id }}/">
+						{{ message.sender.alias }}
+					</a>
+				</span>
+				{% translate 'has joined !' %}
+			</p>
+			{% elif category == 'leave' %}
+			<p class="text-center d-xxl-flex flex-wrap justify-content-xxl-center align-items-xxl-center wrapbox" style="margin-left:0px;color:var(--bs-body-bg);width:100%;">
+				<svg class="icon icon-tabler icon-tabler-door-exit text-secondary" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 25px;margin-right: 5px;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
+					<path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
+					<path d="M13 12v.01"></path>
+					<path d="M3 21h18"></path>
+					<path d="M5 21v-16a2 2 0 0 1 2 -2h7.5m2.5 10.5v7.5"></path>
+					<path d="M14 7h7m-3 -3l3 3l-3 3"></path>
+				</svg>
+				<span class="d-xxl-flex" style="font-weight: bold;margin-right: 5px;">
+					<a id="navProfileFromMessage_{{ message.id }}" href="/profiles/{{ message.sender.id }}/">
+						{{ message.sender.alias }}
+					</a>
+				</span>
+				has left
+			</p>
+			{% elif category == 'next' %}
+			<p class="text-center d-xxl-flex flex-column flex-wrap justify-content-xxl-center align-items-xxl-center wrapbox" style="margin-left:0px;color:var(--bs-body-bg);width:100%;">
+				<svg class="icon icon-tabler icon-tabler-swords" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 25px;margin-right: 5px;color: var(--bs-orange);" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
+					<path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
+					<path d="M21 3v5l-11 9l-4 4l-3 -3l4 -4l9 -11z"></path>
+					<path d="M5 13l6 6"></path>
+					<path d="M14.32 17.32l3.68 3.68l3 -3l-3.365 -3.365"></path>
+					<path d="M10 5.5l-2 -2.5h-5v5l3 2.5"></path>
+				</svg>
+				Next Match:
+				<span style="font-weight: bold;margin-left: 5px;margin-right: 5px;">
+					<a id="navProfile1FromMessage_{{ message.id }}" href="/profiles/{{ round.player1.id }}/">
+						{{ round.player1 }}
+					</a>
+				</span>
+				<span class="text-break" style="margin-right: 0px;color: var(--bs-orange);">
+					VS
+				</span>
+				<span style="font-weight: bold;margin-right: 5px;margin-left: 5px;">
+					<a id="navProfile2FromMessage_{{ message.id }}" href="/profiles/{{ round.player2.id }}/">
+						{{ round.player2 }}
+					</a>
+				</span>
+			</p>
+			{% elif category == 'elim' %}
+			<p class="text-center d-xxl-flex flex-wrap justify-content-xxl-center align-items-xxl-center wrapbox" style="margin-left:0px;color:var(--bs-body-bg);width:100%;">
+				<svg class="icon icon-tabler icon-tabler-x text-danger" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 25px;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
+					<path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
+					<path d="M18 6l-12 12"></path>
+					<path d="M6 6l12 12"></path>
+				</svg>
+				<span style="font-weight: bold;margin-right: 5px;margin-left: 5px;">
+					<a id="navProfileFromMessage_{{ message.id }}" href="/profiles/{{ message.sender.id }}/">
+						{{ message.sender.alias }}
+					</a>
+				</span>
+				has been
+				<span class="text-danger" style="margin-right: 5px;margin-left: 5px;">
+					eliminated
+				</span>
+			</p>
+			{% elif category == 'win' %}
+			<p class="text-center d-xxl-flex flex-wrap justify-content-xxl-center align-items-xxl-center wrapbox" style="margin-left:0px;color:var(--bs-body-bg);width:100%;">
+				<svg class="icon icon-tabler icon-tabler-trophy-filled text-warning" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 25px;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
+					<path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
+					<path d="M17 3a1 1 0 0 1 .993 .883l.007 .117v2.17a3 3 0 1 1 0 5.659v.171a6.002 6.002 0 0 1 -5 5.917v2.083h3a1 1 0 0 1 .117 1.993l-.117 .007h-8a1 1 0 0 1 -.117 -1.993l.117 -.007h3v-2.083a6.002 6.002 0 0 1 -4.996 -5.692l-.004 -.225v-.171a3 3 0 0 1 -3.996 -2.653l-.003 -.176l.005 -.176a3 3 0 0 1 3.995 -2.654l-.001 -2.17a1 1 0 0 1 1 -1h10zm-12 5a1 1 0 1 0 0 2a1 1 0 0 0 0 -2zm14 0a1 1 0 1 0 0 2a1 1 0 0 0 0 -2z" fill="currentColor" stroke-width="0"></path>
+				</svg>
+				<span style="font-weight: bold;margin-right: 5px;margin-left: 5px;">
+					<a id="navProfileFromMessage_{{ message.id }}" href="/profiles/{{ message.sender.id }}/">
+						{{ message.sender.alias }}
+					</a>
+				</span>
+				is the
+				<span class="text-warning" style="margin-right: 5px;margin-left: 0px;">
+					ultimate winner
+				</span>
+				!
+			</p>
+			{% endif %}
+		</div>
+	</div>
+</div>
+{% endif %}

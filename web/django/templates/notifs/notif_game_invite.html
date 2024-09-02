@@ -1,0 +1,49 @@
+{% load static %}
+{% load i18n %}
+<div style="width: 100%;height: 135px;box-shadow: 0px 2px 0px;margin-top: 5px;margin-bottom: 5px;border-bottom-left-radius: 0px;">
+	<div class="d-flex justify-content-center align-items-center" style="height: 30px;background: #5abfea;border-top-left-radius: 6px;border-top-right-radius: 6px;">
+		<svg class="icon icon-tabler icon-tabler-device-gamepad" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 29px;color: var(--bs-body-bg);margin-left: 12px;margin-right: 12px;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
+			<path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
+			<path d="M2 6m0 2a2 2 0 0 1 2 -2h16a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-16a2 2 0 0 1 -2 -2z"></path>
+			<path d="M6 12h4m-2 -2v4"></path>
+			<path d="M15 11l0 .01"></path>
+			<path d="M18 13l0 .01"></path>
+		</svg>
+		<strong class="me-auto" style="color: var(--bs-body-bg);">
+			{% translate 'Game Invite' %}
+		</strong>
+		<button data-object-id="{{ notif.object_id }}" aria-label="Close" class="decline-game-btn btn-close ms-2 mb-1 close" style="padding-left: 4px;padding-right: 4px;margin-left: 7px;margin-right: 7px;" type="button">
+		</button>
+	</div>
+	<p class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="color: var(--bs-body-bg);padding-bottom: 0px;margin-top: 8px;margin-bottom: 8px;">
+		<a id="navProfileFromGame_{{ notif.sender.id }}" href="/profiles/{{ notif.sender.id }}/">
+			<span class="text-truncate" style="font-weight: bold;padding-left: 0px;font-style: italic;color: var(--bs-body-bg);margin-left: 8px;margin-right: 8px;">
+				{{ notif.sender.alias }}
+			</span>
+		</a>
+		{% translate 'has invited you to play !' %}
+	</p>
+	<p class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center" style="margin-bottom: 0px;margin-top: 6px;">
+		<button data-object-id="{{ notif.object_id }}" class="accept-game-btn btn btn-primary d-flex justify-content-center align-items-center" style="margin-left: 10px;margin-right: 10px;background: rgba(255,255,255,0);width: 45px;height: 31px;border-width: 2px;border-color: var(--bs-form-valid-border-color);" type="button">
+			<svg class="icon icon-tabler icon-tabler-check" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="color: var(--bs-form-valid-border-color);" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
+				<path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
+				<path d="M5 12l5 5l10 -10"></path>
+			</svg>
+		</button>
+		<button data-object-id="{{ notif.object_id }}" class="decline-game-btn btn btn-primary d-flex justify-content-center align-items-center" style="margin-left: 10px;margin-right: 10px;width: 45px;height: 30.5px;background: rgba(255,255,255,0);border-width: 2px;border-color: #d14414;" type="button">
+			<svg class="icon icon-tabler icon-tabler-x" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="color: #d14414;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
+				<path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
+				<path d="M18 6l-12 12"></path>
+				<path d="M6 6l12 12"></path>
+			</svg>
+		</button>
+	</p>
+	<div class="d-flex justify-content-center align-items-center">
+		<span style="color: var(--bs-body-bg);font-size: 14px;margin-left: 11px;margin-right: 11px;">
+			{% translate 'Accept' %}
+		</span>
+		<span style="color: var(--bs-body-bg);font-size: 14px;margin-left: 11px;margin-right: 11px;">
+			{% translate 'Decline' %}
+		</span>
+	</div>
+</div>

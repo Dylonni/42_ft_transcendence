@@ -57,3 +57,5 @@ vclean:
 	@if [ "$$(docker volume ls -q)" ]; then \
 		docker volume rm $$(docker volume ls -q | grep -v 'vscode'); \
 	fi
+	@find . -path "*/migrations/*.py" ! -name "__init__.py" -delete
+	@find . -type d -name "__pycache__" -exec rm -r {} +

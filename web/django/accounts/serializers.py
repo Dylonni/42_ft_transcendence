@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.contrib.auth import authenticate, get_user_model
+from django.contrib.auth.hashers import make_password
 from django.utils.translation import gettext_lazy as _
 from rest_framework import serializers
 
@@ -15,26 +16,36 @@ class UserLoginSerializer(serializers.Serializer):
         password = attrs.get('password')
         
         if not username_or_email or not password:
-            msg = _('Must include "username/email" and "password".')
-            raise serializers.ValidationError(msg, code='authorization')
+            raise serializers.ValidationError(_('Must include username/email and password.'))
         
-        user = authenticate(request=self.context.get('request'), username=username_or_email, password=password)
-        if not user:
+        try:
+            user = UserModel.objects.get(username=username_or_email)
+        except UserModel.DoesNotExist:
             try:
                 user = UserModel.objects.get(email=username_or_email)
-                user = authenticate(request=self.context.get('request'), username=user.username, password=password)
-            except UserModel.DoesNotExist as e:
-                msg = _('Unable to log in with provided credentials.')
-                raise serializers.ValidationError(msg, code='authorization')
+            except UserModel.DoesNotExist:
+                raise serializers.ValidationError(_('Unable to log in with provided credentials.'))
+        
+        if not user.is_verified:
+            raise serializers.ValidationError(_('Check your email and activate your account first.'))
+        if not user.check_password(password):
+            raise serializers.ValidationError(_('Unable to log in with provided credentials.'))
+        if not user.is_active:
+            raise serializers.ValidationError(_('Account is inactive.'))
         attrs['user'] = user
         return attrs
 
 
+# TODO: refactor to use set_password instead of make_password when creating user
 class UserRegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserModel
         fields = ('username', 'email', 'password')
         extra_kwargs = {'password': {'write_only': True}}
+    
+    def create(self, validated_data):
+        validated_data['password'] = make_password(validated_data['password'])
+        return super().create(validated_data)
 
 
 class PasswordResetRequestSerializer(serializers.Serializer):

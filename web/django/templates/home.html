@@ -1,101 +1,315 @@
-{% load i18n %}
+{% extends "index.html" %}
 {% load static %}
-{% include "sidebar.html" %}
+{% load i18n %}
+{% block title %}{% translate "Home" %}{% endblock %}
 {% block content %}
-<div class="flex-column" style="display: flex;height: 100%;width: 100%;">
-	<div class="flex-column" style="display: flex;">
-		<div class="container" id="template-playersearch">
-			<div class="row d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center">
-				<div class="col-10 col-sm-7 col-md-5 col-lg-4 col-xl-3 col-xxl-3 d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="margin-top: 0px;margin-left: 0px;padding-left: 35px;padding-right: 35px;">
-					<div class="d-flex d-xxl-flex justify-content-start align-items-center justify-content-xxl-start align-items-xxl-center" style="height: 45px;background: var(--bs-body-color);border-radius: 30px;width: 100%;padding-left: 0px;margin-left: 0px;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-user" style="font-size: 48px;color: var(--bs-body-bg);padding-left: 0px;padding-right: 0px;margin-left: 10px;">
-							<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-							<path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
-							<path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
-						</svg><input class="d-xxl-flex" type="text" id="inputsearch" style="width: 100%;margin-left: 8px;background: rgba(255,255,255,0);color: var(--bs-body-bg);height: 100%;padding-left: 10px;border-style: hidden;font-size: 20px;" placeholder="{% translate "Find a player" %}"><button class="btn btn-primary" type="button" style="background: rgba(13,110,253,0);border-style: none;border-radius: 25px;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-search" style="font-size: 25px;">
-								<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-								<path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"></path>
-								<path d="M21 21l-6 -6"></path>
-							</svg></button></div>
+{% include "sidebar.html" %}
+{% include "notifs/notifications.html" %}
+<div class="container" style="padding-bottom: 0px;margin-top: 0px;margin-bottom: 10px;padding-top: 30px;">
+	<div class="row d-sm-flex justify-content-sm-center align-items-sm-center" style="box-shadow: 0px 0px;background: rgba(0,0,0,0.35);border-radius: 50px;">
+		<div class="col-sm-10 col-md-7 col-lg-7 col-xl-7 d-lg-flex d-xxl-flex justify-content-lg-start justify-content-xxl-center" style="margin-top: 5px;margin-bottom: 5px;">
+			<div class="text-nowrap text-truncate d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-start" id="player-info-1" style="border-radius: 18px;width: 100%;padding-top: 10px;padding-bottom: 10px;">
+				<div class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-center justify-content-md-start justify-content-lg-center justify-content-xl-center justify-content-xxl-center align-items-xxl-center" style="width: 75px;margin-right: 0px;height: 75px;padding-left: 0px;padding-right: 0px;">
+					<img class="rounded-circle" height="130" src="{{ profile.get_avatar_url }}" style="height: 65px;width: 65px;box-shadow: 0px 0px 6px 2px var(--bs-body-bg);margin-bottom: 0px;margin-left: 10px;margin-right: 10px;border: 2px solid var(--bs-body-bg);" width="130"/>
+				</div>
+				<div class="text-truncate d-flex d-xl-flex flex-column justify-content-center align-items-center justify-content-xl-center align-items-xl-center align-items-xxl-start" style="max-width: 650px;width: 100%;margin-left: 0px;padding-left: 15px;padding-right: 15px;">
+					<span class="text-truncate fs-5 text-start text-light text-truncate" data-bs-placement="bottom" data-bs-toggle="tooltip" data-bss-tooltip="" style="text-overflow: ellipsis;font-weight: bold;background: rgba(90,191,234,0);text-shadow: 2px 2px 2px var(--bs-emphasis-color);max-width: 535px;width: 100%;margin-top: 0px;margin-bottom: 0px;margin-right: 0px;margin-left: 0px;" title="{{ profile.alias }}">
+						<svg class="icon icon-tabler icon-tabler-user-circle" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="margin-left: 10px;font-size: 25px;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
+							<path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
+							<path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+							<path d="M12 10m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"></path>
+							<path d="M6.168 18.849a4 4 0 0 1 3.832 -2.849h4a4 4 0 0 1 3.834 2.855"></path>
+						</svg>
+						{{ profile.alias }}
+					</span>
+					<div class="text-truncate text-start d-flex d-lg-flex d-xxl-flex justify-content-start align-items-center flex-wrap justify-content-sm-start justify-content-md-start justify-content-lg-start align-items-lg-center justify-content-xl-start justify-content-xxl-start align-items-xxl-center" style="max-width: 600px;width: 100%;">
+						<span class="text-truncate fs-5 text-center text-light text-truncate" style="text-overflow: ellipsis;font-weight: bold;border-radius: 10px;text-shadow: 2px 2px 2px var(--bs-emphasis-color);max-width: 275px;margin-right: 5px;margin-left: 0px;">
+							<svg class="icon icon-tabler icon-tabler-medal" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="color: var(--bs-yellow);margin-left: 10px;font-size: 25px;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
+								<path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
+								<path d="M12 4v3m-4 -3v6m8 -6v6"></path>
+								<path d="M12 18.5l-3 1.5l.5 -3.5l-2 -2l3 -.5l1.5 -3l1.5 3l3 .5l-2 2l.5 3.5z"></path>
+							</svg>
+							Rank:
+							<span class="text-truncate fs-5 text-center text-truncate" data-bs-placement="bottom" data-bs-toggle="tooltip" data-bss-tooltip="" style="text-overflow: ellipsis;font-weight: bold;border-radius: 10px;text-shadow: 2px 2px 2px var(--bs-emphasis-color);max-width: 240px;margin-right: 0px;color: var(--bs-yellow);margin-left: 0px;" title="{{ profile.get_rank }}">
+								#{{ profile.get_rank }}
+							</span>
+						</span>
+						<span class="text-truncate fs-5 text-center text-light text-truncate" style="text-overflow: ellipsis;font-weight: bold;border-radius: 10px;text-shadow: 2px 2px 2px var(--bs-emphasis-color);max-width: 275px;margin-right: 0px;padding-left: 0px;margin-left: 0px;">
+							<svg class="icon icon-tabler icon-tabler-stars-filled" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="color: var(--bs-info);margin-left: 10px;font-size: 25px;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
+								<path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
+								<path d="M17.657 12.007a1.39 1.39 0 0 0 -1.103 .765l-.855 1.723l-1.907 .277c-.52 .072 -.96 .44 -1.124 .944l-.038 .14c-.1 .465 .046 .954 .393 1.29l1.377 1.337l-.326 1.892a1.393 1.393 0 0 0 2.018 1.465l1.708 -.895l1.708 .896a1.388 1.388 0 0 0 1.462 -.105l.112 -.09a1.39 1.39 0 0 0 .442 -1.272l-.325 -1.891l1.38 -1.339c.38 -.371 .516 -.924 .352 -1.427l-.051 -.134a1.39 1.39 0 0 0 -1.073 -.81l-1.907 -.278l-.853 -1.722a1.393 1.393 0 0 0 -1.247 -.773l-.143 .007z" fill="currentColor" stroke-width="0"></path>
+								<path d="M6.057 12.007a1.39 1.39 0 0 0 -1.103 .765l-.855 1.723l-1.907 .277c-.52 .072 -.96 .44 -1.124 .944l-.038 .14c-.1 .465 .046 .954 .393 1.29l1.377 1.337l-.326 1.892a1.393 1.393 0 0 0 2.018 1.465l1.708 -.895l1.708 .896a1.388 1.388 0 0 0 1.462 -.105l.112 -.09a1.39 1.39 0 0 0 .442 -1.272l-.324 -1.891l1.38 -1.339c.38 -.371 .516 -.924 .352 -1.427l-.051 -.134a1.39 1.39 0 0 0 -1.073 -.81l-1.908 -.279l-.853 -1.722a1.393 1.393 0 0 0 -1.247 -.772l-.143 .007z" fill="currentColor" stroke-width="0"></path>
+								<path d="M11.857 2.007a1.39 1.39 0 0 0 -1.103 .765l-.855 1.723l-1.907 .277c-.52 .072 -.96 .44 -1.124 .944l-.038 .14c-.1 .465 .046 .954 .393 1.29l1.377 1.337l-.326 1.892a1.393 1.393 0 0 0 2.018 1.465l1.708 -.894l1.709 .896a1.388 1.388 0 0 0 1.462 -.105l.112 -.09a1.39 1.39 0 0 0 .442 -1.272l-.325 -1.892l1.38 -1.339c.38 -.371 .516 -.924 .352 -1.427l-.051 -.134a1.39 1.39 0 0 0 -1.073 -.81l-1.908 -.279l-.853 -1.722a1.393 1.393 0 0 0 -1.247 -.772l-.143 .007z" fill="currentColor" stroke-width="0"></path>
+							</svg>
+							Points:
+							<span class="text-truncate fs-5 text-center text-truncate" data-bs-placement="bottom" data-bs-toggle="tooltip" data-bss-tooltip="" style="text-overflow: ellipsis;font-weight: bold;border-radius: 10px;text-shadow: 2px 2px 2px var(--bs-emphasis-color);max-width: 240px;margin-right: 0px;color: var(--bs-info);margin-left: 0px;" title="{{ profile.elo }}">
+								{{ profile.elo }}
+							</span>
+						</span>
+					</div>
 				</div>
 			</div>
 		</div>
-		<div class="container">
-			<div class="row" style="background: #00000000;border-radius: 20px;">
-				<div class="col-md-6 col-xl-4 col-xxl-6 d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="width: 100%;padding-left: 0px;height: 100%;">
-					<div class="d-flex d-xxl-flex flex-column justify-content-center align-items-center flex-sm-column justify-content-sm-center align-items-sm-center flex-md-column justify-content-md-center align-items-md-center flex-lg-row justify-content-lg-center align-items-lg-center flex-xl-row justify-content-xl-center align-items-xl-center flex-xxl-row justify-content-xxl-center align-items-xxl-center p-4 text-center shadow-lg m-5 rounded-5" style="background: var(--bs-emphasis-color);width: 60%;backdrop-filter: blur(30px);-webkit-backdrop-filter: blur(30px);filter: blur(0px);">
-						<div class="d-flex d-md-flex d-xxl-flex flex-column justify-content-center align-items-center justify-content-md-center align-items-md-center justify-content-xxl-center align-items-xxl-center" id="player-info" style="padding: 0px;padding-left: 40px;padding-right: 40px;width: 33%;height: 200px;margin-right: 0px;"><img class="rounded-circle mb-3 fit-cover" width="130" height="130" src="{% static '/img/avatar1.webp' %}" style="height: 100px;width: 100px;"><span class="fs-5 text-light text-truncate">{% translate "#PlayerName" %}</span></div>
-						<div class="d-flex d-md-flex d-xxl-flex flex-column justify-content-center align-items-center justify-content-md-center align-items-md-center justify-content-xxl-center align-items-xxl-center stats" style="padding-right: 0px;height: 200px;width: 33%;padding-left: 0px;margin-left: 0px;">
-							<h1 class="fs-4" style="color: var(--bs-body-bg);">{% translate "Stats" %}</h1><span style="color: var(--bs-body-bg);padding-bottom: 0px;margin-bottom: 10px;">{% translate "Games played:" %}&nbsp;<span>####</span></span>
-							<div style="padding-top: 0px;margin-bottom: 0px;width: 160px;height: 100px;">
-								<div class="d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="width: 145px;height: 40px;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-trophy-filled" style="color: var(--bs-yellow);font-size: 32px;margin-left: 7px;">
-										<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-										<path d="M17 3a1 1 0 0 1 .993 .883l.007 .117v2.17a3 3 0 1 1 0 5.659v.171a6.002 6.002 0 0 1 -5 5.917v2.083h3a1 1 0 0 1 .117 1.993l-.117 .007h-8a1 1 0 0 1 -.117 -1.993l.117 -.007h3v-2.083a6.002 6.002 0 0 1 -4.996 -5.692l-.004 -.225v-.171a3 3 0 0 1 -3.996 -2.653l-.003 -.176l.005 -.176a3 3 0 0 1 3.995 -2.654l-.001 -2.17a1 1 0 0 1 1 -1h10zm-12 5a1 1 0 1 0 0 2a1 1 0 0 0 0 -2zm14 0a1 1 0 1 0 0 2a1 1 0 0 0 0 -2z" stroke-width="0" fill="currentColor"></path>
-									</svg><span class="fs-5" style="color: var(--bs-body-bg);margin-left: 0px;padding-left: 0px;">&nbsp;{% translate "Wins" %}:&nbsp;<span id="win-number" style="color: var(--bs-body-bg);">##</span></span></div>
-								<div class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="width: 145px;height: 40px;"><i class="typcn typcn-times text-danger" style="font-size: 40px;"></i><span class="fs-5" style="color: var(--bs-body-bg);">&nbsp;{% translate "Loss" %}:&nbsp;<span id="loss-number" style="color: var(--bs-body-bg);">##</span></span></div>
-							</div>
-						</div>
-						<div class="d-flex d-md-flex d-xl-flex d-xxl-flex flex-column justify-content-center align-items-center justify-content-md-center align-items-md-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="width: 33%;height: 200px;margin-left: 0px;padding-top: 0px;padding-bottom: 0px;padding-left: 0px;padding-right: 0px;"><button class="btn btn-primary raised round" type="button" style="background: #5abfea;border-style: none;border-radius: 19px;text-shadow: 0px 0px;font-weight: bold;width: 60%;height: 60%;text-shadow: 2px 2px var(--bs-emphasis-color);">{% translate "Create GameRoom" %}&nbsp; &nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-device-gamepad d-xxl-flex" style="font-size: 49px;padding-top: 0px;margin-bottom: 0px;margin-left: 3px;background: #5abfea;color: var(--bs-body-bg);width: 100%;margin-right: 0px;padding-right: 10px;">
-									<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-									<path d="M2 6m0 2a2 2 0 0 1 2 -2h16a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-16a2 2 0 0 1 -2 -2z"></path>
-									<path d="M6 12h4m-2 -2v4"></path>
-									<path d="M15 11l0 .01"></path>
-									<path d="M18 13l0 .01"></path>
-								</svg></button></div>
-					</div>
-				</div>
+		<div class="col-md-5 col-lg-5 col-xl-5 d-flex d-sm-flex d-md-flex d-xl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-end justify-content-xl-end align-items-xl-center justify-content-xxl-end" style="margin-top: 5px;margin-bottom: 5px;">
+			<div class="d-flex d-lg-flex d-xl-flex d-xxl-flex flex-row-reverse justify-content-start align-items-center justify-content-sm-center justify-content-md-center justify-content-lg-start align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="margin-top: 0px;">
+				<button class="btn btn-primary d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" type="button" style="width: 55px;height: 55px;border-radius: 50%;background: rgba(13,110,253,0);border: 2px solid var(--bs-body-bg);" data-bs-toggle="collapse" data-bs-target="#playerFinder" aria-controls="playerFinder">
+                    <svg class="icon icon-tabler icon-tabler-user-search" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" style="width: 100%;height: 100%;">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
+                        <path d="M6 21v-2a4 4 0 0 1 4 -4h1.5"></path>
+                        <path d="M18 18m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"></path>
+                        <path d="M20.2 20.2l1.8 1.8"></path>
+                    </svg>
+                </button>
+                <div class="collapse collapse-horizontal" id="playerFinder">
+                    <input id="searchProfileInput" class="d-xxl-flex" placeholder="Find a Player" style="height: 55px;color: var(--bs-body-bg);background: var(--bs-body-color);border-radius: 19px;width: 250px;margin-left: 0px;margin-right: 0px;padding-left: 10px;padding-right: 10px;border: 2px solid var(--bs-body-bg) ;" type="text"/>
+                </div>
 			</div>
 		</div>
 	</div>
-	<div class="flex-column" style="display: flex;height: 100%;width: 100%;padding-left: 91px;padding-right: 91px;">
-		<div class="container" style="padding-bottom: 0px;margin-bottom: 10px;">
-			<div class="row d-flex d-xxl-flex justify-content-end justify-content-sm-start justify-content-md-start justify-content-xl-start justify-content-xxl-start">
-				<div class="col-sm-5 col-md-4 col-lg-3 col-xl-2 col-xxl-2">
-					<div class="d-flex d-xxl-flex justify-content-start align-items-center justify-content-xxl-end align-items-xxl-center" style="height: 45px;background: rgba(33,37,41,0);border-radius: 30px;width: 100%;padding-left: 0px;margin-left: 0px;color: var(--bs-emphasis-color);border-style: solid;"><input class="d-xxl-flex" type="text" id="gamesearch" style="width: 100%;margin-left: 8px;background: rgba(255,255,255,0);color: var(--bs-emphasis-color);height: 100%;padding-left: 10px;border-style: hidden;font-size: 20px;" placeholder="{% translate "Find a Game" %}"><button class="btn btn-primary" type="button" style="background: rgba(13,110,253,0);border-style: none;border-radius: 25px;"></button></div>
-				</div>
-				<div class="col-sm-2 col-md-2 col-lg-1 col-xl-1 col-xxl-1 d-sm-flex d-md-flex d-xxl-flex justify-content-sm-start justify-content-md-start">
-					<div class="d-flex d-xl-flex d-xxl-flex justify-content-end align-items-center justify-content-xl-end align-items-xl-center align-items-xxl-center" style="height: 45px;"><button class="btn btn-primary d-xxl-flex" type="button" style="color: rgb(0,0,0);border-style: none;background: rgba(13,110,253,0);"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-filter" style="font-size: 40px;">
-								<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-								<path d="M4 4h16v2.172a2 2 0 0 1 -.586 1.414l-4.414 4.414v7l-6 2v-8.5l-4.48 -4.928a2 2 0 0 1 -.52 -1.345v-2.227z"></path>
-							</svg></button></div>
-				</div>
+</div>
+<div class="container" style="margin-bottom: 0px;margin-top: 50px;">
+	<div class="row d-xl-flex d-xxl-flex justify-content-xl-end justify-content-xxl-center align-items-xxl-center">
+		<div class="col-md-12 col-xl-12 col-xxl-3" style="margin-bottom: 10px;">
+			<h2 class="d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center" style="color: var(--bs-body-bg);border-radius: 5px;padding-bottom: 6px;width: 100%;margin-bottom: 12px;text-shadow: 4px 2px 0px var(--bs-emphasis-color);">
+				{% translate 'Game Rooms' %}
+			</h2>
+		</div>
+	</div>
+</div>
+<div class="container" style="padding-left: 20px;padding-right: 20px;">
+	<div class="row d-xl-flex justify-content-xl-end justify-content-xxl-start" style="background: rgba(0,0,0,0.35);border-radius: 10px;">
+		<div class="col-12 col-sm-8 col-md-8 col-lg-9 col-xl-9 col-xxl-6 d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center align-items-sm-center align-items-md-center justify-content-lg-start align-items-lg-center justify-content-xl-center justify-content-xxl-center align-items-xxl-center" style="padding-left: 0px;padding-right: 0px;">
+			<svg class="icon icon-tabler icon-tabler-search" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 35px;color: var(--bs-gray-500);" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
+				<path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
+				<path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"></path>
+				<path d="M21 21l-6 -6"></path>
+			</svg>
+			<div class="d-flex d-xxl-flex justify-content-start align-items-center justify-content-xxl-end align-items-xxl-center" style="background: rgba(33,37,41,0);border-radius: 30px;color: var(--bs-btn-active-color);height: 45px;width: 90%;margin-left: 0px;border: 1px none var(--bs-body-bg) ;">
+				<input class="d-xxl-flex" id="searchGameInput" placeholder="Find a Game" style="width: 100%;margin-left: 8px;background: rgba(255,255,255,0);color: var(--bs-body-bg);height: 100%;padding-left: 10px;font-size: 20px;border-radius: 30px;backdrop-filter: blur(0px);-webkit-backdrop-filter: blur(0px);border-style: none;" type="text"/>
 			</div>
 		</div>
-		<div class="container">
-			<div class="row">
-				<div class="col-12 col-md-12 col-xxl-12" style="margin-left: 0px;width: 100%;padding-top: 0px;margin-top: 0px;">
-					<div class="d-flex justify-content-center align-items-center" style="background: #5abfea;border-top-left-radius: 19px;border-top-right-radius: 19px;">
-						<h1 class="fs-3" style="color: var(--bs-body-bg);text-shadow: 2px 2px var(--bs-emphasis-color);">{% translate "Game Rooms" %}</h1>
-					</div>
-					<div class="d-flex d-xxl-flex flex-column justify-content-center align-items-center justify-content-sm-center align-items-xxl-center overflow-auto" style="background: var(--bs-body-color);border-radius: 19px;height: 450px;padding-left: 0px;padding-right: 0px;border-top-left-radius: 0px;border-top-right-radius: 0px;">
-						<div class="d-flex flex-wrap gameroom" id="template-gameroom" style="background: var(--bs-black);border-radius: 19px;width: 90%;padding-left: 0px;border: 2px solid #5abfea;">
-							<div id="gamename" class="text-truncate roomel" style="border-style: none;">
-								<h1 class="fs-5 d-xxl-flex justify-content-xxl-center align-items-xxl-center text-truncate room-name">{% translate "Room Name" %}</h1>
-								<p class="text-truncate d-xxl-flex justify-content-xxl-center align-items-xxl-center text-truncate" style="color: var(--bs-body-bg);">{% translate "#RoomName" %}</p>
+		<div class="col-12 col-sm-4 col-md-4 col-lg-3 col-xl-3 col-xxl-6 d-sm-flex d-md-flex d-xxl-flex justify-content-sm-end justify-content-md-end justify-content-lg-end align-items-lg-center justify-content-xl-end align-items-xl-center">
+			<div class="d-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="height: 45px;">
+				<button class="btn btn-primary d-xxl-flex" data-bs-target="#modalFilter" data-bs-toggle="modal" data-bss-tooltip="" style="color: rgb(0,0,0);border-style: none;background: rgba(13,110,253,0);" title="Filters" type="button">
+					<svg class="icon icon-tabler icon-tabler-filter" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 40px;color: var(--bs-body-bg);" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
+						<path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
+						<path d="M4 4h16v2.172a2 2 0 0 1 -.586 1.414l-4.414 4.414v7l-6 2v-8.5l-4.48 -4.928a2 2 0 0 1 -.52 -1.345v-2.227z"></path>
+					</svg>
+				</button>
+				<button class="btn btn-primary d-xxl-flex refreshButton" data-bs-toggle="tooltip" data-bss-tooltip="" style="color: rgb(0,0,0);border-style: none;background: rgba(13,110,253,0);" title="Refresh Rooms" type="button">
+					<svg class="icon icon-tabler icon-tabler-refresh" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 40px;color: var(--bs-btn-active-color);" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
+						<path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
+						<path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4"></path>
+						<path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4"></path>
+					</svg>
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container">
+	<div class="row">
+		<div class="col-md-12 col-lg-3 col-xl-4 col-xxl-3 d-flex d-xxl-flex justify-content-center align-items-center flex-wrap justify-content-xl-center justify-content-xxl-center align-items-xxl-center" style="backdrop-filter: blur(0px);-webkit-backdrop-filter: blur(0px);margin-top: 10px;margin-bottom: 10px;margin-left: 0px;margin-right: 0px;border-radius: 19px;padding-left: 12px;padding-right: 12px;">
+			<a id="navSelect" href="/select/" class="card d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center createGame" style="width: 100%;background: rgb(0,0,0);height: 100%;margin-top: 0px;margin-bottom: 0px;margin-left: 0px;margin-right: 0px;position: relative;padding-left: 0px;padding-right: 0px;padding-top: 0px;padding-bottom: 0px;border-radius: 10px;">
+				<div class="card-body d-flex d-xl-flex d-xxl-flex flex-column justify-content-center align-items-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="border-radius: 10px;backdrop-filter: blur(5px);-webkit-backdrop-filter: blur(5px);padding-left: 0px;padding-bottom: 0px;padding-right: 0px;padding-top: 0px;height: 100%;width: 100%;">
+					<div class="d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-start justify-content-sm-center align-items-sm-start justify-content-md-center align-items-md-start justify-content-lg-center align-items-lg-start justify-content-xl-center align-items-xl-start justify-content-xxl-center align-items-xxl-center" style="height: 75%;width: 100%;border-radius: 19px;border-bottom-right-radius: 0px;border-bottom-left-radius: 0px;">
+						<div class="d-flex d-xl-flex d-xxl-flex flex-column justify-content-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="width: 100%;height: 100%;backdrop-filter: blur(20px);-webkit-backdrop-filter: blur(20px);border-radius: 19px;border-bottom-right-radius: 0px;border-bottom-left-radius: 0px;border-top-left-radius: 0px;">
+							<div class="d-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="width: 100%;padding-left: 8px;padding-right: 8px;height: 100%;">
+								<svg class="icon icon-tabler icon-tabler-plus" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 80px;color: var(--bs-body-bg);margin-right: 5px;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
+									<path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
+									<path d="M12 5l0 14"></path>
+									<path d="M5 12l14 0"></path>
+								</svg>
+								<h5 style="color: var(--bs-body-bg);margin-bottom: 0px;text-shadow: 0px 0px 4px var(--bs-emphasis-color);">
+									Create a Game
+								</h5>
 							</div>
-							<div id="gamecreator" class="text-truncate roomel" style="border-style: none;">
-								<h1 class="fs-5 d-xxl-flex justify-content-xxl-center align-items-xxl-center text-truncate room-creator">{% translate "Created By" %}</h1>
-								<p class="text-truncate d-xxl-flex justify-content-xxl-center align-items-xxl-center text-truncate" style="color: var(--bs-body-bg);">{% translate "#CreatorName" %}</p>
-							</div>
-							<div id="gametype" class="text-truncate roomel" style="border-style: none;">
-								<h1 class="fs-5 d-xxl-flex justify-content-xxl-center align-items-xxl-center text-truncate room-type">{% translate "Room Type" %}</h1>
-								<p class="d-xxl-flex justify-content-xxl-center align-items-xxl-center" style="color: var(--bs-body-bg);">{% translate "#Classic/Retro" %}</p>
-							</div>
-							<div id="nbplayers" class="text-truncate roomel" style="border-style: none;">
-								<h1 class="fs-5 d-xxl-flex justify-content-xxl-center align-items-xxl-center text-truncate nb-players">{% translate "Current Players" %}</h1>
-								<p class="d-xxl-flex justify-content-xxl-center align-items-xxl-center" style="color: var(--bs-body-bg);">#X/#Y</p>
-							</div>
-							<div class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center text-truncate roomel" id="join" style="border-style: none;"><button class="btn btn-primary" type="button" style="background: #5abfea;border-style: none;">{% translate "Join" %}&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-joystick" style="font-size: 25px;">
-										<path d="M10 2a2 2 0 0 1-1.5 1.937v5.087c.863.083 1.5.377 1.5.726 0 .414-.895.75-2 .75s-2-.336-2-.75c0-.35.637-.643 1.5-.726V3.937A2 2 0 1 1 10 2"></path>
-										<path d="M0 9.665v1.717a1 1 0 0 0 .553.894l6.553 3.277a2 2 0 0 0 1.788 0l6.553-3.277a1 1 0 0 0 .553-.894V9.665c0-.1-.06-.19-.152-.23L9.5 6.715v.993l5.227 2.178a.125.125 0 0 1 .001.23l-5.94 2.546a2 2 0 0 1-1.576 0l-5.94-2.546a.125.125 0 0 1 .001-.23L6.5 7.708l-.013-.988L.152 9.435a.25.25 0 0 0-.152.23z"></path>
-									</svg></button></div>
 						</div>
 					</div>
 				</div>
-			</div>
+			</a>
 		</div>
-		<div class="d-flex justify-content-center align-items-center" id="template-nogames" style="height: 100%;">
-			<h1 class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="color: rgb(89,97,105);font-weight: bold;height: 100%;">{% translate "NO GAMES TO DISPLAY" %}</h1>
+		<div class="col-md-12 col-lg-9 col-xl-8 col-xxl-9 d-flex d-xxl-flex justify-content-center align-items-start flex-wrap justify-content-sm-center align-items-sm-start justify-content-md-start align-items-md-start justify-content-lg-start align-items-lg-start justify-content-xl-start align-items-xl-start justify-content-xxl-start align-items-xxl-start overflow-auto" style="backdrop-filter: blur(0px);-webkit-backdrop-filter: blur(0px);box-shadow: 0px 0px 6px rgb(145,189,254);border-radius: 19px;background: rgba(0,0,0,0.35);padding-bottom: 15px;padding-top: 12px;margin-left: 0px;margin-bottom: 10px;margin-right: 0px;margin-top: 10px;max-height: 592px;height: auto;padding-left: 30px;padding-right: 30px;">
+			{% for game in games %}
+			<div class="card d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="width: 290px;background: rgba(255,255,255,0);border-top-left-radius: 19px;border-top-right-radius: 19px;border-bottom-right-radius: 19px;border-bottom-left-radius: 19px;height: 160px;padding-left: 0px;padding-right: 0px;padding-top: 0px;padding-bottom: 0px;margin-bottom: 5px;margin-top: 5px;margin-left: 5px;margin-right: 5px;border-width: 2px;border-color: var(--bs-primary-border-subtle);">
+				<div class="card-body d-xxl-flex flex-column justify-content-xxl-center align-items-xxl-center" style="border-radius: 19px;backdrop-filter: blur(5px);-webkit-backdrop-filter: blur(5px);padding-left: 0px;padding-bottom: 0px;padding-right: 0px;padding-top: 0px;height: 100%;width: 100%;">
+					<div class="d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-start justify-content-sm-center align-items-sm-start justify-content-md-center align-items-md-start justify-content-lg-center align-items-lg-start justify-content-xl-center align-items-xl-start justify-content-xxl-center align-items-xxl-center" style='background: url("{{ game.get_map_url }}") center;height: 75%;width: 100%;border-radius: 19px;border-bottom-right-radius: 0px;border-bottom-left-radius: 0px;'>
+						<div class="d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex align-items-start align-items-sm-start align-items-md-start align-items-lg-start align-items-xl-start align-items-xxl-start" style="width: 100%;height: 100%;">
+							{% if game.power_ups %}
+							<svg class="icon icon-tabler icon-tabler-rocket" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 30px;background: var(--bs-orange);backdrop-filter: blur(0px);-webkit-backdrop-filter: blur(0px);border-radius: 20px;color: var(--bs-body-bg);margin-left: 6px;margin-right: 6px;margin-top: 5px;margin-bottom: 5px;border: 3px solid var(--bs-body-bg);" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
+								<path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
+								<path d="M4 13a8 8 0 0 1 7 7a6 6 0 0 0 3 -5a9 9 0 0 0 6 -8a3 3 0 0 0 -3 -3a9 9 0 0 0 -8 6a6 6 0 0 0 -5 3"></path>
+								<path d="M7 14a6 6 0 0 0 -3 6a6 6 0 0 0 6 -3"></path>
+								<path d="M15 9m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"></path>
+							</svg>
+							{% endif %}
+						</div>
+						<div class="d-flex d-xl-flex d-xxl-flex flex-column justify-content-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="width: 100%;height: 100%;backdrop-filter: blur(30px);-webkit-backdrop-filter: blur(30px);border-radius: 19px;border-bottom-right-radius: 0px;border-bottom-left-radius: 0px;border-top-left-radius: 0px;">
+							<div class="d-flex d-xl-flex d-xxl-flex justify-content-start align-items-center justify-content-sm-start justify-content-md-start justify-content-xl-start align-items-xl-center justify-content-xxl-start align-items-xxl-center" style="width: 100%;padding-left: 8px;padding-right: 8px;height: 100%;">
+								<svg class="icon icon-tabler icon-tabler-device-gamepad-2" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 25px;color: rgb(255,255,255);margin-right: 3px;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
+									<path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
+									<path d="M12 5h3.5a5 5 0 0 1 0 10h-5.5l-4.015 4.227a2.3 2.3 0 0 1 -3.923 -2.035l1.634 -8.173a5 5 0 0 1 4.904 -4.019h3.4z"></path>
+									<path d="M14 15l4.07 4.284a2.3 2.3 0 0 0 3.925 -2.023l-1.6 -8.232"></path>
+									<path d="M8 9v2"></path>
+									<path d="M7 10h2"></path>
+									<path d="M14 10h2"></path>
+								</svg>
+								<h6 style="color: var(--bs-body-bg);margin-bottom: 0px;text-shadow: 0px 0px 4px var(--bs-emphasis-color);">
+									{{ game.name }}
+								</h6>
+							</div>
+							<div class="text-truncate d-flex d-xl-flex d-xxl-flex justify-content-start align-items-center justify-content-sm-start justify-content-md-start justify-content-xl-start align-items-xl-center justify-content-xxl-start align-items-xxl-center" style="width: 100%;padding-left: 8px;padding-right: 8px;height: 100%;">
+								<svg class="icon icon-tabler icon-tabler-user-circle" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 25px;color: var(--bs-primary-border-subtle);margin-right: 3px;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
+									<path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
+									<path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+									<path d="M12 10m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"></path>
+									<path d="M6.168 18.849a4 4 0 0 1 3.832 -2.849h4a4 4 0 0 1 3.834 2.855"></path>
+								</svg>
+								<h6 class="text-truncate" data-bs-toggle="tooltip" data-bss-tooltip="" style="color: var(--bs-body-bg);margin-bottom: 0px;text-shadow: 0px 0px 4px var(--bs-emphasis-color);max-width: 140px;" title="{{ game.host }}">
+									{{ game.host }}
+								</h6>
+							</div>
+							<div class="d-flex d-xl-flex d-xxl-flex justify-content-start align-items-center justify-content-sm-start justify-content-md-start justify-content-xl-start align-items-xl-center justify-content-xxl-start align-items-xxl-center" style="width: 100%;padding-left: 8px;padding-right: 8px;height: 100%;">
+								<svg class="icon icon-tabler icon-tabler-target-arrow" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 25px;color: var(--bs-yellow);margin-right: 3px;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
+									<path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
+									<path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"></path>
+									<path d="M12 7a5 5 0 1 0 5 5"></path>
+									<path d="M13 3.055a9 9 0 1 0 7.941 7.945"></path>
+									<path d="M15 6v3h3l3 -3h-3v-3z"></path>
+									<path d="M15 9l-3 3"></path>
+								</svg>
+								<h6 style="color: var(--bs-body-bg);margin-bottom: 0px;text-shadow: 0px 0px 4px var(--bs-emphasis-color);">
+									Score: {{ game.win_score }}
+								</h6>
+							</div>
+							<div class="d-flex d-xl-flex d-xxl-flex justify-content-start align-items-center justify-content-sm-start justify-content-md-start justify-content-xl-start align-items-xl-center justify-content-xxl-start align-items-xxl-center" style="width: 100%;padding-left: 8px;padding-right: 8px;height: 100%;">
+								<svg class="icon icon-tabler icon-tabler-users-group" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 25px;color: var(--bs-info);margin-right: 3px;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
+									<path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
+									<path d="M10 13a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path>
+									<path d="M8 21v-1a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2v1"></path>
+									<path d="M15 5a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path>
+									<path d="M17 10h2a2 2 0 0 1 2 2v1"></path>
+									<path d="M5 5a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path>
+									<path d="M3 13v-1a2 2 0 0 1 2 -2h2"></path>
+								</svg>
+								<h6 style="color: var(--bs-body-bg);margin-bottom: 0px;text-shadow: 0px 0px 4px var(--bs-emphasis-color);">
+									{{ game.get_player_count }}/{{ game.player_limit }}
+								</h6>
+							</div>
+						</div>
+					</div>
+					<button data-game-id="{{ game.id }}" class="btn btn-primary d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center join-game-btn" style="width: 100%;background: rgba(145,189,254,0);text-shadow: 1px 2px 3px rgb(0,0,0);border-bottom-left-radius: 19px;border-bottom-right-radius: 19px;height: 25%;border-top-style: none;border-right-style: none;border-bottom-style: none;border-left-style: none;" type="button">
+						<svg class="icon icon-tabler icon-tabler-brand-apple-arcade" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 25px;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
+							<path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
+							<path d="M12 5m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
+							<path d="M20 12.5v4.75a.734 .734 0 0 1 -.055 .325a.704 .704 0 0 1 -.348 .366l-5.462 2.58a5 5 0 0 1 -4.27 0l-5.462 -2.58a.705 .705 0 0 1 -.401 -.691l0 -4.75"></path>
+							<path d="M4.431 12.216l5.634 -2.332a5.065 5.065 0 0 1 3.87 0l5.634 2.332a.692 .692 0 0 1 .028 1.269l-5.462 2.543a5.064 5.064 0 0 1 -4.27 0l-5.462 -2.543a.691 .691 0 0 1 .028 -1.27z"></path>
+							<path d="M12 7l0 6"></path>
+						</svg>
+						Join
+					</button>
+				</div>
+			</div>
+			{% endfor %}
+			{% if games.count == 0 %}
+			<div class="d-flex justify-content-center align-items-center" style="width: 100%;height: 160px;margin-top: 5px;margin-bottom: 5px;margin-left: 5px;margin-right: 5px;">
+				<h1 style="color: var(--bs-gray-700);font-weight: bold;opacity: 0.50;">
+					🕹️ NO GAMES
+				</h1>
+			</div>
+			{% endif %}
 		</div>
 	</div>
+</div>
+<div id="modalFilter" class="modal fade" role="dialog" tabindex="-1">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header d-flex justify-content-center align-items-center" style="border-style: none;border-radius: 7px 7px 0px 0px;border-top-left-radius: 5px;background: var(--bs-gray-800);padding-left: 0px;padding-right: 0px;border-top-right-radius: 5px;">
+				<svg class="icon icon-tabler icon-tabler-filter-edit" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" style="font-size: 29px;margin-left: 5px;margin-right: 5px;color: var(--bs-body-bg);">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M10.97 20.344l-1.97 .656v-8.5l-4.48 -4.928a2 2 0 0 1 -.52 -1.345v-2.227h16v2.172a2 2 0 0 1 -.586 1.414l-4.414 4.414v1.5"></path>
+                    <path d="M18.42 15.61a2.1 2.1 0 0 1 2.97 2.97l-3.39 3.42h-3v-3l3.42 -3.39z"></path>
+                </svg>
+                <h4 class="modal-title" style="font-weight: bold;color: var(--bs-body-bg);">
+					Filters
+				</h4>
+            </div>
+            <div class="modal-body d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-start justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center" style="height: 100%;width: 100%;color: var(--bs-body-bg);border-style: none;background: var(--bs-body-color);">
+                <div class="d-flex d-xl-flex d-xxl-flex flex-column justify-content-center align-items-center justify-content-xl-center justify-content-xxl-center align-items-xxl-center" style="width: 100%;height: 100%;border-radius: 19px;margin-left: 10px;margin-right: 10px;color: var(--bs-emphasis-color);background: var(--bs-gray-800);border-style: none;">
+                    <h1 class="fs-5 d-flex d-xxl-flex justify-content-center align-items-center align-items-xxl-center" style="padding-top: 3px;padding-bottom: 3px;margin-top: 15px;margin-bottom: 15px;font-weight: bold;color: var(--bs-body-bg);text-shadow: 2px 3px 3px var(--bs-emphasis-color);">
+						Map
+						<svg class="icon icon-tabler icon-tabler-soccer-field" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" style="font-size: 22px;margin-left: 5px;margin-right: 5px;">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M12 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"></path>
+                            <path d="M3 9h3v6h-3z"></path>
+                            <path d="M18 9h3v6h-3z"></path>
+                            <path d="M3 5m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z"></path>
+                            <path d="M12 5l0 14"></path>
+                        </svg>
+					</h1>
+                    <div style="margin-top: 10px;margin-bottom: 10px;">
+                        <div class="form-check">
+							<input id="formCheckMap1" class="form-check-input" type="checkbox" />
+							<label class="form-check-label" for="formCheckMap1" style="font-weight: bold;color: var(--bs-body-bg);">
+								Map 1
+							</label>
+						</div>
+                        <div class="form-check">
+							<input id="formCheckMap2" class="form-check-input" type="checkbox" />
+							<label class="form-check-label" for="formCheckMap2" style="font-weight: bold;color: var(--bs-body-bg);">
+								Map 2
+							</label>
+						</div>
+                        <div class="form-check">
+							<input id="formCheckMap3" class="form-check-input" type="checkbox" />
+							<label class="form-check-label" for="formCheckMap3" style="font-weight: bold;color: var(--bs-body-bg);">
+								Map 3
+							</label>
+						</div>
+                    </div>
+                </div>
+                <div class="d-flex d-xxl-flex flex-column justify-content-center align-items-center align-items-sm-center justify-content-xxl-center align-items-xxl-center" style="border-radius: 19px;color: var(--bs-emphasis-color);margin-left: 10px;margin-right: 10px;height: 100%;width: 100%;background: var(--bs-gray-800);border-style: none;">
+                    <h4 class="fs-5 d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="margin-top: 15px;margin-bottom: 15px;font-weight: bold;color: var(--bs-body-bg);text-shadow: 2px 3px 3px var(--bs-emphasis-color);">
+						Powerups
+						<svg class="icon icon-tabler icon-tabler-rocket" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" style="font-size: 22px;margin-left: 5px;margin-right: 5px;color: var(--bs-orange);">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M4 13a8 8 0 0 1 7 7a6 6 0 0 0 3 -5a9 9 0 0 0 6 -8a3 3 0 0 0 -3 -3a9 9 0 0 0 -8 6a6 6 0 0 0 -5 3"></path>
+                            <path d="M7 14a6 6 0 0 0 -3 6a6 6 0 0 0 6 -3"></path>
+                            <path d="M15 9m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"></path>
+                        </svg>
+					</h4>
+                    <div style="margin-top: 10px;margin-bottom: 10px;">
+                        <div class="form-check">
+							<input id="formCheckPup1" class="form-check-input" type="checkbox" />
+							<label class="form-check-label" for="formCheckPup1" style="font-weight: bold;color: var(--bs-body-bg);">
+								Paddle Grow
+							</label>
+						</div>
+                        <div class="form-check" style="color: var(--bs-body-bg);">
+							<input id="formCheckPup2" class="form-check-input" type="checkbox" />
+							<label class="form-check-label" for="formCheckPup2" style="font-weight: bold;">
+								Blockers
+							</label>
+						</div>
+                        <div class="form-check">
+							<input id="formCheckPup3" class="form-check-input" type="checkbox" />
+							<label class="form-check-label" for="formCheckPup3" style="font-weight: bold;color: var(--bs-body-bg);">
+								Bouncy Ball
+							</label>
+						</div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" style="background: var(--bs-body-color);border-style: none;border-top-style: none;border-bottom-right-radius: 5px;border-bottom-left-radius: 5px;">
+				<button class="btn btn-light" type="button" data-bs-dismiss="modal">
+					Close
+				</button>
+				<button class="btn btn-primary" type="button">
+					Apply Filters
+				</button>
+			</div>
+        </div>
+    </div>
 </div>
 {% endblock %}

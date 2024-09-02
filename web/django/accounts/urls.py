@@ -17,12 +17,13 @@ authpatterns = [
 
 oauthpatterns = [
 	path('42/login/', views.fortytwo_login, name='fortytwo_login'),
+	path('42/unlink/', views.fortytwo_unlink, name='fortytwo_unlink'),
 	path('42/callback/', views.fortytwo_callback, name='fortytwo_callback'),
 ]
 
 tknpatterns = [
 	path('refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path('verify/', TokenVerifyView.as_view(), name='token_verify'),
+    path('verify/', views.token_verify, name='token_verify'),
 ]
 
 urlpatterns = [

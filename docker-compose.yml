@@ -25,6 +25,7 @@ services:
       - "8080:8080" # HTTP -> Django
       - "8443:8443" # HTTPS
       - "8200:8200" # Vault
+      # - "6379:6379" # Redis
       # - "9187:9187" # Postgres Exporter
       # - "9090:9090" # Prometheus
       # - "3000:3000" # Grafana
@@ -64,13 +65,16 @@ services:
     networks:
       - backend
     volumes:
-      - ./web/django/accounts:/django/accounts
-      - ./web/django/pong:/django/pong
-      - ./web/django/static:/django/static
-      - ./web/django/templates:/django/templates
-      - ./web/django/locale:/django/locale
+      - ./web/django:/django
       - elk-data:/logstash
       - django-token:/django/secrets:ro
+
+  redis:
+    image: redis:7.4.0-alpine3.20
+    container_name: redis
+    env_file: .env
+    networks:
+      - backend
 
   postgres:
     build: ./web/postgres

@@ -1,0 +1,7 @@
+{% load static %}
+{% load i18n %}
+{% if game.started_at %}
+{% include "games/game_score.html" %}
+{% else %}
+{% include "games/game_player.html" %}
+{% endif %}

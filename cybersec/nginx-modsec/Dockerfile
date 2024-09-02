@@ -7,5 +7,6 @@ COPY ./conf/grafana.conf /etc/nginx/conf.d/grafana.conf
 COPY ./conf/elasticsearch.conf /etc/nginx/conf.d/elasticsearch.conf
 COPY ./conf/logstash.conf /etc/nginx/conf.d/logstash.conf
 COPY ./conf/kibana.conf /etc/nginx/conf.d/kibana.conf
+COPY ./conf/redis.conf /etc/nginx/conf.d/redis.conf
 
 EXPOSE 8080 8443
