@@ -1,6 +1,6 @@
 FROM python:3.10.14-alpine3.20
 
-RUN apk add curl
+RUN apk add curl gettext
 
 RUN mkdir -p /django/secrets
 WORKDIR /django
@@ -15,5 +15,5 @@ COPY . /django/
 
 EXPOSE 8000
 
-CMD ["sh", "-c", "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"]
-# CMD ["sh", "-c", "python manage.py makemigrations && python manage.py migrate && daphne -b 0.0.0.0 -p 8000 pong.asgi:application"]
+CMD ["sh", "-c", "django-admin compilemessages && python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"]
+# CMD ["sh", "-c", "django-admin compilemessages && python manage.py makemigrations && python manage.py migrate && daphne -b 0.0.0.0 -p 8000 pong.asgi:application"]

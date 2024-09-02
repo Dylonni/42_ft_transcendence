@@ -179,6 +179,21 @@ LOCALE_PATHS = [
 ]
 
 
+LANGUAGES = [
+    ('en', 'English'),
+    ('es', 'Spanish'),
+    ('fr', 'French'),
+    ('it', 'Italian'),
+    ('ja', 'Japanese'),
+    ('ug', 'Uyghur')
+]
+
+
+LOCALE_PATHS = [
+    os.path.join(BASE_DIR, 'locale'),
+]
+
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
