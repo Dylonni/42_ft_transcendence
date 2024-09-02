@@ -5,7 +5,19 @@ document.addEventListener("DOMContentLoaded", () => {
     let friendChatSocket = null;
     let gameChatSocket = null;
     let gamePlaySocket = null;
-    let gameState = null;
+
+    let showCanvas = false;
+    let lastState = null;
+    let currentState = null;
+    let lastTimestamp = 0;
+    let currentTimestamp = 0;
+
+    let player = null;
+    let direction = 0;
+    let keyDown = 0;
+    let isMouseDown = false;
+    let mouseDown = 0;
+    let mouseY = 0;
     let playCanvas = null;
     let ctx = null;
 
@@ -286,10 +298,52 @@ document.addEventListener("DOMContentLoaded", () => {
 
         gamePlaySocket.onmessage = (event) => {
             const data = JSON.parse(event.data);
-            const action = data['action'];
-            if (action === 'update_state') {
-                gameState = data.game_state;
-                renderGame(gameState);
+            if (data.game_state) {
+                lastState = currentState;
+                lastTimestamp = currentTimestamp;
+                currentState = data.game_state;
+                currentTimestamp = performance.now();
+                if (!showCanvas && currentState.game_running) {
+                    const pongDiv = document.getElementById('pongDiv');
+                    if (pongDiv) {
+                        pongDiv.classList.remove('d-none', 'd-xxl-none');
+                    }
+                    const gameInfoDiv = document.getElementById('gameInfoDiv');
+                    if (gameInfoDiv) {
+                        gameInfoDiv.classList.add('d-none', 'd-xxl-none');
+                    }
+                    gameLoop();
+                    showCanvas = true;
+                }
+                if (showCanvas && !currentState.game_running) {
+                    ctx.clearRect(0, 0, playCanvas.width, playCanvas.height);
+                    const pongDiv = document.getElementById('pongDiv');
+                    if (pongDiv) {
+                        pongDiv.classList.add('d-none', 'd-xxl-none');
+                    }
+                    const gameInfoDiv = document.getElementById('gameInfoDiv');
+                    if (gameInfoDiv) {
+                        gameInfoDiv.classList.remove('d-none', 'd-xxl-none');
+                    }
+                    showCanvas = false;
+                }
+            } else if (data.countdown) {
+                const countdownSpan = document.getElementById('countdownSpan');
+                if (countdownSpan) {
+                    countdownSpan.textContent = data.countdown + ' seconds';
+                }
+            } else if (data.ready) {
+                const readyDiv = document.getElementById('readyDiv');
+                if (readyDiv) {
+                    readyDiv.innerHTML = data.ready;
+                }
+            } else if (data.redirect) {
+                navigateTo(data.redirect);
+            } else if (data.header) {
+                const playerSection = document.getElementById('playerSection');
+                if (playerSection) {
+                    playerSection.innerHTML = data.header;
+                }
             }
         };
 
@@ -300,21 +354,67 @@ document.addEventListener("DOMContentLoaded", () => {
         gamePlaySocket.onerror = (error) => {
             console.error('Game Play WebSocket error:', error);
         };
-    };
 
-    const renderGame = () => {
-        if (!gameState || !playCanvas || !ctx) return;
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = "#FFFFFF";
-        ctx.fillRect(gameState.player1_x, gameState.player1_y, gameState.paddle_width, gameState.paddle_height);
-        ctx.fillStyle = "#FFFFFF";
-        ctx.fillRect(gameState.player2_x, gameState.player2_y, gameState.paddle_width, gameState.paddle_height);
-        ctx.beginPath();
-        ctx.arc(gameState.ball_x, gameState.ball_y, gameState.ball_radius, 0, Math.PI * 2);
-        ctx.fillStyle = "#FFFFFF";
-        ctx.fill();
-        ctx.closePath();
-    }
+        const interpolateState = (state1, state2, t) => {
+            return {
+                player1_y: state1.player1_y + (state2.player1_y - state1.player1_y) * t,
+                player2_y: state1.player2_y + (state2.player2_y - state1.player2_y) * t,
+                ball_x: state1.ball_x + (state2.ball_x - state1.ball_x) * t,
+                ball_y: state1.ball_y + (state2.ball_y - state1.ball_y) * t,
+                player1_score: state1.player1_score,
+                player2_score: state1.player2_score,
+                // Any other game state variables
+                game_running: state1.game_running,
+                paddle_height: state1.paddle_height,
+                ball_size: state1.ball_size,
+                countdown: state1.countdown,
+            };
+        };
+
+        const gameLoop = () => {
+            if (currentTimestamp && lastTimestamp && (currentTimestamp !== lastTimestamp)) {
+                const now = performance.now();
+                const interpolationFactor = Math.min(1, (now - lastTimestamp) / (currentTimestamp - lastTimestamp));
+                let stateToRender;
+                if (lastState && currentState) {
+                    stateToRender = interpolateState(lastState, currentState, interpolationFactor);
+                } else {
+                    stateToRender = currentState || lastState;
+                }
+                renderGame(stateToRender);
+            } else {
+                renderGame(currentState || lastState);
+            }
+            requestAnimationFrame(gameLoop);
+        };
+
+        const renderGame = (stateToRender) => {
+            if (!stateToRender || !playCanvas || !ctx) return;
+
+            ctx.clearRect(0, 0, playCanvas.width, playCanvas.height);
+
+            ctx.fillStyle = 'white';
+            ctx.fillRect(0, stateToRender.player1_y, 10, stateToRender.paddle_height);
+            ctx.fillRect(playCanvas.width - 10, stateToRender.player2_y, 10, stateToRender.paddle_height);
+
+            ctx.fillRect(stateToRender.ball_x, stateToRender.ball_y, stateToRender.ball_size, stateToRender.ball_size);
+
+            for (let i = 0; i < playCanvas.height; i += 20) {
+                ctx.fillRect(playCanvas.width / 2 - 1, i, 2, 10);
+            }
+
+            ctx.font = '20px Arial';
+            ctx.fillText(stateToRender.player1_score, playCanvas.width / 4, 30);
+            ctx.fillText(stateToRender.player2_score, 3 * playCanvas.width / 4, 30);
+
+            if (stateToRender.countdown) {
+                ctx.font = '50px Arial';
+                ctx.fillStyle = 'white';
+                ctx.textAlign = 'center';
+                ctx.fillText(stateToRender.countdown, playCanvas.width / 2, playCanvas.height / 2);
+            }
+        };
+    };
 
     const attachHandlers = () => {
         const path = window.location.pathname;
@@ -324,6 +424,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         closeWebSocket(friendChatSocket);
         closeWebSocket(gameChatSocket);
+        closeWebSocket(gamePlaySocket);
         switch (subdirectory) {
             case 'home':
                 homePage();
@@ -646,6 +747,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (pathParts.length > 2 && pathParts[2].length == 36) {
             const gameId = pathParts[2];
             openGameChatWebSocket(gameId);
+            openGamePlayWebSocket(gameId);
 
             const inviteRandomBtn = document.getElementById('inviteRandomBtn');
             if (inviteRandomBtn) {
@@ -729,13 +831,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     .then(response => response.json())
                     .then(data => {
                         console.log('Game started:', data);
-                        const pongDiv = document.getElementById('pongDiv');
-                        if (pongDiv) {
-                            pongDiv.classList.remove('d-none', 'd-xxl-none');
-                        }
-                        const gameInfoDiv = document.getElementById('gameInfoDiv');
-                        if (gameInfoDiv) {
-                            gameInfoDiv.classList.add('d-none', 'd-xxl-none');
+                        if (gamePlaySocket) {
+                            const message = {action: 'next_round'};
+                            gamePlaySocket.send(JSON.stringify(message));
                         }
                     })
                     .catch(error => console.error('Error starting game:', error));
@@ -745,21 +843,68 @@ document.addEventListener("DOMContentLoaded", () => {
             playCanvas = document.getElementById('playCanvas');
             if (playCanvas) {
                 ctx = playCanvas.getContext('2d');
-                playCanvas.addEventListener('mousemove', (event) => {
-                    const rect = playCanvas.getBoundingClientRect();
-                    const mouseY = event.clientY - rect.top;
-                    if (gamePlaySocket) {
-                        const message = {player: 'player1', action: 'move_paddle', position: mouseY};
-                        gamePlaySocket.send(JSON.stringify(message));
+                document.addEventListener('keydown', (event) => {
+                    if (playCanvas) {
+                        if (event.key === 'z' || event.key === 'ArrowUp') {
+                            direction = -1;
+                            sendKeyDirection();
+                        } else if (event.key === 's' || event.key === 'ArrowDown') {
+                            direction = 1;
+                            sendKeyDirection();
+                        }
                     }
                 });
+
+                playCanvas.addEventListener('mousedown', (event) => {
+                    const rect = playCanvas.getBoundingClientRect();
+                    mouseY = event.clientY - rect.top;
+                    isMouseDown = true;
+                    mouseDown = setInterval(sendMousePosition, 16);
+                });
+
+                playCanvas.addEventListener('mousemove', (event) => {
+                    if (isMouseDown) {
+                        const rect = playCanvas.getBoundingClientRect();
+                        mouseY = event.clientY - rect.top;
+                    }
+                });
+
+                playCanvas.addEventListener('mouseup', () => {
+                    isMouseDown = false;
+                    clearInterval(mouseDown);
+                });
+
+                playCanvas.addEventListener('mouseleave', () => {
+                    isMouseDown = false;
+                    clearInterval(mouseDown);
+                });
+
+                const sendKeyDirection = () => {
+                    if (gamePlaySocket) {
+                        gamePlaySocket.send(JSON.stringify({
+                            action: 'move_key',
+                            direction: direction,
+                            player: player,
+                        }));
+                    }
+                };
+
+                const sendMousePosition = () => {
+                    if (gamePlaySocket) {
+                        gamePlaySocket.send(JSON.stringify({
+                            action: 'move_mouse',
+                            position: mouseY,
+                            player: player,
+                        }));
+                    }
+                };
 
                 playCanvas.addEventListener('touchmove', (event) => {
                     event.preventDefault();
                     const touch = event.touches[0];
                     const rect = playCanvas.getBoundingClientRect();
-                    const y = touch.clientY - rect.top;
-                    // TODO: send action through websocket
+                    mouseY = touch.clientY - rect.top;
+                    sendMousePosition();
                 });
             }
         }

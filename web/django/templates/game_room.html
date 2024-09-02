@@ -12,17 +12,13 @@
 			<h1 class="fs-5 d-flex justify-content-center align-items-center" style="color: var(--bs-primary-border-subtle);margin-bottom: 0px;margin-top: 0px;text-shadow: 2px 1px 3px var(--bs-primary-border-subtle);">
 				{{ game.name }}
 			</h1>
-			{% if game.has.started %}
-			<div class="d-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center flex-wrap justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="width: 100%;margin-bottom: 0px;margin-top: 0px;">
-				{% include "games/game_score.html" %}
-			</div>
-			{% else %}
+			<!-- <div class="d-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center flex-wrap justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="width: 100%;margin-bottom: 0px;margin-top: 0px;">
+			</div> -->
 			<div class="d-md-flex d-lg-flex d-xl-flex d-xxl-flex flex-wrap justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="width: 100%;margin-bottom: 0px;margin-top: 0px;">
 				<div id="playerSection" class="d-flex flex-shrink-1 justify-content-center align-items-center align-content-around flex-wrap justify-content-sm-center align-items-sm-center justify-content-xl-center justify-content-xxl-center align-items-xxl-center" style="width: 100%; height: 157px;margin-top: 0px;margin-bottom: 5px;">
-					{% include "games/game_player.html" %}
+					{% include "games/game_header.html" %}
 				</div>
 			</div>
-			{% endif %}
 		</div>
 	</div>
 </div>
@@ -39,10 +35,10 @@
 					Leave Room
 				</button>
 			</div>
-			{% if game.has_started %}
-			<div class="d-flex justify-content-end align-items-center justify-content-sm-end justify-content-md-end justify-content-lg-end justify-content-xl-end" style="width: 100%;border-radius: 20px;border: 2px none #fcd856;padding-left: 0px;padding-right: 0px;">
+			{% if game.started_at %}
+			<div id="gameTimer" class="d-flex justify-content-end align-items-center justify-content-sm-end justify-content-md-end justify-content-lg-end justify-content-xl-end" style="width: 100%;border-radius: 20px;border: 2px none #fcd856;padding-left: 0px;padding-right: 0px;">
 			{% else %}
-			<div class="d-none d-xxl-none d-flex justify-content-end align-items-center justify-content-sm-end justify-content-md-end justify-content-lg-end justify-content-xl-end" style="width: 100%;border-radius: 20px;border: 2px none #fcd856;padding-left: 0px;padding-right: 0px;">
+			<div id="gameTimer" class="d-none d-xxl-none d-flex justify-content-end align-items-center justify-content-sm-end justify-content-md-end justify-content-lg-end justify-content-xl-end" style="width: 100%;border-radius: 20px;border: 2px none #fcd856;padding-left: 0px;padding-right: 0px;">
 			{% endif %}	
 				<h1 class="text-nowrap fs-3 d-xxl-flex justify-content-xxl-end align-items-xxl-center" style="margin-bottom: 0px;margin-left: 5px;margin-right: 5px;">
 					<svg class="icon icon-tabler icon-tabler-hourglass-high" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" style="color: #fcd856;font-size: 25px;">
@@ -61,16 +57,16 @@
 </div>
 <div class="container">
 	<div class="row d-lg-flex d-xl-flex d-xxl-flex justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center">
-		{% if game.has_started %}
-		<div class="col-md-12 col-lg-12 d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="border-style: none;padding-top: 0px;padding-bottom: 0px;">
-			<canvas id="pongOnlineCanvas" width="1000" height="600" style="background-color: #000;border: 2px solid #fff;"></canvas>
+		{% if game.started_at %}
+		<div id="pongDiv" class="col-md-12 col-lg-12 d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="border-style: none;padding-top: 0px;padding-bottom: 0px;">
+			<canvas id="playCanvas" width="1000" height="600" style="background-color: #000;border: 2px solid #fff;"></canvas>
 		</div>
 		{% else %}
-		<div class="col-md-12 col-lg-12 d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="border-style: none;padding-top: 0px;padding-bottom: 0px;">
-			<canvas id="pongOnlineCanvas" width="1000" height="600" style="background-color: #000;border: 2px solid #fff;"></canvas>
+		<div id="pongDiv" class="d-none d-xxl-none col-md-12 col-lg-12 d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="border-style: none;padding-top: 0px;padding-bottom: 0px;">
+			<canvas id="playCanvas" width="1000" height="600" style="background-color: #000;border: 2px solid #fff;"></canvas>
 		</div>
 		{% endif %}
-		<div class="col-md-12 col-lg-11 col-xl-11 col-xxl-10 d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="border-style: none;height: 100%;">
+		<div id="gameInfoDiv" class="col-md-12 col-lg-11 col-xl-11 col-xxl-10 d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="border-style: none;height: 100%;">
 			<div class="card" style="height: 100%;width: 100%;color: var(--bs-body-bg);border-radius: 19px;border-style: none;">
 				<div class="card-body d-flex d-lg-flex d-xl-flex d-xxl-flex flex-column justify-content-start align-items-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start" style="background: #121415;backdrop-filter: blur(0px);-webkit-backdrop-filter: blur(0px);width: 100%;height: 100%;padding-top: 0px;padding-bottom: 0px;box-shadow: 0px 0px 10px 2px var(--bs-gray-800);padding-left: 0px;padding-right: 0px;border-radius: 19px;">
 					<div style="width: 100%;">
@@ -252,73 +248,8 @@
 							<div class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="width: 80%;height: 50%;">
 								<img src="assets/img/resized.webp" width="569" height="245" style="border-radius: 20px;width: 80%;height: auto;">
 							</div>
-							<div class="d-flex d-sm-flex d-md-flex d-lg-flex d-xxl-flex flex-column justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xxl-center align-items-xxl-center" style="width: 100%;height: 50%;border-radius: 20px;margin-bottom: 0px;margin-top: 15px;padding-bottom: 0px;padding-top: 0px;opacity: 1;backdrop-filter: blur(0px);-webkit-backdrop-filter: blur(0px);border-style: none;">
-								<h4 class="d-flex d-sm-flex d-md-flex d-xl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-xl-center" style="margin-top: 0px;width: 80%;padding-bottom: 0px;margin-bottom: 0px;">
-									Get Ready !
-								</h4>
-								<div class="d-flex d-xxl-flex flex-row justify-content-center align-items-center align-items-lg-center justify-content-xl-center justify-content-xxl-end" style="width: 100%;height: auto;border-radius: 20px;border-top-left-radius: 20px;border-top-right-radius: 20px;position: relative;z-index: 1;padding-left: 45px;padding-right: 45px;" title="Room Owner">
-									<div class="text-nowrap text-truncate d-flex d-lg-flex d-xxl-flex flex-column justify-content-center align-items-center justify-content-lg-center align-items-lg-center justify-content-xxl-center versusCard" style="width: 100%;height: 100%;text-overflow: ellipsis;margin-left: 0px;margin-right: 0px;margin-top: 0px;margin-bottom: 0px;position: relative;padding-left: 0px;padding-right: 0px;padding-top: 5px;padding-bottom: 5px;">
-										<div class="d-flex justify-content-center align-items-center" style="width: 80px;height: 80px;border-style: solid;border-radius: 50%;">
-											<img class="player-ready d-none" style="width: 90%;height: 90%;padding-top: 0px;padding-bottom: 0px;padding-left: 0px;padding-right: 0px;">
-										</div>
-										<h1 class="text-truncate fs-4 text-center" style="width: 100%;text-shadow: 3px 3px 3px var(--bs-emphasis-color);padding-bottom: 0px;border-radius: 50%;">
-											Player_1
-										</h1>
-									</div>
-									<div class="d-flex d-lg-flex d-xxl-flex justify-content-center align-items-center justify-content-lg-center align-items-lg-center justify-content-xxl-center" style="width: 30%;height: 100%;margin-bottom: 0px;">
-										<h1 class="text-center" style="font-weight: bold;">
-											VS
-										</h1>
-									</div>
-									<div class="text-nowrap text-truncate d-flex d-lg-flex d-xxl-flex flex-column justify-content-center align-items-center justify-content-lg-center align-items-lg-center justify-content-xxl-center versusCard" style="width: 100%;height: 100%;text-overflow: ellipsis;margin-left: 0px;margin-right: 0px;margin-top: 0px;margin-bottom: 0px;position: relative;padding-left: 0px;padding-right: 0px;padding-top: 5px;padding-bottom: 5px;">
-										<div class="d-flex justify-content-center align-items-center" style="width: 80px;height: 80px;border-style: solid;border-radius: 50%;">
-											<img class="player-ready d-none" style="width: 90%;height: 90%;padding-top: 0px;padding-bottom: 0px;padding-left: 0px;padding-right: 0px; border-radius: 50%;">
-										</div>
-										<h1 class="text-truncate fs-4 text-center" style="width: 100%;text-shadow: 3px 3px 3px var(--bs-emphasis-color);padding-bottom: 0px;">
-											Player_2
-										</h1>
-									</div>
-								</div>
-								<div class="d-flex justify-content-center align-items-center" style="width: 100%;">
-									{% if game.host == profile %}
-									{% if game.has_started %}
-									<button id="startGameBtn" class="d-none d-xxl-none btn btn-primary d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="color: rgb(255,255,255);" type="button">
-									{% else %}
-									<button id="startGameBtn" class="btn btn-primary d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="color: rgb(255,255,255);" type="button">
-									{% endif %}	
-										Lock and Start the Game
-										<svg class="icon icon-tabler icon-tabler-device-gamepad-2" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 25px;margin-left: 5px;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
-											<path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
-											<path d="M12 5h3.5a5 5 0 0 1 0 10h-5.5l-4.015 4.227a2.3 2.3 0 0 1 -3.923 -2.035l1.634 -8.173a5 5 0 0 1 4.904 -4.019h3.4z"></path>
-											<path d="M14 15l4.07 4.284a2.3 2.3 0 0 0 3.925 -2.023l-1.6 -8.232"></path>
-											<path d="M8 9v2"></path>
-											<path d="M7 10h2"></path>
-											<path d="M14 10h2"></path>
-										</svg>
-									</button>
-									{% endif %}
-									{% if profile in game.get_next_players %}
-									{% if profile.status == "Ready" %}
-									<button class="disabled btn btn-success d-flex justify-content-center align-items-center" type="button">
-									{% else %}
-									<button class="btn btn-success d-flex justify-content-center align-items-center" type="button">
-									{% endif %}
-										Ready
-										<svg class="icon icon-tabler icon-tabler-check" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 25px;margin-top: 0px;margin-left: 5px;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
-											<path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
-											<path d="M5 12l5 5l10 -10"></path>
-										</svg>
-									</button>
-									{% endif %}
-								</div>
-								<h4 class="text-nowrap text-center d-flex d-sm-flex d-md-flex d-xl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-xl-center" style="color: var(--bs-body-bg);font-weight: bold;border-radius: 10px;padding-left: 10px;padding-right: 10px;margin-top: 30px;margin-bottom: 30px;">
-									<span style="font-weight: normal !important;">
-										Game will start in
-									</span>&nbsp;
-									<span class="text-primary">
-										#TIME seconds
-									</span>
-								</h4>
+							<div id="readyDiv" class="d-flex d-sm-flex d-md-flex d-lg-flex d-xxl-flex flex-column justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xxl-center align-items-xxl-center" style="width: 100%;height: 50%;border-radius: 20px;margin-bottom: 0px;margin-top: 15px;padding-bottom: 0px;padding-top: 0px;opacity: 1;backdrop-filter: blur(0px);-webkit-backdrop-filter: blur(0px);border-style: none;">
+								{% include "games/game_ready.html" %}
 							</div>
 						</div>
 					</div>

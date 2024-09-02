@@ -60,12 +60,8 @@ def get_friendship_context(request):
 
 def get_game_context(context={}):
     try:
-        games = Game.objects.all()
+        games = Game.objects.filter(started_at__isnull=True)
         context['games'] = games
-        # TODO: refactor model to retrieve game host and player count
-        # for i, game in enumerate(games):
-        #     context['games'][i]['host'] = Player.objects.get(game=game, is_host=True).profile.alias
-        #     context['games'][i]['count'] = Player.objects.get(game=game).count()
         return context
     except Game.DoesNotExist:
         return context
@@ -121,7 +117,7 @@ mode_select = ModeSelectView.as_view()
 
 class PlayView(LangVerificationMixin, APIView):
     def get(self, request):
-        return render(request, 'play.html')
+        return render(request, 'games/play.html')
 
 play = PlayView.as_view()
 

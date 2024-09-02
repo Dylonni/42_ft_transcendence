@@ -84,17 +84,21 @@ game_leave = GameLeaveView.as_view()
 
 class GameStartView(PrivateView):
     def post(self, request, game_id):
-        game = get_object_or_404(Game, id=game_id)
-        player = request.profile
-        if not game.can_start(player):
-            response_data = {'error': _('All players must be ready.')}
+        try:
+            game = get_object_or_404(Game, id=game_id)
+            player = request.profile
+            if not game.can_start(player):
+                response_data = {'error': _('All players must be ready.')}
+                return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
+            rounds = GameRound.objects.prepare_rounds(game)
+            Game.objects.start(game)
+            round = Game.objects.get_next_round(game)
+            rounds_data = GameRoundSerializer(rounds, many=True).data
+            response_data = {'message': _('Game started.'), 'data': rounds_data}
+            return Response(response_data, status=status.HTTP_200_OK)
+        except ValueError as e:
+            response_data = {'error': str(e)}
             return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
-        GameRound.objects.start_game(game)
-        round = Game.objects.get_next_round(game)
-        game.start()
-        round_data = GameRoundSerializer(round).data
-        response_data = {'message': _('Game started.'), 'data': round_data}
-        return Response(response_data, status=status.HTTP_200_OK)
 
 game_start = GameStartView.as_view()
 

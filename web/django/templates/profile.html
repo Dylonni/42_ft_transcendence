@@ -125,7 +125,7 @@
 					<h1 class="card-title" style="font-weight: bold;text-align: center;color: {{ profile.user.fortytwo_coalition_color }};">
 						WIN
 					</h1>
-					<img class="d-xxl-flex justify-content-xxl-center align-items-xxl-center" src="{{ round.get_loser_avatar_url }}" style="width: 60px;height: 60px;border-radius: 50%;border-style: solid;border-color: var(--bs-secondary-text-emphasis);"/>
+					<img class="d-xxl-flex justify-content-xxl-center align-items-xxl-center" src="{{ round.get_loser.get_avatar_url }}" style="width: 60px;height: 60px;border-radius: 50%;border-style: solid;border-color: var(--bs-secondary-text-emphasis);"/>
 					<h4 class="text-nowrap text-center card-title" style="margin-bottom: 0px;color: {{ profile.user.fortytwo_coalition_color }};font-weight: bold;">
 					{% if round.player1 == profile %}
 					{{ round.score1 }} - {{ round.score2 }}
@@ -157,9 +157,9 @@
 					{% endif %}
 					</h4>
 					{% if round.player1 == profile %}
-					<a class="btn btn-primary text-nowrap" data-bs-content="Game Duration: {{ round.get_duration }} | Date: {{ round.started_at }}" data-bs-placement="bottom" data-bs-toggle="popover" data-bs-trigger="hover" role="button" style="border-style: none;color: #ffffff;background: rgba(13,110,253,0);" tabindex="0" title="{{ round.player1.alias }}">
-					{% else %}
 					<a class="btn btn-primary text-nowrap" data-bs-content="Game Duration: {{ round.get_duration }} | Date: {{ round.started_at }}" data-bs-placement="bottom" data-bs-toggle="popover" data-bs-trigger="hover" role="button" style="border-style: none;color: #ffffff;background: rgba(13,110,253,0);" tabindex="0" title="{{ round.player2.alias }}">
+					{% else %}
+					<a class="btn btn-primary text-nowrap" data-bs-content="Game Duration: {{ round.get_duration }} | Date: {{ round.started_at }}" data-bs-placement="bottom" data-bs-toggle="popover" data-bs-trigger="hover" role="button" style="border-style: none;color: #ffffff;background: rgba(13,110,253,0);" tabindex="0" title="{{ round.player1.alias }}">
 					{% endif %}
 					Game Details
 					</a>
@@ -414,7 +414,7 @@
 					<h1 class="card-title" style="font-weight: bold;text-align: center;color: var(--bs-primary-border-subtle);">
 						WIN
 					</h1>
-					<img class="d-xxl-flex justify-content-xxl-center align-items-xxl-center" src="{{ round.get_loser }}" style="width: 60px;height: 60px;border-radius: 50%;border-style: solid;border-color: var(--bs-secondary-text-emphasis);"/>
+					<img class="d-xxl-flex justify-content-xxl-center align-items-xxl-center" src="{{ round.get_loser.get_avatar_url }}" style="width: 60px;height: 60px;border-radius: 50%;border-style: solid;border-color: var(--bs-secondary-text-emphasis);"/>
 					<h4 class="text-nowrap text-center card-title" style="margin-bottom: 0px;color: var(--bs-primary-border-subtle);font-weight: bold;">
 					{% if round.player1 == profile %}
 					{{ round.score1 }} - {{ round.score2 }}
@@ -437,7 +437,7 @@
 					<h1 class="card-title" style="font-weight: bold;text-align: center;color: var(--bs-gray-600);">
 						LOSS
 					</h1>
-					<img class="d-xxl-flex justify-content-xxl-center align-items-xxl-center" src="{{ round.winner }}" style="width: 60px;height: 60px;border-radius: 50%;border-style: solid;border-color: var(--bs-secondary-text-emphasis);"/>
+					<img class="d-xxl-flex justify-content-xxl-center align-items-xxl-center" src="{{ round.winner.get_avatar_url }}" style="width: 60px;height: 60px;border-radius: 50%;border-style: solid;border-color: var(--bs-secondary-text-emphasis);"/>
 					<h4 class="text-nowrap text-center card-title" style="margin-bottom: 0px;color: var(--bs-gray-600);font-weight: bold;border-color: var(--bs-gray-600);">
 					{% if round.player1 == profile %}
 					{{ round.score2 }} - {{ round.score1 }}
@@ -446,9 +446,9 @@
 					{% endif %}
 					</h4>
 					{% if round.player1 == profile %}
-					<a class="btn btn-primary text-nowrap" data-bs-content="Game Duration: {{ round.get_duration }} | Date: {{ round.started_at }}" data-bs-placement="bottom" data-bs-toggle="popover" data-bs-trigger="hover" role="button" style="border-style: none;color: #ffffff;background: rgba(13,110,253,0);" tabindex="0" title="{{ round.player1.alias }}">
-					{% else %}
 					<a class="btn btn-primary text-nowrap" data-bs-content="Game Duration: {{ round.get_duration }} | Date: {{ round.started_at }}" data-bs-placement="bottom" data-bs-toggle="popover" data-bs-trigger="hover" role="button" style="border-style: none;color: #ffffff;background: rgba(13,110,253,0);" tabindex="0" title="{{ round.player2.alias }}">
+					{% else %}
+					<a class="btn btn-primary text-nowrap" data-bs-content="Game Duration: {{ round.get_duration }} | Date: {{ round.started_at }}" data-bs-placement="bottom" data-bs-toggle="popover" data-bs-trigger="hover" role="button" style="border-style: none;color: #ffffff;background: rgba(13,110,253,0);" tabindex="0" title="{{ round.player1.alias }}">
 					{% endif %}
 					Game Details
 					</a>

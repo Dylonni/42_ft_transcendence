@@ -1,4 +1,3 @@
-import math
 import random
 import string
 from asgiref.sync import async_to_sync
@@ -8,6 +7,7 @@ from django.db.models import Q
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from notifs.consumers import NotifConsumer
+from .consumers import GamePlayConsumer
 
 
 class GameManager(models.Manager):
@@ -48,7 +48,8 @@ class GameManager(models.Manager):
             raise ValueError(_('Player is not in the game.'))
         player.leave_game()
         if game.players.count() == 0:
-            game.delete()
+            if not game.ended_at:
+                game.delete()
             return
         if game.host == player:
             new_host = game.players.first()
@@ -68,7 +69,33 @@ class GameManager(models.Manager):
     def get_next_round(self, game):
         game.current_order += 1
         game.save()
-        return game.rounds.filter(order=game.current_order).first()
+        round = game.rounds.filter(order=game.current_order).first()
+        if round:
+            channel_layer = get_channel_layer()
+            async_to_sync(channel_layer.group_send)(
+                f'games_chat_{game.id}',
+                {
+                    'type': 'send_prepare_message',
+                    'round_id': str(round.id),
+                }
+            )
+        return round
+    
+    def start(self, game):
+        if game.started_at:
+            raise ValueError(_('Game has already started.'))
+        game.started_at = timezone.now()
+        game.save()
+        for player in game.players.all():
+            player.set_status(player.StatusChoices.PLAYING)
+        # channel_layer = get_channel_layer()
+        # async_to_sync(channel_layer.group_send)(
+        #     f'games_play_{game.id}',
+        #     {
+        #         'type': 'start_game',
+        #         'game_id': str(game.id),
+        #     }
+        # )
     
     def _generate_name(self):
         if self.filter(started_at=None).count() > 100:
@@ -85,6 +112,8 @@ class GameRoundManager(models.Manager):
         return self.filter(Q(player1=player) | Q(player2=player), ended_at__isnull=False).order_by('-started_at')[:20]
     
     def prepare_rounds(self, game):
+        if game.started_at:
+            raise ValueError(_('Game has already started.'))
         players = list(game.players.all())
         random.shuffle(players)
         total_players = len(players)
@@ -101,15 +130,8 @@ class GameRoundManager(models.Manager):
             elif not rounds[round_num].player2:
                 rounds[round_num].player2 = player
                 rounds[round_num].save()
-            else:
                 round_num += 1
         return rounds
-    
-    def start_game(self, game):
-        if game.started_at:
-            raise ValueError(_('Game has already started.'))
-        self.prepare_rounds(game)
-        # TODO: send prepare message
 
 
 class GameInviteManager(models.Manager):

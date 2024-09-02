@@ -1,3 +1,4 @@
+import logging
 import random
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
@@ -78,8 +79,8 @@ class Game(BaseModel):
         null=True,
         blank=True,
     )
-    current_order = models.PositiveSmallIntegerField(
-        default=0,
+    current_order = models.IntegerField(
+        default=-1,
     )
     winner = models.ForeignKey(
         to='profiles.Profile',
@@ -154,14 +155,17 @@ class Game(BaseModel):
         return self
     
     def start(self):
-        self.current_order = 1
+        if self.started_at:
+            return
         self.started_at = timezone.now()
         self.save()
-        for player in self.players.all():
-            player.set_status(player.StatusChoices.PLAYING)
     
     def end(self):
         self.ended_at = timezone.now()
+        self.host = None
+        last_round = self.rounds.order_by('order').last()
+        if last_round and last_round.winner:
+            self.winner = last_round.winner
         self.save()
     
     def get_currently_playing(self):
@@ -223,6 +227,9 @@ class GameRound(BaseModel):
     def __str__(self):
         return f'{self.player1} VS {self.player2}'
     
+    def get_duration(self):
+        return self.ended_at - self.started_at
+    
     def get_loser(self):
         if self.winner:
             return self.player2 if self.winner == self.player1 else self.player1
@@ -235,13 +242,33 @@ class GameRound(BaseModel):
         self.winner = winner
         self.save()
     
+    def update_score(self, score1, score2):
+        self.score1 = score1
+        self.score2 = score2
+        self.save()
+    
     def start(self):
         self.started_at = timezone.now()
         self.save()
     
     def end(self):
         self.ended_at = timezone.now()
+        if self.score1 == self.game.win_score:
+            self.winner = self.player1
+        elif self.score2 == self.game.win_score:
+            self.winner = self.player2
         self.save()
+        # Move winner to next round
+        rounds = self.game.rounds.order_by('order')
+        for round in rounds:
+            if not round.player1:
+                round.player1 = self.winner
+                round.save()
+                break
+            elif not round.player2:
+                round.player2 = self.winner
+                round.save()
+                break
 
 
 class GameInvite(BaseInteraction):

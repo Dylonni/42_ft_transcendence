@@ -44,7 +44,6 @@ class JWTCookieAuthenticationMixin:
         
         try:
             access_token_obj = AccessToken(access_token)
-            logger.info('Valid access token.')
         except TokenError:
             logger.info('Invalid access token. Trying to refresh.')
             if refresh_token is None:
@@ -70,7 +69,6 @@ class JWTCookieAuthenticationMixin:
                     value=lang,
                 )
                 translation.activate(lang)
-            logger.info(f'Authenticated user: {request.user.username}')
         except UserModel.DoesNotExist:
             logger.error('User does not exist.')
             return self._logout_and_redirect(request)
@@ -83,7 +81,6 @@ class JWTCookieAuthenticationMixin:
         return response
     
     def _logout_and_redirect(self, request):
-        logger.info('Logging out.')
         logout(request)
         response = redirect('/login/')
         response.delete_cookie(key='access_token')
