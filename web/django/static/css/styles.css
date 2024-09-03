@@ -94,7 +94,7 @@ body, html {
 }
 
 .navbar-container {
-  transform: translateX(0px);
+  transform: translateX(1rem);
 }
 
 .icon-tabler-arrow-badge-left {
