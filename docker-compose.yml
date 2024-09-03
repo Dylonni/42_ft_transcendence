@@ -58,7 +58,6 @@ services:
       - shared-certs:/etc/ssl/shared
       # - grafana-token:/vault/secrets/mon/grafana
 
-
 # WEB
   django:
     build: ./web/django

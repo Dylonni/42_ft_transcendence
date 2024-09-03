@@ -1,6 +1,19 @@
 ensure all services have a health check
-check again for ssl/tls : when/where needed
+check again for ssl/tls : when/where needed (certbot only if we use an actual web address)
 try to see if a filezilla container would work with the infinity site ?
+
+on bottom of all pages, should be
+    privacy + cookie policy
+    terms of use
+    contact ?
+
+
+look into openclassrooms for api rest
+
+
+WHY IS THE 403 ERROR (DUE TO ATTEMPTED SQL INJECTIONS)
+    NOT SHOWING ON GRAFANA !!!!
+
 
 cybersec
     nginx
@@ -47,6 +60,7 @@ devops
 questions pour la team
 
     apres retrait des "printf debug", et sans modif du code : peut-on visualiser les donnes perso d'un compte ? (email, coa, 42id, photo profil)
+        peut-on acceder au contenu des chats? des DMs?
 
     adresse courriel de contact?
 

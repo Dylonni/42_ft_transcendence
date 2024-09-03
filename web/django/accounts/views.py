@@ -237,6 +237,7 @@ class FortyTwoCallbackView(APIView):
             'client_secret': settings.FORTYTWO_SECRET,
             'code': code, # mine: 'code': request.GET.get('code'),
             'redirect_uri': settings.FORTYTWO_REDIRECT_URI,
+
         })
         token_response = response.json()
         fortytwo_access_token = token_response.get('access_token')

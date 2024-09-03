@@ -88,12 +88,10 @@ Notwithstanding the above, Transcendence42 reserves the right to remove the user
 
 
 
-6. PRIVACY and monitoring
+6. PRIVACY
 Summary: Transcendence42's use of your personal data and our responsibilities in protecting your privacy are described in our Privacy and Cookie Policy.
 
 You understand and agree that subject to applicable laws we may access, disclose or retain personal information, including the content of your communications,  in the good faith belief that we are lawfully authorized or required to do so, or that doing so is reasonably necessary or appropriate to comply with the law or with legal process or authorities,  respond to any claims, or to protect the rights, property or safety of Transcendence42, our users, our employees or the public, including without limitation to protect  Transcendence42 or our users from fraudulent, abusive, inappropriate or unlawful use of our Service.
-
-You understand and agree that when you communicate with other users within the Game or utilize any interactive features available on the Website, such as instant messaging or chat rooms, such communications and postings are transmitted through our servers, and we may, but are not obligated to, monitor all such communications and postings,  Including those that are designated as “private” to the extent permitted by law.  For further information on how we collect and process data about you, please review our Privacy and Cookie Policy.
 
 
 
@@ -113,16 +111,17 @@ Unless otherwise indicated, all logos, names, packaging designs and marks on the
 
 
 
-9. WARRANTIES; limitation of liability
-Summary: We offer no warranties regarding our services and the Platform, including any regarding their quality, reliability, security, or compatibility. YOU WARRANT THAT YOU WILL ABIDE BY AND RESPECT THESE TERMS OF SERVICE AND ANY ADDITIONAL GUIDELINES OF OUR PLATFORM. IF THESE CAUSE YOU ANY HARM, WE WILL NOT BE HELD LIABLE.
+9. WARRANTIES
+Summary: we offer no warranties regarding our services and the platform, including any regarding their quality, reliability, security, or compatibility. You warrant that you will abide by and respect these terms of service and any additional guidelines of our platform. If these cause you any harm, we will not be held liable.
 
-OUR SERVICES AND ALL MATERIALS ON THE WEBSITE AND PLATFORM ARE PROVIDED "AS IS" AND "AS AVAILABLE" AND WITHOUT WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED,  INCLUDING IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. Transcendence42 MAKES NO REPRESENTATIONS OR WARRANTIES ABOUT THE ACCURACY,  COMPLETENESS, OR SUITABILITY OF ANY MATERIAL ON THE WEBSITE, OR ON ANY WEBSITE OR WEBSITES "LINKED" TO THE WEBSITE. Transcendence42 DOES NOT WARRANT THAT  THE WEBSITE AND/OR OUR PLATFORM WILL BE AVAILABLE, UNINTERRUPTED, ERROR-FREE, OR FREE OF VIRUSES OR OTHER HARMFUL COMPONENTS.
-YOU EXPRESSLY UNDERSTAND AND AGREE THAT, SUBJECT TO AND WITHOUT LIMITING ANY NON-EXCLUDABLE RIGHTS:
-a. THE SERVICE, THE GAMES, THE WEBSITE AND ALL MATERIALS CONTAINED THEREIN ARE PROVIDED ON AN “AS IS” AND “AS AVAILABLE” BASIS WITHOUT WARRANTIES OF ANY KIND, EITHER EXPRESS OR IMPLIED. Transcendence42 AND ITS SUBSIDIARIES, AFFILIATES, OFFICERS, EMPLOYEES, AGENTS, PARTNERS AND LICENSORS DISCLAIM ALL OTHER WARRANTIES, EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION, IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, PERFORMANCE OR SUITABILITY FOR YOUR INTENDED USE, TITLE AND NON-INFRINGEMENT, AS TO THE SERVICE, THE GAME AND THE WEBSITE, INCLUDING ALL INFORMATION, CONTENT AND MATERIALS CONTAINED THEREIN. WITHOUT LIMITING THE FOREGOING, Transcendence42 DOES NOT REPRESENT OR WARRANT THAT THE SERVICE, THE GAMES, THE WEBSITE OR THE MATERIALS CONTAINED THEREIN ARE ACCURATE, COMPLETE, RELIABLE, AVAILABLE, CURRENT OR ERROR-FREE. Transcendence42 ALSO DOES NOT REPRESENT OR WARRANT THAT THE GAMES, THE WEBSITE OR ITS SERVERS ARE FREE OF VIRUSES, BUGS, ERRORS OR OTHER HARMFUL COMPONENTS OR DEFECTS, TRANSMIT DATA IN A SECURE MANNER, OR FUNCTION PROPERLY WITH THE SERVICE.
-b. Transcendence42 AND ITS SUBSIDIARIES, AFFILIATES, OFFICERS, EMPLOYEES, AGENTS, PARTNERS AND LICENSORS MAKE NO WARRANTY THAT (I) THE SERVICE WILL MEET YOUR REQUIREMENTS; (II) THE WEBSITE WILL BE UNINTERRUPTED, TIMELY, SECURE OR ERROR-FREE; OR (III) ANY ERRORS IN THE SOFTWARE WILL BE CORRECTED.
-c. WHILE Transcendence42 ATTEMPTS TO MAKE YOUR ACCESS AND USE OF THE SERVICE SAFE, Transcendence42 CANNOT AND DOES NOT REPRESENT OR WARRANT THAT THE SERVICE OR ITS SERVER(S) ARE FREE OF VIRUSES OR OTHER HARMFUL COMPONENTS; THEREFORE, You are responsible for implementing sufficient procedures and checkpoints to meet your specific requirements for accuracy of data input and output, and for maintaining a means outside the Website and Platform for reconstructing lost data  YOU SHOULD USE INDUSTRY-RECOGNIZED SOFTWARE TO DETECT AND DISINFECT VIRUSES FROM ANY DOWNLOAD. ANY MATERIAL DOWNLOADED OR OTHERWISE OBTAINED THROUGH THE USE OF THE WEBSITE OR SERVICE IS ACCESSED AT YOUR OWN DISCRETION AND RISK, AND YOU WILL BE SOLELY RESPONSIBLE FOR ANY DAMAGE TO YOUR COMPUTER SYSTEM OR LOSS OF DATA THAT RESULTS FROM THE DOWNLOAD OF ANY SUCH MATERIAL.
-d. A SMALL PERCENTAGE OF USERS MAY EXPERIENCE EPILEPTIC SEIZURES WHEN EXPOSED TO CERTAIN LIGHT PATTERNS OR BACKGROUNDS ON A COMPUTER SCREEN OR WHILE USING THE WEBSITE OR THE SERVICE. CERTAIN CONDITIONS MAY INDUCE PREVIOUSLY UNDETECTED EPILEPTIC SYMPTOMS EVEN IN USERS WHO HAVE NO HISTORY OF PRIOR SEIZURES OR EPILEPSY. IF YOU, OR ANYONE IN YOUR FAMILY, HAVE AN EPILEPTIC CONDITION, CONSULT YOUR PHYSICIAN PRIOR TO USING THE SERVICE. IMMEDIATELY DISCONTINUE USE OF THE SERVICE AND CONSULT YOUR PHYSICIAN IF YOU EXPERIENCE ANY OF THE FOLLOWING SYMPTOMS WHILE USING THE SERVICE: DIZZINESS, ALTERED VISION, EYE OR MUSCLE TWITCHES, LOSS OF AWARENESS, DISORIENTATION, ANY INVOLUNTARY MOVEMENT, OR CONVULSIONS.
-e. REFERENCE TO ANY PRODUCTS, SERVICES, PROCESSES OR OTHER INFORMATION, BY TRADE NAME, TRADEMARK, MANUFACTURER, SUPPLIER OR OTHERWISE DOES NOT CONSTITUTE OR IMPLY ENDORSEMENT, SPONSORSHIP OR RECOMMENDATION THEREOF, OR ANY AFFILIATION THEREWITH, BY Transcendence42.
+Our services and all materials on the website and platform are provided "as is" and "as available" and without warranties of any kind, express or implied, including implied warranties of merchantability and fitness for a particular purpose. Transcendence42 makes no representations or warranties about the accuracy, completeness, or suitability of any material on the website, or on any website or websites "linked" to the website. Transcendence42 does not warrant that the website and/or our platform will be available, uninterrupted, error-free, or free of viruses or other harmful components.
+You expressly understand and agree that, subject to and without limiting any non-excludable rights:
+A. The service, the games, the website and all materials contained therein are provided on an “as is” and “as available” basis without warranties of any kind, either express or implied. Transcendence42 and its subsidiaries, affiliates, officers, employees, agents, partners and licensors disclaim all other warranties, express or implied, including, without limitation, implied warranties of merchantability, fitness for a particular purpose, performance or suitability for your intended use, title and non-infringement, as to the service, the game and the website, including all information, content and materials contained therein. Without limiting the foregoing, transcendence42 does not represent or warrant that the service, the games, the website or the materials contained therein are accurate, complete, reliable, available, current or error-free. Transcendence42 also does not represent or warrant that the games, the website or its servers are free of viruses, bugs, errors or other harmful components or defects, transmit data in a secure manner, or function properly with the service.
+B. Transcendence42 and its subsidiaries, affiliates, officers, employees, agents, partners and licensors make no warranty that (i) the service will meet your requirements; (ii) the website will be uninterrupted, timely, secure or error-free; or (iii) any errors in the software will be corrected.
+C. While transcendence42 attempts to make your access and use of the service safe, transcendence42 cannot and does not represent or warrant that the service or its server(s) are free of viruses or other harmful components; therefore, you are responsible for implementing sufficient procedures and checkpoints to meet your specific requirements for accuracy of data input and output, and for maintaining a means outside the website and platform for reconstructing lost data you should use industry-recognized software to detect and disinfect viruses from any download. Any material downloaded or otherwise obtained through the use of the website or service is accessed at your own discretion and risk, and you will be solely responsible for any damage to your computer system or loss of data that results from the download of any such material.
+D. A small percentage of users may experience epileptic seizures when exposed to certain light patterns or backgrounds on a computer screen or while using the website or the service. Certain conditions may induce previously undetected epileptic symptoms even in users who have no history of prior seizures or epilepsy. If you, or anyone in your family, have an epileptic condition, consult your physician prior to using the service. Immediately discontinue use of the service and consult your physician if you experience any of the following symptoms while using the service: dizziness, altered vision, eye or muscle twitches, loss of awareness, disorientation, any involuntary movement, or convulsions.
+E. Reference to any products, services, processes or other information, by trade name, trademark, manufacturer, supplier or otherwise does not constitute or imply endorsement, sponsorship or recommendation thereof, or any affiliation therewith, by transcendence42.
+
 
 
 
@@ -148,12 +147,12 @@ Transcendence42 reserves the right to terminate these Terms and end your access 
 
 12. INFORMATION, COMPLAINTS & COPYRIGHT CLAIMS
 
-Summary: If you have any concerns or complaints, please email us at legal@Transcendence42.com. When you provide us with feedback we are free to use such feedback at our own discretion.
+Summary: If you have any concerns or complaints, please email us at contact@transcendence42.rocks. When you provide us with feedback we are free to use such feedback at our own discretion.
 
-If you have a question or complaint regarding the Platform or Website, please fill in our contact form at https://www.Transcendence42.com/contact or send an e-mail to legal@Transcendence42.com.
+If you have a question or complaint regarding the Platform or Website, please fill in our contact form at https://www.Transcendence42.com/contact or send an e-mail to contact@transcendence42.rocks.
 We value your opinion. if you provide us with feedback, including data, variables, comments, suggestions, ideas, notes, drawings, graphics, concepts or other information  ("Feedback"), you are providing that Feedback, and all of your rights thereto, to us free of charge, and such Feedback will be treated as non-confidential and non-proprietary  and may be used by us for any purpose, without your consent or any compensation to you or anyone else. This applies whether you submit such Feedback to us by email,  Through a form on the Website, on a bulletin board or otherwise.
 
-If you believe in good faith that materials available on the Website or Platform infringe your copyright, you (or your agent) may send us a written notice by courier,  mail or e-mail, requesting that we remove such material or block access to it. If you believe in good faith that someone has wrongly filed a notice of  copyright infringement against you, you can send us a counter-notice. Notices and counter-notices must be sent by e-mail to legal@Transcendence42.com.
+If you believe in good faith that materials available on the Website or Platform infringe your copyright, you (or your agent) may send us a written notice by courier,  mail or e-mail, requesting that we remove such material or block access to it. If you believe in good faith that someone has wrongly filed a notice of  copyright infringement against you, you can send us a counter-notice. Notices and counter-notices must be sent by e-mail to contact@transcendence42.rocks.
 
 For US Residents Only: If you are a copyright owner or an agent thereof and believe that your intellectual property rights have been infringed upon, you may submit a notification pursuant to the Digital Millennium Copyright Act (“DMCA”) by providing our copyright agent with the following information in writing (see 17 U.S.C 512(c)(3) for further detail):
 A physical or electronic signature of a person authorized to act on behalf of the owner of an exclusive right that is allegedly infringed;
@@ -162,7 +161,7 @@ identification of the material that is claimed to be infringing or to be the sub
 information reasonably sufficient to permit Transcendence42 to contact you, such as an address, telephone number, and, if available, an e-mail address;
 a statement that you have a good faith belief that use of the material in the manner complained of is not authorized by the copyright owner, its agent, or the law; and
 a statement that the information in the notification is accurate, and under penalty of perjury, that you are authorized to act on behalf of the owner of an exclusive right that is allegedly infringed.
-You can contact us via email (legal@Transcendence42.com). Upon receipt of a notification, Transcendence42 will take whatever action, in its sole discretion, it deems appropriate, including removal of the challenged content from the Website or Platform.
+You can contact us via email (contact@transcendence42.rocks). Upon receipt of a notification, Transcendence42 will take whatever action, in its sole discretion, it deems appropriate, including removal of the challenged content from the Website or Platform.
 We suggest that you consult your legal advisor before filing a notice or counter-notice.
 
 
@@ -170,7 +169,7 @@ We suggest that you consult your legal advisor before filing a notice or counter
 13. DISPUTES
 Summary: Mindful of the high costs of legal disputes, we want to try to settle any disputes with you related to the Terms by initially attempting to resolve the matter in good faith through written notice.
 
-Mindful of the high cost of legal dispute, not only in money but also in time and energy, both you and Transcendence42 agree to the following dispute resolution procedure:  In the event of any controversy, claim, action, or dispute arising out of or related to the breach, enforcement, interpretation, or validity of these Terms or any part of it,  the party asserting the dispute will first try in good faith to settle such dispute by providing written notice to the other party by registered mail describing the facts and circumstances  (including any relevant documentation) of the dispute and allowing the receiving party 30 days from the date of mailing to respond to the dispute. Notice will be sent to legal@Transcendence42.com.
+Mindful of the high cost of legal dispute, not only in money but also in time and energy, both you and Transcendence42 agree to the following dispute resolution procedure:  In the event of any controversy, claim, action, or dispute arising out of or related to the breach, enforcement, interpretation, or validity of these Terms or any part of it,  the party asserting the dispute will first try in good faith to settle such dispute by providing written notice to the other party by registered mail describing the facts and circumstances  (including any relevant documentation) of the dispute and allowing the receiving party 30 days from the date of mailing to respond to the dispute. Notice will be sent to contact@transcendence42.rocks.
 Unless you indicate otherwise in your notice, Transcendence42 will respond to your notice using your last-used e-mail address that we have.
 In the event that Transcendence42 is unable to resolve the dispute, you and Transcendence42 both agree that the parties will resolve their dispute in accordance with section 14 below.
 
@@ -198,7 +197,7 @@ Subject to any applicable law (including any Non-Excludable Rights), we have the
 
 16. CONTACT US
 If you have questions about these Terms, please contact us as follows:
-contact@transcendence42.com
+contact@transcendence42.rocks
 
 
 
