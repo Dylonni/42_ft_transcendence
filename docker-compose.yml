@@ -36,6 +36,7 @@ services:
       # - "5001:5001" # Logstash - no need to expose
       # - "5601:5601" # Kibana - shows "elasticsearch", which is normal
       - "3100:3100" # ModSecurity/Loki
+      # - "6379:6379" # Redis
     volumes:
       - shared-certs:/etc/ssl/shared
 
@@ -74,13 +75,16 @@ services:
     networks:
       - backend
     volumes:
-      - ./web/django/accounts:/django/accounts
-      - ./web/django/pong:/django/pong
-      - ./web/django/static:/django/static
-      - ./web/django/templates:/django/templates
-      - ./web/django/locale:/django/locale
+      - ./web/django:/django
       - elk-data:/logstash
       - django-token:/django/secrets:ro
+
+  redis:
+    image: redis:7.4.0-alpine3.20
+    container_name: redis
+    env_file: .env
+    networks:
+      - backend
 
   postgres:
     build: ./web/postgres

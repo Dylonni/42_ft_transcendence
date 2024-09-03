@@ -57,7 +57,6 @@ else
         exit 1
     fi
 
-
     # echo "Sealing Vault..."
     # vault operator seal
 fi

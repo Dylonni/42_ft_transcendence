@@ -11,11 +11,15 @@ COPY ./conf/grafana.conf /etc/nginx/conf.d/grafana.conf
 COPY ./conf/elasticsearch.conf /etc/nginx/conf.d/elasticsearch.conf
 COPY ./conf/logstash.conf /etc/nginx/conf.d/logstash.conf
 COPY ./conf/kibana.conf /etc/nginx/conf.d/kibana.conf
+
 COPY ./conf/loki.conf /etc/nginx/conf.d/loki.conf
 
 COPY ./conf/nginx.conf /etc/nginx/templates/conf.d/default.conf.template
 COPY ./conf/modsecurity.conf /etc/nginx/templates/modsecurity.d/modsecurity-override.conf.template
 
 COPY ./conf/proxy_backend.conf /etc/nginx/conf.d/proxy_backend.conf
+
+COPY ./conf/redis.conf /etc/nginx/conf.d/redis.conf
+
 
 EXPOSE 8080 8443
