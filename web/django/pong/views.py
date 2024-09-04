@@ -110,7 +110,7 @@ class ModeSelectView(PublicView):
     def get(self, request):
         context = get_profile_context(request)
         context = get_notif_context(request, context)
-        return render(request, 'customize_game.html', context)
+        return render(request, 'games/game_config.html', context)
 
 mode_select = ModeSelectView.as_view()
 
@@ -178,7 +178,7 @@ class CustomizeGameView(PrivateView):
         context = get_notif_context(request, context)
         if request.query_params.get('local', None):
             context['local'] = True
-        return render(request, 'customize_game.html', context)
+        return render(request, 'games/game_config.html', context)
 
 customize_game = CustomizeGameView.as_view()
 
@@ -193,7 +193,7 @@ class GameRoomView(PrivateView):
         context['players'] = game.players.all()
         context['available_friends'] = Profile.objects.get_available_friends(request.profile)
         context = get_notif_context(request, context)
-        return render(request, 'game_room.html', context)
+        return render(request, 'games/game_room.html', context)
 
 game_room = GameRoomView.as_view()
 
