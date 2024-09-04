@@ -22,6 +22,7 @@ class GameChatConsumer(AsyncWebsocketConsumer):
             await self.close()
             return
         self.game_id = self.scope['url_route']['kwargs']['game_id']
+        self.profile = await self.get_profile()
         self.room_name = f'games_chat_{self.game_id}'
         await self.channel_layer.group_add(
             self.room_name,
@@ -37,45 +38,22 @@ class GameChatConsumer(AsyncWebsocketConsumer):
     
     async def receive(self, text_data=None, bytes_data=None):
         text_data_json = json.loads(text_data)
-        # TODO: handle player joining/leaving/chatting
-        message = text_data_json['message']
-        await self.channel_layer.group_send(
-            self.room_name,
-            {
-                'type': 'broadcast',
-                'message': message,
-            }
-        )
     
     async def broadcast(self, event):
         message_id = event['message_id']
+        game = await self.get_game()
+        round = await self.get_current_round()
         message = await self.get_message(message_id)
-        context = {'message': message}
-        rendered_html = await sync_to_async(render_to_string)('games/game_send.html', context)
-        await self.send(text_data=json.dumps({'element': rendered_html}))
+        context = {'game': game, 'round': round, 'message': message, 'profile': self.profile}
+        rendered_html = await sync_to_async(render_to_string)('games/game_message.html', context)
+        await self.send(text_data=json.dumps({'message': rendered_html}))
     
-    async def send_join_message(self, event):
-        player_id = event['player_id']
-        game = await self.get_game_by_player(player_id)
+    async def update_header(self, event):
+        game = await self.get_game()
         round = await self.get_current_round()
         context = {'game': game, 'round': round}
         rendered_html = await sync_to_async(render_to_string)('games/game_header.html', context)
-        await self.send(text_data=json.dumps({'element': rendered_html}))
-    
-    async def send_leave_message(self, event):
-        game_id = event['game_id']
-        game = await self.get_game(game_id)
-        round = await self.get_current_round()
-        context = {'game': game, 'round': round}
-        rendered_html = await sync_to_async(render_to_string)('games/game_header.html', context)
-        await self.send(text_data=json.dumps({'element': rendered_html}))
-    
-    async def send_prepare_message(self, event):
-        round_id = event['round_id']
-        round = await self.get_round(round_id)
-        context = {'round': round}
-        # rendered_html = await sync_to_async(render_to_string)('games/game_message.html', context)
-        # await self.send(text_data=json.dumps({'context': context}))
+        await self.send(text_data=json.dumps({'header': rendered_html}))
     
     @database_sync_to_async
     def get_message(self, message_id):
@@ -86,18 +64,26 @@ class GameChatConsumer(AsyncWebsocketConsumer):
             return None
     
     @database_sync_to_async
-    def get_profile(self, profile_id):
+    def send_message(self, game, sender=None, category='Send'):
         try:
-            profile_model = apps.get_model('profiles.Profile')
-            return profile_model.objects.filter(id=profile_id).first()
+            gamemessage_model = apps.get_model('games.GameMessage')
+            gamemessage_model.objects.send_message(game=game, sender=sender, category=category)
         except LookupError:
             return None
     
     @database_sync_to_async
-    def get_game(self, game_id):
+    def get_profile(self):
+        try:
+            profile_model = apps.get_model('profiles.Profile')
+            return profile_model.objects.filter(user=self.user).first()
+        except LookupError:
+            return None
+    
+    @database_sync_to_async
+    def get_game(self):
         try:
             game_model = apps.get_model('games.Game')
-            return game_model.objects.filter(id=game_id).first()
+            return game_model.objects.filter(id=self.game_id).first()
         except LookupError:
             return None
     
@@ -334,27 +320,25 @@ class GamePlayConsumer(AsyncWebsocketConsumer):
                 game_state['ball_y'] += ball_speed_y
                 
                 if game_state['ball_y'] < 0:
-                    # game_state['ball_y'] = 0
                     ball_speed_y = -ball_speed_y
                 elif game_state['ball_y'] > height - game_state['ball_size']:
-                    # game_state['ball_y'] = game_state['height'] - game_state['ball_size']
                     ball_speed_y = -ball_speed_y
                 
                 if game_state['ball_x'] < game_state['paddle_width']:
                     if game_state['player1_y'] - game_state['ball_size'] < game_state['ball_y'] < game_state['player1_y'] + game_state['paddle_height']:
-                        # game_state['ball_x'] = game_state['paddle_width']
                         ball_speed_x = -ball_speed_x
                     else:
                         game_state['player2_score'] += 1
                         await self.update_score(game_state)
+                        await self.channel_layer.group_send(self.room_name, {'type': 'send_header'})
                         has_scored = True
                 elif game_state['ball_x'] > width - game_state['ball_size'] - game_state['paddle_width']:
                     if game_state['player2_y'] - game_state['ball_size'] < game_state['ball_y'] < game_state['player2_y'] + game_state['paddle_height']:
-                        # game_state['ball_x'] = game_state['width'] - game_state['ball_size'] - game_state['paddle_width']
                         ball_speed_x = -ball_speed_x
                     else:
                         game_state['player1_score'] += 1
                         await self.update_score(game_state)
+                        await self.channel_layer.group_send(self.room_name, {'type': 'send_header'})
                         has_scored = True
                 self.set_game_state(game_state)
                 await self.channel_layer.group_send(
@@ -368,6 +352,7 @@ class GamePlayConsumer(AsyncWebsocketConsumer):
         
         winner = await self.set_round_winner()
         winner_msg = winner + ' wins!'
+        await self.send_win_message()
         await self.update_game_state('countdown', winner_msg)
         countdown = 3 - self.FPS
         while countdown > 0:
@@ -409,6 +394,20 @@ class GamePlayConsumer(AsyncWebsocketConsumer):
                 if profile not in game.players.all():
                     return None
             return profile
+        except LookupError:
+            return None
+    
+    @database_sync_to_async
+    def send_win_message(self):
+        try:
+            game_model = apps.get_model('games.Game')
+            game = game_model.objects.filter(id=self.game_id).first()
+            if game:
+                round_model = apps.get_model('games.GameRound')
+                round = round_model.objects.filter(game=game, order=game.current_order).first()
+                if round:
+                    gamemessage_model = apps.get_model('games.GameMessage')
+                    gamemessage_model.objects.send_message(game=game, sender=round.winner, category='Win')
         except LookupError:
             return None
     

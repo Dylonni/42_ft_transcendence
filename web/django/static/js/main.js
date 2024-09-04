@@ -294,10 +294,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
         gameChatSocket.onmessage = (event) => {
             const data = JSON.parse(event.data);
-            const element = data['element'];
-            const playerSection = document.getElementById('playerSection');
-            if (playerSection) {
-                playerSection.innerHTML = element;
+            if (data.header) {
+                const playerSection = document.getElementById('playerSection');
+                if (playerSection) {
+                    playerSection.innerHTML = data.header;
+                }
+            }
+            if (data.message) {
+                const gameMsgDiv = document.getElementById('gameMsgDiv');
+                if (gameMsgDiv) {
+                    gameMsgDiv.innerHTML += data.message;
+                    gameMsgDiv.scrollTop = gameMsgDiv.scrollHeight;
+                }
             }
         };
 
@@ -770,6 +778,17 @@ document.addEventListener("DOMContentLoaded", () => {
             openGameChatWebSocket(gameId);
             openGamePlayWebSocket(gameId);
 
+            new EmojiPicker({
+                trigger: [
+                    {
+                        selector: ['.emojiPickerBtn'],
+                        insertInto: '.gameChatInput'
+                    },
+                ],
+                closeButton: true,
+                closeOnSelect: true,
+            });
+
             const inviteRandomBtn = document.getElementById('inviteRandomBtn');
             if (inviteRandomBtn) {
                 inviteRandomBtn.addEventListener('click', (event) => {
@@ -927,6 +946,58 @@ document.addEventListener("DOMContentLoaded", () => {
                     mouseY = touch.clientY - rect.top;
                     sendMousePosition();
                 });
+            }
+
+            const gameChatForm = document.getElementById('gameChatForm');
+            if (gameChatForm) {
+                gameChatForm.addEventListener('submit', (event) => {
+                    event.preventDefault();
+                    const gameId = gameChatForm.dataset.gameId;
+                    if (gameId) {
+                        const formData = new FormData(event.target);
+                        fetch(`/api/games/${gameId}/messages/`, {
+                            method: 'POST',
+                            headers: {
+                                'X-Requested-With': 'XMLHttpRequest',
+                            },
+                            body: formData,
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            const gameChatInput = document.getElementById('gameChatInput');
+                            if (gameChatInput) {
+                                gameChatInput.value = '';
+                            }
+                        })
+                        .catch(error => console.error(`Error sending message to game:`, error));
+                    }
+                });
+
+                const gameChatBtn = document.getElementById('gameChatBtn');
+                if (gameChatBtn) {
+                    gameChatBtn.addEventListener('click', (event) => {
+                        event.preventDefault();
+                        const gameId = gameChatForm.dataset.gameId;
+                        if (gameId) {
+                            const formData = new FormData(gameChatForm);
+                            fetch(`/api/games/${gameId}/messages/`, {
+                                method: 'POST',
+                                headers: {
+                                    'X-Requested-With': 'XMLHttpRequest',
+                                },
+                                body: formData,
+                            })
+                            .then(response => response.json())
+                            .then(data => {
+                                const gameChatInput = document.getElementById('gameChatInput');
+                                if (gameChatInput) {
+                                    gameChatInput.value = '';
+                                }
+                            })
+                            .catch(error => console.error(`Error sending message to game:`, error));
+                        }
+                    });
+                }
             }
         }
     };
