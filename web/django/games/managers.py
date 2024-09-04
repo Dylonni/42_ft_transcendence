@@ -7,7 +7,7 @@ from django.db.models import Q
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from notifs.consumers import NotifConsumer
-from .consumers import GamePlayConsumer
+from .consumers import GameChatConsumer, GamePlayConsumer
 
 
 class GameManager(models.Manager):
@@ -35,13 +35,9 @@ class GameManager(models.Manager):
             raise ValueError(_('Game has already started.'))
         player.join_game(game)
         channel_layer = get_channel_layer()
-        async_to_sync(channel_layer.group_send)(
-            f'games_chat_{game.id}',
-            {
-                'type': 'send_join_message',
-                'player_id': str(player.id),
-            }
-        )
+        async_to_sync(channel_layer.group_send)(f'games_chat_{game.id}', {'type': 'update_header'})
+        consumer = GameChatConsumer()
+        async_to_sync(consumer.send_message)(game=game, sender=player, category='Join')
     
     def remove_player(self, game, player):
         if player not in game.players.all():
@@ -57,28 +53,17 @@ class GameManager(models.Manager):
                 game.set_host(new_host)
         # TODO: remove player from game rounds if game has started
         channel_layer = get_channel_layer()
-        async_to_sync(channel_layer.group_send)(
-            f'games_chat_{game.id}',
-            {
-                'type': 'send_leave_message',
-                'player_id': str(player.id),
-                'game_id': str(game.id),
-            }
-        )
+        async_to_sync(channel_layer.group_send)(f'games_chat_{game.id}', {'type': 'update_header'})
+        consumer = GameChatConsumer()
+        async_to_sync(consumer.send_message)(game=game, sender=player, category='Leave')
     
     def get_next_round(self, game):
         game.current_order += 1
         game.save()
         round = game.rounds.filter(order=game.current_order).first()
         if round:
-            channel_layer = get_channel_layer()
-            async_to_sync(channel_layer.group_send)(
-                f'games_chat_{game.id}',
-                {
-                    'type': 'send_prepare_message',
-                    'round_id': str(round.id),
-                }
-            )
+            consumer = GameChatConsumer()
+            async_to_sync(consumer.send_message)(game=game, category='Prepare')
         return round
     
     def start(self, game):
@@ -88,14 +73,6 @@ class GameManager(models.Manager):
         game.save()
         for player in game.players.all():
             player.set_status(player.StatusChoices.PLAYING)
-        # channel_layer = get_channel_layer()
-        # async_to_sync(channel_layer.group_send)(
-        #     f'games_play_{game.id}',
-        #     {
-        #         'type': 'start_game',
-        #         'game_id': str(game.id),
-        #     }
-        # )
     
     def _generate_name(self):
         if self.filter(started_at=None).count() > 100:
@@ -192,8 +169,8 @@ class GameInviteManager(models.Manager):
 
 
 class GameMessageManager(models.Manager):
-    def send_message(self, game, sender, content):
-        game_message = self.create(game=game, sender=sender, content=content)
+    def send_message(self, game, sender=None, content=None, category='Send'):
+        game_message = self.create(game=game, sender=sender, content=content, category=category)
         channel_layer = get_channel_layer()
         async_to_sync(channel_layer.group_send)(
             f'games_chat_{game.id}',

@@ -107,6 +107,9 @@ class Game(BaseModel):
     def __str__(self):
         return self.name
     
+    def get_current_round(self):
+        return self.rounds.filter(order=self.current_order).first()
+
     def get_ball_size(self):
         if self.ball_size == self.SizeChoices.SMALL:
             return 10
@@ -132,7 +135,7 @@ class Game(BaseModel):
         return self.players.count()
     
     def get_rounds(self):
-        return self.rounds
+        return self.rounds.all()
     
     def is_full(self):
         return self.players.count() == self.player_limit
@@ -292,6 +295,19 @@ class GameInvite(BaseInteraction):
 
 
 class GameMessage(BaseModel):
+    class GameMessageCategories(models.TextChoices):
+        SEND = 'Send', _('Send')
+        JOIN = 'Join', _('Join')
+        LEAVE = 'Leave', _('Leave')
+        PREPARE = 'Prepare', _('Prepare')
+        ELIMINATE = 'Eliminate', _('Eliminate')
+        WIN = 'Win', _('Win')
+    
+    category = models.CharField(
+        max_length=20,
+        choices=GameMessageCategories.choices,
+        default=GameMessageCategories.SEND,
+    )
     game = models.ForeignKey(
         to=Game,
         on_delete=models.CASCADE,
@@ -301,6 +317,7 @@ class GameMessage(BaseModel):
         to='profiles.Profile',
         on_delete=models.CASCADE,
         related_name='game_messages_sent',
+        null=True,
     )
     content = models.TextField(
         blank=False,
