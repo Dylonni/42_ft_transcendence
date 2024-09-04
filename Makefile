@@ -9,6 +9,8 @@ all:
 .PHONY: build
 build:
 	@$(COMPOSE_CMD) build
+	@chmod +x entrypoint.sh
+	@./entrypoint.sh
 
 .PHONY: up
 up:

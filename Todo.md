@@ -8,6 +8,24 @@ on bottom of all pages, should be
     contact ?
 
 
+SSL / HTTPS
+    nginx
+    vault
+
+    alert-manager
+    grafana
+    loki
+    postgres-exporter
+    prometheus
+
+
+MICROSERVICES
+    use redis?
+    Inter Process Communication : how to set it up ?
+
+
+how long should we keep live chats ? (twitch keeps them minimum 7 days, depending on user status)
+
 look into openclassrooms for api rest
 
 
@@ -36,7 +54,9 @@ cybersec
         ensure data is handled in an "anonymized" way
         how to contact team?
         how to request deletion of account ? (there's the button, but what about hacked accounts?)
-    
+        !! convert Privacy policy and TOS to html
+
+
     vault
         how to handle API keys for grafana ?
             -> try to have as many of the .env vars handled by vault

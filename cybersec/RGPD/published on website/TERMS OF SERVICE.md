@@ -29,7 +29,13 @@ Transcendence42 grants you a non-exclusive, limited, non-sublicensable and non-t
 
 Except for the limited rights expressly granted below, we reserve all right, title and interest in and to the Website and our Platform, including all associated intellectual property rights.  Any games available through our Platform are owned by Transcendence42 or its partners. No rights are granted to you hereunder other than as expressly set forth herein.  You agree not to reproduce, duplicate, copy, sell, resell or exploit any part of the Website/Platform, use of the Website/Platform or access to the Website/Platform without our express written consent.  You may not duplicate, copy or reuse any part of the visual design elements without our express written consent.
 
-Users may livestream and monetise videos on online (live streaming) websites using gameplay and screenshots from games available on our Platform (“Gaming Content”), subject to the following conditions:  (i) Transcendence42’ Platform and its logo will be clearly visible and not obscured,  (ii) only monetise such videos and streams in accordance with the monetisation methods available on such online websites (e.g., Youtube, Twitch,...),  (iii) you do not imply or state that your Gaming Content is officially affiliated with, sponsored, endorsed or approved by Transcendence42 (except when we have entered into a partnership with you) and  (iv) the User is responsible for any third party content (e.g. music) that it uses together with the Gaming Content.  Transcendence42 reserves the right to take action at any time against Gaming Content that Transcendence42 believes is unlawful, infringing, inappropriate or not in accordance with these Terms.
+Users may livestream and monetise videos on online (live streaming) websites using gameplay and screenshots from games available on our Platform (“Gaming Content”), subject to the following conditions:
+(i) Transcendence42’ Platform and its logo will be clearly visible and not obscured,
+(ii) only monetise such videos and streams in accordance with the monetisation methods available on such online websites (e.g., Youtube, Twitch,...),
+(iii) you do not imply or state that your Gaming Content is officially affiliated with, sponsored, endorsed or approved by Transcendence42 (except when we have entered into a partnership with you) and
+(iv) the User is responsible for any third party content (e.g. music) that it uses together with the Gaming Content.
+
+Transcendence42 reserves the right to take action at any time against Gaming Content that Transcendence42 believes is unlawful, infringing, inappropriate or not in accordance with these Terms.
 
 
 
@@ -91,7 +97,7 @@ Notwithstanding the above, Transcendence42 reserves the right to remove the user
 6. PRIVACY
 Summary: Transcendence42's use of your personal data and our responsibilities in protecting your privacy are described in our Privacy and Cookie Policy.
 
-You understand and agree that subject to applicable laws we may access, disclose or retain personal information, including the content of your communications,  in the good faith belief that we are lawfully authorized or required to do so, or that doing so is reasonably necessary or appropriate to comply with the law or with legal process or authorities,  respond to any claims, or to protect the rights, property or safety of Transcendence42, our users, our employees or the public, including without limitation to protect  Transcendence42 or our users from fraudulent, abusive, inappropriate or unlawful use of our Service.
+You understand and agree that subject to applicable laws we may access, disclose or retain personal information, including the content of your communications, in the good faith belief that we are lawfully authorized or required to do so, or that doing so is reasonably necessary or appropriate to comply with the law or with legal process or authorities, respond to any claims, or to protect the rights, property or safety of Transcendence42, our users, our employees or the public, including without limitation to protect Transcendence42 or our users from fraudulent, abusive, inappropriate or unlawful use of our Service.
 
 
 

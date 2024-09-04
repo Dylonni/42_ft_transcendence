@@ -1,5 +1,8 @@
 FROM grafana/grafana:10.4.4
 
+
+COPY grafana.ini /etc/grafana/grafana.ini
+
 COPY provisioning/datasources/ /etc/grafana/provisioning/datasources
 COPY provisioning/dashboards/ /etc/grafana/provisioning/dashboards
 COPY provisioning/alerting/ /etc/grafana/provisioning/alerting
@@ -20,7 +23,5 @@ COPY provisioning/dashboards/Django/17658_rev2.json /var/lib/grafana/dashboards/
 # RUN mkdir -p /var/lib/grafana/secrets
 
 COPY provisioning/dashboards/15495_rev1.json /var/lib/grafana/dashboards/15495_rev1.json
-
-
 
 EXPOSE 3000

@@ -38,7 +38,10 @@ services:
       - "3100:3100" # ModSecurity/Loki
       # - "6379:6379" # Redis
     volumes:
-      - shared-certs:/etc/ssl/shared
+      - shared-certs:/etc/ssl/shared:ro
+      - ./data/certbot/conf:/etc/letsencrypt
+      - ./data/certbot/www:/var/www/certbot
+
 
   vault:
     build: ./cybersec/vault
@@ -57,6 +60,18 @@ services:
       - django-token:/vault/secrets/django
       - shared-certs:/etc/ssl/shared
       # - grafana-token:/vault/secrets/mon/grafana
+
+  certbot:
+    build: ./cybersec/certbot
+    container_name: certbot
+    env_file: .env
+    restart: "always"
+    networks:
+      - backend
+    volumes:
+      - shared-certs:/etc/ssl/shared:ro
+      - ./data/certbot/conf:/etc/letsencrypt
+      - ./data/certbot/www:/var/www/certbot
 
 # WEB
   django:
@@ -127,7 +142,8 @@ services:
       - prometheus
     networks:
       - backend
-    # volumes:
+    volumes:
+      - shared-certs:/etc/ssl/shared:ro
     #   - grafana-token:/var/lib/grafana/secrets:ro
 
   alert-manager:
