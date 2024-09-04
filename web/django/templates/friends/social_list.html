@@ -1,0 +1,35 @@
+{% load static %}
+{% load i18n %}
+<div class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="width: 100%;height: 45px;padding-top: 5px;padding-bottom: 5px;border-radius: 20px;border: 1px none var(--bs-gray-400);background: var(--bs-emphasis-color);border-top-left-radius: 0px;border-top-right-radius: 0px;padding-left: 0px;padding-right: 0px;border-bottom-right-radius: 10px;border-bottom-left-radius: 10px;margin-bottom: 0px;">
+	<input id="searchFriendInput" placeholder="{% translate 'Search for a message' %}" style="width: 80%;height: 100%;background: var(--bs-emphasis-color);border-style: none;color: var(--bs-body-bg);margin-left: 0px;" type="text"/>
+	<svg class="icon icon-tabler icon-tabler-search" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 30px;color: var(--bs-gray-400);margin-left: 5px;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
+		<path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
+		<path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"></path>
+		<path d="M21 21l-6 -6"></path>
+	</svg>
+</div>
+{% for friendship in friendships %}
+	{% if friendship.profile1 == profile %}
+		{% with friend=friendship.profile2 %}
+			{% include "friends/social_friend.html" %}
+		{% endwith %}
+	{% else %}
+		{% with friend=friendship.profile1 %}
+			{% include "friends/social_friend.html" %}
+		{% endwith %}
+	{% endif %}
+{% endfor %}
+{% if friendships.count == 0 %}
+<div class="d-flex justify-content-center align-items-center" style="width: 100%;height: 100%;">
+	<h1 class="d-flex justify-content-center align-items-center" style="color: var(--bs-gray-700);font-weight: bold;">
+		No friends
+		<svg class="icon icon-tabler icon-tabler-users" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+			<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+			<path d="M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"></path>
+			<path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
+			<path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+			<path d="M21 21v-2a4 4 0 0 0 -3 -3.85"></path>
+		</svg>
+	</h1>
+</div>
+{% endif %}

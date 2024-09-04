@@ -1,4 +1,6 @@
 import random
+from asgiref.sync import async_to_sync
+from channels.layers import get_channel_layer
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
@@ -27,8 +29,7 @@ class ProfileManager(models.Manager):
     def set_user_status(self, user, status):
         try:
             profile = self.get(user=user)
-            profile.status = status
-            profile.save()
+            profile.set_status(status)
         except self.model.DoesNotExist:
             raise ValueError(_('No profile found to set status.'))
     

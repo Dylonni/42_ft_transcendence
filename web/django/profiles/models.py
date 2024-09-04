@@ -1,5 +1,7 @@
 import logging
 import requests
+from asgiref.sync import async_to_sync
+from channels.layers import get_channel_layer
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.db import models
@@ -121,18 +123,28 @@ class Profile(BaseModel):
     
     def join_game(self, game):
         self.game = game
-        self.status = self.StatusChoices.WAITING
+        if game.started_at:
+            self.set_status(self.StatusChoices.PLAYING)
+        else:
+            self.set_status(self.StatusChoices.WAITING)
         self.save()
     
     def leave_game(self):
         self.game = None
-        self.status = self.StatusChoices.ONLINE
+        self.set_status(self.StatusChoices.ONLINE)
         self.save()
     
-    def set_status(self, status):
-        if status in self.StatusChoices:
-            self.status = status
-            self.save()
+    def set_status(self, status: StatusChoices):
+        self.status = status
+        self.save()
+        channel_layer = get_channel_layer()
+        async_to_sync(channel_layer.group_send)('friends', {'type': 'update_friend_list'})
+        friendships_as_profile1 = self.friendships_as_profile1.all()
+        for friendship in friendships_as_profile1:
+            async_to_sync(channel_layer.group_send)(f'friends_{friendship.id}', {'type': 'update_header'})
+        friendships_as_profile2 = self.friendships_as_profile2.all()
+        for friendship in friendships_as_profile2:
+            async_to_sync(channel_layer.group_send)(f'friends_{friendship.id}', {'type': 'update_header'})
     
     def update_elo(self, new_elo):
         self.elo = new_elo

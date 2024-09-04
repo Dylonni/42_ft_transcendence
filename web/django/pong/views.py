@@ -176,7 +176,6 @@ class CustomizeGameView(PrivateView):
             return redirect(f'/games/{request.profile.game.id}/', True)
         context = get_profile_context(request)
         context = get_notif_context(request, context)
-        logger.info(request.query_params)
         if request.query_params.get('local', None):
             context['local'] = True
         return render(request, 'customize_game.html', context)

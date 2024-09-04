@@ -4,6 +4,7 @@ from asgiref.sync import sync_to_async
 from channels.db import database_sync_to_async
 from channels.generic.websocket import AsyncWebsocketConsumer
 from django.apps import apps
+from django.db.models import OuterRef, Q, Subquery
 from django.template.loader import render_to_string
 
 logger = logging.getLogger('django')
@@ -15,6 +16,7 @@ class FriendListConsumer(AsyncWebsocketConsumer):
         if not self.user.is_authenticated:
             await self.close()
             return
+        self.profile = await self.get_profile()
         self.room_name = f'friends'
         await self.channel_layer.group_add(
             self.room_name,
@@ -30,8 +32,29 @@ class FriendListConsumer(AsyncWebsocketConsumer):
     
     async def receive(self, text_data=None, bytes_data=None):
         text_data_json = json.loads(text_data)
-        # TODO: handle friend changing status
         status = text_data_json.get('status', {})
+    
+    async def update_friend_list(self, event):
+        friendships = await self.get_friendships()
+        context = {'friendships': friendships, 'profile': self.profile}
+        friend_list = await sync_to_async(render_to_string)('friends/social_list.html', context)
+        await self.send(text_data=json.dumps({'friend_list': friend_list}))
+    
+    @database_sync_to_async
+    def get_profile(self):
+        try:
+            profile_model = apps.get_model('profiles.Profile')
+            return profile_model.objects.filter(user=self.user).first()
+        except LookupError:
+            return None
+    
+    @database_sync_to_async
+    def get_friendships(self):
+        try:
+            friendship_model = apps.get_model('friends.Friendship')
+            return friendship_model.objects.get_friendships(self.profile)
+        except LookupError:
+            return None
 
 friend_list_consumer = FriendListConsumer.as_asgi()
 
@@ -43,16 +66,18 @@ class FriendChatConsumer(AsyncWebsocketConsumer):
             await self.close()
             return
         self.friendship_id = self.scope['url_route']['kwargs']['friendship_id']
+        self.profile = await self.get_profile()
         self.room_name = f'friends_{self.friendship_id}'
-        logger.info(f"User {self.user} connecting to room {self.room_name}")
         await self.channel_layer.group_add(
             self.room_name,
             self.channel_name
         )
         await self.accept()
+        await self.mark_messages_as_read()
+        await self.channel_layer.group_send(self.room_name, {'type': 'update_section'})
+        await self.channel_layer.group_send('friends', {'type': 'update_friend_list'})
     
     async def disconnect(self, code):
-        logger.info(f'User {self.user} disconnecting from room {self.room_name} with close code {code}')
         await self.channel_layer.group_discard(
             self.room_name,
             self.channel_name
@@ -60,25 +85,52 @@ class FriendChatConsumer(AsyncWebsocketConsumer):
     
     async def receive(self, text_data=None, bytes_data=None):
         text_data_json = json.loads(text_data)
-        message = text_data_json.get('message', {})
-        logger.info(f'Preparing message to send: {message}')
-        sender = await self.get_profile(self.user)
-        friend_message = await self.send_message(sender, message)
-        logger.info(f'Broadcasting message from user {sender.alias}: {message}')
+        read = text_data_json.get('read')
+        if read:
+            await self.mark_messages_as_read()
+            await self.channel_layer.group_send(self.room_name, {'type': 'update_section'})
+            await self.channel_layer.group_send('friends', {'type': 'update_friend_list'})
+        message = text_data_json.get('message')
+        if message:
+            sender = self.profile
+            friend_message = await self.send_message(sender, message)
     
     async def broadcast(self, event):
         message_id = event.get('message_id', '')
-        profile = await self.get_profile(self.user)
         message = await self.get_message(message_id)
-        context = {'message': message, 'profile': profile}
+        context = {'message': message, 'profile': self.profile}
         rendered_html = await sync_to_async(render_to_string)('friends/social_message.html', context)
         await self.send(text_data=json.dumps({'element': rendered_html}))
     
+    async def update_header(self, event):
+        current_friend = await self.get_current_friend()
+        context = {'current_friend': current_friend}
+        friend_header = await sync_to_async(render_to_string)('friends/social_header.html', context)
+        await self.send(text_data=json.dumps({'friend_header': friend_header}))
+    
+    async def update_section(self, event):
+        current_friend = await self.get_current_friend()
+        messages = await self.get_messages()
+        context = {'current_friend': current_friend, 'messages': messages, 'profile': self.profile}
+        section = await sync_to_async(render_to_string)('friends/social_section.html', context)
+        await self.send(text_data=json.dumps({'section': section}))
+    
     @database_sync_to_async
-    def get_profile(self, user):
+    def get_profile(self):
         try:
             profile_model = apps.get_model('profiles.Profile')
-            return profile_model.objects.filter(user=user).first()
+            return profile_model.objects.filter(user=self.user).first()
+        except LookupError:
+            return None
+    
+    @database_sync_to_async
+    def get_current_friend(self):
+        try:
+            friendship_model = apps.get_model('friends.Friendship')
+            friendship = friendship_model.objects.filter(id=self.friendship_id).first()
+            if friendship:
+                return friendship.get_other(self.profile)
+            return None
         except LookupError:
             return None
     
@@ -86,7 +138,7 @@ class FriendChatConsumer(AsyncWebsocketConsumer):
     def get_profile_from_alias(self, alias):
         try:
             profile_model = apps.get_model('profiles.Profile')
-            return profile_model.objects.get(alias=alias)
+            return profile_model.objects.filter(alias=alias).first()
         except LookupError:
             return None
     
@@ -94,7 +146,18 @@ class FriendChatConsumer(AsyncWebsocketConsumer):
     def get_message(self, message_id):
         try:
             friendmessage_model = apps.get_model('friends.FriendMessage')
-            return friendmessage_model.objects.get(id=message_id)
+            return friendmessage_model.objects.filter(id=message_id).first()
+        except LookupError:
+            return None
+    
+    @database_sync_to_async
+    def get_messages(self):
+        try:
+            friendship_model = apps.get_model('friends.Friendship')
+            friendship = friendship_model.objects.filter(id=self.friendship_id).first()
+            if friendship:
+                return friendship.messages.all()
+            return None
         except LookupError:
             return None
     
@@ -102,9 +165,21 @@ class FriendChatConsumer(AsyncWebsocketConsumer):
     def send_message(self, sender, message):
         try:
             friendship_model = apps.get_model('friends.Friendship')
-            friendship = friendship_model.objects.get(id=self.friendship_id)
-            friendmessage_model = apps.get_model('friends.FriendMessage')
-            return friendmessage_model.objects.send_message(friendship, sender, message)
+            friendship = friendship_model.objects.filter(id=self.friendship_id).first()
+            if friendship:
+                friendmessage_model = apps.get_model('friends.FriendMessage')
+                return friendmessage_model.objects.send_message(friendship, sender, message)
+        except LookupError:
+            return None
+    
+    @database_sync_to_async
+    def mark_messages_as_read(self):
+        try:
+            friendship_model = apps.get_model('friends.Friendship')
+            friendship = friendship_model.objects.filter(id=self.friendship_id).first()
+            if friendship:
+                for message in friendship.messages.filter(receiver=self.profile, read=False).all():
+                    message.mark_as_read()
         except LookupError:
             return None
 

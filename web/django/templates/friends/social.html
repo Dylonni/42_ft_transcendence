@@ -38,102 +38,20 @@
 					</svg>
 				</h1>
 			</div>
-			<div class="d-xl-flex flex-column flex overflow-auto" id="friend-list" style="width: 100%;height: 100%;margin-top: 0px;background: var(--bs-body-color);border-bottom-right-radius: 19px;border-bottom-left-radius: 19px;margin-bottom: 0px;box-shadow: 0px 0px 6px 2px #2b7050;max-height: 655px;">
-				<div class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="width: 100%;height: 45px;padding-top: 5px;padding-bottom: 5px;border-radius: 20px;border: 1px none var(--bs-gray-400);background: var(--bs-emphasis-color);border-top-left-radius: 0px;border-top-right-radius: 0px;padding-left: 0px;padding-right: 0px;border-bottom-right-radius: 10px;border-bottom-left-radius: 10px;margin-bottom: 0px;">
-					<input id="searchFriendInput" placeholder="{% translate 'Search for a message' %}" style="width: 80%;height: 100%;background: var(--bs-emphasis-color);border-style: none;color: var(--bs-body-bg);margin-left: 0px;" type="text"/>
-					<svg class="icon icon-tabler icon-tabler-search" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 30px;color: var(--bs-gray-400);margin-left: 5px;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
-						<path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
-						<path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"></path>
-						<path d="M21 21l-6 -6"></path>
-					</svg>
-				</div>
-				{% for friendship in friendships %}
-					{% if friendship.profile1 == profile %}
-						{% with friend=friendship.profile2 %}
-							{% include "friends/social_friend.html" %}
-						{% endwith %}
-					{% else %}
-						{% with friend=friendship.profile1 %}
-							{% include "friends/social_friend.html" %}
-						{% endwith %}
-					{% endif %}
-				{% endfor %}
-				{% if friendships.count == 0 %}
-				<div class="d-flex justify-content-center align-items-center" style="width: 100%;height: 100%;">
-					<h1 class="d-flex justify-content-center align-items-center" style="color: var(--bs-gray-700);font-weight: bold;">
-						No friends
-						<svg class="icon icon-tabler icon-tabler-users" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-							<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-							<path d="M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"></path>
-							<path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
-							<path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-							<path d="M21 21v-2a4 4 0 0 0 -3 -3.85"></path>
-						</svg>
-					</h1>
-				</div>
-				{% endif %}
+			<div class="d-xl-flex flex-column flex overflow-auto" id="friendList" style="width: 100%;height: 100%;margin-top: 0px;background: var(--bs-body-color);border-bottom-right-radius: 19px;border-bottom-left-radius: 19px;margin-bottom: 0px;box-shadow: 0px 0px 6px 2px #2b7050;max-height: 655px;">
+				{% include "friends/social_list.html" %}
 			</div>
 		</div>
 		<div class="col-sm-12 col-md-7 col-lg-6 col-xl-7 col-xxl-7 d-flex flex-column" style="height: 100%;margin-left: 0px;padding-left: 0px;padding-right: 0px;margin-bottom: 10px;">
-			<div class="d-flex d-md-flex d-xl-flex justify-content-start align-items-center align-items-md-center justify-content-lg-start justify-content-xl-start align-items-xl-center justify-content-xxl-start" style="border-radius: 20px;background: #2b7050;border-top-right-radius: 19px;border-bottom-right-radius: 0px;border-top-left-radius: 19px;border-bottom-left-radius: 0px;height: 100px;border-width: 0px;border-bottom: 2px solid var(--bs-body-color);box-shadow: 0px 0px 6px 2px #2b7050;">
-				{% if current_friend %}
-				<div class="d-xxl-flex justify-content-xxl-center align-items-xxl-center" style="border-radius: 0px;width: 75px;height: 75px;padding-left: 0px;margin-top: 0px;margin-bottom: 0px;margin-left: 15px;margin-right: 15px;">
-					<img height="135" src="{{ current_friend.avatar_url }}" style="border-radius: 50%;width: 100%;height: 100%;border-style: none;border-color: rgb(51,255,0);" width="93"/>
-				</div>
-				<div id="currentDiscussion"  style="width: 70%;">
-					<h1 class="text-truncate fs-3 d-flex d-xl-flex justify-content-start align-items-center" style="color: var(--bs-body-bg);text-shadow: 2px 2px var(--bs-emphasis-color);font-weight: bold;width: 310px;">
-						{{ current_friend.alias }}
-					</h1>
-					<h1 class="text-truncate fs-5 d-flex d-xl-flex justify-content-start align-items-center" style="color: var(--bs-body-bg);text-shadow: 2px 2px var(--bs-emphasis-color);width: 100%;">
-						{% if current_friend.status == 'Online' %}
-						<span class="d-xxl-flex justify-content-start align-items-center" style="color: rgb(51,255,0);margin-top: 0px;margin-bottom: 0px;text-shadow: 2px 1px 1px var(--bs-emphasis-color);background: rgb(51,255,0);height: 10px;width: 10px;margin-right: 5px;border-radius: 5px;">
-						</span>
-						<span class="d-xxl-flex justify-content-center align-items-center" style="color:rgb(51,255,0);margin-top:0px;margin-bottom:0px;">
-							{% translate 'Online' %}
-						</span>
-						{% elif current_friend.status == 'Offline' %}
-						<span style="color: var(--bs-dark-border-subtle);margin-top: 0px;margin-bottom: 0px;">
-							{% translate 'Offline' %}
-						</span>
-						{% elif current_friend.status == 'Waiting' %}
-						<span class="d-xxl-flex justify-content-start align-items-center" style="color: #29c9ea;margin-top: 0px;margin-bottom: 0px;text-shadow: 2px 1px 1px var(--bs-emphasis-color);background: rgb(51,255,0);height: 10px;width: 10px;margin-right: 5px;border-radius: 5px;">
-						</span>
-						<span class="d-xxl-flex justify-content-center align-items-center" style="color: var(--bs-orange);margin-top: 0px;margin-bottom: 0px;">
-							{% translate 'In a room' %}
-						</span>
-						{% else %}
-						<span class="d-xxl-flex justify-content-start align-items-center" style="color: var(--bs-orange);margin-top: 0px;margin-bottom: 0px;text-shadow: 2px 1px 1px var(--bs-emphasis-color);background: rgb(51,255,0);height: 10px;width: 10px;margin-right: 5px;border-radius: 5px;">
-						</span>
-						<span class="d-xxl-flex justify-content-center align-items-center" style="color: var(--bs-orange);margin-top: 0px;margin-bottom: 0px;">
-							{% translate 'In game' %}
-						</span>
-						{% endif %}
-					</h1>
-				</div>
-				{% endif %}
+			<div id="friendHeaderDiv" class="d-flex d-md-flex d-xl-flex justify-content-start align-items-center align-items-md-center justify-content-lg-start justify-content-xl-start align-items-xl-center justify-content-xxl-start" style="border-radius: 20px;background: #2b7050;border-top-right-radius: 19px;border-bottom-right-radius: 0px;border-top-left-radius: 19px;border-bottom-left-radius: 0px;height: 100px;border-width: 0px;border-bottom: 2px solid var(--bs-body-color);box-shadow: 0px 0px 6px 2px #2b7050;">
+				{% include "friends/social_header.html" %}
 			</div>
 			<div class="d-flex d-xl-flex flex-column-reverse overflow-auto" style="background: var(--bs-body-color);padding-top: 0px;margin-left: 0px;margin-top: 0px;height: 585px;width: 100%;box-shadow: 0px 0px 6px 2px #2b7050;">
 				<section class="overflow-auto" id="messageSection" style="height: 100%;width: 100%;background: linear-gradient(-38deg, rgba(255,255,255,0) 0%, var(--bs-success-text-emphasis) 52%, rgba(255,255,255,0) 100%);">
-					{% for message in messages %}
-					{% include "friends/social_message.html" %}
-					{% endfor %}
-					{% if messages.count == 0 %}
-					<div class="d-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" id="templateSayHi" style="width: 100%;height: 100%;">
-						<h1 class="text-center d-md-flex d-xxl-flex align-items-md-center justify-content-xxl-center align-items-xxl-center" style="color: var(--bs-success-border-subtle);">
-							{% translate 'No messages yet, say hi' %} 👋
-						</h1>
-					</div>
-					{% endif %}
-					{% if not current_friend %}
-					<div class="d-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" id="templateSelectConv" style="width: 100%;height: 100%;">
-						<h1 class="d-xxl-flex justify-content-xxl-center align-items-xxl-center" style="color: var(--bs-success-border-subtle);">
-							{% translate 'Select a conversation' %}
-						</h1>
-					</div>
-					{% endif %}
+					{% include "friends/social_section.html" %}
 				</section>
 			</div>
-			{% if frienship %}
+			{% if current_friend %}
 			<form data-friendship-id="{{ friendship.id }}" id="chatForm" class="d-flex flex-row align-items-center justify-content-xxl-start" style="border-radius: 19px;background: #111314;border-top-left-radius: 0px;border-top-right-radius: 0px;height: 70px;border-width: 0px;border-color: var(--bs-body-bg);width: 100%;box-shadow: 0px 0px 6px 2px #2b7050;">
 				<div class="d-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="width: 100%;height: 100%;">
 					<button class="btn btn-primary d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center emojiPick" id="emojiPick" style="background: rgba(13,110,253,0);border-style: none;" type="button">

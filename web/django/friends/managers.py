@@ -1,7 +1,7 @@
 from asgiref.sync import async_to_sync
 from channels.layers import get_channel_layer
 from django.db import models
-from django.db.models import Q
+from django.db.models import Max, OuterRef, Q, Subquery
 from django.utils.translation import gettext_lazy as _
 from notifs.consumers import NotifConsumer
 
@@ -14,7 +14,18 @@ class FriendshipManager(models.Manager):
         ).first()
     
     def get_friendships(self, profile):
-        return self.filter(Q(profile1=profile) | Q(profile2=profile), removed_by__isnull=True)
+        latest_message_created_at_subquery = self.filter(
+            id=OuterRef('pk')
+        ).annotate(
+            latest_created_at=Max('messages__created_at')
+        ).values('latest_created_at')[:1]
+        friendships = self.filter(
+            Q(profile1=profile) | Q(profile2=profile),
+            removed_by__isnull=True
+        ).annotate(
+            last_message_created_at=Subquery(latest_message_created_at_subquery)
+        ).order_by('-last_message_created_at')
+        return friendships
     
     def get_friendship_id(self, profile1, profile2):
         friendship = self.get_friendship(profile1, profile2)
@@ -140,6 +151,7 @@ class FriendMessageManager(models.Manager):
                 'message_id': str(friend_message.id),
             }
         )
+        async_to_sync(channel_layer.group_send)('friends', {'type': 'update_friend_list'})
         return friend_message
     
     def mark_messages_as_read(self, sender, receiver):
