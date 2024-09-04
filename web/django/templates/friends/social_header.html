@@ -1,0 +1,39 @@
+{% load static %}
+{% load i18n %}
+{% if current_friend %}
+<div class="d-xxl-flex justify-content-xxl-center align-items-xxl-center" style="border-radius: 0px;width: 75px;height: 75px;padding-left: 0px;margin-top: 0px;margin-bottom: 0px;margin-left: 15px;margin-right: 15px;">
+	<img height="135" src="{{ current_friend.avatar_url }}" style="border-radius: 50%;width: 100%;height: 100%;border-style: none;border-color: rgb(51,255,0);" width="93"/>
+</div>
+<div id="currentDiscussion"  style="width: 70%;">
+	<h1 class="text-truncate fs-3 d-flex d-xl-flex justify-content-start align-items-center" style="color: var(--bs-body-bg);text-shadow: 2px 2px var(--bs-emphasis-color);font-weight: bold;width: 310px;">
+		{{ current_friend.alias }}
+	</h1>
+	<h1 class="text-truncate fs-5 d-flex d-xl-flex justify-content-start align-items-center" style="color: var(--bs-body-bg);text-shadow: 2px 2px var(--bs-emphasis-color);width: 100%;">
+		{% if current_friend.status == 'Online' %}
+		<span class="d-xxl-flex justify-content-start align-items-center" style="color: rgb(51,255,0);margin-top: 0px;margin-bottom: 0px;text-shadow: 2px 1px 1px var(--bs-emphasis-color);background: rgb(51,255,0);height: 10px;width: 10px;margin-right: 5px;border-radius: 5px;">
+		</span>
+		<span class="d-xxl-flex justify-content-center align-items-center" style="color:rgb(51,255,0);margin-top:0px;margin-bottom:0px;">
+			{% translate 'Online' %}
+		</span>
+		{% elif current_friend.status == 'Offline' %}
+		<span class="d-xxl-flex justify-content-start align-items-center" style="color: var(--bs-dark-border-subtle);margin-top: 0px;margin-bottom: 0px;text-shadow: 2px 1px 1px var(--bs-emphasis-color);background: var(--bs-dark-border-subtle);height: 10px;width: 10px;margin-right: 5px;border-radius: 5px;">
+		</span>
+		<span style="color: var(--bs-dark-border-subtle);margin-top: 0px;margin-bottom: 0px;">
+			{% translate 'Offline' %}
+		</span>
+		{% elif current_friend.status == 'Playing' %}
+		<span class="d-xxl-flex justify-content-start align-items-center" style="color: #29c9ea;margin-top: 0px;margin-bottom: 0px;text-shadow: 2px 1px 1px var(--bs-emphasis-color);background: #29c9ea;height: 10px;width: 10px;margin-right: 5px;border-radius: 5px;">
+		</span>
+		<span class="d-xxl-flex justify-content-center align-items-center" style="color: #29c9ea;margin-top: 0px;margin-bottom: 0px;">
+			{% translate 'Playing' %}
+		</span>
+		{% else %}
+		<span class="d-xxl-flex justify-content-start align-items-center" style="color: var(--bs-orange);margin-top: 0px;margin-bottom: 0px;text-shadow: 2px 1px 1px var(--bs-emphasis-color);background: var(--bs-orange);height: 10px;width: 10px;margin-right: 5px;border-radius: 5px;">
+		</span>
+		<span class="d-xxl-flex justify-content-center align-items-center" style="color: var(--bs-orange);margin-top: 0px;margin-bottom: 0px;">
+			{% translate 'Waiting' %}
+		</span>
+		{% endif %}
+	</h1>
+</div>
+{% endif %}

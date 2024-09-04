@@ -98,3 +98,7 @@ class FriendMessage(BaseInteraction):
     
     def __str__(self):
         return f'Friend message ({self.id}) from {self.sender} to {self.receiver}'
+    
+    def mark_as_read(self):
+        self.read = True
+        self.save()

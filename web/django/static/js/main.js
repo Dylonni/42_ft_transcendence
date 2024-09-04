@@ -216,12 +216,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
         friendListSocket.onmessage = (event) => {
             const data = JSON.parse(event.data);
-            const element = data['element'];
-            // TODO: update friends on status changed
-            // const friendList = document.getElementById('friendList');
-            // if (friendList) {
-            //     friendList.innerHTML += element;
-            // }
+            if (data.friend_list) {
+                const friendList = document.getElementById('friendList');
+                if (friendList) {
+                    friendList.innerHTML = data.friend_list;
+                    document.querySelectorAll('a').forEach(anchor => {
+                        if (anchor.id.startsWith('navFriendChat')) {
+                            anchor.addEventListener('click', (event) => {
+                                event.preventDefault();
+                                navigateTo(anchor.href);
+                            });
+                        }
+                    });
+                }
+            }
         };
 
         friendListSocket.onclose = () => {
@@ -242,17 +250,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
         friendChatSocket.onmessage = (event) => {
             const data = JSON.parse(event.data);
-            const element = data['element'];
-            const sayHiMessage = document.getElementById('templateSayHi');
-            if (sayHiMessage) {
-                sayHiMessage.remove();
+            if (data.element) {
+                const sayHiMessage = document.getElementById('templateSayHi');
+                if (sayHiMessage) {
+                    sayHiMessage.remove();
+                }
+                const messageSection = document.getElementById('messageSection');
+                if (messageSection) {
+                    messageSection.innerHTML += data.element;
+                    messageSection.scrollTop = messageSection.scrollHeight;
+                }
+                friendChatSocket.send(JSON.stringify({'read': true}));
             }
-            const messageSection = document.getElementById('messageSection');
-            if (messageSection) {
-                messageSection.innerHTML += element;
-                messageSection.scrollTop = messageSection.scrollHeight;
+            if (data.friend_header) {
+                const friendHeaderDiv = document.getElementById('friendHeaderDiv');
+                if (friendHeaderDiv) {
+                    friendHeaderDiv.innerHTML = data.friend_header;
+                }
             }
-            // TODO: update last message sent in friend list
+            if (data.section) {
+                const messageSection = document.getElementById('messageSection');
+                if (messageSection) {
+                    messageSection.innerHTML = data.section;
+                }
+            }
         };
 
         friendChatSocket.onclose = () => {
@@ -1146,7 +1167,6 @@ document.addEventListener("DOMContentLoaded", () => {
                         })
                         .then(response => response.json())
                         .then(data => {
-                            console.log(data);
                             const chatInput = document.getElementById('chatInput');
                             if (chatInput) {
                                 chatInput.value = '';
@@ -1155,6 +1175,32 @@ document.addEventListener("DOMContentLoaded", () => {
                         .catch(error => console.error(`Error sending message to friend:`, error));
                     }
                 });
+
+                const chatBtn = document.getElementById('chatBtn');
+                if (chatBtn) {
+                    chatBtn.addEventListener('click', (event) => {
+                        event.preventDefault();
+                        const friendshipId = chatForm.dataset.friendshipId;
+                        if (friendshipId) {
+                            const formData = new FormData(chatForm);
+                            fetch(`/api/profiles/me/friends/${friendshipId}/messages/`, {
+                                method: 'POST',
+                                headers: {
+                                    'X-Requested-With': 'XMLHttpRequest',
+                                },
+                                body: formData,
+                            })
+                            .then(response => response.json())
+                            .then(data => {
+                                const chatInput = document.getElementById('chatInput');
+                                if (chatInput) {
+                                    chatInput.value = '';
+                                }
+                            })
+                            .catch(error => console.error(`Error sending message to friend:`, error));
+                        }
+                    });
+                }
             }
         }
     };
