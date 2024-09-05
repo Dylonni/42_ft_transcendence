@@ -291,11 +291,14 @@ class GamePlayConsumer(AsyncWebsocketConsumer):
             game_state['player1_score'] = 0
             game_state['player2_score'] = 0
             game_state['game_running'] = True
-            self.set_game_state(game_state)
             width = game_state['width']
             height = game_state['height']
-            ball_speed_x = game_state['ball_speed']
-            ball_speed_y = game_state['ball_speed']
+            game_state['player1_y'] = (height - game_state['paddle_height']) / 2
+            game_state['player2_y'] = (height - game_state['paddle_height']) / 2
+            self.set_game_state(game_state)
+            ball_speed = game_state['ball_speed']
+            ball_speed_x = ball_speed
+            ball_speed_y = ball_speed
         await self.set_round_start()
         has_scored = True
         while True:
@@ -306,8 +309,9 @@ class GamePlayConsumer(AsyncWebsocketConsumer):
                     game_state['ball_y'] = (height - game_state['ball_size']) / 2
                     angle = random.random() * math.pi / 2 - math.pi / 4
                     direction = -1 if ball_speed_x < 0 else 1
-                    ball_speed_x = direction * game_state['ball_speed'] * math.cos(angle)
-                    ball_speed_y = game_state['ball_speed'] * math.sin(angle)
+                    ball_speed = game_state['ball_speed']
+                    ball_speed_x = direction * ball_speed * math.cos(angle)
+                    ball_speed_y = ball_speed * math.sin(angle)
                     self.set_game_state(game_state)
                     if game_state['player1_score'] >= game_state['win_score'] or game_state['player2_score'] >= game_state['win_score']:
                         break
@@ -327,6 +331,10 @@ class GamePlayConsumer(AsyncWebsocketConsumer):
                 if game_state['ball_x'] < game_state['paddle_width']:
                     if game_state['player1_y'] - game_state['ball_size'] < game_state['ball_y'] < game_state['player1_y'] + game_state['paddle_height']:
                         ball_speed_x = -ball_speed_x
+                        angle = math.atan2(ball_speed_y, ball_speed_x)
+                        ball_speed += 1
+                        ball_speed_x = ball_speed * math.cos(angle)
+                        ball_speed_y = ball_speed * math.sin(angle)
                     else:
                         game_state['player2_score'] += 1
                         await self.update_score(game_state)
@@ -335,6 +343,10 @@ class GamePlayConsumer(AsyncWebsocketConsumer):
                 elif game_state['ball_x'] > width - game_state['ball_size'] - game_state['paddle_width']:
                     if game_state['player2_y'] - game_state['ball_size'] < game_state['ball_y'] < game_state['player2_y'] + game_state['paddle_height']:
                         ball_speed_x = -ball_speed_x
+                        angle = math.atan2(ball_speed_y, ball_speed_x)
+                        ball_speed += 1
+                        ball_speed_x = ball_speed * math.cos(angle)
+                        ball_speed_y = ball_speed * math.sin(angle)
                     else:
                         game_state['player1_score'] += 1
                         await self.update_score(game_state)
