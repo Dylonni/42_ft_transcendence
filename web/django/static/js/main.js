@@ -1495,6 +1495,7 @@ const pongGame = () => {
 	const HEIGHT = canvas.height;
     const HALFWIDTH = canvas.width / 2;
     const HALFHEIGHT = canvas.height / 2;
+    const BALLSPEED = settings.ballSpeed;
 
 	// Paddle properties
 	let paddleWidth = 10;
@@ -1503,9 +1504,9 @@ const pongGame = () => {
 
 	// Ball properties
 	let ballSize = settings.ballSize;
-    let ballSpeed = settings.ballSpeed;
-	let ballSpeedX = settings.ballSpeed;
-	let ballSpeedY = settings.ballSpeed;
+    let ballSpeed = BALLSPEED;
+	let ballSpeedX = BALLSPEED;
+	let ballSpeedY = BALLSPEED;
 
     let winScore = settings.winScore;
 
@@ -1693,14 +1694,20 @@ const pongGame = () => {
 		// Ball collision with paddles
 		if (ballX <= paddleWidth && ballY >= player1Y && ballY <= player1Y + paddleHeight) {
 			ballX = paddleWidth;
-            ballSpeedX = -ballSpeedX + 1;
-            ballSpeedY = ballSpeedY < 0 ? ballSpeedY - 1 : ballSpeedY + 1;
+            ballSpeedX = -ballSpeedX;
+            const angle = Math.atan2(ballSpeedY, ballSpeedX);
+            ballSpeed += 1;
+            ballSpeedX = ballSpeed * Math.cos(angle);
+            ballSpeedY = ballSpeed * Math.sin(angle);
             setBallAsHit();
 		}
 		if (ballX >= WIDTH - paddleWidth - ballSize && ballY >= player2Y && ballY <= player2Y + paddleHeight) {
 			ballX = WIDTH - paddleWidth - ballSize;
-            ballSpeedX = -ballSpeedX - 1;
-            ballSpeedY = ballSpeedY < 0 ? ballSpeedY - 1 : ballSpeedY + 1;
+            ballSpeedX = -ballSpeedX;
+            const angle = Math.atan2(ballSpeedY, ballSpeedX);
+            ballSpeed += 1;
+            ballSpeedX = ballSpeed * Math.cos(angle);
+            ballSpeedY = ballSpeed * Math.sin(angle);
 		}
 
 		// AI paddle movement
@@ -1792,6 +1799,7 @@ const pongGame = () => {
             if (countdown <= 0) {
                 const angle = Math.random() * Math.PI / 2 - Math.PI / 4;
                 const direction = tempSpeedX < 0 ? 1 : -1;
+                ballSpeed = BALLSPEED;
                 ballSpeedX = direction * ballSpeed * Math.cos(angle);
                 ballSpeedY = ballSpeed * Math.sin(angle);
                 if (ballSpeedX > 0) {

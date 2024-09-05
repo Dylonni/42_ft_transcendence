@@ -60,7 +60,7 @@ class Profile(BaseModel):
         blank=True,
         related_name='players',
     )
-    elo = models.PositiveSmallIntegerField(
+    elo = models.IntegerField(
         default=1000,
     )
     is_ready = models.BooleanField(
@@ -104,6 +104,10 @@ class Profile(BaseModel):
         self.default_lang = lang
         self.save()
     
+    def update_elo(self, value):
+        self.elo = max(self.elo + value, 0)
+        self.save()
+    
     def is_friend(self, profile):
         is_profile1_friend = self.friendships_as_profile1.filter(profile1=self, profile2=profile, removed_by__isnull=True).exists()
         is_profile2_friend = self.friendships_as_profile2.filter(profile1=profile, profile2=self, removed_by__isnull=True).exists()
@@ -130,6 +134,8 @@ class Profile(BaseModel):
         self.save()
     
     def leave_game(self):
+        if self.game.started_at:
+            self.update_elo(-50)
         self.game = None
         self.set_status(self.StatusChoices.ONLINE)
         self.save()
@@ -145,10 +151,6 @@ class Profile(BaseModel):
         friendships_as_profile2 = self.friendships_as_profile2.all()
         for friendship in friendships_as_profile2:
             async_to_sync(channel_layer.group_send)(f'friends_{friendship.id}', {'type': 'update_header'})
-    
-    def update_elo(self, new_elo):
-        self.elo = new_elo
-        self.save()
     
     def toggle_ready(self):
         self.is_ready = not self.is_ready
