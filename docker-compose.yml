@@ -36,7 +36,7 @@ services:
       # - "5001:5001" # Logstash - no need to expose
       # - "5601:5601" # Kibana - shows "elasticsearch", which is normal
       - "3100:3100" # ModSecurity/Loki
-      # - "6379:6379" # Redis
+      # - "6379:6379" # Redis - no need to expose
     volumes:
       - shared-certs:/etc/ssl/shared:ro
       - ./data/certbot/conf:/etc/letsencrypt
@@ -61,17 +61,17 @@ services:
       - shared-certs:/etc/ssl/shared
       # - grafana-token:/vault/secrets/mon/grafana
 
-  certbot:
-    build: ./cybersec/certbot
-    container_name: certbot
-    env_file: .env
-    restart: "always"
-    networks:
-      - backend
-    volumes:
-      - shared-certs:/etc/ssl/shared:ro
-      - ./data/certbot/conf:/etc/letsencrypt
-      - ./data/certbot/www:/var/www/certbot
+#   # certbot:
+#   #   build: ./cybersec/certbot
+#   #   container_name: certbot
+#   #   env_file: .env
+#   #   restart: "always"
+#   #   networks:
+#   #     - backend
+#   #   volumes:
+#   #     - shared-certs:/etc/ssl/shared:ro
+#   #     - ./data/certbot/conf:/etc/letsencrypt
+#   #     - ./data/certbot/www:/var/www/certbot
 
 # WEB
   django:
@@ -158,9 +158,9 @@ services:
   loki:
     build: ./devops/mon/loki
     container_name: loki
-    # depends_on:
-    #   django:
-    #     condition: service_healthy
+    depends_on:
+      django:
+        condition: service_healthy
     command: -config.file=/etc/loki/local-config.yaml
     networks:
       - backend

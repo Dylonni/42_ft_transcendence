@@ -4,6 +4,11 @@ USER root
 RUN apk update && apk upgrade
 RUN apk add --no-cache openssl
 
+RUN mkdir -p /etc/ssl/shared
+RUN openssl req -x509 -nodes -days 365 -sha256 -newkey rsa:2048 -keyout /etc/ssl/shared/nginx_selfsigned.key -out /etc/ssl/shared/nginx_selfsigned.crt -subj "/C=FR/ST=IDF/L=Paris/O=Ecole42/OU=Stud/CN=ft_transcendence"
+RUN chmod 644 /etc/ssl/shared/nginx_selfsigned.key
+
+
 COPY ./conf/vault.conf /etc/nginx/conf.d/vault.conf
 COPY ./conf/postgres-exporter.conf /etc/nginx/conf.d/postgres-exporter.conf
 COPY ./conf/prometheus.conf /etc/nginx/conf.d/prometheus.conf
@@ -14,7 +19,10 @@ COPY ./conf/kibana.conf /etc/nginx/conf.d/kibana.conf
 
 COPY ./conf/loki.conf /etc/nginx/conf.d/loki.conf
 
-COPY ./conf/nginx.conf /etc/nginx/templates/conf.d/default.conf.template
+COPY ./conf/django.conf /etc/nginx/templates/conf.d/default.conf.template
+COPY ./conf/nginx.conf /etc/nginx/templates/includes/nginx.conf.template
+# COPY ./conf/nginx.conf /etc/nginx/conf.d/nginx.conf
+
 COPY ./conf/modsecurity.conf /etc/nginx/templates/modsecurity.d/modsecurity-override.conf.template
 
 COPY ./conf/proxy_backend.conf /etc/nginx/conf.d/proxy_backend.conf

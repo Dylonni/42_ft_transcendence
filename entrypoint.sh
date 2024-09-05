@@ -34,7 +34,9 @@ echo
 
 
 echo "### Starting nginx ..."
-docker-compose up --force-recreate -d nginx
+docker_nginx="nginx-modsec"
+# docker_nginx=$(basename $(pwd))"-nginx-modsec"
+docker-compose up --force-recreate -d $docker_nginx
 echo
 
 echo "### Deleting dummy certificate for $domains ..."

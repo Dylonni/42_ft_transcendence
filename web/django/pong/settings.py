@@ -43,7 +43,7 @@ SECRET_KEY = secret_response['data']['data']['SECRET_KEY']
 DEBUG = True
 
 
-ALLOWED_HOSTS = ['localhost', 'django', '127.0.0.1', 'www.transcendence42.rocks'] # add '*' if issue, to accept all hosts - should be removed in production
+ALLOWED_HOSTS = ['localhost', 'django', '127.0.0.1', 'www.transcendence42.rocks', '10.31.6.9'] # add '*' if issue, to accept all hosts - should be removed in production
 
 CSRF_TRUSTED_ORIGINS = ['https://localhost:8443', 'http://localhost:8080', 'https://127.0.0.1:8443', 'http://127.0.0.1:8080']
 
