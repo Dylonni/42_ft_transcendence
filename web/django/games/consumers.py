@@ -547,8 +547,6 @@ class GamePlayConsumer(AsyncWebsocketConsumer):
             game = game_model.objects.filter(id=self.game_id).first()
             if game:
                 game.end()
-                for player in game.players.all():
-                    game_model.objects.remove_player(game, player)
         except LookupError:
             return None
 

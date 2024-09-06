@@ -171,6 +171,8 @@ class Game(BaseModel):
         if last_round and last_round.winner:
             self.winner = last_round.winner
         self.save()
+        for player in self.players.all():
+            self.__class__.objects.remove_player(self, player)
     
     def get_currently_playing(self):
         round = self.rounds.filter(order=self.current_order).first()

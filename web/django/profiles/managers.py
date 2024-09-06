@@ -2,6 +2,7 @@ import random
 from asgiref.sync import async_to_sync
 from channels.layers import get_channel_layer
 from django.db import models
+from django.db.models import Count, Q
 from django.utils.translation import gettext_lazy as _
 
 
@@ -54,7 +55,19 @@ class ProfileManager(models.Manager):
         return rank
     
     def get_ranked_profiles(self):
-        return self.order_by('-elo')
+        unique_elo_scores = (
+            self.annotate(
+                total_games=Count('player1_rounds', distinct=True) + Count('player2_rounds', distinct=True)
+            )
+            .filter(total_games__gt=0)
+            .order_by('-elo')
+            .values_list('elo', flat=True)
+            .distinct()[:100]
+        )
+        profiles = self.annotate(
+            total_games=Count('player1_rounds', distinct=True) + Count('player2_rounds', distinct=True)
+        ).filter(total_games__gt=0, elo__in=unique_elo_scores).order_by('-elo')
+        return profiles
     
     def get_available_friends(self, profile):
         friends_as_profile1 = profile.friendships_as_profile1.filter(

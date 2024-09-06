@@ -134,7 +134,7 @@ class Profile(BaseModel):
         self.save()
     
     def leave_game(self):
-        if self.game.started_at:
+        if self.game.started_at and not self.game.ended_at:
             self.update_elo(-50)
         self.game = None
         self.set_status(self.StatusChoices.ONLINE)
@@ -170,7 +170,11 @@ class Profile(BaseModel):
         return self.get_total_games() - self.get_won_games()
     
     def get_rank(self):
-        higher_elo_count = self.__class__.objects.filter(elo__gt=self.elo).count()
+        if self.player1_rounds.count() + self.player2_rounds.count() == 0:
+            return '???'
+        higher_elo_count = self.__class__.objects.annotate(
+            total_games=models.Count('player1_rounds', distinct=True) + models.Count('player2_rounds', distinct=True)
+        ).filter(total_games__gt=0, elo__gt=self.elo).count()
         return higher_elo_count + 1
 
 
