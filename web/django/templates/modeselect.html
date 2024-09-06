@@ -68,4 +68,7 @@
         </div>
     </div>
 </div>
+{% if not profile %}
+    {% include "footer.html" %}
+{% endif %}
 {% endblock %}

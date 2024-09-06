@@ -4,7 +4,9 @@
 {% block title %}{% translate "Pong" %}{% endblock %}
 {% block content %}
 {% include "games/game_score.html" %}
-<div id="pongDiv" style="display: flex;justify-content: center;align-items: center;margin: 0;height:100vh;background-color: #00000000;">
-	<canvas id="pongCanvas" width="1000" height="600" style="background-color: #000;border: 2px solid #fff;"></canvas>
+<div class="row d-lg-flex d-xl-flex d-xxl-flex justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center">
+	<div id="pongDiv" class="col-md-12 col-lg-12 d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="border-style: none;padding-top: 0px;padding-bottom: 0px;">
+		<canvas id="pongCanvas" width="1000" height="600" style="background-color: #000;border: 2px solid #fff;"></canvas>
+	</div>
 </div>
 {% endblock %}

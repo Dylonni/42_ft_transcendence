@@ -147,6 +147,13 @@ class ForgotPasswordView(PublicView):
 forgot_password = ForgotPasswordView.as_view()
 
 
+class PrivacyPolicyView(PublicView):
+    def get(self, request):
+        return render(request, 'privacy_policy.html')
+
+privacy_policy = PrivacyPolicyView.as_view()
+
+
 class HomeView(PrivateView):
     def get(self, request):
         if request.profile.game:
