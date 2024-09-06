@@ -150,8 +150,7 @@ class Game(BaseModel):
     def can_start(self, player):
         is_host = player == self.host
         is_full = self.is_full()
-        all_ready = True #all(player.is_ready for player in self.players)
-        return is_host and is_full and all_ready
+        return is_host and is_full
     
     def set_host(self, new_host):
         self.host = new_host

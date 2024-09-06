@@ -14,10 +14,6 @@ from .storage import OverwriteStorage
 UserModel = get_user_model()
 logger = logging.getLogger('django')
 
-def upload_avatar(instance, filename):
-    ext = filename.split('.')[-1]
-    return f"avatars/{instance.id}.{ext}"
-
 
 class Profile(BaseModel):
     class StatusChoices(models.TextChoices):
@@ -37,7 +33,7 @@ class Profile(BaseModel):
     )
     avatar = models.ImageField(
         null=True,
-        upload_to=upload_avatar,
+        upload_to='upload_avatar',
         storage=OverwriteStorage(), 
     )
     avatar_url = models.CharField(
@@ -62,9 +58,6 @@ class Profile(BaseModel):
     )
     elo = models.IntegerField(
         default=1000,
-    )
-    is_ready = models.BooleanField(
-        default=False,
     )
     
     objects: ProfileManager = ProfileManager()
@@ -152,16 +145,27 @@ class Profile(BaseModel):
         for friendship in friendships_as_profile2:
             async_to_sync(channel_layer.group_send)(f'friends_{friendship.id}', {'type': 'update_header'})
     
-    def toggle_ready(self):
-        self.is_ready = not self.is_ready
-        self.save()
-        return self.is_ready
-    
     def get_total_games(self):
         return self.player1_rounds.count() + self.player2_rounds.count()
     
     def get_won_tournaments(self):
         return self.won_games.count()
+    
+    def get_highest_winstreak(self):
+        player1_rounds = self.player1_rounds.all()
+        player2_rounds = self.player2_rounds.all()
+        combined_rounds = player1_rounds.union(player2_rounds).order_by('started_at')
+        if not combined_rounds.exists():
+            return 0
+        max_streak = 0
+        current_streak = 0
+        for round in combined_rounds:
+            if round.winner == self:
+                current_streak += 1
+            else:
+                max_streak = max(max_streak, current_streak)
+                current_streak = 0
+        return max(max_streak, current_streak)
     
     def get_won_games(self):
         return self.rounds_won.count()
@@ -174,8 +178,13 @@ class Profile(BaseModel):
             return '???'
         higher_elo_count = self.__class__.objects.annotate(
             total_games=models.Count('player1_rounds', distinct=True) + models.Count('player2_rounds', distinct=True)
-        ).filter(total_games__gt=0, elo__gt=self.elo).count()
+        ).filter(total_games__gt=0, elo__gt=self.elo).values('elo').distinct().count()
         return higher_elo_count + 1
+    
+    @staticmethod
+    def upload_avatar(instance, filename):
+        ext = filename.split('.')[-1]
+        return f'avatars/{instance.id}.{ext}'
 
 
 class ProfileBlock(BaseModel):
