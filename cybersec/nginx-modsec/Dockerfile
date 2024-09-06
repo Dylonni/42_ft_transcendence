@@ -19,9 +19,10 @@ COPY ./conf/kibana.conf /etc/nginx/conf.d/kibana.conf
 
 COPY ./conf/loki.conf /etc/nginx/conf.d/loki.conf
 
-COPY ./conf/django.conf /etc/nginx/templates/conf.d/default.conf.template
+COPY ./conf/old_nginxConfTurnedDjango.conf /etc/nginx/templates/conf.d/default.conf.template
+# COPY ./conf/django.conf /etc/nginx/templates/conf.d/default.conf.template
 COPY ./conf/nginx.conf /etc/nginx/templates/includes/nginx.conf.template
-# COPY ./conf/nginx.conf /etc/nginx/conf.d/nginx.conf
+
 
 COPY ./conf/modsecurity.conf /etc/nginx/templates/modsecurity.d/modsecurity-override.conf.template
 
