@@ -125,7 +125,11 @@
 					<h1 class="card-title" style="font-weight: bold;text-align: center;color: {{ profile.user.fortytwo_coalition_color }};">
 						WIN
 					</h1>
+					{% if round.get_loser %}
 					<img class="d-xxl-flex justify-content-xxl-center align-items-xxl-center" src="{{ round.get_loser.get_avatar_url }}" style="width: 60px;height: 60px;border-radius: 50%;border-style: solid;border-color: var(--bs-secondary-text-emphasis);"/>
+					{% else %}
+					<img class="d-xxl-flex justify-content-xxl-center align-items-xxl-center" style="width: 60px;height: 60px;border-radius: 50%;border-style: solid;border-color: var(--bs-secondary-text-emphasis);"/>
+					{% endif %}
 					<h4 class="text-nowrap text-center card-title" style="margin-bottom: 0px;color: {{ profile.user.fortytwo_coalition_color }};font-weight: bold;">
 					{% if round.player1 == profile %}
 					{{ round.score1 }} - {{ round.score2 }}
@@ -148,7 +152,11 @@
 					<h1 class="card-title" style="font-weight: bold;text-align: center;color: var(--bs-gray-600);">
 						LOSS
 					</h1>
+					{% if round.winner %}
 					<img class="d-xxl-flex justify-content-xxl-center align-items-xxl-center" src="{{ round.winner.get_avatar_url }}" style="width: 60px;height: 60px;border-radius: 50%;border-style: solid;border-color: var(--bs-secondary-text-emphasis);"/>
+					{% else %}
+					<img class="d-xxl-flex justify-content-xxl-center align-items-xxl-center" style="width: 60px;height: 60px;border-radius: 50%;border-style: solid;border-color: var(--bs-secondary-text-emphasis);"/>
+					{% endif %}
 					<h4 class="text-nowrap text-center card-title" style="margin-bottom: 0px;color: var(--bs-gray-600);font-weight: bold;border-color: var(--bs-gray-600);">
 					{% if round.player1 == profile %}
 					{{ round.score2 }} - {{ round.score1 }}
@@ -414,7 +422,11 @@
 					<h1 class="card-title" style="font-weight: bold;text-align: center;color: var(--bs-primary-border-subtle);">
 						WIN
 					</h1>
+					{% if round.get_loser %}
 					<img class="d-xxl-flex justify-content-xxl-center align-items-xxl-center" src="{{ round.get_loser.get_avatar_url }}" style="width: 60px;height: 60px;border-radius: 50%;border-style: solid;border-color: var(--bs-secondary-text-emphasis);"/>
+					{% else %}
+					<img class="d-xxl-flex justify-content-xxl-center align-items-xxl-center" style="width: 60px;height: 60px;border-radius: 50%;border-style: solid;border-color: var(--bs-secondary-text-emphasis);"/>
+					{% endif %}
 					<h4 class="text-nowrap text-center card-title" style="margin-bottom: 0px;color: var(--bs-primary-border-subtle);font-weight: bold;">
 					{% if round.player1 == profile %}
 					{{ round.score1 }} - {{ round.score2 }}
@@ -437,7 +449,11 @@
 					<h1 class="card-title" style="font-weight: bold;text-align: center;color: var(--bs-gray-600);">
 						LOSS
 					</h1>
+					{% if round.winner %}
 					<img class="d-xxl-flex justify-content-xxl-center align-items-xxl-center" src="{{ round.winner.get_avatar_url }}" style="width: 60px;height: 60px;border-radius: 50%;border-style: solid;border-color: var(--bs-secondary-text-emphasis);"/>
+					{% else %}
+					<img class="d-xxl-flex justify-content-xxl-center align-items-xxl-center" style="width: 60px;height: 60px;border-radius: 50%;border-style: solid;border-color: var(--bs-secondary-text-emphasis);"/>
+					{% endif %}
 					<h4 class="text-nowrap text-center card-title" style="margin-bottom: 0px;color: var(--bs-gray-600);font-weight: bold;border-color: var(--bs-gray-600);">
 					{% if round.player1 == profile %}
 					{{ round.score2 }} - {{ round.score1 }}

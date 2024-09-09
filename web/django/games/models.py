@@ -172,6 +172,7 @@ class Game(BaseModel):
         self.save()
         for player in self.players.all():
             self.__class__.objects.remove_player(self, player)
+        self.messages.all().delete()
     
     def get_currently_playing(self):
         round = self.rounds.filter(order=self.current_order).first()
@@ -191,13 +192,13 @@ class GameRound(BaseModel):
     )
     player1 = models.ForeignKey(
         to='profiles.Profile',
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
         related_name='player1_rounds',
         null=True,
     )
     player2 = models.ForeignKey(
         to='profiles.Profile',
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
         related_name='player2_rounds',
         null=True,
     )

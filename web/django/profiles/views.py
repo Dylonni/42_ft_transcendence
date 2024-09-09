@@ -10,7 +10,7 @@ from pong.views import PrivateView
 from accounts.utils import unset_jwt_cookies
 from friends.models import FriendRequest, FriendMessage, Friendship
 from friends.serializers import FriendRequestSerializer, FriendshipSerializer, FriendMessageSerializer
-from games.models import GameInvite
+from games.models import Game, GameInvite, GameMessage
 from games.serializers import GameInviteSerializer
 from notifs.models import Notification
 
@@ -53,11 +53,11 @@ class MyDetailView(PrivateView):
         if not request.user.check_password(request.data['password']):
             response_data = {'error': _('Incorrect password.')}
             return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
-        # TODO: delete friends, messages, replace match history with placeholder
+        if request.profile.game:
+            Game.objects.remove_player(request.profile.game, request.profile)
         Notification.objects.remove_all_for_profile(request.profile)
-        user = request.user
-        user.is_active = False
-        user.save()
+        Friendship.objects.remove_all_for_profile(request.profile)
+        request.user.delete()
         response_data = {'message': _('Account deleted.'), 'redirect': '/'}
         response = Response(response_data, status=status.HTTP_200_OK)
         unset_jwt_cookies(response)

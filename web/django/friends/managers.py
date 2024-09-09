@@ -92,6 +92,12 @@ class FriendshipManager(models.Manager):
             Q(profile1__alias__istartswith=alias) |
             Q(profile2__alias__istartswith=alias)
         )
+    
+    def remove_all_for_profile(self, profile):
+        friendships = self.filter(Q(profile1=profile) | Q(profile2=profile))
+        friendships.delete()
+        channel_layer = get_channel_layer()
+        async_to_sync(channel_layer.group_send)('friends', {'type': 'update_friend_list'})
 
 
 class FriendRequestManager(models.Manager):
