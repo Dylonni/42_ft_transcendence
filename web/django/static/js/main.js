@@ -177,24 +177,31 @@ document.addEventListener("DOMContentLoaded", () => {
 
         notifSocket.onmessage = (event) => {
             const data = JSON.parse(event.data);
-            const element = data['element'];
-            const notifList = document.getElementById('notifList');
-            if (notifList) {
-                notifList.innerHTML += element;
-                setNotifHandlers(); // MAYBE: optimize
-            }
-            const notifBtn = document.getElementById('notiftoggle');
-            if (notifBtn && !notifBtn.checked) {
-                const showNotifDot = document.getElementById('showNotifDot');
-                if (showNotifDot) {
-                    showNotifDot.classList.remove('d-none', 'd-xxl-none');
+            if (data.element) {
+                const notifList = document.getElementById('notifList');
+                if (notifList) {
+                    notifList.innerHTML += data.element;
+                    setNotifHandlers(); // MAYBE: optimize
                 }
-            }
-            const notifDiv = document.getElementById('notifDiv');
-            if (notifDiv) {
-                notifDiv.classList.remove('rubberBand');
-                void notifDiv.offsetWidth;
-                notifDiv.classList.add('rubberBand');
+                const notifBtn = document.getElementById('notiftoggle');
+                if (notifBtn && !notifBtn.checked) {
+                    const showNotifDot = document.getElementById('showNotifDot');
+                    if (showNotifDot) {
+                        showNotifDot.classList.remove('d-none', 'd-xxl-none');
+                    }
+                }
+                const notifDiv = document.getElementById('notifDiv');
+                if (notifDiv) {
+                    notifDiv.classList.remove('rubberBand');
+                    void notifDiv.offsetWidth;
+                    notifDiv.classList.add('rubberBand');
+                }
+            } else if (data.notif_list) {
+                const notifList = document.getElementById('notifList');
+                if (notifList) {
+                    notifList.innerHTML = data.notif_list;
+                    setNotifHandlers(); // MAYBE: optimize
+                }
             }
         };
 
@@ -584,6 +591,10 @@ document.addEventListener("DOMContentLoaded", () => {
                             }
                         };
                         notifSocket.send(JSON.stringify(message));
+                        const showNotifDot = document.getElementById('showNotifDot');
+                        if (showNotifDot) {
+                            showNotifDot.classList.add('d-none', 'd-xxl-none');
+                        }
                     }
                 });
             }

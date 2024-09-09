@@ -12,6 +12,7 @@ from friends.models import FriendRequest, FriendMessage, Friendship
 from friends.serializers import FriendRequestSerializer, FriendshipSerializer, FriendMessageSerializer
 from games.models import GameInvite
 from games.serializers import GameInviteSerializer
+from notifs.models import Notification
 
 from .models import Profile, ProfileBlock
 from .serializers import ProfileSerializer, ProfileBlockSerializer
@@ -53,6 +54,7 @@ class MyDetailView(PrivateView):
             response_data = {'error': _('Incorrect password.')}
             return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
         # TODO: delete friends, messages, replace match history with placeholder
+        Notification.objects.remove_all_for_profile(request.profile)
         user = request.user
         user.is_active = False
         user.save()
