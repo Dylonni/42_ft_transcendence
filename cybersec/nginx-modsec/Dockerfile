@@ -5,9 +5,6 @@ RUN apk update && apk upgrade
 RUN apk add --no-cache openssl
 
 RUN mkdir -p /etc/ssl/shared
-# RUN openssl req -x509 -nodes -days 365 -sha256 -newkey rsa:2048 -keyout /etc/ssl/shared/nginx_selfsigned.key -out /etc/ssl/shared/nginx_selfsigned.crt -subj "/C=FR/ST=IDF/L=Paris/O=Ecole42/OU=Stud/CN=ft_transcendence"
-# RUN chmod 644 /etc/ssl/shared/nginx_selfsigned.key
-
 
 #this works
 COPY ./conf/vault.conf /etc/nginx/conf.d/vault.conf
@@ -29,14 +26,14 @@ COPY ./conf/modsecurity.conf /etc/nginx/templates/modsecurity.d/modsecurity-over
 #for testing
 
 # ok, this works in previous commit
-COPY ./conf/old_nginxConfTurnedDjango.conf /etc/nginx/templates/conf.d/default.conf.template
-COPY ./conf/OKgrafana.conf /etc/nginx/conf.d/grafana.conf
+# COPY ./conf/old_nginxConfTurnedDjango.conf /etc/nginx/templates/conf.d/default.conf.template
+# COPY ./conf/OKgrafana.conf /etc/nginx/conf.d/grafana.conf
 
 
 #lets try this
 
 # COPY ./conf/grafana.conf /etc/nginx/conf.d/grafana.conf
-# COPY ./conf/django.conf /etc/nginx/templates/conf.d/default.conf.template
+COPY ./conf/testnginx.conf /etc/nginx/templates/conf.d/default.conf.template
 # COPY ./conf/nginx.conf /etc/nginx/templates/includes/nginx.conf.template
 
 
