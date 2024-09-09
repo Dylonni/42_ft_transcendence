@@ -85,7 +85,11 @@ class NotifConsumer(AsyncWebsocketConsumer):
     def get_notifications(self, receiver_id):
         try:
             notification_model = apps.get_model('notifs.Notification')
-            return notification_model.objects.filter(receiver__id=receiver_id).all()
+            profile_model = apps.get_model('profiles.Profile')
+            profile = profile_model.objects.filter(id=receiver_id).first()
+            if profile:
+                return notification_model.objects.get_notifications_for_profile(profile)
+            return None
         except LookupError:
             logger.info('Error getting notifications.')
     

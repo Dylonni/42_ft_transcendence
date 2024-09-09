@@ -38,6 +38,6 @@ class Notification(BaseInteraction):
     def mark_as_read(self):
         self.read = True
         self.save()
-
+    
     def get_time_since(self):
         return timezone.now() - self.created_at

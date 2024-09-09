@@ -6,7 +6,8 @@ from django.db.models import Q
 
 class NotificationManager(models.Manager):
     def get_notifications_for_profile(self, profile):
-        return self.filter(receiver=profile)
+        blocked_profiles = profile.blocked_profiles.values_list('blocked_id', flat=True)
+        return self.filter(receiver=profile).exclude(sender__in=blocked_profiles)
     
     def send_notification(self, sender, receiver, category, object_id):
         notification = self.create(sender=sender, receiver=receiver, category=category, object_id=object_id)
