@@ -1,0 +1,307 @@
+networks:
+  backend:
+    name: backend
+  elk:
+    name: elk
+
+services:
+# CYBERSECURITY
+  nginx-modsec:
+    build: ./cybersec/nginx-modsec
+    container_name: nginx-modsec
+    env_file: .env
+    depends_on:
+      - vault
+      - django
+      - postgres-exporter
+      - prometheus
+      - grafana
+      - alert-manager
+      - loki
+      # - elasticsearch
+      # - logstash
+      # - kibana
+    restart: always
+    networks:
+      - backend
+    ports:
+      - "8080:8080" # HTTP -> Django
+      - "8443:8443" # HTTPS
+      # - "9187:9187" # Postgres Exporter - no need to expose
+      # - "9200:9200" # Elasticsearch - no need to expose
+      # - "5001:5001" # Logstash - no need to expose
+      # - "5601:5601" # Kibana - shows "elasticsearch", which is normal
+      # - "6379:6379" # Redis - no need to expose
+    volumes:
+      - shared-certs:/etc/ssl/shared:ro
+      # - ./data/certbot/conf:/etc/letsencrypt
+      # - ./data/certbot/www:/var/www/certbot
+
+
+  vault:
+    build: ./cybersec/vault
+    container_name: vault
+    env_file: .env
+    cap_add:
+      - IPC_LOCK
+    healthcheck:
+      test: ["CMD-SHELL", "vault status | grep 'Sealed.*false' && test -f /vault/output/initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - backend
+    expose:
+      - "8200:8200"
+    volumes:
+      - django-token:/vault/secrets/django
+      - shared-certs:/etc/ssl/shared
+      # - grafana-token:/vault/secrets/mon/grafana
+
+#   # certbot:
+#   #   build: ./cybersec/certbot
+#   #   container_name: certbot
+#   #   env_file: .env
+#   #   restart: "always"
+#   #   networks:
+#   #     - backend
+#   #   volumes:
+#   #     - shared-certs:/etc/ssl/shared:ro
+#   #     - ./data/certbot/conf:/etc/letsencrypt
+#   #     - ./data/certbot/www:/var/www/certbot
+
+# WEB
+  django:
+    build: ./web/django
+    container_name: django
+    env_file: .env
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "localhost:8000"]
+      interval: 5s
+      timeout: 5s
+      retries: 4
+    networks:
+      - backend
+    expose:
+      - "8080:8080" # HTTP -> Django
+    volumes:
+      - ./web/django:/django
+      - elk-data:/logstash
+      - django-token:/django/secrets:ro
+
+  redis:
+    image: redis:7.4.0-alpine3.20
+    container_name: redis
+    env_file: .env
+    networks:
+      - backend
+
+  postgres:
+    build: ./web/postgres
+    container_name: postgres
+    env_file: .env
+    depends_on:
+      vault:
+        condition: service_healthy
+    healthcheck:
+      test: pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}
+      interval: 5s
+      timeout: 5s
+      retries: 4
+    networks:
+      - backend
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+
+# MONITORING
+  postgres-exporter:
+    build: ./devops/mon/postgres-exporter
+    container_name: postgres-exporter
+    env_file: .env
+    networks:
+      - backend
+
+  prometheus:
+    build: ./devops/mon/prometheus
+    container_name: prometheus
+    depends_on:
+      django:
+        condition: service_healthy
+    expose:
+      - "9090:9090"
+    networks:
+      - backend
+
+  grafana:
+    build: ./devops/mon/grafana
+    container_name: grafana
+    env_file: .env
+    depends_on:
+      - prometheus
+    networks:
+      - backend
+    expose:
+      - "3000:3000"
+    volumes:
+      - shared-certs:/etc/grafana/certs:ro
+      # - shared-certs:/etc/ssl/shared:ro
+    #   - grafana-token:/var/lib/grafana/secrets:ro
+
+  alert-manager:
+    build: ./devops/mon/alert-manager
+    container_name: alert-manager
+    depends_on:
+      - prometheus
+    expose:
+      - "9093:9093"
+    networks:
+      - backend
+    command: --config.file=/etc/alertmanager/alertmanager.yml --log.level=debug --web.listen-address=:9093 --cluster.listen-address=
+
+  loki:
+    build: ./devops/mon/loki
+    container_name: loki
+    depends_on:
+      django:
+        condition: service_healthy
+    command: -config.file=/etc/loki/local-config.yaml
+    expose:
+      - "3100:3100"
+    networks:
+      - backend
+
+# ELK STACK
+  # elk_certs:
+  #   build:
+  #     context: ./devops/elk/elk_certs
+  #     args:
+  #       ELK_STACK_VERSION: ${ELK_STACK_VERSION}
+  #       ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
+  #       KIBANA_SYSTEM_PASSWORD: ${KIBANA_SYSTEM_PASSWORD:-}
+  #   container_name: elk_certs
+  #   environment:
+  #     node.name: transcendence42
+  #     discovery.type: single-node
+  #     xpack.license.self_generated.type: trial
+  #     ES_JAVA_OPTS: -Xms512m -Xmx512m
+  #     ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
+  #     KIBANA_SYSTEM_PASSWORD: ${KIBANA_SYSTEM_PASSWORD:-}
+  #   env_file: .env
+  #   networks:
+  #     - backend
+  #     - elk
+  #   depends_on:
+  #     - vault
+  #   volumes:
+  #     - shared_elk:/usr/share/elasticsearch/config/certs
+  #     - elk-data:/usr/share/elasticsearch/
+  #   # user: root
+  #   healthcheck:
+  #     test: ["CMD-SHELL", "[ -f config/certs/elasticsearch/elasticsearch.crt ]"]
+  #     interval: 10s
+  #     timeout: 5s
+  #     retries: 5
+
+### test with elast and elk_certs // this one seems ok but kibana needs its enroll token
+  # elasticsearch:
+  #   build:
+  #     context: ./devops/elk/elasticsearch
+  #     args:
+  #       ELK_STACK_VERSION: ${ELK_STACK_VERSION}
+  #       ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
+  #       KIBANA_SYSTEM_PASSWORD: ${KIBANA_SYSTEM_PASSWORD:-}
+  #   container_name: elasticsearch
+  #   environment:
+  #     node.name: transcendence42
+  #     discovery.type: single-node
+  #     xpack.license.self_generated.type: trial
+  #     ES_JAVA_OPTS: -Xms512m -Xmx512m
+  #     ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
+  #     KIBANA_SYSTEM_PASSWORD: ${KIBANA_SYSTEM_PASSWORD:-}
+  #   env_file: .env
+  #   networks:
+  #     - backend
+  #     - elk
+  #   volumes:
+  #     - shared_elk:/usr/share/elasticsearch/config/certs
+  #     - elk-data:/usr/share/elasticsearch/
+
+
+  # elasticsearch:
+  #   build:
+  #     context: ./devops/elk/elasticsearch
+  #     args:
+  #       ELK_STACK_VERSION: ${ELK_STACK_VERSION}
+  #       ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
+  #   container_name: elasticsearch
+  #   environment:
+  #     node.name: transcendence42
+  #     discovery.type: single-node
+  #     xpack.license.self_generated.type: trial
+  #     ES_JAVA_OPTS: -Xms512m -Xmx512m
+  #     ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
+  #   env_file: .env
+  #   depends_on:
+  #     elk_certs:
+  #       condition: service_healthy
+  #   networks:
+  #     - backend
+  #     - elk
+  #   volumes:
+  #     - shared_elk:/usr/share/elasticsearch/config/certs
+  #     - elk-data:/usr/share/elasticsearch/
+
+  # logstash:
+  #   build:
+  #     context: ./devops/elk/logstash
+  #     args:
+  #       ELK_STACK_VERSION: ${ELK_STACK_VERSION}
+  #   container_name: logstash
+  #   environment:
+  #     LS_JAVA_OPTS: -Xms256m -Xmx256m
+  #     LOGSTASH_INTERNAL_PASSWORD: ${LOGSTASH_INTERNAL_PASSWORD:-}
+  #   depends_on:
+  #     - elasticsearch
+  #   networks:
+  #     - backend
+  #     - elk
+  #   volumes:
+  #     - elk-data:/logstash
+
+  # kibana:
+  #   build:
+  #     context: ./devops/elk/kibana
+  #     args:
+  #       ELK_STACK_VERSION: ${ELK_STACK_VERSION}
+  #   container_name: kibana
+  #   environment:
+  #     ELASTICSEARCH_USERNAME: kibana
+  #     KIBANA_SYSTEM_PASSWORD: ${KIBANA_SYSTEM_PASSWORD:-}
+  #     ELASTICSEARCH_SSL_CERTIFICATEAUTHORITIES: config/certs/ca/ca.crt
+  #   depends_on:
+  #     - elasticsearch
+  #   env_file: .env
+  #   networks:
+  #     - backend
+  #     - elk
+  #   restart: always
+  #   volumes:
+  #     - shared_elk:/usr/share/kibana/config/certs
+  #     - elk-data:/certs
+
+volumes:
+  pg-data:
+    name: pg-data
+  django-token:
+    name: django-token
+  shared-certs:
+    name: shared-certs
+  elk-data:
+    name: elk-data
+  # grafana-token:
+  #   name: grafana-token
+
+
