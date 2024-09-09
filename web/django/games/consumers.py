@@ -193,34 +193,34 @@ class GamePlayConsumer(AsyncWebsocketConsumer):
             await self.handle_player_move(action, text_data_json)
             # asyncio.create_task(self.handle_player_move(action, text_data_json))
         elif action == 'next_round':
-            # TODO: prepare next round
-            asyncio.create_task(self.start_loop())
+            self.channel_layer.task = asyncio.create_task(self.start_loop())
     
     async def handle_player_move(self, action, data):
         direction = data.get('direction', 0)
         position = data.get('position', 0)
         async with GamePlayConsumer.state_lock:
             game_state = self.get_game_state()
-            if action == 'move_key':
-                if self.which == 'player1':
-                    game_state['player1_y'] = max(0, min(game_state['player1_y'] + direction * game_state['paddle_speed'], game_state['height'] - game_state['paddle_height']))
-                elif self.which == 'player2':
-                    game_state['player2_y'] = max(0, min(game_state['player2_y'] + direction * game_state['paddle_speed'], game_state['height'] - game_state['paddle_height']))
-            elif action == 'move_mouse':
-                if self.which == 'player1':
-                    direction = 1 if game_state['player1_y'] < position - game_state['paddle_height'] / 2 else -1
-                    game_state['player1_y'] = max(0, min(game_state['player1_y'] + direction * game_state['paddle_speed'], game_state['height'] - game_state['paddle_height']))
-                elif self.which == 'player2':
-                    direction = 1 if game_state['player2_y'] < position - game_state['paddle_height'] / 2 else -1
-                    game_state['player2_y'] = max(0, min(game_state['player2_y'] + direction * game_state['paddle_speed'], game_state['height'] - game_state['paddle_height']))
-            self.set_game_state(game_state)
-            await self.channel_layer.group_send(
-                self.room_name,
-                {
-                    'type': 'send_game_state',
-                    'game_state': game_state,
-                }
-            )
+            if game_state['game_running']:
+                if action == 'move_key':
+                    if self.which == 'player1':
+                        game_state['player1_y'] = max(0, min(game_state['player1_y'] + direction * game_state['paddle_speed'], game_state['height'] - game_state['paddle_height']))
+                    elif self.which == 'player2':
+                        game_state['player2_y'] = max(0, min(game_state['player2_y'] + direction * game_state['paddle_speed'], game_state['height'] - game_state['paddle_height']))
+                elif action == 'move_mouse':
+                    if self.which == 'player1':
+                        direction = 1 if game_state['player1_y'] < position - game_state['paddle_height'] / 2 else -1
+                        game_state['player1_y'] = max(0, min(game_state['player1_y'] + direction * game_state['paddle_speed'], game_state['height'] - game_state['paddle_height']))
+                    elif self.which == 'player2':
+                        direction = 1 if game_state['player2_y'] < position - game_state['paddle_height'] / 2 else -1
+                        game_state['player2_y'] = max(0, min(game_state['player2_y'] + direction * game_state['paddle_speed'], game_state['height'] - game_state['paddle_height']))
+                self.set_game_state(game_state)
+                await self.channel_layer.group_send(
+                    self.room_name,
+                    {
+                        'type': 'send_game_state',
+                        'game_state': game_state,
+                    }
+                )
     
     def get_game_state(self):
         game_state = redis_client.get(f'{str(self.game_id)}')
@@ -244,6 +244,15 @@ class GamePlayConsumer(AsyncWebsocketConsumer):
         context = {'game': game, 'round': round}
         rendered_html = await sync_to_async(render_to_string)('games/game_header.html', context)
         await self.send(text_data=json.dumps({'header': rendered_html}))
+    
+    async def terminate(self, event):
+        if hasattr(self.channel_layer, 'task') and self.channel_layer.task:
+            self.channel_layer.task.cancel()
+            try:
+                await self.channel_layer.task
+            except asyncio.CancelledError:
+                pass
+        await self.send(text_data=json.dumps({'redirect': '/home/'}))
     
     async def set_players(self, event):
         self.which = await self.check_player()
@@ -285,100 +294,105 @@ class GamePlayConsumer(AsyncWebsocketConsumer):
         await self.update_game_state('countdown', None)
     
     async def start_loop(self):
-        await self.prepare_next_round()
-        async with GamePlayConsumer.state_lock:
-            game_state = self.get_game_state()
-            game_state['player1_score'] = 0
-            game_state['player2_score'] = 0
-            game_state['game_running'] = True
-            width = game_state['width']
-            height = game_state['height']
-            game_state['player1_y'] = (height - game_state['paddle_height']) / 2
-            game_state['player2_y'] = (height - game_state['paddle_height']) / 2
-            self.set_game_state(game_state)
-            ball_speed = game_state['ball_speed']
-            ball_speed_x = ball_speed
-            ball_speed_y = ball_speed
-        await self.set_round_start()
-        has_scored = True
-        while True:
-            if has_scored:
-                async with GamePlayConsumer.state_lock:
-                    game_state = self.get_game_state()
-                    game_state['ball_x'] = (width - game_state['ball_size']) / 2
-                    game_state['ball_y'] = (height - game_state['ball_size']) / 2
-                    angle = random.random() * math.pi / 2 - math.pi / 4
-                    direction = -1 if ball_speed_x < 0 else 1
-                    ball_speed = game_state['ball_speed']
-                    ball_speed_x = direction * ball_speed * math.cos(angle)
-                    ball_speed_y = ball_speed * math.sin(angle)
-                    self.set_game_state(game_state)
-                    if game_state['player1_score'] >= game_state['win_score'] or game_state['player2_score'] >= game_state['win_score']:
-                        break
-                await self.start_countdown()
-                has_scored = False
-            
+        try:
+            await self.prepare_next_round()
             async with GamePlayConsumer.state_lock:
                 game_state = self.get_game_state()
-                game_state['ball_x'] += ball_speed_x
-                game_state['ball_y'] += ball_speed_y
-                
-                if game_state['ball_y'] < 0:
-                    ball_speed_y = -ball_speed_y
-                elif game_state['ball_y'] > height - game_state['ball_size']:
-                    ball_speed_y = -ball_speed_y
-                
-                if game_state['ball_x'] < game_state['paddle_width']:
-                    if game_state['player1_y'] - game_state['ball_size'] < game_state['ball_y'] < game_state['player1_y'] + game_state['paddle_height']:
-                        ball_speed_x = -ball_speed_x
-                        angle = math.atan2(ball_speed_y, ball_speed_x)
-                        ball_speed += 1
-                        ball_speed_x = ball_speed * math.cos(angle)
-                        ball_speed_y = ball_speed * math.sin(angle)
-                    else:
-                        game_state['player2_score'] += 1
-                        await self.update_score(game_state)
-                        await self.channel_layer.group_send(self.room_name, {'type': 'send_header'})
-                        has_scored = True
-                elif game_state['ball_x'] > width - game_state['ball_size'] - game_state['paddle_width']:
-                    if game_state['player2_y'] - game_state['ball_size'] < game_state['ball_y'] < game_state['player2_y'] + game_state['paddle_height']:
-                        ball_speed_x = -ball_speed_x
-                        angle = math.atan2(ball_speed_y, ball_speed_x)
-                        ball_speed += 1
-                        ball_speed_x = ball_speed * math.cos(angle)
-                        ball_speed_y = ball_speed * math.sin(angle)
-                    else:
-                        game_state['player1_score'] += 1
-                        await self.update_score(game_state)
-                        await self.channel_layer.group_send(self.room_name, {'type': 'send_header'})
-                        has_scored = True
+                game_state['player1_score'] = 0
+                game_state['player2_score'] = 0
+                game_state['game_running'] = True
+                width = game_state['width']
+                height = game_state['height']
+                game_state['player1_y'] = (height - game_state['paddle_height']) / 2
+                game_state['player2_y'] = (height - game_state['paddle_height']) / 2
                 self.set_game_state(game_state)
-                await self.channel_layer.group_send(
-                    self.room_name,
-                    {
-                        'type': 'send_game_state',
-                        'game_state': game_state,
-                    }
-                )
-            await asyncio.sleep(self.FPS)
+                ball_speed = game_state['ball_speed']
+                ball_speed_x = ball_speed
+                ball_speed_y = ball_speed
+            await self.set_round_start()
+            has_scored = True
+            while True:
+                if has_scored:
+                    async with GamePlayConsumer.state_lock:
+                        game_state = self.get_game_state()
+                        game_state['ball_x'] = (width - game_state['ball_size']) / 2
+                        game_state['ball_y'] = (height - game_state['ball_size']) / 2
+                        angle = random.random() * math.pi / 2 - math.pi / 4
+                        direction = -1 if ball_speed_x < 0 else 1
+                        ball_speed = game_state['ball_speed']
+                        ball_speed_x = direction * ball_speed * math.cos(angle)
+                        ball_speed_y = ball_speed * math.sin(angle)
+                        self.set_game_state(game_state)
+                        if game_state['player1_score'] >= game_state['win_score'] or game_state['player2_score'] >= game_state['win_score']:
+                            break
+                    await self.start_countdown()
+                    has_scored = False
+                
+                async with GamePlayConsumer.state_lock:
+                    game_state = self.get_game_state()
+                    game_state['ball_x'] += ball_speed_x
+                    game_state['ball_y'] += ball_speed_y
+                    
+                    if game_state['ball_y'] < 0:
+                        ball_speed_y = -ball_speed_y
+                    elif game_state['ball_y'] > height - game_state['ball_size']:
+                        ball_speed_y = -ball_speed_y
+                    
+                    if game_state['ball_x'] < game_state['paddle_width']:
+                        if game_state['player1_y'] - game_state['ball_size'] < game_state['ball_y'] < game_state['player1_y'] + game_state['paddle_height']:
+                            ball_speed_x = -ball_speed_x
+                            angle = math.atan2(ball_speed_y, ball_speed_x)
+                            ball_speed += 1
+                            ball_speed_x = ball_speed * math.cos(angle)
+                            ball_speed_y = ball_speed * math.sin(angle)
+                        else:
+                            game_state['player2_score'] += 1
+                            await self.update_score(game_state)
+                            await self.channel_layer.group_send(self.room_name, {'type': 'send_header'})
+                            has_scored = True
+                    elif game_state['ball_x'] > width - game_state['ball_size'] - game_state['paddle_width']:
+                        if game_state['player2_y'] - game_state['ball_size'] < game_state['ball_y'] < game_state['player2_y'] + game_state['paddle_height']:
+                            ball_speed_x = -ball_speed_x
+                            angle = math.atan2(ball_speed_y, ball_speed_x)
+                            ball_speed += 1
+                            ball_speed_x = ball_speed * math.cos(angle)
+                            ball_speed_y = ball_speed * math.sin(angle)
+                        else:
+                            game_state['player1_score'] += 1
+                            await self.update_score(game_state)
+                            await self.channel_layer.group_send(self.room_name, {'type': 'send_header'})
+                            has_scored = True
+                    self.set_game_state(game_state)
+                    await self.channel_layer.group_send(
+                        self.room_name,
+                        {
+                            'type': 'send_game_state',
+                            'game_state': game_state,
+                        }
+                    )
+                await asyncio.sleep(self.FPS)
         
-        winner = await self.set_round_winner()
-        winner_msg = winner + ' wins!'
-        await self.send_win_message()
-        await self.update_game_state('countdown', winner_msg)
-        countdown = 3 - self.FPS
-        while countdown > 0:
-            await asyncio.sleep(self.FPS)
-            countdown -= self.FPS
-        countdown = 0
-        await self.update_game_state('countdown', None)
-        await self.update_game_state('game_running', False)
-        round = await self.get_next_round()
-        if round:
-            asyncio.create_task(self.start_loop())
-        else:
-            await self.end_game()
-            await self.channel_layer.group_send(self.room_name, {'type': 'send_home'})
+            winner = await self.set_round_winner()
+            winner_msg = winner + ' wins!'
+            await self.send_win_message()
+            await self.update_game_state('countdown', winner_msg)
+            countdown = 3 - self.FPS
+            while countdown > 0:
+                await asyncio.sleep(self.FPS)
+                countdown -= self.FPS
+            countdown = 0
+            await self.update_game_state('countdown', None)
+            await self.update_game_state('game_running', False)
+            round = await self.get_next_round()
+            if round:
+                self.channel_layer.task = asyncio.create_task(self.start_loop())
+            else:
+                await self.end_game()
+                await self.channel_layer.group_send(self.room_name, {'type': 'send_home'})
+        except asyncio.CancelledError:
+            await self.update_game_state('game_running', False)
+            await self.channel_layer.group_send(self.room_name, {'type': 'terminate'})
+            raise
     
     async def update_game_state(self, key, value):
         async with GamePlayConsumer.state_lock:

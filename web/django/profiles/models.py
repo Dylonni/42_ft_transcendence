@@ -178,7 +178,7 @@ class Profile(BaseModel):
             return '???'
         higher_elo_count = self.__class__.objects.annotate(
             total_games=models.Count('player1_rounds', distinct=True) + models.Count('player2_rounds', distinct=True)
-        ).filter(total_games__gt=0, elo__gt=self.elo).values('elo').distinct().count()
+        ).filter(total_games__gt=0, elo__gt=self.elo).count()
         return higher_elo_count + 1
     
     @staticmethod
