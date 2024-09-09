@@ -700,6 +700,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             });
         }
+        const acceptTerms = document.getElementById('tosAccept');
+        const registerBtn = document.getElementById('registerBtn');
+        if (registerBtn && acceptTerms){
+            acceptTerms.addEventListener('change', (event) => {  
+                    registerBtn.classList.toggle("disabled");
+            });
+        }
     };
 
     const homePage = () => {
