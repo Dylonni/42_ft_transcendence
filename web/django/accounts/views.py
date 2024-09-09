@@ -180,32 +180,6 @@ class PasswordResetConfirmView(PublicView):
         return response
 
 password_reset_confirm = PasswordResetConfirmView.as_view()
-################################################3333
-# class FortyTwoLoginView(APIView): #OG
-#     permission_classes = (AllowAny,)
-    
-#     def get(self, request, *args, **kwargs):
-#         redirect_uri = quote('http://localhost:8080/api/oauth/42/callback/', safe='')
-#         authorization_url = f'https://api.intra.42.fr/oauth/authorize?client_id={settings.FORTYTWO_ID}&redirect_uri={redirect_uri}&response_type=code'
-#         return redirect(authorization_url)
-
-
-# class FortyTwoLoginView(APIView): #mine 8080
-#     permission_classes = (AllowAny,)
-    
-#     def get(self, request, *args, **kwargs):
-#         redirect_uri = quote('https://localhost:8080/api/oauth/42/callback/', safe='')
-#         authorization_url = f'https://api.intra.42.fr/oauth/authorize?client_id={settings.FORTYTWO_ID}&redirect_uri={redirect_uri}&response_type=code'
-#         return redirect(authorization_url)
-
-# class FortyTwoLoginView(APIView): #mine 8443 - OLD
-#     permission_classes = (AllowAny,)
-    
-#     def get(self, request, *args, **kwargs):
-#         redirect_uri = quote('https://localhost:8443/api/oauth/42/callback/', safe='')
-
-##################################################3
-
 
 class FortyTwoLoginView(APIView):
     def get(self, request: HttpRequest):
@@ -235,7 +209,7 @@ class FortyTwoCallbackView(APIView):
             'grant_type': 'authorization_code',
             'client_id': settings.FORTYTWO_ID,
             'client_secret': settings.FORTYTWO_SECRET,
-            'code': code, # mine: 'code': request.GET.get('code'),
+            'code': code,
             'redirect_uri': settings.FORTYTWO_REDIRECT_URI,
 
         })
