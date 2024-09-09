@@ -1,6 +1,19 @@
+re-make as is (thx postgre & redis limits)
+
+KEEP TESTING WITH TESTNGINX.CONF
+try to add the index and root directives
+work with compose yml on the ports vs expose
+
+
+
+
 ensure all services have a health check
 check again for ssl/tls : when/where needed (certbot only if we use an actual web address)
 try to see if a filezilla container would work with the infinity site ?
+clean dockerfiles
+check on both docker-compose files if we can use "expose" instead of "ports"
+
+
 
 on bottom of all pages, should be
     privacy + cookie policy
