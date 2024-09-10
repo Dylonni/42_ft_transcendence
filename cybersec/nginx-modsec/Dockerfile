@@ -33,9 +33,9 @@ RUN apk add --no-cache openssl
 #lets try this
 
 # COPY ./conf/grafana.conf /etc/nginx/conf.d/grafana.conf
-COPY ./conf/testnginx.conf /etc/nginx/templates/conf.d/default.conf.template
+# COPY ./conf/testnginx.conf /etc/nginx/templates/conf.d/default.conf.template
 # COPY ./conf/nginx.conf /etc/nginx/templates/includes/nginx.conf.template
-# COPY ./conf/test2.conf /etc/nginx/templates/conf.d/default.conf.template
+COPY ./conf/test2.conf /etc/nginx/templates/conf.d/default.conf.template
 
 
 # COPY ./conf/rocks_http.conf /etc/nginx/templates/nginx.conf.template
