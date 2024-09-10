@@ -35,12 +35,10 @@ services:
       # - "9200:9200" # Elasticsearch - no need to expose
       # - "5001:5001" # Logstash - no need to expose
       # - "5601:5601" # Kibana - shows "elasticsearch", which is normal
-      - "3100:3100" # ModSecurity/Loki
+      - "3100:3100" # Loki
       # - "6379:6379" # Redis - no need to expose
     volumes:
       - shared-certs:/etc/nginx/ssl
-      # - ./data/certbot/conf:/etc/letsencrypt
-      # - ./data/certbot/www:/var/www/certbot
 
 
   vault:
@@ -61,17 +59,6 @@ services:
       - shared-certs:/etc/ssl/shared
       # - grafana-token:/vault/secrets/mon/grafana
 
-#   # certbot:
-#   #   build: ./cybersec/certbot
-#   #   container_name: certbot
-#   #   env_file: .env
-#   #   restart: "always"
-#   #   networks:
-#   #     - backend
-#   #   volumes:
-#   #     - shared-certs:/etc/ssl/shared:ro
-#   #     - ./data/certbot/conf:/etc/letsencrypt
-#   #     - ./data/certbot/www:/var/www/certbot
 
 # WEB
   django:
@@ -93,12 +80,12 @@ services:
       - elk-data:/logstash
       - django-token:/django/secrets:ro
 
-  # redis:
-  #   image: redis:7.4.0-alpine3.20
-  #   container_name: redis
-  #   env_file: .env
-  #   networks:
-  #     - backend
+  redis:
+    image: redis:7.4.0-alpine3.20
+    container_name: redis
+    env_file: .env
+    networks:
+      - backend
 
   postgres:
     build: ./web/postgres
