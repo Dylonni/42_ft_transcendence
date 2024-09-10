@@ -38,7 +38,7 @@ services:
       - "3100:3100" # ModSecurity/Loki
       # - "6379:6379" # Redis - no need to expose
     volumes:
-      - shared-certs:/etc/ssl/shared:ro
+      - shared-certs:/etc/nginx/ssl
       # - ./data/certbot/conf:/etc/letsencrypt
       # - ./data/certbot/www:/var/www/certbot
 
@@ -293,6 +293,8 @@ volumes:
     name: shared-certs
   elk-data:
     name: elk-data
+  django-web:
+    name: django-web
   # grafana-token:
   #   name: grafana-token
 
