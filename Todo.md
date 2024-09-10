@@ -1,7 +1,7 @@
 re-make as is (thx postgre & redis limits)
 
 KEEP TESTING WITH TESTNGINX.CONF
-try to add the index and root directives
+if still issues, try uncommentng lines 90-91-92
 work with compose yml on the ports vs expose
 
 
