@@ -7,7 +7,8 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.validators import UnicodeUsernameValidator
-from .managers import CustomUserManager
+from pong.models import BaseModel
+from .managers import CustomUserManager, TemporaryCodeManager
 
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
@@ -63,6 +64,13 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         related_name='custom_user_set',
         related_query_name='custom_user',
     )
+    code = models.CharField(
+        max_length=6,
+        null=True,
+    )
+    code_updated_at = models.DateTimeField(
+        null=True,
+    )
     
     objects: CustomUserManager = CustomUserManager()
     
@@ -87,4 +95,15 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     def set_as_verified(self):
         self.is_verified = True
         self.is_active = True
+        self.save()
+    
+    def has_code_expired(self):
+        expiration_time = self.code_updated_at + timezone.timedelta(minutes=10)
+        return timezone.now() > expiration_time
+    
+    def check_code(self, code):
+        return not self.has_code_expired() and code == self.code
+    
+    def remove_code(self):
+        self.code = None
         self.save()

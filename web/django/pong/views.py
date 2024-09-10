@@ -147,6 +147,32 @@ class ForgotPasswordView(PublicView):
 forgot_password = ForgotPasswordView.as_view()
 
 
+class VerifyCodeView(PublicView):
+    def get(self, request):
+        context = {
+            'type': request.query_params.get('type', None),
+            'token': request.query_params.get('token', None),
+            'user': request.query_params.get('user', None),
+        }
+        return render(request, 'accounts/verify_code.html', context)
+
+verify_code = VerifyCodeView.as_view()
+
+
+class ChangePasswordView(PublicView):
+    def get(self, request):
+        return render(request, 'accounts/change_password.html')
+
+change_password = ChangePasswordView.as_view()
+
+
+class ChangeEmailView(PublicView):
+    def get(self, request):
+        return render(request, 'accounts/change_email.html')
+
+change_email = ChangeEmailView.as_view()
+
+
 class HomeView(PrivateView):
     def get(self, request):
         if request.profile.game:
