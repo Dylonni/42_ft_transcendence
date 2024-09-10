@@ -1,7 +1,8 @@
 re-make as is (thx postgre & redis limits)
 
 KEEP TESTING WITH TESTNGINX.CONF
-
+    => look into logs
+RE-add modsec to conf
 work with compose yml on the ports vs expose
 
 
