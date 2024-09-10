@@ -44,6 +44,8 @@ class GameChatConsumer(AsyncWebsocketConsumer):
         game = await self.get_game()
         round = await self.get_current_round()
         message = await self.get_message(message_id)
+        if await self.is_blocked(message):
+            return
         context = {'game': game, 'round': round, 'message': message, 'profile': self.profile}
         rendered_html = await sync_to_async(render_to_string)('games/game_message.html', context)
         await self.send(text_data=json.dumps({'message': rendered_html}))
@@ -70,6 +72,10 @@ class GameChatConsumer(AsyncWebsocketConsumer):
             gamemessage_model.objects.send_message(game=game, sender=sender, category=category)
         except LookupError:
             return None
+    
+    @database_sync_to_async
+    def is_blocked(self, message):
+        return self.profile.blocked_profiles.filter(blocked=message.sender).exists() and message.category == 'Send'
     
     @database_sync_to_async
     def get_profile(self):

@@ -135,16 +135,13 @@ class FriendRequestManager(models.Manager):
 
 
 class FriendMessageManager(models.Manager):
-    def get_messages(self, friendship_id):
-        return self.filter(friendship__id=friendship_id)
-    
-    def get_conversation(self, profile1, profile2):
-        return self.filter(
-            Q(sender=profile1, receiver=profile2) | Q(sender=profile2, receiver=profile1)
-        )
-    
-    def get_conversation_by_friendship_id(self, friendship_id):
-        return self.filter(friendship__id=friendship_id)
+    def get_messages(self, friendship, profile):
+        friend = friendship.get_other(profile)
+        if friend:
+            if not profile.blocked_profiles.filter(blocked=friend).exists():
+                return self.filter(friendship=friendship)
+            return self.filter(friendship=friendship, sender=profile)
+        return None
     
     def send_message(self, friendship, sender, content):
         receiver = friendship.get_other(sender)

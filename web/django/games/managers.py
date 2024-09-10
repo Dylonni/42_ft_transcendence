@@ -186,6 +186,12 @@ class GameInviteManager(models.Manager):
 
 
 class GameMessageManager(models.Manager):
+    def get_messages(self, game, profile):
+        blocked_profiles = profile.blocked_profiles.values_list('blocked', flat=True)
+        return self.filter(game=game).exclude(
+            models.Q(sender__in=blocked_profiles) & models.Q(category=self.model.GameMessageCategories.SEND)
+        )
+    
     def send_message(self, game, sender=None, content=None, category='Send'):
         game_message = self.create(game=game, sender=sender, content=content, category=category)
         channel_layer = get_channel_layer()

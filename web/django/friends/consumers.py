@@ -98,6 +98,8 @@ class FriendChatConsumer(AsyncWebsocketConsumer):
     async def broadcast(self, event):
         message_id = event.get('message_id', '')
         message = await self.get_message(message_id)
+        if await self.is_blocked(message):
+            return
         context = {'message': message, 'profile': self.profile}
         rendered_html = await sync_to_async(render_to_string)('friends/social_message.html', context)
         await self.send(text_data=json.dumps({'element': rendered_html}))
@@ -122,6 +124,10 @@ class FriendChatConsumer(AsyncWebsocketConsumer):
             return profile_model.objects.filter(user=self.user).first()
         except LookupError:
             return None
+    
+    @database_sync_to_async
+    def is_blocked(self, message):
+        return self.profile.blocked_profiles.filter(blocked=message.sender).exists()
     
     @database_sync_to_async
     def get_current_friend(self):
@@ -156,7 +162,8 @@ class FriendChatConsumer(AsyncWebsocketConsumer):
             friendship_model = apps.get_model('friends.Friendship')
             friendship = friendship_model.objects.filter(id=self.friendship_id).first()
             if friendship:
-                return friendship.messages.all()
+                friendmessage_model = apps.get_model('friends.FriendMessage')
+                return friendmessage_model.objects.get_messages(friendship, self.profile)
             return None
         except LookupError:
             return None
@@ -179,7 +186,8 @@ class FriendChatConsumer(AsyncWebsocketConsumer):
             friendship = friendship_model.objects.filter(id=self.friendship_id).first()
             if friendship:
                 for message in friendship.messages.filter(receiver=self.profile, read=False).all():
-                    message.mark_as_read()
+                    if not self.profile.blocked_profiles.filter(blocked=message.sender).exists():
+                        message.mark_as_read()
         except LookupError:
             return None
 

@@ -12,7 +12,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from profiles.models import Profile, ProfileBlock
 from friends.models import Friendship, FriendMessage
-from games.models import Game, GameRound
+from games.models import Game, GameRound, GameMessage
 from notifs.models import Notification
 from .mixins import JWTCookieAuthenticationMixin, LangVerificationMixin, RedirectIfAuthenticatedMixin
 
@@ -216,6 +216,7 @@ class GameRoomView(PrivateView):
             return redirect('/home/')
         context = get_friend_context(request)
         context['game'] = game
+        context['messages'] = GameMessage.objects.get_messages(game, request.profile)
         context['players'] = game.players.all()
         context['available_friends'] = Profile.objects.get_available_friends(request.profile)
         context = get_notif_context(request, context)
@@ -276,7 +277,7 @@ class SocialFriendView(PrivateView):
         if friendship.is_outsider(request.profile):
             return redirect('/home/')
         context = get_friendship_context(request)
-        context['messages'] = FriendMessage.objects.get_messages(friendship_id)
+        context['messages'] = FriendMessage.objects.get_messages(friendship, request.profile)
         context['current_friend'] = Friendship.objects.get_other(friendship_id, request.profile)
         context['friendship'] = friendship
         context['profile_block'] = request.profile.get_block(context['current_friend'])
