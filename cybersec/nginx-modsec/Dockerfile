@@ -7,16 +7,13 @@ RUN apk add --no-cache openssl
 
 
 # ssl only for website
-
 # COPY ./conf/proxy_backend.conf /etc/nginx/conf.d/proxy_backend.conf
 # COPY ./conf/modsecurity.conf /etc/nginx/templates/modsecurity.d/modsecurity-override.conf.template
-
 # COPY ./conf/old_nginx.conf /etc/nginx/templates/conf.d/default.conf.template
 # COPY ./conf/vault.conf /etc/nginx/conf.d/vault.conf
 # COPY ./conf/grafana.conf /etc/nginx/conf.d/grafana.conf
 # COPY ./conf/loki.conf /etc/nginx/conf.d/loki.conf
 # COPY ./conf/redis.conf /etc/nginx/conf.d/redis.conf
-
 
 
 # COPY ./conf/elasticsearch.conf /etc/nginx/conf.d/elasticsearch.conf
@@ -26,9 +23,8 @@ RUN apk add --no-cache openssl
 
 
 # ssl for all
-COPY ./conf/testnginx.conf /etc/nginx/templates/conf.d/default.conf.template
+COPY ./conf/ssl_nginx.conf /etc/nginx/templates/conf.d/default.conf.template
 COPY ./conf/modsecurity.conf /etc/nginx/templates/modsecurity.d/modsecurity-override.conf.template
-## maye add proxy_backend ?
 
 
 

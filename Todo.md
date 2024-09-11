@@ -1,15 +1,5 @@
-re-make as is (thx postgre & redis limits)
-
-KEEP TESTING WITH TESTNGINX.CONF
-    => look into logs
-RE-add modsec to conf
-work with compose yml on the ports vs expose
-
-
-
 
 ensure all services have a health check
-check again for ssl/tls : when/where needed (certbot only if we use an actual web address)
 try to see if a filezilla container would work with the infinity site ?
 clean dockerfiles
 check on both docker-compose files if we can use "expose" instead of "ports"
@@ -22,17 +12,6 @@ on bottom of all pages, should be
     contact ?
 
 
-SSL / HTTPS
-    nginx
-    vault
-
-    alert-manager
-    grafana
-    loki
-    postgres-exporter
-    prometheus
-
-
 MICROSERVICES
     use redis?
     Inter Process Communication : how to set it up ?
@@ -43,14 +22,10 @@ how long should we keep live chats ? (twitch keeps them minimum 7 days, dependin
 look into openclassrooms for api rest
 
 
-WHY IS THE 403 ERROR (DUE TO ATTEMPTED SQL INJECTIONS)
-    NOT SHOWING ON GRAFANA !!!!
-
-
 cybersec
     nginx
         add "modsecurity on" to all config files   ==> done
-        change the "return 301" into "rewrite" ?
+
     
     RGPD
         general

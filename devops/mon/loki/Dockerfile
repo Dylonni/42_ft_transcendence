@@ -1,7 +1,6 @@
 FROM grafana/loki:2.9.10
 
 
-
 COPY config/local-config.yaml /etc/loki/local-config.yaml
 
 
