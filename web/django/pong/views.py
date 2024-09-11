@@ -110,7 +110,7 @@ class ModeSelectView(PublicView):
     def get(self, request):
         context = get_profile_context(request)
         context = get_notif_context(request, context)
-        return render(request, 'customize_game.html', context)
+        return render(request, 'games/game_config.html', context)
 
 mode_select = ModeSelectView.as_view()
 
@@ -147,6 +147,19 @@ class ForgotPasswordView(PublicView):
 forgot_password = ForgotPasswordView.as_view()
 
 
+class PrivacyPolicyView(PublicView):
+    def get(self, request):
+        return render(request, 'privacy_policy.html')
+
+privacy_policy = PrivacyPolicyView.as_view()
+
+class TosView(PublicView):
+    def get(self, request):
+        return render(request, 'terms_of_use.html')
+
+terms_of_use = TosView.as_view()
+
+
 class HomeView(PrivateView):
     def get(self, request):
         if request.profile.game:
@@ -176,10 +189,9 @@ class CustomizeGameView(PrivateView):
             return redirect(f'/games/{request.profile.game.id}/', True)
         context = get_profile_context(request)
         context = get_notif_context(request, context)
-        logger.info(request.query_params)
         if request.query_params.get('local', None):
             context['local'] = True
-        return render(request, 'customize_game.html', context)
+        return render(request, 'games/game_config.html', context)
 
 customize_game = CustomizeGameView.as_view()
 
@@ -194,7 +206,7 @@ class GameRoomView(PrivateView):
         context['players'] = game.players.all()
         context['available_friends'] = Profile.objects.get_available_friends(request.profile)
         context = get_notif_context(request, context)
-        return render(request, 'game_room.html', context)
+        return render(request, 'games/game_room.html', context)
 
 game_room = GameRoomView.as_view()
 

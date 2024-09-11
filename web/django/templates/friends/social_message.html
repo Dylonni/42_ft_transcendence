@@ -3,7 +3,7 @@
 {% if message.sender != profile %}
 <div class="d-flex d-xxl-flex align-items-end justify-content-xxl-start align-items-xxl-end chatEl" style="height: auto;width: 100%;margin-top: 0px;margin-bottom: 0px;">
 	<div class="d-xxl-flex justify-content-xxl-center align-items-xxl-center" style="border-radius: 0px;width: 50px;height: 50px;padding-left: 0px;margin-top: 0px;margin-bottom: 0px;margin-left: 15px;margin-right: 10px;">
-		<img height="135" src="{{ message.sender.get_avatar_url }}" style="width: 100%;height: 100%;border-radius: 50%;border-style: none;border-color: var(--bs-body-bg);" width="93"/>
+		<img height="135" src="{{ message.sender.avatar_url }}" style="width: 100%;height: 100%;border-radius: 50%;border-style: none;border-color: var(--bs-body-bg);" width="93"/>
 	</div>
 	<div class="text-break flex-column justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="border-radius: 20px;border-bottom-right-radius: 19px;border-top-left-radius: 19px;border-top-right-radius: 19px;border-bottom-left-radius: 0px;font-size: 19px;display: inline-block;max-width: 50%;background: var(--bs-gray-700);margin-bottom: 35px;margin-top: 5px;">
 		<div class="d-flex d-xxl-flex justify-content-xxl-center align-items-xxl-center message-wrapper" style="margin-left: 0px;margin-right: 0px;padding-top: 10px;padding-bottom: 10px;padding-left: 15px;padding-right: 15px;">

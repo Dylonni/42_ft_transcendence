@@ -2,7 +2,7 @@
 {% load i18n %}
 {% for player in game.players.all %}
 {% if game.host == player %}
-<div data-bs-container="div" class="d-flex d-xxl-flex flex-column justify-content-end justify-content-lg-center align-items-lg-center justify-content-xxl-end align-items-xxl-center" data-bs-placement="bottom" data-bs-toggle="tooltip" data-bss-tooltip="" style="width: 9%;height: 130px;backdrop-filter: opacity(1);-webkit-backdrop-filter: opacity(1);opacity: 1;margin-left: 15px;margin-right: 15px;" title="{{ game.host }}">
+<div data-bs-container="div" class="d-flex d-xxl-flex flex-column justify-content-end justify-content-lg-center align-items-lg-center justify-content-xxl-end align-items-xxl-center" data-bs-placement="bottom" data-bs-toggle="tooltip" data-bss-tooltip="" style="width: 8%;height: 130px;backdrop-filter: opacity(1);-webkit-backdrop-filter: opacity(1);opacity: 1;margin-left: 15px;margin-right: 15px;" title="{{ game.host }}">
 	<div class="d-flex justify-content-center align-items-center" style="width: 100%;">
 		<svg class="icon icon-tabler icon-tabler-crown" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 30px;color: var(--bs-primary-border-subtle);" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
 			<path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
@@ -12,11 +12,10 @@
 	<div class="d-flex d-lg-flex d-xxl-flex justify-content-center align-items-center align-items-sm-center align-items-md-center justify-content-lg-center align-items-lg-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="width: 100%;height: 100%;">
 		<img height="65" src="{{ player.get_avatar_url }}" style="border-radius: 50%;width: 60px;height: 60px;box-shadow: 0px 0px 6px 2px var(--bs-primary-bg-subtle);border: 3px solid var(--bs-primary-bg-subtle) ;" width="65"/>
 	</div>
-	<div class="d-flex justify-content-center align-items-center" style="width: 100%;height: auto;min-height: 30px;">
-	</div>
+	<div class="d-flex justify-content-center align-items-center" style="width: 100%;height: auto;min-height: 30px;"></div>
 </div>
 {% else %}
-<div class="d-flex d-xxl-flex flex-column justify-content-end justify-content-lg-center align-items-lg-center justify-content-xxl-start align-items-xxl-center" data-bs-placement="bottom" data-bs-toggle="tooltip" data-bss-tooltip="" id="roomPlayer-1" style="width: 9%;height: 130px;backdrop-filter: opacity(1);-webkit-backdrop-filter: opacity(1);opacity: 1;margin-left: 15px;margin-right: 15px;" title="#Player">
+<div class="d-flex d-xxl-flex flex-column justify-content-end justify-content-lg-center align-items-lg-center justify-content-xxl-start align-items-xxl-center" data-bs-placement="bottom" data-bs-toggle="tooltip" data-bss-tooltip="" id="roomPlayer-1" style="width: 8%;height: 130px;backdrop-filter: opacity(1);-webkit-backdrop-filter: opacity(1);opacity: 1;margin-left: 15px;margin-right: 15px;" title="#Player">
 	<div class="d-flex justify-content-center align-items-center" style="width: 100%;height: 30px;">
 	</div>
 	<div class="d-flex d-lg-flex d-xxl-flex justify-content-center align-items-center align-items-sm-center align-items-md-center justify-content-lg-center align-items-lg-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="width: 100%;height: 70px;">
@@ -26,8 +25,7 @@
 </div>
 {% endif %}
 {% endfor %}
-{% if game.is_full %}
-<div id="inviteModalBtn" class="d-none d-xxl-none d-flex d-xxl-flex flex-column flex-shrink-0 justify-content-lg-center align-items-lg-center justify-content-xxl-start align-items-xxl-center" id="invitePlayer" style="width: 9%;height: 130px;backdrop-filter: opacity(1);-webkit-backdrop-filter: opacity(1);opacity: 1;margin-left: 15px;margin-right: 15px;">
+<div id="inviteModalBtn" class="{{ game.is_full|yesno:"d-none d-xxl-none," }} d-flex d-xxl-flex flex-column flex-shrink-0 justify-content-lg-center align-items-lg-center justify-content-xxl-start align-items-xxl-center" id="invitePlayer" style="width: 9%;height: 130px;backdrop-filter: opacity(1);-webkit-backdrop-filter: opacity(1);opacity: 1;margin-left: 15px;margin-right: 15px;">
 	<div class="d-flex flex-shrink-0 justify-content-center align-items-center" style="width: 100%;height: 30px;">
 	</div>
 	<div class="d-flex d-lg-flex d-xxl-flex flex-shrink-0 justify-content-center align-items-center align-items-sm-center align-items-md-center justify-content-lg-center align-items-lg-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="width: 100%;height: 70px;">
@@ -45,23 +43,3 @@
 		</span>
 	</div>
 </div>
-{% else %}
-<div id="inviteModalBtn" class="d-flex d-xxl-flex flex-column flex-shrink-0 justify-content-lg-center align-items-lg-center justify-content-xxl-start align-items-xxl-center" id="invitePlayer" style="width: 9%;height: 130px;backdrop-filter: opacity(1);-webkit-backdrop-filter: opacity(1);opacity: 1;margin-left: 15px;margin-right: 15px;">
-	<div class="d-flex flex-shrink-0 justify-content-center align-items-center" style="width: 100%;height: 30px;">
-	</div>
-	<div class="d-flex d-lg-flex d-xxl-flex flex-shrink-0 justify-content-center align-items-center align-items-sm-center align-items-md-center justify-content-lg-center align-items-lg-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="width: 100%;height: 70px;">
-		<button class="btn btn-primary d-flex d-xxl-flex flex-shrink-0 justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" data-bs-target="#modalInvite" data-bs-toggle="modal" style="width: 60px;height: 60px;border-radius: 50%;background: rgba(13,110,253,0);border-width: 2px;border-color: var(--bs-btn-disabled-color);padding-left: 0px;padding-right: 0px;padding-top: 0px;padding-bottom: 0px;" type="button">
-			<svg class="icon icon-tabler icon-tabler-plus flex-shrink-0" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 43px;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
-				<path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
-				<path d="M12 5l0 14"></path>
-				<path d="M5 12l14 0"></path>
-			</svg>
-		</button>
-	</div>
-	<div class="d-flex justify-content-center align-items-center" style="width: 100%;">
-		<span class="text-nowrap" style="color: var(--bs-body-bg);">
-			Invite Player
-		</span>
-	</div>
-</div>
-{% endif %}

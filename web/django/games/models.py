@@ -1,4 +1,5 @@
 import logging
+import math
 import random
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
@@ -107,6 +108,9 @@ class Game(BaseModel):
     def __str__(self):
         return self.name
     
+    def get_current_round(self):
+        return self.rounds.filter(order=self.current_order).first()
+
     def get_ball_size(self):
         if self.ball_size == self.SizeChoices.SMALL:
             return 10
@@ -132,7 +136,7 @@ class Game(BaseModel):
         return self.players.count()
     
     def get_rounds(self):
-        return self.rounds
+        return self.rounds.all()
     
     def is_full(self):
         return self.players.count() == self.player_limit
@@ -167,6 +171,8 @@ class Game(BaseModel):
         if last_round and last_round.winner:
             self.winner = last_round.winner
         self.save()
+        for player in self.players.all():
+            self.__class__.objects.remove_player(self, player)
     
     def get_currently_playing(self):
         round = self.rounds.filter(order=self.current_order).first()
@@ -200,6 +206,12 @@ class GameRound(BaseModel):
         default=0,
     )
     score2 = models.PositiveSmallIntegerField(
+        default=0,
+    )
+    elo_win = models.IntegerField(
+        default=0,
+    )
+    elo_lose = models.IntegerField(
         default=0,
     )
     winner = models.ForeignKey(
@@ -247,6 +259,27 @@ class GameRound(BaseModel):
         self.score2 = score2
         self.save()
     
+    def calculate_elo(self):
+        gain = max(min(int(abs(self.player1.elo - self.player2.elo) // 4), 30), 10)
+        loss = -gain
+        serie = math.ceil(math.log2(self.game.player_limit))
+        if serie:
+            current_serie = 0
+            for i in range(serie):
+                if self.order >= 2**i - 1:
+                    current_serie = i
+                    break
+            bonus = 2**current_serie
+        if self.winner.get_total_games() <= 5:
+            gain = max(min(int(abs(self.player1.elo - self.player2.elo) // 4), 50), 25)
+        if self.get_loser().get_total_games() <= 5:
+            loss = -5
+        self.winner.update_elo(gain + bonus)
+        self.get_loser().update_elo(loss)
+        self.elo_win = gain + bonus
+        self.elo_lose = loss
+        self.save()
+    
     def start(self):
         self.started_at = timezone.now()
         self.save()
@@ -258,6 +291,7 @@ class GameRound(BaseModel):
         elif self.score2 == self.game.win_score:
             self.winner = self.player2
         self.save()
+        self.calculate_elo()
         # Move winner to next round
         rounds = self.game.rounds.order_by('order')
         for round in rounds:
@@ -292,6 +326,19 @@ class GameInvite(BaseInteraction):
 
 
 class GameMessage(BaseModel):
+    class GameMessageCategories(models.TextChoices):
+        SEND = 'Send', _('Send')
+        JOIN = 'Join', _('Join')
+        LEAVE = 'Leave', _('Leave')
+        PREPARE = 'Prepare', _('Prepare')
+        ELIMINATE = 'Eliminate', _('Eliminate')
+        WIN = 'Win', _('Win')
+    
+    category = models.CharField(
+        max_length=20,
+        choices=GameMessageCategories.choices,
+        default=GameMessageCategories.SEND,
+    )
     game = models.ForeignKey(
         to=Game,
         on_delete=models.CASCADE,
@@ -301,6 +348,7 @@ class GameMessage(BaseModel):
         to='profiles.Profile',
         on_delete=models.CASCADE,
         related_name='game_messages_sent',
+        null=True,
     )
     content = models.TextField(
         blank=False,

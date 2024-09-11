@@ -1,5 +1,7 @@
 import logging
 import requests
+from asgiref.sync import async_to_sync
+from channels.layers import get_channel_layer
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.db import models
@@ -58,7 +60,7 @@ class Profile(BaseModel):
         blank=True,
         related_name='players',
     )
-    elo = models.PositiveSmallIntegerField(
+    elo = models.IntegerField(
         default=1000,
     )
     is_ready = models.BooleanField(
@@ -102,6 +104,10 @@ class Profile(BaseModel):
         self.default_lang = lang
         self.save()
     
+    def update_elo(self, value):
+        self.elo = max(self.elo + value, 0)
+        self.save()
+    
     def is_friend(self, profile):
         is_profile1_friend = self.friendships_as_profile1.filter(profile1=self, profile2=profile, removed_by__isnull=True).exists()
         is_profile2_friend = self.friendships_as_profile2.filter(profile1=profile, profile2=self, removed_by__isnull=True).exists()
@@ -121,22 +127,30 @@ class Profile(BaseModel):
     
     def join_game(self, game):
         self.game = game
-        self.status = self.StatusChoices.WAITING
+        if game.started_at:
+            self.set_status(self.StatusChoices.PLAYING)
+        else:
+            self.set_status(self.StatusChoices.WAITING)
         self.save()
     
     def leave_game(self):
+        if self.game.started_at and not self.game.ended_at:
+            self.update_elo(-50)
         self.game = None
-        self.status = self.StatusChoices.ONLINE
+        self.set_status(self.StatusChoices.ONLINE)
         self.save()
     
-    def set_status(self, status):
-        if status in self.StatusChoices:
-            self.status = status
-            self.save()
-    
-    def update_elo(self, new_elo):
-        self.elo = new_elo
+    def set_status(self, status: StatusChoices):
+        self.status = status
         self.save()
+        channel_layer = get_channel_layer()
+        async_to_sync(channel_layer.group_send)('friends', {'type': 'update_friend_list'})
+        friendships_as_profile1 = self.friendships_as_profile1.all()
+        for friendship in friendships_as_profile1:
+            async_to_sync(channel_layer.group_send)(f'friends_{friendship.id}', {'type': 'update_header'})
+        friendships_as_profile2 = self.friendships_as_profile2.all()
+        for friendship in friendships_as_profile2:
+            async_to_sync(channel_layer.group_send)(f'friends_{friendship.id}', {'type': 'update_header'})
     
     def toggle_ready(self):
         self.is_ready = not self.is_ready
@@ -156,7 +170,11 @@ class Profile(BaseModel):
         return self.get_total_games() - self.get_won_games()
     
     def get_rank(self):
-        higher_elo_count = self.__class__.objects.filter(elo__gt=self.elo).count()
+        if self.player1_rounds.count() + self.player2_rounds.count() == 0:
+            return '???'
+        higher_elo_count = self.__class__.objects.annotate(
+            total_games=models.Count('player1_rounds', distinct=True) + models.Count('player2_rounds', distinct=True)
+        ).filter(total_games__gt=0, elo__gt=self.elo).count()
         return higher_elo_count + 1
 
 

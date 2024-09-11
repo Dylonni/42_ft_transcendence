@@ -216,12 +216,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
         friendListSocket.onmessage = (event) => {
             const data = JSON.parse(event.data);
-            const element = data['element'];
-            // TODO: update friends on status changed
-            // const friendList = document.getElementById('friendList');
-            // if (friendList) {
-            //     friendList.innerHTML += element;
-            // }
+            if (data.friend_list) {
+                const friendList = document.getElementById('friendList');
+                if (friendList) {
+                    friendList.innerHTML = data.friend_list;
+                    document.querySelectorAll('a').forEach(anchor => {
+                        if (anchor.id.startsWith('navFriendChat')) {
+                            anchor.addEventListener('click', (event) => {
+                                event.preventDefault();
+                                navigateTo(anchor.href);
+                            });
+                        }
+                    });
+                }
+            }
         };
 
         friendListSocket.onclose = () => {
@@ -242,17 +250,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
         friendChatSocket.onmessage = (event) => {
             const data = JSON.parse(event.data);
-            const element = data['element'];
-            const sayHiMessage = document.getElementById('templateSayHi');
-            if (sayHiMessage) {
-                sayHiMessage.remove();
+            if (data.element) {
+                const sayHiMessage = document.getElementById('templateSayHi');
+                if (sayHiMessage) {
+                    sayHiMessage.remove();
+                }
+                const messageSection = document.getElementById('messageSection');
+                if (messageSection) {
+                    messageSection.innerHTML += data.element;
+                    messageSection.scrollTop = messageSection.scrollHeight;
+                }
+                friendChatSocket.send(JSON.stringify({'read': true}));
             }
-            const messageSection = document.getElementById('messageSection');
-            if (messageSection) {
-                messageSection.innerHTML += element;
-                messageSection.scrollTop = messageSection.scrollHeight;
+            if (data.friend_header) {
+                const friendHeaderDiv = document.getElementById('friendHeaderDiv');
+                if (friendHeaderDiv) {
+                    friendHeaderDiv.innerHTML = data.friend_header;
+                }
             }
-            // TODO: update last message sent in friend list
+            if (data.section) {
+                const messageSection = document.getElementById('messageSection');
+                if (messageSection) {
+                    messageSection.innerHTML = data.section;
+                }
+            }
         };
 
         friendChatSocket.onclose = () => {
@@ -273,10 +294,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
         gameChatSocket.onmessage = (event) => {
             const data = JSON.parse(event.data);
-            const element = data['element'];
-            const playerSection = document.getElementById('playerSection');
-            if (playerSection) {
-                playerSection.innerHTML = element;
+            if (data.header) {
+                const playerSection = document.getElementById('playerSection');
+                if (playerSection) {
+                    playerSection.innerHTML = data.header;
+                }
+            }
+            if (data.message) {
+                const gameMsgDiv = document.getElementById('gameMsgDiv');
+                if (gameMsgDiv) {
+                    gameMsgDiv.innerHTML += data.message;
+                    gameMsgDiv.scrollTop = gameMsgDiv.scrollHeight;
+                }
             }
         };
 
@@ -671,6 +700,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             });
         }
+        const acceptTerms = document.getElementById('tosAccept');
+        const registerBtn = document.getElementById('registerBtn');
+        if (registerBtn && acceptTerms){
+            acceptTerms.addEventListener('change', (event) => {  
+                    registerBtn.classList.toggle("disabled");
+            });
+        }
     };
 
     const homePage = () => {
@@ -748,6 +784,17 @@ document.addEventListener("DOMContentLoaded", () => {
             const gameId = pathParts[2];
             openGameChatWebSocket(gameId);
             openGamePlayWebSocket(gameId);
+
+            new EmojiPicker({
+                trigger: [
+                    {
+                        selector: ['.emojiPickerBtn'],
+                        insertInto: '.gameChatInput'
+                    },
+                ],
+                closeButton: true,
+                closeOnSelect: true,
+            });
 
             const inviteRandomBtn = document.getElementById('inviteRandomBtn');
             if (inviteRandomBtn) {
@@ -906,6 +953,58 @@ document.addEventListener("DOMContentLoaded", () => {
                     mouseY = touch.clientY - rect.top;
                     sendMousePosition();
                 });
+            }
+
+            const gameChatForm = document.getElementById('gameChatForm');
+            if (gameChatForm) {
+                gameChatForm.addEventListener('submit', (event) => {
+                    event.preventDefault();
+                    const gameId = gameChatForm.dataset.gameId;
+                    if (gameId) {
+                        const formData = new FormData(event.target);
+                        fetch(`/api/games/${gameId}/messages/`, {
+                            method: 'POST',
+                            headers: {
+                                'X-Requested-With': 'XMLHttpRequest',
+                            },
+                            body: formData,
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            const gameChatInput = document.getElementById('gameChatInput');
+                            if (gameChatInput) {
+                                gameChatInput.value = '';
+                            }
+                        })
+                        .catch(error => console.error(`Error sending message to game:`, error));
+                    }
+                });
+
+                const gameChatBtn = document.getElementById('gameChatBtn');
+                if (gameChatBtn) {
+                    gameChatBtn.addEventListener('click', (event) => {
+                        event.preventDefault();
+                        const gameId = gameChatForm.dataset.gameId;
+                        if (gameId) {
+                            const formData = new FormData(gameChatForm);
+                            fetch(`/api/games/${gameId}/messages/`, {
+                                method: 'POST',
+                                headers: {
+                                    'X-Requested-With': 'XMLHttpRequest',
+                                },
+                                body: formData,
+                            })
+                            .then(response => response.json())
+                            .then(data => {
+                                const gameChatInput = document.getElementById('gameChatInput');
+                                if (gameChatInput) {
+                                    gameChatInput.value = '';
+                                }
+                            })
+                            .catch(error => console.error(`Error sending message to game:`, error));
+                        }
+                    });
+                }
             }
         }
     };
@@ -1146,7 +1245,6 @@ document.addEventListener("DOMContentLoaded", () => {
                         })
                         .then(response => response.json())
                         .then(data => {
-                            console.log(data);
                             const chatInput = document.getElementById('chatInput');
                             if (chatInput) {
                                 chatInput.value = '';
@@ -1155,6 +1253,32 @@ document.addEventListener("DOMContentLoaded", () => {
                         .catch(error => console.error(`Error sending message to friend:`, error));
                     }
                 });
+
+                const chatBtn = document.getElementById('chatBtn');
+                if (chatBtn) {
+                    chatBtn.addEventListener('click', (event) => {
+                        event.preventDefault();
+                        const friendshipId = chatForm.dataset.friendshipId;
+                        if (friendshipId) {
+                            const formData = new FormData(chatForm);
+                            fetch(`/api/profiles/me/friends/${friendshipId}/messages/`, {
+                                method: 'POST',
+                                headers: {
+                                    'X-Requested-With': 'XMLHttpRequest',
+                                },
+                                body: formData,
+                            })
+                            .then(response => response.json())
+                            .then(data => {
+                                const chatInput = document.getElementById('chatInput');
+                                if (chatInput) {
+                                    chatInput.value = '';
+                                }
+                            })
+                            .catch(error => console.error(`Error sending message to friend:`, error));
+                        }
+                    });
+                }
             }
         }
     };
@@ -1378,6 +1502,7 @@ const pongGame = () => {
 	const HEIGHT = canvas.height;
     const HALFWIDTH = canvas.width / 2;
     const HALFHEIGHT = canvas.height / 2;
+    const BALLSPEED = settings.ballSpeed;
 
 	// Paddle properties
 	let paddleWidth = 10;
@@ -1386,9 +1511,9 @@ const pongGame = () => {
 
 	// Ball properties
 	let ballSize = settings.ballSize;
-    let ballSpeed = settings.ballSpeed;
-	let ballSpeedX = settings.ballSpeed;
-	let ballSpeedY = settings.ballSpeed;
+    let ballSpeed = BALLSPEED;
+	let ballSpeedX = BALLSPEED;
+	let ballSpeedY = BALLSPEED;
 
     let winScore = settings.winScore;
 
@@ -1576,14 +1701,20 @@ const pongGame = () => {
 		// Ball collision with paddles
 		if (ballX <= paddleWidth && ballY >= player1Y && ballY <= player1Y + paddleHeight) {
 			ballX = paddleWidth;
-            ballSpeedX = -ballSpeedX + 1;
-            ballSpeedY = ballSpeedY < 0 ? ballSpeedY - 1 : ballSpeedY + 1;
+            ballSpeedX = -ballSpeedX;
+            const angle = Math.atan2(ballSpeedY, ballSpeedX);
+            ballSpeed += 1;
+            ballSpeedX = ballSpeed * Math.cos(angle);
+            ballSpeedY = ballSpeed * Math.sin(angle);
             setBallAsHit();
 		}
 		if (ballX >= WIDTH - paddleWidth - ballSize && ballY >= player2Y && ballY <= player2Y + paddleHeight) {
 			ballX = WIDTH - paddleWidth - ballSize;
-            ballSpeedX = -ballSpeedX - 1;
-            ballSpeedY = ballSpeedY < 0 ? ballSpeedY - 1 : ballSpeedY + 1;
+            ballSpeedX = -ballSpeedX;
+            const angle = Math.atan2(ballSpeedY, ballSpeedX);
+            ballSpeed += 1;
+            ballSpeedX = ballSpeed * Math.cos(angle);
+            ballSpeedY = ballSpeed * Math.sin(angle);
 		}
 
 		// AI paddle movement
@@ -1675,6 +1806,7 @@ const pongGame = () => {
             if (countdown <= 0) {
                 const angle = Math.random() * Math.PI / 2 - Math.PI / 4;
                 const direction = tempSpeedX < 0 ? 1 : -1;
+                ballSpeed = BALLSPEED;
                 ballSpeedX = direction * ballSpeed * Math.cos(angle);
                 ballSpeedY = ballSpeed * Math.sin(angle);
                 if (ballSpeedX > 0) {

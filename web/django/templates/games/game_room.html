@@ -35,11 +35,7 @@
 					Leave Room
 				</button>
 			</div>
-			{% if game.started_at %}
-			<div id="gameTimer" class="d-flex justify-content-end align-items-center justify-content-sm-end justify-content-md-end justify-content-lg-end justify-content-xl-end" style="width: 100%;border-radius: 20px;border: 2px none #fcd856;padding-left: 0px;padding-right: 0px;">
-			{% else %}
-			<div id="gameTimer" class="d-none d-xxl-none d-flex justify-content-end align-items-center justify-content-sm-end justify-content-md-end justify-content-lg-end justify-content-xl-end" style="width: 100%;border-radius: 20px;border: 2px none #fcd856;padding-left: 0px;padding-right: 0px;">
-			{% endif %}	
+			<div id="gameTimer" class="{{ game.started_at|yesno:",d-none d-xxl-none" }} d-flex justify-content-end align-items-center justify-content-sm-end justify-content-md-end justify-content-lg-end justify-content-xl-end" style="width: 100%;border-radius: 20px;border: 2px none #fcd856;padding-left: 0px;padding-right: 0px;">
 				<h1 class="text-nowrap fs-3 d-xxl-flex justify-content-xxl-end align-items-xxl-center" style="margin-bottom: 0px;margin-left: 5px;margin-right: 5px;">
 					<svg class="icon icon-tabler icon-tabler-hourglass-high" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" style="color: #fcd856;font-size: 25px;">
 						<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -57,15 +53,9 @@
 </div>
 <div class="container">
 	<div class="row d-lg-flex d-xl-flex d-xxl-flex justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center">
-		{% if game.started_at %}
-		<div id="pongDiv" class="col-md-12 col-lg-12 d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="border-style: none;padding-top: 0px;padding-bottom: 0px;">
+		<div id="pongDiv" class="{{ game.started_at|yesno:",d-none d-xxl-none" }} col-md-12 col-lg-12 d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="border-style: none;padding-top: 0px;padding-bottom: 0px;">
 			<canvas id="playCanvas" width="1000" height="600" style="background-color: #000;border: 2px solid #fff;"></canvas>
 		</div>
-		{% else %}
-		<div id="pongDiv" class="d-none d-xxl-none col-md-12 col-lg-12 d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="border-style: none;padding-top: 0px;padding-bottom: 0px;">
-			<canvas id="playCanvas" width="1000" height="600" style="background-color: #000;border: 2px solid #fff;"></canvas>
-		</div>
-		{% endif %}
 		<div id="gameInfoDiv" class="col-md-12 col-lg-11 col-xl-11 col-xxl-10 d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="border-style: none;height: 100%;">
 			<div class="card" style="height: 100%;width: 100%;color: var(--bs-body-bg);border-radius: 19px;border-style: none;">
 				<div class="card-body d-flex d-lg-flex d-xl-flex d-xxl-flex flex-column justify-content-start align-items-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start" style="background: #121415;backdrop-filter: blur(0px);-webkit-backdrop-filter: blur(0px);width: 100%;height: 100%;padding-top: 0px;padding-bottom: 0px;box-shadow: 0px 0px 10px 2px var(--bs-gray-800);padding-left: 0px;padding-right: 0px;border-radius: 19px;">
@@ -121,7 +111,7 @@
 									</h1>
 									<div class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center">
 										<span class="d-flex d-xxl-flex align-items-center justify-content-xxl-center align-items-xxl-center" style="color: #ffc61e;font-size: 15px;font-weight: bold;height: 40px;">
-											{{ game.player_limit }}
+											{{ game.win_score }}
 										</span>
 										<span class="d-flex d-xxl-flex align-items-center justify-content-xxl-center align-items-xxl-center" style="color: #ffc61e;font-size: 15px;font-weight: bold;height: 40px;">
 											&nbsp;points

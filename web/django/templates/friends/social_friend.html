@@ -6,23 +6,19 @@
 	<div class="d-flex d-xl-flex flex-row justify-content-start align-items-center justify-content-lg-start align-items-lg-center align-items-xl-center justify-content-xxl-start friendItem" style="height: 85px;width: 100%;border-radius: 0px;margin-left: 0px;margin-right: 0px;padding-left: 10px;padding-right: 10px;">
 		<div class="d-flex d-xl-flex justify-content-center align-items-center justify-content-sm-center justify-content-xl-center align-items-xl-center justify-content-xxl-center" style="border-radius: 0px;padding-top: 0px;margin-bottom: 0px;height: 60px;width: 40%;margin-top: 0px;position: sticky;">
 			<div style="width: 60px;height: 60px;">
-				<img height="60" src="{{ friend.get_avatar_url }}" style="border-radius: 50%;z-index: 999;width: 100%;height: 100%;box-shadow: 0px 0px 6px 1px rgb(51,255,0);border: 2px solid rgb(51,255,0) ;" width="60"/>
+				<img height="60" src="{{ friend.avatar_url }}" style="border-radius: 50%;z-index: 999;width: 100%;height: 100%;box-shadow: 0px 0px 6px 1px rgb(51,255,0);border: 2px solid rgb(51,255,0) ;" width="60"/>
 			</div>
-			{% if friend.has_unread_messages %}
-			<div style="width:10px;height:10px;background:#ff0000;border-radius:8px;margin:0px;padding-right:0px;margin-bottom:45px;margin-right:0px;margin-left:0px;">
+			<div style="width:10px; height:10px; background: {{ friend.has_unread_messages|yesno:"red,transparent" }}; border-radius:8px; margin:0; padding-right:0; margin-bottom:45px; margin-right:0; margin-left:0;">
 			</div>
-			{% else %}
-			<div style="width:10px;height:10px;background:#ff000000;border-radius:8px;margin:0px;padding-right:0px;margin-bottom:45px;margin-right:0px;margin-left:0px;">
-			</div>
-			{% endif %}
+			
 		</div>
 		<div class="text-truncate d-flex d-sm-flex d-xl-flex flex-column justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-xl-center align-items-xl-start" style="width: 100%;height: 100%;margin-bottom: 0px;margin-right: 0px;margin-left: 0px;">
 			<h1 class="text-truncate fs-5" style="color: var(--bs-body-bg);margin-bottom: 0px;margin-top: 0px;width: 100%;font-weight: bold;">
 				{{ friend.alias }}
 			</h1>
 			<h1 class="text-truncate fs-6" style="color: var(--bs-gray-500);margin-bottom: 0px;margin-top: 0px;width: 100%;">
-				{% if friend.get_last_message %}
-				{{ friend.get_last_speaker }}: {{ friend.get_last_message }}
+				{% if friendship.get_last_message %}
+				{{ friendship.get_last_speaker }}: {{ friendship.get_last_message }}
 				{% endif %}
 			</h1>
 		</div>
@@ -33,23 +29,19 @@
 	<div class="d-flex d-xl-flex flex-row justify-content-start align-items-center justify-content-lg-start align-items-lg-center align-items-xl-center justify-content-xxl-start friendItem" style="height: 85px;width: 100%;border-radius: 0px;background: var(--bs-body-color);margin-left: 0px;margin-right: 0px;padding-left: 10px;padding-right: 10px;">
 		<div class="d-flex d-xl-flex justify-content-center align-items-center justify-content-sm-center justify-content-xl-center align-items-xl-center justify-content-xxl-center" style="border-radius: 0px;padding-top: 0px;margin-bottom: 0px;height: 60px;width: 40%;margin-top: 0px;position: sticky;">
 			<div style="width: 60px;height: 60px;">
-				<img height="60" src="{{ friend.get_avatar_url }}" style="border-radius: 50%;z-index: 999;width: 100%;height: 100%;border: 2px solid #29c9ea;box-shadow: 0px 0px 6px 2px #29c9ea;" width="60"/>
+				<img height="60" src="{{ friend.avatar_url }}" style="border-radius: 50%;z-index: 999;width: 100%;height: 100%;border: 2px solid #29c9ea;box-shadow: 0px 0px 6px 2px #29c9ea;" width="60"/>
 			</div>
-			{% if friend.has_unread_messages %}
-			<div style="width:10px;height:10px;background:#ff0000;border-radius:8px;margin:0px;padding-right:0px;margin-bottom:45px;margin-right:0px;margin-left:0px;">
+			<div style="width:10px; height:10px; background: {{ friend.has_unread_messages|yesno:"red,transparent" }}; border-radius:8px; margin:0; padding-right:0; margin-bottom:45px; margin-right:0; margin-left:0;">
 			</div>
-			{% else %}
-			<div style="width:10px;height:10px;background:#ff000000;border-radius:8px;margin:0px;padding-right:0px;margin-bottom:45px;margin-right:0px;margin-left:0px;">
-			</div>
-			{% endif %}
+			
 		</div>
 		<div class="text-truncate d-flex d-sm-flex d-xl-flex flex-column justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-xl-center align-items-xl-start" style="width: 100%;height: 100%;margin-bottom: 0px;margin-right: 0px;margin-left: 0px;">
 			<h1 class="text-truncate fs-5" style="color: var(--bs-body-bg);margin-bottom: 0px;margin-top: 0px;width: 100%;font-weight: bold;">
 				{{ friend.alias }}
 			</h1>
 			<h1 class="text-truncate fs-6" style="color: var(--bs-gray-500);margin-bottom: 0px;margin-top: 0px;width: 100%;">
-				{% if friend.get_last_message %}
-				{{ friend.get_last_speaker }}: {{ friend.get_last_message }}
+				{% if friendship.get_last_message %}
+				{{ friendship.get_last_speaker }}: {{ friendship.get_last_message }}
 				{% endif %}
 			</h1>
 		</div>
@@ -60,23 +52,19 @@
 	<div class="d-flex d-xl-flex flex-row justify-content-start align-items-center justify-content-lg-start align-items-lg-center align-items-xl-center justify-content-xxl-start friendItem" style="height: 85px;width: 100%;border-radius: 0px;background: var(--bs-body-color);margin-left: 0px;margin-right: 0px;padding-left: 10px;padding-right: 10px;">
 		<div class="d-flex d-xl-flex justify-content-center align-items-center justify-content-sm-center justify-content-xl-center align-items-xl-center justify-content-xxl-center" style="border-radius: 0px;padding-top: 0px;margin-bottom: 0px;height: 60px;width: 40%;margin-top: 0px;position: sticky;">
 			<div style="width: 60px;height: 60px;">
-				<img height="60" src="{{ friend.get_avatar_url }}" style="border-radius: 50%;z-index: 999;width: 100%;height: 100%;border: 2px solid var(--bs-orange);box-shadow: 0px 0px 6px 2px var(--bs-orange);" width="60"/>
+				<img height="60" src="{{ friend.avatar_url }}" style="border-radius: 50%;z-index: 999;width: 100%;height: 100%;border: 2px solid var(--bs-orange);box-shadow: 0px 0px 6px 2px var(--bs-orange);" width="60"/>
 			</div>
-			{% if friend.has_unread_messages %}
-			<div style="width:10px;height:10px;background:#ff0000;border-radius:8px;margin:0px;padding-right:0px;margin-bottom:45px;margin-right:0px;margin-left:0px;">
+			<div style="width:10px; height:10px; background: {{ friend.has_unread_messages|yesno:"red,transparent" }}; border-radius:8px; margin:0; padding-right:0; margin-bottom:45px; margin-right:0; margin-left:0;">
 			</div>
-			{% else %}
-			<div style="width:10px;height:10px;background:#ff000000;border-radius:8px;margin:0px;padding-right:0px;margin-bottom:45px;margin-right:0px;margin-left:0px;">
-			</div>
-			{% endif %}
+			
 		</div>
 		<div class="text-truncate d-flex d-sm-flex d-xl-flex flex-column justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-xl-center align-items-xl-start" style="width: 100%;height: 100%;margin-bottom: 0px;margin-right: 0px;margin-left: 0px;">
 			<h1 class="text-truncate fs-5" style="color: var(--bs-body-bg);margin-bottom: 0px;margin-top: 0px;width: 100%;font-weight: bold;">
 				{{ friend.alias }}
 			</h1>
 			<h1 class="text-truncate fs-6" style="color: var(--bs-gray-500);margin-bottom: 0px;margin-top: 0px;width: 100%;">
-				{% if friend.get_last_message %}
-				{{ friend.get_last_speaker }}: {{ friend.get_last_message }}
+				{% if friendship.get_last_message %}
+				{{ friendship.get_last_speaker }}: {{ friendship.get_last_message }}
 				{% endif %}
 			</h1>
 		</div>
@@ -87,23 +75,19 @@
 	<div class="d-flex d-xl-flex flex-row justify-content-start align-items-center justify-content-lg-start align-items-lg-center align-items-xl-center justify-content-xxl-start friendItem" style="height: 85px;width: 100%;border-radius: 0px;background: var(--bs-body-color);margin-left: 0px;margin-right: 0px;opacity: 0.50;padding-left: 10px;padding-right: 10px;">
 		<div class="d-flex d-xl-flex justify-content-center align-items-center justify-content-sm-center justify-content-xl-center align-items-xl-center justify-content-xxl-center" style="border-radius: 0px;padding-top: 0px;margin-bottom: 0px;height: 60px;width: 40%;margin-top: 0px;position: sticky;">
 			<div style="width: 60px;height: 60px;">
-				<img height="60" src="{{ friend.get_avatar_url }}" style="border-radius: 50%;z-index: 999;width: 100%;height: 100%;border: 2px none rgb(51,255,0);opacity: 1;" width="60"/>
+				<img height="60" src="{{ friend.avatar_url }}" style="border-radius: 50%;z-index: 999;width: 100%;height: 100%;border: 2px none rgb(51,255,0);opacity: 1;" width="60"/>
 			</div>
-			{% if friend.has_unread_messages %}
-			<div style="width:10px;height:10px;background:#ff0000;border-radius:8px;margin:0px;padding-right:0px;margin-bottom:45px;margin-right:0px;margin-left:0px;">
+			<div style="width:10px; height:10px; background: {{ friend.has_unread_messages|yesno:"red,transparent" }}; border-radius:8px; margin:0; padding-right:0; margin-bottom:45px; margin-right:0; margin-left:0;">
 			</div>
-			{% else %}
-			<div style="width:10px;height:10px;background:#ff000000;border-radius:8px;margin:0px;padding-right:0px;margin-bottom:45px;margin-right:0px;margin-left:0px;">
-			</div>
-			{% endif %}
+			
 		</div>
 		<div class="text-truncate d-flex d-sm-flex d-xl-flex flex-column justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-xl-center align-items-xl-start" style="width: 100%;height: 100%;margin-bottom: 0px;margin-right: 0px;margin-left: 0px;">
 			<h1 class="text-truncate fs-5" style="color: var(--bs-body-bg);margin-bottom: 0px;margin-top: 0px;width: 100%;font-weight: bold;">
 				{{ friend.alias }}
 			</h1>
 			<h1 class="text-truncate fs-6" style="color: var(--bs-gray-500);margin-bottom: 0px;margin-top: 0px;width: 100%;">
-				{% if friend.get_last_message %}
-				{{ friend.get_last_speaker }}: {{ friend.get_last_message }}
+				{% if friendship.get_last_message %}
+				{{ friendship.get_last_speaker }}: {{ friendship.get_last_message }}
 				{% endif %}
 			</h1>
 		</div>
