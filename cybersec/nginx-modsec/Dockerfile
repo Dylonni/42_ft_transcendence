@@ -6,7 +6,7 @@ RUN apk add --no-cache openssl
 
 
 
-#this works
+# ssl only for website
 # COPY ./conf/vault.conf /etc/nginx/conf.d/vault.conf
 # COPY ./conf/postgres-exporter.conf /etc/nginx/conf.d/postgres-exporter.conf
 # COPY ./conf/prometheus.conf /etc/nginx/conf.d/prometheus.conf
@@ -16,32 +16,20 @@ RUN apk add --no-cache openssl
 # COPY ./conf/loki.conf /etc/nginx/conf.d/loki.conf
 # COPY ./conf/redis.conf /etc/nginx/conf.d/redis.conf
 # COPY ./conf/proxy_backend.conf /etc/nginx/conf.d/proxy_backend.conf
-
+# COPY ./conf/grafana.conf /etc/nginx/conf.d/grafana.conf
+# COPY ./conf/old_nginx.conf /etc/nginx/templates/conf.d/default.conf.template
 
 # COPY ./conf/modsecurity.conf /etc/nginx/templates/modsecurity.d/modsecurity-override.conf.template
 
 
 
 
-#for testing
-
-# ok, this works in previous commit
-# COPY ./conf/old_nginxConfTurnedDjango.conf /etc/nginx/templates/conf.d/default.conf.template
-# COPY ./conf/OKgrafana.conf /etc/nginx/conf.d/grafana.conf
 
 
-#lets try this
-
-# COPY ./conf/grafana.conf /etc/nginx/conf.d/grafana.conf
+# ssl for all
 COPY ./conf/testnginx.conf /etc/nginx/templates/conf.d/default.conf.template
-# COPY ./conf/nginx.conf /etc/nginx/templates/includes/nginx.conf.template
+## ADD MODSEC !!
 
-
-# COPY ./conf/rocks_http.conf /etc/nginx/templates/nginx.conf.template
-# COPY ./conf/rocks_server.conf /etc/nginx/sites-available/default
-
-
-# COPY ./conf/fullconf.conf /etc/nginx/templates/conf.d/default.conf.template
 
 
 

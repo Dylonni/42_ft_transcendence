@@ -27,18 +27,29 @@ services:
     ports:
       - "8080:8080" # HTTP -> Django
       - "8443:8443" # HTTPS
-      - "8200:8200" # Vault
-      # - "9187:9187" # Postgres Exporter - no need to expose
-      - "9090:9090" # Prometheus
+      - "8200:8200" # Vault - only exposed if trying to access GUI
       - "3000:3000" # Grafana
       - "9093:9093" # Alert Manager
-      # - "9200:9200" # Elasticsearch - no need to expose
-      # - "5001:5001" # Logstash - no need to expose
-      # - "5601:5601" # Kibana - shows "elasticsearch", which is normal
       - "3100:3100" # Loki
-      # - "6379:6379" # Redis - no need to expose
     volumes:
       - shared-certs:/etc/nginx/ssl
+
+# nginx used ports:
+      # - "8080:8080" # HTTP -> Django
+      # - "8443:8443" # HTTPS
+      # - "8200:8200" # Vault - only exposed if trying to access GUI
+      # - "3000:3000" # Grafana
+      # - "9093:9093" # Alert Manager
+      # - "3100:3100" # Loki
+      # - "9090:9090" # Prometheus - no need to expose
+      # - "9187:9187" # Postgres Exporter - no need to expose
+      # - "6379:6379" # Redis - no need to expose
+#currently not used:
+#       - "9200:9200" # Elasticsearch - no need to expose
+#       - "5001:5001" # Logstash - no need to expose
+#       - "5601:5601" # Kibana - shows "elasticsearch", which is normal
+
+
 
 
   vault:
