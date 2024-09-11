@@ -29,7 +29,6 @@ services:
       - "8443:8443" # HTTPS
       - "8200:8200" # Vault - only exposed if trying to access GUI
       - "3000:3000" # Grafana
-      - "9093:9093" # Alert Manager
       - "3100:3100" # Loki
     volumes:
       - shared-certs:/etc/nginx/ssl
