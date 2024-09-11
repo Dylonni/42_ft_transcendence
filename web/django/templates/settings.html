@@ -213,10 +213,10 @@
                         </section>
                         <section class="d-flex justify-content-center align-items-center" id="templateSecNormalAcc" style="width: 100%;height: 100%;background: rgba(0,0,0,0.15);border-radius: 10px;margin-top: 10px;margin-bottom: 10px;margin-left: 5px;margin-right: 5px;padding-top: 0px;padding-bottom: 0px;">
                             <div class="d-flex flex-column justify-content-center align-items-start align-items-sm-start" style="width: 100%;padding-bottom: 20px;height: 100%;margin-top: 0px;margin-bottom: 0px;padding-left: 0px;padding-right: 0px;padding-top: 10px;margin-left: 0px;margin-right: 5px;">
-                                <button id="changeEmailBtn" class="btn btn-primary link-info d-sm-flex d-md-flex justify-content-sm-center justify-content-md-center align-items-md-center" data-bs-target="#modalModifyCred" data-bs-toggle="modal" style="background: #21252900;border-radius: 15px;border-style: none;border-color: var(--bs-highlight-color);margin-top: 10px;margin-bottom: 10px;" type="submit">
+                                <button id="changeEmailBtn" class="btn btn-primary link-info d-sm-flex d-md-flex justify-content-sm-center justify-content-md-center align-items-md-center" style="background: #21252900;border-radius: 15px;border-style: none;border-color: var(--bs-highlight-color);margin-top: 10px;margin-bottom: 10px;" type="submit">
                                     {% translate 'Modify Email' %}
                                 </button>
-                                <button id="changePasswordBtn" class="btn btn-primary link-info d-sm-flex d-md-flex justify-content-sm-center justify-content-md-center align-items-md-center" data-bs-target="#modalModifyCred" data-bs-toggle="modal" style="background: #21252900;border-radius: 15px;border-style: none;border-color: var(--bs-highlight-color);margin-bottom: 10px;margin-top: 10px;" type="submit">
+                                <button id="changePasswordBtn" class="btn btn-primary link-info d-sm-flex d-md-flex justify-content-sm-center justify-content-md-center align-items-md-center" style="background: #21252900;border-radius: 15px;border-style: none;border-color: var(--bs-highlight-color);margin-bottom: 10px;margin-top: 10px;" type="submit">
                                     {% translate 'Modify Password' %}
                                 </button>
                                 <div class="dropdown" style="width: 100%;">
@@ -456,40 +456,6 @@
                 <a class="btn btn-primary" data-bs-dismiss="modal" href="/api/oauth/42/unlink/" id="unlinkFortytwo">
                     {% translate 'Unlink' %}
                 </a>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="modal fade" id="modalModifyCred" role="dialog" tabindex="-1">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header d-xxl-flex justify-content-xxl-center align-items-xxl-center" style="border-style: none;">
-                <svg class="icon icon-tabler icon-tabler-mail-fast" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 40px;margin-right: 5px;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
-                    <path d="M3 7h3"></path>
-                    <path d="M3 11h2"></path>
-                    <path d="M9.02 8.801l-.6 6a2 2 0 0 0 1.99 2.199h7.98a2 2 0 0 0 1.99 -1.801l.6 -6a2 2 0 0 0 -1.99 -2.199h-7.98a2 2 0 0 0 -1.99 1.801z"></path>
-                    <path d="M9.8 7.5l2.982 3.28a3 3 0 0 0 4.238 .202l3.28 -2.982"></path>
-                </svg>
-                <h4 class="modal-title">
-                    {% translate 'An Email has been sent !' %}
-                </h4>
-                <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button">
-                </button>
-            </div>
-            <div class="modal-body" style="border-style: none;">
-                <p style="font-weight: bold;">
-                    {% translate 'An email with a link has been sent to modify your informations.' %}
-                    <br/>
-                    {% translate 'Make sure to check into your spams as well.' %}
-                    <br/>
-                    {% translate 'You will be able to send another link in 30 seconds.' %}
-                </p>
-            </div>
-            <div class="modal-footer d-flex d-xxl-flex justify-content-center justify-content-xxl-center align-items-xxl-center" style="border-style: none;padding-top: 0px;">
-                <button class="btn btn-primary" data-bs-dismiss="modal" type="button">
-                    {% translate 'Got it' %}
-                </button>
             </div>
         </div>
     </div>
