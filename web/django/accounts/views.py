@@ -181,6 +181,7 @@ class PasswordResetConfirmView(PublicView):
 
 password_reset_confirm = PasswordResetConfirmView.as_view()
 
+
 class FortyTwoLoginView(APIView):
     def get(self, request: HttpRequest):
         redirect_uri = quote(settings.FORTYTWO_REDIRECT_URI, safe='')
@@ -188,6 +189,7 @@ class FortyTwoLoginView(APIView):
         return redirect(authorization_url)
 
 fortytwo_login = FortyTwoLoginView.as_view()
+
 
 class FortyTwoUnlinkView(PrivateView):
     def post(self, request: HttpRequest):
@@ -198,20 +200,20 @@ class FortyTwoUnlinkView(PrivateView):
 
 fortytwo_unlink = FortyTwoUnlinkView.as_view()
 
+
 class FortyTwoCallbackView(APIView):
     def get(self, request: HttpRequest):
         code = request.GET.get('code')
         if not code:
             logger.error('No authorization code received.')
             return redirect('/login/?fortytwo=nocode')
-        
+
         response = requests.post('https://api.intra.42.fr/oauth/token', data={
             'grant_type': 'authorization_code',
             'client_id': settings.FORTYTWO_ID,
             'client_secret': settings.FORTYTWO_SECRET,
             'code': code,
             'redirect_uri': settings.FORTYTWO_REDIRECT_URI,
-
         })
         token_response = response.json()
         fortytwo_access_token = token_response.get('access_token')

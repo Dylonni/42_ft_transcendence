@@ -22,6 +22,12 @@ how long should we keep live chats ? (twitch keeps them minimum 7 days, dependin
 look into openclassrooms for api rest
 
 
+web/django/pong/settings.py
+    => look into the logging part (line 291), reconfigure to use loki instead of logstash
+    => look into ssl settings ? (line 323)
+
+
+
 cybersec
     nginx
         add "modsecurity on" to all config files   ==> done
