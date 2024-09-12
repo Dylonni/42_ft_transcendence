@@ -12,7 +12,7 @@ logger = logging.getLogger('django')
 class NotifConsumer(AsyncWebsocketConsumer):
     async def connect(self):
         self.user = self.scope['user']
-        self.profile = await self.get_profile(self.user)
+        self.profile = await self.get_profile()
         if not self.user.is_authenticated or not self.profile:
             await self.close()
             return
@@ -48,11 +48,18 @@ class NotifConsumer(AsyncWebsocketConsumer):
                 rendered_html = await sync_to_async(render_to_string)('notifs/notif_friend_request.html', context)
         await self.send(text_data=json.dumps({'element': rendered_html}))
     
+    async def update_notification(self, event):
+        receiver_id = event['receiver_id']
+        notifs = await self.get_notifications(receiver_id)
+        context = {'notifs': notifs}
+        notif_list = await sync_to_async(render_to_string)('notifs/notif_list.html', context)
+        await self.send(text_data=json.dumps({'notif_list': notif_list}))
+    
     @database_sync_to_async
-    def get_profile(self, user):
+    def get_profile(self):
         try:
             profile_model = apps.get_model('profiles.Profile')
-            return profile_model.objects.filter(user=user).first()
+            return profile_model.objects.filter(user=self.user).first()
         except LookupError:
             logger.info('Error getting profile.')
     
@@ -73,6 +80,18 @@ class NotifConsumer(AsyncWebsocketConsumer):
             return notification_model.objects.filter(id=notif_id).first()
         except LookupError:
             logger.info('Error getting notification.')
+    
+    @database_sync_to_async
+    def get_notifications(self, receiver_id):
+        try:
+            notification_model = apps.get_model('notifs.Notification')
+            profile_model = apps.get_model('profiles.Profile')
+            profile = profile_model.objects.filter(id=receiver_id).first()
+            if profile:
+                return notification_model.objects.get_notifications_for_profile(profile)
+            return None
+        except LookupError:
+            logger.info('Error getting notifications.')
     
     @database_sync_to_async
     def mark_all_notifications_as_read(self):

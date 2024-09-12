@@ -2,16 +2,22 @@ import logging
 from asgiref.sync import async_to_sync
 from django.shortcuts import get_object_or_404
 from django.utils import translation
+from django.utils.encoding import force_bytes
+from django.utils.http import urlsafe_base64_encode
 from django.utils.translation import gettext_lazy as _
 from rest_framework import status
 from rest_framework.response import Response
 
 from pong.views import PrivateView
+from accounts.models import CustomUser
+from accounts.serializers import CustomUserEmailSerializer, CustomUserPasswordSerializer
+from accounts.tokens import EmailTokenGenerator
 from accounts.utils import unset_jwt_cookies
 from friends.models import FriendRequest, FriendMessage, Friendship
 from friends.serializers import FriendRequestSerializer, FriendshipSerializer, FriendMessageSerializer
-from games.models import GameInvite
+from games.models import Game, GameInvite, GameMessage
 from games.serializers import GameInviteSerializer
+from notifs.models import Notification
 
 from .models import Profile, ProfileBlock
 from .serializers import ProfileSerializer, ProfileBlockSerializer
@@ -52,10 +58,11 @@ class MyDetailView(PrivateView):
         if not request.user.check_password(request.data['password']):
             response_data = {'error': _('Incorrect password.')}
             return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
-        # TODO: delete friends, messages, replace match history with placeholder
-        user = request.user
-        user.is_active = False
-        user.save()
+        if request.profile.game:
+            Game.objects.remove_player(request.profile.game, request.profile)
+        Notification.objects.remove_all_for_profile(request.profile)
+        Friendship.objects.remove_all_for_profile(request.profile)
+        request.user.delete()
         response_data = {'message': _('Account deleted.'), 'redirect': '/'}
         response = Response(response_data, status=status.HTTP_200_OK)
         unset_jwt_cookies(response)
@@ -113,18 +120,85 @@ my_lang = MyLangView.as_view()
 
 class MyEmailView(PrivateView):
     def post(self, request):
-        # TODO: logic to send email
-        response_data = {'message': _('Email to change email sent.')}
-        return Response(response_data, status=status.HTTP_200_OK)
+        try:
+            user = CustomUser.objects.send_mail(request.data['email'], 'accounts/email_change_email.html', 'Change your Email')
+            token_generator = EmailTokenGenerator()
+            token = token_generator.make_token(user)
+            uid = urlsafe_base64_encode(force_bytes(user.pk))
+            response_data = {
+                'message': _('Email change request sent! Please check your email.'),
+                'redirect': f'/verify-code/?type=password&token={token}&user={uid}',
+            }
+            return Response(response_data, status=status.HTTP_200_OK)
+        except ValueError as e:
+            response_data = {'error': str(e)}
+            return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
+    
+    def put(self, request):
+        try:
+            token = request.query_params.get('token', None)
+            uid = request.query_params.get('user', None)
+            user = CustomUser.objects.filter(id=uid).first()
+            if not user:
+                response_data = {'message': _('Invalid url.'), 'redirect': '/settings/'}
+                return Response(response_data, status=status.HTTP_200_OK)
+            token_generator = EmailTokenGenerator()
+            if not token_generator.check_token(user, token):
+                response_data = {'message': _('Invalid url.'), 'redirect': '/settings/'}
+                return Response(response_data, status=status.HTTP_200_OK)
+            serializer = CustomUserEmailSerializer(data=request.data)
+            if not serializer.is_valid():
+                response_data = {'message': _('Invalid email.'), 'redirect': '/settings/'}
+                return Response(response_data, status=status.HTTP_200_OK)
+            user.email = request.data['email']
+            user.save()
+            response_data = {'message': _('Email changed.'), 'redirect': '/settings/'}
+            return Response(response_data, status=status.HTTP_200_OK)
+        except ValueError as e:
+            response_data = {'error': str(e)}
+            return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
 
 my_email = MyEmailView.as_view()
 
 
 class MyPasswordView(PrivateView):
     def post(self, request):
-        # TODO: logic to send email
-        response_data = {'message': _('Email to change password sent.')}
-        return Response(response_data, status=status.HTTP_200_OK)
+        try:
+            user = CustomUser.objects.send_mail(request.data['email'], 'accounts/email_change_password.html', 'Change your Password')
+            token_generator = EmailTokenGenerator()
+            token = token_generator.make_token(user)
+            uid = urlsafe_base64_encode(force_bytes(user.pk))
+            response_data = {
+                'message': _('Password change request sent! Please check your email.'),
+                'redirect': f'/verify-code/?type=email&token={token}&user={uid}',
+            }
+            return Response(response_data, status=status.HTTP_200_OK)
+        except ValueError as e:
+            response_data = {'error': str(e)}
+            return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
+    
+    def put(self, request):
+        try:
+            token = request.query_params.get('token', None)
+            uid = request.query_params.get('user', None)
+            user = CustomUser.objects.filter(id=uid).first()
+            if not user:
+                response_data = {'message': _('Invalid url.'), 'redirect': '/settings/'}
+                return Response(response_data, status=status.HTTP_200_OK)
+            token_generator = EmailTokenGenerator()
+            if not token_generator.check_token(user, token):
+                response_data = {'message': _('Invalid url.'), 'redirect': '/settings/'}
+                return Response(response_data, status=status.HTTP_200_OK)
+            serializer = CustomUserPasswordSerializer(data=request.data)
+            if not serializer.is_valid():
+                response_data = {'message': _('Invalid password.'), 'redirect': '/settings/'}
+                return Response(response_data, status=status.HTTP_200_OK)
+            user.set_password(request.data['new_password'])
+            response_data = {'message': _('Password changed.'), 'redirect': '/settings/'}
+            return Response(response_data, status=status.HTTP_200_OK)
+        except ValueError as e:
+            response_data = {'error': str(e)}
+            return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
 
 my_password = MyPasswordView.as_view()
 

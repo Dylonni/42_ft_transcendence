@@ -40,6 +40,9 @@ urlpatterns = [
     path('login/', views.login, name='login'),
     path('register/', views.register, name='register'),
 	path('forgot-password/', views.forgot_password, name='forgot_password'),
+	path('verify-code/', views.verify_code, name='verify_code'),
+	path('change-password/', views.change_password, name='change_password'),
+	path('change-email/', views.change_email, name='change_email'),
 	
     path('privacy_policy/', views.privacy_policy, name='privacy_policy'),
     path('terms_of_use/', views.terms_of_use, name='terms_of_use'),

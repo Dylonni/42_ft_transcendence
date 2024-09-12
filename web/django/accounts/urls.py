@@ -8,11 +8,11 @@ authpatterns = [
 	path('logout/', views.user_logout, name='user_logout'),
 	
     path('register/', views.user_register, name='user_register'),
-    path('activate/<uidb64>/<token>/', views.user_activate, name='user_activate'),
+    path('activate/', views.user_activate, name='user_activate'),
 	
-	path('reset-password/request/', views.password_reset_request, name='password_reset_request'),
-	path('reset-password/<uidb64>/<token>/', views.password_reset, name='password_reset'),
-	path('reset-password/confirm/', views.password_reset_confirm, name='password_reset_confirm'),
+	path('password/request/', views.password_request, name='password_request'),
+	path('password/reset/', views.password_reset, name='password_reset'),
+	path('password/confirm/', views.password_confirm, name='password_confirm'),
 ]
 
 oauthpatterns = [
@@ -31,4 +31,3 @@ urlpatterns = [
 	path('oauth/', include((oauthpatterns, 'oauth'), namespace='oauth')),
     path('token/', include((tknpatterns, 'token'), namespace='token')),
 ]
-    # path('update-email/', views.UserUpdateEmailView.as_view(), name='update_email'),

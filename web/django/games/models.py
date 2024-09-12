@@ -150,8 +150,7 @@ class Game(BaseModel):
     def can_start(self, player):
         is_host = player == self.host
         is_full = self.is_full()
-        all_ready = True #all(player.is_ready for player in self.players)
-        return is_host and is_full and all_ready
+        return is_host and is_full
     
     def set_host(self, new_host):
         self.host = new_host
@@ -173,6 +172,7 @@ class Game(BaseModel):
         self.save()
         for player in self.players.all():
             self.__class__.objects.remove_player(self, player)
+        self.messages.all().delete()
     
     def get_currently_playing(self):
         round = self.rounds.filter(order=self.current_order).first()
@@ -192,13 +192,13 @@ class GameRound(BaseModel):
     )
     player1 = models.ForeignKey(
         to='profiles.Profile',
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
         related_name='player1_rounds',
         null=True,
     )
     player2 = models.ForeignKey(
         to='profiles.Profile',
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
         related_name='player2_rounds',
         null=True,
     )
