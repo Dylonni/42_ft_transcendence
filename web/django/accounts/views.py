@@ -207,7 +207,7 @@ class FortyTwoCallbackView(APIView):
         if not code:
             logger.error('No authorization code received.')
             return redirect('/login/?fortytwo=nocode')
-
+        
         response = requests.post('https://api.intra.42.fr/oauth/token', data={
             'grant_type': 'authorization_code',
             'client_id': settings.FORTYTWO_ID,

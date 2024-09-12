@@ -290,8 +290,6 @@ volumes:
     name: shared-certs
   elk-data:
     name: elk-data
-  django-web:
-    name: django-web
   # grafana-token:
   #   name: grafana-token
 

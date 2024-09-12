@@ -1,9 +1,8 @@
 
 ensure all services have a health check
-try to see if a filezilla container would work with the infinity site ?
 clean dockerfiles
-check on both docker-compose files if we can use "expose" instead of "ports"
 
+create a contact email address and update it to docs
 
 
 on bottom of all pages, should be
