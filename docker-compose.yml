@@ -67,7 +67,7 @@ services:
     volumes:
       - django-token:/vault/secrets/django
       - shared-certs:/etc/ssl/shared
-      # - grafana-token:/vault/secrets/mon/grafana
+      - grafana-token:/vault/secrets/grafana
 
 
 # WEB
@@ -136,12 +136,13 @@ services:
     container_name: grafana
     env_file: .env
     depends_on:
+      - vault
       - prometheus
     networks:
       - backend
     volumes:
       - shared-certs:/etc/ssl/shared:ro
-    #   - grafana-token:/var/lib/grafana/secrets:ro
+      - grafana-token:/var/lib/grafana/secrets:ro
 
   alert-manager:
     build: ./devops/mon/alert-manager
@@ -290,7 +291,7 @@ volumes:
     name: shared-certs
   elk-data:
     name: elk-data
-  # grafana-token:
-  #   name: grafana-token
+  grafana-token:
+    name: grafana-token
 
 
