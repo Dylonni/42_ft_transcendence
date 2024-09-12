@@ -16,8 +16,6 @@ MICROSERVICES
     Inter Process Communication : how to set it up ?
 
 
-how long should we keep live chats ? (twitch keeps them minimum 7 days, depending on user status)
-
 look into openclassrooms for api rest
 
 
@@ -52,8 +50,8 @@ cybersec
 
 
     vault
-        how to handle API keys for grafana ?
-            -> try to have as many of the .env vars handled by vault
+        grafana with vault is only for paid "enterprise" accounts
+        no other creds needed?
 
 devops
     grafana

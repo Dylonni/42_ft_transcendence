@@ -26,11 +26,7 @@ else
 
 	echo "Storing secrets..."
     vault kv put -mount=secret django/key SECRET_KEY="${DJANGO_SECRET_KEY}"
-
-    vault kv put -mount=secret prometheus/key PROM_DB="${PROMETHEUS_DB}" PROM_USER="${PROMETHEUS_USER}" PROM_PASS="${PROMETHEUS_PASSWORD}"
-    vault kv put -mount=secret pg_exporter/key DATA_SOURCE_NAME="${DATA_SOURCE_NAME}"
-    vault kv put -mount=secret grafana/key GF_USER="${GF_SECURITY_ADMIN_USER}" GF_PASS="${GF_SECURITY_ADMIN_PASSWORD}"
-
+    # vault kv put -mount=secret grafana/key GF_USER="${GF_SECURITY_ADMIN_USER}" GF_PASS="${GF_SECURITY_ADMIN_PASSWORD}"
 
     echo "Generate temporary tokens for other services..."
     vault policy write django-policy /vault/config/policies/django-policy.hcl
@@ -39,8 +35,8 @@ else
     vault policy write admin-policy /vault/config/policies/admin-policy.hcl
     vault token create -policy=admin-policy -display-name=admin > /vault/output/admin.txt
 
-    vault policy write grafana-policy /vault/config/policies/grafana-policy.hcl
-    vault token create -ttl=1h -policy=grafana-policy -display-name=grafana > /vault/secrets/grafana/token
+    # vault policy write grafana-policy /vault/config/policies/grafana-policy.hcl
+    # vault token create -ttl=1h -policy=grafana-policy -display-name=grafana > /vault/secrets/grafana/token
 
     # Check if the vault command was successful
     if [ $? -eq 0 ]; then

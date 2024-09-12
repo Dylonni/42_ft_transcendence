@@ -100,7 +100,7 @@ services:
   postgres:
     build: ./web/postgres
     container_name: postgres
-    env_file: .env
+    env_file: .env # NEEDED
     depends_on:
       vault:
         condition: service_healthy
@@ -118,7 +118,7 @@ services:
   postgres-exporter:
     build: ./devops/mon/postgres-exporter
     container_name: postgres-exporter
-    env_file: .env
+    # env_file: .env
     networks:
       - backend
 
