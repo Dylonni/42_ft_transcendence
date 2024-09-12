@@ -11,19 +11,19 @@ UserModel = get_user_model()
 class CustomUserEmailSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
-        fields = 'email'
+        fields = ('email',)
 
 
 class CustomUserPasswordSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
-        fields = 'password'
+        fields = ('password',)
 
 
 class CustomUserCodeSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
-        fields = 'code'
+        fields = ('code',)
 
 
 class UserLoginSerializer(serializers.Serializer):

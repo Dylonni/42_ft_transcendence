@@ -149,26 +149,64 @@ forgot_password = ForgotPasswordView.as_view()
 
 class VerifyCodeView(PublicView):
     def get(self, request):
+        code_token = request.query_params.get('token', None)
+        code_user = request.query_params.get('user', None)
         context = {
             'type': request.query_params.get('type', None),
-            'token': request.query_params.get('token', None),
-            'user': request.query_params.get('user', None),
+            'token': code_token,
+            'user': code_user,
+            'target': f'/api/auth/activate/?token={code_token}&user={code_user}',
         }
         return render(request, 'accounts/verify_code.html', context)
 
 verify_code = VerifyCodeView.as_view()
 
 
-class ChangePasswordView(PublicView):
+class ConfirmPasswordView(PublicView):
     def get(self, request):
-        return render(request, 'accounts/change_password.html')
+        context = {'target': '/api/auth/password/confirm/', 'category': 'password'}
+        return render(request, 'accounts/modify_credentials.html', context)
+
+confirm_password = ConfirmPasswordView.as_view()
+
+
+class CheckCodeView(PrivateView):
+    def get(self, request):
+        code_type = request.query_params.get('type', None)
+        code_token = request.query_params.get('token', None)
+        code_user = request.query_params.get('user', None)
+        match code_type:
+            case "twofa":
+                target = f"/api/profiles/me/code/?type=twofa&token={code_token}&user={code_user}"
+            case "email":
+                target = f"/api/profiles/me/code/?type=email&token={code_token}&user={code_user}"
+            case "password":
+                target = f"/api/profiles/me/code/?type=password&token={code_token}&user={code_user}"
+            case _:
+                target = ""
+        context = {
+            'type': code_type,
+            'token': code_token,
+            'user': code_user,
+            'target': target,
+        }
+        return render(request, 'accounts/verify_code.html', context)
+
+check_code = CheckCodeView.as_view()
+
+
+class ChangePasswordView(PrivateView):
+    def get(self, request):
+        context = {'target': '/api/profiles/me/password/', 'category': 'password'}
+        return render(request, 'accounts/modify_credentials.html', context)
 
 change_password = ChangePasswordView.as_view()
 
 
-class ChangeEmailView(PublicView):
+class ChangeEmailView(PrivateView):
     def get(self, request):
-        return render(request, 'accounts/change_email.html')
+        context = {'target': '/api/profiles/me/email/', 'category': 'email'}
+        return render(request, 'accounts/modify_credentials.html', context)
 
 change_email = ChangeEmailView.as_view()
 

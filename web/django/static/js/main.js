@@ -481,6 +481,81 @@ document.addEventListener("DOMContentLoaded", () => {
 
         setNotifHandlers();
         authPages();
+        
+        const inputs = document.querySelectorAll(".otp-field > input");
+        const button = document.getElementById("verifyBtn"); 
+        if (inputs.length > 0) {
+            window.addEventListener("load", () => inputs[0].focus());  
+            if (button) {
+                button.setAttribute("disabled", "disabled");
+            }
+            inputs[0].addEventListener("paste", function (event) {
+                event.preventDefault();
+                const pastedValue = (event.clipboardData || window.clipboardData).getData(
+                    "text"
+                );
+                const otpLength = inputs.length;
+    
+                for (let i = 0; i < otpLength; i++) {
+                    if (i < pastedValue.length) {
+                        inputs[i].value = pastedValue[i];
+                        inputs[i].removeAttribute("disabled");
+                        inputs[i].focus;
+                    } else {
+                        inputs[i].value = ""; // Clear any remaining inputs
+                        inputs[i].focus;
+                    }
+                }
+            });
+    
+            inputs[inputs.length - 1].addEventListener("keyup", (event) => {
+                if (event.key === "Enter") {
+                    console.log("Enter");
+                    button.click();
+                }
+            });
+    
+            inputs.forEach((input, index1) => {
+            input.addEventListener("keyup", (e) => {
+                    const currentInput = input;
+                    const nextInput = input.nextElementSibling;
+                    const prevInput = input.previousElementSibling;
+    
+                    if (currentInput.value.length > 1) {
+                        currentInput.value = "";
+                        return;
+                    }
+    
+                    if ( nextInput && nextInput.hasAttribute("disabled") && currentInput.value !== "") {
+                        nextInput.removeAttribute("disabled");
+                        nextInput.focus();
+                    }
+    
+                    if (e.key === "Backspace") {
+                        inputs.forEach((input, index2) => {
+                            if (index1 <= index2 && prevInput) {
+                                input.setAttribute("disabled", true);
+                                input.value = "";
+                                prevInput.focus();
+                            }
+                        });
+                    }
+    
+                    button.classList.remove("active");
+                    button.setAttribute("disabled", "disabled");
+    
+                    const inputsNo = inputs.length;
+                    if (!inputs[inputsNo - 1].disabled && inputs[inputsNo - 1].value !== "") {
+                        button.classList.add("active");
+                        button.removeAttribute("disabled");
+    
+                        return;
+                    }
+                });
+            });
+        }
+
+        
 
         const pongCanvas = document.getElementById('pongCanvas');
         if (pongCanvas) {
@@ -496,12 +571,39 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
 
-        document.querySelectorAll('.auth-form').forEach(form => {
-            form.addEventListener('submit', (event) => {
+        const verifyBtn = document.getElementById('verifyBtn');
+        if (verifyBtn) {
+            verifyBtn.addEventListener('click', (event) => {
+                event.preventDefault();
+                let code = '';
+                document.querySelectorAll(".otp-field > input").forEach(inputField => {
+                    code += inputField.value;
+                });
+                fetch(verifyBtn.dataset.target, {
+                    method: 'POST',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({'code': code}),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if ('redirect' in data) {
+                        navigateTo(data.redirect);
+                    }
+                })
+                .catch(error => console.error(`Error with request to ${event.target.action}:`, error));
+            })
+        }
+
+        const changePasswordForm = document.getElementById('changePasswordForm');
+        if (changePasswordForm) {
+            changePasswordForm.addEventListener('submit', (event) => {
                 event.preventDefault();
                 const formData = new FormData(event.target);
                 fetch(event.target.action, {
-                    method: event.target.method,
+                    method: 'PUT',
                     headers: {
                         'X-Requested-With': 'XMLHttpRequest',
                     },
@@ -510,15 +612,36 @@ document.addEventListener("DOMContentLoaded", () => {
                 .then(response => response.json())
                 .then(data => {
                     if ('redirect' in data) {
-                        openNotifWebSocket();
                         navigateTo(data.redirect);
                     }
                 })
-                .catch(error => console.error(`Error with request to ${event.target.action}:`, error));
+                .catch(error => console.error('Error changing password:', error));
             });
-        });
+        }
 
-        const logoutBtn = document.querySelector('.logout-btn');
+        const changeEmailForm = document.getElementById('changeEmailForm');
+        if (changeEmailForm) {
+            changeEmailForm.addEventListener('submit', (event) => {
+                event.preventDefault();
+                const formData = new FormData(event.target);
+                fetch(event.target.action, {
+                    method: 'PUT',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                    },
+                    body: formData,
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if ('redirect' in data) {
+                        navigateTo(data.redirect);
+                    }
+                })
+                .catch(error => console.error('Error changing email:', error));
+            });
+        }
+
+        const logoutBtn = document.getElementById('logoutBtn');
         if (logoutBtn) {
             logoutBtn.addEventListener('click', (event) => {
                 event.preventDefault();
@@ -711,11 +834,56 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             });
         }
+
         const acceptTerms = document.getElementById('tosAccept');
         const registerBtn = document.getElementById('registerBtn');
         if (registerBtn && acceptTerms){
             acceptTerms.addEventListener('change', (event) => {  
                     registerBtn.classList.toggle("disabled");
+            });
+        }
+
+        const registerForm = document.getElementById('registerForm');
+        if (registerForm) {
+            registerForm.addEventListener('submit', (event) => {
+                event.preventDefault();
+                const formData = new FormData(event.target);
+                fetch(event.target.action, {
+                    method: event.target.method,
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                    },
+                    body: formData,
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if ('redirect' in data) {
+                        navigateTo(data.redirect);
+                    }
+                })
+                .catch(error => console.error(`Error with request to ${event.target.action}:`, error));
+            });
+        }
+
+        const loginForm = document.getElementById('loginForm');
+        if (loginForm) {
+            loginForm.addEventListener('submit', (event) => {
+                event.preventDefault();
+                const formData = new FormData(event.target);
+                fetch(event.target.action, {
+                    method: event.target.method,
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                    },
+                    body: formData,
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if ('redirect' in data) {
+                        navigateTo(data.redirect);
+                    }
+                })
+                .catch(error => console.error(`Error with request to ${event.target.action}:`, error));
             });
         }
     };
@@ -1388,10 +1556,19 @@ document.addEventListener("DOMContentLoaded", () => {
         if (changeEmailBtn) {
             changeEmailBtn.addEventListener('click', (event) => {
                 event.preventDefault();
-                makeAPIRequest(
-                    '/api/profiles/me/email/',
-                    'POST',
-                );
+                fetch('/api/profiles/me/email/', {
+                    method: 'POST',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                    },
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if ('redirect' in data) {
+                        navigateTo(data.redirect);
+                    }
+                })
+                .catch(error => console.error('Error changing email:', error));
             });
         }
 
@@ -1399,10 +1576,19 @@ document.addEventListener("DOMContentLoaded", () => {
         if (changePasswordBtn) {
             changePasswordBtn.addEventListener('click', (event) => {
                 event.preventDefault();
-                makeAPIRequest(
-                    '/api/profiles/me/password/',
-                    'POST',
-                );
+                fetch('/api/profiles/me/password/', {
+                    method: 'POST',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                    },
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if ('redirect' in data) {
+                        navigateTo(data.redirect);
+                    }
+                })
+                .catch(error => console.error('Error changing password:', error));
             });
         }
 

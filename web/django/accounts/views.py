@@ -98,24 +98,31 @@ user_register = UserRegisterView.as_view()
 
 
 class UserActivateView(PublicView):
-    def get(self, request: HttpRequest, uidb64, token):
+    def post(self, request: HttpRequest):
         try:
             token = request.query_params.get('token', None)
-            uid = request.query_params.get('user', None)
+            to_decode = request.query_params.get('user', None)
+            uid = force_str(urlsafe_base64_decode(to_decode))
             user = UserModel.objects.filter(id=uid).first()
             if not user:
-                response_data = {'message': _('Invalid url.'), 'redirect': '/settings/'}
-                return Response(response_data, status=status.HTTP_200_OK)
+                response_data = {'error': _('Invalid url.')}
+                return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
             token_generator = EmailTokenGenerator()
             if not token_generator.check_token(user, token):
-                response_data = {'message': _('Invalid url.'), 'redirect': '/settings/'}
-                return Response(response_data, status=status.HTTP_200_OK)
+                response_data = {'error': _('Invalid url.')}
+                return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
             serializer = CustomUserCodeSerializer(data=request.data)
             if not serializer.is_valid():
-                response_data = {'message': _('Invalid password.'), 'redirect': '/settings/'}
-                return Response(response_data, status=status.HTTP_200_OK)
+                response_data = {'error': _('Invalid code.')}
+                return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
+            if not user.check_code(serializer.validated_data['code']):
+                response_data = {'error': _('Invalid code.')}
+                return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
             Profile.objects.create_from_user(user)
             user.set_as_verified()
+            user.code = None
+            user.code_updated_at = None
+            user.save()
             Profile.objects.set_user_status(user, Profile.StatusChoices.ONLINE)
             response_data = {'message': _('Account verified.'), 'redirect': '/home/'}
             response = Response(response_data, status=status.HTTP_200_OK)

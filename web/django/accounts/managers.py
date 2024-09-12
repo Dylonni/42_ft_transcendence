@@ -50,7 +50,7 @@ class CustomUserManager(BaseUserManager):
             if not user.has_code_expired():
                 # raise ValueError('Code already sent.')
                 return
-        user.code = ''.join(random.choices('0123456789', k=6))
+        user.code = ''.join(random.choices('0123456789', k=5))
         user.code_updated_at = timezone.now()
         user.save()
         context = {'user': user}

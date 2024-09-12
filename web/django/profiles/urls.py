@@ -12,6 +12,7 @@ urlpatterns = [
 	path('profiles/me/lang/<str:lang>/', views.my_lang, name='my_lang'),
 	path('profiles/me/email/', views.my_email, name='my_email'),
 	path('profiles/me/password/', views.my_password, name='my_password'),
+    path('profiles/me/code/', views.my_code, name='my_code'),
 	
     path('profiles/<uuid:profile_id>/', views.profile_detail, name='profile_detail'),
 	path('profiles/<uuid:profile_id>/invites/', views.profile_invite_list, name='profile_invite_list'),

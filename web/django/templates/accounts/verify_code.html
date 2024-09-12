@@ -38,19 +38,19 @@
 			</h4>
 			<div class="card-body text-center p-5" style="width: 100%;">
 				<h4>
-					Enter the recieved code
+					Enter the received code
 				</h4>
 				<p>
 					Your code was sent to you via email, don't forget to check into your spam box.
 				</p>
 				<div class="d-flex justify-content-center align-items-center otp-field mb-4">
-					<input type="number">
+					<input max="9" type="number">
 					<input type="number" disabled="">
 					<input type="number" disabled="">
 					<input type="number" disabled="">
 					<input type="number" disabled="">
 				</div>
-				<button class="btn btn-primary mb-3" style="border-style: none;background: var(--bs-emphasis-color);">
+				<button data-target="{{ target }}" id="verifyBtn" class="btn btn-primary mb-3" style="border-style: none;background: var(--bs-emphasis-color);">
 					Verify
 				</button>
 			</div>

@@ -175,11 +175,11 @@ class Profile(BaseModel):
     
     def get_rank(self):
         if self.player1_rounds.count() + self.player2_rounds.count() == 0:
-            return '???'
+            return _('Unranked')
         higher_elo_count = self.__class__.objects.annotate(
             total_games=models.Count('player1_rounds', distinct=True) + models.Count('player2_rounds', distinct=True)
         ).filter(total_games__gt=0, elo__gt=self.elo).count()
-        return higher_elo_count + 1
+        return "#" + str(higher_elo_count + 1)
     
     @staticmethod
     def upload_avatar(instance, filename):

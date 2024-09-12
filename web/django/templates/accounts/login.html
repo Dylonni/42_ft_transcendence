@@ -34,7 +34,7 @@
                             {% translate 'Log in' %}
                         </h2>
                         <div class="card-body d-flex flex-column align-items-center">
-                            <form action="/api/auth/login/" class="text-center auth-form" method="post">
+                            <form id="loginForm" action="/api/auth/login/" class="text-center" method="post">
                                 {% csrf_token %}
                                 <div class="mb-3 form-floating">
                                     <input class="form-control" id="floatingInput" name="username_or_email" placeholder=" " required="" type="text"/>

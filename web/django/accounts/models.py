@@ -64,7 +64,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         related_query_name='custom_user',
     )
     code = models.CharField(
-        max_length=6,
+        max_length=5,
         null=True,
     )
     code_updated_at = models.DateTimeField(

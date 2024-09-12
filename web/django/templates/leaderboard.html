@@ -30,7 +30,7 @@
                                 Your Rank
                             </h1>
                             <h1 class="text-truncate fs-3 text-truncate" id="player-name-2" style="color: var(--bs-body-bg);border-radius: 10px;font-family: Roboto, sans-serif;position: relative;margin-bottom: 0px;padding-left: 34px;padding-right: 34px;max-width: 280px;">
-                                #{{ profile.get_rank }}
+                                {{ profile.get_rank }}
                             </h1>
                         </div>
                     </div>
@@ -40,7 +40,7 @@
         <div class="col-12 col-md-12 col-xl-12 col-xxl-12">
             <div class="overflow-auto" style="background: rgba(255,255,255,0);margin-left: 0px;margin-right: 0px;padding-left: 10px;padding-right: 10px;border-radius: 19px;max-height: 815px;">
                 {% for player in players %}
-                {% if player.get_rank == 1 %}
+                {% if player.get_rank == '#1' %}
                 <div class="d-flex justify-content-center align-items-center flex-nowrap justify-content-xxl-center align-items-xxl-center game-loose" id="template-first" style="border-radius: 18px;width: 100%;border: 2px none #a47e0b;box-shadow: 0px 0px 6px 2px #dca911;margin-bottom: 15px;margin-top: 5px;">
                     <div class="d-flex justify-content-center align-items-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center text-truncate leaderboardinfos" style="border-style: none;width: 100%;">
                         <div class="d-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="width: 60px;background: var(--bs-secondary-text-emphasis);border-radius: 50%;height: 60px;border-style: solid;border-color: var(--bs-secondary-text-emphasis);padding-bottom: 0px;padding-top: 0px;">
@@ -61,12 +61,12 @@
                     </div>
                     <div class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center text-truncate leaderboardinfos" style="border-style: none;font-size: 30px;width: 100%;">
                         <p class="d-xxl-flex justify-content-xxl-center align-items-xxl-center text-truncate" style="color: var(--bs-body-bg);margin-bottom: 0px;text-shadow: 1px 2px 3px var(--bs-emphasis-color);">
-                            #{{ player.get_rank }}
+                            {{ player.get_rank }}
                         </p>
                         <lottie-player src="{% static '/js/Medal_gold.json' %}" mode="normal" autoplay="" style="width: 25%;height: 25%;"></lottie-player>
                     </div>
                 </div>
-                {% elif player.get_rank == 2 %}
+                {% elif player.get_rank == '#2' %}
                 <div class="d-flex justify-content-center align-items-center flex-nowrap justify-content-xxl-center align-items-xxl-center game-loose" id="template-first-3" style="border-radius: 18px;width: 100%;border: 2px none #a47e0b;box-shadow: 0px 0px 6px 2px var(--bs-gray-500);margin-top: 15px;margin-bottom: 15px;">
                     <div class="d-flex justify-content-center align-items-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center text-truncate leaderboardinfos" style="border-style: none;width: 100%;">
                         <div class="d-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="width: 60px;background: var(--bs-secondary-text-emphasis);border-radius: 50%;height: 60px;border-style: solid;border-color: var(--bs-secondary-text-emphasis);padding-bottom: 0px;padding-top: 0px;">
@@ -87,12 +87,12 @@
                     </div>
                     <div class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center text-truncate leaderboardinfos" style="border-style: none;font-size: 30px;width: 100%;">
                         <p class="d-xxl-flex justify-content-xxl-center align-items-xxl-center text-truncate" style="color: var(--bs-body-bg);margin-bottom: 0px;text-shadow: 1px 2px 3px var(--bs-emphasis-color);">
-                            #{{ player.get_rank }}
+                            {{ player.get_rank }}
                         </p>
                         <lottie-player src="{% static '/js/Medal_silver.json' %}" mode="normal" autoplay="" style="width: 25%;height: 25%;"></lottie-player>
                     </div>
                 </div>
-                {% elif player.get_rank == 3 %}
+                {% elif player.get_rank == '#3' %}
                 <div class="d-flex justify-content-center align-items-center flex-nowrap justify-content-xxl-center align-items-xxl-center game-loose" id="template-first-2" style="border-radius: 18px;width: 100%;border: 2px none #a47e0b;box-shadow: 0px 0px 6px 2px #c3700f;margin-top: 15px;margin-bottom: 15px;">
                     <div class="d-flex justify-content-center align-items-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center text-truncate leaderboardinfos" style="border-style: none;width: 100%;">
                         <div class="d-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="width: 60px;background: var(--bs-secondary-text-emphasis);border-radius: 50%;height: 60px;border-style: solid;border-color: var(--bs-secondary-text-emphasis);padding-bottom: 0px;padding-top: 0px;">
@@ -113,7 +113,7 @@
                     </div>
                     <div class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center text-truncate leaderboardinfos" style="border-style: none;font-size: 30px;width: 100%;">
                         <p class="d-xxl-flex justify-content-xxl-center align-items-xxl-center text-truncate" style="color: var(--bs-body-bg);margin-bottom: 0px;text-shadow: 1px 2px 3px var(--bs-emphasis-color);">
-                            #{{ player.get_rank }}
+                            {{ player.get_rank }}
                         </p>
                         <lottie-player src="{% static '/js/Medal_bronze.json' %}" mode="normal" autoplay="" style="width: 25%;height: 25%;"></lottie-player>
                     </div>
@@ -139,7 +139,7 @@
                     </div>
                     <div class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center text-truncate leaderboardinfos" style="border-style: none;font-size: 30px;width: 100%;">
                         <p class="d-xxl-flex justify-content-xxl-center align-items-xxl-center text-truncate" style="color: var(--bs-body-bg);margin-bottom: 0px;text-shadow: 1px 2px 3px var(--bs-emphasis-color);">
-                            #{{ player.get_rank }}
+                            {{ player.get_rank }}
                         </p>
                     </div>
                 </div>
