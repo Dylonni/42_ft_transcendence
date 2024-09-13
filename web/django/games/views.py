@@ -103,19 +103,6 @@ class GameStartView(PrivateView):
 game_start = GameStartView.as_view()
 
 
-class GameReadyView(PrivateView):
-    def post(self, request, game_id):
-        game = get_object_or_404(Game, id=game_id)
-        player = request.profile
-        if player.toggle_ready():
-            response_data = {'message': _('Player set ready.')}
-        else:
-            response_data = {'message': _('Player canceled ready state.')}
-        return Response(response_data, status=status.HTTP_200_OK)
-
-game_ready = GameReadyView.as_view()
-
-
 class GameMessageListView(PrivateView):
     def get(self, request, game_id):
         game = get_object_or_404(Game, id=game_id)

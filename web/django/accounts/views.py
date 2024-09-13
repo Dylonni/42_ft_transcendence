@@ -1,17 +1,11 @@
 import logging
-import random
 import requests
-import string
 from django.conf import settings
 from django.contrib.auth import authenticate, get_user_model, login, logout
-from django.contrib.auth.models import User
-from django.contrib.auth.tokens import PasswordResetTokenGenerator
-from django.contrib.sites.shortcuts import get_current_site
-from django.core.files.base import ContentFile
+from django.contrib.auth.models import AnonymousUser
 from django.core.mail import send_mail
 from django.http import HttpRequest
 from django.shortcuts import redirect, render
-from django.template.loader import render_to_string
 from django.utils.decorators import method_decorator
 from django.utils.encoding import force_bytes, force_str
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
@@ -19,7 +13,6 @@ from django.utils.translation import gettext_lazy as _
 from django.views.decorators.csrf import ensure_csrf_cookie
 from rest_framework import generics, status
 from rest_framework.exceptions import ValidationError
-from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import AccessToken
@@ -28,18 +21,14 @@ from pong.views import PrivateView, PublicView
 from profiles.models import Profile
 from games.models import Game
 from .serializers import (
-    PasswordResetConfirmSerializer,
-    PasswordResetRequestSerializer,
     UserLoginSerializer,
     UserRegisterSerializer,
-    UserUpdateEmailSerializer,
+    CustomUserCodeSerializer,
 )
 from .tokens import EmailTokenGenerator
 from .utils import (
     is_token_valid,
     get_jwt_from_refresh,
-    send_activation_mail,
-    send_password_reset_mail,
     set_jwt_as_cookies,
     set_jwt_cookies_for_user,
     unset_jwt_cookies,
@@ -93,93 +82,141 @@ class UserRegisterView(PublicView):
             serializer.is_valid(raise_exception=True)
             user = serializer.save()
             
-            response_data = {'message': _('Account registered! Please check your email to activate your account.')}
-            response = Response(response_data, status=status.HTTP_201_CREATED)
-            send_activation_mail(request, user)
-            return response
+            user = UserModel.objects.send_mail(request.data['email'], 'accounts/email_activate.html', 'Activate your Account')
+            token_generator = EmailTokenGenerator()
+            token = token_generator.make_token(user)
+            uid = urlsafe_base64_encode(force_bytes(user.pk))
+            response_data = {
+                'message': _('Account registered! Please check your email to activate your account.'),
+                'redirect': f'/verify-code/?type=activate&token={token}&user={uid}',
+            }
+            return Response(response_data, status=status.HTTP_201_CREATED)
         except ValidationError as e:
-            response_data = {'message': e.detail}
+            response_data = {'error': str(e)}
             return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
 
 user_register = UserRegisterView.as_view()
 
 
 class UserActivateView(PublicView):
-    def get(self, request: HttpRequest, uidb64, token):
-        try:
-            uid = force_str(urlsafe_base64_decode(uidb64))
-            user = UserModel.objects.get(pk=uid)
-            Profile.objects.create_from_user(user)
-        except (TypeError, ValueError, OverflowError, UserModel.DoesNotExist) as e:
-            user = None
-            logger.warning('Invalid activation link.')
-        
-        token_generator = EmailTokenGenerator()
-        if user is not None and token_generator.check_token(user, token):
-            user.set_as_verified()
-            Profile.objects.set_user_status(user, Profile.StatusChoices.ONLINE)
-            response = redirect('/home/')
-            login(request, user)
-            set_jwt_cookies_for_user(response, user)
-            return response
-        
-        logger.warning('Invalid activation link.')
-        return redirect('/login/')
-
-user_activate = UserActivateView.as_view()
-
-
-# TODO: send mail with numeric code instead of link
-class PasswordResetRequestView(PublicView):
-    @method_decorator(ensure_csrf_cookie)
     def post(self, request: HttpRequest):
-        serializer = PasswordResetRequestSerializer(data=request.data)
-        serializer.is_valid()
-        user = serializer.get_user()
-        if user:
-            send_password_reset_mail(request, user)
-        response_data = {'message': _('Password reset request sent! Please check your email to reset your password.')}
-        return Response(response_data, status=status.HTTP_200_OK)
-
-
-password_reset_request = PasswordResetRequestView.as_view()
-
-
-class PasswordResetView(PublicView):
-    def get(self, request: HttpRequest, uidb64, token):
         try:
-            uid = force_str(urlsafe_base64_decode(uidb64))
-            user = UserModel.objects.get(pk=uid)
-        except(TypeError, ValueError, OverflowError, UserModel.DoesNotExist):
-            user = None
-        
-        token_generator = EmailTokenGenerator()
-        if user is not None and token_generator.check_token(user, token):
-            response_data = {'message': _('Set your new password.'), 'redirect': '/password-reset/'}
+            token = request.query_params.get('token', None)
+            to_decode = request.query_params.get('user', None)
+            uid = force_str(urlsafe_base64_decode(to_decode))
+            user = UserModel.objects.filter(id=uid).first()
+            if not user:
+                response_data = {'error': _('Invalid url.')}
+                return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
+            token_generator = EmailTokenGenerator()
+            if not token_generator.check_token(user, token):
+                response_data = {'error': _('Invalid url.')}
+                return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
+            serializer = CustomUserCodeSerializer(data=request.data)
+            if not serializer.is_valid():
+                response_data = {'error': _('Invalid code.')}
+                return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
+            if not user.check_code(serializer.validated_data['code']):
+                response_data = {'error': _('Invalid code.')}
+                return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
+            Profile.objects.create_from_user(user)
+            user.set_as_verified()
+            user.code = None
+            user.code_updated_at = None
+            user.save()
+            Profile.objects.set_user_status(user, Profile.StatusChoices.ONLINE)
+            response_data = {'message': _('Account verified.'), 'redirect': '/home/'}
             response = Response(response_data, status=status.HTTP_200_OK)
             login(request, user)
             set_jwt_cookies_for_user(response, user)
             return response
-        
-        response_data = {'message': _('Password reset link is invalid.'), 'redirect': '/login/'}
-        return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
+        except ValueError as e:
+            response_data = {'error': str(e)}
+            return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
+
+user_activate = UserActivateView.as_view()
+
+
+class PasswordRequestView(PublicView):
+    def post(self, request: HttpRequest):
+        try:
+            user = UserModel.objects.send_mail(request.data['email'], 'accounts/email_reset_password.html', 'Reset your Password')
+            token_generator = EmailTokenGenerator()
+            token = token_generator.make_token(user)
+            uid = urlsafe_base64_encode(force_bytes(user.pk))
+            response_data = {
+                'message': _('Password reset request sent! Please check your email.'),
+                'redirect': f'/verify-code/?type=forget&token={token}&user={uid}',
+            }
+            return Response(response_data, status=status.HTTP_200_OK)
+        except ValueError as e:
+            token_generator = EmailTokenGenerator()
+            # TODO: generate random token and uid
+            user = AnonymousUser()
+            token = token_generator.make_token(user)
+            uid = urlsafe_base64_encode(force_bytes(user.pk))
+            response_data = {
+                'message': _('Password reset request sent! Please check your email.'),
+                'redirect': f'/verify-code/?type=forget&token={token}&user={uid}',
+            }
+            return Response(response_data, status=status.HTTP_200_OK)
+
+
+password_request = PasswordRequestView.as_view()
+
+
+class PasswordResetView(PublicView):
+    def post(self, request: HttpRequest):
+        try:
+            token = request.query_params.get('token', None)
+            to_decode = request.query_params.get('user', None)
+            uid = force_str(urlsafe_base64_decode(to_decode))
+            user = UserModel.objects.filter(id=uid).first()
+            if not user:
+                response_data = {'message': _('Invalid url.'), 'redirect': '/'}
+                return Response(response_data, status=status.HTTP_200_OK)
+            token_generator = EmailTokenGenerator()
+            if not token_generator.check_token(user, token):
+                response_data = {'message': _('Invalid url.'), 'redirect': '/'}
+                return Response(response_data, status=status.HTTP_200_OK)
+            response_data = {
+                'message': _('Set your new password.'),
+                'redirect': f'/confirm-password/?token={token}&user={uid}',
+            }
+            return Response(response_data, status=status.HTTP_200_OK)
+        except ValueError as e:
+            response_data = {'error': str(e)}
+            return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
+
 
 password_reset = PasswordResetView.as_view()
 
 
-class PasswordResetConfirmView(PublicView):
-    @method_decorator(ensure_csrf_cookie)
-    def post(self, request: HttpRequest):
-        serializer = PasswordResetConfirmSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        user = serializer.save(password=serializer.validated_data['new_password'])
-        response_data = {'message': _('Password changed.'), 'redirect': '/home/'}
-        response = Response(response_data, status=status.HTTP_200_OK)
-        login(request, user)
-        set_jwt_cookies_for_user(response, user)
-        return response
+class PasswordConfirmView(PublicView):
+    def put(self, request: HttpRequest):
+        try:
+            token = request.query_params.get('token', None)
+            uid = request.query_params.get('user', None)
+            user = UserModel.objects.filter(id=uid).first()
+            if not user:
+                response_data = {'message': _('Invalid url.'), 'redirect': '/'}
+                return Response(response_data, status=status.HTTP_200_OK)
+            token_generator = EmailTokenGenerator()
+            if not token_generator.check_token(user, token):
+                response_data = {'message': _('Invalid url.'), 'redirect': '/'}
+                return Response(response_data, status=status.HTTP_200_OK)
+            user.set_password(request.data['password'])
+            Profile.objects.set_user_status(user, Profile.StatusChoices.ONLINE)
+            response_data = {'message': _('Password changed.'), 'redirect': '/home/'}
+            response = Response(response_data, status=status.HTTP_200_OK)
+            login(request, user)
+            set_jwt_cookies_for_user(response, user)
+            return response
+        except ValueError as e:
+            response_data = {'error': str(e)}
+            return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
 
-password_reset_confirm = PasswordResetConfirmView.as_view()
+password_confirm = PasswordConfirmView.as_view()
 
 
 class FortyTwoLoginView(APIView):
@@ -307,26 +344,3 @@ class TokenVerify(PublicView):
         return response
 
 token_verify = TokenVerify.as_view()
-
-
-class UserUpdateEmailView(generics.GenericAPIView):
-    queryset = UserModel.objects.all()
-    permission_classes = (IsAuthenticated,)
-    serializer_class = UserUpdateEmailSerializer
-
-    # @method_decorator(ensure_csrf_cookie)
-    def post(self, request: HttpRequest):
-        try:
-            user = UserModel.objects.get(id=request.data.get('id'))
-        except UserModel.DoesNotExist as e:
-            return Response({
-                'status': 'User not found.',
-            }, status=status.HTTP_400_BAD_REQUEST)
-        serializer = self.get_serializer(user, data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        email = serializer.validated_data['email']
-        return Response({
-            'status': _('Email updated succesfully!'),
-            'data': email,
-        }, status=status.HTTP_200_OK)

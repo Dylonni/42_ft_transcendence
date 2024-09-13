@@ -177,24 +177,31 @@ document.addEventListener("DOMContentLoaded", () => {
 
         notifSocket.onmessage = (event) => {
             const data = JSON.parse(event.data);
-            const element = data['element'];
-            const notifList = document.getElementById('notifList');
-            if (notifList) {
-                notifList.innerHTML += element;
-                setNotifHandlers(); // MAYBE: optimize
-            }
-            const notifBtn = document.getElementById('notiftoggle');
-            if (notifBtn && !notifBtn.checked) {
-                const showNotifDot = document.getElementById('showNotifDot');
-                if (showNotifDot) {
-                    showNotifDot.classList.remove('d-none', 'd-xxl-none');
+            if (data.element) {
+                const notifList = document.getElementById('notifList');
+                if (notifList) {
+                    notifList.innerHTML += data.element;
+                    setNotifHandlers(); // MAYBE: optimize
                 }
-            }
-            const notifDiv = document.getElementById('notifDiv');
-            if (notifDiv) {
-                notifDiv.classList.remove('rubberBand');
-                void notifDiv.offsetWidth;
-                notifDiv.classList.add('rubberBand');
+                const notifBtn = document.getElementById('notiftoggle');
+                if (notifBtn && !notifBtn.checked) {
+                    const showNotifDot = document.getElementById('showNotifDot');
+                    if (showNotifDot) {
+                        showNotifDot.classList.remove('d-none', 'd-xxl-none');
+                    }
+                }
+                const notifDiv = document.getElementById('notifDiv');
+                if (notifDiv) {
+                    notifDiv.classList.remove('rubberBand');
+                    void notifDiv.offsetWidth;
+                    notifDiv.classList.add('rubberBand');
+                }
+            } else if (data.notif_list) {
+                const notifList = document.getElementById('notifList');
+                if (notifList) {
+                    notifList.innerHTML = data.notif_list;
+                    setNotifHandlers(); // MAYBE: optimize
+                }
             }
         };
 
@@ -474,6 +481,80 @@ document.addEventListener("DOMContentLoaded", () => {
 
         setNotifHandlers();
         authPages();
+        
+        const inputs = document.querySelectorAll(".otp-field > input");
+        const button = document.getElementById("verifyBtn"); 
+        if (inputs.length > 0) {
+            window.addEventListener("load", () => inputs[0].focus());  
+            if (button) {
+                button.setAttribute("disabled", "disabled");
+            }
+            inputs[0].addEventListener("paste", function (event) {
+                event.preventDefault();
+                const pastedValue = (event.clipboardData || window.clipboardData).getData(
+                    "text"
+                );
+                const otpLength = inputs.length;
+    
+                for (let i = 0; i < otpLength; i++) {
+                    if (i < pastedValue.length) {
+                        inputs[i].value = pastedValue[i];
+                        inputs[i].removeAttribute("disabled");
+                        inputs[i].focus;
+                    } else {
+                        inputs[i].value = ""; // Clear any remaining inputs
+                        inputs[i].focus;
+                    }
+                }
+            });
+    
+            inputs[inputs.length - 1].addEventListener("keyup", (event) => {
+                if (event.key === "Enter") {
+                    button.click();
+                }
+            });
+    
+            inputs.forEach((input, index1) => {
+            input.addEventListener("keyup", (e) => {
+                    const currentInput = input;
+                    const nextInput = input.nextElementSibling;
+                    const prevInput = input.previousElementSibling;
+    
+                    if (currentInput.value.length > 1) {
+                        currentInput.value = "";
+                        return;
+                    }
+    
+                    if ( nextInput && nextInput.hasAttribute("disabled") && currentInput.value !== "") {
+                        nextInput.removeAttribute("disabled");
+                        nextInput.focus();
+                    }
+    
+                    if (e.key === "Backspace") {
+                        inputs.forEach((input, index2) => {
+                            if (index1 <= index2 && prevInput) {
+                                input.setAttribute("disabled", true);
+                                input.value = "";
+                                prevInput.focus();
+                            }
+                        });
+                    }
+    
+                    button.classList.remove("active");
+                    button.setAttribute("disabled", "disabled");
+    
+                    const inputsNo = inputs.length;
+                    if (!inputs[inputsNo - 1].disabled && inputs[inputsNo - 1].value !== "") {
+                        button.classList.add("active");
+                        button.removeAttribute("disabled");
+    
+                        return;
+                    }
+                });
+            });
+        }
+
+        
 
         const pongCanvas = document.getElementById('pongCanvas');
         if (pongCanvas) {
@@ -486,15 +567,51 @@ document.addEventListener("DOMContentLoaded", () => {
                     event.preventDefault();
                     navigateTo(anchor.href);
                 });
+            } else if (anchor.id.startsWith('changeLang')) {
+                anchor.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    const idParts = anchor.id.split('_');
+                    if (idParts.length > 1) {
+                        const lang = idParts[1];
+                        langReload(lang);
+                    }
+                });
             }
         });
 
-        document.querySelectorAll('.auth-form').forEach(form => {
-            form.addEventListener('submit', (event) => {
+        const verifyBtn = document.getElementById('verifyBtn');
+        if (verifyBtn) {
+            verifyBtn.addEventListener('click', (event) => {
+                event.preventDefault();
+                let code = '';
+                document.querySelectorAll(".otp-field > input").forEach(inputField => {
+                    code += inputField.value;
+                });
+                fetch(verifyBtn.dataset.target, {
+                    method: 'POST',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({'code': code}),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if ('redirect' in data) {
+                        navigateTo(data.redirect);
+                    }
+                })
+                .catch(error => console.error(`Error with request to ${event.target.action}:`, error));
+            })
+        }
+
+        const resetPasswordForm = document.getElementById('resetPasswordForm');
+        if (resetPasswordForm) {
+            resetPasswordForm.addEventListener('submit', (event) => {
                 event.preventDefault();
                 const formData = new FormData(event.target);
                 fetch(event.target.action, {
-                    method: event.target.method,
+                    method: 'POST',
                     headers: {
                         'X-Requested-With': 'XMLHttpRequest',
                     },
@@ -503,15 +620,58 @@ document.addEventListener("DOMContentLoaded", () => {
                 .then(response => response.json())
                 .then(data => {
                     if ('redirect' in data) {
-                        openNotifWebSocket();
                         navigateTo(data.redirect);
                     }
                 })
-                .catch(error => console.error(`Error with request to ${event.target.action}:`, error));
+                .catch(error => console.error('Error resetting password:', error));
             });
-        });
+        }
 
-        const logoutBtn = document.querySelector('.logout-btn');
+        const changePasswordForm = document.getElementById('changePasswordForm');
+        if (changePasswordForm) {
+            changePasswordForm.addEventListener('submit', (event) => {
+                event.preventDefault();
+                const formData = new FormData(event.target);
+                fetch(event.target.action, {
+                    method: 'PUT',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                    },
+                    body: formData,
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if ('redirect' in data) {
+                        navigateTo(data.redirect);
+                    }
+                })
+                .catch(error => console.error('Error changing password:', error));
+            });
+        }
+
+        const changeEmailForm = document.getElementById('changeEmailForm');
+        if (changeEmailForm) {
+            changeEmailForm.addEventListener('submit', (event) => {
+                event.preventDefault();
+                const formData = new FormData(event.target);
+                fetch(event.target.action, {
+                    method: 'PUT',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                    },
+                    body: formData,
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if ('redirect' in data) {
+                        navigateTo(data.redirect);
+                    }
+                })
+                .catch(error => console.error('Error changing email:', error));
+            });
+        }
+
+        const logoutBtn = document.getElementById('logoutBtn');
         if (logoutBtn) {
             logoutBtn.addEventListener('click', (event) => {
                 event.preventDefault();
@@ -561,7 +721,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     })
                     .then(response => response.json())
                     .then(data => {
-                        console.log('Game created:', data);
                         if ('redirect' in data) {
                             navigateTo(data.redirect);
                         }
@@ -584,6 +743,10 @@ document.addEventListener("DOMContentLoaded", () => {
                             }
                         };
                         notifSocket.send(JSON.stringify(message));
+                        const showNotifDot = document.getElementById('showNotifDot');
+                        if (showNotifDot) {
+                            showNotifDot.classList.add('d-none', 'd-xxl-none');
+                        }
                     }
                 });
             }
@@ -603,7 +766,6 @@ document.addEventListener("DOMContentLoaded", () => {
                         })
                         .then(response => response.json())
                         .then(data => {
-                            console.log('Friend request accepted:', data);
                             acceptFriendBtn.parentElement.parentElement.remove();
                         })
                         .catch(error => console.error('Error accepting friend request:', error));
@@ -626,7 +788,6 @@ document.addEventListener("DOMContentLoaded", () => {
                         })
                         .then(response => response.json())
                         .then(data => {
-                            console.log('Friend request declined:', data);
                             declineFriendBtn.parentElement.parentElement.remove();
                         })
                         .catch(error => console.error('Error declining friend request:', error));
@@ -649,7 +810,6 @@ document.addEventListener("DOMContentLoaded", () => {
                         })
                         .then(response => response.json())
                         .then(data => {
-                            console.log('Game invite accepted:', data);
                             acceptGameBtn.parentElement.parentElement.remove();
                             if ('redirect' in data) {
                                 navigateTo(data.redirect);
@@ -675,7 +835,6 @@ document.addEventListener("DOMContentLoaded", () => {
                         })
                         .then(response => response.json())
                         .then(data => {
-                            console.log('Game invite declined:', data);
                             declineGameBtn.parentElement.parentElement.remove();
                         })
                         .catch(error => console.error('Error declining game invite:', error));
@@ -700,11 +859,56 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             });
         }
+
         const acceptTerms = document.getElementById('tosAccept');
         const registerBtn = document.getElementById('registerBtn');
         if (registerBtn && acceptTerms){
             acceptTerms.addEventListener('change', (event) => {  
                     registerBtn.classList.toggle("disabled");
+            });
+        }
+
+        const registerForm = document.getElementById('registerForm');
+        if (registerForm) {
+            registerForm.addEventListener('submit', (event) => {
+                event.preventDefault();
+                const formData = new FormData(event.target);
+                fetch(event.target.action, {
+                    method: event.target.method,
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                    },
+                    body: formData,
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if ('redirect' in data) {
+                        navigateTo(data.redirect);
+                    }
+                })
+                .catch(error => console.error(`Error with request to ${event.target.action}:`, error));
+            });
+        }
+
+        const loginForm = document.getElementById('loginForm');
+        if (loginForm) {
+            loginForm.addEventListener('submit', (event) => {
+                event.preventDefault();
+                const formData = new FormData(event.target);
+                fetch(event.target.action, {
+                    method: event.target.method,
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                    },
+                    body: formData,
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if ('redirect' in data) {
+                        navigateTo(data.redirect);
+                    }
+                })
+                .catch(error => console.error(`Error with request to ${event.target.action}:`, error));
             });
         }
     };
@@ -721,7 +925,6 @@ document.addEventListener("DOMContentLoaded", () => {
                         fetch(`/api/profiles/search/?alias=${profileAlias}`)
                         .then(response => response.json())
                         .then(data => {
-                            console.log('Profiles searched:', data);
                             if (data && 'data' in data) {
                                 navigateTo(`/profiles/${data.data[0].id}`);
                             }
@@ -766,7 +969,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     })
                     .then(response => response.json())
                     .then(data => {
-                        console.log('Game joined:', data);
                         if ('redirect' in data) {
                             navigateTo(data.redirect);
                         }
@@ -858,7 +1060,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     })
                     .then(response => response.json())
                     .then(data => {
-                        console.log('Game left:', data);
                         navigateTo('/home/');
                     })
                     .catch(error => console.error('Error leaving game:', error));
@@ -877,7 +1078,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     })
                     .then(response => response.json())
                     .then(data => {
-                        console.log('Game started:', data);
                         if (gamePlaySocket) {
                             const message = {action: 'next_round'};
                             gamePlaySocket.send(JSON.stringify(message));
@@ -1024,7 +1224,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     })
                     .then(response => response.json())
                     .then(data => {
-                        console.log('Friend request sent:', data);
                         navigateTo(window.location.pathname);
                     })
                     .catch(error => console.error('Error sending friend request:', error));
@@ -1046,7 +1245,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     })
                     .then(response => response.json())
                     .then(data => {
-                        console.log('Friend removed:', data);
                         navigateTo(window.location.pathname);
                     })
                     .catch(error => console.error('Error removing friend:', error));
@@ -1068,7 +1266,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     })
                     .then(response => response.json())
                     .then(data => {
-                        console.log('Profile blocked:', data);
                         navigateTo(window.location.pathname);
                     })
                     .catch(error => console.error('Error blocking profile:', error));
@@ -1090,7 +1287,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     })
                     .then(response => response.json())
                     .then(data => {
-                        console.log('Profile unblocked:', data);
                         navigateTo(window.location.pathname);
                     })
                     .catch(error => console.error('Error unblocking profile:', error));
@@ -1155,7 +1351,6 @@ document.addEventListener("DOMContentLoaded", () => {
                         })
                         .then(response => response.json())
                         .then(data => {
-                            console.log('Friend blocked:', data);
                             navigateTo(window.location.pathname);
                         })
                         .catch(error => console.error('Error blocking friend:', error));
@@ -1177,7 +1372,6 @@ document.addEventListener("DOMContentLoaded", () => {
                         })
                         .then(response => response.json())
                         .then(data => {
-                            console.log('Friend unblocked:', data);
                             navigateTo(window.location.pathname);
                         })
                         .catch(error => console.error('Error unblocking friend:', error));
@@ -1199,7 +1393,6 @@ document.addEventListener("DOMContentLoaded", () => {
                         })
                         .then(response => response.json())
                         .then(data => {
-                            console.log('Friend removed:', data);
                             navigateTo('/friends/');
                         })
                         .catch(error => console.error('Error removing friend:', error));
@@ -1340,7 +1533,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const uploadAvatarInput = document.getElementById('uploadAvatarInput');
         if (uploadAvatarInput) {
             uploadAvatarInput.addEventListener('change', (e) => {
-                console.log("HERE");
                 if (e.target.files.length > 0) {
                     const formData = new FormData();
                     const imageFile = e.target.files[0];
@@ -1377,10 +1569,19 @@ document.addEventListener("DOMContentLoaded", () => {
         if (changeEmailBtn) {
             changeEmailBtn.addEventListener('click', (event) => {
                 event.preventDefault();
-                makeAPIRequest(
-                    '/api/profiles/me/email/',
-                    'POST',
-                );
+                fetch('/api/profiles/me/email/', {
+                    method: 'POST',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                    },
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if ('redirect' in data) {
+                        navigateTo(data.redirect);
+                    }
+                })
+                .catch(error => console.error('Error changing email:', error));
             });
         }
 
@@ -1388,10 +1589,19 @@ document.addEventListener("DOMContentLoaded", () => {
         if (changePasswordBtn) {
             changePasswordBtn.addEventListener('click', (event) => {
                 event.preventDefault();
-                makeAPIRequest(
-                    '/api/profiles/me/password/',
-                    'POST',
-                );
+                fetch('/api/profiles/me/password/', {
+                    method: 'POST',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                    },
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if ('redirect' in data) {
+                        navigateTo(data.redirect);
+                    }
+                })
+                .catch(error => console.error('Error changing password:', error));
             });
         }
 
@@ -1442,7 +1652,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     })
                     .then(response => response.json())
                     .then(data => {
-                        console.log('Friend unblocked:', data);
                         navigateTo(window.location.pathname);
                     })
                     .catch(error => console.error('Error unblocking friend:', error));

@@ -34,7 +34,7 @@
                             {% translate 'Register' %}
                         </h2>
                         <div class="card-body d-flex flex-column align-items-center" style="filter: blur(0px);width: 100%;">
-                            <form class="text-center auth-form" action="/api/auth/register/" method="post" style="width: 100%;">
+                            <form id="registerForm" class="text-center" action="/api/auth/register/" method="post" style="width: 100%;">
                                 {% csrf_token %}
                                 <div class="mb-3 form-floating">
                                     <input class="form-control form-control" type="text" id="floatingUser-register" maxlength="20" minlength="4" name="username" pattern="^[a-zA-Z0-9_.-]*$" placeholder=" " required="" tabindex="0" data-bs-toggle="popover" data-bs-trigger="focus" title="Username" data-bs-content="This is unique and cannot be changed after account creation. Must be no longer than 20 characters long and can include letters (a-Z) , numbers (0-9) , the symbols : '-' (hyphen), '_' (underscore) and '.' (dot)">

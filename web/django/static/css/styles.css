@@ -318,3 +318,43 @@ input[type="file"] {
   initial-value: 0deg;
   inherits: false;
 }
+
+.otp-field {
+  flex-direction: row;
+  column-gap: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.otp-field input {
+  height: 70px;
+  width: 60px;
+  border-radius: 6px;
+  outline: none;
+  font-size: 1.125rem;
+  text-align: center;
+  border: 1px solid #6298d9;
+}
+
+.otp-field input:focus {
+  box-shadow: 0 1px 0 rgba(0,87,255,0.1);
+}
+
+.otp-field input::-webkit-inner-spin-button, .otp-field input::-webkit-outer-spin-button {
+  display: none;
+}
+
+.resend {
+  font-size: 12px;
+}
+
+input[type=number]::-webkit-outer-spin-button, input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+

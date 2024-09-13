@@ -43,6 +43,25 @@ class GameManager(models.Manager):
         if player not in game.players.all():
             raise ValueError(_('Player is not in the game.'))
         player.leave_game()
+        rounds_as_player1 = game.rounds.filter(player1=player, ended_at__isnull=True)
+        rounds_as_player1.update(player1=None)
+        rounds_as_player2 = game.rounds.filter(player2=player, ended_at__isnull=True)
+        rounds_as_player2.update(player2=None)
+        current_round = game.rounds.filter(player1__isnull=True, player2__isnull=True, order=game.current_order)
+        empty_rounds = game.rounds.filter(player1__isnull=True, player2__isnull=True, started_at__isnull=False)
+        channel_layer = get_channel_layer()
+        if current_round.exists() or empty_rounds.exists():
+            current_round.delete()
+            empty_rounds.delete()
+            game.ended_at = timezone.now()
+            game.host = None
+            game.save()
+            game.messages.all().delete()
+            remaining_rounds = game.rounds.filter(order__gt=game.current_order)
+            remaining_rounds.delete()
+            for player in game.players.all():
+                self.remove_player(game, player)
+            async_to_sync(channel_layer.group_send)(f'games_play_{game.id}', {'type': 'terminate'})
         if game.players.count() == 0:
             if not game.ended_at:
                 game.delete()
@@ -51,11 +70,9 @@ class GameManager(models.Manager):
             new_host = game.players.first()
             if new_host:
                 game.set_host(new_host)
-        # TODO: remove player from game rounds if game has started
-        channel_layer = get_channel_layer()
-        async_to_sync(channel_layer.group_send)(f'games_chat_{game.id}', {'type': 'update_header'})
         consumer = GameChatConsumer()
         async_to_sync(consumer.send_message)(game=game, sender=player, category='Leave')
+        async_to_sync(channel_layer.group_send)(f'games_chat_{game.id}', {'type': 'update_header'})
     
     def get_next_round(self, game):
         game.current_order += 1
@@ -169,6 +186,12 @@ class GameInviteManager(models.Manager):
 
 
 class GameMessageManager(models.Manager):
+    def get_messages(self, game, profile):
+        blocked_profiles = profile.blocked_profiles.values_list('blocked', flat=True)
+        return self.filter(game=game).exclude(
+            models.Q(sender__in=blocked_profiles) & models.Q(category=self.model.GameMessageCategories.SEND)
+        )
+    
     def send_message(self, game, sender=None, content=None, category='Send'):
         game_message = self.create(game=game, sender=sender, content=content, category=category)
         channel_layer = get_channel_layer()

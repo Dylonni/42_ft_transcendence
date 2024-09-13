@@ -12,7 +12,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from profiles.models import Profile, ProfileBlock
 from friends.models import Friendship, FriendMessage
-from games.models import Game, GameRound
+from games.models import Game, GameRound, GameMessage
 from notifs.models import Notification
 from .mixins import JWTCookieAuthenticationMixin, LangVerificationMixin, RedirectIfAuthenticatedMixin
 
@@ -147,11 +147,95 @@ class ForgotPasswordView(PublicView):
 forgot_password = ForgotPasswordView.as_view()
 
 
+class VerifyCodeView(PublicView):
+    def get(self, request):
+        code_type = request.query_params.get('type', None)
+        code_token = request.query_params.get('token', None)
+        code_user = request.query_params.get('user', None)
+        match code_type:
+            case "forget":
+                target = f"/api/auth/password/reset/?token={code_token}&user={code_user}"
+            case "activate":
+                target = f'/api/auth/activate/?token={code_token}&user={code_user}'
+            case _:
+                target = ""
+        context = {
+            'type': request.query_params.get('type', None),
+            'token': code_token,
+            'user': code_user,
+            'target': target,
+        }
+        return render(request, 'accounts/verify_code.html', context)
+
+verify_code = VerifyCodeView.as_view()
+
+
+class ConfirmPasswordView(PublicView):
+    def get(self, request):
+        code_token = request.query_params.get('token', None)
+        code_user = request.query_params.get('user', None)
+        context = {'target': f'/api/auth/password/confirm/?token={code_token}&user={code_user}', 'category': 'password'}
+        return render(request, 'accounts/modify_credentials.html', context)
+
+confirm_password = ConfirmPasswordView.as_view()
+
+
+class CheckCodeView(PrivateView):
+    def get(self, request):
+        code_type = request.query_params.get('type', None)
+        code_token = request.query_params.get('token', None)
+        code_user = request.query_params.get('user', None)
+        match code_type:
+            case "twofa":
+                target = f"/api/profiles/me/code/?type=twofa&token={code_token}&user={code_user}"
+            case "email":
+                target = f"/api/profiles/me/code/?type=email&token={code_token}&user={code_user}"
+            case "password":
+                target = f"/api/profiles/me/code/?type=password&token={code_token}&user={code_user}"
+            case _:
+                target = ""
+        context = {
+            'type': code_type,
+            'token': code_token,
+            'user': code_user,
+            'target': target,
+            'profile': request.profile,
+        }
+        return render(request, 'accounts/verify_code.html', context)
+
+check_code = CheckCodeView.as_view()
+
+
+class ChangePasswordView(PrivateView):
+    def get(self, request):
+        context = {
+            'target': '/api/profiles/me/password/',
+            'category': 'password',
+            'profile': request.profile,
+        }
+        return render(request, 'accounts/modify_credentials.html', context)
+
+change_password = ChangePasswordView.as_view()
+
+
+class ChangeEmailView(PrivateView):
+    def get(self, request):
+        context = {
+            'target': '/api/profiles/me/email/',
+            'category': 'email',
+            'profile': request.profile,
+        }
+        return render(request, 'accounts/modify_credentials.html', context)
+
+change_email = ChangeEmailView.as_view()
+
+
 class PrivacyPolicyView(PublicView):
     def get(self, request):
         return render(request, 'privacy_policy.html')
 
 privacy_policy = PrivacyPolicyView.as_view()
+
 
 class TosView(PublicView):
     def get(self, request):
@@ -203,6 +287,7 @@ class GameRoomView(PrivateView):
             return redirect('/home/')
         context = get_friend_context(request)
         context['game'] = game
+        context['messages'] = GameMessage.objects.get_messages(game, request.profile)
         context['players'] = game.players.all()
         context['available_friends'] = Profile.objects.get_available_friends(request.profile)
         context = get_notif_context(request, context)
@@ -263,7 +348,7 @@ class SocialFriendView(PrivateView):
         if friendship.is_outsider(request.profile):
             return redirect('/home/')
         context = get_friendship_context(request)
-        context['messages'] = FriendMessage.objects.get_messages(friendship_id)
+        context['messages'] = FriendMessage.objects.get_messages(friendship, request.profile)
         context['current_friend'] = Friendship.objects.get_other(friendship_id, request.profile)
         context['friendship'] = friendship
         context['profile_block'] = request.profile.get_block(context['current_friend'])

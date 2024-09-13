@@ -81,7 +81,7 @@
 			<div class="d-flex d-sm-flex d-md-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-xxl-center align-items-xxl-center" style="width: 100%;height: 100%;">
 				<div class="text-truncate d-flex d-xl-flex flex-column justify-content-center align-items-center justify-content-xl-center align-items-xl-center" style="width: 50%;height: 100%;margin-top: 0px;margin-bottom: 0px;color: var(--bs-body-bg);padding-left: 10px;padding-right: 10px;margin-left: 0px;margin-right: 0px;padding-top: 20px;padding-bottom: 20px;">
 					<h1 class="text-truncate text-center" data-bs-toggle="tooltip" data-bss-tooltip="" id="player-name-6" style="border-style: none;display: inline-block;color: var(--bs-body-bg);text-shadow: 0px 0px 10px var(--bs-emphasis-color);max-width: 265px;height: 100%;width: 100%;padding-bottom: 0px;margin-bottom: 0px;font-weight: bold;" title="#rank">
-						#{{ profile.get_rank }}
+						{{ profile.get_rank }}
 					</h1>
 					<h1 class="fs-3 text-center d-flex d-xxl-flex justify-content-center align-items-start justify-content-xxl-center align-items-xxl-start" id="player-name-5" style="width: 100%;height: 100%;text-shadow: 0px 0px 10px var(--bs-emphasis-color);color: var(--bs-body-bg);margin-bottom: 0px;">
 						<svg class="icon icon-tabler icon-tabler-medal" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 35px;color: var(--bs-yellow);" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
@@ -125,7 +125,11 @@
 					<h1 class="card-title" style="font-weight: bold;text-align: center;color: {{ profile.user.fortytwo_coalition_color }};">
 						WIN
 					</h1>
+					{% if round.get_loser %}
 					<img class="d-xxl-flex justify-content-xxl-center align-items-xxl-center" src="{{ round.get_loser.get_avatar_url }}" style="width: 60px;height: 60px;border-radius: 50%;border-style: solid;border-color: var(--bs-secondary-text-emphasis);"/>
+					{% else %}
+					<img class="d-xxl-flex justify-content-xxl-center align-items-xxl-center" style="width: 60px;height: 60px;border-radius: 50%;border-style: solid;border-color: var(--bs-secondary-text-emphasis);"/>
+					{% endif %}
 					<h4 class="text-nowrap text-center card-title" style="margin-bottom: 0px;color: {{ profile.user.fortytwo_coalition_color }};font-weight: bold;">
 					{% if round.player1 == profile %}
 					{{ round.score1 }} - {{ round.score2 }}
@@ -148,7 +152,11 @@
 					<h1 class="card-title" style="font-weight: bold;text-align: center;color: var(--bs-gray-600);">
 						LOSS
 					</h1>
+					{% if round.winner %}
 					<img class="d-xxl-flex justify-content-xxl-center align-items-xxl-center" src="{{ round.winner.get_avatar_url }}" style="width: 60px;height: 60px;border-radius: 50%;border-style: solid;border-color: var(--bs-secondary-text-emphasis);"/>
+					{% else %}
+					<img class="d-xxl-flex justify-content-xxl-center align-items-xxl-center" style="width: 60px;height: 60px;border-radius: 50%;border-style: solid;border-color: var(--bs-secondary-text-emphasis);"/>
+					{% endif %}
 					<h4 class="text-nowrap text-center card-title" style="margin-bottom: 0px;color: var(--bs-gray-600);font-weight: bold;border-color: var(--bs-gray-600);">
 					{% if round.player1 == profile %}
 					{{ round.score2 }} - {{ round.score1 }}
@@ -239,7 +247,7 @@
 								</div>
 								<div class="text-truncate d-flex flex-column align-items-start flex-wrap align-items-sm-start align-items-md-start" style="width: 100%;height: 100%;">
 									<h1 class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-xxl-center" style="color: {{ profile.user.fortytwo_coalition_color }};font-weight: bold;margin-top: 10px;margin-bottom: 10px;">
-										Last 30 days
+										Last 5 Games
 									</h1>
 									<h4 class="text-truncate text-start d-flex d-md-flex justify-content-start align-items-center justify-content-md-start align-items-md-center" style="color: {{ profile.user.fortytwo_coalition_color }};">
 										#Highestpts
@@ -287,7 +295,7 @@
 					</svg>
 					Best Winning Streak
 					<span class="text-truncate" data-bs-placement="bottom" data-bs-toggle="tooltip" data-bss-tooltip="" style="color: var(--bs-red);margin-left: 0px;max-width: 246px;margin-left: 10px;" title="#Streak">
-						{{ profile.get_winning_streak }}
+						{{ profile.get_highest_winstreak }}
 					</span>
 				</h4>
 			</div>
@@ -370,7 +378,7 @@
 			<div class="d-flex d-sm-flex d-md-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-xxl-center align-items-xxl-center" style="width: 100%;height: 100%;">
 				<div class="text-truncate d-flex d-xl-flex flex-column justify-content-center align-items-center justify-content-xl-center align-items-xl-center" style="width: 50%;height: 100%;margin-top: 0px;margin-bottom: 0px;color: var(--bs-body-bg);padding-left: 10px;padding-right: 10px;margin-left: 0px;margin-right: 0px;padding-top: 20px;padding-bottom: 20px;">
 					<h1 class="text-truncate text-center" id="player-name-22" style="border-style: none;display: inline-block;color: var(--bs-body-bg);text-shadow: 0px 0px 10px var(--bs-emphasis-color);max-width: 265px;height: 100%;width: 100%;padding-bottom: 0px;margin-bottom: 0px;font-weight: bold;">
-						#{{ profile.get_rank }}
+						{{ profile.get_rank }}
 					</h1>
 					<h1 class="fs-3 text-center d-flex d-xxl-flex justify-content-center align-items-start justify-content-xxl-center align-items-xxl-start" id="player-name-23" style="width: 100%;height: 100%;text-shadow: 0px 0px 10px var(--bs-emphasis-color);color: var(--bs-body-bg);margin-bottom: 0px;">
 						<svg class="icon icon-tabler icon-tabler-medal" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 35px;color: var(--bs-yellow);" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
@@ -414,7 +422,11 @@
 					<h1 class="card-title" style="font-weight: bold;text-align: center;color: var(--bs-primary-border-subtle);">
 						WIN
 					</h1>
+					{% if round.get_loser %}
 					<img class="d-xxl-flex justify-content-xxl-center align-items-xxl-center" src="{{ round.get_loser.get_avatar_url }}" style="width: 60px;height: 60px;border-radius: 50%;border-style: solid;border-color: var(--bs-secondary-text-emphasis);"/>
+					{% else %}
+					<img class="d-xxl-flex justify-content-xxl-center align-items-xxl-center" style="width: 60px;height: 60px;border-radius: 50%;border-style: solid;border-color: var(--bs-secondary-text-emphasis);"/>
+					{% endif %}
 					<h4 class="text-nowrap text-center card-title" style="margin-bottom: 0px;color: var(--bs-primary-border-subtle);font-weight: bold;">
 					{% if round.player1 == profile %}
 					{{ round.score1 }} - {{ round.score2 }}
@@ -437,7 +449,11 @@
 					<h1 class="card-title" style="font-weight: bold;text-align: center;color: var(--bs-gray-600);">
 						LOSS
 					</h1>
+					{% if round.winner %}
 					<img class="d-xxl-flex justify-content-xxl-center align-items-xxl-center" src="{{ round.winner.get_avatar_url }}" style="width: 60px;height: 60px;border-radius: 50%;border-style: solid;border-color: var(--bs-secondary-text-emphasis);"/>
+					{% else %}
+					<img class="d-xxl-flex justify-content-xxl-center align-items-xxl-center" style="width: 60px;height: 60px;border-radius: 50%;border-style: solid;border-color: var(--bs-secondary-text-emphasis);"/>
+					{% endif %}
 					<h4 class="text-nowrap text-center card-title" style="margin-bottom: 0px;color: var(--bs-gray-600);font-weight: bold;border-color: var(--bs-gray-600);">
 					{% if round.player1 == profile %}
 					{{ round.score2 }} - {{ round.score1 }}
@@ -528,7 +544,7 @@
 								</div>
 								<div class="text-truncate d-flex flex-column align-items-start flex-wrap align-items-sm-start align-items-md-start" style="width: 100%;height: 100%;">
 									<h1 class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-xxl-center" style="color: var(--bs-primary-border-subtle);font-weight: bold;margin-top: 10px;margin-bottom: 10px;">
-										Last 30 days
+										Last 5 Games
 									</h1>
 									<h4 class="text-truncate text-start d-flex d-md-flex justify-content-start align-items-center justify-content-md-start align-items-md-center" style="color: var(--bs-primary-border-subtle);">
 										#Highestpts
@@ -576,7 +592,7 @@
 					</svg>
 					Best Winning Streak
 					<span class="text-truncate" data-bs-placement="bottom" data-bs-toggle="tooltip" data-bss-tooltip="" style="color: var(--bs-red);margin-left: 0px;max-width: 246px;margin-left: 10px;" title="#Streak">
-						{{ profile.get_winning_streak }}
+						{{ profile.get_highest_winstreak }}
 					</span>
 				</h4>
 			</div>

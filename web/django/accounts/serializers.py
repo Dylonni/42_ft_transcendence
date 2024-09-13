@@ -3,8 +3,27 @@ from django.contrib.auth import authenticate, get_user_model
 from django.contrib.auth.hashers import make_password
 from django.utils.translation import gettext_lazy as _
 from rest_framework import serializers
+from .models import CustomUser
 
 UserModel = get_user_model()
+
+
+class CustomUserEmailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CustomUser
+        fields = ('email',)
+
+
+class CustomUserPasswordSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CustomUser
+        fields = ('password',)
+
+
+class CustomUserCodeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CustomUser
+        fields = ('code',)
 
 
 class UserLoginSerializer(serializers.Serializer):
@@ -59,7 +78,7 @@ class PasswordResetRequestSerializer(serializers.Serializer):
         return getattr(self, 'user', None)
 
 
-class PasswordResetConfirmSerializer(serializers.Serializer):
+class PasswordConfirmSerializer(serializers.Serializer):
     new_password = serializers.CharField(write_only=True)
 
     def validate_new_password(self, value):
