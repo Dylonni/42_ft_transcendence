@@ -3,7 +3,15 @@
 #
 server.name: kibana
 server.host: 0.0.0.0
-elasticsearch.hosts: [ http://elasticsearch:9200 ]
+
+elasticsearch.hosts:
+  - "http://elasticsearch:9200"
+  - "https://localhost:9200"
+
+# elasticsearch.hosts: [ http://elasticsearch:9200 ]
+# elasticsearch.hosts: https://localhost:9200
+
+elasticsearch.ssl.certificateAuthorities: [ "/usr/share/kibana/config/elasticsearch-ca.pem" ]
 
 monitoring.ui.container.elasticsearch.enabled: true
 monitoring.ui.container.logstash.enabled: true
@@ -12,6 +20,8 @@ monitoring.ui.container.logstash.enabled: true
 #
 elasticsearch.username: kibana_system
 elasticsearch.password: ${KIBANA_SYSTEM_PASSWORD}
+
+xpack.security.enrollment.enabled: true
 
 ## Encryption keys (optional but highly recommended)
 ##
@@ -22,9 +32,25 @@ elasticsearch.password: ${KIBANA_SYSTEM_PASSWORD}
 ## https://www.elastic.co/guide/en/kibana/current/using-kibana-with-security.html
 ## https://www.elastic.co/guide/en/kibana/current/kibana-encryption-keys.html
 #
-#xpack.security.encryptionKey:
-#xpack.encryptedSavedObjects.encryptionKey:
-#xpack.reporting.encryptionKey:
+# xpack.security.encryptionKey: ${KIBANA_ENCRYPTION_KEY}
+# xpack.encryptedSavedObjects.encryptionKey:
+# xpack.reporting.encryptionKey:
+
+xpack.security.enabled: true
+
+server.ssl.enabled: true
+server.ssl.certificate: /usr/share/kibana/config/certs/kibana-server.crt  # check exact path
+server.ssl.key: /usr/share/kibana/config/certs/kibana-server.key # check exact path
+
+
+
+
+
+#just testing
+# elasticsearch.ssl.certificateAuthorities: [ "config/elasticsearch-ca.pem" ]
+
+
+
 
 ## Fleet
 ## https://www.elastic.co/guide/en/kibana/current/fleet-settings-kb.html

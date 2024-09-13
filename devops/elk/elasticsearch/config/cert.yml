@@ -1,0 +1,24 @@
+instances:
+  - name: "transcendence42"
+    dns:
+      - "localhost"
+      - "transcendence42"
+      - "transcendence42.rocks"
+    ip:
+      - "127.0.0.1"
+
+
+
+# instances:
+#    - name: elasticsearch
+#      dns:
+#        - elasticsearch
+#        - localhost
+#      ip:
+#        - 127.0.0.1
+#    - name: kibana
+#      dns:
+#        - kibana
+#        - localhost
+#      ip:
+#        - 127.0.0.1

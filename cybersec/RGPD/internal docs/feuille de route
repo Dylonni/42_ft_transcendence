@@ -1,0 +1,52 @@
+1 / mise en place politique d'archivage (via django ?)
+
+	quand suppression de compte, check s'il y a eu une sauvegarde depuis la creation
+		si oui : conserver le django ID pouvoir supprimer si la sauvegarde doit etre utilisee
+	conservation des conversations ?
+
+
+
+2 / Mesures de sécurité techniques :
+
+Mesures de traçabilité => qui accede a quoi et quand ? => log admin access for vault, website, postgres
+
+Mesures de protection des logiciels =>
+	=> phishing? on gere pas (on demande pas de donnees sensibles)
+	=> DDoS? euh a voir
+		==> comment on gere?
+			==> the WAF should be configured to limit the rate of requests and block malicious traffic
+				-> need to update the Access Control List
+			==> limit the number of service requests received by the network
+	=> attaque de services clouds? pas de teletravail a gerer, donc pas d'echange d'infos, etc ===> on gere pas
+	=> supply chain logicielle? on fait pas de cybercommerce, donc on gere pas
+
+Sauvegarde des données => une fois par semaine en aggregat de donnees ? et une fois tous les 6 mois pour une sauvegarde complete?
+
+Chiffrement des données => a voir avec Pascal
+
+Contrôle accès des utilisateurs => tout a un acces par personal creds, y compris acces aux backups
+
+Contrôle des sous-traitants => pas de sous-traitants
+
+
+
+3 / else
+
+for project
+	users can view/edit/delete personal info
+		=> email address can be viewed/updated from profile/settings . is deleted with account suppression
+		=> 42-intranet data can be unlinked from profile/settings, then data is no longer accessed
+		=> easy to find "delete my account", "contact team", "privacy policy"
+
+create "charte des employes" for internal use, as well as resources for employees to learn about data protection
+	=> how to handle personal data
+	=> how to handle data breaches and all incidents
+	=> how to handle data requests
+	=> how to handle data deletion
+	=> how to handle data backups
+	=> how to handle data encryption
+	=> how to handle data access
+	=> how to handle data subcontractors
+	=> how to handle data security
+	=> how to handle data retention
+	=> how to handle data training

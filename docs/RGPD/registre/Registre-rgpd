@@ -1,0 +1,44 @@
+Registre recensant les traitements de données
+
+nom et coordonnées de l'organisme responsable du traitement, et le cas échéant:
+	- de son représentant (si organisme pas établi dans l'UE)
+	- du délégué à la protection des données (DPO) si désigné
+
+
+1 fiche de registre par traitement de données
+données traitées :
+
+    À quoi sert précisément cette collecte de données?
+    Cette donnée (ou ensemble de données) spécifique est-elle vraiment nécessaire dans le cadre du projet?
+    Est-il pertinent de conserver toutes les données aussi longtemps?
+    Les données sont-elles sufisamment protégées?
+
+
+
+En pratique :
+1 le cas échéant, nom et coordonnées du responsable conjoint de traitement
+2 à quoi servent les données (leur finalité)
+3 catégories de personnes concernées (clients, employés, prospects, etc)
+4 catégories de données traitées (identité, situation familiale/économique/financière, données bancaires, géolocalisation, données de connexion, coordonnées, etc)
+5 les catégories de destinataires (y compris sous-traitants) : qui accède aux données et à qui elles sont communiquées
+6 les transferts de données hors UE (pays tiers, organisations internationales) ainsi que, le cas échéant, les garanties sont mises en place pour assurer un niveau de protection adéquat
+7 les délais prévus pour effacement : combien de temps elles sont conservées, ou à défaut les critères utilisés pour déterminer cette durée
+8 comment elles sont protégées/sécurisées : description générale des mesures techniques et organisationnelles mises en place pour garantir la sécurité des données
+
+
+On peut rajouter par exemple :
+- les informations nécessaires pour informer les personnes (base légale du traitement, et selon le cas, fondement juridique du transfert de données vers des pays tiers, droits qui s’appliquent au traitement, existence ou non d’une décision automatisée, origine des données, etc.) vous pourrez vous appuyer sur votre registre pour rédiger vos mentions d’information.
+- un historique des violations de données et recenser tous les documents liés aux transferts de données hors de l’Union européenne (clauses contractuelles, BCR, etc.) et aux sous-traitants auxquels vous recourez (contrats de sous-traitance)
+
+
+personal data processed:
+All:
+email address
+COOKIES !! what do we collect through cookies?
+    JWT tokens (access, refresh)
+    language preference
+
+42 studs:
+UID
+coalition (banner + color)
+avatar picture

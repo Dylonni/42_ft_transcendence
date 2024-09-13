@@ -41,11 +41,10 @@ SECRET_KEY = secret_response['data']['data']['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+# below, add '*' if issue, to accept all hosts - should be removed in production. also add server host machine IP ?
+ALLOWED_HOSTS = ['localhost', 'django', '127.0.0.1']
 
-ALLOWED_HOSTS = ['localhost', 'django', '*']
-
-CSRF_TRUSTED_ORIGINS = ['http://localhost:8080']
-
+CSRF_TRUSTED_ORIGINS = ['https://localhost:8443', 'http://localhost:8080', 'https://127.0.0.1:8443', 'http://127.0.0.1:8080']
 
 # Application definition
 
@@ -80,6 +79,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_prometheus.middleware.PrometheusAfterMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
+
 ]
 
 ROOT_URLCONF = 'pong.urls'
@@ -157,7 +158,17 @@ PASSWORD_RESET_TIMEOUT = 600
 
 LANGUAGE_CODE = 'en-us'
 
+LANGUAGES = [
+	('en', 'English'),
+    ('fr', 'French'),
+	# ('jp', 'japanese'),
+]
+
 TIME_ZONE = 'UTC'
+
+LOCALE_PATHS = [
+    os.path.join(BASE_DIR, 'locale'),
+]
 
 USE_I18N = True
 
@@ -277,32 +288,53 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_REFRESH_SERIALIZER': 'rest_framework_simplejwt.serializers.TokenRefreshSlidingSerializer',
 }
 
-# LOGGING = {
-#     'version': 1,
-#     'disable_existing_loggers': False,
-#     'handlers': {
-#         'logstash': {
-#             'level': 'DEBUG',
-#             'class': 'logging.FileHandler',
-#             'filename': '/logstash/debug.log',
-#             'formatter': 'json',
-#         },
-#         'console': {
-#             'level': 'DEBUG',
-#             'class': 'logging.StreamHandler',
-#             'formatter': 'json',
-#         },
-#     },
-#     'formatters': {
-#         'json': {
-#             '()': 'logstash_formatter.LogstashFormatter',
-#         },
-#     },
-#     'loggers': {
-#         'django': {
-#             'handlers': ['logstash', 'console'],
-#             'level': 'DEBUG',
-#             'propagate': True,
-#         },
-#     },
-# }
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'logstash': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': '/logstash/debug.log',
+            'formatter': 'json',
+        },
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'json',
+        },
+    },
+    'formatters': {
+        'json': {
+            '()': 'logstash_formatter.LogstashFormatter',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['logstash', 'console'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}
+
+
+
+# SSL/HTTPS settings
+# https://docs.djangoproject.com/en/5.0/topics/security/#ssl-https
+
+# SECURE_SSL_REDIRECT = True # probably not useful when used at 42
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+SESSION_COOKIE_SECURE = True
+
+CSRF_COOKIE_SECURE = True
+
+SECURE_BROWSER_XSS_FILTER = True
+
+# SECURE_HSTS_SECONDS = 30 # in seconds, change value to a much larger one when in production
+
+# SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+
+# SECURE_HSTS_PRELOAD = True # to be uncommented just before prod and tested
