@@ -138,12 +138,15 @@ class MyEmailView(PrivateView):
         try:
             serializer = CustomUserEmailSerializer(data=request.data)
             if not serializer.is_valid():
-                response_data = {'message': _('Invalid email.'), 'redirect': '/change-email/'}
+                response_data = {'error': _('Invalid email.')}
                 return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
-            self.user.email = request.data['email']
-            self.user.code = None
-            self.user.code_updated_at = None
-            self.user.save()
+            if request.user.email == serializer.validated_data['email']:
+                response_data = {'error': _('Invalid password.')}
+                return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
+            request.user.email = request.data['email']
+            request.user.code = None
+            request.user.code_updated_at = None
+            request.user.save()
             response_data = {'message': _('Email changed.'), 'redirect': '/settings/'}
             return Response(response_data, status=status.HTTP_200_OK)
         except ValueError as e:
@@ -173,12 +176,16 @@ class MyPasswordView(PrivateView):
         try:
             serializer = CustomUserPasswordSerializer(data=request.data)
             if not serializer.is_valid():
-                response_data = {'message': _('Invalid password.'), 'redirect': '/change-password/'}
+                response_data = {'error': _('Invalid password.')}
                 return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
-            self.user.set_password(request.data['new_password'])
-            self.user.code = None
-            self.user.code_updated_at = None
-            self.user.save()
+            # FIXME: check password not working as expected
+            if request.user.check_password(serializer.validated_data['password']):
+                response_data = {'error': _('Invalid password.')}
+                return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
+            request.user.set_password(serializer.validated_data['password'])
+            request.user.code = None
+            request.user.code_updated_at = None
+            request.user.save()
             response_data = {'message': _('Password changed.'), 'redirect': '/settings/'}
             return Response(response_data, status=status.HTTP_200_OK)
         except ValueError as e:

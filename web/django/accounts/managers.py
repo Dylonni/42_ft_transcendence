@@ -43,13 +43,11 @@ class CustomUserManager(BaseUserManager):
     def send_mail(self, email, html, subject):
         user = self.filter(email=email).first()
         if not user:
-            # raise ValueError('No such user.')
-            return
+            raise ValueError('No such user.')
         temp_code = user.code
         if temp_code:
             if not user.has_code_expired():
-                # raise ValueError('Code already sent.')
-                return
+                raise ValueError('Code already sent.')
         user.code = ''.join(random.choices('0123456789', k=5))
         user.code_updated_at = timezone.now()
         user.save()

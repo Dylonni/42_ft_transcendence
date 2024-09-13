@@ -510,7 +510,6 @@ document.addEventListener("DOMContentLoaded", () => {
     
             inputs[inputs.length - 1].addEventListener("keyup", (event) => {
                 if (event.key === "Enter") {
-                    console.log("Enter");
                     button.click();
                 }
             });
@@ -568,6 +567,15 @@ document.addEventListener("DOMContentLoaded", () => {
                     event.preventDefault();
                     navigateTo(anchor.href);
                 });
+            } else if (anchor.id.startsWith('changeLang')) {
+                anchor.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    const idParts = anchor.id.split('_');
+                    if (idParts.length > 1) {
+                        const lang = idParts[1];
+                        langReload(lang);
+                    }
+                });
             }
         });
 
@@ -595,6 +603,28 @@ document.addEventListener("DOMContentLoaded", () => {
                 })
                 .catch(error => console.error(`Error with request to ${event.target.action}:`, error));
             })
+        }
+
+        const resetPasswordForm = document.getElementById('resetPasswordForm');
+        if (resetPasswordForm) {
+            resetPasswordForm.addEventListener('submit', (event) => {
+                event.preventDefault();
+                const formData = new FormData(event.target);
+                fetch(event.target.action, {
+                    method: 'POST',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                    },
+                    body: formData,
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if ('redirect' in data) {
+                        navigateTo(data.redirect);
+                    }
+                })
+                .catch(error => console.error('Error resetting password:', error));
+            });
         }
 
         const changePasswordForm = document.getElementById('changePasswordForm');
@@ -691,7 +721,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     })
                     .then(response => response.json())
                     .then(data => {
-                        console.log('Game created:', data);
                         if ('redirect' in data) {
                             navigateTo(data.redirect);
                         }
@@ -737,7 +766,6 @@ document.addEventListener("DOMContentLoaded", () => {
                         })
                         .then(response => response.json())
                         .then(data => {
-                            console.log('Friend request accepted:', data);
                             acceptFriendBtn.parentElement.parentElement.remove();
                         })
                         .catch(error => console.error('Error accepting friend request:', error));
@@ -760,7 +788,6 @@ document.addEventListener("DOMContentLoaded", () => {
                         })
                         .then(response => response.json())
                         .then(data => {
-                            console.log('Friend request declined:', data);
                             declineFriendBtn.parentElement.parentElement.remove();
                         })
                         .catch(error => console.error('Error declining friend request:', error));
@@ -783,7 +810,6 @@ document.addEventListener("DOMContentLoaded", () => {
                         })
                         .then(response => response.json())
                         .then(data => {
-                            console.log('Game invite accepted:', data);
                             acceptGameBtn.parentElement.parentElement.remove();
                             if ('redirect' in data) {
                                 navigateTo(data.redirect);
@@ -809,7 +835,6 @@ document.addEventListener("DOMContentLoaded", () => {
                         })
                         .then(response => response.json())
                         .then(data => {
-                            console.log('Game invite declined:', data);
                             declineGameBtn.parentElement.parentElement.remove();
                         })
                         .catch(error => console.error('Error declining game invite:', error));
@@ -900,7 +925,6 @@ document.addEventListener("DOMContentLoaded", () => {
                         fetch(`/api/profiles/search/?alias=${profileAlias}`)
                         .then(response => response.json())
                         .then(data => {
-                            console.log('Profiles searched:', data);
                             if (data && 'data' in data) {
                                 navigateTo(`/profiles/${data.data[0].id}`);
                             }
@@ -945,7 +969,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     })
                     .then(response => response.json())
                     .then(data => {
-                        console.log('Game joined:', data);
                         if ('redirect' in data) {
                             navigateTo(data.redirect);
                         }
@@ -1037,7 +1060,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     })
                     .then(response => response.json())
                     .then(data => {
-                        console.log('Game left:', data);
                         navigateTo('/home/');
                     })
                     .catch(error => console.error('Error leaving game:', error));
@@ -1056,7 +1078,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     })
                     .then(response => response.json())
                     .then(data => {
-                        console.log('Game started:', data);
                         if (gamePlaySocket) {
                             const message = {action: 'next_round'};
                             gamePlaySocket.send(JSON.stringify(message));
@@ -1203,7 +1224,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     })
                     .then(response => response.json())
                     .then(data => {
-                        console.log('Friend request sent:', data);
                         navigateTo(window.location.pathname);
                     })
                     .catch(error => console.error('Error sending friend request:', error));
@@ -1225,7 +1245,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     })
                     .then(response => response.json())
                     .then(data => {
-                        console.log('Friend removed:', data);
                         navigateTo(window.location.pathname);
                     })
                     .catch(error => console.error('Error removing friend:', error));
@@ -1247,7 +1266,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     })
                     .then(response => response.json())
                     .then(data => {
-                        console.log('Profile blocked:', data);
                         navigateTo(window.location.pathname);
                     })
                     .catch(error => console.error('Error blocking profile:', error));
@@ -1269,7 +1287,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     })
                     .then(response => response.json())
                     .then(data => {
-                        console.log('Profile unblocked:', data);
                         navigateTo(window.location.pathname);
                     })
                     .catch(error => console.error('Error unblocking profile:', error));
@@ -1334,7 +1351,6 @@ document.addEventListener("DOMContentLoaded", () => {
                         })
                         .then(response => response.json())
                         .then(data => {
-                            console.log('Friend blocked:', data);
                             navigateTo(window.location.pathname);
                         })
                         .catch(error => console.error('Error blocking friend:', error));
@@ -1356,7 +1372,6 @@ document.addEventListener("DOMContentLoaded", () => {
                         })
                         .then(response => response.json())
                         .then(data => {
-                            console.log('Friend unblocked:', data);
                             navigateTo(window.location.pathname);
                         })
                         .catch(error => console.error('Error unblocking friend:', error));
@@ -1378,7 +1393,6 @@ document.addEventListener("DOMContentLoaded", () => {
                         })
                         .then(response => response.json())
                         .then(data => {
-                            console.log('Friend removed:', data);
                             navigateTo('/friends/');
                         })
                         .catch(error => console.error('Error removing friend:', error));
@@ -1519,7 +1533,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const uploadAvatarInput = document.getElementById('uploadAvatarInput');
         if (uploadAvatarInput) {
             uploadAvatarInput.addEventListener('change', (e) => {
-                console.log("HERE");
                 if (e.target.files.length > 0) {
                     const formData = new FormData();
                     const imageFile = e.target.files[0];
@@ -1639,7 +1652,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     })
                     .then(response => response.json())
                     .then(data => {
-                        console.log('Friend unblocked:', data);
                         navigateTo(window.location.pathname);
                     })
                     .catch(error => console.error('Error unblocking friend:', error));

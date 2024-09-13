@@ -2,6 +2,7 @@ import logging
 import requests
 from django.conf import settings
 from django.contrib.auth import authenticate, get_user_model, login, logout
+from django.contrib.auth.models import AnonymousUser
 from django.core.mail import send_mail
 from django.http import HttpRequest
 from django.shortcuts import redirect, render
@@ -149,8 +150,16 @@ class PasswordRequestView(PublicView):
             }
             return Response(response_data, status=status.HTTP_200_OK)
         except ValueError as e:
-            response_data = {'error': str(e)}
-            return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
+            token_generator = EmailTokenGenerator()
+            # TODO: generate random token and uid
+            user = AnonymousUser()
+            token = token_generator.make_token(user)
+            uid = urlsafe_base64_encode(force_bytes(user.pk))
+            response_data = {
+                'message': _('Password reset request sent! Please check your email.'),
+                'redirect': f'/verify-code/?type=forget&token={token}&user={uid}',
+            }
+            return Response(response_data, status=status.HTTP_200_OK)
 
 
 password_request = PasswordRequestView.as_view()
@@ -160,7 +169,8 @@ class PasswordResetView(PublicView):
     def post(self, request: HttpRequest):
         try:
             token = request.query_params.get('token', None)
-            uid = request.query_params.get('user', None)
+            to_decode = request.query_params.get('user', None)
+            uid = force_str(urlsafe_base64_decode(to_decode))
             user = UserModel.objects.filter(id=uid).first()
             if not user:
                 response_data = {'message': _('Invalid url.'), 'redirect': '/'}
@@ -171,9 +181,8 @@ class PasswordResetView(PublicView):
                 return Response(response_data, status=status.HTTP_200_OK)
             response_data = {
                 'message': _('Set your new password.'),
-                'redirect': f'/change-password/?token={token}&user={uid}',
+                'redirect': f'/confirm-password/?token={token}&user={uid}',
             }
-            response_data = {'message': _('Set your new password.')}
             return Response(response_data, status=status.HTTP_200_OK)
         except ValueError as e:
             response_data = {'error': str(e)}
@@ -184,7 +193,7 @@ password_reset = PasswordResetView.as_view()
 
 
 class PasswordConfirmView(PublicView):
-    def post(self, request: HttpRequest):
+    def put(self, request: HttpRequest):
         try:
             token = request.query_params.get('token', None)
             uid = request.query_params.get('user', None)
@@ -196,7 +205,7 @@ class PasswordConfirmView(PublicView):
             if not token_generator.check_token(user, token):
                 response_data = {'message': _('Invalid url.'), 'redirect': '/'}
                 return Response(response_data, status=status.HTTP_200_OK)
-            user.set_password(request.data['new_password'])
+            user.set_password(request.data['password'])
             Profile.objects.set_user_status(user, Profile.StatusChoices.ONLINE)
             response_data = {'message': _('Password changed.'), 'redirect': '/home/'}
             response = Response(response_data, status=status.HTTP_200_OK)
