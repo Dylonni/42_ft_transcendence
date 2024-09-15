@@ -39,6 +39,11 @@
         </div>
         <div class="col-12 col-md-12 col-xl-12 col-xxl-12">
             <div class="overflow-auto" style="background: rgba(255,255,255,0);margin-left: 0px;margin-right: 0px;padding-left: 10px;padding-right: 10px;border-radius: 19px;max-height: 815px;">
+                {% if players.count == 0 %}
+                <h1 class="d-flex justify-content-center align-items-center" style="color: var(--bs-gray-700);font-weight: bold;">
+                    No rankings yet
+                <h1>
+                {% endif %}
                 {% for player in players %}
                 {% if player.get_rank == '#1' %}
                 <div class="d-flex justify-content-center align-items-center flex-nowrap justify-content-xxl-center align-items-xxl-center game-loose" id="template-first" style="border-radius: 18px;width: 100%;border: 2px none #a47e0b;box-shadow: 0px 0px 6px 2px #dca911;margin-bottom: 15px;margin-top: 5px;">

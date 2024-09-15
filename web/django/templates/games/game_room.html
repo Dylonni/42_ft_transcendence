@@ -12,8 +12,6 @@
 			<h1 class="fs-5 d-flex justify-content-center align-items-center" style="color: var(--bs-primary-border-subtle);margin-bottom: 0px;margin-top: 0px;text-shadow: 2px 1px 3px var(--bs-primary-border-subtle);">
 				{{ game.name }}
 			</h1>
-			<!-- <div class="d-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center flex-wrap justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="width: 100%;margin-bottom: 0px;margin-top: 0px;">
-			</div> -->
 			<div class="d-md-flex d-lg-flex d-xl-flex d-xxl-flex flex-wrap justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="width: 100%;margin-bottom: 0px;margin-top: 0px;">
 				<div id="playerSection" class="d-flex flex-shrink-1 justify-content-center align-items-center align-content-around flex-wrap justify-content-sm-center align-items-sm-center justify-content-xl-center justify-content-xxl-center align-items-xxl-center" style="width: 100%; height: 157px;margin-top: 0px;margin-bottom: 5px;">
 					{% include "games/game_header.html" %}
@@ -175,53 +173,6 @@
 									</div>
 								</div>
 							</div>
-							<h1 class="text-nowrap fs-4 d-flex d-xl-flex justify-content-center align-items-center justify-content-xl-center align-items-xl-center" style="width: 100%;">
-								<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-rocket" style="color: var(--bs-orange);font-size: 30px;">
-									<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-									<path d="M4 13a8 8 0 0 1 7 7a6 6 0 0 0 3 -5a9 9 0 0 0 6 -8a3 3 0 0 0 -3 -3a9 9 0 0 0 -8 6a6 6 0 0 0 -5 3"></path>
-									<path d="M7 14a6 6 0 0 0 -3 6a6 6 0 0 0 6 -3"></path>
-									<path d="M15 9m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"></path>
-								</svg>
-								Powerups
-							</h1>
-							<div class="d-flex d-lg-flex d-xl-flex d-xxl-flex flex-column justify-content-center align-items-center flex-sm-row flex-md-row flex-lg-row justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="width: 100%;height: 100%;margin-top: 25px;margin-bottom: 25px;">
-								{% if not  game.power_ups %}
-								<div style="width: 100%;margin-left: 15px;margin-right: 15px;">
-									<div class="d-flex d-xxl-flex flex-column justify-content-center align-items-center align-items-xxl-center" style="border-top-left-radius: 19px;border-top-right-radius: 19px;border-bottom-right-radius: 19px;border-bottom-left-radius: 19px;margin-left: 0px;margin-right: 0px;background: rgba(33,37,41,0.5);border: 1px solid var(--bs-gray-800);margin-bottom: 5px;">
-										<h1 class="fs-6 d-xxl-flex justify-content-xxl-center align-items-xxl-center" style="color: var(--bs-body-bg);margin-top: 10px;margin-bottom: 10px;">
-											No Powerups
-										</h1>
-									</div>
-								</div>
-								{% endif %}
-								{% if "Paddle grow" in game.get_power_ups %}
-								<div style="width: 100%;margin-left: 15px;margin-right: 15px;">
-									<div class="d-flex d-xxl-flex flex-column justify-content-center align-items-center align-items-xxl-center" style="border-top-left-radius: 19px;border-top-right-radius: 19px;border-bottom-right-radius: 19px;border-bottom-left-radius: 19px;margin-left: 0px;margin-right: 0px;background: rgba(33,37,41,0.5);border: 1px solid var(--bs-gray-800);margin-bottom: 5px;">
-										<h1 class="fs-6 d-xxl-flex justify-content-xxl-center align-items-xxl-center" style="color: var(--bs-body-bg);margin-top: 10px;margin-bottom: 10px;">
-											Paddle Grow
-										</h1>
-									</div>
-								</div>
-								{% endif %}
-								{% if "Blockers" in game.get_power_ups %}
-								<div style="width: 100%;margin-left: 15px;margin-right: 15px;">
-									<div class="d-flex d-xxl-flex flex-column justify-content-center align-items-center align-items-xxl-center" style="border-top-left-radius: 19px;border-top-right-radius: 19px;border-bottom-right-radius: 19px;border-bottom-left-radius: 19px;background: rgba(33,37,41,0.5);border: 1px solid var(--bs-gray-800);margin-top: 5px;margin-bottom: 5px;">
-										<h1 class="fs-6 d-xxl-flex justify-content-xxl-center align-items-xxl-center" style="color: var(--bs-body-bg);margin-top: 10px;margin-bottom: 10px;">
-											Blockers
-										</h1>
-									</div>
-								</div>
-								{% endif %}
-								{% if "Bouncy ball" in game.get_power_ups %}
-								<div style="width: 100%;margin-left: 15px;margin-right: 15px;">
-									<div class="d-flex d-xxl-flex flex-column justify-content-center align-items-center align-items-xxl-center" style="border-top-left-radius: 19px;border-top-right-radius: 19px;border-bottom-right-radius: 19px;border-bottom-left-radius: 19px;background: rgba(33,37,41,0.5);border: 1px solid var(--bs-gray-800);margin-top: 5px;margin-bottom: 5px;">
-										<h1 class="fs-6 d-xxl-flex justify-content-xxl-center align-items-xxl-center" style="color: var(--bs-body-bg);margin-top: 10px;margin-bottom: 10px;">
-											Bouncy ball
-										</h1>
-									</div>
-								</div>
-								{% endif %}
-							</div>
 						</div>
 						<div class="d-flex d-xxl-flex flex-column justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="width: 100%;height: 100%;margin-top: 0px;margin-bottom: 0px;padding-left: 0px;padding-right: 0px;padding-top: 0px;padding-bottom: 0px;">
 							<h1 class="fs-4 d-flex justify-content-center align-items-center" style="width: 80%;margin-bottom: 0px;border-top-left-radius: 20px;border-top-right-radius: 20px;backdrop-filter: blur(0px);-webkit-backdrop-filter: blur(0px);">
@@ -264,7 +215,7 @@
 			</div>
 			<div class="modal-body">
 				<p>
-					If any game has started, leaving will make you unable to join the room again and your next game will be considered as a defeat.
+					If you have not been eliminated yet, your next game will be considered as a defeat and you will get a point penalty. You will not be able to join the room again.
 				</p>
 			</div>
 			<div class="modal-footer" style="border-style: none;">

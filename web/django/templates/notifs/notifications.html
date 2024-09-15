@@ -2,7 +2,7 @@
 {% load i18n %}
 {% if profile %}
 <input id="notiftoggle" type="checkbox"/>
-<div class="d-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" id="notif-toggler" style="width: 100px;height: 80px;margin-top: 35px;margin-bottom: 35px;z-index: 999;margin-left: 50px;margin-right: 50px;">
+<div class="d-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" id="notif-toggler" style="width: 100px;height: 80px;margin-top: 35px;margin-bottom: 35px;z-index: 999;margin-left: 3rem;">
     <div class="d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center rubberBand animated" style="opacity: 1;backdrop-filter: opacity(1);-webkit-backdrop-filter: opacity(1);position: absolute;width: 70px;height: 70px;border-radius: 50px;background: var(--bs-light-text-emphasis);border-style: solid;border-color: #292c30;z-index: 998;">
         <label class="form-label" for="notiftoggle" style="margin-bottom: 0px;padding-bottom: 0px;">
             <svg class="icon icon-tabler icon-tabler-bell-ringing" data-bs-placement="bottom" data-bs-toggle="tooltip" data-bss-tooltip="" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 45px;color: var(--bs-body-bg);" title="Notifications" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
@@ -21,7 +21,7 @@
     {% endif %}
     </div>
 </div>
-<div id="notifList" class="overflow-auto notif-panel" style="width: 320px;height: 500px;background: #2e353b;margin-left: 79px;margin-right: 79px;border-radius: 19px;z-index: 999;margin-top: 56px;margin-bottom: 56px;">
+<div id="notifList" class="overflow-auto notif-panel" style="width: 320px;height: 500px;background: #2e353b;margin-left: 10rem;border-radius: 19px;z-index: 999;margin-top: 56px;margin-bottom: 56px;">
     {% include "notifs/notif_list.html" %}
 </div>
 {% endif %}
