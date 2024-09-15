@@ -30,6 +30,9 @@ services:
       - "8200:8200" # Vault - only exposed if trying to access GUI
       - "3000:3000" # Grafana
       - "3100:3100" # Loki
+      - "9090:9090" # Prometheus - no need to expose
+      - "9187:9187" # Postgres Exporter - no need to expose
+
     volumes:
       - shared-certs:/etc/nginx/ssl
 

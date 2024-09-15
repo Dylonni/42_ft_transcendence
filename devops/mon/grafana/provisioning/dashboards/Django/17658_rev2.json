@@ -1472,9 +1472,7 @@
   "schemaVersion": 39,
   "tags": [
     "Web",
-    "Django",
-    "Database",
-    "Cache"
+    "Django"
   ],
   "templating": {
     "list": [
@@ -1656,7 +1654,7 @@
     ]
   },
   "timezone": "",
-  "title": "Django Overview webapp",
+  "title": "Django / Overview webapp",
   "uid": "O6v4rMpizda2",
   "version": 1,
   "weekStart": ""

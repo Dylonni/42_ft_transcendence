@@ -22,11 +22,11 @@ scrape_configs:
         - django:8000
         labels:
           group: 'django-app'
-  - job_name: 'postgres'
+  - job_name: 'postgres-exporter'
     static_configs:
       - targets:
         - postgres-exporter:9187
-        labels:
-          group: 'postgres-server'
+        # labels:
+        #   group: 'postgres-server'
 
 

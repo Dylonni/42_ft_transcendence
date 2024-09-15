@@ -608,7 +608,9 @@
   "schemaVersion": 39,
   "tags": [
     "django",
-    "django-mixin"
+    "django-mixin",
+    "database",
+    "cache"
   ],
   "templating": {
     "list": [

@@ -1,9 +1,13 @@
 
+rework on 4xx5xx alert rules, understand how to get then triggered
+rework on pg_up alert -> how does it works, and why currently it triggers the `pg is down` alert
+        => is it because postgre-exporter is ssl now?
+
 ensure all services have a health check
-clean dockerfiles
+
 
 create a contact email address and update it to docs
-
+=> have a "contact" variable for ToS/privacy policy (and others?)
 
 on bottom of all pages, should be
     privacy + cookie policy
@@ -16,13 +20,11 @@ MICROSERVICES
     Inter Process Communication : how to set it up ?
 
 
-look into openclassrooms for api rest
-
-
 web/django/pong/settings.py
     => look into the logging part (line 291), reconfigure to use loki instead of logstash
     => look into ssl settings ? (line 323)
-
+!!! does the logstash log give same info as loki/nginx modsec?
+!!! what would we need for easy-to-read logs for debugging?
 
 
 cybersec
@@ -48,10 +50,6 @@ cybersec
         how to request deletion of account ? (there's the button, but what about hacked accounts?)
         !! convert Privacy policy and TOS to html
 
-
-    vault
-        grafana with vault is only for paid "enterprise" accounts
-        no other creds needed?
 
 devops
     grafana
