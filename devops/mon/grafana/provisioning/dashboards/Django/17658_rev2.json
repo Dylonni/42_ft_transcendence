@@ -903,7 +903,7 @@
               },
               {
                 "color": "red",
-                "value": 1
+                "value": 80
               }
             ]
           },
@@ -918,7 +918,7 @@
         "y": 12
       },
       "id": 4,
-      "interval": "30s",
+      "interval": "30",
       "options": {
         "legend": {
           "calcs": [],
@@ -1285,7 +1285,7 @@
           "refId": "A"
         }
       ],
-      "title": "Top Requests",
+      "title": "Top 10 Requests",
       "type": "timeseries"
     },
     {
@@ -1466,368 +1466,6 @@
       ],
       "title": "Database Query Duration",
       "type": "heatmap"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 10,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "short"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 0,
-        "y": 36
-      },
-      "id": 39,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "multi",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "10.4.4",
-      "targets": [
-        {
-          "datasource": {
-            "uid": "$datasource"
-          },
-          "expr": "sum(irate(django_http_requests_total_by_view_transport_method_total{namespace=~\"$namespace\", app=~\"^$app$\",view!~\"prometheus-django-metrics|healthcheck\"}[1m])) by(method, view)",
-          "format": "time_series",
-          "hide": false,
-          "intervalFactor": 1,
-          "legendFormat": "{{method}} /{{view}}",
-          "refId": "A"
-        }
-      ],
-      "title": "9528 requests",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "short"
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "mysql"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#584477",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "postgresql"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "#0064a5",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 12,
-        "y": 36
-      },
-      "id": 40,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "multi",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "10.4.4",
-      "targets": [
-        {
-          "datasource": {
-            "uid": "$datasource"
-          },
-          "expr": "sum(irate(django_db_execute_total{namespace=~\"$namespace\", app=~\"^$app$\"}[1m])) by (vendor)",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "{{vendor}}",
-          "refId": "A"
-        }
-      ],
-      "title": "9528 db ops",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "PBFA97CFB590B2093"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 10,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "never",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "short"
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byValue",
-              "options": {
-                "op": "gte",
-                "reducer": "allIsZero",
-                "value": 0
-              }
-            },
-            "properties": [
-              {
-                "id": "custom.hideFrom",
-                "value": {
-                  "legend": true,
-                  "tooltip": true,
-                  "viz": false
-                }
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 0,
-        "y": 44
-      },
-      "id": 41,
-      "options": {
-        "legend": {
-          "calcs": [
-            "mean",
-            "lastNotNull",
-            "max"
-          ],
-          "displayMode": "table",
-          "placement": "right",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "multi",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "10.4.4",
-      "targets": [
-        {
-          "datasource": {
-            "uid": "$datasource"
-          },
-          "expr": "sum(irate(django_model_deletes_total{namespace=~\"$namespace\", app=~\"^$app$\"}[1m])) by (model)",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "[{{model}}] deletes",
-          "refId": "A"
-        },
-        {
-          "datasource": {
-            "uid": "$datasource"
-          },
-          "expr": "sum(irate(django_model_inserts_total{namespace=~\"$namespace\", app=~\"^$app$\"}[1m])) by (model)",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "[{{model}}] inserts",
-          "refId": "B"
-        },
-        {
-          "datasource": {
-            "uid": "$datasource"
-          },
-          "expr": "sum(irate(django_model_updates_total{namespace=~\"$namespace\", app=~\"^$app$\"}[1m])) by (model)",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "[{{model}}] updates",
-          "refId": "C"
-        }
-      ],
-      "title": "9528 model stats",
-      "type": "timeseries"
     }
   ],
   "refresh": "10s",
@@ -1889,7 +1527,7 @@
       },
       {
         "current": {
-          "selected": false,
+          "selected": true,
           "text": "All",
           "value": "$__all"
         },
@@ -1989,7 +1627,7 @@
     ]
   },
   "time": {
-    "from": "now-1h",
+    "from": "now-15m",
     "to": "now"
   },
   "timepicker": {
@@ -2018,7 +1656,7 @@
     ]
   },
   "timezone": "",
-  "title": "Django 17658",
+  "title": "Django Overview webapp",
   "uid": "O6v4rMpizda2",
   "version": 1,
   "weekStart": ""
