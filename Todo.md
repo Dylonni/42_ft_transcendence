@@ -1,3 +1,6 @@
+look in python code all var with _() and see which ones are needed for translation
+look into all "context" elements and add the "None" where appropriate
+
 
 rework on 4xx5xx alert rules, understand how to get then triggered
 rework on pg_up alert -> how does it works, and why currently it triggers the `pg is down` alert
