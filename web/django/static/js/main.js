@@ -905,6 +905,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 .then(response => response.json())
                 .then(data => {
                     if ('redirect' in data) {
+                        openNotifWebSocket();
                         navigateTo(data.redirect);
                     }
                 })
