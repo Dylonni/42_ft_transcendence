@@ -1,6 +1,6 @@
 import logging
 from django.contrib.auth import get_user_model
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from django.template.loader import render_to_string
 from django.utils import translation
@@ -15,6 +15,7 @@ from friends.models import Friendship, FriendMessage
 from games.models import Game, GameRound, GameMessage
 from notifs.models import Notification
 from .mixins import JWTCookieAuthenticationMixin, LangVerificationMixin, RedirectIfAuthenticatedMixin
+from . import views
 
 UserModel = get_user_model()
 logger = logging.getLogger('django')
@@ -89,6 +90,9 @@ def render_response(request, path, title, context={}):
         return HttpResponse(html)
     return render_with_sub_template(request, path, title, context)
 
+def health_check(request):
+    return JsonResponse({'status': 'ok'})
+
 
 class PublicView(RedirectIfAuthenticatedMixin, LangVerificationMixin, APIView):
     permission_classes = (AllowAny,)
@@ -101,6 +105,7 @@ class PrivateView(JWTCookieAuthenticationMixin, LangVerificationMixin, APIView):
 class IndexView(PublicView):
     def get(self, request):
         context = get_profile_context(request)
+        context['game'] = None
         return render(request, 'modeselect.html', context)
 
 index = IndexView.as_view()

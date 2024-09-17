@@ -78,9 +78,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django_prometheus.middleware.PrometheusAfterMiddleware',
     'django.middleware.locale.LocaleMiddleware',
-
+    'django_prometheus.middleware.PrometheusAfterMiddleware',
 ]
 
 ROOT_URLCONF = 'pong.urls'
@@ -288,32 +287,19 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_REFRESH_SERIALIZER': 'rest_framework_simplejwt.serializers.TokenRefreshSlidingSerializer',
 }
 
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'handlers': {
-        'logstash': {
-            'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'filename': '/logstash/debug.log',
-            'formatter': 'json',
-        },
         'console': {
-            'level': 'DEBUG',
             'class': 'logging.StreamHandler',
-            'formatter': 'json',
-        },
-    },
-    'formatters': {
-        'json': {
-            '()': 'logstash_formatter.LogstashFormatter',
         },
     },
     'loggers': {
         'django': {
-            'handlers': ['logstash', 'console'],
+            'handlers': ['console'],
             'level': 'DEBUG',
-            'propagate': True,
         },
     },
 }

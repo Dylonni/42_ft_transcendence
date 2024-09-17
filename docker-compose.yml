@@ -32,7 +32,9 @@ services:
       - "3100:3100" # Loki
       - "9090:9090" # Prometheus - no need to expose
       - "9187:9187" # Postgres Exporter - no need to expose
-
+      # - "9200:9200" # Elasticsearch - no need to expose
+      # - "5001:5001" # Logstash - no need to expose
+      # - "5601:5601" # Kibana - shows "elasticsearch", which is normal
     volumes:
       - shared-certs:/etc/nginx/ssl
 
@@ -81,7 +83,7 @@ services:
       postgres:
         condition: service_healthy
     healthcheck:
-      test: ["CMD", "curl", "-f", "localhost:8000"]
+      test: ["CMD-SHELL", "ping -c 1 localhost || exit 1"]
       interval: 5s
       timeout: 5s
       retries: 4
@@ -218,7 +220,7 @@ services:
   #     - backend
   #     - elk
   #   volumes:
-  #     - shared_elk:/usr/share/elasticsearch/config/certs
+  #     # - shared_elk:/usr/share/elasticsearch/config/certs
   #     - elk-data:/usr/share/elasticsearch/
 
 
@@ -281,7 +283,7 @@ services:
   #     - elk
   #   restart: always
   #   volumes:
-  #     - shared_elk:/usr/share/kibana/config/certs
+  #     # - shared_elk:/usr/share/kibana/config/certs
   #     - elk-data:/certs
 
 volumes:
