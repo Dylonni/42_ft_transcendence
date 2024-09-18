@@ -287,7 +287,6 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_REFRESH_SERIALIZER': 'rest_framework_simplejwt.serializers.TokenRefreshSlidingSerializer',
 }
 
-
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -303,7 +302,6 @@ LOGGING = {
         },
     },
 }
-
 
 
 # SSL/HTTPS settings
