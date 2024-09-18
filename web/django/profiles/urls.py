@@ -28,6 +28,8 @@ urlpatterns = [
     path('profiles/me/requests/', views.my_request_list, name='my_request_list'),
 	path('profiles/me/requests/<uuid:request_id>/', views.my_request_detail, name='my_request_detail'),
     
+	path('profiles/me/elos/', views.my_elo_list, name='my_elo_list'),
+    
 	path('profiles/me/friends/', views.my_friend_list, name='my_friend_list'),
 	path('profiles/me/friends/<uuid:friendship_id>/', views.my_friend_detail, name='my_friend_detail'),
 	path('profiles/me/friends/<uuid:friendship_id>/messages/', views.my_friend_message_list, name='my_friend_message_list'),

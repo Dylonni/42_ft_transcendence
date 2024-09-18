@@ -16,7 +16,7 @@ from accounts.tokens import EmailTokenGenerator
 from accounts.utils import unset_jwt_cookies
 from friends.models import FriendRequest, FriendMessage, Friendship
 from friends.serializers import FriendRequestSerializer, FriendshipSerializer, FriendMessageSerializer
-from games.models import Game, GameInvite, GameMessage
+from games.models import Game, GameInvite, GameMessage, GameRound
 from games.serializers import GameInviteSerializer
 from notifs.models import Notification
 
@@ -434,6 +434,23 @@ class MyRequestDetailView(PrivateView):
             return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
 
 my_request_detail = MyRequestDetailView.as_view()
+
+
+class MyEloListView(PrivateView):
+    def get(self, request):
+        last_matches = GameRound.objects.get_last_matches(request.profile)
+        last_elos = []
+        current_elo = request.profile.elo
+        for m in last_matches:
+            if m.winner == request.profile:
+                current_elo -= m.elo_win
+            else:
+                current_elo += m.elo_lose
+            last_elos.append(current_elo)
+        response_data = {'data': last_elos.reverse()}
+        return Response(response_data, status=status.HTTP_200_OK)
+
+my_elo_list = MyEloListView.as_view()
 
 
 class MyFriendListView(PrivateView):
