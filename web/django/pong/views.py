@@ -1,6 +1,6 @@
 import logging
 from django.contrib.auth import get_user_model
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from django.template.loader import render_to_string
 from django.utils import translation
@@ -23,10 +23,10 @@ def get_profile_context(request, profile_id=None):
     context = {}
     try:
         if profile_id:
-            profile = Profile.objects.get(id=profile_id)
+            profile = Profile.objects.filter(id=profile_id).first()
         else: 
             if request.user.id:
-                profile = Profile.objects.get(user=request.user)
+                profile = Profile.objects.filter(user=request.user).first()
             else:
                 profile = None
         context['profile'] = profile
@@ -98,6 +98,13 @@ class PrivateView(JWTCookieAuthenticationMixin, LangVerificationMixin, APIView):
     permission_classes = (IsAuthenticated,)
 
 
+class HealthzView(APIView):
+    def get(self, request):
+        return Response({'status': 'ok'}, status=status.HTTP_200_OK)
+
+healthz = HealthzView.as_view()
+
+
 class IndexView(PublicView):
     def get(self, request):
         context = get_profile_context(request)
@@ -155,6 +162,8 @@ class VerifyCodeView(PublicView):
         match code_type:
             case "forget":
                 target = f"/api/auth/password/reset/?token={code_token}&user={code_user}"
+            case "twofa":
+                target = f'/api/auth/twofa/?token={code_token}&user={code_user}'
             case "activate":
                 target = f'/api/auth/activate/?token={code_token}&user={code_user}'
             case _:

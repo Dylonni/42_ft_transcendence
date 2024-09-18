@@ -51,6 +51,9 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     is_verified = models.BooleanField(
         default=False,
     )
+    has_twofa = models.BooleanField(
+        default=False,
+    )
     groups = models.ManyToManyField(
         to=Group,
         blank=True,
@@ -65,6 +68,10 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     )
     code = models.CharField(
         max_length=5,
+        null=True,
+    )
+    code_type = models.CharField(
+        max_length=20,
         null=True,
     )
     code_updated_at = models.DateTimeField(
@@ -97,6 +104,8 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         self.save()
     
     def has_code_expired(self):
+        if not self.code_updated_at:
+            return True
         expiration_time = self.code_updated_at + timezone.timedelta(minutes=10)
         return timezone.now() > expiration_time
     

@@ -554,7 +554,45 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
 
-        
+        const enableTwoFaBtn = document.getElementById('enableTwoFaBtn');
+        if (enableTwoFaBtn) {
+            enableTwoFaBtn.addEventListener('click', (event) => {
+                event.preventDefault();
+                fetch('/api/profiles/me/twofa/', {
+                    method: 'POST',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                    },
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if ('redirect' in data) {
+                        navigateTo(data.redirect);
+                    }
+                })
+                .catch(error => console.error(`Error disabling 2FA:`, error));
+            });
+        }
+
+        const disableTwoFaBtn = document.getElementById('disableTwoFaBtn');
+        if (disableTwoFaBtn) {
+            disableTwoFaBtn.addEventListener('click', (event) => {
+                event.preventDefault();
+                fetch('/api/profiles/me/twofa/', {
+                    method: 'PUT',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                    },
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if ('redirect' in data) {
+                        navigateTo(data.redirect);
+                    }
+                })
+                .catch(error => console.error(`Error disabling 2FA:`, error));
+            });
+        }
 
         const pongCanvas = document.getElementById('pongCanvas');
         if (pongCanvas) {
@@ -598,6 +636,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 .then(response => response.json())
                 .then(data => {
                     if ('redirect' in data) {
+                        if (data.redirect === '/home/') {
+                            openNotifWebSocket();
+                        }
                         navigateTo(data.redirect);
                     }
                 })
@@ -905,7 +946,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 .then(response => response.json())
                 .then(data => {
                     if ('redirect' in data) {
-                        openNotifWebSocket();
+                        if (data.redirect === '/home/') {
+                            openNotifWebSocket();
+                        }
                         navigateTo(data.redirect);
                     }
                 })

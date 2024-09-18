@@ -5,6 +5,7 @@ from . import views
 
 authpatterns = [
     path('login/', views.user_login, name='user_login'),
+	path('twofa/', views.user_twofa, name='user_twofa'),
 	path('logout/', views.user_logout, name='user_logout'),
 	
     path('register/', views.user_register, name='user_register'),

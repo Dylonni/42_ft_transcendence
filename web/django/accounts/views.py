@@ -2,6 +2,7 @@ import logging
 import requests
 from django.conf import settings
 from django.contrib.auth import authenticate, get_user_model, login, logout
+from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import AnonymousUser
 from django.core.mail import send_mail
 from django.http import HttpRequest
@@ -45,6 +46,16 @@ class UserLoginView(PublicView):
             serializer = UserLoginSerializer(data=request.data)
             serializer.is_valid(raise_exception=True)
             user = serializer.validated_data['user']
+            if user.has_twofa:
+                user = UserModel.objects.send_mail(user.email, 'accounts/email_twofa.html', 'New Connection')
+                token_generator = EmailTokenGenerator()
+                token = token_generator.make_token(user)
+                uid = urlsafe_base64_encode(force_bytes(user.pk))
+                response_data = {
+                    'message': _('Please check your email to sign in.'),
+                    'redirect': f'/verify-code/?type=twofa&token={token}&user={uid}',
+                }
+                return Response(response_data, status=status.HTTP_200_OK)
             Profile.objects.set_user_status(user, Profile.StatusChoices.ONLINE)
             response_data = {'message': _('User logged in.'), 'redirect': '/home/'}
             response = Response(response_data, status=status.HTTP_200_OK)
@@ -54,8 +65,48 @@ class UserLoginView(PublicView):
         except ValidationError as e:
             response_data = {'message': e.detail}
             return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
+        except ValueError as e:
+            response_data = {'error': str(e)}
+            return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
 
 user_login = UserLoginView.as_view()
+
+
+class UserTwofaView(PublicView):
+    def post(self, request: HttpRequest):
+        try:
+            token = request.query_params.get('token', None)
+            to_decode = request.query_params.get('user', None)
+            uid = force_str(urlsafe_base64_decode(to_decode))
+            user = UserModel.objects.filter(id=uid).first()
+            if not user:
+                response_data = {'error': _('Invalid url.')}
+                return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
+            token_generator = EmailTokenGenerator()
+            if not token_generator.check_token(user, token):
+                response_data = {'error': _('Invalid url.')}
+                return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
+            serializer = CustomUserCodeSerializer(data=request.data)
+            if not serializer.is_valid():
+                response_data = {'error': _('Invalid code.')}
+                return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
+            if not user.check_code(serializer.validated_data['code']):
+                response_data = {'error': _('Invalid code.')}
+                return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
+            user.code = None
+            user.code_updated_at = None
+            user.save()
+            Profile.objects.set_user_status(user, Profile.StatusChoices.ONLINE)
+            response_data = {'message': _('Connection accepted.'), 'redirect': '/home/'}
+            response = Response(response_data, status=status.HTTP_200_OK)
+            login(request, user)
+            set_jwt_cookies_for_user(response, user)
+            return response
+        except ValueError as e:
+            response_data = {'error': str(e)}
+            return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
+
+user_twofa = UserTwofaView.as_view()
 
 
 class UserLogoutView(PrivateView):
@@ -205,7 +256,10 @@ class PasswordConfirmView(PublicView):
             if not token_generator.check_token(user, token):
                 response_data = {'message': _('Invalid url.'), 'redirect': '/'}
                 return Response(response_data, status=status.HTTP_200_OK)
-            user.set_password(request.data['password'])
+            user.password = make_password(request.data['password'])
+            user.code = None
+            user.code_updated_at = None
+            user.save()
             Profile.objects.set_user_status(user, Profile.StatusChoices.ONLINE)
             response_data = {'message': _('Password changed.'), 'redirect': '/home/'}
             response = Response(response_data, status=status.HTTP_200_OK)
