@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate, get_user_model, login, logout
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import AnonymousUser
 from django.core.mail import send_mail
+from django.db.models import Q
 from django.http import HttpRequest
 from django.shortcuts import redirect, render
 from django.utils.decorators import method_decorator
@@ -130,6 +131,9 @@ class UserRegisterView(PublicView):
     def post(self, request: HttpRequest):
         try:
             serializer = UserRegisterSerializer(data=request.data)
+            user = UserModel.objects.filter(Q(username=request.data.get('username')) | Q(email=request.data.get('email'))).first()
+            if user and user.has_verif_expired():
+                user.delete()
             serializer.is_valid(raise_exception=True)
             user = serializer.save()
             

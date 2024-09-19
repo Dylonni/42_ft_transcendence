@@ -62,6 +62,22 @@ class UserRegisterSerializer(serializers.ModelSerializer):
         fields = ('username', 'email', 'password')
         extra_kwargs = {'password': {'write_only': True}}
     
+    def validate(self, attrs):
+        username = attrs.get('username')
+        email = attrs.get('email')
+        password = attrs.get('password')
+        
+        if not username or not email or not password:
+            raise serializers.ValidationError(_('Must include username/email and password.'))
+        
+        user = UserModel.objects.filter(username=username, email=email).first()
+        if not user:
+            return attrs
+        if user.has_verif_expired() or user.is_verified or user.is_active:
+            raise serializers.ValidationError(_('Unable to register with provided credentials.'))
+        user.delete()
+        return attrs
+    
     def create(self, validated_data):
         validated_data['password'] = make_password(validated_data['password'])
         return super().create(validated_data)

@@ -103,6 +103,12 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         self.is_active = True
         self.save()
     
+    def has_verif_expired(self):
+        if self.is_verified:
+            return False
+        expiration_time = self.date_joined + timezone.timedelta(minutes=10)
+        return timezone.now() > expiration_time
+    
     def has_code_expired(self):
         if not self.code_updated_at:
             return True
