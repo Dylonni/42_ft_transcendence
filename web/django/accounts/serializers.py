@@ -55,7 +55,6 @@ class UserLoginSerializer(serializers.Serializer):
         return attrs
 
 
-# TODO: refactor to use set_password instead of make_password when creating user
 class UserRegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserModel
@@ -98,7 +97,6 @@ class PasswordConfirmSerializer(serializers.Serializer):
     new_password = serializers.CharField(write_only=True)
 
     def validate_new_password(self, value):
-        # Add any custom password validation if necessary
         return value
 
 

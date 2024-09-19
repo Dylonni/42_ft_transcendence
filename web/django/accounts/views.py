@@ -61,7 +61,9 @@ class UserLoginView(PublicView):
             response_data = {'message': _('User logged in.'), 'redirect': '/home/'}
             response = Response(response_data, status=status.HTTP_200_OK)
             login(request, user)
-            set_jwt_cookies_for_user(response, user)
+            access_token, refresh_token = set_jwt_cookies_for_user(response, user)
+            response.data['access_token'] = access_token
+            response.data['refresh_token'] = refresh_token
             return response
         except ValidationError as e:
             response_data = {'message': e.detail}
@@ -101,7 +103,9 @@ class UserTwofaView(PublicView):
             response_data = {'message': _('Connection accepted.'), 'redirect': '/home/'}
             response = Response(response_data, status=status.HTTP_200_OK)
             login(request, user)
-            set_jwt_cookies_for_user(response, user)
+            access_token, refresh_token = set_jwt_cookies_for_user(response, user)
+            response.data['access_token'] = access_token
+            response.data['refresh_token'] = refresh_token
             return response
         except ValueError as e:
             response_data = {'error': str(e)}
@@ -183,7 +187,9 @@ class UserActivateView(PublicView):
             response_data = {'message': _('Account verified.'), 'redirect': '/home/'}
             response = Response(response_data, status=status.HTTP_200_OK)
             login(request, user)
-            set_jwt_cookies_for_user(response, user)
+            access_token, refresh_token = set_jwt_cookies_for_user(response, user)
+            response.data['access_token'] = access_token
+            response.data['refresh_token'] = refresh_token
             return response
         except ValueError as e:
             response_data = {'error': str(e)}
@@ -268,7 +274,9 @@ class PasswordConfirmView(PublicView):
             response_data = {'message': _('Password changed.'), 'redirect': '/home/'}
             response = Response(response_data, status=status.HTTP_200_OK)
             login(request, user)
-            set_jwt_cookies_for_user(response, user)
+            access_token, refresh_token = set_jwt_cookies_for_user(response, user)
+            response.data['access_token'] = access_token
+            response.data['refresh_token'] = refresh_token
             return response
         except ValueError as e:
             response_data = {'error': str(e)}
@@ -360,45 +368,25 @@ class TokenVerify(PublicView):
     def post(self, request: HttpRequest):
         access_token = request.COOKIES.get('access_token')
         refresh_token = request.COOKIES.get('refresh_token')
-        if access_token:
-            if is_token_valid(access_token):
-                response = Response(
-                    {
-                        'status': _('Already authenticated!'),
-                        'redirect': '/home/',
-                    },
-                    status=status.HTTP_200_OK,
-                )
-                return response
-            else:
-                access_token, refresh_token = get_jwt_from_refresh(refresh_token)
-                if access_token is None:
-                    response = Response(
-                        {
-                            'status': _('Invalid tokens!'),
-                            'redirect': '/login/',
-                        },
-                        status=status.HTTP_200_OK,
-                    )
-                    unset_jwt_cookies(response)
-                    return response
-                else:
-                    response = Response(
-                        {
-                            'status': _('Already authenticated!'),
-                            'redirect': '/home/',
-                        },
-                        status=status.HTTP_200_OK,
-                    )
-                    set_jwt_as_cookies(response, access_token, refresh_token)
-                    return response
-        response = Response(
-            {
-                'status': _('Welcome!'),
-                'redirect': '/login/',
-            },
-            status=status.HTTP_200_OK,
-        )
+        if not access_token:
+            response_data = {'message': _('Sign in first.'), 'redirect': '/login/'}
+            response = Response(response_data, status=status.HTTP_200_OK)
+            return response
+        if is_token_valid(access_token):
+            response_data = {'message': _('Valid tokens.'), 'redirect': '/home/'}
+            response = Response(response_data, status=status.HTTP_200_OK)
+            return response
+        access_token, refresh_token = get_jwt_from_refresh(refresh_token)
+        if access_token is None:
+            response_data = {'message': _('Invalid tokens.'), 'redirect': '/login/'}
+            response = Response(response_data, status=status.HTTP_200_OK)
+            unset_jwt_cookies(response)
+            return response
+        response_data = {'message': _('Refreshed tokens.'), 'redirect': '/home/'}
+        response = Response(response_data, status=status.HTTP_200_OK)
+        set_jwt_as_cookies(response, access_token, refresh_token)
+        response.data['access_token'] = access_token
+        response.data['refresh_token'] = refresh_token
         return response
 
 token_verify = TokenVerify.as_view()
