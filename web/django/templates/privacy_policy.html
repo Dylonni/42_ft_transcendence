@@ -10,13 +10,14 @@
         <div class="row">
             <div class="col-md-12" style="text-align: center; align-items: center; margin-top: 3rem;">
                 <h1 class="fs-1" style="color: var(--bs-body-bg);margin-bottom: 50px;">
-                    Privacy Policy
+                    {% translate "Privacy Policy" %}
                 </h1>
             </div>
         </div>
     </div>
 </header>
 <div class="container">
+    {% blocktrans %}
     <div class="row">
         <div class="col-md-12">
             <h5 style="color: var(--bs-body-bg);">
@@ -69,14 +70,17 @@
             </ul>
         </div>
     </div>
+    {% endblocktrans %}
 </div>
 <div class="container">
+    {% blocktrans %}
     <div class="row">
         <div class="col">
             <hr>
         </div>
         <div class="col-md-12" id="wDataCollect">
             <h4 style="color: var(--bs-primary-border-subtle);text-decoration: underline;">
+
                 What data do we collect ?
             </h4>
             <p style="color: var(--bs-body-bg);">
@@ -104,6 +108,7 @@
                     Indirectly identifying information (coalition banner and color scheme)
                 </li>
             </ul>
+
         </div>
         <div class="col">
             <hr>
@@ -160,10 +165,10 @@
                 How do we store your data?
             </h4>
             <p style="color: var(--bs-body-bg);">
-                Transcendence42 securely stores your data in SERVERS LOCATED AT BLAH BLAH BLAH / OR “your own computer, if you decide to host locally”
+                Transcendence42 is executed locally on your computer. This mean that all data shared with Transcendence42 is handled on your own computer or server. You are solely responsible for securing your own network to avoid your data being exposed on external networks.
                 <br>Transcendence42 will keep your email for the whole life of your account. We will delete your data automatically upon deletion of the account.
                 <br>If applicable, Transcendence42 will keep your 42 UID only to complete the 42Auth authentication process. Then we will delete your data automatically.
-                <br>If applicable, Transcendence42 will keep your 42 profile picture, coalition banner and coalition color scheme until you personally and explicitly revoke the 42Auth access. If you decide to revoke the access, we will delete your data automatically. Deletion of your account automatically revokes the 42Auth access.
+                <br>If applicable, Transcendence42 will keep your 42 profile picture, coalition banner and coalition color scheme until you personally and explicitly revoke the 42Auth access. If you decide to revoke the access, we will automatically delete all data retrieved through 42Auth. Deletion of your account automatically revokes the 42Auth access.
                 <br>Your account preferences are stored locally on your computer through the use of cookies, and&nbsp;Transcendence42 has no access to these cookies. You can decide to erase these at any time from your web browser settings.
             </p>
         </div>
@@ -209,9 +214,7 @@
                 </li>
             </ul>
             <p style="color: var(--bs-body-bg);">
-                If you make a request, we have one month to respond to you. If you would like to exercise any of these rights, please contact us at our email:
-                <br>
-                <a href="mailto:">contact@transcendence42.rocks</a>
+                If you make a request, we have one month to respond to you. If you would like to exercise any of these rights, please <a href="mailto:{{django_mail_contact}}">contact us </a>
             </p>
         </div>
         <div class="col">
@@ -222,7 +225,7 @@
                 What are cookies
             </h4>
             <p style="color: var(--bs-body-bg);">
-                Cookies are text files placed on your computer to collect standard Internet log information and visitor behavior information. When you visit our websites, we may collect information from you automatically through cookies or similar technology
+                Cookies are text files placed on your computer to collect standard Internet log information and visitor behavior information. When you visit our website, we may collect information from you automatically through cookies or similar technology
                 <br>For further information, visit
                 <br>
                 <a target="_blank" href="allaboutcookies.org">allaboutcookies.org</a>
@@ -307,6 +310,8 @@
                 If you have any questions about Transcendence42’s privacy policy, the data we hold on you, or you would like to exercise one of your data protection rights, please do not hesitate to contact us.
                 <br>Email us at:&nbsp;
                 <a href="mailto:">contact@transcendence42.rocks</a>
+                <br>or on&nbsp;
+                <a href="{{discord_invite}}">discord</a>.
             </p>
         </div>
         <div class="col">
@@ -324,5 +329,6 @@
             </p>
         </div>
     </div>
+    {% endblocktrans %}
 </div>
 {% endblock %}

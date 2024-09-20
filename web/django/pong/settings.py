@@ -15,7 +15,6 @@ import os
 from pathlib import Path
 import re
 
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -161,7 +160,7 @@ LANGUAGE_CODE = 'en-us'
 LANGUAGES = [
 	('en', 'English'),
     ('fr', 'French'),
-	# ('jp', 'japanese'),
+	('jp', 'japanese'),
 ]
 
 TIME_ZONE = 'UTC'
@@ -233,6 +232,11 @@ EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = os.getenv('DJANGO_MAIL')
 EMAIL_HOST_USER = os.getenv('DJANGO_MAIL_USERNAME')
 EMAIL_HOST_PASSWORD = os.getenv('DJANGO_MAIL_PASSWORD')
+
+# Contacts
+
+DISCORD_INVITE = os.getenv('DISCORD_INVITE')
+DJANGO_MAIL_CONTACT = os.getenv('DJANGO_MAIL_CONTACT')
 
 # 42 API
 
