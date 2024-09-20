@@ -211,11 +211,7 @@
 						<div class="tab-pane active" id="tab-1" role="tabpanel">
 							<div class="d-flex justify-content-center align-items-center" style="height: 100%;width: 100%;">
 								<div style="width: 100%;height: 100%;">
-									<svg class="icon icon-tabler icon-tabler-chart-pie" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 250px;color: var(--bs-body-bg);width: 85%;height: 85%;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
-										<path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
-										<path d="M10 3.2a9 9 0 1 0 10.8 10.8a1 1 0 0 0 -1 -1h-6.8a2 2 0 0 1 -2 -2v-7a.9 .9 0 0 0 -1 -.8"></path>
-										<path d="M15 3.5a9 9 0 0 1 5.5 5.5h-4.5a1 1 0 0 1 -1 -1v-4.5"></path>
-									</svg>
+									<canvas id="winRate"></canvas>
 								</div>
 								<div class="text-truncate" style="width: 100%;height: 100%;">
 									<h1 class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-xxl-center" style="color: {{ profile.user.fortytwo_coalition_color }};font-weight: bold;margin-top: 10px;margin-bottom: 10px;">
@@ -239,11 +235,7 @@
 						<div class="tab-pane" id="tab-2" role="tabpanel">
 							<div class="d-flex justify-content-center align-items-center" style="height: 100%;width: 100%;">
 								<div style="width: 100%;height: 100%;">
-									<svg class="icon icon-tabler icon-tabler-chart-line" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 250px;color: var(--bs-body-bg);width: 85%;height: 85%;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
-										<path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
-										<path d="M4 19l16 0"></path>
-										<path d="M4 15l4 -6l4 2l4 -5l4 4"></path>
-									</svg>
+									<canvas id="lastElos"></canvas>
 								</div>
 								<div class="text-truncate d-flex flex-column align-items-start flex-wrap align-items-sm-start align-items-md-start" style="width: 100%;height: 100%;">
 									<h1 class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-xxl-center" style="color: {{ profile.user.fortytwo_coalition_color }};font-weight: bold;margin-top: 10px;margin-bottom: 10px;">
@@ -508,11 +500,7 @@
 						<div class="tab-pane active" id="tab-1" role="tabpanel">
 							<div class="d-flex justify-content-center align-items-center" style="height: 100%;width: 100%;">
 								<div style="width: 100%;height: 100%;">
-									<svg class="icon icon-tabler icon-tabler-chart-pie" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 250px;color: var(--bs-body-bg);width: 85%;height: 85%;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
-										<path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
-										<path d="M10 3.2a9 9 0 1 0 10.8 10.8a1 1 0 0 0 -1 -1h-6.8a2 2 0 0 1 -2 -2v-7a.9 .9 0 0 0 -1 -.8"></path>
-										<path d="M15 3.5a9 9 0 0 1 5.5 5.5h-4.5a1 1 0 0 1 -1 -1v-4.5"></path>
-									</svg>
+									<canvas data-won="{{ profile.get_won_games }}" data-lost="{{ profile.get_lost_games }}" id="winRate"></canvas>
 								</div>
 								<div class="text-truncate" style="width: 100%;height: 100%;">
 									<h1 class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-xxl-center" style="color: var(--bs-primary-border-subtle);font-weight: bold;margin-top: 10px;margin-bottom: 10px;">
@@ -536,11 +524,7 @@
 						<div class="tab-pane" id="tab-2" role="tabpanel">
 							<div class="d-flex justify-content-center align-items-center" style="height: 100%;width: 100%;">
 								<div style="width: 100%;height: 100%;">
-									<svg class="icon icon-tabler icon-tabler-chart-line" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 250px;color: var(--bs-body-bg);width: 85%;height: 85%;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
-										<path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
-										<path d="M4 19l16 0"></path>
-										<path d="M4 15l4 -6l4 2l4 -5l4 4"></path>
-									</svg>
+									<canvas id="lastElos"></canvas>
 								</div>
 								<div class="text-truncate d-flex flex-column align-items-start flex-wrap align-items-sm-start align-items-md-start" style="width: 100%;height: 100%;">
 									<h1 class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-xxl-center" style="color: var(--bs-primary-border-subtle);font-weight: bold;margin-top: 10px;margin-bottom: 10px;">

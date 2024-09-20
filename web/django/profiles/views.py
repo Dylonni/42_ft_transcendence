@@ -350,6 +350,24 @@ class ProfileFriendListView(PrivateView):
 profile_friend_list = ProfileFriendListView.as_view()
 
 
+class ProfileEloListView(PrivateView):
+    def get(self, request, profile_id):
+        profile = get_object_or_404(Profile, id=profile_id)
+        last_matches = GameRound.objects.get_last_matches(profile)
+        last_elos = []
+        current_elo = profile.elo
+        for i in range(last_matches.count()):
+            last_elos.append({'index': i, 'elo': current_elo})
+            if last_matches[i].winner == profile:
+                current_elo -= last_matches[i].elo_win
+            else:
+                current_elo -= last_matches[i].elo_lose
+        response_data = {'points': reversed(last_elos)}
+        return Response(response_data, status=status.HTTP_200_OK)
+
+profile_elo_list = ProfileEloListView.as_view()
+
+
 class MyInviteListView(PrivateView):
     def get(self, request):
         received_invites = GameInvite.objects.get_received_invites(request.profile)
@@ -441,13 +459,13 @@ class MyEloListView(PrivateView):
         last_matches = GameRound.objects.get_last_matches(request.profile)
         last_elos = []
         current_elo = request.profile.elo
-        for m in last_matches:
-            if m.winner == request.profile:
-                current_elo -= m.elo_win
+        for i in range(last_matches.count()):
+            last_elos.append({'index': i, 'elo': current_elo})
+            if last_matches[i].winner == request.profile:
+                current_elo -= last_matches[i].elo_win
             else:
-                current_elo += m.elo_lose
-            last_elos.append(current_elo)
-        response_data = {'data': last_elos.reverse()}
+                current_elo -= last_matches[i].elo_lose
+        response_data = {'points': reversed(last_elos)}
         return Response(response_data, status=status.HTTP_200_OK)
 
 my_elo_list = MyEloListView.as_view()

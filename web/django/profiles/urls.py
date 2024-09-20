@@ -20,6 +20,7 @@ urlpatterns = [
     path('profiles/<uuid:profile_id>/blocks/', views.profile_block_list, name='profile_block_list'),
 	path('profiles/<uuid:profile_id>/requests/', views.profile_request_list, name='profile_request_list'),
     path('profiles/<uuid:profile_id>/friends/', views.profile_friend_list, name='profile_friend_list'),
+	path('profiles/<uuid:profile_id>/elos/', views.profile_elo_list, name='profile_elo_list'),
 	
     path('profiles/me/invites/', views.my_invite_list, name='my_invite_list'),
 	path('profiles/me/invites/<uuid:invite_id>/', views.my_invite_detail, name='my_invite_detail'),
