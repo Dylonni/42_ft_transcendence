@@ -12,7 +12,7 @@
             <div class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="background: rgba(255,255,255,0);width: 100%;height: 60%;backdrop-filter: blur(0px);-webkit-backdrop-filter: blur(0px);color: var(--bs-body-bg);">
                 <div class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="background: rgba(0,0,0,0);margin-top: 0px;margin-bottom: 0px;padding-bottom: 0px;padding-top: 0px;height: 100%;width: 100%;">
                     <h1 class="fs-2 d-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-xl-center justify-content-xxl-center text-truncate" id="player-name-3" style="color: var(--bs-body-bg);border-radius: 10px;font-family: Roboto, sans-serif;width: 100%;position: relative;margin-bottom: 0px;">
-                        Top 100 Ranking
+                        {% translate 'Top 100 Ranking' %}
                         <img src="{% static '/img/winners-cup.svg' %}" width="50" height="35" style="transform: perspective(0px) rotateY(180deg);position: relative;">
                     </h1>
                 </div>
@@ -27,7 +27,7 @@
                         </div>
                         <div class="text-truncate" style="padding-right: 20px;padding-left: 0px;">
                             <h1 class="fs-3 d-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-xl-center justify-content-xxl-center text-truncate" id="player-name-1" style="color: var(--bs-body-bg);border-radius: 10px;font-family: Roboto, sans-serif;position: relative;margin-bottom: 0px;">
-                                Your Rank
+                                {% translate 'Your Rank' %}
                             </h1>
                             <h1 class="text-truncate fs-3 text-truncate" id="player-name-2" style="color: var(--bs-body-bg);border-radius: 10px;font-family: Roboto, sans-serif;position: relative;margin-bottom: 0px;padding-left: 34px;padding-right: 34px;max-width: 280px;">
                                 {{ profile.get_rank }}
@@ -41,7 +41,7 @@
             <div class="overflow-auto" style="background: rgba(255,255,255,0);margin-left: 0px;margin-right: 0px;padding-left: 10px;padding-right: 10px;border-radius: 19px;max-height: 815px;">
                 {% if players.count == 0 %}
                 <h1 class="d-flex justify-content-center align-items-center" style="color: var(--bs-gray-700);font-weight: bold;">
-                    No rankings yet
+                    {% translate 'No rankings yet' %}
                 <h1>
                 {% endif %}
                 {% for player in players %}

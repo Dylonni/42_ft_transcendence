@@ -89,7 +89,7 @@
 							<path d="M12 4v3m-4 -3v6m8 -6v6"></path>
 							<path d="M12 18.5l-3 1.5l.5 -3.5l-2 -2l3 -.5l1.5 -3l1.5 3l3 .5l-2 2l.5 3.5z"></path>
 						</svg>
-						Rank
+						{% translate 'Rank' %}
 					</h1>
 				</div>
 				<div class="text-truncate d-flex d-xl-flex flex-column justify-content-center align-items-center justify-content-xl-center align-items-xl-center" style="width: 50%;height: 100%;color: var(--bs-body-bg);padding-left: 10px;padding-right: 10px;margin-left: 0px;margin-right: 0px;padding-top: 20px;padding-bottom: 20px;">
@@ -103,7 +103,7 @@
 							<path d="M6.057 12.007a1.39 1.39 0 0 0 -1.103 .765l-.855 1.723l-1.907 .277c-.52 .072 -.96 .44 -1.124 .944l-.038 .14c-.1 .465 .046 .954 .393 1.29l1.377 1.337l-.326 1.892a1.393 1.393 0 0 0 2.018 1.465l1.708 -.895l1.708 .896a1.388 1.388 0 0 0 1.462 -.105l.112 -.09a1.39 1.39 0 0 0 .442 -1.272l-.324 -1.891l1.38 -1.339c.38 -.371 .516 -.924 .352 -1.427l-.051 -.134a1.39 1.39 0 0 0 -1.073 -.81l-1.908 -.279l-.853 -1.722a1.393 1.393 0 0 0 -1.247 -.772l-.143 .007z" fill="currentColor" stroke-width="0"></path>
 							<path d="M11.857 2.007a1.39 1.39 0 0 0 -1.103 .765l-.855 1.723l-1.907 .277c-.52 .072 -.96 .44 -1.124 .944l-.038 .14c-.1 .465 .046 .954 .393 1.29l1.377 1.337l-.326 1.892a1.393 1.393 0 0 0 2.018 1.465l1.708 -.894l1.709 .896a1.388 1.388 0 0 0 1.462 -.105l.112 -.09a1.39 1.39 0 0 0 .442 -1.272l-.325 -1.892l1.38 -1.339c.38 -.371 .516 -.924 .352 -1.427l-.051 -.134a1.39 1.39 0 0 0 -1.073 -.81l-1.908 -.279l-.853 -1.722a1.393 1.393 0 0 0 -1.247 -.772l-.143 .007z" fill="currentColor" stroke-width="0"></path>
 						</svg>
-						Points
+						{% translate 'Points' %}
 					</h1>
 				</div>
 			</div>
@@ -114,7 +114,7 @@
 	<div class="row d-xxl-flex justify-content-xxl-start align-items-xxl-center" style="margin-top: 30px;margin-bottom: 30px;">
 		<div class="col-md-12 col-lg-12 col-xl-12 col-xxl-12" style="margin-top: 15px;margin-bottom: 15px;">
 			<h3 class="d-flex d-xxl-flex justify-content-start align-items-center align-items-xxl-center" style="color: var(--bs-body-bg);margin-left: 0px;margin-right: 0px;text-shadow: 2px 2px 2px {{ profile.user.fortytwo_coalition_color }};margin-bottom: 0px;">
-				Game History (Last 20 Games)
+				{% translate 'Game History (Last 20 Games)' %}
 			</h3>
 		</div>
 		<div class="col-xl-12 col-xxl-12 d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex align-items-center align-items-sm-center align-items-md-center align-items-lg-center align-items-xl-center align-items-xxl-center overflow-auto" style="padding-left: 0px;padding-right: 0px;margin-left: 0px;margin-right: 0px;">
@@ -123,7 +123,7 @@
 			<div class="card d-flex flex-shrink-0 justify-content-center align-items-center" style="background: rgba(255,255,255,0);width: 153px;margin-top: 10px;margin-bottom: 10px;height: 214px;margin-left: 5px;margin-right: 5px;">
 				<div class="card-body d-flex d-xxl-flex flex-column justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="border-radius: 15px;box-shadow: 0px 0px 6px 2px {{ profile.user.fortytwo_coalition_color }};border: 0px solid {{ profile.user.fortytwo_coalition_color }};width: 100%;margin-left: 0px;margin-right: 0px;height: 100%;">
 					<h1 class="card-title" style="font-weight: bold;text-align: center;color: {{ profile.user.fortytwo_coalition_color }};">
-						WIN
+						{% translate 'WIN' %}
 					</h1>
 					{% if round.get_loser %}
 					<img class="d-xxl-flex justify-content-xxl-center align-items-xxl-center" src="{{ round.get_loser.get_avatar_url }}" style="width: 60px;height: 60px;border-radius: 50%;border-style: solid;border-color: var(--bs-secondary-text-emphasis);"/>
@@ -142,7 +142,7 @@
 					{% else %}
 					<a class="btn btn-primary text-nowrap" data-bs-content="Game Duration: {{ round.get_duration }} | Date: {{ round.started_at }}" data-bs-placement="bottom" data-bs-toggle="popover" data-bs-trigger="hover" role="button" style="border-style: none;color: #ffffff;background: rgba(13,110,253,0);" tabindex="0" title="{{ round.player1.alias }}">
 					{% endif %}
-					Game Details
+					{% translate 'Game Details' %}
 					</a>
 				</div>
 			</div>
@@ -150,7 +150,7 @@
 			<div class="card d-flex flex-shrink-0 justify-content-center align-items-center" style="background: rgba(255,255,255,0);width: 153px;margin-top: 10px;margin-bottom: 10px;height: 214px;margin-left: 5px;margin-right: 5px;">
 				<div class="card-body d-flex d-xxl-flex flex-column justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="border-radius: 15px;box-shadow: 0px 0px 6px 2px var(--bs-gray-600);width: 100%;margin-left: 0px;margin-right: 0px;border: 0px solid var(--bs-gray-600);height: 100%;">
 					<h1 class="card-title" style="font-weight: bold;text-align: center;color: var(--bs-gray-600);">
-						LOSS
+						{% translate 'LOSS' %}
 					</h1>
 					{% if round.winner %}
 					<img class="d-xxl-flex justify-content-xxl-center align-items-xxl-center" src="{{ round.winner.get_avatar_url }}" style="width: 60px;height: 60px;border-radius: 50%;border-style: solid;border-color: var(--bs-secondary-text-emphasis);"/>
@@ -169,7 +169,7 @@
 					{% else %}
 					<a class="btn btn-primary text-nowrap" data-bs-content="Game Duration: {{ round.get_duration }} | Date: {{ round.started_at }}" data-bs-placement="bottom" data-bs-toggle="popover" data-bs-trigger="hover" role="button" style="border-style: none;color: #ffffff;background: rgba(13,110,253,0);" tabindex="0" title="{{ round.player1.alias }}">
 					{% endif %}
-					Game Details
+					{% translate 'Game Details' %}
 					</a>
 				</div>
 			</div>
@@ -179,7 +179,7 @@
 		{% if rounds.count == 0 %}
 		<div class="col-xl-12 col-xxl-12 d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex flex-shrink-0 justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center overflow-auto" style="padding-left: 0px;padding-right: 0px;height: 234px;">
 			<h1 class="d-xxl-flex justify-content-xxl-center align-items-xxl-center" style="color: var(--bs-gray-700);font-weight: bold;">
-				NO GAMES TO SHOW
+				{% translate 'NO GAMES TO SHOW' %}
 			</h1>
 		</div>
 		{% endif %}
@@ -189,7 +189,7 @@
 	<div class="row">
 		<div class="col-md-12 col-lg-12 col-xl-12 col-xxl-12 d-xxl-flex justify-content-xxl-center align-items-xxl-center" style="border-radius: 9px;border: 1px none {{ profile.user.fortytwo_coalition_color }} ;">
 			<h3 class="d-flex justify-content-center align-items-center" style="color: var(--bs-body-bg);text-shadow: 2px 2px 2px {{ profile.user.fortytwo_coalition_color }};margin-bottom: 10px;margin-top: 0px;">
-				Player Statistics
+				{% translate 'Player Statistics' %}
 			</h3>
 		</div>
 		<div class="col-md-12 col-lg-6 col-xl-7 col-xxl-6 d-lg-flex" style="margin-top: 10px;margin-bottom: 10px;margin-left: 0px;margin-right: 0px;border-radius: 20px;padding-left: 11px;padding-right: 11px;">
@@ -239,7 +239,7 @@
 								</div>
 								<div class="text-truncate d-flex flex-column align-items-start flex-wrap align-items-sm-start align-items-md-start" style="width: 100%;height: 100%;">
 									<h1 class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-xxl-center" style="color: {{ profile.user.fortytwo_coalition_color }};font-weight: bold;margin-top: 10px;margin-bottom: 10px;">
-										Last 5 Games
+										Last 20 Games
 									</h1>
 									<h4 class="text-truncate text-start d-flex d-md-flex justify-content-start align-items-center justify-content-md-start align-items-md-center" style="color: {{ profile.user.fortytwo_coalition_color }};">
 										#Highestpts
@@ -265,7 +265,7 @@
 						<path d="M7 10h2"></path>
 						<path d="M14 10h2"></path>
 					</svg>
-					Total Games Played
+					{% translate 'Total Games Played' %}
 					<span class="text-truncate" data-bs-placement="bottom" data-bs-toggle="tooltip" data-bss-tooltip="" style="color: var(--bs-primary-border-subtle);max-width: 246px;margin-left: 10px;" title="#Gamesplayed">
 						{{ profile.get_total_games }}
 					</span>
@@ -275,7 +275,7 @@
 						<path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
 						<path d="M17 3a1 1 0 0 1 .993 .883l.007 .117v2.17a3 3 0 1 1 0 5.659v.171a6.002 6.002 0 0 1 -5 5.917v2.083h3a1 1 0 0 1 .117 1.993l-.117 .007h-8a1 1 0 0 1 -.117 -1.993l.117 -.007h3v-2.083a6.002 6.002 0 0 1 -4.996 -5.692l-.004 -.225v-.171a3 3 0 0 1 -3.996 -2.653l-.003 -.176l.005 -.176a3 3 0 0 1 3.995 -2.654l-.001 -2.17a1 1 0 0 1 1 -1h10zm-12 5a1 1 0 1 0 0 2a1 1 0 0 0 0 -2zm14 0a1 1 0 1 0 0 2a1 1 0 0 0 0 -2z" fill="currentColor" stroke-width="0"></path>
 					</svg>
-					Won Tournaments
+					{% translate 'Won Tournaments' %}
 					<span class="text-truncate" data-bs-placement="bottom" data-bs-toggle="tooltip" data-bss-tooltip="" style="color: #fcbf49;margin-left: 0px;max-width: 246px;margin-left: 10px;" title="#Wontournaments">
 						{{ profile.get_won_tournaments }}
 					</span>
@@ -285,7 +285,7 @@
 						<path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
 						<path d="M12 12c2 -2.96 0 -7 -1 -8c0 3.038 -1.773 4.741 -3 6c-1.226 1.26 -2 3.24 -2 5a6 6 0 1 0 12 0c0 -1.532 -1.056 -3.94 -2 -5c-1.786 3 -2.791 3 -4 2z"></path>
 					</svg>
-					Best Winning Streak
+					{% translate 'Best Winning Streak' %}
 					<span class="text-truncate" data-bs-placement="bottom" data-bs-toggle="tooltip" data-bss-tooltip="" style="color: var(--bs-red);margin-left: 0px;max-width: 246px;margin-left: 10px;" title="#Streak">
 						{{ profile.get_highest_winstreak }}
 					</span>
@@ -378,7 +378,7 @@
 							<path d="M12 4v3m-4 -3v6m8 -6v6"></path>
 							<path d="M12 18.5l-3 1.5l.5 -3.5l-2 -2l3 -.5l1.5 -3l1.5 3l3 .5l-2 2l.5 3.5z"></path>
 						</svg>
-						Rank
+						{% translate 'Rank' %}
 					</h1>
 				</div>
 				<div class="text-truncate d-flex d-xl-flex flex-column justify-content-center align-items-center justify-content-xl-center align-items-xl-center" style="width: 50%;height: 100%;color: var(--bs-body-bg);padding-left: 10px;padding-right: 10px;margin-left: 0px;margin-right: 0px;padding-top: 20px;padding-bottom: 20px;">
@@ -392,7 +392,7 @@
 							<path d="M6.057 12.007a1.39 1.39 0 0 0 -1.103 .765l-.855 1.723l-1.907 .277c-.52 .072 -.96 .44 -1.124 .944l-.038 .14c-.1 .465 .046 .954 .393 1.29l1.377 1.337l-.326 1.892a1.393 1.393 0 0 0 2.018 1.465l1.708 -.895l1.708 .896a1.388 1.388 0 0 0 1.462 -.105l.112 -.09a1.39 1.39 0 0 0 .442 -1.272l-.324 -1.891l1.38 -1.339c.38 -.371 .516 -.924 .352 -1.427l-.051 -.134a1.39 1.39 0 0 0 -1.073 -.81l-1.908 -.279l-.853 -1.722a1.393 1.393 0 0 0 -1.247 -.772l-.143 .007z" fill="currentColor" stroke-width="0"></path>
 							<path d="M11.857 2.007a1.39 1.39 0 0 0 -1.103 .765l-.855 1.723l-1.907 .277c-.52 .072 -.96 .44 -1.124 .944l-.038 .14c-.1 .465 .046 .954 .393 1.29l1.377 1.337l-.326 1.892a1.393 1.393 0 0 0 2.018 1.465l1.708 -.894l1.709 .896a1.388 1.388 0 0 0 1.462 -.105l.112 -.09a1.39 1.39 0 0 0 .442 -1.272l-.325 -1.892l1.38 -1.339c.38 -.371 .516 -.924 .352 -1.427l-.051 -.134a1.39 1.39 0 0 0 -1.073 -.81l-1.908 -.279l-.853 -1.722a1.393 1.393 0 0 0 -1.247 -.772l-.143 .007z" fill="currentColor" stroke-width="0"></path>
 						</svg>
-						Points
+						{% translate 'Points' %}
 					</h1>
 				</div>
 			</div>
@@ -403,7 +403,7 @@
 	<div class="row d-xxl-flex justify-content-xxl-start align-items-xxl-center" style="margin-top: 30px;margin-bottom: 30px;">
 		<div class="col-md-12 col-lg-12 col-xl-12 col-xxl-12" style="margin-top: 15px;margin-bottom: 15px;">
 			<h3 class="d-flex d-xxl-flex justify-content-start align-items-center align-items-xxl-center" style="color: var(--bs-body-bg);margin-left: 0px;margin-right: 0px;text-shadow: 2px 2px 2px var(--bs-primary-border-subtle);margin-bottom: 0px;">
-				Game History (Last 20 Games)
+				{% translate 'Game History (Last 20 Games)' %}
 			</h3>
 		</div>
 		<div class="col-xl-12 col-xxl-12 d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex align-items-center align-items-sm-center align-items-md-center align-items-lg-center align-items-xl-center align-items-xxl-center overflow-auto" style="padding-left: 0px;padding-right: 0px;margin-left: 0px;margin-right: 0px;">
@@ -412,7 +412,7 @@
 			<div class="card d-flex flex-shrink-0 justify-content-center align-items-center" style="background: rgba(255,255,255,0);width: 153px;margin-top: 10px;margin-bottom: 10px;height: 214px;margin-left: 5px;margin-right: 5px;">
 				<div class="card-body d-flex d-xxl-flex flex-column justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="border-radius: 15px;box-shadow: 0px 0px 6px 2px var(--bs-primary-border-subtle);border: 0px solid var(--bs-primary-border-subtle);width: 100%;margin-left: 0px;margin-right: 0px;height: 100%;">
 					<h1 class="card-title" style="font-weight: bold;text-align: center;color: var(--bs-primary-border-subtle);">
-						WIN
+						{% translate 'WIN' %}
 					</h1>
 					{% if round.get_loser %}
 					<img class="d-xxl-flex justify-content-xxl-center align-items-xxl-center" src="{{ round.get_loser.get_avatar_url }}" style="width: 60px;height: 60px;border-radius: 50%;border-style: solid;border-color: var(--bs-secondary-text-emphasis);"/>
@@ -431,7 +431,7 @@
 					{% else %}
 					<a class="btn btn-primary text-nowrap" data-bs-content="Game Duration: {{ round.get_duration }} | Date: {{ round.started_at }}" data-bs-placement="bottom" data-bs-toggle="popover" data-bs-trigger="hover" role="button" style="border-style: none;color: #ffffff;background: rgba(13,110,253,0);" tabindex="0" title="{{ round.player1.alias }}">
 					{% endif %}
-					Game Details
+					{% translate 'Game Details' %}
 					</a>
 				</div>
 			</div>
@@ -439,7 +439,7 @@
 			<div class="card d-flex flex-shrink-0 justify-content-center align-items-center" style="background: rgba(255,255,255,0);width: 153px;margin-top: 10px;margin-bottom: 10px;height: 214px;margin-left: 5px;margin-right: 5px;">
 				<div class="card-body d-flex d-xxl-flex flex-column justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="border-radius: 15px;box-shadow: 0px 0px 6px 2px var(--bs-gray-600);width: 100%;margin-left: 0px;margin-right: 0px;border: 0px solid var(--bs-gray-600);height: 100%;">
 					<h1 class="card-title" style="font-weight: bold;text-align: center;color: var(--bs-gray-600);">
-						LOSS
+						{% translate 'LOSS' %}
 					</h1>
 					{% if round.winner %}
 					<img class="d-xxl-flex justify-content-xxl-center align-items-xxl-center" src="{{ round.winner.get_avatar_url }}" style="width: 60px;height: 60px;border-radius: 50%;border-style: solid;border-color: var(--bs-secondary-text-emphasis);"/>
@@ -458,7 +458,7 @@
 					{% else %}
 					<a class="btn btn-primary text-nowrap" data-bs-content="Game Duration: {{ round.get_duration }} | Date: {{ round.started_at }}" data-bs-placement="bottom" data-bs-toggle="popover" data-bs-trigger="hover" role="button" style="border-style: none;color: #ffffff;background: rgba(13,110,253,0);" tabindex="0" title="{{ round.player1.alias }}">
 					{% endif %}
-					Game Details
+					{% translate 'Game Details' %}
 					</a>
 				</div>
 			</div>
@@ -468,7 +468,7 @@
 		{% if rounds.count == 0 %}
 		<div class="col-xl-12 col-xxl-12 d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex flex-shrink-0 justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center overflow-auto" style="padding-left: 0px;padding-right: 0px;height: 234px;">
 			<h1 class="d-xxl-flex justify-content-xxl-center align-items-xxl-center" style="color: var(--bs-gray-700);font-weight: bold;">
-				NO GAMES TO SHOW
+				{% translate 'NO GAMES TO SHOW' %}
 			</h1>
 		</div>
 		{% endif %}
@@ -478,7 +478,7 @@
 	<div class="row">
 		<div class="col-md-12 col-lg-12 col-xl-12 col-xxl-12 d-xxl-flex justify-content-xxl-center align-items-xxl-center" style="border-radius: 9px;border: 1px none var(--bs-primary-border-subtle) ;">
 			<h3 class="d-flex justify-content-center align-items-center" style="color: var(--bs-body-bg);text-shadow: 2px 2px 2px var(--bs-primary-border-subtle);margin-bottom: 10px;margin-top: 0px;">
-				Player Statistics
+				{% translate 'Player Statistics' %}
 			</h3>
 		</div>
 		<div class="col-md-12 col-lg-6 col-xl-7 col-xxl-6 d-lg-flex" style="margin-top: 10px;margin-bottom: 10px;margin-left: 0px;margin-right: 0px;border-radius: 20px;padding-left: 11px;padding-right: 11px;">
@@ -487,12 +487,12 @@
 					<ul class="nav nav-tabs" role="tablist" style="border-style: none;border-bottom-width: 2px;border-bottom-style: none;">
 						<li class="nav-item" role="presentation">
 							<a class="nav-link active" data-bs-toggle="tab" href="#tab-1" role="tab" style="background: rgba(255,255,255,0);color: var(--bs-primary-border-subtle);">
-								Winrate
+								{% translate 'Winrate' %}
 							</a>
 						</li>
 						<li class="nav-item" role="presentation">
 							<a class="nav-link" data-bs-toggle="tab" href="#tab-2" role="tab" style="color: var(--bs-primary-border-subtle);background: rgba(255,255,255,0);">
-								Points
+								{% translate 'Points' %}
 							</a>
 						</li>
 					</ul>
@@ -554,7 +554,7 @@
 						<path d="M7 10h2"></path>
 						<path d="M14 10h2"></path>
 					</svg>
-					Total Games Played
+					{% translate 'Total Games Played' %}
 					<span class="text-truncate" data-bs-placement="bottom" data-bs-toggle="tooltip" data-bss-tooltip="" style="color: var(--bs-primary-border-subtle);max-width: 246px;margin-left: 10px;" title="#Gamesplayed">
 						{{ profile.get_total_games }}
 					</span>
@@ -564,7 +564,7 @@
 						<path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
 						<path d="M17 3a1 1 0 0 1 .993 .883l.007 .117v2.17a3 3 0 1 1 0 5.659v.171a6.002 6.002 0 0 1 -5 5.917v2.083h3a1 1 0 0 1 .117 1.993l-.117 .007h-8a1 1 0 0 1 -.117 -1.993l.117 -.007h3v-2.083a6.002 6.002 0 0 1 -4.996 -5.692l-.004 -.225v-.171a3 3 0 0 1 -3.996 -2.653l-.003 -.176l.005 -.176a3 3 0 0 1 3.995 -2.654l-.001 -2.17a1 1 0 0 1 1 -1h10zm-12 5a1 1 0 1 0 0 2a1 1 0 0 0 0 -2zm14 0a1 1 0 1 0 0 2a1 1 0 0 0 0 -2z" fill="currentColor" stroke-width="0"></path>
 					</svg>
-					Won Tournaments
+					{% translate 'Won Tournaments' %}
 					<span class="text-truncate" data-bs-placement="bottom" data-bs-toggle="tooltip" data-bss-tooltip="" style="color: #fcbf49;margin-left: 0px;max-width: 246px;margin-left: 10px;" title="#Wontournaments">
 						{{ profile.get_won_tournaments }}
 					</span>
@@ -574,7 +574,7 @@
 						<path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
 						<path d="M12 12c2 -2.96 0 -7 -1 -8c0 3.038 -1.773 4.741 -3 6c-1.226 1.26 -2 3.24 -2 5a6 6 0 1 0 12 0c0 -1.532 -1.056 -3.94 -2 -5c-1.786 3 -2.791 3 -4 2z"></path>
 					</svg>
-					Best Winning Streak
+					{% translate 'Best Winning Streak' %}
 					<span class="text-truncate" data-bs-placement="bottom" data-bs-toggle="tooltip" data-bss-tooltip="" style="color: var(--bs-red);margin-left: 0px;max-width: 246px;margin-left: 10px;" title="#Streak">
 						{{ profile.get_highest_winstreak }}
 					</span>

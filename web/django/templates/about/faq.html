@@ -3,7 +3,7 @@
 {% load i18n %}
 {% block title %}{% translate "Privacy Policy" %}{% endblock %}
 {% block content %}
-{% include "sidebar.html" %}
+{% include "../sidebar.html" %}
 {% if profile %}
     {% include "notifs/notifications.html" %}
 {% endif %}
@@ -17,7 +17,7 @@
                         <path d="M8 8a3.5 3 0 0 1 3.5 -3h1a3.5 3 0 0 1 3.5 3a3 3 0 0 1 -2 3a3 4 0 0 0 -2 4"></path>
                         <path d="M12 19l0 .01"></path>
                     </svg>
-                    Frequently Asked Questions
+                    {% translate 'Frequently Asked Questions' %}
                 </h1>
                 <div class="d-flex justify-content-center align-items-center" style="height: 55px;">
                     <a id="navAboutFaq" href="/about/" class="d-flex justify-content-center align-items-center aboutBtn" style="padding-left: 15px;padding-right: 15px;border-radius: 19px;box-shadow: 0px 0px 6px 1px var(--bs-body-bg);padding-top: 10px;padding-bottom: 10px;margin-top: 5px;margin-bottom: 5px;">
@@ -29,7 +29,7 @@
                         </svg>
                         <div class="d-flex justify-content-center align-items-center">
                             <p style="color: var(--bs-body-bg);margin-bottom: 0px;">
-                                About
+                                {% translate 'About' %}
                             </p>
                         </div>
                     </a>
@@ -42,7 +42,7 @@
         <div class="col-sm-10 col-md-10 d-flex justify-content-center align-items-center" style="width: 100%;height: 100%;padding-top: 10px;padding-bottom: 10px;">
             <div style="width: 100%;height: 100%;">
                 <a class="btn btn-primary d-flex d-xxl-flex justify-content-center align-items-center align-items-xxl-center" data-bs-toggle="collapse" aria-expanded="false" aria-controls="collapse-1" href="#collapse-1" role="button" style="background: var(--bs-gray-700);border-radius: 10px;font-weight: bold;border-bottom-right-radius: 0px;border-bottom-left-radius: 1px;font-size: 20px;border-color: rgb(73,80,87);border-bottom-style: solid;border-bottom-color: rgb(73,80,87);">
-                How does the ranking system and the elo works ?
+                {% translate 'How does the ranking system and the elo works ?' %}
                     <svg class="icon icon-tabler icon-tabler-plus" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" style="font-size: 30px;color: var(--bs-black);margin-left: 12px;">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                         <path d="M12 5l0 14"></path>
@@ -59,9 +59,10 @@
                         </svg>
                         <strong>
                             <span style="color: rgb(13, 202, 240); background-color: rgb(33, 37, 41);">
-                                Points
+                                {% translate 'Points' %}
                             </span>
-                        </strong> are calculated upon victories and defeats and on your opponent&#39;s 
+                        </strong>
+                        {% translate 'are calculated upon victories and defeats and on your opponent&#39;s ' %}
                         <svg class="icon icon-tabler icon-tabler-medal" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" style="color: var(--bs-yellow);border-bottom-color: rgb(255, 193, 7);font-size: 19px;">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                             <path d="M12 4v3m-4 -3v6m8 -6v6"></path>
@@ -69,21 +70,23 @@
                         </svg>
                         <strong>
                             <span style="color: rgb(255, 193, 7);">
-                                Rank
+                                {% transalte 'Rank' %}
                             </span>
                         </strong>.
                         <br />
-                        If your opponent&#39;s rank is bigger than yours, you will gain more points on a victory and loose less points on a defeat.
+                        {% translate 'If your opponent&#39;s rank is bigger than yours, you will gain more points on a victory and loose less points on a defeat.' %}'
                         <br />
-                        If you decide to leave the game while it&#39;s on, you will get a 
+                        {% translate 'If you decide to leave the game while it&#39;s on, you will get a' %}
                         <span style="color: rgb(204, 15, 15); background-color: rgb(41, 33, 33);">
-                            point penalty
+                            {% translate 'point penalty' %}
                         </span>
-                        and you will also loose the points you were supposed to loose initially.
-                        <br />Winning games in a tournament will 
+                        {% translate 'and you will also loose the points you were supposed to loose initially.' %}
+                        <br />
+                        {% translate 'Winning games in a tournament will ' %}
                         <span style="color: rgb(7, 135, 35);">
-                            grant you
-                        </span> more points.
+                            {% translate 'grant you' %}
+                        </span>
+                         {% translate 'more points.' %}'
                         <br />
                         <svg class="icon icon-tabler icon-tabler-medal" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" style="color: var(--bs-yellow);font-size: 19px;margin-right: 0px;">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -92,10 +95,10 @@
                         </svg>
                         <strong>
                             <span style="color: rgb(255, 193, 7);">
-                                Rank
+                                {% translate 'Rank' %}
                             </span>
                         </strong>
-                         is simply based on your aquired 
+                         {% translate 'is simply based on your aquired' %} 
                         <svg class="icon icon-tabler icon-tabler-stars-filled" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" style="color: var(--bs-info);margin-right: 5px;">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                             <path d="M17.657 12.007a1.39 1.39 0 0 0 -1.103 .765l-.855 1.723l-1.907 .277c-.52 .072 -.96 .44 -1.124 .944l-.038 .14c-.1 .465 .046 .954 .393 1.29l1.377 1.337l-.326 1.892a1.393 1.393 0 0 0 2.018 1.465l1.708 -.895l1.708 .896a1.388 1.388 0 0 0 1.462 -.105l.112 -.09a1.39 1.39 0 0 0 .442 -1.272l-.325 -1.891l1.38 -1.339c.38 -.371 .516 -.924 .352 -1.427l-.051 -.134a1.39 1.39 0 0 0 -1.073 -.81l-1.907 -.278l-.853 -1.722a1.393 1.393 0 0 0 -1.247 -.773l-.143 .007z" stroke-width="0" fill="currentColor"></path>
@@ -104,7 +107,7 @@
                         </svg>
                         <strong>
                             <span style="color: rgb(13, 202, 240);">
-                                Points
+                                {% translate 'Points' %}
                             </span>
                         </strong>
                     </p>
@@ -112,96 +115,205 @@
             </div>
         </div>
         <div class="col-sm-10 col-md-10 d-flex justify-content-center align-items-center" style="width: 100%;height: 100%;padding-top: 10px;padding-bottom: 10px;">
-            <div style="width: 100%;height: 100%;"><a class="btn btn-primary d-flex d-xxl-flex justify-content-center align-items-center align-items-xxl-center" data-bs-toggle="collapse" aria-expanded="false" aria-controls="collapse-5" href="#collapse-5" role="button" style="background: var(--bs-gray-700);border-radius: 10px;font-weight: bold;border-bottom-right-radius: 0px;border-bottom-left-radius: 1px;font-size: 20px;border-color: rgb(73,80,87);border-bottom-style: solid;border-bottom-color: rgb(73,80,87);">What data do you store ?<svg class="icon icon-tabler icon-tabler-plus" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" style="font-size: 30px;color: var(--bs-black);margin-left: 12px;">
+            <div style="width: 100%;height: 100%;">
+                <a class="btn btn-primary d-flex d-xxl-flex justify-content-center align-items-center align-items-xxl-center" data-bs-toggle="collapse" aria-expanded="false" aria-controls="collapse-5" href="#collapse-5" role="button" style="background: var(--bs-gray-700);border-radius: 10px;font-weight: bold;border-bottom-right-radius: 0px;border-bottom-left-radius: 1px;font-size: 20px;border-color: rgb(73,80,87);border-bottom-style: solid;border-bottom-color: rgb(73,80,87);">
+                   {% translate 'What data do you store ?' %}
+                    <svg class="icon icon-tabler icon-tabler-plus" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" style="font-size: 30px;color: var(--bs-black);margin-left: 12px;">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                         <path d="M12 5l0 14"></path>
                         <path d="M5 12l14 0"></path>
-                    </svg></a>
+                    </svg>
+                </a>
                 <div id="collapse-5" class="collapse">
-                    <p class="text-center" style="color: var(--bs-body-bg);padding-left: 10px;padding-right: 10px;margin-top: 0px;border-bottom-right-radius: 10px;border-bottom-left-radius: 10px;margin-bottom: 0px;border: 2px solid var(--bs-gray-700);border-top-style: solid;border-bottom-style: solid;border-bottom-color: rgb(73, 80, 87);padding-top: 10px;padding-bottom: 10px;">We suggest you to check about data collection and treatment details in our <svg class="icon icon-tabler icon-tabler-file-text" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" style="color: var(--bs-yellow);">
+                    <p class="text-center" style="color: var(--bs-body-bg);padding-left: 10px;padding-right: 10px;margin-top: 0px;border-bottom-right-radius: 10px;border-bottom-left-radius: 10px;margin-bottom: 0px;border: 2px solid var(--bs-gray-700);border-top-style: solid;border-bottom-style: solid;border-bottom-color: rgb(73, 80, 87);padding-top: 10px;padding-bottom: 10px;">
+                        {% translate 'We suggest you to check about data collection and treatment details in our' %}
+                        <svg class="icon icon-tabler icon-tabler-file-text" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" style="color: var(--bs-yellow);">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                             <path d="M14 3v4a1 1 0 0 0 1 1h4"></path>
                             <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z"></path>
                             <path d="M9 9l1 0"></path>
                             <path d="M9 13l6 0"></path>
                             <path d="M9 17l6 0"></path>
-                        </svg><a href="#" style="color: var(--bs-body-bg);">Privacy Policy</a> page.</p>
+                        </svg>
+                        <a id="navPPFaq" href="/about/privacy_policy/" style="color: var(--bs-body-bg);">
+                            {% translate 'Privacy Policy' %}
+                        </a> {% translate 'page.' %}
+                    </p>
                 </div>
             </div>
         </div>
         <div class="col-sm-10 col-md-10 d-flex justify-content-center align-items-center" style="width: 100%;height: 100%;padding-top: 10px;padding-bottom: 10px;">
-            <div style="width: 100%;height: 100%;"><a class="btn btn-primary d-flex d-xxl-flex justify-content-center align-items-center align-items-xxl-center" data-bs-toggle="collapse" aria-expanded="false" aria-controls="collapse-4" href="#collapse-4" role="button" style="background: var(--bs-gray-700);border-radius: 10px;font-weight: bold;border-bottom-right-radius: 0px;border-bottom-left-radius: 1px;font-size: 20px;border-color: rgb(73,80,87);border-bottom-style: solid;border-bottom-color: rgb(73,80,87);">How does the social aspect works ?<svg class="icon icon-tabler icon-tabler-plus" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" style="font-size: 30px;color: var(--bs-black);margin-left: 12px;">
+            <div style="width: 100%;height: 100%;">
+                <a class="btn btn-primary d-flex d-xxl-flex justify-content-center align-items-center align-items-xxl-center" data-bs-toggle="collapse" aria-expanded="false" aria-controls="collapse-4" href="#collapse-4" role="button" style="background: var(--bs-gray-700);border-radius: 10px;font-weight: bold;border-bottom-right-radius: 0px;border-bottom-left-radius: 1px;font-size: 20px;border-color: rgb(73,80,87);border-bottom-style: solid;border-bottom-color: rgb(73,80,87);">
+                    {% translate 'How does the social aspect works ?'}
+                    <svg class="icon icon-tabler icon-tabler-plus" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" style="font-size: 30px;color: var(--bs-black);margin-left: 12px;">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                         <path d="M12 5l0 14"></path>
                         <path d="M5 12l14 0"></path>
-                    </svg></a>
+                    </svg>
+                </a>
                 <div id="collapse-4" class="collapse">
-                    <p style="color: var(--bs-body-bg);padding-left: 10px;padding-right: 10px;margin-top: 0px;border-bottom-right-radius: 10px;border-bottom-left-radius: 10px;margin-bottom: 0px;border: 2px solid var(--bs-gray-700);border-top-style: solid;border-bottom-style: solid;border-bottom-color: rgb(73, 80, 87);padding-top: 10px;padding-bottom: 10px;">The <svg class="icon icon-tabler icon-tabler-message-chatbot" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" style="color: #54e012;margin-right: 5px;font-size: 17px;">
+                    <p style="color: var(--bs-body-bg);padding-left: 10px;padding-right: 10px;margin-top: 0px;border-bottom-right-radius: 10px;border-bottom-left-radius: 10px;margin-bottom: 0px;border: 2px solid var(--bs-gray-700);border-top-style: solid;border-bottom-style: solid;border-bottom-color: rgb(73, 80, 87);padding-top: 10px;padding-bottom: 10px;">
+                        {% translate 'The' %} 
+                        <svg class="icon icon-tabler icon-tabler-message-chatbot" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" style="color: #54e012;margin-right: 5px;font-size: 17px;">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                             <path d="M18 4a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-5l-5 3v-3h-2a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3h12z"></path>
                             <path d="M9.5 9h.01"></path>
                             <path d="M14.5 9h.01"></path>
                             <path d="M9.5 13a3.5 3.5 0 0 0 5 0"></path>
-                        </svg><strong><span style="background-color: rgb(33, 37, 41);">Social </span></strong><span style="background-color: rgb(33, 37, 41);">aspect of the app allows you to discuss with friends and manage your friend list.</span><br />To create a conversation or interact with someone, you must add a player to your friend list.<br />The friend has to either accept the requested invitation from you, or has to add you back via your<br /><svg class="icon icon-tabler icon-tabler-user-circle" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" style="color: var(--bs-primary-border-subtle);font-size: 17px;margin-right: 0px;">
+                        </svg>
+                        <strong>
+                            <span style="background-color: rgb(33, 37, 41);">
+                                {% translate 'Social' %}
+                            </span>
+                        </strong>
+                        <span style="background-color: rgb(33, 37, 41);">
+                            {% translate 'aspect of the app allows you to discuss with friends and manage your friend list.' %}
+                        </span>
+                        <br />
+                        {% translate 'To create a conversation or interact with someone, you must add a player to your friend list.' %}
+                        <br />
+                        {% translate 'The friend has to either accept the requested invitation from you, or has to add you back via your' %}
+                        <br />
+                        <svg class="icon icon-tabler icon-tabler-user-circle" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" style="color: var(--bs-primary-border-subtle);font-size: 17px;margin-right: 0px;">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                             <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
                             <path d="M12 10m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"></path>
                             <path d="M6.168 18.849a4 4 0 0 1 3.832 -2.849h4a4 4 0 0 1 3.834 2.855"></path>
-                        </svg><strong> Profile</strong> page.<br />When both users have accepted each other, you can see their status in the  <svg class="icon icon-tabler icon-tabler-message-chatbot" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" style="color: #54e012;margin-right: 5px;font-size: 17px;">
+                        </svg>
+                        <strong>
+                             {% translate 'Profile' %}
+                        </strong>
+                         {% translate 'page.' %}
+                        <br />
+                        {% translate 'When both users have accepted each other, you can see their status in the' %}  
+                        <svg class="icon icon-tabler icon-tabler-message-chatbot" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" style="color: #54e012;margin-right: 5px;font-size: 17px;">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                             <path d="M18 4a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-5l-5 3v-3h-2a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3h12z"></path>
                             <path d="M9.5 9h.01"></path>
                             <path d="M14.5 9h.01"></path>
                             <path d="M9.5 13a3.5 3.5 0 0 0 5 0"></path>
-                        </svg><strong>Social </strong>page<strong> </strong>, you can interact with this friend by clicking on them in your friend list.</p>
+                        </svg>
+                        <strong>
+                            {% translate 'Social' %} 
+                        </strong>
+                        {% translate 'page, you can interact with this friend by clicking on them in your friend list.' %}
+                    </p>
                 </div>
             </div>
         </div>
         <div class="col-8 col-sm-10 col-md-10 d-flex justify-content-center align-items-center" style="width: 100%;height: 100%;padding-top: 10px;padding-bottom: 10px;">
-            <div style="width: 100%;height: 100%;"><a class="btn btn-primary d-flex d-xxl-flex justify-content-center align-items-center align-items-xxl-center" data-bs-toggle="collapse" aria-expanded="false" aria-controls="collapse-3" href="#collapse-3" role="button" style="background: var(--bs-gray-700);border-radius: 10px;font-weight: bold;border-bottom-right-radius: 0px;border-bottom-left-radius: 1px;font-size: 20px;border-color: rgb(73,80,87);border-bottom-style: solid;border-bottom-color: rgb(73,80,87);">What happens when i block someone ?<svg class="icon icon-tabler icon-tabler-plus" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" style="font-size: 30px;color: var(--bs-black);margin-left: 12px;">
+            <div style="width: 100%;height: 100%;">
+                <a class="btn btn-primary d-flex d-xxl-flex justify-content-center align-items-center align-items-xxl-center" data-bs-toggle="collapse" aria-expanded="false" aria-controls="collapse-3" href="#collapse-3" role="button" style="background: var(--bs-gray-700);border-radius: 10px;font-weight: bold;border-bottom-right-radius: 0px;border-bottom-left-radius: 1px;font-size: 20px;border-color: rgb(73,80,87);border-bottom-style: solid;border-bottom-color: rgb(73,80,87);">
+                    {% translate 'What happens when i block someone ?' %}
+                    <svg class="icon icon-tabler icon-tabler-plus" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" style="font-size: 30px;color: var(--bs-black);margin-left: 12px;">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                         <path d="M12 5l0 14"></path>
                         <path d="M5 12l14 0"></path>
-                    </svg></a>
+                    </svg>
+                </a>
                 <div id="collapse-3" class="collapse">
-                    <p style="padding-left: 10px;padding-right: 10px;margin-top: 0px;border-bottom-right-radius: 10px;border-bottom-left-radius: 10px;margin-bottom: 0px;border: 2px solid var(--bs-gray-700);border-top-style: solid;border-bottom-style: solid;border-bottom-color: rgb(73, 80, 87);padding-top: 10px;padding-bottom: 10px;color: #fc7e14;"><svg class="icon icon-tabler icon-tabler-bell-off" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" style="color: #fc7e14;margin-right: 5px;font-size: 17px;">
+                    <p style="padding-left: 10px;padding-right: 10px;margin-top: 0px;border-bottom-right-radius: 10px;border-bottom-left-radius: 10px;margin-bottom: 0px;border: 2px solid var(--bs-gray-700);border-top-style: solid;border-bottom-style: solid;border-bottom-color: rgb(73, 80, 87);padding-top: 10px;padding-bottom: 10px;color: #fc7e14;">
+                        <svg class="icon icon-tabler icon-tabler-bell-off" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" style="color: #fc7e14;margin-right: 5px;font-size: 17px;">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                             <path d="M9.346 5.353c.21 -.129 .428 -.246 .654 -.353a2 2 0 1 1 4 0a7 7 0 0 1 4 6v3m-1 3h-13a4 4 0 0 0 2 -3v-3a6.996 6.996 0 0 1 1.273 -3.707"></path>
                             <path d="M9 17v1a3 3 0 0 0 6 0v-1"></path>
                             <path d="M3 3l18 18"></path>
-                        </svg><strong>Blocking<span style="color: rgb(218, 52, 68);"> </span></strong><span style="color: rgb(255, 255, 255);">a user will prevent them from sending notifications and messages to you.</span><br /><span style="color: rgb(255, 255, 255);">If you have blocked someone and play with them in the same game room, you will not see their messages in the room chat.</span><br /><span style="color: rgb(255, 255, 255);">If you have blocked a friend, you will still be able to interact with them, and they will be able to see your requests and messages but you will not see their replies or requests.</span><br /><span style="color: rgb(255, 255, 255);">You can </span><svg class="icon icon-tabler icon-tabler-bell-ringing" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" style="color: #0c6eff;font-size: 17px;margin-right: 0px;">
+                        </svg>
+                        <strong>
+                            {% translate 'Blocking' %}
+                        </strong>
+                        <span style="color: rgb(255, 255, 255);">
+                            {% translate 'a user will prevent them from sending notifications and messages to you.' %}
+                        </span>
+                        <br />
+                        <span style="color: rgb(255, 255, 255);">
+                            {% translate 'If you have blocked someone and play with them in the same game room, you will not see their messages in the room chat.' %}
+                        </span>
+                        <br />
+                        <span style="color: rgb(255, 255, 255);">
+                            {% translate 'If you have blocked a friend, you will still be able to interact with them, and they will be able to see your requests and messages but you will not see their replies or requests.' %}
+                        </span>
+                        <br />
+                        <span style="color: rgb(255, 255, 255);">
+                            {% translate 'You can' %} 
+                        </span>
+                        <svg class="icon icon-tabler icon-tabler-bell-ringing" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" style="color: #0c6eff;font-size: 17px;margin-right: 0px;">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                             <path d="M10 5a2 2 0 0 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6"></path>
                             <path d="M9 17v1a3 3 0 0 0 6 0v-1"></path>
                             <path d="M21 6.727a11.05 11.05 0 0 0 -2.794 -3.727"></path>
                             <path d="M3 6.727a11.05 11.05 0 0 1 2.792 -3.727"></path>
-                        </svg><strong><span style="color: rgb(12, 110, 255);">Unblock </span></strong><span style="color: rgb(255, 255, 255);">a user by going to their </span><svg class="icon icon-tabler icon-tabler-user-circle" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" style="color: var(--bs-primary-border-subtle);font-size: 17px;margin-right: 0px;">
+                        </svg>
+                        <strong>
+                            <span style="color: rgb(12, 110, 255);">
+                                {% translate 'Unblock' %}
+                            </span>
+                        </strong>
+                        <span style="color: rgb(255, 255, 255);">
+                            {% translate 'a user by going to their' %}
+                        </span>
+                        <svg class="icon icon-tabler icon-tabler-user-circle" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" style="color: var(--bs-primary-border-subtle);font-size: 17px;margin-right: 0px;">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                             <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
                             <path d="M12 10m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"></path>
                             <path d="M6.168 18.849a4 4 0 0 1 3.832 -2.849h4a4 4 0 0 1 3.834 2.855"></path>
-                        </svg><strong><span style="color: rgb(255, 255, 255);">Profile</span></strong><span style="color: rgb(255, 255, 255);"> page, via the </span><svg class="icon icon-tabler icon-tabler-message-chatbot" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" style="color: #54e012;margin-right: 5px;font-size: 17px;">
+                        </svg>
+                        <strong>
+                            <span style="color: rgb(255, 255, 255);">
+                                {% translate 'Profile' %}
+                            </span>
+                        </strong>
+                        <span style="color: rgb(255, 255, 255);">
+                        {% translate 'page, via the' %} 
+                        </span>
+                        <svg class="icon icon-tabler icon-tabler-message-chatbot" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" style="color: #54e012;margin-right: 5px;font-size: 17px;">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                             <path d="M18 4a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-5l-5 3v-3h-2a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3h12z"></path>
                             <path d="M9.5 9h.01"></path>
                             <path d="M14.5 9h.01"></path>
                             <path d="M9.5 13a3.5 3.5 0 0 0 5 0"></path>
-                        </svg><strong><span style="color: rgb(255, 255, 255);">Social</span></strong><span style="color: rgb(255, 255, 255);"> page , or removing them off your blocked list under the  </span><svg class="icon icon-tabler icon-tabler-settings" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" style="color: var(--bs-gray-500);font-size: 17px;margin-right: 0px;">
+                        </svg>
+                        <strong>
+                        <span style="color: rgb(255, 255, 255);">
+                            {% translate 'Social' %}
+                        </span>
+                        </strong>
+                        <span style="color: rgb(255, 255, 255);">
+                        {% translate 'page , or removing them off your blocked list under the' %}  
+                        </span>
+                        <svg class="icon icon-tabler icon-tabler-settings" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" style="color: var(--bs-gray-500);font-size: 17px;margin-right: 0px;">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                             <path d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z"></path>
                             <path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"></path>
-                        </svg><strong><span style="color: rgb(255, 255, 255);">Settings</span></strong><span style="color: rgb(255, 255, 255);"> page</span></p>
+                        </svg>
+                        <strong>
+                            <span style="color: rgb(255, 255, 255);">
+                                {% translate 'Settings' %}
+                            </span>
+                        </strong>
+                        <span style="color: rgb(255, 255, 255);">
+                            {% translate 'page' %}
+                        </span>
+                    </p>
                 </div>
             </div>
         </div>
         <div class="col-sm-10 col-md-10 d-flex justify-content-center align-items-center" style="width: 100%;height: 100%;padding-top: 10px;padding-bottom: 10px;">
-            <div style="width: 100%;height: 100%;"><a class="btn btn-primary d-flex d-xxl-flex justify-content-center align-items-center align-items-xxl-center" data-bs-toggle="collapse" aria-expanded="false" aria-controls="collapse-2" href="#collapse-2" role="button" style="background: var(--bs-gray-700);border-radius: 10px;font-weight: bold;border-bottom-right-radius: 0px;border-bottom-left-radius: 1px;font-size: 20px;border-color: rgb(73,80,87);border-bottom-style: solid;border-bottom-color: rgb(73,80,87);">Can i suggest some ideas ?<svg class="icon icon-tabler icon-tabler-plus" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" style="font-size: 30px;color: var(--bs-black);margin-left: 12px;">
+            <div style="width: 100%;height: 100%;">
+                <a class="btn btn-primary d-flex d-xxl-flex justify-content-center align-items-center align-items-xxl-center" data-bs-toggle="collapse" aria-expanded="false" aria-controls="collapse-2" href="#collapse-2" role="button" style="background: var(--bs-gray-700);border-radius: 10px;font-weight: bold;border-bottom-right-radius: 0px;border-bottom-left-radius: 1px;font-size: 20px;border-color: rgb(73,80,87);border-bottom-style: solid;border-bottom-color: rgb(73,80,87);">
+                    {% translate 'Can i suggest some ideas ?' %}
+                    <svg class="icon icon-tabler icon-tabler-plus" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" style="font-size: 30px;color: var(--bs-black);margin-left: 12px;">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                         <path d="M12 5l0 14"></path>
                         <path d="M5 12l14 0"></path>
-                    </svg></a>
+                    </svg>
+                </a>
                 <div id="collapse-2" class="collapse">
-                    <p class="flex-wrap" style="color: var(--bs-body-bg);padding-left: 10px;padding-right: 10px;margin-top: 0px;border-bottom-right-radius: 10px;border-bottom-left-radius: 10px;margin-bottom: 0px;border: 2px solid var(--bs-gray-700);border-top-style: solid;border-bottom-style: solid;border-bottom-color: rgb(73, 80, 87);padding-top: 10px;padding-bottom: 10px;">Yes , we would love to hear about your ideas ! Feel free to share them with us by contacting us at <a href="#">transcendence42@rocks.fr</a></p>
+                    <p class="flex-wrap" style="color: var(--bs-body-bg);padding-left: 10px;padding-right: 10px;margin-top: 0px;border-bottom-right-radius: 10px;border-bottom-left-radius: 10px;margin-bottom: 0px;border: 2px solid var(--bs-gray-700);border-top-style: solid;border-bottom-style: solid;border-bottom-color: rgb(73, 80, 87);padding-top: 10px;padding-bottom: 10px;">
+                        {% translate 'Yes , we would love to hear about your ideas ! Feel free to share them with us by contacting us at' %} 
+                        <a href="#">transcendence42@rocks.fr</a>
+                    </p>
                 </div>
             </div>
         </div>

@@ -3,7 +3,7 @@
 {% load i18n %}
 {% block title %}{% translate "Game Rules" %}{% endblock %}
 {% block content %}
-{% include "sidebar.html" %}
+{% include "../sidebar.html" %}
 {% if profile %}
     {% include "notifs/notifications.html" %}
 {% endif %}
@@ -19,7 +19,7 @@
                         <path d="M12 14l-3 3v2a1 1 0 0 0 1 1h4a1 1 0 0 0 1 -1v-2l-3 -3z"></path>
                         <path d="M12 10l-3 -3v-2a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v2l-3 3z"></path>
                     </svg>
-                    Game Rules
+                    {% translate 'Game Rules' %}
                 </h1>
                 <div class="d-flex justify-content-center align-items-center" style="height: 55px;">
                     <a id="navAboutGameRules" href="/about/" class="d-flex justify-content-center align-items-center aboutBtn" style="padding-left: 15px;padding-right: 15px;border-radius: 19px;box-shadow: 0px 0px 6px 1px var(--bs-body-bg);padding-top: 10px;padding-bottom: 10px;margin-top: 5px;margin-bottom: 5px;">
@@ -31,7 +31,7 @@
                         </svg>
                         <div class="d-flex justify-content-center align-items-center">
                             <p style="color: var(--bs-body-bg);margin-bottom: 0px;">
-                                About
+                                {% translate 'About' %}
                             </p>
                         </div>
                     </a>
@@ -43,15 +43,15 @@
 <div class="row" style="width: 100%;margin-left: 0px;margin-right: 0px;">
     <div class="col text-center d-flex justify-content-center align-items-center" style="padding: 20px 12px;padding-bottom: 0px;padding-top: 0px;">
         <h6 class="d-flex justify-content-center align-items-center" style="color: var(--bs-body-bg);margin-bottom: 0px;">
-            The rules are simple:
+            {% translate 'The rules are simple:' %}
             <br />
-            There are two paddles on each side of the field , you (and your opponent) have to move your paddles and hit the ball in order to score a point.
+            {% translate 'There are two paddles on each side of the field , you (and your opponent) have to move your paddles and hit the ball in order to score a point.' %}
             <br />
-            The ball is getting faster from each hit.
+            {% translate 'The ball is getting faster from each hit.' %}
             <br />
-            You have to score as much points as the creator of the game room has defined to win a game.
+            {% translate 'You have to score as much points as the creator of the game room has defined to win a game.' %}
             <br />
-            Your side is represented by your name and your avatar above the game , it also displays the current score of the game.
+            {% translate 'Your side is represented by your name and your avatar above the game , it also displays the current score of the game.' %}
         </h6>
     </div>
 </div>
@@ -99,10 +99,10 @@
                 <path d="M8 17l4 4l4 -4"></path>
                 <path d="M12 3l0 18"></path>
             </svg>
-            Movement 
+            {% translate 'Movement' %} 
         </h3>
         <h6 class="d-flex justify-content-center align-items-center" style="color: var(--bs-body-bg);padding-top: 8px;padding-bottom: 8px;margin-bottom: 0px;">
-            There are 3 ways to move your paddle
+            {% translate 'There are 3 ways to move your paddle' %}
         </h6>
         <h6 class="d-flex justify-content-center align-items-center" style="color: var(--bs-body-bg);margin-bottom: 0px;">
             <svg class="icon icon-tabler icon-tabler-mouse" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" style="font-size: 30px;color: var(--bs-success-bg-subtle);margin-right: 0px;">
@@ -110,39 +110,39 @@
                 <path d="M6 3m0 4a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v10a4 4 0 0 1 -4 4h-4a4 4 0 0 1 -4 -4z"></path>
                 <path d="M12 7l0 4"></path>
             </svg>
-            You can click and hold to a direction make the paddle going up and down
+            {% translate 'You can click and hold to a direction make the paddle going up and down' %}
         </h6>
         <h6 class="d-flex justify-content-center align-items-center" style="color: var(--bs-body-bg);margin-bottom: 0px;">
-            Pressing
+            {% translate 'Pressing' %}
             <svg class="icon icon-tabler icon-tabler-square-arrow-up" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" style="font-size: 30px;color: var(--bs-success-bg-subtle);margin-right: 5px;margin-left: 5px;">
                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                 <path d="M16 12l-4 -4l-4 4"></path>
                 <path d="M12 16v-8"></path>
                 <path d="M3 3m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z"></path>
             </svg>
-            or
+            {% translate 'or' %}
             <svg class="icon icon-tabler icon-tabler-square-letter-w" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" style="font-size: 30px;color: var(--bs-success-bg-subtle);margin-left: 5px;margin-right: 5px;">
                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                 <path d="M3 3m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z"></path>
                 <path d="M9 8l1 8l2 -5l2 5l1 -8"></path>
             </svg>
-            keys will make the paddle going up
+            {% translate 'keys will make the paddle going up' %}
         </h6>
         <h6 class="d-flex justify-content-center align-items-center" style="color: var(--bs-body-bg);margin-bottom: 0px;">
-            Pressing
+            {% translate 'Pressing' %}
             <svg class="icon icon-tabler icon-tabler-square-arrow-down" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" style="font-size: 30px;color: var(--bs-success-bg-subtle);margin-right: 5px;margin-left: 5px;">
                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                 <path d="M8 12l4 4l4 -4"></path>
                 <path d="M12 8v8"></path>
                 <path d="M3 3m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z"></path>
             </svg> 
-            or
+            {% translate 'or' %}
             <svg class="icon icon-tabler icon-tabler-square-letter-s" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" style="font-size: 30px;color: var(--bs-success-bg-subtle);margin-left: 5px;margin-right: 5px;">
                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                 <path d="M3 3m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z"></path>
                 <path d="M10 15a1 1 0 0 0 1 1h2a1 1 0 0 0 1 -1v-2a1 1 0 0 0 -1 -1h-2a1 1 0 0 1 -1 -1v-2a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1"></path>
             </svg>
-            keys will make the paddle going down
+            {% translate 'keys will make the paddle going down' %}
         </h6>
     </div>
 </div>
@@ -157,7 +157,7 @@
                 <path d="M15 6v3h3l3 -3h-3v-3z"></path>
                 <path d="M15 9l-3 3"></path>
             </svg>
-            Points to win a game, 
+            {% translate 'Points to win a game,' %} 
             <svg class="icon icon-tabler icon-tabler-users-group" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" style="font-size: 30px;color: var(--bs-info);margin-right: 5px;">
                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                 <path d="M10 13a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path>
@@ -167,7 +167,7 @@
                 <path d="M5 5a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path>
                 <path d="M3 13v-1a2 2 0 0 1 2 -2h2"></path>
             </svg>
-            Players in the room/Players needed and the
+            {% translate 'Players in the room/Players needed and the' %}
             <svg class="icon icon-tabler icon-tabler-soccer-field" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" style="font-size: 30px;color: var(--bs-body-bg);margin-right: 5px;">
                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                 <path d="M12 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"></path>
@@ -176,18 +176,18 @@
                 <path d="M3 5m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z"></path>
                 <path d="M12 5l0 14"></path>
             </svg>
-            map are defined by the game creator and can be seen in the game rooms section from the home menu.
+            {% translate 'map are defined by the game creator and can be seen in the game rooms section from the home menu.' }
             <br />
-            There are some other settings that the room owner can define , such as the initial ball speed , or the paddle/ball size.
+            {% translate 'There are some other settings that the room owner can define , such as the initial ball speed , or the paddle/ball size.' %}
             <br />
-            These settings cannot be changed once the room is created.
+            {% translate 'These settings cannot be changed once the room is created.' %}
         </p>
     </div>
 </div>
 <div class="row d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="width: 100%;">
     <div class="col-xl-12 col-xxl-12 text-center d-flex flex-column justify-content-center align-items-center" style="padding: 20px 12px;padding-top: 0px;padding-bottom: 0px;padding-right: 0px;">
         <h3 class="d-flex justify-content-center align-items-center bounce animated infinite" style="color: var(--bs-body-bg);margin-bottom: 0px;padding-top: 10px;padding-bottom: 10px;">
-            Enjoy your games ! 
+            {% translate 'Enjoy your games !' %} 
         </h3>
     </div>
 </div>
