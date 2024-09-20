@@ -1,5 +1,6 @@
 import logging
 from asgiref.sync import async_to_sync
+from django.contrib.auth.hashers import make_password
 from django.shortcuts import get_object_or_404
 from django.utils import translation
 from django.utils.encoding import force_bytes, force_str
@@ -15,7 +16,7 @@ from accounts.tokens import EmailTokenGenerator
 from accounts.utils import unset_jwt_cookies
 from friends.models import FriendRequest, FriendMessage, Friendship
 from friends.serializers import FriendRequestSerializer, FriendshipSerializer, FriendMessageSerializer
-from games.models import Game, GameInvite, GameMessage
+from games.models import Game, GameInvite, GameMessage, GameRound
 from games.serializers import GameInviteSerializer
 from notifs.models import Notification
 
@@ -182,7 +183,7 @@ class MyPasswordView(PrivateView):
             if request.user.check_password(serializer.validated_data['password']):
                 response_data = {'error': _('Invalid password.')}
                 return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
-            request.user.set_password(serializer.validated_data['password'])
+            request.user.password = make_password(serializer.validated_data['password'])
             request.user.code = None
             request.user.code_updated_at = None
             request.user.save()
@@ -193,6 +194,30 @@ class MyPasswordView(PrivateView):
             return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
 
 my_password = MyPasswordView.as_view()
+
+
+class MyTwofaView(PrivateView):
+    def post(self, request):
+        try:
+            request.user.has_twofa = True
+            request.user.save()
+            response_data = {'message': _('2FA enabled.'), 'redirect': '/settings/'}
+            return Response(response_data, status=status.HTTP_200_OK)
+        except ValueError as e:
+            response_data = {'error': str(e)}
+            return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
+    
+    def put(self, request):
+        try:
+            request.user.has_twofa = False
+            request.user.save()
+            response_data = {'message': _('2FA disabled.'), 'redirect': '/settings/'}
+            return Response(response_data, status=status.HTTP_200_OK)
+        except ValueError as e:
+            response_data = {'error': str(e)}
+            return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
+
+my_twofa = MyTwofaView.as_view()
 
 
 class MyCodeView(PrivateView):
@@ -409,6 +434,23 @@ class MyRequestDetailView(PrivateView):
             return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
 
 my_request_detail = MyRequestDetailView.as_view()
+
+
+class MyEloListView(PrivateView):
+    def get(self, request):
+        last_matches = GameRound.objects.get_last_matches(request.profile)
+        last_elos = []
+        current_elo = request.profile.elo
+        for m in last_matches:
+            if m.winner == request.profile:
+                current_elo -= m.elo_win
+            else:
+                current_elo += m.elo_lose
+            last_elos.append(current_elo)
+        response_data = {'data': last_elos.reverse()}
+        return Response(response_data, status=status.HTTP_200_OK)
+
+my_elo_list = MyEloListView.as_view()
 
 
 class MyFriendListView(PrivateView):
