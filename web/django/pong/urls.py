@@ -47,7 +47,7 @@ urlpatterns = [
 	path('change-email/', views.change_email, name='change_email'),
 	
     path('privacy_policy/', views.privacy_policy, name='privacy_policy'),
-    path('terms_of_use/', views.terms_of_use, name='terms_of_use'),
+    path('terms_of_service/', views.terms_of_service, name='terms_of_service'),
 
     path('home/', views.home, name='home'),
 	path('select/', views.select_game, name='select_game'),

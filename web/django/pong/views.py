@@ -239,9 +239,9 @@ privacy_policy = PrivacyPolicyView.as_view()
 
 class TosView(PublicView):
     def get(self, request):
-        return render(request, 'terms_of_use.html')
+        return render(request, 'terms_of_service.html')
 
-terms_of_use = TosView.as_view()
+terms_of_service = TosView.as_view()
 
 
 class HomeView(PrivateView):
