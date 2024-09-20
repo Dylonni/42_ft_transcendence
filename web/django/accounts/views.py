@@ -46,7 +46,7 @@ class UserLoginView(PublicView):
             serializer.is_valid(raise_exception=True)
             user = serializer.validated_data['user']
             Profile.objects.set_user_status(user, Profile.StatusChoices.ONLINE)
-            response_data = {'message': _('User logged in.'), 'redirect': '/home/'}
+            response_data = {'message':'User logged in.', 'redirect': '/home/'}
             response = Response(response_data, status=status.HTTP_200_OK)
             login(request, user)
             set_jwt_cookies_for_user(response, user)
@@ -65,7 +65,7 @@ class UserLogoutView(PrivateView):
         if game:
             Game.objects.remove_player(game, player)
         Profile.objects.set_user_status(request.user, Profile.StatusChoices.OFFLINE)
-        response_data = {'message': _('User logged out.'), 'redirect': '/'}
+        response_data = {'message': 'User logged out.', 'redirect': '/'}
         response = Response(response_data, status=status.HTTP_200_OK)
         logout(request)
         unset_jwt_cookies(response)
@@ -125,7 +125,7 @@ class UserActivateView(PublicView):
             user.code_updated_at = None
             user.save()
             Profile.objects.set_user_status(user, Profile.StatusChoices.ONLINE)
-            response_data = {'message': _('Account verified.'), 'redirect': '/home/'}
+            response_data = {'message': 'Account verified.', 'redirect': '/home/'}
             response = Response(response_data, status=status.HTTP_200_OK)
             login(request, user)
             set_jwt_cookies_for_user(response, user)
@@ -173,11 +173,11 @@ class PasswordResetView(PublicView):
             uid = force_str(urlsafe_base64_decode(to_decode))
             user = UserModel.objects.filter(id=uid).first()
             if not user:
-                response_data = {'message': _('Invalid url.'), 'redirect': '/'}
+                response_data = {'message': 'Invalid url.', 'redirect': '/'}
                 return Response(response_data, status=status.HTTP_200_OK)
             token_generator = EmailTokenGenerator()
             if not token_generator.check_token(user, token):
-                response_data = {'message': _('Invalid url.'), 'redirect': '/'}
+                response_data = {'message': 'Invalid url.', 'redirect': '/'}
                 return Response(response_data, status=status.HTTP_200_OK)
             response_data = {
                 'message': _('Set your new password.'),
@@ -199,15 +199,15 @@ class PasswordConfirmView(PublicView):
             uid = request.query_params.get('user', None)
             user = UserModel.objects.filter(id=uid).first()
             if not user:
-                response_data = {'message': _('Invalid url.'), 'redirect': '/'}
+                response_data = {'message': 'Invalid url.', 'redirect': '/'}
                 return Response(response_data, status=status.HTTP_200_OK)
             token_generator = EmailTokenGenerator()
             if not token_generator.check_token(user, token):
-                response_data = {'message': _('Invalid url.'), 'redirect': '/'}
+                response_data = {'message': 'Invalid url.', 'redirect': '/'}
                 return Response(response_data, status=status.HTTP_200_OK)
             user.set_password(request.data['password'])
             Profile.objects.set_user_status(user, Profile.StatusChoices.ONLINE)
-            response_data = {'message': _('Password changed.'), 'redirect': '/home/'}
+            response_data = {'message': 'Password changed.', 'redirect': '/home/'}
             response = Response(response_data, status=status.HTTP_200_OK)
             login(request, user)
             set_jwt_cookies_for_user(response, user)
@@ -232,7 +232,7 @@ class FortyTwoUnlinkView(PrivateView):
     def post(self, request: HttpRequest):
         request.profile.set_avatar_url()
         request.user.update_fortytwo_infos()
-        response_data = {'message': _('42 account unlinked.'), 'redirect': '/settings/'}
+        response_data = {'message': '42 account unlinked.', 'redirect': '/settings/'}
         return Response(response_data, status=status.HTTP_200_OK)
 
 fortytwo_unlink = FortyTwoUnlinkView.as_view()
@@ -306,7 +306,7 @@ class TokenVerify(PublicView):
             if is_token_valid(access_token):
                 response = Response(
                     {
-                        'status': _('Already authenticated!'),
+                        'status': 'Already authenticated!',
                         'redirect': '/home/',
                     },
                     status=status.HTTP_200_OK,
@@ -317,7 +317,7 @@ class TokenVerify(PublicView):
                 if access_token is None:
                     response = Response(
                         {
-                            'status': _('Invalid tokens!'),
+                            'status': 'Invalid tokens!',
                             'redirect': '/login/',
                         },
                         status=status.HTTP_200_OK,
@@ -327,7 +327,7 @@ class TokenVerify(PublicView):
                 else:
                     response = Response(
                         {
-                            'status': _('Already authenticated!'),
+                            'status': 'Already authenticated!',
                             'redirect': '/home/',
                         },
                         status=status.HTTP_200_OK,
@@ -336,7 +336,7 @@ class TokenVerify(PublicView):
                     return response
         response = Response(
             {
-                'status': _('Welcome!'),
+                'status': 'Welcome!',
                 'redirect': '/login/',
             },
             status=status.HTTP_200_OK,
