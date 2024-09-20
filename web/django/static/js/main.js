@@ -1211,6 +1211,61 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     const profilesPage = () => {
+        const winrateCanvas = document.getElementById('winRate');
+        if (winrateCanvas) {
+            const data = [winrateCanvas.dataset.won, winrateCanvas.dataset.lost];
+            new Chart(
+                winrateCanvas,
+                {
+                    type: 'pie',
+                    data: {
+                        labels: [
+                            'Won',
+                            'Lost',
+                        ],
+                        datasets: [{
+                            label: 'Winrate',
+                            data: data,
+                        }],
+                    },
+                }
+            );
+        }
+
+        let points;
+        let path = window.location.pathname;
+        if (path.endsWith('/')) {
+            path = '/api' + path + 'elos/';
+        } else {
+            path = '/api' + path + '/elos/';
+        }
+        fetch(`${path}`, {
+            method: 'GET',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            if ('points' in data) {
+                points = data.points;
+                new Chart(
+                    document.getElementById('lastElos'),
+                    {
+                        type: 'line',
+                        data: {
+                            labels: points.map(row => row.index),
+                            datasets: [{
+                                label: "Elo",
+                                data: points.map(row => row.elo),
+                            }],
+                        },
+                    }
+                );
+            }
+        })
+        .catch(error => console.error('Error getting last elos:', error));
+        
         const addFriendBtn = document.getElementById('addFriendBtn');
         if (addFriendBtn) {
             addFriendBtn.addEventListener('click', (event) => {
