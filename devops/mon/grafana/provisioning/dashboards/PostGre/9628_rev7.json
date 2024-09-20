@@ -198,7 +198,7 @@
 			},
 			"disableTextWrap": false,
 			"editorMode": "code",
-			"expr": "process_start_time_seconds{instance=\"$instance\", job=\"postgres\", group=\"postgres-server\"} * 1000",
+			"expr": "process_start_time_seconds{release=\"$release\", instance=\"$instance\"} * 1000",
 			"fullMetaSearch": false,
 			"hide": false,
 			"includeNullMetadata": true,
@@ -209,7 +209,7 @@
 			"useBackend": false
 		  }
 		],
-		"title": "Start Time - updated",
+		"title": "Start Time",
 		"type": "stat"
 	  },
 	  {
