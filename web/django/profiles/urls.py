@@ -12,7 +12,6 @@ urlpatterns = [
 	path('profiles/me/lang/<str:lang>/', views.my_lang, name='my_lang'),
 	path('profiles/me/email/', views.my_email, name='my_email'),
 	path('profiles/me/password/', views.my_password, name='my_password'),
-	path('profiles/me/twofa/', views.my_twofa, name='my_twofa'),
     path('profiles/me/code/', views.my_code, name='my_code'),
 	
     path('profiles/<uuid:profile_id>/', views.profile_detail, name='profile_detail'),
@@ -27,8 +26,6 @@ urlpatterns = [
 	path('profiles/me/blocks/<uuid:block_id>/', views.my_block_detail, name='my_block_detail'),
     path('profiles/me/requests/', views.my_request_list, name='my_request_list'),
 	path('profiles/me/requests/<uuid:request_id>/', views.my_request_detail, name='my_request_detail'),
-    
-	path('profiles/me/elos/', views.my_elo_list, name='my_elo_list'),
     
 	path('profiles/me/friends/', views.my_friend_list, name='my_friend_list'),
 	path('profiles/me/friends/<uuid:friendship_id>/', views.my_friend_detail, name='my_friend_detail'),
