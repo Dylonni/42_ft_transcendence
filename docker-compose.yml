@@ -81,7 +81,7 @@ services:
       test: ["CMD", "curl", "-f", "localhost:8000"]
       interval: 5s
       timeout: 5s
-      retries: 8
+      retries: 4
     networks:
       - backend
     volumes:

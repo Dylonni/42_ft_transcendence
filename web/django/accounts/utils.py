@@ -12,20 +12,24 @@ def set_jwt_as_cookies(response: HttpResponse, access_token, refresh_token):
         key='access_token',
         value=access_token,
         httponly=True,
-        secure=True,
-        samesite='Lax',
+        # secure=True,
+        # samesite='Lax',
     )
     response.set_cookie(
         key='refresh_token',
         value=refresh_token,
         httponly=True,
-        secure=True,
-        samesite='Lax',
+        # secure=True,
+        # samesite='Lax',
     )
 
 def unset_jwt_cookies(response: HttpResponse):
-    response.delete_cookie(key='access_token')
-    response.delete_cookie(key='refresh_token')
+    response.delete_cookie(
+        key='access_token',
+    )
+    response.delete_cookie(
+        key='refresh_token',
+    )
 
 def is_token_valid(token):
     try:

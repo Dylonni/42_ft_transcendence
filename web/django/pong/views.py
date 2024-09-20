@@ -1,6 +1,6 @@
 import logging
 from django.contrib.auth import get_user_model
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from django.template.loader import render_to_string
 from django.utils import translation
@@ -23,10 +23,10 @@ def get_profile_context(request, profile_id=None):
     context = {}
     try:
         if profile_id:
-            profile = Profile.objects.filter(id=profile_id).first()
+            profile = Profile.objects.get(id=profile_id)
         else: 
             if request.user.id:
-                profile = Profile.objects.filter(user=request.user).first()
+                profile = Profile.objects.get(user=request.user)
             else:
                 profile = None
         context['profile'] = profile
@@ -98,13 +98,6 @@ class PrivateView(JWTCookieAuthenticationMixin, LangVerificationMixin, APIView):
     permission_classes = (IsAuthenticated,)
 
 
-class HealthzView(APIView):
-    def get(self, request):
-        return Response({'status': 'ok'}, status=status.HTTP_200_OK)
-
-healthz = HealthzView.as_view()
-
-
 class IndexView(PublicView):
     def get(self, request):
         context = get_profile_context(request)
@@ -162,8 +155,6 @@ class VerifyCodeView(PublicView):
         match code_type:
             case "forget":
                 target = f"/api/auth/password/reset/?token={code_token}&user={code_user}"
-            case "twofa":
-                target = f'/api/auth/twofa/?token={code_token}&user={code_user}'
             case "activate":
                 target = f'/api/auth/activate/?token={code_token}&user={code_user}'
             case _:
@@ -239,16 +230,44 @@ class ChangeEmailView(PrivateView):
 change_email = ChangeEmailView.as_view()
 
 
+class AboutView(PublicView):
+    def get(self, request):
+        return render(request, 'about/about.html')
+
+about = AboutView.as_view()
+
+
+class DevTeamView(PublicView):
+    def get(self, request):
+        return render(request, 'about/dev_team.html')
+
+dev_team = DevTeamView.as_view()
+
+
+class FaqView(PublicView):
+    def get(self, request):
+        return render(request, 'about/faq.html')
+
+faq = FaqView.as_view()
+
+
+class GameRulesView(PublicView):
+    def get(self, request):
+        return render(request, 'about/game_rules.html')
+
+game_rules = GameRulesView.as_view()
+
+
 class PrivacyPolicyView(PublicView):
     def get(self, request):
-        return render(request, 'privacy_policy.html')
+        return render(request, 'about/privacy_policy.html')
 
 privacy_policy = PrivacyPolicyView.as_view()
 
 
 class TosView(PublicView):
     def get(self, request):
-        return render(request, 'terms_of_service.html')
+        return render(request, 'about/terms_of_service.html')
 
 terms_of_service = TosView.as_view()
 

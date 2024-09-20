@@ -31,7 +31,6 @@ apipatterns = [
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('django_prometheus.urls')),
-	path('healthz/', views.healthz, name='healthz'),
     path('', views.index, name='index'),
     path('api/', include((apipatterns, 'api'), namespace='api')),
 
@@ -47,8 +46,12 @@ urlpatterns = [
 	path('change-password/', views.change_password, name='change_password'),
 	path('change-email/', views.change_email, name='change_email'),
 	
-    path('privacy_policy/', views.privacy_policy, name='privacy_policy'),
-    path('terms_of_service/', views.terms_of_service, name='terms_of_service'),
+    path('about/', views.about, name='about'),
+    path('about/dev_team/', views.dev_team, name='dev_team'),
+    path('about/faq/', views.faq, name='faq'),
+    path('about/game_rules/', views.game_rules, name='game_rules'),
+    path('about/privacy_policy/', views.privacy_policy, name='privacy_policy'),
+    path('about/terms_of_service/', views.terms_of_service, name='terms_of_service'),
 
     path('home/', views.home, name='home'),
 	path('select/', views.select_game, name='select_game'),
