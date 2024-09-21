@@ -6,7 +6,7 @@
         <div>
             <ul class="list-unstyled d-flex d-xl-flex flex-column justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center">
                 <li class="d-xl-flex justify-content-xl-center align-items-xl-center" style="margin-top: 20px;margin-bottom: 20px;">
-                    {% if profile.game %}
+                    {% if profile and profile.game %}
                     <a id="navGame" href="/games/{{ profile.game.id }}" style="color: var(--bs-body-bg);">
                         <svg class="bi bi-joystick" fill="currentColor" height="1em" style="font-size: 40px;" viewbox="0 0 16 16" width="1em" xmlns="http://www.w3.org/2000/svg">
                             <path d="M10 2a2 2 0 0 1-1.5 1.937v5.087c.863.083 1.5.377 1.5.726 0 .414-.895.75-2 .75s-2-.336-2-.75c0-.35.637-.643 1.5-.726V3.937A2 2 0 1 1 10 2"></path>

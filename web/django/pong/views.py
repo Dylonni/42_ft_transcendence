@@ -230,13 +230,42 @@ class ChangeEmailView(PrivateView):
 
 change_email = ChangeEmailView.as_view()
 
+
+class AboutView(PublicView):
+    def get(self, request):
+        return render(request, 'about/about.html')
+
+about = AboutView.as_view()
+
+
+class DevTeamView(PublicView):
+    def get(self, request):
+        return render(request, 'about/dev_team.html')
+
+dev_team = DevTeamView.as_view()
+
+
+class FaqView(PublicView):
+    def get(self, request):
+        return render(request, 'about/faq.html')
+
+faq = FaqView.as_view()
+
+
+class GameRulesView(PublicView):
+    def get(self, request):
+        return render(request, 'about/game_rules.html')
+
+game_rules = GameRulesView.as_view()
+
+
 class PrivacyPolicyView(PublicView):
     def get(self, request):
         context = {
             'discord_invite': settings.DISCORD_INVITE,
             'django_mail_contact': settings.DJANGO_MAIL_CONTACT,
         }
-        return render(request, 'privacy_policy.html', context)
+        return render(request, 'privacy_policy.html', context)>>>>>>> 
 
 privacy_policy = PrivacyPolicyView.as_view()
 
@@ -247,9 +276,9 @@ class TosView(PublicView):
             'discord_invite': settings.DISCORD_INVITE,
             'django_mail_contact': settings.DJANGO_MAIL_CONTACT,
         }
-        return render(request, 'terms_of_use.html', context)
+        return render(request, 'about/terms_of_service.html')
 
-terms_of_use = TosView.as_view()
+terms_of_service = TosView.as_view()
 
 
 class HomeView(PrivateView):

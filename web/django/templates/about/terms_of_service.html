@@ -3,15 +3,34 @@
 {% load i18n %}
 {% block title %}{% translate "Terms of Service" %}{% endblock %}
 {% block content %}
-{% include "sidebar.html" %}
-{% include "notifs/notifications.html" %}
+{% include "../sidebar.html" %}
+{% if profile %}
+    {% include "notifs/notifications.html" %}
+{% endif %}
 <header>
     <div class="container">
         <div class="row">
-            <div class="col-md-12" style="margin-top: 3rem;">
-                <h1 class="fs-1 text-center" style="color: var(--bs-body-bg);margin-bottom: 50px;">
-                    {% translate "TERMS OF SERVICE" %}
-                </h1>
+            <div class="col-md-12" style="margin-top: 1em;margin-bottom: 3em;">
+                <div class="d-flex flex-column justify-content-center align-items-center" style="padding-top: 1em;margin-top: 3em;padding-bottom: 30px;">
+                    <h1 class="d-flex justify-content-center align-items-center justify-content-xxl-center" style="color: var(--bs-body-bg);margin-left: 0px;margin-right: 0px;width: 100%;margin-bottom: 25px;">
+                        TERMS OF SERVICE
+                    </h1>
+                    <div class="d-flex justify-content-center align-items-center" style="height: 55px;">
+                        <a id="navAboutTos" href="/about/" class="d-flex justify-content-center align-items-center aboutBtn" style="padding-left: 15px;padding-right: 15px;border-radius: 19px;box-shadow: 0px 0px 6px 1px var(--bs-body-bg);padding-top: 10px;padding-bottom: 10px;margin-top: 5px;margin-bottom: 5px;">
+                            <svg class="icon icon-tabler icon-tabler-arrow-left" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" style="font-size: 35px;color: var(--bs-body-bg);margin-right: 5px;">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                <path d="M5 12l14 0"></path>
+                                <path d="M5 12l6 6"></path>
+                                <path d="M5 12l6 -6"></path>
+                            </svg>
+                            <div class="d-flex justify-content-center align-items-center">
+                                <p style="color: var(--bs-body-bg);margin-bottom: 0px;">
+                                    About
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

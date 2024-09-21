@@ -16,7 +16,7 @@
                 <path d="M9.5 13a3.5 3.5 0 0 0 5 0"></path>
             </svg>
             <strong class="me-auto" style="color: var(--bs-body-bg);">
-                New Message
+                {% translate 'New Message' %}
             </strong>
             <small style="color: var(--bs-body-bg);">
                 {{ notif.created_at|timesince }}
@@ -25,13 +25,13 @@
             </button>
         </div>
         <p class="d-flex justify-content-center align-items-center" style="color: var(--bs-body-bg);padding-bottom: 0px;margin-top: 8px;margin-bottom: 8px;">
-            New
+            {% translate 'New' %}
             <a id="navFriendFromMessage_{{ notif.sender.id }}" href="/friends/{{ notif.object_id }}/">
                 <span class="text-truncate" style="font-weight: bold;padding-left: 0px;font-style: italic;color: var(--bs-body-bg);margin-left: 5px;margin-right: 5px;">
-                    message
+                    {% translate 'message' %}
                 </span>
             </a>
-            from
+            {% translate 'from' %}
             <span class="text-truncate" style="font-weight: bold;padding-left: 0px;font-style: italic;color: var(--bs-body-bg);margin-left: 8px;margin-right: 8px;">
                 {{ notif.sender }}
             </span>

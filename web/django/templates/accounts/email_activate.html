@@ -3,30 +3,30 @@
 <html>
     <head>
         <title>
-            Activate your account
+            {% translate 'Activate your account' %}
         </title>
     </head>
 
     <body>
         <h1 class="d-flex justify-content-center align-items-center">
-            Hi {{ user.username }},
+            {% translate 'Hi' %} {{ user.username }},
         </h1>
         <p class="d-flex justify-content-center align-items-center">
-            Thank you for registering at Transcendence. Please use the code below to activate your account:
+            {% translate 'Thank you for registering at Transcendence42. Please use the code below to activate your account:' %}
         </p>
         <h1 class="d-flex justify-content-center align-items-center" style="color: rgb(38,136,234);font-weight: bold;text-shadow: 1px 1px var(--bs-emphasis-color);">
             {{ user.code }}
         </h1>
         <p class="text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center" style="margin-top: 16px;font-weight: bold;">
-            This code will expire in 10 minutes.
+            {% translate 'This code will expire in 10 minutes.' %}
         </p>
         <p class="text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center">
-            If you did not create an account, please ignore this email.
+            {% translate 'If you did not create an account, please ignore this email.' %}
         </p>
         <p class="text-center d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center">
-            Thank you,
+            {% translate 'Thank you,' %}
             <br />
-            The Transcendence42 Team
+            {% translate 'The Transcendence42 Team' %}
         </p>
     </body>
 </html>

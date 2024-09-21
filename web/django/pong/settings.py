@@ -157,12 +157,6 @@ PASSWORD_RESET_TIMEOUT = 600
 
 LANGUAGE_CODE = 'en-us'
 
-LANGUAGES = [
-	('en', 'English'),
-    ('fr', 'French'),
-	('jp', 'japanese'),
-]
-
 TIME_ZONE = 'UTC'
 
 LOCALE_PATHS = [
@@ -181,23 +175,8 @@ LANGUAGES = [
     ('fr', 'French'),
     ('it', 'Italian'),
     ('ja', 'Japanese'),
-    ('ug', 'Uyghur'),
-]
-
-LOCALE_PATHS = [
-    os.path.join(BASE_DIR, 'locale'),
-]
-
-
-LANGUAGES = [
-    ('en', 'English'),
-    ('es', 'Spanish'),
-    ('fr', 'French'),
-    ('it', 'Italian'),
-    ('ja', 'Japanese'),
     ('ug', 'Uyghur')
 ]
-
 
 LOCALE_PATHS = [
     os.path.join(BASE_DIR, 'locale'),
