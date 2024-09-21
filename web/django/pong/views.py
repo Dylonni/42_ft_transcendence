@@ -230,46 +230,105 @@ class ChangeEmailView(PrivateView):
 change_email = ChangeEmailView.as_view()
 
 
+class AboutView(PrivateView):
+    def get(self, request):
+        context = {
+            'profile': request.profile,
+        }
+        return render(request, 'about/about.html', context)
+
+about_priv = AboutView.as_view()
+
+
 class AboutView(PublicView):
     def get(self, request):
         return render(request, 'about/about.html')
 
-about = AboutView.as_view()
+about_pub = AboutView.as_view()
+
+
+class DevTeamView(PrivateView):
+    def get(self, request):
+        context = {
+            'profile': request.profile,
+        }
+        return render(request, 'about/dev_team.html', context)
+
+dev_team_priv = DevTeamView.as_view()
 
 
 class DevTeamView(PublicView):
     def get(self, request):
         return render(request, 'about/dev_team.html')
 
-dev_team = DevTeamView.as_view()
+dev_team_pub = DevTeamView.as_view()
+
+
+class FaqView(PrivateView):
+    def get(self, request):
+        context = {
+            'profile': request.profile,
+        }
+        return render(request, 'about/faq.html', context)
+
+faq_priv = FaqView.as_view()
 
 
 class FaqView(PublicView):
     def get(self, request):
         return render(request, 'about/faq.html')
 
-faq = FaqView.as_view()
+faq_pub = FaqView.as_view()
+
+
+class GameRulesView(PrivateView):
+    def get(self, request):
+        context = {
+            'profile': request.profile,
+        }
+        return render(request, 'about/game_rules.html', context)
+
+game_rules_priv = GameRulesView.as_view()
 
 
 class GameRulesView(PublicView):
     def get(self, request):
         return render(request, 'about/game_rules.html')
 
-game_rules = GameRulesView.as_view()
+game_rules_pub = GameRulesView.as_view()
 
 
-class PrivacyPolicyView(PublicView):
+class PrivacyPolicyView(PrivateView):
+    def get(self, request):
+        context = {
+            'profile': request.profile,
+        }
+        return render(request, 'about/privacy_policy.html', context)
+
+privacy_policy_priv = PrivacyPolicyView.as_view()
+
+
+class PrivacyPolicyView(PrivateView):
     def get(self, request):
         return render(request, 'about/privacy_policy.html')
 
-privacy_policy = PrivacyPolicyView.as_view()
+privacy_policy_pub = PrivacyPolicyView.as_view()
 
+
+class TosView(PrivateView):
+    def get(self, request):
+        context = {
+            'profile': request.profile,
+        }
+        return render(request, 'about/terms_of_service.html', context)
+
+terms_of_service_priv = TosView.as_view()
 
 class TosView(PublicView):
     def get(self, request):
         return render(request, 'about/terms_of_service.html')
 
-terms_of_service = TosView.as_view()
+terms_of_service_pub = TosView.as_view()
 
 
 class HomeView(PrivateView):
