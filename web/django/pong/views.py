@@ -1,5 +1,4 @@
 import logging
-from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render, redirect
@@ -241,11 +240,11 @@ class AboutView(PrivateView):
 about_priv = AboutView.as_view()
 
 
-# class AboutView(PublicView):
-#     def get(self, request):
-#         return render(request, 'about/about.html')
+class AboutView(PublicView):
+    def get(self, request):
+        return render(request, 'about/about.html')
 
-# about_pub = AboutView.as_view()
+about_pub = AboutView.as_view()
 
 
 class DevTeamView(PrivateView):
@@ -309,14 +308,6 @@ class PrivacyPolicyView(PrivateView):
 privacy_policy_priv = PrivacyPolicyView.as_view()
 
 
-class PrivacyPolicyView(PublicView):
-    def get(self, request):
-        context = {
-            'discord_invite': settings.DISCORD_INVITE,
-            'django_mail_contact': settings.DJANGO_MAIL_CONTACT,
-        }
-        return render(request, 'privacy_policy.html', context)
-
 class PrivacyPolicyView(PrivateView):
     def get(self, request):
         return render(request, 'about/privacy_policy.html')
@@ -335,12 +326,7 @@ terms_of_service_priv = TosView.as_view()
 
 class TosView(PublicView):
     def get(self, request):
-        context = {
-            'discord_invite': settings.DISCORD_INVITE,
-            'django_mail_contact': settings.DJANGO_MAIL_CONTACT,
-        }
         return render(request, 'about/terms_of_service.html')
-
 
 terms_of_service_pub = TosView.as_view()
 
