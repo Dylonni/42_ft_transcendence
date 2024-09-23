@@ -271,27 +271,13 @@ LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'handlers': {
-        'logstash': {
-            'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'filename': '/logstash/debug.log',
-            'formatter': 'json',
-        },
         'console': {
-            'level': 'DEBUG',
             'class': 'logging.StreamHandler',
-            'formatter': 'json',
-        },
-    },
-    'formatters': {
-        'json': {
-            '()': 'logstash_formatter.LogstashFormatter',
         },
     },
     'loggers': {
         'django': {
-            'handlers': ['logstash', 'console'],
-            'level': 'DEBUG',
+            'handlers': ['console'],
             'propagate': True,
         },
     },

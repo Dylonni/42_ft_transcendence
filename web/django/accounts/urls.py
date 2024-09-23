@@ -5,6 +5,7 @@ from . import views
 
 authpatterns = [
     path('login/', views.user_login, name='user_login'),
+	path('twofa/', views.user_twofa, name='user_twofa'),
 	path('logout/', views.user_logout, name='user_logout'),
 	
     path('register/', views.user_register, name='user_register'),
@@ -21,13 +22,8 @@ oauthpatterns = [
 	path('42/callback/', views.fortytwo_callback, name='fortytwo_callback'),
 ]
 
-tknpatterns = [
-	path('refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path('verify/', views.token_verify, name='token_verify'),
-]
-
 urlpatterns = [
 	path('auth/', include((authpatterns, 'auth'), namespace='auth')),
 	path('oauth/', include((oauthpatterns, 'oauth'), namespace='oauth')),
-    path('token/', include((tknpatterns, 'token'), namespace='token')),
+    path('token/verify/', views.token_verify, name='token_verify'),
 ]
