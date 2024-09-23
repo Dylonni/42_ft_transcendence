@@ -79,8 +79,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_prometheus.middleware.PrometheusAfterMiddleware',
-    'django.middleware.locale.LocaleMiddleware',
-
 ]
 
 ROOT_URLCONF = 'pong.urls'
@@ -159,10 +157,6 @@ PASSWORD_RESET_TIMEOUT = 600
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
-
-LOCALE_PATHS = [
-    os.path.join(BASE_DIR, 'locale'),
-]
 
 USE_I18N = True
 

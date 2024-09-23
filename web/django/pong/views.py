@@ -1,4 +1,5 @@
 import logging
+from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, render, redirect
@@ -460,7 +461,7 @@ class SettingsView(PrivateView):
         context = get_notif_context(request, context)
         return render(request, 'settings.html', context)
 
-settings = SettingsView.as_view()
+settings_view = SettingsView.as_view()
 
 
 class LangReloadView(PublicView):
@@ -472,6 +473,8 @@ class LangReloadView(PublicView):
         response.set_cookie(
             key='lang',
             value=lang,
+            secure=True,
+            samesite='Lax',
         )
         return response
 

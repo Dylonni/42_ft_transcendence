@@ -113,6 +113,8 @@ class MyLangView(PrivateView):
         response.set_cookie(
             key='lang',
             value=lang,
+            secure=True,
+            samesite='Lax',
         )
         return response
 
