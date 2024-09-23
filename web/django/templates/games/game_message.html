@@ -125,9 +125,9 @@
 						{{ message.sender.alias }}
 					</a>
 				</span>
-				has been
+				{% translate 'has been' %}
 				<span class="text-danger" style="margin-right: 5px;margin-left: 5px;">
-					eliminated
+					{% translate 'eliminated' %}
 				</span>
 			</p>
 			{% elif message.category == 'Win' %}
@@ -141,9 +141,9 @@
 						{{ message.sender.alias }}
 					</a>
 				</span>
-				is the
+				{% translate 'is the' %}
 				<span class="text-warning" style="margin-right: 5px;margin-left: 0px;">
-					ultimate winner
+					{% translate 'ultimate winner' %}
 				</span>
 				!
 			</p>

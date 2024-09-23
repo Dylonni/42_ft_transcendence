@@ -229,6 +229,41 @@ input[type="file"] {
   border-style: none;
 }
 
+.aboutBtn:hover {
+  border-style: solid;
+  border-width: 0.1px;
+  border-radius: 19px;
+  border-color: var(--bs-primary-border-subtle);
+}
+
+.faqBtn:hover {
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 19px;
+  border-color: var(--bs-pink);
+}
+
+.gamerulesBtn:hover {
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 19px;
+  border-color: var(--bs-primary-border-subtle);
+}
+
+.devTeamBtn:hover {
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 19px;
+  border-color: var(--bs-orange);
+}
+
+.policyBtn:hover {
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 19px;
+  border-color: var(--bs-yellow);
+}
+
 .seeProfile:hover {
   border-style: solid;
   border-width: 1px;
