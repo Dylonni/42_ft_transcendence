@@ -318,7 +318,7 @@ class PrivacyPolicyView(PrivateView):
 privacy_policy_priv = PrivacyPolicyView.as_view()
 
 
-class PrivacyPolicyView(PrivateView):
+class PrivacyPolicyView(PublicView):
     def get(self, request):
         return render(request, 'about/privacy_policy.html')
 
