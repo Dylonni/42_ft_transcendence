@@ -78,7 +78,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.middleware.locale.LocaleMiddleware',
+    # 'django.middleware.locale.LocaleMiddleware',
     'django_prometheus.middleware.PrometheusAfterMiddleware',
 ]
 
@@ -167,11 +167,11 @@ USE_TZ = True
 
 LANGUAGES = [
     ('en', 'English'),
-    ('es', 'Spanish'),
+    # ('es', 'Spanish'),
     ('fr', 'French'),
-    ('it', 'Italian'),
-    ('ja', 'Japanese'),
-    ('ug', 'Uyghur')
+    # ('it', 'Italian'),
+    ('jp', 'Japanese'),
+    # ('ug', 'Uyghur')
 ]
 
 LOCALE_PATHS = [

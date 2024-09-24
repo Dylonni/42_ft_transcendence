@@ -1,4 +1,5 @@
 import logging
+from pong.settings import DISCORD_INVITE, DJANGO_MAIL_CONTACT
 from django.contrib.auth import get_user_model
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render, redirect
@@ -315,6 +316,16 @@ class PrivacyPolicyView(PrivateView):
 privacy_policy_pub = PrivacyPolicyView.as_view()
 
 
+class PrivacyPolicyView(PublicView):
+    def get(self, request):
+        context = {
+            'discord_invite': settings.DISCORD_INVITE,
+            'django_mail_contact': settings.DJANGO_MAIL_CONTACT,
+        }
+        return render(request, 'about/privacy_policy.html', context)
+
+privacy_policy = PrivacyPolicyView.as_view()
+
 class TosView(PrivateView):
     def get(self, request):
         context = {
@@ -326,6 +337,10 @@ terms_of_service_priv = TosView.as_view()
 
 class TosView(PublicView):
     def get(self, request):
+        context = {
+            'discord_invite': settings.DISCORD_INVITE,
+            'django_mail_contact': settings.DJANGO_MAIL_CONTACT,
+        }
         return render(request, 'about/terms_of_service.html')
 
 terms_of_service_pub = TosView.as_view()

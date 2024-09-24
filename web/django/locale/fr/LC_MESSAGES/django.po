@@ -2819,7 +2819,7 @@ msgstr "Désactivée"
 
 #: templates/settings.html:214
 msgid "Enable 2FA"
-msgstr Activer la 2FA""
+msgstr "Activer la 2FA"
 
 #: templates/settings.html:227
 msgid "Link with 42"
