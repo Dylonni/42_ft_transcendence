@@ -1,3 +1,5 @@
+let gameRunning = false;
+
 document.addEventListener("DOMContentLoaded", () => {
     const contentDiv = document.getElementById('content');
     let errorModal = null;
@@ -49,6 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     const renderPage = () => {
+        gameRunning = false;
         let path = window.location.pathname;
         let search = window.location.search;
         fetch(`${path}${search}`, {
@@ -425,9 +428,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 ctx.fillRect(playCanvas.width / 2 - 1, i, 2, 10);
             }
 
-            ctx.font = '20px Arial';
-            ctx.fillText(stateToRender.player1_score, playCanvas.width / 4, 30);
-            ctx.fillText(stateToRender.player2_score, 3 * playCanvas.width / 4, 30);
+            // ctx.font = '20px Arial';
+            // ctx.fillText(stateToRender.player1_score, playCanvas.width / 4, 30);
+            // ctx.fillText(stateToRender.player2_score, 3 * playCanvas.width / 4, 30);
 
             if (stateToRender.countdown) {
                 ctx.font = '50px Arial';
@@ -1342,12 +1345,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     })
                     .then(response => response.json())
                     .then(data => {
-                        // if ('error' in data) {
-                        //     if (errorBsModal) {
-                        //         errorModalMsg.textContent = data.error;
-                        //         errorBsModal.show();
-                        //     }
-                        // }
                         navigateTo(window.location.pathname);
                     })
                     .catch(error => console.error('Error sending friend request:', error));
@@ -1853,7 +1850,7 @@ const pongGame = () => {
 	let player1Score = 0;
 	let player2Score = 0;
 
-    let gameRunning = true;
+   
     let message = null;
     let countdown = 3;
 
@@ -1975,6 +1972,7 @@ const pongGame = () => {
 
 	// Game loop
 	function gameLoop() {
+        if (!gameRunning) return;
 		update();
 		draw();
 		requestAnimationFrame(gameLoop);
@@ -2049,6 +2047,10 @@ const pongGame = () => {
 		// Score and reset ball
 		if (ballX <= 0) {
 			player2Score++;
+            const playerTwoScore = document.getElementById('playerTwoScore');
+            if (playerTwoScore) {
+                playerTwoScore.textContent = player2Score;
+            }
 			if (player2Score >= winScore) {
                 gameRunning = false;
                 message = 'Player 2 Wins! Press Enter to Retry';
@@ -2058,6 +2060,10 @@ const pongGame = () => {
             }
 		} else if (ballX >= WIDTH - ballSize) {
 			player1Score++;
+            const playerOneScore = document.getElementById('playerOneScore');
+            if (playerOneScore) {
+                playerOneScore.textContent = player1Score;
+            }
 			if (player1Score >= winScore) {
                 gameRunning = false;
                 message = 'Player 1 Wins! Press Enter to Retry';
@@ -2085,10 +2091,10 @@ const pongGame = () => {
 			ctx.fillRect(WIDTH / 2 - 1, i, 2, 10);
 		}
 
-		// Draw scores
-		ctx.font = '20px Arial';
-		ctx.fillText(player1Score, WIDTH / 4, 30);
-		ctx.fillText(player2Score, 3 * WIDTH / 4, 30);
+		// // Draw scores
+		// ctx.font = '20px Arial';
+		// ctx.fillText(player1Score, WIDTH / 4, 30);
+		// ctx.fillText(player2Score, 3 * WIDTH / 4, 30);
 
         if (message) {
             ctx.font = '30px Arial';
