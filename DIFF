@@ -1,0 +1,754 @@
+
+diff --git a/web/django/accounts/urls.py b/web/django/accounts/urls.py
+index 630d45f..7c64873 100644
+--- a/web/django/accounts/urls.py
++++ b/web/django/accounts/urls.py
+@@ -5,7 +5,6 @@ from . import views
+ 
+ authpatterns = [
+     path('login/', views.user_login, name='user_login'),
+-	path('twofa/', views.user_twofa, name='user_twofa'),
+ 	path('logout/', views.user_logout, name='user_logout'),
+ 	
+     path('register/', views.user_register, name='user_register'),
+@@ -22,8 +21,13 @@ oauthpatterns = [
+ 	path('42/callback/', views.fortytwo_callback, name='fortytwo_callback'),
+ ]
+ 
++tknpatterns = [
++	path('refresh/', TokenRefreshView.as_view(), name='token_refresh'),
++    path('verify/', views.token_verify, name='token_verify'),
++]
++
+ urlpatterns = [
+ 	path('auth/', include((authpatterns, 'auth'), namespace='auth')),
+ 	path('oauth/', include((oauthpatterns, 'oauth'), namespace='oauth')),
+-    path('token/verify/', views.token_verify, name='token_verify'),
++    path('token/', include((tknpatterns, 'token'), namespace='token')),
+ ]
+\ No newline at end of file
+diff --git a/web/django/accounts/utils.py b/web/django/accounts/utils.py
+index ff203cc..ad0aaab 100644
+--- a/web/django/accounts/utils.py
++++ b/web/django/accounts/utils.py
+@@ -12,20 +12,24 @@ def set_jwt_as_cookies(response: HttpResponse, access_token, refresh_token):
+         key='access_token',
+         value=access_token,
+         httponly=True,
+-        secure=True,
+-        samesite='Lax',
++        # secure=True,
++        # samesite='Lax',
+     )
+     response.set_cookie(
+         key='refresh_token',
+         value=refresh_token,
+         httponly=True,
+-        secure=True,
+-        samesite='Lax',
++        # secure=True,
++        # samesite='Lax',
+     )
+ 
+ def unset_jwt_cookies(response: HttpResponse):
+-    response.delete_cookie(key='access_token')
+-    response.delete_cookie(key='refresh_token')
++    response.delete_cookie(
++        key='access_token',
++    )
++    response.delete_cookie(
++        key='refresh_token',
++    )
+ 
+ def is_token_valid(token):
+     try:
+diff --git a/web/django/accounts/views.py b/web/django/accounts/views.py
+index c07435b..efa19a7 100644
+--- a/web/django/accounts/views.py
++++ b/web/django/accounts/views.py
+@@ -2,10 +2,8 @@ import logging
+ import requests
+ from django.conf import settings
+ from django.contrib.auth import authenticate, get_user_model, login, logout
+-from django.contrib.auth.hashers import make_password
+ from django.contrib.auth.models import AnonymousUser
+ from django.core.mail import send_mail
+-from django.db.models import Q
+ from django.http import HttpRequest
+ from django.shortcuts import redirect, render
+ from django.utils.decorators import method_decorator
+@@ -47,73 +45,19 @@ class UserLoginView(PublicView):
+             serializer = UserLoginSerializer(data=request.data)
+             serializer.is_valid(raise_exception=True)
+             user = serializer.validated_data['user']
+-            if user.has_twofa:
+-                user = UserModel.objects.send_mail(user.email, 'accounts/email_twofa.html', 'New Connection')
+-                token_generator = EmailTokenGenerator()
+-                token = token_generator.make_token(user)
+-                uid = urlsafe_base64_encode(force_bytes(user.pk))
+-                response_data = {
+-                    'message': _('Please check your email to sign in.'),
+-                    'redirect': f'/verify-code/?type=twofa&token={token}&user={uid}',
+-                }
+-                return Response(response_data, status=status.HTTP_200_OK)
+             Profile.objects.set_user_status(user, Profile.StatusChoices.ONLINE)
+-            response_data = {'message': _('User logged in.'), 'redirect': '/home/'}
++            response_data = {'message':'User logged in.', 'redirect': '/home/'}
+             response = Response(response_data, status=status.HTTP_200_OK)
+             login(request, user)
+-            access_token, refresh_token = set_jwt_cookies_for_user(response, user)
+-            response.data['access_token'] = access_token
+-            response.data['refresh_token'] = refresh_token
++            set_jwt_cookies_for_user(response, user)
+             return response
+         except ValidationError as e:
+             response_data = {'message': e.detail}
+             return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
+-        except ValueError as e:
+-            response_data = {'error': str(e)}
+-            return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
+ 
+ user_login = UserLoginView.as_view()
+ 
+ 
+-class UserTwofaView(PublicView):
+-    def post(self, request: HttpRequest):
+-        try:
+-            token = request.query_params.get('token', None)
+-            to_decode = request.query_params.get('user', None)
+-            uid = force_str(urlsafe_base64_decode(to_decode))
+-            user = UserModel.objects.filter(id=uid).first()
+-            if not user:
+-                response_data = {'error': _('Invalid url.')}
+-                return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
+-            token_generator = EmailTokenGenerator()
+-            if not token_generator.check_token(user, token):
+-                response_data = {'error': _('Invalid url.')}
+-                return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
+-            serializer = CustomUserCodeSerializer(data=request.data)
+-            if not serializer.is_valid():
+-                response_data = {'error': _('Invalid code.')}
+-                return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
+-            if not user.check_code(serializer.validated_data['code']):
+-                response_data = {'error': _('Invalid code.')}
+-                return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
+-            user.code = None
+-            user.code_updated_at = None
+-            user.save()
+-            Profile.objects.set_user_status(user, Profile.StatusChoices.ONLINE)
+-            response_data = {'message': _('Connection accepted.'), 'redirect': '/home/'}
+-            response = Response(response_data, status=status.HTTP_200_OK)
+-            login(request, user)
+-            access_token, refresh_token = set_jwt_cookies_for_user(response, user)
+-            response.data['access_token'] = access_token
+-            response.data['refresh_token'] = refresh_token
+-            return response
+-        except ValueError as e:
+-            response_data = {'error': str(e)}
+-            return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
+-
+-user_twofa = UserTwofaView.as_view()
+-
+-
+ class UserLogoutView(PrivateView):
+     def post(self, request: HttpRequest):
+         player = request.profile
+@@ -121,7 +65,7 @@ class UserLogoutView(PrivateView):
+         if game:
+             Game.objects.remove_player(game, player)
+         Profile.objects.set_user_status(request.user, Profile.StatusChoices.OFFLINE)
+-        response_data = {'message': _('User logged out.'), 'redirect': '/'}
++        response_data = {'message': 'User logged out.', 'redirect': '/'}
+         response = Response(response_data, status=status.HTTP_200_OK)
+         logout(request)
+         unset_jwt_cookies(response)
+@@ -135,9 +79,6 @@ class UserRegisterView(PublicView):
+     def post(self, request: HttpRequest):
+         try:
+             serializer = UserRegisterSerializer(data=request.data)
+-            user = UserModel.objects.filter(Q(username=request.data.get('username')) | Q(email=request.data.get('email'))).first()
+-            if user and user.has_verif_expired():
+-                user.delete()
+             serializer.is_valid(raise_exception=True)
+             user = serializer.save()
+             
+@@ -184,12 +125,10 @@ class UserActivateView(PublicView):
+             user.code_updated_at = None
+             user.save()
+             Profile.objects.set_user_status(user, Profile.StatusChoices.ONLINE)
+-            response_data = {'message': _('Account verified.'), 'redirect': '/home/'}
++            response_data = {'message': 'Account verified.', 'redirect': '/home/'}
+             response = Response(response_data, status=status.HTTP_200_OK)
+             login(request, user)
+-            access_token, refresh_token = set_jwt_cookies_for_user(response, user)
+-            response.data['access_token'] = access_token
+-            response.data['refresh_token'] = refresh_token
++            set_jwt_cookies_for_user(response, user)
+             return response
+         except ValueError as e:
+             response_data = {'error': str(e)}
+@@ -234,11 +173,11 @@ class PasswordResetView(PublicView):
+             uid = force_str(urlsafe_base64_decode(to_decode))
+             user = UserModel.objects.filter(id=uid).first()
+             if not user:
+-                response_data = {'message': _('Invalid url.'), 'redirect': '/'}
++                response_data = {'message': 'Invalid url.', 'redirect': '/'}
+                 return Response(response_data, status=status.HTTP_200_OK)
+             token_generator = EmailTokenGenerator()
+             if not token_generator.check_token(user, token):
+-                response_data = {'message': _('Invalid url.'), 'redirect': '/'}
++                response_data = {'message': 'Invalid url.', 'redirect': '/'}
+                 return Response(response_data, status=status.HTTP_200_OK)
+             response_data = {
+                 'message': _('Set your new password.'),
+@@ -260,23 +199,18 @@ class PasswordConfirmView(PublicView):
+             uid = request.query_params.get('user', None)
+             user = UserModel.objects.filter(id=uid).first()
+             if not user:
+-                response_data = {'message': _('Invalid url.'), 'redirect': '/'}
++                response_data = {'message': 'Invalid url.', 'redirect': '/'}
+                 return Response(response_data, status=status.HTTP_200_OK)
+             token_generator = EmailTokenGenerator()
+             if not token_generator.check_token(user, token):
+-                response_data = {'message': _('Invalid url.'), 'redirect': '/'}
++                response_data = {'message': 'Invalid url.', 'redirect': '/'}
+                 return Response(response_data, status=status.HTTP_200_OK)
+-            user.password = make_password(request.data['password'])
+-            user.code = None
+-            user.code_updated_at = None
+-            user.save()
++            user.set_password(request.data['password'])
+             Profile.objects.set_user_status(user, Profile.StatusChoices.ONLINE)
+-            response_data = {'message': _('Password changed.'), 'redirect': '/home/'}
++            response_data = {'message': 'Password changed.', 'redirect': '/home/'}
+             response = Response(response_data, status=status.HTTP_200_OK)
+             login(request, user)
+-            access_token, refresh_token = set_jwt_cookies_for_user(response, user)
+-            response.data['access_token'] = access_token
+-            response.data['refresh_token'] = refresh_token
++            set_jwt_cookies_for_user(response, user)
+             return response
+         except ValueError as e:
+             response_data = {'error': str(e)}
+@@ -298,7 +232,7 @@ class FortyTwoUnlinkView(PrivateView):
+     def post(self, request: HttpRequest):
+         request.profile.set_avatar_url()
+         request.user.update_fortytwo_infos()
+-        response_data = {'message': _('42 account unlinked.'), 'redirect': '/settings/'}
++        response_data = {'message': '42 account unlinked.', 'redirect': '/settings/'}
+         return Response(response_data, status=status.HTTP_200_OK)
+ 
+ fortytwo_unlink = FortyTwoUnlinkView.as_view()
+@@ -368,25 +302,45 @@ class TokenVerify(PublicView):
+     def post(self, request: HttpRequest):
+         access_token = request.COOKIES.get('access_token')
+         refresh_token = request.COOKIES.get('refresh_token')
+-        if not access_token:
+-            response_data = {'message': _('Sign in first.'), 'redirect': '/login/'}
+-            response = Response(response_data, status=status.HTTP_200_OK)
+-            return response
+-        if is_token_valid(access_token):
+-            response_data = {'message': _('Valid tokens.'), 'redirect': '/home/'}
+-            response = Response(response_data, status=status.HTTP_200_OK)
+-            return response
+-        access_token, refresh_token = get_jwt_from_refresh(refresh_token)
+-        if access_token is None:
+-            response_data = {'message': _('Invalid tokens.'), 'redirect': '/login/'}
+-            response = Response(response_data, status=status.HTTP_200_OK)
+-            unset_jwt_cookies(response)
+-            return response
+-        response_data = {'message': _('Refreshed tokens.'), 'redirect': '/home/'}
+-        response = Response(response_data, status=status.HTTP_200_OK)
+-        set_jwt_as_cookies(response, access_token, refresh_token)
+-        response.data['access_token'] = access_token
+-        response.data['refresh_token'] = refresh_token
++        if access_token:
++            if is_token_valid(access_token):
++                response = Response(
++                    {
++                        'status': 'Already authenticated!',
++                        'redirect': '/home/',
++                    },
++                    status=status.HTTP_200_OK,
++                )
++                return response
++            else:
++                access_token, refresh_token = get_jwt_from_refresh(refresh_token)
++                if access_token is None:
++                    response = Response(
++                        {
++                            'status': 'Invalid tokens!',
++                            'redirect': '/login/',
++                        },
++                        status=status.HTTP_200_OK,
++                    )
++                    unset_jwt_cookies(response)
++                    return response
++                else:
++                    response = Response(
++                        {
++                            'status': 'Already authenticated!',
++                            'redirect': '/home/',
++                        },
++                        status=status.HTTP_200_OK,
++                    )
++                    set_jwt_as_cookies(response, access_token, refresh_token)
++                    return response
++        response = Response(
++            {
++                'status': 'Welcome!',
++                'redirect': '/login/',
++            },
++            status=status.HTTP_200_OK,
++        )
+         return response
+ 
+ token_verify = TokenVerify.as_view()
+\ No newline at end of file
+diff --git a/web/django/pong/mixins.py b/web/django/pong/mixins.py
+index 5375701..80c5a41 100644
+--- a/web/django/pong/mixins.py
++++ b/web/django/pong/mixins.py
+@@ -21,8 +21,6 @@ class LangVerificationMixin:
+             response.set_cookie(
+                 key='lang',
+                 value='en',
+-                secure=True,
+-                samesite='Lax',
+             )
+             translation.activate(lang)
+         return response
+@@ -60,14 +58,17 @@ class JWTCookieAuthenticationMixin:
+                 logger.error('Invalid refresh token.')
+                 return self._logout_and_redirect(request)
+         
+-        change_lang = False
+         try:
+             user_id = access_token_obj['user_id']
+             request.user = UserModel.objects.get(id=user_id)
+             request.profile = Profile.objects.get(user__id=user_id)
+             lang = request.profile.default_lang
+             if lang != request.COOKIES.get('lang', 'en') and lang in dict(settings.LANGUAGES):
+-                change_lang = True
++                response.set_cookie(
++                    key='lang',
++                    value=lang,
++                )
++                translation.activate(lang)
+         except UserModel.DoesNotExist:
+             logger.error('User does not exist.')
+             return self._logout_and_redirect(request)
+@@ -76,14 +77,6 @@ class JWTCookieAuthenticationMixin:
+             return self._logout_and_redirect(request)
+         request.META['HTTP_AUTHORIZATION'] = f'Bearer {access_token}'
+         response = super().dispatch(request, *args, **kwargs)
+-        if change_lang:
+-            response.set_cookie(
+-                key='lang',
+-                value=lang,
+-                secure=True,
+-                samesite='Lax',
+-            )
+-            translation.activate(lang)
+         set_jwt_as_cookies(response, access_token, refresh_token)
+         return response
+
+diff --git a/web/django/pong/views.py b/web/django/pong/views.py
+index 394e4a2..4f9ec06 100644
+--- a/web/django/pong/views.py
++++ b/web/django/pong/views.py
+@@ -1,7 +1,7 @@
+ import logging
+-from django.conf import settings
++from pong.settings import DISCORD_INVITE, DJANGO_MAIL_CONTACT
+ from django.contrib.auth import get_user_model
+-from django.http import HttpResponse, JsonResponse
++from django.http import HttpResponse
+ from django.shortcuts import get_object_or_404, render, redirect
+ from django.template.loader import render_to_string
+ from django.utils import translation
+@@ -24,10 +24,10 @@ def get_profile_context(request, profile_id=None):
+     context = {}
+     try:
+         if profile_id:
+-            profile = Profile.objects.filter(id=profile_id).first()
++            profile = Profile.objects.get(id=profile_id)
+         else: 
+             if request.user.id:
+-                profile = Profile.objects.filter(user=request.user).first()
++                profile = Profile.objects.get(user=request.user)
+             else:
+                 profile = None
+         context['profile'] = profile
+@@ -99,13 +99,6 @@ class PrivateView(JWTCookieAuthenticationMixin, LangVerificationMixin, APIView):
+     permission_classes = (IsAuthenticated,)
+ 
+ 
+-class HealthzView(APIView):
+-    def get(self, request):
+-        return Response({'status': 'ok'}, status=status.HTTP_200_OK)
+-
+-healthz = HealthzView.as_view()
+-
+-
+ class IndexView(PublicView):
+     def get(self, request):
+         context = get_profile_context(request)
+@@ -163,8 +156,6 @@ class VerifyCodeView(PublicView):
+         match code_type:
+             case "forget":
+                 target = f"/api/auth/password/reset/?token={code_token}&user={code_user}"
+-            case "twofa":
+-                target = f'/api/auth/twofa/?token={code_token}&user={code_user}'
+             case "activate":
+                 target = f'/api/auth/activate/?token={code_token}&user={code_user}'
+             case _:
+@@ -325,6 +316,16 @@ class PrivacyPolicyView(PrivateView):
+ privacy_policy_pub = PrivacyPolicyView.as_view()
+ 
+ 
++class PrivacyPolicyView(PublicView):
++    def get(self, request):
++        context = {
++            'discord_invite': settings.DISCORD_INVITE,
++            'django_mail_contact': settings.DJANGO_MAIL_CONTACT,
++        }
++        return render(request, 'about/privacy_policy.html', context)
++
++privacy_policy = PrivacyPolicyView.as_view()
++
+ class TosView(PrivateView):
+     def get(self, request):
+         context = {
+@@ -336,6 +337,10 @@ terms_of_service_priv = TosView.as_view()
+ 
+ class TosView(PublicView):
+     def get(self, request):
++        context = {
++            'discord_invite': settings.DISCORD_INVITE,
++            'django_mail_contact': settings.DJANGO_MAIL_CONTACT,
++        }
+         return render(request, 'about/terms_of_service.html')
+ 
+ terms_of_service_pub = TosView.as_view()
+@@ -461,7 +466,7 @@ class SettingsView(PrivateView):
+         context = get_notif_context(request, context)
+         return render(request, 'settings.html', context)
+ 
+-settings_view = SettingsView.as_view()
++settings = SettingsView.as_view()
+ 
+ 
+ class LangReloadView(PublicView):
+@@ -473,8 +478,6 @@ class LangReloadView(PublicView):
+         response.set_cookie(
+             key='lang',
+             value=lang,
+-            secure=True,
+-            samesite='Lax',
+         )
+         return response
+ 
+diff --git a/web/django/profiles/urls.py b/web/django/profiles/urls.py
+index a473e37..75d59aa 100644
+--- a/web/django/profiles/urls.py
++++ b/web/django/profiles/urls.py
+@@ -12,7 +12,6 @@ urlpatterns = [
+ 	path('profiles/me/lang/<str:lang>/', views.my_lang, name='my_lang'),
+ 	path('profiles/me/email/', views.my_email, name='my_email'),
+ 	path('profiles/me/password/', views.my_password, name='my_password'),
+-	path('profiles/me/twofa/', views.my_twofa, name='my_twofa'),
+     path('profiles/me/code/', views.my_code, name='my_code'),
+ 	
+     path('profiles/<uuid:profile_id>/', views.profile_detail, name='profile_detail'),
+@@ -22,7 +21,6 @@ urlpatterns = [
+     path('profiles/<uuid:profile_id>/friends/', views.profile_friend_list, name='profile_friend_list'),
+ 	path('profiles/<uuid:profile_id>/elos/', views.profile_elo_list, name='profile_elo_list'),
+ 	
+-	path('profiles/me/elos/', views.my_elo_list, name='my_elo_list'),
+     path('profiles/me/invites/', views.my_invite_list, name='my_invite_list'),
+ 	path('profiles/me/invites/<uuid:invite_id>/', views.my_invite_detail, name='my_invite_detail'),
+ 	path('profiles/me/blocks/', views.my_block_list, name='my_block_list'),
+diff --git a/web/django/profiles/views.py b/web/django/profiles/views.py
+index 3d83c55..8bed60a 100644
+--- a/web/django/profiles/views.py
++++ b/web/django/profiles/views.py
+@@ -1,6 +1,5 @@
+ import logging
+ from asgiref.sync import async_to_sync
+-from django.contrib.auth.hashers import make_password
+ from django.shortcuts import get_object_or_404
+ from django.utils import translation
+ from django.utils.encoding import force_bytes, force_str
+@@ -16,7 +15,7 @@ from accounts.tokens import EmailTokenGenerator
+ from accounts.utils import unset_jwt_cookies
+ from friends.models import FriendRequest, FriendMessage, Friendship
+ from friends.serializers import FriendRequestSerializer, FriendshipSerializer, FriendMessageSerializer
+-from games.models import Game, GameInvite, GameMessage, GameRound
++from games.models import Game, GameInvite, GameMessage
+ from games.serializers import GameInviteSerializer
+ from notifs.models import Notification
+ 
+@@ -113,8 +112,6 @@ class MyLangView(PrivateView):
+         response.set_cookie(
+             key='lang',
+             value=lang,
+-            secure=True,
+-            samesite='Lax',
+         )
+         return response
+ 
+@@ -185,7 +182,7 @@ class MyPasswordView(PrivateView):
+             if request.user.check_password(serializer.validated_data['password']):
+                 response_data = {'error': _('Invalid password.')}
+                 return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
+-            request.user.password = make_password(serializer.validated_data['password'])
++            request.user.set_password(serializer.validated_data['password'])
+             request.user.code = None
+             request.user.code_updated_at = None
+             request.user.save()
+@@ -198,30 +195,6 @@ class MyPasswordView(PrivateView):
+ my_password = MyPasswordView.as_view()
+ 
+ 
+-class MyTwofaView(PrivateView):
+-    def post(self, request):
+-        try:
+-            request.user.has_twofa = True
+-            request.user.save()
+-            response_data = {'message': _('2FA enabled.'), 'redirect': '/settings/'}
+-            return Response(response_data, status=status.HTTP_200_OK)
+-        except ValueError as e:
+-            response_data = {'error': str(e)}
+-            return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
+-    
+-    def put(self, request):
+-        try:
+-            request.user.has_twofa = False
+-            request.user.save()
+-            response_data = {'message': _('2FA disabled.'), 'redirect': '/settings/'}
+-            return Response(response_data, status=status.HTTP_200_OK)
+-        except ValueError as e:
+-            response_data = {'error': str(e)}
+-            return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
+-
+-my_twofa = MyTwofaView.as_view()
+-
+-
+ class MyCodeView(PrivateView):
+     def post(self, request):
+         try:
+diff --git a/web/django/static/js/main.js b/web/django/static/js/main.js
+index 847566c..8f667e0 100644
+--- a/web/django/static/js/main.js
++++ b/web/django/static/js/main.js
+@@ -554,45 +554,7 @@ document.addEventListener("DOMContentLoaded", () => {
+             });
+         }
+ 
+-        const enableTwoFaBtn = document.getElementById('enableTwoFaBtn');
+-        if (enableTwoFaBtn) {
+-            enableTwoFaBtn.addEventListener('click', (event) => {
+-                event.preventDefault();
+-                fetch('/api/profiles/me/twofa/', {
+-                    method: 'POST',
+-                    headers: {
+-                        'X-Requested-With': 'XMLHttpRequest',
+-                    },
+-                })
+-                .then(response => response.json())
+-                .then(data => {
+-                    if ('redirect' in data) {
+-                        navigateTo(data.redirect);
+-                    }
+-                })
+-                .catch(error => console.error(`Error disabling 2FA:`, error));
+-            });
+-        }
+-
+-        const disableTwoFaBtn = document.getElementById('disableTwoFaBtn');
+-        if (disableTwoFaBtn) {
+-            disableTwoFaBtn.addEventListener('click', (event) => {
+-                event.preventDefault();
+-                fetch('/api/profiles/me/twofa/', {
+-                    method: 'PUT',
+-                    headers: {
+-                        'X-Requested-With': 'XMLHttpRequest',
+-                    },
+-                })
+-                .then(response => response.json())
+-                .then(data => {
+-                    if ('redirect' in data) {
+-                        navigateTo(data.redirect);
+-                    }
+-                })
+-                .catch(error => console.error(`Error disabling 2FA:`, error));
+-            });
+-        }
++        
+ 
+         const pongCanvas = document.getElementById('pongCanvas');
+         if (pongCanvas) {
+@@ -636,9 +598,7 @@ document.addEventListener("DOMContentLoaded", () => {
+                 .then(response => response.json())
+                 .then(data => {
+                     if ('redirect' in data) {
+-                        if (data.redirect === '/home/') {
+-                            openNotifWebSocket();
+-                        }
++                        navigateTo(data.redirect);
+                     }
+                 })
+                 .catch(error => console.error(`Error with request to ${event.target.action}:`, error));
+@@ -945,9 +905,7 @@ document.addEventListener("DOMContentLoaded", () => {
+                 .then(response => response.json())
+                 .then(data => {
+                     if ('redirect' in data) {
+-                        if (data.redirect === '/home/') {
+-                            openNotifWebSocket();
+-                        }
++                        openNotifWebSocket();
+                         navigateTo(data.redirect);
+                     }
+                 })
+
+diff --git a/web/django/templates/accounts/email_twofa.html b/web/django/templates/accounts/email_twofa.html
+deleted file mode 100644
+index 3185557..0000000
+--- a/web/django/templates/accounts/email_twofa.html
++++ /dev/null
+@@ -1,33 +0,0 @@
+-{% load static %}
+-{% load i18n %}
+-<!DOCTYPE html>
+-<html>
+-    <head>
+-        <title>
+-            {% translate 'New Connection' %}
+-        </title>
+-    </head>
+-
+-    <body>
+-        <h1 class="d-flex justify-content-center align-items-center">
+-            {% translate 'Hi' %} {{ user.username }},
+-        </h1>
+-        <p class="d-flex justify-content-center align-items-center">
+-            {% translate 'Please use the code below to sign in:' %}
+-        </p>
+-        <h1 class="d-flex justify-content-center align-items-center" style="color: rgb(38,136,234);font-weight: bold;text-shadow: 1px 1px var(--bs-emphasis-color);">
+-            {{ user.code }}
+-        </h1>
+-        <p class="text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center" style="margin-top: 16px;font-weight: bold;">
+-            {% translate 'This code will expire in 10 minutes.' %}
+-        </p>
+-        <p class="text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center">
+-            {% translate 'If you have not attempted to sign in, please ignore this email.' %}
+-        </p>
+-        <p class="text-center d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center">
+-            {% translate 'Thank you,' %}
+-            <br />
+-            {% translate 'The Transcendence42 Team' %}
+-        </p>
+-    </body>
+-</html>
+\ No newline at end of file
+diff --git a/web/django/templates/accounts/register.html b/web/django/templates/accounts/register.html
+index 69ecf26..ca425f7 100644
+--- a/web/django/templates/accounts/register.html
++++ b/web/django/templates/accounts/register.html
+@@ -20,7 +20,7 @@
+                 </svg>
+             </a>
+             <div id="collapseLang" class="collapse collapse-horizontal">
+-                <a id="changeLang_fr" href="/api/lang/fr/" style="font-size: 20px;margin-left: 10px;margin-right: 10px;">FR</a><a id="changeLang_en" href="/api/lang/en/" style="font-size: 20px;margin-left: 10px;margin-right: 10px;">EN</a><a id="changeLang_ja" href="/api/lang/jp/" style="font-size: 20px;margin-left: 10px;margin-right: 10px;">JP</a>
++                <a href="/api/lang/fr/" style="font-size: 20px;margin-left: 10px;margin-right: 10px;">FR</a><a href="/api/lang/en/" style="font-size: 20px;margin-left: 10px;margin-right: 10px;">EN</a><a href="/api/lang/jp/" style="font-size: 20px;margin-left: 10px;margin-right: 10px;">JP</a>
+             </div>
+         </div>
+ </header>
+
+diff --git a/web/django/templates/games/game_room.html b/web/django/templates/games/game_room.html
+index b44d440..9311cdd 100644
+--- a/web/django/templates/games/game_room.html
++++ b/web/django/templates/games/game_room.html
+@@ -6,6 +6,7 @@
+ {% include "sidebar.html" %}
+ {% include "notifs/notifications.html" %}
+ {% include "games/game_chat.html" %}
++{% if game %}
+ <div class="container" style="padding-top: 0px;padding-bottom: 0px;padding-left: 0px;padding-right: 0px;margin-bottom: 20px;">
+ 	<div class="row">
+ 		<div class="col-sm-12 col-md-12 col-xxl-12 d-xl-flex d-xxl-flex flex-column flex-wrap justify-content-xl-center align-items-xl-center align-items-xxl-center" style="border-radius: 20px;margin-top: 0px;margin-bottom: 0px;padding-top: 0px;padding-bottom: 0px;margin-left: 0px;margin-right: 0px;padding-left: 0px;padding-right: 0px;border: 2px none rgb(53,224,248) ;">
+@@ -307,4 +308,5 @@
+ 		</div>
+ 	</div>
+ </div>
++{% endif %}
+ {% endblock %}
+\ No newline at end of file
+diff --git a/web/django/templates/settings.html b/web/django/templates/settings.html
+index 39c167d..6e2f898 100644
+--- a/web/django/templates/settings.html
++++ b/web/django/templates/settings.html
+@@ -186,7 +186,7 @@
+                                         </svg>
+                                         {% translate 'Two-Factor Authentication' %}
+                                     </h1>
+-                                    {% if profile.user.has_twofa %}
++                                    {% if profile.user.twofa %}
+                                     <div class="text-truncate d-flex d-xxl-flex justify-content-start align-items-center justify-content-xxl-start align-items-xxl-center" id="templateFtLink" style="width: 100%;">
+                                         <div style="width: 100%;height: 100%;">
+                                             <span class="text-truncate d-flex d-sm-flex justify-content-start align-items-center justify-content-xxl-start align-items-xxl-center" id="ftLink" style="color: var(--bs-success);font-size: 16px;margin-top: 0px;width: 100%;height: 100%;">
+@@ -199,7 +199,7 @@
+                                                 </svg>
+                                             </span>
+                                         </div>
+-                                        <a id="disableTwoFaBtn" class="btn btn-primary d-flex d-md-flex d-xxl-flex justify-content-end align-items-center align-items-md-center align-items-xxl-center" style="background: rgba(13,110,253,0);color: rgb(13,202,240);border-style: none;">
++                                        <a class="btn btn-primary d-flex d-md-flex d-xxl-flex justify-content-end align-items-center align-items-md-center align-items-xxl-center" data-bs-target="#modalUnlinkFt" data-bs-toggle="modal" style="background: rgba(13,110,253,0);color: rgb(13,202,240);border-style: none;">
+                                             {% translate 'Disable 2FA' %}
+                                         </a>
+                                     </div>
+@@ -391,7 +391,7 @@
+                         {% translate 'Your conversations and your friend list' %}
+                     </li>
+                     <li>
+-                        {% translate 'Your ranking and your games history' %}
++                        {% translate 'Your ranking and your game history' %}
+                     </li>
+                 </ul>
+                 <p style="font-weight: bold;margin-bottom: 0px;">
+@@ -408,7 +408,7 @@
+                         <path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
+                         <path d="M12 1.67c.955 0 1.845 .467 2.39 1.247l.105 .16l8.114 13.548a2.914 2.914 0 0 1 -2.307 4.363l-.195 .008h-16.225a2.914 2.914 0 0 1 -2.582 -4.2l.099 -.185l8.11 -13.538a2.914 2.914 0 0 1 2.491 -1.403zm.01 13.33l-.127 .007a1 1 0 0 0 0 1.986l.117 .007l.127 -.007a1 1 0 0 0 0 -1.986l-.117 -.007zm-.01 -7a1 1 0 0 0 -.993 .883l-.007 .117v4l.007 .117a1 1 0 0 0 1.986 0l.007 -.117v-4l-.007 -.117a1 1 0 0 0 -.993 -.883z" fill="currentColor" stroke-width="0"></path>
+                     </svg>
+-                    {% translate 'This action is not reversible' %}
++                    {% translate 'This action is irreversible' %}
+                 </p>
+             </div>
+             <div class="modal-footer d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="border-bottom-style: none;">
+@@ -477,7 +477,7 @@
+             <div class="modal-body">
+                 <p>
+                     <strong>
+-                        {% translate 'Two Factor Authentication will add a security layer to your account by sending you a code via email each time you want to log in. Do you want to enable it ?' %}
++                        {% translate 'Two Factor Authentication will add a security layer to your account, by sending you a code via email each time you want to log in. Do you wish to enable it ?' %}
+                     </strong>
+                 </p>
+             </div>
+@@ -485,7 +485,7 @@
+                 <button class="btn btn-light" data-bs-dismiss="modal" type="button">
+                     {% translate 'Cancel' %}
+                 </button>
+-                <a class="btn btn-primary" data-bs-dismiss="modal" id="enableTwoFaBtn">
++                <a class="btn btn-primary" data-bs-dismiss="modal" href="/api/oauth/me/twofa/" id="enableTwoFa">
+                     {% translate 'Activate 2FA' %}
+                 </a>
+             </div>
+@@ -520,7 +520,7 @@
+                 </p>
+                 <ul style="margin-bottom: 0px;">
+                     <li>
+-                        {% translate 'You will not be able to connect using 42 auth on login page.' %}
++                        {% translate 'You will not be able to connect using 42Auth on login page.' %}
+                     </li>
+                     <li>
+                         {% translate 'You will not be able to use your 42 banner and profile image.' %}

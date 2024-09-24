@@ -4,7 +4,7 @@
 <html>
     <head>
         <title>
-            {% translate 'Activate your account' %}
+            {% translate 'New Connection' %}
         </title>
     </head>
 
@@ -13,7 +13,7 @@
             {% translate 'Hi' %} {{ user.username }},
         </h1>
         <p class="d-flex justify-content-center align-items-center">
-            {% translate 'Thank you for registering at Transcendence42. Please use the code below to activate your account:' %}
+            {% translate 'Please use the code below to sign in:' %}
         </p>
         <h1 class="d-flex justify-content-center align-items-center" style="color: rgb(38,136,234);font-weight: bold;text-shadow: 1px 1px var(--bs-emphasis-color);">
             {{ user.code }}
@@ -22,7 +22,7 @@
             {% translate 'This code will expire in 10 minutes.' %}
         </p>
         <p class="text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center">
-            {% translate 'If you did not create an account, please ignore this email.' %}
+            {% translate 'If you have not attempted to sign in, please ignore this email.' %}
         </p>
         <p class="text-center d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center">
             {% translate 'Thank you,' %}

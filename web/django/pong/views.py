@@ -1,7 +1,7 @@
 import logging
-from pong.settings import DISCORD_INVITE, DJANGO_MAIL_CONTACT
+from django.conf import settings
 from django.contrib.auth import get_user_model
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from django.template.loader import render_to_string
 from django.utils import translation
@@ -24,10 +24,10 @@ def get_profile_context(request, profile_id=None):
     context = {}
     try:
         if profile_id:
-            profile = Profile.objects.get(id=profile_id)
+            profile = Profile.objects.filter(id=profile_id).first()
         else: 
             if request.user.id:
-                profile = Profile.objects.get(user=request.user)
+                profile = Profile.objects.filter(user=request.user).first()
             else:
                 profile = None
         context['profile'] = profile
@@ -99,6 +99,13 @@ class PrivateView(JWTCookieAuthenticationMixin, LangVerificationMixin, APIView):
     permission_classes = (IsAuthenticated,)
 
 
+class HealthzView(APIView):
+    def get(self, request):
+        return Response({'status': 'ok'}, status=status.HTTP_200_OK)
+
+healthz = HealthzView.as_view()
+
+
 class IndexView(PublicView):
     def get(self, request):
         context = get_profile_context(request)
@@ -156,6 +163,8 @@ class VerifyCodeView(PublicView):
         match code_type:
             case "forget":
                 target = f"/api/auth/password/reset/?token={code_token}&user={code_user}"
+            case "twofa":
+                target = f'/api/auth/twofa/?token={code_token}&user={code_user}'
             case "activate":
                 target = f'/api/auth/activate/?token={code_token}&user={code_user}'
             case _:
@@ -303,17 +312,12 @@ class PrivacyPolicyView(PrivateView):
     def get(self, request):
         context = {
             'profile': request.profile,
+            'discord_invite': settings.DISCORD_INVITE,
+            'django_mail_contact': settings.DJANGO_MAIL_CONTACT,
         }
         return render(request, 'about/privacy_policy.html', context)
 
 privacy_policy_priv = PrivacyPolicyView.as_view()
-
-
-class PrivacyPolicyView(PrivateView):
-    def get(self, request):
-        return render(request, 'about/privacy_policy.html')
-
-privacy_policy_pub = PrivacyPolicyView.as_view()
 
 
 class PrivacyPolicyView(PublicView):
@@ -324,12 +328,14 @@ class PrivacyPolicyView(PublicView):
         }
         return render(request, 'about/privacy_policy.html', context)
 
-privacy_policy = PrivacyPolicyView.as_view()
+privacy_policy_pub = PrivacyPolicyView.as_view()
 
 class TosView(PrivateView):
     def get(self, request):
         context = {
             'profile': request.profile,
+            'discord_invite': settings.DISCORD_INVITE,
+            'django_mail_contact': settings.DJANGO_MAIL_CONTACT,
         }
         return render(request, 'about/terms_of_service.html', context)
 
@@ -466,7 +472,7 @@ class SettingsView(PrivateView):
         context = get_notif_context(request, context)
         return render(request, 'settings.html', context)
 
-settings = SettingsView.as_view()
+settings_view = SettingsView.as_view()
 
 
 class LangReloadView(PublicView):
@@ -478,6 +484,8 @@ class LangReloadView(PublicView):
         response.set_cookie(
             key='lang',
             value=lang,
+            secure=True,
+            samesite='Lax',
         )
         return response
 

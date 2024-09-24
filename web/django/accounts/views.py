@@ -2,8 +2,10 @@ import logging
 import requests
 from django.conf import settings
 from django.contrib.auth import authenticate, get_user_model, login, logout
+from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import AnonymousUser
 from django.core.mail import send_mail
+from django.db.models import Q
 from django.http import HttpRequest
 from django.shortcuts import redirect, render
 from django.utils.decorators import method_decorator
@@ -45,17 +47,71 @@ class UserLoginView(PublicView):
             serializer = UserLoginSerializer(data=request.data)
             serializer.is_valid(raise_exception=True)
             user = serializer.validated_data['user']
+            if user.has_twofa:
+                user = UserModel.objects.send_mail(user.email, 'accounts/email_twofa.html', 'New Connection')
+                token_generator = EmailTokenGenerator()
+                token = token_generator.make_token(user)
+                uid = urlsafe_base64_encode(force_bytes(user.pk))
+                response_data = {
+                    'message': _('Please check your email to sign in.'),
+                    'redirect': f'/verify-code/?type=twofa&token={token}&user={uid}',
+                }
+                return Response(response_data, status=status.HTTP_200_OK)
             Profile.objects.set_user_status(user, Profile.StatusChoices.ONLINE)
             response_data = {'message':'User logged in.', 'redirect': '/home/'}
             response = Response(response_data, status=status.HTTP_200_OK)
             login(request, user)
-            set_jwt_cookies_for_user(response, user)
+            access_token, refresh_token = set_jwt_cookies_for_user(response, user)
+            response.data['access_token'] = access_token
+            response.data['refresh_token'] = refresh_token
             return response
         except ValidationError as e:
             response_data = {'message': e.detail}
             return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
+        except ValueError as e:
+            response_data = {'error': str(e)}
+            return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
 
 user_login = UserLoginView.as_view()
+
+
+class UserTwofaView(PublicView):
+    def post(self, request: HttpRequest):
+        try:
+            token = request.query_params.get('token', None)
+            to_decode = request.query_params.get('user', None)
+            uid = force_str(urlsafe_base64_decode(to_decode))
+            user = UserModel.objects.filter(id=uid).first()
+            if not user:
+                response_data = {'error': _('Invalid url.')}
+                return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
+            token_generator = EmailTokenGenerator()
+            if not token_generator.check_token(user, token):
+                response_data = {'error': _('Invalid url.')}
+                return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
+            serializer = CustomUserCodeSerializer(data=request.data)
+            if not serializer.is_valid():
+                response_data = {'error': _('Invalid code.')}
+                return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
+            if not user.check_code(serializer.validated_data['code']):
+                response_data = {'error': _('Invalid code.')}
+                return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
+            user.code = None
+            user.code_updated_at = None
+            user.save()
+            Profile.objects.set_user_status(user, Profile.StatusChoices.ONLINE)
+            response_data = {'message': _('Connection accepted.'), 'redirect': '/home/'}
+            response = Response(response_data, status=status.HTTP_200_OK)
+            login(request, user)
+            access_token, refresh_token = set_jwt_cookies_for_user(response, user)
+            response.data['access_token'] = access_token
+            response.data['refresh_token'] = refresh_token
+            return response
+        except ValueError as e:
+            response_data = {'error': str(e)}
+            return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
+
+user_twofa = UserTwofaView.as_view()
 
 
 class UserLogoutView(PrivateView):
@@ -79,6 +135,9 @@ class UserRegisterView(PublicView):
     def post(self, request: HttpRequest):
         try:
             serializer = UserRegisterSerializer(data=request.data)
+            user = UserModel.objects.filter(Q(username=request.data.get('username')) | Q(email=request.data.get('email'))).first()
+            if user and user.has_verif_expired():
+                user.delete()
             serializer.is_valid(raise_exception=True)
             user = serializer.save()
             
@@ -128,7 +187,9 @@ class UserActivateView(PublicView):
             response_data = {'message': 'Account verified.', 'redirect': '/home/'}
             response = Response(response_data, status=status.HTTP_200_OK)
             login(request, user)
-            set_jwt_cookies_for_user(response, user)
+            access_token, refresh_token = set_jwt_cookies_for_user(response, user)
+            response.data['access_token'] = access_token
+            response.data['refresh_token'] = refresh_token
             return response
         except ValueError as e:
             response_data = {'error': str(e)}
@@ -205,12 +266,17 @@ class PasswordConfirmView(PublicView):
             if not token_generator.check_token(user, token):
                 response_data = {'message': 'Invalid url.', 'redirect': '/'}
                 return Response(response_data, status=status.HTTP_200_OK)
-            user.set_password(request.data['password'])
+            user.password = make_password(request.data['password'])
+            user.code = None
+            user.code_updated_at = None
+            user.save()
             Profile.objects.set_user_status(user, Profile.StatusChoices.ONLINE)
             response_data = {'message': 'Password changed.', 'redirect': '/home/'}
             response = Response(response_data, status=status.HTTP_200_OK)
             login(request, user)
-            set_jwt_cookies_for_user(response, user)
+            access_token, refresh_token = set_jwt_cookies_for_user(response, user)
+            response.data['access_token'] = access_token
+            response.data['refresh_token'] = refresh_token
             return response
         except ValueError as e:
             response_data = {'error': str(e)}
@@ -302,6 +368,7 @@ class TokenVerify(PublicView):
     def post(self, request: HttpRequest):
         access_token = request.COOKIES.get('access_token')
         refresh_token = request.COOKIES.get('refresh_token')
+<<<<<<< HEAD
         if access_token:
             if is_token_valid(access_token):
                 response = Response(
@@ -341,6 +408,27 @@ class TokenVerify(PublicView):
             },
             status=status.HTTP_200_OK,
         )
+=======
+        if not access_token:
+            response_data = {'message': _('Sign in first.'), 'redirect': '/login/'}
+            response = Response(response_data, status=status.HTTP_200_OK)
+            return response
+        if is_token_valid(access_token):
+            response_data = {'message': _('Valid tokens.'), 'redirect': '/home/'}
+            response = Response(response_data, status=status.HTTP_200_OK)
+            return response
+        access_token, refresh_token = get_jwt_from_refresh(refresh_token)
+        if access_token is None:
+            response_data = {'message': _('Invalid tokens.'), 'redirect': '/login/'}
+            response = Response(response_data, status=status.HTTP_200_OK)
+            unset_jwt_cookies(response)
+            return response
+        response_data = {'message': _('Refreshed tokens.'), 'redirect': '/home/'}
+        response = Response(response_data, status=status.HTTP_200_OK)
+        set_jwt_as_cookies(response, access_token, refresh_token)
+        response.data['access_token'] = access_token
+        response.data['refresh_token'] = refresh_token
+>>>>>>> main
         return response
 
 token_verify = TokenVerify.as_view()

@@ -186,7 +186,7 @@
                                         </svg>
                                         {% translate 'Two-Factor Authentication' %}
                                     </h1>
-                                    {% if profile.user.twofa %}
+                                    {% if profile.user.has_twofa %}
                                     <div class="text-truncate d-flex d-xxl-flex justify-content-start align-items-center justify-content-xxl-start align-items-xxl-center" id="templateFtLink" style="width: 100%;">
                                         <div style="width: 100%;height: 100%;">
                                             <span class="text-truncate d-flex d-sm-flex justify-content-start align-items-center justify-content-xxl-start align-items-xxl-center" id="ftLink" style="color: var(--bs-success);font-size: 16px;margin-top: 0px;width: 100%;height: 100%;">
@@ -199,7 +199,7 @@
                                                 </svg>
                                             </span>
                                         </div>
-                                        <a class="btn btn-primary d-flex d-md-flex d-xxl-flex justify-content-end align-items-center align-items-md-center align-items-xxl-center" data-bs-target="#modalUnlinkFt" data-bs-toggle="modal" style="background: rgba(13,110,253,0);color: rgb(13,202,240);border-style: none;">
+                                        <a id="disableTwoFaBtn" class="btn btn-primary d-flex d-md-flex d-xxl-flex justify-content-end align-items-center align-items-md-center align-items-xxl-center" style="background: rgba(13,110,253,0);color: rgb(13,202,240);border-style: none;">
                                             {% translate 'Disable 2FA' %}
                                         </a>
                                     </div>
@@ -485,7 +485,7 @@
                 <button class="btn btn-light" data-bs-dismiss="modal" type="button">
                     {% translate 'Cancel' %}
                 </button>
-                <a class="btn btn-primary" data-bs-dismiss="modal" href="/api/oauth/me/twofa/" id="enableTwoFa">
+                <a class="btn btn-primary" data-bs-dismiss="modal" id="enableTwoFaBtn">
                     {% translate 'Activate 2FA' %}
                 </a>
             </div>

@@ -31,6 +31,7 @@ apipatterns = [
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('django_prometheus.urls')),
+	# path('healthz/', views.healthz, name='healthz'),
     path('', views.index, name='index'),
     path('api/', include((apipatterns, 'api'), namespace='api')),
 
@@ -68,6 +69,6 @@ urlpatterns = [
     path('leaderboard/', views.leaderboard, name='leaderboard'),
 	path('friends/', views.social, name='social'),
     path('friends/<uuid:friendship_id>/', views.social_friend, name='social_friend'),
-    path('settings/', views.settings, name='settings'),
+    path('settings/', views.settings_view, name='settings_view'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     # + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
