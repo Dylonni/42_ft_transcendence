@@ -174,7 +174,7 @@ class Profile(BaseModel):
         return self.get_total_games() - self.get_won_games()
     
     def get_winrate(self):
-        if self.get_total_games == 0:
+        if self.get_total_games() == 0:
             return 0
         return (self.get_won_games() / self.get_total_games()) * 100
     
