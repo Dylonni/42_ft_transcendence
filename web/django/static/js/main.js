@@ -1,5 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
     const contentDiv = document.getElementById('content');
+    let errorModal = null;
+    let errorBsModal = null;
+    let errorModalMsg = null;
     let notifSocket = null;
     let friendListSocket = null;
     let friendChatSocket = null;
@@ -79,23 +82,6 @@ document.addEventListener("DOMContentLoaded", () => {
         var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
             return new bootstrap.Popover(popoverTriggerEl);
         });
-    
-        var toastTriggers = document.querySelectorAll('[data-bs-toggle="toast"]');
-        for (let toastTrigger of toastTriggers) {
-            toastTrigger.addEventListener('click', function () {
-                var toastSelector = toastTrigger.getAttribute('data-bs-target');
-                if (!toastSelector) return;
-                try {
-                    var toastEl = document.querySelector(toastSelector);
-                    if (!toastEl) return;
-                    var toast = new bootstrap.Toast(toastEl);
-                    toast.show();
-                }
-                catch(e) {
-                    console.error(e);
-                }
-            });
-        }
     }
 
     const getCookie = (name) => {
@@ -454,6 +440,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const attachHandlers = () => {
         const path = window.location.pathname;
+        errorModal = document.getElementById('errorModal');
+        errorBsModal = new bootstrap.Modal(errorModal);
+        errorModalMsg = document.getElementById('errorModalMsg');
         const subdirectory = path.split('/')[1];
         if (subdirectory !== 'friends') {
             closeWebSocket(friendListSocket);
@@ -635,9 +624,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 })
                 .then(response => response.json())
                 .then(data => {
+                    if ('error' in data) {
+                        if (errorBsModal) {
+                            errorModalMsg.textContent = data.error;
+                            errorBsModal.show();
+                        }
+                    }
                     if ('redirect' in data) {
                         if (data.redirect === '/home/') {
                             openNotifWebSocket();
+                            navigateTo(data.redirect);
                         }
                     }
                 })
@@ -922,6 +918,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 })
                 .then(response => response.json())
                 .then(data => {
+                    if ('error' in data) {
+                        if (errorBsModal) {
+                            errorModalMsg.textContent = data.error;
+                            errorBsModal.show();
+                        }
+                    }
                     if ('redirect' in data) {
                         navigateTo(data.redirect);
                     }
@@ -944,6 +946,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 })
                 .then(response => response.json())
                 .then(data => {
+                    if ('error' in data) {
+                        if (errorBsModal) {
+                            errorModalMsg.textContent = data.error;
+                            errorBsModal.show();
+                        }
+                    }
                     if ('redirect' in data) {
                         if (data.redirect === '/home/') {
                             openNotifWebSocket();
@@ -968,7 +976,13 @@ document.addEventListener("DOMContentLoaded", () => {
                         fetch(`/api/profiles/search/?alias=${profileAlias}`)
                         .then(response => response.json())
                         .then(data => {
-                            if (data && 'data' in data) {
+                            if ('error' in data) {
+                                if (errorBsModal) {
+                                    errorModalMsg.textContent = data.error;
+                                    errorBsModal.show();
+                                }
+                            }
+                            if ('data' in data) {
                                 navigateTo(`/profiles/${data.data[0].id}`);
                             }
                         })
@@ -1012,6 +1026,12 @@ document.addEventListener("DOMContentLoaded", () => {
                     })
                     .then(response => response.json())
                     .then(data => {
+                        if ('error' in data) {
+                            if (errorBsModal) {
+                                errorModalMsg.textContent = data.error;
+                                errorBsModal.show();
+                            }
+                        }
                         if ('redirect' in data) {
                             navigateTo(data.redirect);
                         }
@@ -1322,6 +1342,12 @@ document.addEventListener("DOMContentLoaded", () => {
                     })
                     .then(response => response.json())
                     .then(data => {
+                        // if ('error' in data) {
+                        //     if (errorBsModal) {
+                        //         errorModalMsg.textContent = data.error;
+                        //         errorBsModal.show();
+                        //     }
+                        // }
                         navigateTo(window.location.pathname);
                     })
                     .catch(error => console.error('Error sending friend request:', error));
@@ -1589,19 +1615,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 })
                 .then(response => response.json())
                 .then(data => {
-                    const changeAliasErrorMsg = document.getElementById('changeAliasErrorMsg');
-                    if (data) {
-                        if ('error' in data) {
-                            if (changeAliasErrorMsg) {
-                                changeAliasErrorMsg.classList.remove('d-none', 'd-xxl-none');
-                            }
+                    if ('error' in data) {
+                        if (errorBsModal) {
+                            errorModalMsg.textContent = data.error;
+                            errorBsModal.show();
                         }
-                        if ('redirect' in data) {
-                            if (changeAliasErrorMsg) {
-                                changeAliasErrorMsg.classList.add('d-none', 'd-xxl-none');
-                            }
-                            navigateTo(data.redirect);
-                        }
+                    }
+                    if ('redirect' in data) {
+                        navigateTo(data.redirect);
                     }
                 })
                 .catch(error => console.error('Error changing alias:', error));
@@ -1642,19 +1663,15 @@ document.addEventListener("DOMContentLoaded", () => {
                         },
                         body: formData,
                     })
-                    .then(response => {
-                        const uploadAvatarErrorMsg = document.getElementById('uploadAvatarErrorMsg');
-                        if (uploadAvatarErrorMsg) {
-                            if (response.ok) {
-                                uploadAvatarErrorMsg.classList.add('d-none', 'd-xxl-none');
-                            } else {
-                                uploadAvatarErrorMsg.classList.remove('d-none', 'd-xxl-none');
+                    .then(response => response.json())
+                    .then(data => {
+                        if ('error' in data) {
+                            if (errorBsModal) {
+                                errorModalMsg.textContent = data.error;
+                                errorBsModal.show();
                             }
                         }
-                        return response.json();
-                    })
-                    .then(data => {
-                        if (data && 'redirect' in data) {
+                        if ('redirect' in data) {
                             navigateTo(data.redirect);
                         }
                     })

@@ -173,6 +173,11 @@ class Profile(BaseModel):
     def get_lost_games(self):
         return self.get_total_games() - self.get_won_games()
     
+    def get_winrate(self):
+        if self.get_total_games == 0:
+            return 0
+        return (self.get_won_games() / self.get_total_games()) * 100
+    
     def get_rank(self):
         if self.player1_rounds.count() + self.player2_rounds.count() == 0:
             return _('Unranked')
