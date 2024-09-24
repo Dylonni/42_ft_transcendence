@@ -31,7 +31,7 @@ apipatterns = [
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('django_prometheus.urls')),
-	# path('healthz/', views.healthz, name='healthz'),
+	path('healthz/', views.healthz, name='healthz'),
     path('', views.index, name='index'),
     path('api/', include((apipatterns, 'api'), namespace='api')),
 

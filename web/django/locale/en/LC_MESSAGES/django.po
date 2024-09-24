@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-23 15:44+0000\n"
+"POT-Creation-Date: 2024-09-24 15:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: accounts/serializers.py:38
+#: accounts/serializers.py:38 accounts/serializers.py:70
 msgid "Must include username/email and password."
 msgstr ""
 
@@ -34,25 +34,37 @@ msgstr ""
 msgid "Account is inactive."
 msgstr ""
 
-#: accounts/views.py:90
-msgid "Account registered! Please check your email to activate your account."
+#: accounts/serializers.py:76
+msgid "Unable to register with provided credentials."
 msgstr ""
 
-#: accounts/views.py:109 accounts/views.py:113 profiles/views.py:207
-#: profiles/views.py:211
+#: accounts/views.py:56
+msgid "Please check your email to sign in."
+msgstr ""
+
+#: accounts/views.py:86 accounts/views.py:90 accounts/views.py:168
+#: accounts/views.py:172 profiles/views.py:234 profiles/views.py:238
 msgid "Invalid url."
 msgstr ""
 
-#: accounts/views.py:117 accounts/views.py:120 profiles/views.py:215
-#: profiles/views.py:218
+#: accounts/views.py:94 accounts/views.py:97 accounts/views.py:176
+#: accounts/views.py:179 profiles/views.py:242 profiles/views.py:245
 msgid "Invalid code."
 msgstr ""
 
-#: accounts/views.py:148 accounts/views.py:159
+#: accounts/views.py:144
+msgid "Activate your Account"
+msgstr ""
+
+#: accounts/views.py:149
+msgid "Account registered! Please check your email to activate it."
+msgstr ""
+
+#: accounts/views.py:209 accounts/views.py:220
 msgid "Password reset request sent! Please check your email."
 msgstr ""
 
-#: accounts/views.py:183
+#: accounts/views.py:244
 msgid "Set your new password."
 msgstr ""
 
@@ -212,7 +224,7 @@ msgstr ""
 msgid "Game started."
 msgstr ""
 
-#: games/views.py:116 profiles/views.py:482
+#: games/views.py:116 profiles/views.py:509
 msgid "Message sent."
 msgstr ""
 
@@ -232,7 +244,7 @@ msgstr ""
 msgid "Game Message"
 msgstr ""
 
-#: pong/views.py:461
+#: pong/views.py:482
 msgid "Language changed."
 msgstr ""
 
@@ -260,100 +272,110 @@ msgstr ""
 msgid "Unranked"
 msgstr ""
 
-#: profiles/views.py:44
+#: profiles/views.py:45
 msgid "Profile not found."
 msgstr ""
 
-#: profiles/views.py:59
+#: profiles/views.py:60
 msgid "Incorrect password."
 msgstr ""
 
-#: profiles/views.py:66
+#: profiles/views.py:67
 msgid "Account deleted."
 msgstr ""
 
-#: profiles/views.py:78
+#: profiles/views.py:79
 msgid "Alias already taken."
 msgstr ""
 
-#: profiles/views.py:81
+#: profiles/views.py:82
 msgid "Alias updated."
 msgstr ""
 
-#: profiles/views.py:100
+#: profiles/views.py:101
 msgid "Avatar updated."
 msgstr ""
 
-#: profiles/views.py:110
+#: profiles/views.py:111
 msgid "Default language changed."
 msgstr ""
 
-#: profiles/views.py:129
+#: profiles/views.py:132
 msgid "Email change request sent! Please check your email."
 msgstr ""
 
-#: profiles/views.py:141
+#: profiles/views.py:144
 msgid "Invalid email."
 msgstr ""
 
-#: profiles/views.py:144 profiles/views.py:179 profiles/views.py:183
+#: profiles/views.py:147 profiles/views.py:182 profiles/views.py:186
 msgid "Invalid password."
 msgstr ""
 
-#: profiles/views.py:150
+#: profiles/views.py:153
 msgid "Email changed."
 msgstr ""
 
-#: profiles/views.py:167
+#: profiles/views.py:170
 msgid "Password change request sent! Please check your email."
 msgstr ""
 
-#: profiles/views.py:189
+#: profiles/views.py:192
 msgid "Password changed."
 msgstr ""
 
-#: profiles/views.py:232
+#: profiles/views.py:206
+msgid "2FA enabled."
+msgstr ""
+
+#: profiles/views.py:216
+msgid "2FA disabled."
+msgstr ""
+
+#: profiles/views.py:259
 msgid "Code verified."
 msgstr ""
 
-#: profiles/views.py:262
+#: profiles/views.py:289
 msgid "Game invitation sent."
 msgstr ""
 
-#: profiles/views.py:283
+#: profiles/views.py:310
 msgid "Profile blocked."
 msgstr ""
 
-#: profiles/views.py:306 profiles/views.py:413
+#: profiles/views.py:333 profiles/views.py:440
 msgid "Friend request accepted."
 msgstr ""
 
-#: profiles/views.py:309
+#: profiles/views.py:336
 msgid "Friend request sent."
 msgstr ""
 
-#: profiles/views.py:361
+#: profiles/views.py:388
 msgid "Game invitation accepted."
 msgstr ""
 
-#: profiles/views.py:371
+#: profiles/views.py:398
 msgid "Game invitation declined."
 msgstr ""
 
-#: profiles/views.py:393
+#: profiles/views.py:420
 msgid "Profile unblocked."
 msgstr ""
 
-#: profiles/views.py:423
+#: profiles/views.py:450
 msgid "Friend request declined."
 msgstr ""
 
-#: profiles/views.py:463
+#: profiles/views.py:490
 msgid "Friend removed."
 msgstr ""
 
 #: templates/about/about.html:4 templates/about/dev_team.html:33
 #: templates/about/faq.html:32 templates/about/game_rules.html:34
+#: templates/about/privacy_policy.html:28
+#: templates/about/terms_of_service.html:28
 msgid "About"
 msgstr ""
 
@@ -381,7 +403,8 @@ msgstr ""
 
 #: templates/about/about.html:89 templates/about/dev_team.html:4
 #: templates/about/faq.html:139 templates/about/privacy_policy.html:4
-#: templates/accounts/register.html:76 templates/footer.html:7
+#: templates/about/privacy_policy.html:16 templates/accounts/register.html:76
+#: templates/footer.html:7
 msgid "Privacy Policy"
 msgstr ""
 
@@ -393,6 +416,38 @@ msgstr ""
 #: templates/about/dev_team.html:45
 msgid ""
 "This is us, the team behind Transcendence42 project. Check us out below !"
+msgstr ""
+
+#: templates/about/dev_team.html:62
+msgid "Frontend Dev"
+msgstr ""
+
+#: templates/about/dev_team.html:65
+msgid "UI/UX Design"
+msgstr ""
+
+#: templates/about/dev_team.html:115
+msgid "Backend Dev"
+msgstr ""
+
+#: templates/about/dev_team.html:118
+msgid "Database Architecture"
+msgstr ""
+
+#: templates/about/dev_team.html:121
+msgid "Game Design"
+msgstr ""
+
+#: templates/about/dev_team.html:136
+msgid "Devops and security"
+msgstr ""
+
+#: templates/about/dev_team.html:139
+msgid "GDPR Compliance"
+msgstr ""
+
+#: templates/about/dev_team.html:142
+msgid "Localization and Translation"
 msgstr ""
 
 #: templates/about/faq.html:4
@@ -616,6 +671,16 @@ msgid ""
 "also displays the current score of the game."
 msgstr ""
 
+#: templates/about/game_rules.html:65 templates/games/game_ready.html:16
+#: templates/games/game_score.html:13
+msgid "Player_1"
+msgstr ""
+
+#: templates/about/game_rules.html:86 templates/games/game_ready.html:33
+#: templates/games/game_score.html:60
+msgid "Player_2"
+msgstr ""
+
 #: templates/about/game_rules.html:102
 msgid "Movement"
 msgstr ""
@@ -672,7 +737,17 @@ msgstr ""
 msgid "Enjoy your games !"
 msgstr ""
 
-#: templates/about/privacy_policy.html:39
+#: templates/about/privacy_policy.html:42
+#: templates/about/terms_of_service.html:42
+msgid "Last updated: "
+msgstr ""
+
+#: templates/about/privacy_policy.html:42
+#: templates/about/terms_of_service.html:42
+msgid "September 2024"
+msgstr ""
+
+#: templates/about/privacy_policy.html:48
 msgid ""
 "\n"
 "    <div class=\"row\">\n"
@@ -681,6 +756,11 @@ msgid ""
 "                This privacy policy will explain how our organization "
 "“Transcendence42” uses the personal data we collect from you when you use "
 "our website.\n"
+"                <br>First, we would like to assure you that at&nbsp;"
+"Transcendence42 we take privacy seriously. We will never contact you for "
+"marketing purposes. Your email will solely be used for privacy or security "
+"concerns.\n"
+"                <br>\n"
 "                <br>Topics:\n"
 "            </h5>\n"
 "            <ul style=\"color: var(--bs-body-bg);padding-left: 60px;\">\n"
@@ -696,9 +776,6 @@ msgid ""
 "                </li>\n"
 "                <li>\n"
 "                    <a href=\"#hDataStore\">How do we store your data?</a>\n"
-"                </li>\n"
-"                <li>\n"
-"                    <a href=\"#marketing\">Marketing</a>\n"
 "                </li>\n"
 "                <li>\n"
 "                    <a href=\"#wDataProtection\">What are your data "
@@ -739,7 +816,7 @@ msgid ""
 "    "
 msgstr ""
 
-#: templates/about/privacy_policy.html:95
+#: templates/about/privacy_policy.html:103
 #, python-format
 msgid ""
 "\n"
@@ -849,8 +926,8 @@ msgid ""
 "            <p style=\"color: var(--bs-body-bg);\">\n"
 "                Transcendence42 is executed locally on your computer. This "
 "mean that all data shared with Transcendence42 is handled on your own "
-"computer or server. You are solely responsible for securing your own network "
-"to avoid your data being exposed on external networks.\n"
+"computer or server. YOU ARE SOLELY RESPONSIBLE FOR SECURING YOUR OWN NETWORK "
+"TO AVOID YOUR DATA BEING EXPOSED ON EXTERNAL NETWORKS.\n"
 "                <br>Transcendence42 will keep your email for the whole life "
 "of your account. We will delete your data automatically upon deletion of the "
 "account.\n"
@@ -870,17 +947,6 @@ msgid ""
 "        </div>\n"
 "        <div class=\"col\">\n"
 "            <hr>\n"
-"        </div>\n"
-"        <div class=\"col-md-12\" id=\"marketing\">\n"
-"            <h4 style=\"color: var(--bs-primary-border-subtle);text-"
-"decoration: underline;\">\n"
-"                Marketing\n"
-"            </h4>\n"
-"            <p style=\"color: var(--bs-body-bg);\">\n"
-"                At&nbsp;Transcendence42 we take privacy seriously. We will "
-"not contact you for marketing purposes. The email point of contact is solely "
-"to be used for privacy or security concerns.\n"
-"            </p>\n"
 "        </div>\n"
 "        <div class=\"col\">\n"
 "            <hr>\n"
@@ -984,15 +1050,10 @@ msgid ""
 "            </h4>\n"
 "            <p style=\"color: var(--bs-body-bg);\">\n"
 "                There are a number of different types of cookies, however, "
-"our website uses:\n"
+"our website uses only \"functionality\" cookies. Transcendence42 uses these "
+"cookies so that we recognize you on our website and remember your previously "
+"selected preferences. These could include what language you prefer.\n"
 "            </p>\n"
-"            <ul style=\"color: var(--bs-body-bg);padding-left: 60px;\">\n"
-"                <li style=\"color: var(--bs-body-bg);\">\n"
-"                    Functionality – Transcendence42 uses these cookies so "
-"that we recognize you on our website and remember your previously selected "
-"preferences. These could include what language you prefer.\n"
-"                </li>\n"
-"            </ul>\n"
 "        </div>\n"
 "        <div class=\"col\">\n"
 "            <hr>\n"
@@ -1033,8 +1094,7 @@ msgid ""
 "            <p style=\"color: var(--bs-body-bg);\">\n"
 "                Transcendence42 keeps its privacy policy under regular "
 "review and places any updates on this web page. You will also be notified by "
-"email that an update has occurred. This privacy policy was last updated on "
-"29 August 2024.\n"
+"email that an update has occurred.\n"
 "            </p>\n"
 "        </div>\n"
 "        <div class=\"col\">\n"
@@ -1080,12 +1140,8 @@ msgid ""
 "    "
 msgstr ""
 
-#: templates/about/terms_of_service.html:42
-msgid "Last updated: "
-msgstr ""
-
-#: templates/about/terms_of_service.html:42
-msgid "August 2024"
+#: templates/about/terms_of_service.html:16
+msgid "TERMS OF SERVICE"
 msgstr ""
 
 #: templates/about/terms_of_service.html:48
@@ -1197,11 +1253,14 @@ msgid ""
 "Platform, including all associated intellectual property rights. Any games "
 "available through our Platform are owned by Transcendence42 or its partners. "
 "No rights are granted to you hereunder other than as expressly set forth "
-"herein. You agree not to reproduce, duplicate, copy, sell, resell or exploit "
-"any part of the Website/Platform, use of the Website/Platform or access to "
-"the Website/Platform without our express written consent. You may not "
-"duplicate, copy or reuse any part of the visual design elements without our "
-"express written consent.\n"
+"herein.\n"
+"            </p>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                YOU AGREE NOT TO REPRODUCE, DUPLICATE, COPY, SELL, RESELL OR "
+"EXPLOIT ANY PART OF THE WEBSITE/PLATFORM, USE OF THE WEBSITE/PLATFORM OR "
+"ACCESS TO THE WEBSITE/PLATFORM WITHOUT OUR EXPRESS WRITTEN CONSENT. YOU MAY "
+"NOT DUPLICATE, COPY OR REUSE ANY PART OF THE VISUAL DESIGN ELEMENTS WITHOUT "
+"OUR EXPRESS WRITTEN CONSENT.\n"
 "            </p>\n"
 "            <p style=\"color: var(--bs-body-bg);\">\n"
 "                Users may livestream and monetise videos on online (live "
@@ -1322,7 +1381,7 @@ msgid ""
 "                4. CODE OF CONDUCT\n"
 "            </h4>\n"
 "            <p style=\"color: var(--bs-body-bg);\">\n"
-"                Summary In general, you should avoid doing anything that "
+"                Summary: In general, you should avoid doing anything that "
 "might harm Transcendence42 or anyone else. Among other things, you may not "
 "copy the Platform or use any content in an illegal or harmful manner, make "
 "any misrepresentations of or abuse our services, or otherwise violate "
@@ -1494,10 +1553,13 @@ msgid ""
 "            <p style=\"color: var(--bs-body-bg);\">\n"
 "                WE MAY WITHHOLD, SUSPEND, MODIFY, OR TERMINATE YOUR ACCESS "
 "TO THE SERVICES FOR ANY OR NO REASON AT ANY TIME WITHOUT NOTICE UNLESS "
-"OTHERWISE REQUIRED BY APPLICABLE LAW. If your account is suspended while you "
-"are participating in a tournament or competition, Transcendence42 assumes no "
-"liability in the loss of any potential prizes or recognition related to the "
-"tournament or competition.\n"
+"OTHERWISE REQUIRED BY APPLICABLE LAW.\n"
+"            </p>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                If your account is suspended while you are participating in "
+"a tournament or competition, Transcendence42 assumes no liability in the "
+"loss of any potential prizes or recognition related to the tournament or "
+"competition.\n"
 "            </p>\n"
 "        </div>\n"
 "        <div class=\"col\">\n"
@@ -1793,8 +1855,7 @@ msgid ""
 "we are free to use such feedback at our own discretion.\n"
 "            <p style=\"color: var(--bs-body-bg);\">\n"
 "                If you have a question or complaint regarding the Platform "
-"or Website, please fill in our contact form at https://www.transcendence42."
-"com/contact or reach out on <a href=\"%(discord_invite)s\">discord</a>.\n"
+"or Website, please reach out on <a href=\"%(discord_invite)s\">discord</a>.\n"
 "            </p>\n"
 "            <p style=\"color: var(--bs-body-bg);\">\n"
 "                We value your opinion. if you provide us with feedback, "
@@ -1817,7 +1878,7 @@ msgid ""
 "href=\"%(discord_invite)s\">discord</a>.\n"
 "            </p>\n"
 "            <p style=\"color: var(--bs-body-bg);\">\n"
-"                For US Residents Only: If you are a copyright owner or an "
+"                FOR US RESIDENTS ONLY: If you are a copyright owner or an "
 "agent thereof and believe that your intellectual property rights have been "
 "infringed upon, you may submit a notification pursuant to the Digital "
 "Millennium Copyright Act (“DMCA”) by providing our copyright agent with the "
@@ -2028,45 +2089,49 @@ msgid ""
 "    "
 msgstr ""
 
-#: templates/accounts/email_activate.html:6
+#: templates/accounts/email_activate.html:7
 msgid "Activate your account"
 msgstr ""
 
-#: templates/accounts/email_activate.html:12
+#: templates/accounts/email_activate.html:13
 #: templates/accounts/email_change_email.html:13
 #: templates/accounts/email_change_password.html:13
 #: templates/accounts/email_reset_password.html:13
+#: templates/accounts/email_twofa.html:13
 msgid "Hi"
 msgstr ""
 
-#: templates/accounts/email_activate.html:15
+#: templates/accounts/email_activate.html:16
 msgid ""
 "Thank you for registering at Transcendence42. Please use the code below to "
 "activate your account:"
 msgstr ""
 
-#: templates/accounts/email_activate.html:21
+#: templates/accounts/email_activate.html:22
 #: templates/accounts/email_change_email.html:22
 #: templates/accounts/email_change_password.html:22
 #: templates/accounts/email_reset_password.html:22
+#: templates/accounts/email_twofa.html:22
 msgid "This code will expire in 10 minutes."
 msgstr ""
 
-#: templates/accounts/email_activate.html:24
+#: templates/accounts/email_activate.html:25
 msgid "If you did not create an account, please ignore this email."
 msgstr ""
 
-#: templates/accounts/email_activate.html:27
+#: templates/accounts/email_activate.html:28
 #: templates/accounts/email_change_email.html:28
 #: templates/accounts/email_change_password.html:28
 #: templates/accounts/email_reset_password.html:28
+#: templates/accounts/email_twofa.html:28
 msgid "Thank you,"
 msgstr ""
 
-#: templates/accounts/email_activate.html:29
+#: templates/accounts/email_activate.html:30
 #: templates/accounts/email_change_email.html:30
 #: templates/accounts/email_change_password.html:30
 #: templates/accounts/email_reset_password.html:30
+#: templates/accounts/email_twofa.html:30
 msgid "The Transcendence42 Team"
 msgstr ""
 
@@ -2104,6 +2169,18 @@ msgstr ""
 
 #: templates/accounts/email_reset_password.html:25
 msgid "If you have not requested a password reset, please ignore this email."
+msgstr ""
+
+#: templates/accounts/email_twofa.html:7
+msgid "New Connection"
+msgstr ""
+
+#: templates/accounts/email_twofa.html:16
+msgid "Please use the code below to sign in:"
+msgstr ""
+
+#: templates/accounts/email_twofa.html:25
+msgid "If you have not attempted to sign in, please ignore this email."
 msgstr ""
 
 #: templates/accounts/forgot_password.html:4
@@ -2205,6 +2282,12 @@ msgstr ""
 msgid "Register"
 msgstr ""
 
+#: templates/accounts/register.html:40
+msgid ""
+"Your unique id, which cannot be changed after account creation. Must be 20 "
+"characters long maximum and can include letters (a-Z), numbers (0-9), \\"
+msgstr ""
+
 #: templates/accounts/register.html:42 templates/settings.html:136
 msgid "Username"
 msgstr ""
@@ -2251,11 +2334,11 @@ msgstr ""
 msgid "Verify"
 msgstr ""
 
-#: templates/alert_modal.html:12
+#: templates/alert_modal.html:14
 msgid "Error"
 msgstr ""
 
-#: templates/alert_modal.html:21
+#: templates/alert_modal.html:23
 msgid "Close"
 msgstr ""
 
@@ -2263,7 +2346,7 @@ msgstr ""
 msgid "Friends"
 msgstr ""
 
-#: templates/friends/social.html:66
+#: templates/friends/social.html:66 templates/games/game_chat.html:20
 msgid "Send a message"
 msgstr ""
 
@@ -2297,6 +2380,10 @@ msgstr ""
 
 #: templates/friends/social_section.html:16
 msgid "Select a conversation"
+msgstr ""
+
+#: templates/games/game_chat.html:11
+msgid "Chat"
 msgstr ""
 
 #: templates/games/game_config.html:4 templates/games/game_config.html:11
@@ -2355,6 +2442,10 @@ msgstr ""
 msgid "has joined !"
 msgstr ""
 
+#: templates/games/game_message.html:101
+msgid "Next Match:"
+msgstr ""
+
 #: templates/games/game_message.html:128
 msgid "has been"
 msgstr ""
@@ -2364,7 +2455,7 @@ msgid "eliminated"
 msgstr ""
 
 #: templates/games/game_message.html:144
-msgid "is the"
+msgid "is the "
 msgstr ""
 
 #: templates/games/game_message.html:146
@@ -2393,6 +2484,10 @@ msgstr ""
 
 #: templates/games/game_room.html:4
 msgid "Game Room"
+msgstr ""
+
+#: templates/games/game_room.html:34
+msgid "Leave Room"
 msgstr ""
 
 #: templates/games/game_room.html:63
@@ -2451,8 +2546,16 @@ msgstr ""
 msgid "Home"
 msgstr ""
 
+#: templates/home.html:65
+msgid "Find a Player"
+msgstr ""
+
 #: templates/home.html:75
 msgid "Game Rooms"
+msgstr ""
+
+#: templates/home.html:89
+msgid "Find a Game"
 msgstr ""
 
 #: templates/home.html:119
@@ -2564,6 +2667,14 @@ msgstr ""
 
 #: templates/profile.html:192 templates/profile.html:481
 msgid "Player Statistics"
+msgstr ""
+
+#: templates/profile.html:221 templates/profile.html:510
+msgid "Wins"
+msgstr ""
+
+#: templates/profile.html:227 templates/profile.html:516
+msgid "Losses"
 msgstr ""
 
 #: templates/profile.html:268 templates/profile.html:557

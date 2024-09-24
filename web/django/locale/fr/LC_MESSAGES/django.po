@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-23 15:44+0000\n"
+"POT-Creation-Date: 2024-09-24 15:34+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,9 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: accounts/serializers.py:38
-#, fuzzy
-#| msgid "Must include \"username/email\" and \"password\"."
+#: accounts/serializers.py:38 accounts/serializers.py:70
 msgid "Must include username/email and password."
 msgstr "Doit inclure \"nom d'utilisateur/courriel\" et \"mot de passe\"."
 
@@ -29,84 +27,88 @@ msgid "Unable to log in with provided credentials."
 msgstr "Impossible de se connecter avec les identifiants fournis."
 
 #: accounts/serializers.py:49
-#, fuzzy
-#| msgid ""
-#| "Account registered! Please check your email to activate your account."
 msgid "Check your email and activate your account first."
-msgstr ""
-"Votre compte est enregistré ! Pour l'activer, veuillez vérifier votre "
-"adresse courriel."
+msgstr "Pour activer votre compte, veuillez vérifier votre adresse courriel."
 
 #: accounts/serializers.py:53
-#, fuzzy
-#| msgid "Account activated!"
 msgid "Account is inactive."
-msgstr "Compte activé !"
+msgstr "Compte désactivé."
 
-#: accounts/views.py:90
-#, fuzzy
-#| msgid ""
-#| "Account registered! Please check your email to activate your account."
-msgid "Account registered! Please check your email to activate your account."
-msgstr ""
-"Votre compte est enregistré ! Pour l'activer, veuillez vérifier votre "
-"adresse courriel."
+#: accounts/serializers.py:76
+msgid "Unable to register with provided credentials."
+msgstr "Impossible de se connecter avec les identifiants fournis."
 
-#: accounts/views.py:109 accounts/views.py:113 profiles/views.py:207
-#: profiles/views.py:211
+#: accounts/views.py:56
+msgid "Please check your email to sign in."
+msgstr "Notre"
+
+#: accounts/views.py:86 accounts/views.py:90 accounts/views.py:168
+#: accounts/views.py:172 profiles/views.py:234 profiles/views.py:238
 msgid "Invalid url."
 msgstr "URL invalide"
 
-#: accounts/views.py:117 accounts/views.py:120 profiles/views.py:215
-#: profiles/views.py:218
+#: accounts/views.py:94 accounts/views.py:97 accounts/views.py:176
+#: accounts/views.py:179 profiles/views.py:242 profiles/views.py:245
 msgid "Invalid code."
 msgstr "Code invalide"
 
-#: accounts/views.py:148 accounts/views.py:159
+#: accounts/views.py:144
+#, fuzzy
+#| msgid "Activate your account"
+msgid "Activate your Account"
+msgstr "Activer votre compte"
+
+#: accounts/views.py:149
+msgid "Account registered! Please check your email to activate it."
+msgstr ""
+"Votre compte est enregistré ! Pour l'activer, veuillez vérifier votre "
+"adresse courriel."
+
+#: accounts/views.py:209 accounts/views.py:220
 msgid "Password reset request sent! Please check your email."
 msgstr ""
 "Vous allez recevoir un lien pour modifier votre mot de passe. Veuillez "
 "surveiller votre courriel."
 
-#: accounts/views.py:183
+#: accounts/views.py:244
 msgid "Set your new password."
 msgstr "Entrez votre nouveau mot de passe."
 
 #: friends/managers.py:37
 msgid "Friendship not found."
-msgstr ""
+msgstr "Ami introuvable."
 
 #: friends/managers.py:53
 msgid "Cannot be friends with yourself."
-msgstr ""
+msgstr "Vous ne pouvez pas être votre propre ami."
 
 #: friends/managers.py:62
 msgid "These profiles are already friends."
-msgstr ""
+msgstr "Ces profiles sont déjà amis."
 
 #: friends/managers.py:80
 msgid "Profile not part of this friendship."
-msgstr ""
+msgstr "Vous n'êtes pas ami avec cette personne."
 
 #: friends/managers.py:83
 msgid "Friendship already removed."
-msgstr ""
+msgstr "Cette amitié n'existe déjà plus."
 
 #: friends/managers.py:112
 msgid "Cannot send a friend request to yourself."
-msgstr ""
+msgstr "Vous ne pouvez pas être votre propre ami."
 
 #: friends/managers.py:114
 msgid "Friend request already sent."
-msgstr ""
+msgstr "Vous l'avez déjà demandé en ami."
 
 #: friends/managers.py:116
 msgid "Friend request already received."
-msgstr ""
+msgstr "Vous avez déjà reçu une demande en ami"
 
 #: friends/managers.py:168
 msgid "Friend message not found."
-msgstr ""
+msgstr "Nous n'avons pas trouvé ce message."
 
 #: games/managers.py:16 games/managers.py:31 games/managers.py:168
 msgid "Player is already in a game."
@@ -134,7 +136,7 @@ msgstr "Vous ne pouvez pas vous inviter vous-même."
 
 #: games/managers.py:148
 msgid "Sender is not in a game."
-msgstr ""
+msgstr "Vous n'avez pas encore créé de partie."
 
 #: games/managers.py:150
 msgid "Game invite already sent."
@@ -201,70 +203,54 @@ msgid "Eliminate"
 msgstr "Éliminer"
 
 #: games/models.py:335
-#, fuzzy
-#| msgid "Wins"
 msgid "Win"
 msgstr "Victoires"
 
 #: games/views.py:26
-#, fuzzy
-#| msgid "Game Duration"
 msgid "Game created."
-msgstr "Durée de la partie"
+msgstr "Partie créée."
 
 #: games/views.py:40
 msgid "Game not found."
 msgstr "Partie inexistante"
 
 #: games/views.py:62
-#, fuzzy
-#| msgid "date joined"
 msgid "Game joined."
-msgstr "date d'adhésion"
+msgstr "Partie rejointe"
 
 #: games/views.py:76
-#, fuzzy
-#| msgid "Games played:"
 msgid "Game left."
-msgstr "Parties jouées :"
+msgstr "Partie quittée."
 
 #: games/views.py:91
 msgid "All players must be ready."
 msgstr "Tous les joueurs se tiennent prêts"
 
 #: games/views.py:97
-#, fuzzy
-#| msgid "Games played:"
 msgid "Game started."
-msgstr "Parties jouées :"
+msgstr "La partie a commencé."
 
-#: games/views.py:116 profiles/views.py:482
+#: games/views.py:116 profiles/views.py:509
 msgid "Message sent."
 msgstr "Message envoyé"
 
 #: notifs/models.py:10 templates/notifs/notif_friend_request.html:14
-#, fuzzy
-#| msgid "Friends"
 msgid "Friend Request"
-msgstr "Amis"
+msgstr "Demande en Ami"
 
 #: notifs/models.py:11
-#, fuzzy
-#| msgid "  Send a message"
 msgid "Friend Message"
-msgstr "  Envoyer un message"
+msgstr "Message"
 
 #: notifs/models.py:12
-#, fuzzy
-#| msgid "Game Duration"
 msgid "Game Invitation"
-msgstr "Durée de la partie"
+msgstr "Invitation à jouer"
 
 #: notifs/models.py:13
 msgid "Game Message"
 msgstr "Message du jeu"
 
-#: pong/views.py:461
+#: pong/views.py:482
 msgid "Language changed."
 msgstr "Langue mise à jour"
 
@@ -285,137 +271,127 @@ msgid "Playing"
 msgstr "En jeu"
 
 #: profiles/models.py:23 templates/friends/social_header.html:22
-#, fuzzy
-#| msgid "Online"
 msgid "Offline"
-msgstr "En ligne"
+msgstr "Hors ligne"
 
 #: profiles/models.py:178
 msgid "Unranked"
-msgstr "Non classé"
+msgstr "non classé"
 
-#: profiles/views.py:44
-#, fuzzy
-#| msgid "My Profile"
+#: profiles/views.py:45
 msgid "Profile not found."
-msgstr "Mon profil"
+msgstr "Profil introuvable."
 
-#: profiles/views.py:59
-#, fuzzy
-#| msgid "Set your new password."
+#: profiles/views.py:60
 msgid "Incorrect password."
-msgstr "Entrez votre nouveau mot de passe."
+msgstr "Mot de passe erroné."
 
-#: profiles/views.py:66
-#, fuzzy
-#| msgid "Account created on"
+#: profiles/views.py:67
 msgid "Account deleted."
-msgstr "Compte créé le"
+msgstr "Compte supprimé."
 
-#: profiles/views.py:78
+#: profiles/views.py:79
 msgid "Alias already taken."
 msgstr "Cet alias est déjà pris."
 
-#: profiles/views.py:81
+#: profiles/views.py:82
 msgid "Alias updated."
 msgstr "Alias mis à jour."
 
-#: profiles/views.py:100
+#: profiles/views.py:101
 msgid "Avatar updated."
 msgstr "Avatar mis à jour."
 
-#: profiles/views.py:110
+#: profiles/views.py:111
 msgid "Default language changed."
 msgstr "La langue par défaut a été modifiée."
 
-#: profiles/views.py:129
+#: profiles/views.py:132
 msgid "Email change request sent! Please check your email."
 msgstr ""
 "Vous allez recevoir un lien pour modifier votre adresse courriel de contact. "
 "Veuillez surveiller votre adresse courriel actuelle."
 
-#: profiles/views.py:141
-#, fuzzy
-#| msgid "Enter a valid email address."
+#: profiles/views.py:144
 msgid "Invalid email."
-msgstr "Veuillez saisir une adresse courriel valide."
+msgstr "Adresse courriel invalide."
 
-#: profiles/views.py:144 profiles/views.py:179 profiles/views.py:183
-#, fuzzy
-#| msgid "Show password"
+#: profiles/views.py:147 profiles/views.py:182 profiles/views.py:186
 msgid "Invalid password."
-msgstr "Afficher le mot de passe"
+msgstr "Mot de passe invalide."
 
-#: profiles/views.py:150
+#: profiles/views.py:153
 msgid "Email changed."
 msgstr "L'adresse courriel a été modifiée."
 
-#: profiles/views.py:167
+#: profiles/views.py:170
 msgid "Password change request sent! Please check your email."
 msgstr ""
 "Vous allez recevoir un lien pour modifier votre mot de passe. Veuillez "
 "surveiller votre courriel."
 
-#: profiles/views.py:189
-#, fuzzy
-#| msgid "Password changed!"
+#: profiles/views.py:192
 msgid "Password changed."
-msgstr "Le mot de passe a été changé !"
+msgstr "Le mot de passe a été modifié."
 
-#: profiles/views.py:232
+#: profiles/views.py:206
+msgid "2FA enabled."
+msgstr "2FA Activée."
+
+#: profiles/views.py:216
+msgid "2FA disabled."
+msgstr "2FA désactivée."
+
+#: profiles/views.py:259
 msgid "Code verified."
 msgstr "Code vérifié."
 
-#: profiles/views.py:262
+#: profiles/views.py:289
 msgid "Game invitation sent."
 msgstr "Invitation envoyée."
 
-#: profiles/views.py:283
-#, fuzzy
-#| msgid "My Profile"
+#: profiles/views.py:310
 msgid "Profile blocked."
-msgstr "Mon profil"
+msgstr "Utilisateur bloqué."
 
-#: profiles/views.py:306 profiles/views.py:413
+#: profiles/views.py:333 profiles/views.py:440
 msgid "Friend request accepted."
 msgstr "La demande en ami a été acceptée."
 
-#: profiles/views.py:309
+#: profiles/views.py:336
 msgid "Friend request sent."
 msgstr "La demande en ami a été envoyée."
 
-#: profiles/views.py:361
+#: profiles/views.py:388
 msgid "Game invitation accepted."
 msgstr "L'invitation de jeu a été acceptée."
 
-#: profiles/views.py:371
+#: profiles/views.py:398
 msgid "Game invitation declined."
 msgstr "L'invitation de jeu a été refusée."
 
-#: profiles/views.py:393
-#, fuzzy
-#| msgid "My Profile"
+#: profiles/views.py:420
 msgid "Profile unblocked."
-msgstr "Mon profil"
+msgstr "Utilisateur debloqué."
 
-#: profiles/views.py:423
+#: profiles/views.py:450
 msgid "Friend request declined."
 msgstr "La demande en ami a été refusée."
 
-#: profiles/views.py:463
+#: profiles/views.py:490
 msgid "Friend removed."
 msgstr "Amitié supprimée."
 
 #: templates/about/about.html:4 templates/about/dev_team.html:33
 #: templates/about/faq.html:32 templates/about/game_rules.html:34
+#: templates/about/privacy_policy.html:28
+#: templates/about/terms_of_service.html:28
 msgid "About"
 msgstr "À propos"
 
 #: templates/about/about.html:15 templates/footer.html:8
-#, fuzzy
-#| msgid "Transcendence"
 msgid "About Transcendence42"
-msgstr "Transcendance"
+msgstr "À propos de Transcendence42"
 
 #: templates/about/about.html:30
 msgid ""
@@ -429,10 +405,8 @@ msgstr "Foire Aux Questions"
 
 #: templates/about/about.html:59 templates/about/game_rules.html:4
 #: templates/about/game_rules.html:22
-#, fuzzy
-#| msgid "Game Rooms"
 msgid "Game Rules"
-msgstr "Salons de jeux"
+msgstr "Règles du jeu"
 
 #: templates/about/about.html:72 templates/about/dev_team.html:21
 msgid "The Dev Team"
@@ -440,7 +414,8 @@ msgstr "L'équipe de développement"
 
 #: templates/about/about.html:89 templates/about/dev_team.html:4
 #: templates/about/faq.html:139 templates/about/privacy_policy.html:4
-#: templates/accounts/register.html:76 templates/footer.html:7
+#: templates/about/privacy_policy.html:16 templates/accounts/register.html:76
+#: templates/footer.html:7
 msgid "Privacy Policy"
 msgstr "Politique de confidentialité"
 
@@ -454,6 +429,38 @@ msgid ""
 "This is us, the team behind Transcendence42 project. Check us out below !"
 msgstr "Et voici l'équipe de Transcendence42 !"
 
+#: templates/about/dev_team.html:62
+msgid "Frontend Dev"
+msgstr "Dev Frontend"
+
+#: templates/about/dev_team.html:65
+msgid "UI/UX Design"
+msgstr "Design UI/UX"
+
+#: templates/about/dev_team.html:115
+msgid "Backend Dev"
+msgstr "Dev Backend"
+
+#: templates/about/dev_team.html:118
+msgid "Database Architecture"
+msgstr "Architecture de données"
+
+#: templates/about/dev_team.html:121
+msgid "Game Design"
+msgstr "Design du jeu"
+
+#: templates/about/dev_team.html:136
+msgid "Devops and security"
+msgstr "Devops et sécurité"
+
+#: templates/about/dev_team.html:139
+msgid "GDPR Compliance"
+msgstr "Conformité RGPD"
+
+#: templates/about/dev_team.html:142
+msgid "Localization and Translation"
+msgstr "Traduction et localisation"
+
 #: templates/about/faq.html:4
 msgid "FAQ"
 msgstr "FAQ"
@@ -466,16 +473,16 @@ msgstr "Comment fonctionnent le classement et le système d'elo ?"
 #: templates/home.html:44 templates/profile.html:106 templates/profile.html:395
 #: templates/profile.html:495
 msgid "Points"
-msgstr "Les points"
+msgstr "Points"
 
 #: templates/about/faq.html:65
 msgid "are calculated upon victories and defeats and on your opponent&#39;s "
-msgstr "sont basés sur le nombre de victoires et défaites, mais aussi"
+msgstr ": basés sur le nombre de victoires et défaites, mais aussi le"
 
 #: templates/about/faq.html:73 templates/about/faq.html:98
 #: templates/home.html:32 templates/profile.html:92 templates/profile.html:381
 msgid "Rank"
-msgstr "le classement"
+msgstr "Classement"
 
 #: templates/about/faq.html:75
 msgid "."
@@ -500,7 +507,7 @@ msgstr "un point de pénalité"
 #: templates/about/faq.html:83
 msgid ""
 "and you will also loose the points you were supposed to loose initially."
-msgstr "en plus de la perte de points prévue en cas de défaite."
+msgstr ", en plus de la perte de points prévue en cas de défaite."
 
 #: templates/about/faq.html:85
 msgid "Winning games in a tournament will "
@@ -515,8 +522,6 @@ msgid "more points."
 msgstr "plus de points."
 
 #: templates/about/faq.html:101
-#, fuzzy
-#| msgid "is simply based on your aquired"
 msgid "is simply based on the"
 msgstr "est tout simplement basé sur"
 
@@ -534,7 +539,7 @@ msgstr "Notre"
 
 #: templates/about/faq.html:140
 msgid "page for all relevant info."
-msgstr "contient toutes les informations dont vous avez besoin,"
+msgstr "contient toutes les informations dont vous avez besoin."
 
 #: templates/about/faq.html:148
 msgid "How does the social aspect works ?"
@@ -570,8 +575,8 @@ msgid ""
 "The friend has to either accept the requested invitation from you, or has to "
 "add you back via your"
 msgstr ""
-"Cette personne peut soit accpter votre invitation, soit vous ajouter à sa "
-"propre liste d'amis via votre "
+"Cette personne peut accepter votre invitation directement, ou encore vous "
+"ajouter à sa propre liste d'amis via votre "
 
 #: templates/about/faq.html:185 templates/about/faq.html:264
 #: templates/profile.html:4
@@ -593,15 +598,14 @@ msgstr ""
 msgid ""
 "page, you can interact with this friend by clicking on them in your friend "
 "list."
-msgstr "et intéragir en cliquant sur le nom dans la liste d'amis."
+msgstr ""
+". Pour intéragir avec un ami, il suffit de cliquer sur son nom dans la liste."
 
 #: templates/about/faq.html:208
 msgid "What happens when I block someone ?"
 msgstr "Que se passe-t-il quand je bloque quelqu'un?"
 
 #: templates/about/faq.html:224
-#, fuzzy
-#| msgid "Block list"
 msgid "Blocking"
 msgstr "Bloquer"
 
@@ -609,7 +613,7 @@ msgstr "Bloquer"
 msgid ""
 "a user will prevent them from sending notifications and messages to you."
 msgstr ""
-"un joueur fait que vous ne recevrez plus de messages no de notifications de "
+"un joueur fait que vous ne recevrez plus de messages ni de notifications de "
 "sa part."
 
 #: templates/about/faq.html:231
@@ -626,7 +630,7 @@ msgid ""
 "and they will be able to see your requests and messages but you will not see "
 "their replies or requests."
 msgstr ""
-"Vous pourrez continuer à notifier les amis que vous bloquez, et ils verront "
+"Vous pouvez continuer à notifier les amis que vous bloquez, et ils verront "
 "vos messages et invitations. Cependant, vous ne pourrez plus voir leurs "
 "réponses ou invitations."
 
@@ -640,11 +644,13 @@ msgstr "Débloquer"
 
 #: templates/about/faq.html:254
 msgid "a user by going to their"
-msgstr "un utilisateur depuis leur"
+msgstr "un utilisateur depuis sa page de"
 
 #: templates/about/faq.html:268
+#, fuzzy
+#| msgid ", via the"
 msgid "page, via the"
-msgstr ""
+msgstr "via la page de"
 
 #: templates/about/faq.html:283
 msgid "page , or removing them off your blocked list under the"
@@ -669,6 +675,8 @@ msgid ""
 "Yes , we would love to hear about your ideas ! Feel free to share them with "
 "us by contacting us at"
 msgstr ""
+"Nous serons ravis de recevoir vos idées et suggestions! Vous pouvez nous les "
+"envoyer à :"
 
 #: templates/about/game_rules.html:46
 msgid "The rules are simple:"
@@ -679,8 +687,8 @@ msgid ""
 "There are two paddles on each side of the field , you (and your opponent) "
 "have to move your paddles and hit the ball in order to score a point."
 msgstr ""
-"Chaque joueur défend son côté du terrain grâce à sa raquette, et marque un "
-"point chaque fois que l'adversaire n'arrive pas à rattrapper la balle."
+"défendez votre côté du terrain avec votre raquette, et marquez un point "
+"chaque fois que l'adversaire n'arrive pas à rattrapper la balle."
 
 #: templates/about/game_rules.html:50
 msgid "The ball is getting faster from each hit."
@@ -699,8 +707,22 @@ msgid ""
 "Your side is represented by your name and your avatar above the game , it "
 "also displays the current score of the game."
 msgstr ""
-"Votre côté du terrain est identifiable avec votre nom et votre avatar. Il "
+"Votre côté du terrain est identifiable par votre nom et votre avatar. Il "
 "indique aussi votre score."
+
+#: templates/about/game_rules.html:65 templates/games/game_ready.html:16
+#: templates/games/game_score.html:13
+#, fuzzy
+#| msgid "Players"
+msgid "Player_1"
+msgstr "Joueurs"
+
+#: templates/about/game_rules.html:86 templates/games/game_ready.html:33
+#: templates/games/game_score.html:60
+#, fuzzy
+#| msgid "Players"
+msgid "Player_2"
+msgstr "Joueurs"
 
 #: templates/about/game_rules.html:102
 msgid "Movement"
@@ -734,27 +756,27 @@ msgstr "pour faire descendre la raquette"
 
 #: templates/about/game_rules.html:160
 msgid "Points to win a game,"
-msgstr "Le nombre de points pour gagner"
+msgstr "Le nombre de points pour gagner,"
 
 #: templates/about/game_rules.html:170
 msgid "Players in the room/Players needed and the"
-msgstr "les Joueurs du salon et leur nombre"
+msgstr "le nombre de Joueurs du salon, et"
 
 #: templates/about/game_rules.html:179
 msgid ""
 "map are defined by the game creator and can be seen in the game rooms "
 "section from the home menu."
 msgstr ""
-"ainsi que l'arène de jeu sont également définis par le créateur du salon de "
-"jeu, toutes ces informations sont visibles depuis la page d'accueil."
+"l'arène de jeu sont également définis par le créateur du salon de jeu, "
+"toutes ces informations sont visibles depuis la page d'accueil."
 
 #: templates/about/game_rules.html:181
 msgid ""
 "There are some other settings that the room owner can define , such as the "
 "initial ball speed , or the paddle/ball size."
 msgstr ""
-"D'autres paramètres peuvent être ajustés à la création du salon de jeu, "
-"comme par exemple la vitesse de la balle en début de partie, la taille de la "
+"D'autres paramètres peuvent être ajustés lors de la création du salon, comme "
+"par exemple la vitesse de la balle en début de partie, la taille de la "
 "raquette et celle de la balle."
 
 #: templates/about/game_rules.html:183
@@ -765,7 +787,17 @@ msgstr "Ces paramètres ne pourront plus être changés une fois le salon créé
 msgid "Enjoy your games !"
 msgstr "Amusez-vous bien !"
 
-#: templates/about/privacy_policy.html:39
+#: templates/about/privacy_policy.html:42
+#: templates/about/terms_of_service.html:42
+msgid "Last updated: "
+msgstr "Dernière mise à jour : "
+
+#: templates/about/privacy_policy.html:42
+#: templates/about/terms_of_service.html:42
+msgid "September 2024"
+msgstr ""
+
+#: templates/about/privacy_policy.html:48
 msgid ""
 "\n"
 "    <div class=\"row\">\n"
@@ -774,6 +806,11 @@ msgid ""
 "                This privacy policy will explain how our organization "
 "“Transcendence42” uses the personal data we collect from you when you use "
 "our website.\n"
+"                <br>First, we would like to assure you that at&nbsp;"
+"Transcendence42 we take privacy seriously. We will never contact you for "
+"marketing purposes. Your email will solely be used for privacy or security "
+"concerns.\n"
+"                <br>\n"
 "                <br>Topics:\n"
 "            </h5>\n"
 "            <ul style=\"color: var(--bs-body-bg);padding-left: 60px;\">\n"
@@ -789,9 +826,6 @@ msgid ""
 "                </li>\n"
 "                <li>\n"
 "                    <a href=\"#hDataStore\">How do we store your data?</a>\n"
-"                </li>\n"
-"                <li>\n"
-"                    <a href=\"#marketing\">Marketing</a>\n"
 "                </li>\n"
 "                <li>\n"
 "                    <a href=\"#wDataProtection\">What are your data "
@@ -832,7 +866,7 @@ msgid ""
 "    "
 msgstr ""
 
-#: templates/about/privacy_policy.html:95
+#: templates/about/privacy_policy.html:103
 #, python-format
 msgid ""
 "\n"
@@ -942,8 +976,8 @@ msgid ""
 "            <p style=\"color: var(--bs-body-bg);\">\n"
 "                Transcendence42 is executed locally on your computer. This "
 "mean that all data shared with Transcendence42 is handled on your own "
-"computer or server. You are solely responsible for securing your own network "
-"to avoid your data being exposed on external networks.\n"
+"computer or server. YOU ARE SOLELY RESPONSIBLE FOR SECURING YOUR OWN NETWORK "
+"TO AVOID YOUR DATA BEING EXPOSED ON EXTERNAL NETWORKS.\n"
 "                <br>Transcendence42 will keep your email for the whole life "
 "of your account. We will delete your data automatically upon deletion of the "
 "account.\n"
@@ -963,17 +997,6 @@ msgid ""
 "        </div>\n"
 "        <div class=\"col\">\n"
 "            <hr>\n"
-"        </div>\n"
-"        <div class=\"col-md-12\" id=\"marketing\">\n"
-"            <h4 style=\"color: var(--bs-primary-border-subtle);text-"
-"decoration: underline;\">\n"
-"                Marketing\n"
-"            </h4>\n"
-"            <p style=\"color: var(--bs-body-bg);\">\n"
-"                At&nbsp;Transcendence42 we take privacy seriously. We will "
-"not contact you for marketing purposes. The email point of contact is solely "
-"to be used for privacy or security concerns.\n"
-"            </p>\n"
 "        </div>\n"
 "        <div class=\"col\">\n"
 "            <hr>\n"
@@ -1077,15 +1100,10 @@ msgid ""
 "            </h4>\n"
 "            <p style=\"color: var(--bs-body-bg);\">\n"
 "                There are a number of different types of cookies, however, "
-"our website uses:\n"
+"our website uses only \"functionality\" cookies. Transcendence42 uses these "
+"cookies so that we recognize you on our website and remember your previously "
+"selected preferences. These could include what language you prefer.\n"
 "            </p>\n"
-"            <ul style=\"color: var(--bs-body-bg);padding-left: 60px;\">\n"
-"                <li style=\"color: var(--bs-body-bg);\">\n"
-"                    Functionality – Transcendence42 uses these cookies so "
-"that we recognize you on our website and remember your previously selected "
-"preferences. These could include what language you prefer.\n"
-"                </li>\n"
-"            </ul>\n"
 "        </div>\n"
 "        <div class=\"col\">\n"
 "            <hr>\n"
@@ -1126,8 +1144,7 @@ msgid ""
 "            <p style=\"color: var(--bs-body-bg);\">\n"
 "                Transcendence42 keeps its privacy policy under regular "
 "review and places any updates on this web page. You will also be notified by "
-"email that an update has occurred. This privacy policy was last updated on "
-"29 August 2024.\n"
+"email that an update has occurred.\n"
 "            </p>\n"
 "        </div>\n"
 "        <div class=\"col\">\n"
@@ -1173,12 +1190,8 @@ msgid ""
 "    "
 msgstr ""
 
-#: templates/about/terms_of_service.html:42
-msgid "Last updated: "
-msgstr ""
-
-#: templates/about/terms_of_service.html:42
-msgid "August 2024"
+#: templates/about/terms_of_service.html:16
+msgid "TERMS OF SERVICE"
 msgstr ""
 
 #: templates/about/terms_of_service.html:48
@@ -1290,11 +1303,14 @@ msgid ""
 "Platform, including all associated intellectual property rights. Any games "
 "available through our Platform are owned by Transcendence42 or its partners. "
 "No rights are granted to you hereunder other than as expressly set forth "
-"herein. You agree not to reproduce, duplicate, copy, sell, resell or exploit "
-"any part of the Website/Platform, use of the Website/Platform or access to "
-"the Website/Platform without our express written consent. You may not "
-"duplicate, copy or reuse any part of the visual design elements without our "
-"express written consent.\n"
+"herein.\n"
+"            </p>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                YOU AGREE NOT TO REPRODUCE, DUPLICATE, COPY, SELL, RESELL OR "
+"EXPLOIT ANY PART OF THE WEBSITE/PLATFORM, USE OF THE WEBSITE/PLATFORM OR "
+"ACCESS TO THE WEBSITE/PLATFORM WITHOUT OUR EXPRESS WRITTEN CONSENT. YOU MAY "
+"NOT DUPLICATE, COPY OR REUSE ANY PART OF THE VISUAL DESIGN ELEMENTS WITHOUT "
+"OUR EXPRESS WRITTEN CONSENT.\n"
 "            </p>\n"
 "            <p style=\"color: var(--bs-body-bg);\">\n"
 "                Users may livestream and monetise videos on online (live "
@@ -1415,7 +1431,7 @@ msgid ""
 "                4. CODE OF CONDUCT\n"
 "            </h4>\n"
 "            <p style=\"color: var(--bs-body-bg);\">\n"
-"                Summary In general, you should avoid doing anything that "
+"                Summary: In general, you should avoid doing anything that "
 "might harm Transcendence42 or anyone else. Among other things, you may not "
 "copy the Platform or use any content in an illegal or harmful manner, make "
 "any misrepresentations of or abuse our services, or otherwise violate "
@@ -1587,10 +1603,13 @@ msgid ""
 "            <p style=\"color: var(--bs-body-bg);\">\n"
 "                WE MAY WITHHOLD, SUSPEND, MODIFY, OR TERMINATE YOUR ACCESS "
 "TO THE SERVICES FOR ANY OR NO REASON AT ANY TIME WITHOUT NOTICE UNLESS "
-"OTHERWISE REQUIRED BY APPLICABLE LAW. If your account is suspended while you "
-"are participating in a tournament or competition, Transcendence42 assumes no "
-"liability in the loss of any potential prizes or recognition related to the "
-"tournament or competition.\n"
+"OTHERWISE REQUIRED BY APPLICABLE LAW.\n"
+"            </p>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                If your account is suspended while you are participating in "
+"a tournament or competition, Transcendence42 assumes no liability in the "
+"loss of any potential prizes or recognition related to the tournament or "
+"competition.\n"
 "            </p>\n"
 "        </div>\n"
 "        <div class=\"col\">\n"
@@ -1886,8 +1905,7 @@ msgid ""
 "we are free to use such feedback at our own discretion.\n"
 "            <p style=\"color: var(--bs-body-bg);\">\n"
 "                If you have a question or complaint regarding the Platform "
-"or Website, please fill in our contact form at https://www.transcendence42."
-"com/contact or reach out on <a href=\"%(discord_invite)s\">discord</a>.\n"
+"or Website, please reach out on <a href=\"%(discord_invite)s\">discord</a>.\n"
 "            </p>\n"
 "            <p style=\"color: var(--bs-body-bg);\">\n"
 "                We value your opinion. if you provide us with feedback, "
@@ -1910,7 +1928,7 @@ msgid ""
 "href=\"%(discord_invite)s\">discord</a>.\n"
 "            </p>\n"
 "            <p style=\"color: var(--bs-body-bg);\">\n"
-"                For US Residents Only: If you are a copyright owner or an "
+"                FOR US RESIDENTS ONLY: If you are a copyright owner or an "
 "agent thereof and believe that your intellectual property rights have been "
 "infringed upon, you may submit a notification pursuant to the Digital "
 "Millennium Copyright Act (“DMCA”) by providing our copyright agent with the "
@@ -2121,57 +2139,53 @@ msgid ""
 "    "
 msgstr ""
 
-#: templates/accounts/email_activate.html:6
+#: templates/accounts/email_activate.html:7
 msgid "Activate your account"
 msgstr "Activer votre compte"
 
-#: templates/accounts/email_activate.html:12
+#: templates/accounts/email_activate.html:13
 #: templates/accounts/email_change_email.html:13
 #: templates/accounts/email_change_password.html:13
 #: templates/accounts/email_reset_password.html:13
+#: templates/accounts/email_twofa.html:13
 msgid "Hi"
 msgstr "Bonjour"
 
-#: templates/accounts/email_activate.html:15
-#, fuzzy
-#| msgid ""
-#| "Thank you for registering at Transcendence. Please click the link below "
-#| "to activate your account:"
+#: templates/accounts/email_activate.html:16
 msgid ""
 "Thank you for registering at Transcendence42. Please use the code below to "
 "activate your account:"
 msgstr ""
-"Merci de vous être inscrit à Transcendance42. Veuillez cliquer sur le lien "
-"ci-dessous pour activer votre compte :"
+"Merci pour votre inscription à Transcendence42. Veuillez utiliser le code ci-"
+"dessous pour activer votre compte :"
 
-#: templates/accounts/email_activate.html:21
+#: templates/accounts/email_activate.html:22
 #: templates/accounts/email_change_email.html:22
 #: templates/accounts/email_change_password.html:22
 #: templates/accounts/email_reset_password.html:22
+#: templates/accounts/email_twofa.html:22
 msgid "This code will expire in 10 minutes."
 msgstr "Ce code expirera dans 10 minutes"
 
-#: templates/accounts/email_activate.html:24
+#: templates/accounts/email_activate.html:25
 msgid "If you did not create an account, please ignore this email."
 msgstr "Si vous n'avez pas créé de compte, veuillez ignorer ce courriel."
 
-#: templates/accounts/email_activate.html:27
+#: templates/accounts/email_activate.html:28
 #: templates/accounts/email_change_email.html:28
 #: templates/accounts/email_change_password.html:28
 #: templates/accounts/email_reset_password.html:28
-#, fuzzy
-#| msgid "Thanks,"
+#: templates/accounts/email_twofa.html:28
 msgid "Thank you,"
 msgstr "Merci,"
 
-#: templates/accounts/email_activate.html:29
+#: templates/accounts/email_activate.html:30
 #: templates/accounts/email_change_email.html:30
 #: templates/accounts/email_change_password.html:30
 #: templates/accounts/email_reset_password.html:30
-#, fuzzy
-#| msgid "The Transcendence Team"
+#: templates/accounts/email_twofa.html:30
 msgid "The Transcendence42 Team"
-msgstr "L'équipe Transcendance42"
+msgstr "L'équipe Transcendence42"
 
 #: templates/accounts/email_change_email.html:7
 msgid "Change your email"
@@ -2183,65 +2197,61 @@ msgstr ""
 "Veuillez utiliser le code ci-dessous pour modifier votre adresse courriel:"
 
 #: templates/accounts/email_change_email.html:25
-#, fuzzy
-#| msgid "If you did not create an account, please ignore this email."
 msgid "If you have not requested an email change, please ignore this email."
 msgstr "Si vous n'avez pas créé de compte, veuillez ignorer ce courriel."
 
 #: templates/accounts/email_change_password.html:7
-#, fuzzy
-#| msgid "Set your new password."
 msgid "Change your Password"
-msgstr "Entrez votre nouveau mot de passe."
+msgstr "Modifier votre nouveau mot de passe."
 
 #: templates/accounts/email_change_password.html:16
-#, fuzzy
-#| msgid "Please check your email to reset your password."
 msgid "Please use the code below to change your password:"
-msgstr ""
-"Veuillez vérifier votre adresse courriel pour réinitialiser votre mot de "
-"passe."
+msgstr "Veuillez utilisez le code ci-dessous pour modifier votre mot de passe."
 
 #: templates/accounts/email_change_password.html:25
-#, fuzzy
-#| msgid "If you did not create an account, please ignore this email."
 msgid "If you have not requested a password change, please ignore this email."
-msgstr "Si vous n'avez pas créé de compte, veuillez ignorer ce courriel."
+msgstr ""
+"Si vous n'avez pas demandé à modifier votre mot de passe, vous pouvez "
+"ignorer ce courriel."
 
 #: templates/accounts/email_reset_password.html:7
-#, fuzzy
-#| msgid "Set your new password."
 msgid "Reset your password"
-msgstr "Entrez votre nouveau mot de passe."
+msgstr "Réinitialiser votre nouveau mot de passe."
 
 #: templates/accounts/email_reset_password.html:16
-#, fuzzy
-#| msgid "Please check your email to reset your password."
 msgid "Please use the code below to reset your password:"
 msgstr ""
-"Veuillez vérifier votre adresse courriel pour réinitialiser votre mot de "
-"passe."
+"Veuillez utiliser le code ci-dessous pour réinitialiser votre mot de passe."
 
 #: templates/accounts/email_reset_password.html:25
-#, fuzzy
-#| msgid "If you did not create an account, please ignore this email."
 msgid "If you have not requested a password reset, please ignore this email."
-msgstr "Si vous n'avez pas créé de compte, veuillez ignorer ce courriel."
+msgstr ""
+"Si vous n'avez pas demandé à réinitialiser votre mot de passe, vous pouvez "
+"ignorer ce courriel."
+
+#: templates/accounts/email_twofa.html:7
+msgid "New Connection"
+msgstr "Nouvelle connection"
+
+#: templates/accounts/email_twofa.html:16
+msgid "Please use the code below to sign in:"
+msgstr "Veuillez utiliser le code ci-dessous pour vous connecter:"
+
+#: templates/accounts/email_twofa.html:25
+msgid "If you have not attempted to sign in, please ignore this email."
+msgstr ""
+"Si vous n'avez pas essayé de vous connecter, vous pouvez ignorer ce courriel."
 
 #: templates/accounts/forgot_password.html:4
 #: templates/accounts/forgot_password.html:32
-#, fuzzy
-#| msgid "Forgot your password ?"
 msgid "Forgot Password"
-msgstr "Mot de passe oublié ?"
+msgstr "Mot de passe oublié"
 
 #: templates/accounts/forgot_password.html:45
-#, fuzzy
-#| msgid "Please check your email to reset your password."
 msgid "Please enter your account e-mail to get a password reset link"
 msgstr ""
-"Veuillez vérifier votre adresse courriel pour réinitialiser votre mot de "
-"passe."
+"Veuillez vérifier votre adresse courriel pour recevoir un lien de "
+"réinitialisation de mot de passe"
 
 #: templates/accounts/forgot_password.html:51
 #: templates/accounts/register.html:48 templates/settings.html:163
@@ -2250,7 +2260,7 @@ msgstr "Courriel"
 
 #: templates/accounts/forgot_password.html:56
 msgid "Wrong email format. Please try again"
-msgstr ""
+msgstr "Courriel invalide. Veuillez réessayer"
 
 #: templates/accounts/login.html:4 templates/accounts/login.html:67
 msgid "Login"
@@ -2277,8 +2287,7 @@ msgstr "Afficher le mot de passe"
 
 #: templates/accounts/login.html:60 templates/settings.html:444
 msgid "Wrong credentials. Please try again"
-msgstr ""
-"Mauvaise combinaison de nom d'utilisateur / mot de passe. Veuillez réessayer."
+msgstr "Identifiants invalides. Veuillez réessayer."
 
 #: templates/accounts/login.html:73
 msgid "Forgot your password ?"
@@ -2290,17 +2299,15 @@ msgstr "SE CONNECTER AVEC"
 
 #: templates/accounts/login.html:102
 msgid "Not Registered ?"
-msgstr "Pas encore de compte ?"
+msgstr "Pas encore enregistré ?"
 
 #: templates/accounts/login.html:104
 msgid "Create an account"
 msgstr "Créer un compte"
 
 #: templates/accounts/modify_credentials.html:4
-#, fuzzy
-#| msgid "Modify Email"
 msgid "Modify Credentials"
-msgstr "Modifier l'adresse courriel"
+msgstr "Modifier vos identifiants"
 
 #: templates/accounts/modify_credentials.html:37
 msgid "Change Email"
@@ -2320,27 +2327,34 @@ msgid "Confirm Changes"
 msgstr "Veuillez confirmer la modification"
 
 #: templates/accounts/modify_credentials.html:75
-#, fuzzy
-#| msgid "Password"
 msgid "Change Password"
-msgstr "Mot de passe"
+msgstr "Modifier le mot de passe"
 
 #: templates/accounts/modify_credentials.html:93
-#, fuzzy
-#| msgid "Set your new password."
 msgid "Please enter your new password"
 msgstr "Entrez votre nouveau mot de passe."
 
 #: templates/accounts/modify_credentials.html:99
-#, fuzzy
-#| msgid "Password"
 msgid "New Password"
-msgstr "Mot de passe"
+msgstr "Nouveau mot de passe"
 
 #: templates/accounts/register.html:4 templates/accounts/register.html:34
 #: templates/accounts/register.html:88
 msgid "Register"
 msgstr "S'enregistrer"
+
+#: templates/accounts/register.html:40
+#, fuzzy
+#| msgid ""
+#| "Your unique id, which cannot be changed after account creation. Must be "
+#| "20 characters long maximum and can include letters (a-Z), numbers (0-9), "
+msgid ""
+"Your unique id, which cannot be changed after account creation. Must be 20 "
+"characters long maximum and can include letters (a-Z), numbers (0-9), \\"
+msgstr ""
+"Votre identifiant. Vous ne pourrez pas le changer après création du compte. "
+"Peut comprendre max 20 caractères, dont lettres (a-Z), chiffres (0-9), "
+"tiret , underscore et point "
 
 #: templates/accounts/register.html:42 templates/settings.html:136
 msgid "Username"
@@ -2348,17 +2362,15 @@ msgstr "Nom d'utilisateur"
 
 #: templates/accounts/register.html:63
 msgid "I read and agree to the Transcendence42"
-msgstr "J'ai lu et j'accepte "
+msgstr "J'ai lu et j'accepte les"
 
 #: templates/accounts/register.html:74
 msgid "and"
-msgstr "et"
+msgstr "et la"
 
 #: templates/accounts/register.html:92
-#, fuzzy
-#| msgid "Username / Email"
 msgid "Username or Email is invalid"
-msgstr "Nom d'utilisateur / courriel"
+msgstr "Nom d'utilisateur ou courriel erroné"
 
 #: templates/accounts/register.html:95
 msgid "Already Registered ?"
@@ -2366,7 +2378,7 @@ msgstr "Déjà enregistré ?"
 
 #: templates/accounts/register.html:97
 msgid "Sign in here"
-msgstr "Connectez-vous ici"
+msgstr "Connexion"
 
 #: templates/accounts/verify_code.html:4
 msgid "Code Verify"
@@ -2384,17 +2396,18 @@ msgstr "Veuillez saisir votre code"
 msgid ""
 "Your code was sent to you via email, don't forget to check into your spam "
 "box."
-msgstr "Votre code a été envoyé par courriel, n'hésitez pas à vérifier vos spams"
+msgstr ""
+"Votre code a été envoyé par courriel, n'hésitez pas à vérifier vos spams"
 
 #: templates/accounts/verify_code.html:54
 msgid "Verify"
 msgstr "Vérifier"
 
-#: templates/alert_modal.html:12
+#: templates/alert_modal.html:14
 msgid "Error"
 msgstr "Erreur"
 
-#: templates/alert_modal.html:21
+#: templates/alert_modal.html:23
 msgid "Close"
 msgstr "Fermer"
 
@@ -2402,43 +2415,31 @@ msgstr "Fermer"
 msgid "Friends"
 msgstr "Amis"
 
-#: templates/friends/social.html:66
-#, fuzzy
-#| msgid "  Send a message"
+#: templates/friends/social.html:66 templates/games/game_chat.html:20
 msgid "Send a message"
-msgstr "  Envoyer un message"
+msgstr "Envoyer un message"
 
 #: templates/friends/social.html:100
-#, fuzzy
-#| msgid "Profile"
 msgid "See Profile"
-msgstr "Profil"
+msgstr "Voir le profil"
 
 #: templates/friends/social.html:113
 msgid "Unblock Friend"
 msgstr "Débloquer cet ami"
 
 #: templates/friends/social.html:125
-#, fuzzy
-#| msgid "Block list"
 msgid "Block Friend"
-msgstr "Joueurs bloqués"
+msgstr "Bloquer cet ami"
 
 #: templates/friends/social.html:138
-#, fuzzy
-#| msgid "Friends"
 msgid "Remove Friend"
-msgstr "Amis"
+msgstr "Supprimer cet ami"
 
 #: templates/friends/social.html:152
-#, fuzzy
-#| msgid "Friends"
 msgid "Invite Friend"
-msgstr "Amis"
+msgstr "Demander en Ami"
 
 #: templates/friends/social_list.html:17
-#, fuzzy
-#| msgid "Friends"
 msgid "No friends"
 msgstr "Amis"
 
@@ -2450,25 +2451,25 @@ msgstr "Aucun message, dites 'Coucou'"
 msgid "Select a conversation"
 msgstr "Sélectionner une conversation"
 
+#: templates/games/game_chat.html:11
+msgid "Chat"
+msgstr "Messages"
+
 #: templates/games/game_config.html:4 templates/games/game_config.html:11
 msgid "Customize your game"
 msgstr "Personnalisez votre partie"
 
 #: templates/games/game_config.html:25
-#, fuzzy
-#| msgid "Game Duration"
 msgid "Game Options"
-msgstr "Durée de la partie"
+msgstr "Options de jeu"
 
 #: templates/games/game_config.html:44 templates/games/game_room.html:82
-#, fuzzy
-#| msgid "#PlayerName"
 msgid "Players"
-msgstr "Nom du joueur"
+msgstr "Joueurs"
 
 #: templates/games/game_config.html:77 templates/games/game_room.html:101
 msgid "Score to win"
-msgstr "Score de victoire"
+msgstr "Score à atteindre"
 
 #: templates/games/game_config.html:115 templates/games/game_room.html:125
 msgid "Ball size"
@@ -2488,7 +2489,7 @@ msgstr "Difficulté de l'IA"
 
 #: templates/games/game_config.html:299
 msgid "Arena Options"
-msgstr "Options de l'arène"
+msgstr "Options d'arène"
 
 #: templates/games/game_config.html:309
 msgid "Map"
@@ -2499,20 +2500,20 @@ msgid "Go Back"
 msgstr "Retour"
 
 #: templates/games/game_config.html:380
-#, fuzzy
-#| msgid "Create GameRoom"
 msgid "Create Game"
-msgstr "Créer un salon de jeux"
+msgstr "Créer le salon"
 
 #: templates/games/game_message.html:56
 msgid "Game Announcement"
-msgstr "Notifications de jeu"
+msgstr "Annonces"
 
 #: templates/games/game_message.html:74
-#, fuzzy
-#| msgid "date joined"
 msgid "has joined !"
-msgstr "date d'adhésion"
+msgstr "a rejoint la partie !"
+
+#: templates/games/game_message.html:101
+msgid "Next Match:"
+msgstr "Prochain match :"
 
 #: templates/games/game_message.html:128
 msgid "has been"
@@ -2523,18 +2524,18 @@ msgid "eliminated"
 msgstr "éliminé"
 
 #: templates/games/game_message.html:144
-msgid "is the"
-msgstr "est le"
+#, fuzzy
+#| msgid "is the"
+msgid "is the "
+msgstr "est le "
 
 #: templates/games/game_message.html:146
 msgid "ultimate winner"
-msgstr "vainqueur final"
+msgstr " vainqueur final"
 
 #: templates/games/game_player.html:42
-#, fuzzy
-#| msgid "Current Players"
 msgid "Invite Player"
-msgstr "Parties en cours"
+msgstr "Inviter des Joueurs"
 
 #: templates/games/game_ready.html:4
 msgid "Get Ready !"
@@ -2553,16 +2554,16 @@ msgid "seconds"
 msgstr "secondes"
 
 #: templates/games/game_room.html:4
-#, fuzzy
-#| msgid "Game Rooms"
 msgid "Game Room"
-msgstr "Salons de jeux"
+msgstr "Salon de jeux"
+
+#: templates/games/game_room.html:34
+msgid "Leave Room"
+msgstr "Quitter la partie"
 
 #: templates/games/game_room.html:63
-#, fuzzy
-#| msgid "Game Rooms"
 msgid "Game Infos"
-msgstr "Salons de jeux"
+msgstr "Infos de la partie"
 
 #: templates/games/game_room.html:77
 msgid "Rules"
@@ -2585,12 +2586,15 @@ msgid ""
 "If you have not been eliminated yet, your next game will be considered as a "
 "defeat and you will get a point penalty. You will not be able to join the "
 "room again."
-msgstr "Si vous êtes encore en lice, votre prochaine partie sera considérée comme une défaite et vous subirez un point de pénalité. Vous ne pourrez plus rejoindre cette partie."
+msgstr ""
+"Si vous êtes encore en lice, votre prochaine partie sera considérée comme "
+"une défaite et vous subirez un point de pénalité. Vous ne pourrez plus "
+"rejoindre cette partie."
 
 #: templates/games/game_room.html:224 templates/settings.html:451
 #: templates/settings.html:486 templates/settings.html:532
 msgid "Cancel"
-msgstr "Abandonner"
+msgstr "Rester"
 
 #: templates/games/game_room.html:245 templates/games/game_room.html:265
 msgid "Invite"
@@ -2616,25 +2620,29 @@ msgstr "Pong"
 msgid "Home"
 msgstr "Accueil"
 
+#: templates/home.html:65
+msgid "Find a Player"
+msgstr "Trouver un joueur"
+
 #: templates/home.html:75
 msgid "Game Rooms"
 msgstr "Salons de jeux"
 
+#: templates/home.html:89
+msgid "Find a Game"
+msgstr "Trouver une partie"
+
 #: templates/home.html:119
-#, fuzzy
-#| msgid "Create GameRoom"
 msgid "Create a Game"
-msgstr "Créer un salon de jeux"
+msgstr "Créer un salon de jeu"
 
 #: templates/home.html:202
 msgid "NO GAMES"
 msgstr "AUCUNE PARTIE À AFFICHER"
 
 #: templates/index.html:9
-#, fuzzy
-#| msgid "Transcendence"
 msgid "Transcendence42"
-msgstr "Transcendance"
+msgstr "Transcendence42"
 
 #: templates/leaderboard.html:5
 msgid "Leaderboard"
@@ -2646,11 +2654,11 @@ msgstr "Les 100 meilleurs"
 
 #: templates/leaderboard.html:30
 msgid "Your Rank"
-msgstr "Votre classement"
+msgstr "Votre classement :"
 
 #: templates/leaderboard.html:44
 msgid "No rankings yet"
-msgstr "Aucun classement"
+msgstr "Soyez le premier !"
 
 #: templates/modeselect.html:4
 msgid "Mode Selection"
@@ -2665,16 +2673,12 @@ msgid "Against AI"
 msgstr "Contre l'IA"
 
 #: templates/modeselect.html:45
-#, fuzzy
-#| msgid "Total Games"
 msgid "Local Game"
-msgstr "Nombre de parties"
+msgstr "Partie locale"
 
 #: templates/modeselect.html:61
-#, fuzzy
-#| msgid "Online"
 msgid "Online Game"
-msgstr "En ligne"
+msgstr "Jeu en ligne"
 
 #: templates/notifs/notif_friend_request.html:28
 msgid "wants to be your friend !"
@@ -2687,10 +2691,8 @@ msgstr "Accepter"
 
 #: templates/notifs/notif_friend_request.html:50
 #: templates/notifs/notif_game_invite.html:46
-#, fuzzy
-#| msgid "Online"
 msgid "Decline"
-msgstr "En ligne"
+msgstr "Refuser"
 
 #: templates/notifs/notif_game_invite.html:13
 msgid "Game Invite"
@@ -2709,10 +2711,8 @@ msgid "New"
 msgstr "Nouveau"
 
 #: templates/notifs/notif_list.html:31
-#, fuzzy
-#| msgid "  Send a message"
 msgid "message"
-msgstr "  Envoyer un message"
+msgstr "message"
 
 #: templates/notifs/notif_list.html:34
 msgid "from"
@@ -2724,22 +2724,18 @@ msgstr "Historique de jeu (20 dernières parties)"
 
 #: templates/profile.html:126 templates/profile.html:415
 msgid "WIN"
-msgstr "VICTOIRE"
+msgstr "Victoire"
 
 #: templates/profile.html:145 templates/profile.html:172
 #: templates/profile.html:434 templates/profile.html:461
-#, fuzzy
-#| msgid "Game Duration"
 msgid "Game Details"
-msgstr "Durée de la partie"
+msgstr "Détails de la partie"
 
 #: templates/profile.html:153 templates/profile.html:442
 msgid "LOSS"
-msgstr "Défaites"
+msgstr "Défaite"
 
 #: templates/profile.html:182 templates/profile.html:471
-#, fuzzy
-#| msgid "NO GAMES TO DISPLAY"
 msgid "NO GAMES TO SHOW"
 msgstr "AUCUNE PARTIE A AFFICHER"
 
@@ -2747,35 +2743,37 @@ msgstr "AUCUNE PARTIE A AFFICHER"
 msgid "Player Statistics"
 msgstr "Statistiques du joueur"
 
+#: templates/profile.html:221 templates/profile.html:510
+msgid "Wins"
+msgstr "Victoires"
+
+#: templates/profile.html:227 templates/profile.html:516
+msgid "Losses"
+msgstr "Défaites"
+
 #: templates/profile.html:268 templates/profile.html:557
-#, fuzzy
-#| msgid "Total Games"
 msgid "Total Games Played"
 msgstr "Nombre de parties"
 
 #: templates/profile.html:278 templates/profile.html:567
-#, fuzzy
-#| msgid "#Won Tournaments"
 msgid "Won Tournaments"
-msgstr "#Tournois remportés"
+msgstr "Tournois remportés"
 
 #: templates/profile.html:288 templates/profile.html:577
 msgid "Best Winning Streak"
-msgstr "Meilleure série de victoires"
+msgstr "Votre meilleure série"
 
 #: templates/profile.html:490
 msgid "Winrate"
 msgstr "Taux de victoires"
 
 #: templates/settings.html:31
-#, fuzzy
-#| msgid "My Profile"
 msgid "Profile Card"
 msgstr "Mon profil"
 
 #: templates/settings.html:51
 msgid "This user alias is already taken, try another one"
-msgstr "Ce nom d'utilisateur est déjà pris, veuillez en choisir uun autre"
+msgstr "Ce nom d'utilisateur est déjà pris, veuillez en choisir un autre"
 
 #: templates/settings.html:58
 msgid "Avatars"
@@ -2784,6 +2782,7 @@ msgstr "Avatars"
 #: templates/settings.html:113
 msgid "Your image must not exceed 500KB in size and 1024x1024 in dimensions"
 msgstr ""
+"Votre fichier doit peser moins de 500KB et mesurer moins de 1024x1024 px"
 
 #: templates/settings.html:121
 msgid "Account"
@@ -2850,8 +2849,6 @@ msgid "Delete my account"
 msgstr "Supprimer mon compte"
 
 #: templates/settings.html:299
-#, fuzzy
-#| msgid "Block list"
 msgid "Block List"
 msgstr "Joueurs bloqués"
 
@@ -2860,8 +2857,6 @@ msgid "BLOCK LIST IS EMPTY"
 msgstr "LISTE VIDE"
 
 #: templates/settings.html:358
-#, fuzzy
-#| msgid "Delete my account"
 msgid "Delete account"
 msgstr "Supprimer mon compte"
 
@@ -2903,11 +2898,12 @@ msgstr "vos conversations et votre liste d'amis"
 
 #: templates/settings.html:394
 msgid "Your ranking and your game history"
-msgstr "votre classement et historique de jeu"
+msgstr "Votre classement et historique de jeu"
 
 #: templates/settings.html:404
 msgid "If you had linked your account to 42, this will also undo the link."
-msgstr "si vous aviez asssocié votre compte à votre compte 42, cela supprimera ce lien"
+msgstr ""
+"si vous aviez asssocié votre compte à votre compte 42, ce sera supprimé."
 
 #: templates/settings.html:411
 msgid "This action is irreversible"
@@ -2923,7 +2919,8 @@ msgstr "Confirmer la suppression du compte"
 
 #: templates/settings.html:435
 msgid "Please enter your password to confirm your account deletion"
-msgstr "Veuillez saisir votre mot de passe pour confirmer la suppression du compte"
+msgstr ""
+"Veuillez saisir votre mot de passe pour confirmer la suppression du compte"
 
 #: templates/settings.html:454
 msgid "Confirm"
@@ -2938,13 +2935,14 @@ msgid ""
 "Two Factor Authentication will add a security layer to your account, by "
 "sending you a code via email each time you want to log in. Do you wish to "
 "enable it ?"
-msgstr "L'authentication à double facteur ajoute un niveau de sécurité à votre compte, en vous envoyant un code à confirmer chaque fois que vous vous connectez. Souhaitez-vous l'activer?"
+msgstr ""
+"L'authentication à double facteur ajoute un niveau de sécurité à votre "
+"compte, en vous envoyant un code à confirmer chaque fois que vous vous "
+"connectez. Souhaitez-vous l'activer?"
 
 #: templates/settings.html:489
-#, fuzzy
-#| msgid "Activate Your Account"
 msgid "Activate 2FA"
-msgstr "Activer votre compte"
+msgstr "Activer la 2FA"
 
 #: templates/settings.html:510
 msgid "Unlink 42 account"
@@ -2960,17 +2958,18 @@ msgstr "Vous ne pourrez plus vousd identifier via 42Auth"
 
 #: templates/settings.html:526
 msgid "You will not be able to use your 42 banner and profile image."
-msgstr "Vous ne verrez plus votre bannière de coalition ni votre photo de profil"
+msgstr ""
+"Vous ne verrez plus votre bannière de coalition ni votre photo de profil"
 
 #: templates/settings.html:535
-#, fuzzy
-#| msgid "Online"
 msgid "Unlink"
-msgstr "En ligne"
+msgstr "Dissocier"
 
-#~ msgid ""
-#~ "We suggest you to check about data collection and treatment details in our"
-#~ msgstr "N'hésitez pas à consulter notre"
+#~ msgid "August 2024"
+#~ msgstr "Août 2024"
+
+#~ msgid "Enter your code"
+#~ msgstr "Veuillez saisir votre code"
 
 #~ msgid "Personal info"
 #~ msgstr "Informations personnelles"
@@ -2978,14 +2977,8 @@ msgstr "En ligne"
 #~ msgid "Permissions"
 #~ msgstr "Autorisations"
 
-#~ msgid "Important dates"
-#~ msgstr "Dates importantes"
-
 #~ msgid "id"
 #~ msgstr "id"
-
-#~ msgid "Unique identifier for the user, automatically generated."
-#~ msgstr "Identifiant unique pour l'utilisateur, généré automatiquement."
 
 #~ msgid "username"
 #~ msgstr "Nom d'utilisateur"
@@ -2993,8 +2986,8 @@ msgstr "En ligne"
 #~ msgid ""
 #~ "Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only."
 #~ msgstr ""
-#~ "Requis. 150 caractères maximum. Uniquement des lettres, chiffres et @/./+/-/"
-#~ "_ ."
+#~ "Requis. 150 caractères maximum. Uniquement des lettres, chiffres et @/./"
+#~ "+/-/_ ."
 
 #~ msgid "The username must be 150 characters or fewer."
 #~ msgstr "Le nom d'utilisateur doit être de 150 caractères ou moins."
@@ -3014,56 +3007,11 @@ msgstr "En ligne"
 #~ msgid "42 id"
 #~ msgstr "42 id"
 
-#~ msgid "Unique identifier for the user from 42."
-#~ msgstr "Identifiant unique pour l'utilisateur via 42."
-
-#~ msgid "42 access token"
-#~ msgstr "Jeton d'accès 42"
-
-#~ msgid "Access token for 42 API."
-#~ msgstr "Jeton d'accès pour 42 API."
-
-#~ msgid "42 refresh token"
-#~ msgstr "Jeton de rafraîchissement 42"
-
-#~ msgid "Refresh token for 42 API."
-#~ msgstr "Jeton de rafraîchissement pour 42 API."
-
-#~ msgid "The date and time when the user joined."
-#~ msgstr "La date et l'heure à laquelle l'utilisateur s'est enregistré."
-
-#~ msgid "staff status"
-#~ msgstr "Statut du personnel"
-
-#~ msgid "Designates whether the user can log into this admin site."
-#~ msgstr ""
-#~ "Indique si l'utilisateur peut se connecter à ce site d'administration."
-
 #~ msgid "active"
 #~ msgstr "actif"
 
-#~ msgid ""
-#~ "Designates whether this user should be treated as active. Unselect this "
-#~ "instead of deleting accounts."
-#~ msgstr ""
-#~ "Indique si cet utilisateur doit être traité comme actif. Désélectionnez "
-#~ "ceci au lieu de supprimer des comptes."
-
 #~ msgid "groups"
 #~ msgstr "groupes"
-
-#~ msgid ""
-#~ "The groups this user belongs to. A user will get all permissions granted "
-#~ "to each of their groups."
-#~ msgstr ""
-#~ "Les groupes auxquels cet utilisateur appartient. Un utilisateur obtient "
-#~ "toutes les autorisations accordées à chacun de ses groupes."
-
-#~ msgid "user permissions"
-#~ msgstr "permissions de l'utilisateur"
-
-#~ msgid "Specific permissions for this user."
-#~ msgstr "Autorisations spécifiques pour cet utilisateur."
 
 #~ msgid "custom user"
 #~ msgstr "utilisateur personnalisé"
@@ -3108,17 +3056,8 @@ msgstr "En ligne"
 #~ msgid "Development Team"
 #~ msgstr "Équipe de développement"
 
-#~ msgid "Find a player"
-#~ msgstr "Trouver un joueur"
-
 #~ msgid "Stats"
 #~ msgstr "Statistiques"
-
-#~ msgid "Loss"
-#~ msgstr "Défaites"
-
-#~ msgid "Find a Game"
-#~ msgstr "Trouver une partie"
 
 #~ msgid "Room Name"
 #~ msgstr "Nom du salon"
@@ -3158,4 +3097,3 @@ msgstr "En ligne"
 
 #~ msgid "Currentmail****@*****.com"
 #~ msgstr "Courriel****@****.com"
-

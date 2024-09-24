@@ -30,7 +30,7 @@ else
 
     echo "Generate temporary tokens for other services..."
     vault policy write django-policy /vault/config/policies/django-policy.hcl
-    vault token create -ttl=1h -policy=django-policy -display-name=django > /vault/secrets/django/token
+    vault token create -ttl=12h -policy=django-policy -display-name=django > /vault/secrets/django/token
 
     vault policy write admin-policy /vault/config/policies/admin-policy.hcl
     vault token create -policy=admin-policy -display-name=admin > /vault/output/admin.txt

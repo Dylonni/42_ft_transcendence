@@ -98,7 +98,7 @@
 					<path d="M14.32 17.32l3.68 3.68l3 -3l-3.365 -3.365"></path>
 					<path d="M10 5.5l-2 -2.5h-5v5l3 2.5"></path>
 				</svg>
-				Next Match:
+				{% translate "Next Match:" %}
 				<span style="font-weight: bold;margin-left: 5px;margin-right: 5px;">
 					<a id="navProfile1FromMessage_{{ message.id }}" href="/profiles/{{ round.player1.id }}/">
 						{{ round.player1 }}
@@ -141,7 +141,7 @@
 						{{ message.sender.alias }}
 					</a>
 				</span>
-				{% translate 'is the' %}
+				{% translate 'is the ' %}
 				<span class="text-warning" style="margin-right: 5px;margin-left: 0px;">
 					{% translate 'ultimate winner' %}
 				</span>

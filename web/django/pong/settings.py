@@ -167,11 +167,8 @@ USE_TZ = True
 
 LANGUAGES = [
     ('en', 'English'),
-    # ('es', 'Spanish'),
     ('fr', 'French'),
-    # ('it', 'Italian'),
     ('jp', 'Japanese'),
-    # ('ug', 'Uyghur')
 ]
 
 LOCALE_PATHS = [
