@@ -58,7 +58,7 @@ class UserLoginView(PublicView):
                 }
                 return Response(response_data, status=status.HTTP_200_OK)
             Profile.objects.set_user_status(user, Profile.StatusChoices.ONLINE)
-            response_data = {'message':'User logged in.', 'redirect': '/home/'}
+            response_data = {'message': _('User logged in.'), 'redirect': '/home/'}
             response = Response(response_data, status=status.HTTP_200_OK)
             login(request, user)
             access_token, refresh_token = set_jwt_cookies_for_user(response, user)
@@ -66,10 +66,10 @@ class UserLoginView(PublicView):
             response.data['refresh_token'] = refresh_token
             return response
         except ValidationError as e:
-            response_data = {'message': e.detail}
+            response_data = {'error': _('Wrong credentials. Please try again')}
             return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
         except ValueError as e:
-            response_data = {'error': str(e)}
+            response_data = {'error': _('Wrong credentials. Please try again')}
             return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
 
 user_login = UserLoginView.as_view()
@@ -100,7 +100,7 @@ class UserTwofaView(PublicView):
             user.code_updated_at = None
             user.save()
             Profile.objects.set_user_status(user, Profile.StatusChoices.ONLINE)
-            response_data = {'message': 'Connection accepted.', 'redirect': '/home/'}
+            response_data = {'message': _('Connection accepted.'), 'redirect': '/home/'}
             response = Response(response_data, status=status.HTTP_200_OK)
             login(request, user)
             access_token, refresh_token = set_jwt_cookies_for_user(response, user)
@@ -121,7 +121,7 @@ class UserLogoutView(PrivateView):
         if game:
             Game.objects.remove_player(game, player)
         Profile.objects.set_user_status(request.user, Profile.StatusChoices.OFFLINE)
-        response_data = {'message': 'User logged out.', 'redirect': '/'}
+        response_data = {'message': _('User logged out.'), 'redirect': '/'}
         response = Response(response_data, status=status.HTTP_200_OK)
         logout(request)
         unset_jwt_cookies(response)
