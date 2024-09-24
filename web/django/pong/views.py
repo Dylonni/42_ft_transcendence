@@ -12,7 +12,7 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from profiles.models import Profile, ProfileBlock
-from friends.models import Friendship, FriendMessage
+from friends.models import Friendship, FriendMessage, FriendRequest
 from games.models import Game, GameRound, GameMessage
 from notifs.models import Notification
 from .mixins import JWTCookieAuthenticationMixin, LangVerificationMixin, RedirectIfAuthenticatedMixin
@@ -421,6 +421,7 @@ class ProfileOtherView(PrivateView):
         context = get_profile_context(request, profile_id)
         context = get_notif_context(request, context)
         context['is_self'] = request.profile.id == profile_id
+        context['is_requested'] = FriendRequest.objects.filter(sender=request.profile, receiver=profile).first()
         context['is_friend'] = request.profile.is_friend(context['profile'])
         if context['is_friend']:
             context['friendship'] = Friendship.objects.get_friendship(request.profile, profile)

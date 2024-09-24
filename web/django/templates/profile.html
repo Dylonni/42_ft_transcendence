@@ -33,7 +33,7 @@
 							</svg>
 						</button>
 						{% elif is_requested %}
-						<div class="d-xxl-flex justify-content-xxl-center align-items-xxl-center btn" style="box-shadow: 0px 0px;background: rgba(255,255,255,0);color: var(--bs-btn-border-color);width: 20%;margin-left: 5px;margin-right: 5px;border-style: none;">
+						<div class="d-xxl-flex justify-content-xxl-center align-items-xxl-center btn disabled" style="box-shadow: 0px 0px;background: rgba(255,255,255,0);color: var(--bs-btn-border-color);width: 20%;margin-left: 5px;margin-right: 5px;border-style: none;">
 							<svg class="icon icon-tabler icon-tabler-user-check text-success" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" data-bs-toggle="tooltip" data-bss-tooltip data-bs-placement="bottom" title="Add Player" style="font-size: 35px;">
 								<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
 								<path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
@@ -215,7 +215,7 @@
 								</div>
 								<div class="text-truncate" style="width: 100%;height: 100%;">
 									<h1 class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-xxl-center" style="color: {{ profile.user.fortytwo_coalition_color }};font-weight: bold;margin-top: 10px;margin-bottom: 10px;">
-										#WR
+										{{ profile.get_winrate }}%
 									</h1>
 									<h4 class="text-truncate text-start d-flex d-md-flex justify-content-start align-items-center justify-content-md-start align-items-md-center" style="color: var(--bs-body-bg);">
 										{% translate "Wins" %}:
@@ -322,7 +322,7 @@
 							</svg>
 						</button>
 						{% elif is_requested %}
-						<div class="d-xxl-flex justify-content-xxl-center align-items-xxl-center btn" style="box-shadow: 0px 0px;background: rgba(255,255,255,0);color: var(--bs-btn-border-color);width: 20%;margin-left: 5px;margin-right: 5px;border-style: none;">
+						<div class="d-xxl-flex justify-content-xxl-center align-items-xxl-center btn disabled" style="box-shadow: 0px 0px;background: rgba(255,255,255,0);color: var(--bs-btn-border-color);width: 20%;margin-left: 5px;margin-right: 5px;border-style: none;">
 							<svg class="icon icon-tabler icon-tabler-user-check text-success" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" data-bs-toggle="tooltip" data-bss-tooltip data-bs-placement="bottom" title="Add Player" style="font-size: 35px;">
 								<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
 								<path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
@@ -504,7 +504,7 @@
 								</div>
 								<div class="text-truncate" style="width: 100%;height: 100%;">
 									<h1 class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-xxl-center" style="color: var(--bs-primary-border-subtle);font-weight: bold;margin-top: 10px;margin-bottom: 10px;">
-										#WR
+										{{ profile.get_winrate }}%
 									</h1>
 									<h4 class="text-truncate text-start d-flex d-md-flex justify-content-start align-items-center justify-content-md-start align-items-md-center" style="color: var(--bs-body-bg);">
 										{% translate "Wins" %}:
@@ -528,7 +528,7 @@
 								</div>
 								<div class="text-truncate d-flex flex-column align-items-start flex-wrap align-items-sm-start align-items-md-start" style="width: 100%;height: 100%;">
 									<h1 class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-xxl-center" style="color: var(--bs-primary-border-subtle);font-weight: bold;margin-top: 10px;margin-bottom: 10px;">
-										Last 5 Games
+										Last 20 Games
 									</h1>
 									<h4 class="text-truncate text-start d-flex d-md-flex justify-content-start align-items-center justify-content-md-start align-items-md-center" style="color: var(--bs-primary-border-subtle);">
 										#Highestpts

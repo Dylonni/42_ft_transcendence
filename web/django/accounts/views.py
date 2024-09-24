@@ -151,7 +151,7 @@ class UserRegisterView(PublicView):
             }
             return Response(response_data, status=status.HTTP_201_CREATED)
         except ValidationError as e:
-            response_data = {'error': str(e)}
+            response_data = {'error': _('Invalid Username/Email.')}
             return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
 
 user_register = UserRegisterView.as_view()
@@ -192,7 +192,7 @@ class UserActivateView(PublicView):
             response.data['refresh_token'] = refresh_token
             return response
         except ValueError as e:
-            response_data = {'error': str(e)}
+            response_data = {'error': 'Invalid Code.'}
             return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
 
 user_activate = UserActivateView.as_view()

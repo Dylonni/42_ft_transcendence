@@ -42,7 +42,7 @@ SECRET_KEY = secret_response['data']['data']['SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 # below, add '*' if issue, to accept all hosts - should be removed in production. also add server host machine IP ?
-ALLOWED_HOSTS = ['localhost', 'django', '127.0.0.1']
+ALLOWED_HOSTS = ['localhost', 'django', '127.0.0.1', '*']
 
 CSRF_TRUSTED_ORIGINS = ['https://localhost:8443', 'http://localhost:8080', 'https://127.0.0.1:8443', 'http://127.0.0.1:8080']
 
@@ -169,7 +169,8 @@ LANGUAGES = [
     ('en', 'English'),
     ('fr', 'French'),
     ('jp', 'Japanese'),
-]
+    # ('ja', 'Japanese'),
+
 
 LOCALE_PATHS = [
     os.path.join(BASE_DIR, 'locale'),

@@ -1,5 +1,10 @@
+let gameRunning = false;
+
 document.addEventListener("DOMContentLoaded", () => {
     const contentDiv = document.getElementById('content');
+    let errorModal = null;
+    let errorBsModal = null;
+    let errorModalMsg = null;
     let notifSocket = null;
     let friendListSocket = null;
     let friendChatSocket = null;
@@ -46,6 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     const renderPage = () => {
+        gameRunning = false;
         let path = window.location.pathname;
         let search = window.location.search;
         fetch(`${path}${search}`, {
@@ -79,23 +85,6 @@ document.addEventListener("DOMContentLoaded", () => {
         var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
             return new bootstrap.Popover(popoverTriggerEl);
         });
-    
-        var toastTriggers = document.querySelectorAll('[data-bs-toggle="toast"]');
-        for (let toastTrigger of toastTriggers) {
-            toastTrigger.addEventListener('click', function () {
-                var toastSelector = toastTrigger.getAttribute('data-bs-target');
-                if (!toastSelector) return;
-                try {
-                    var toastEl = document.querySelector(toastSelector);
-                    if (!toastEl) return;
-                    var toast = new bootstrap.Toast(toastEl);
-                    toast.show();
-                }
-                catch(e) {
-                    console.error(e);
-                }
-            });
-        }
     }
 
     const getCookie = (name) => {
@@ -439,9 +428,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 ctx.fillRect(playCanvas.width / 2 - 1, i, 2, 10);
             }
 
-            ctx.font = '20px Arial';
-            ctx.fillText(stateToRender.player1_score, playCanvas.width / 4, 30);
-            ctx.fillText(stateToRender.player2_score, 3 * playCanvas.width / 4, 30);
+            // ctx.font = '20px Arial';
+            // ctx.fillText(stateToRender.player1_score, playCanvas.width / 4, 30);
+            // ctx.fillText(stateToRender.player2_score, 3 * playCanvas.width / 4, 30);
 
             if (stateToRender.countdown) {
                 ctx.font = '50px Arial';
@@ -454,6 +443,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const attachHandlers = () => {
         const path = window.location.pathname;
+        errorModal = document.getElementById('errorModal');
+        errorBsModal = new bootstrap.Modal(errorModal);
+        errorModalMsg = document.getElementById('errorModalMsg');
         const subdirectory = path.split('/')[1];
         if (subdirectory !== 'friends') {
             closeWebSocket(friendListSocket);
@@ -635,9 +627,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 })
                 .then(response => response.json())
                 .then(data => {
+                    if ('error' in data) {
+                        if (errorBsModal) {
+                            errorModalMsg.textContent = data.error;
+                            errorBsModal.show();
+                        }
+                    }
                     if ('redirect' in data) {
                         if (data.redirect === '/home/') {
                             openNotifWebSocket();
+                            navigateTo(data.redirect);
                         }
                     }
                 })
@@ -922,6 +921,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 })
                 .then(response => response.json())
                 .then(data => {
+                    if ('error' in data) {
+                        if (errorBsModal) {
+                            errorModalMsg.textContent = data.error;
+                            errorBsModal.show();
+                        }
+                    }
                     if ('redirect' in data) {
                         navigateTo(data.redirect);
                     }
@@ -944,6 +949,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 })
                 .then(response => response.json())
                 .then(data => {
+                    if ('error' in data) {
+                        if (errorBsModal) {
+                            errorModalMsg.textContent = data.error;
+                            errorBsModal.show();
+                        }
+                    }
                     if ('redirect' in data) {
                         if (data.redirect === '/home/') {
                             openNotifWebSocket();
@@ -968,7 +979,13 @@ document.addEventListener("DOMContentLoaded", () => {
                         fetch(`/api/profiles/search/?alias=${profileAlias}`)
                         .then(response => response.json())
                         .then(data => {
-                            if (data && 'data' in data) {
+                            if ('error' in data) {
+                                if (errorBsModal) {
+                                    errorModalMsg.textContent = data.error;
+                                    errorBsModal.show();
+                                }
+                            }
+                            if ('data' in data) {
                                 navigateTo(`/profiles/${data.data[0].id}`);
                             }
                         })
@@ -1012,6 +1029,12 @@ document.addEventListener("DOMContentLoaded", () => {
                     })
                     .then(response => response.json())
                     .then(data => {
+                        if ('error' in data) {
+                            if (errorBsModal) {
+                                errorModalMsg.textContent = data.error;
+                                errorBsModal.show();
+                            }
+                        }
                         if ('redirect' in data) {
                             navigateTo(data.redirect);
                         }
@@ -1589,19 +1612,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 })
                 .then(response => response.json())
                 .then(data => {
-                    const changeAliasErrorMsg = document.getElementById('changeAliasErrorMsg');
-                    if (data) {
-                        if ('error' in data) {
-                            if (changeAliasErrorMsg) {
-                                changeAliasErrorMsg.classList.remove('d-none', 'd-xxl-none');
-                            }
+                    if ('error' in data) {
+                        if (errorBsModal) {
+                            errorModalMsg.textContent = data.error;
+                            errorBsModal.show();
                         }
-                        if ('redirect' in data) {
-                            if (changeAliasErrorMsg) {
-                                changeAliasErrorMsg.classList.add('d-none', 'd-xxl-none');
-                            }
-                            navigateTo(data.redirect);
-                        }
+                    }
+                    if ('redirect' in data) {
+                        navigateTo(data.redirect);
                     }
                 })
                 .catch(error => console.error('Error changing alias:', error));
@@ -1642,19 +1660,15 @@ document.addEventListener("DOMContentLoaded", () => {
                         },
                         body: formData,
                     })
-                    .then(response => {
-                        const uploadAvatarErrorMsg = document.getElementById('uploadAvatarErrorMsg');
-                        if (uploadAvatarErrorMsg) {
-                            if (response.ok) {
-                                uploadAvatarErrorMsg.classList.add('d-none', 'd-xxl-none');
-                            } else {
-                                uploadAvatarErrorMsg.classList.remove('d-none', 'd-xxl-none');
+                    .then(response => response.json())
+                    .then(data => {
+                        if ('error' in data) {
+                            if (errorBsModal) {
+                                errorModalMsg.textContent = data.error;
+                                errorBsModal.show();
                             }
                         }
-                        return response.json();
-                    })
-                    .then(data => {
-                        if (data && 'redirect' in data) {
+                        if ('redirect' in data) {
                             navigateTo(data.redirect);
                         }
                     })
@@ -1836,7 +1850,7 @@ const pongGame = () => {
 	let player1Score = 0;
 	let player2Score = 0;
 
-    let gameRunning = true;
+   
     let message = null;
     let countdown = 3;
 
@@ -1958,6 +1972,7 @@ const pongGame = () => {
 
 	// Game loop
 	function gameLoop() {
+        if (!gameRunning) return;
 		update();
 		draw();
 		requestAnimationFrame(gameLoop);
@@ -2032,6 +2047,10 @@ const pongGame = () => {
 		// Score and reset ball
 		if (ballX <= 0) {
 			player2Score++;
+            const playerTwoScore = document.getElementById('playerTwoScore');
+            if (playerTwoScore) {
+                playerTwoScore.textContent = player2Score;
+            }
 			if (player2Score >= winScore) {
                 gameRunning = false;
                 message = 'Player 2 Wins! Press Enter to Retry';
@@ -2041,6 +2060,10 @@ const pongGame = () => {
             }
 		} else if (ballX >= WIDTH - ballSize) {
 			player1Score++;
+            const playerOneScore = document.getElementById('playerOneScore');
+            if (playerOneScore) {
+                playerOneScore.textContent = player1Score;
+            }
 			if (player1Score >= winScore) {
                 gameRunning = false;
                 message = 'Player 1 Wins! Press Enter to Retry';
@@ -2068,10 +2091,10 @@ const pongGame = () => {
 			ctx.fillRect(WIDTH / 2 - 1, i, 2, 10);
 		}
 
-		// Draw scores
-		ctx.font = '20px Arial';
-		ctx.fillText(player1Score, WIDTH / 4, 30);
-		ctx.fillText(player2Score, 3 * WIDTH / 4, 30);
+		// // Draw scores
+		// ctx.font = '20px Arial';
+		// ctx.fillText(player1Score, WIDTH / 4, 30);
+		// ctx.fillText(player2Score, 3 * WIDTH / 4, 30);
 
         if (message) {
             ctx.font = '30px Arial';
