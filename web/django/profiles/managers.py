@@ -32,7 +32,7 @@ class ProfileManager(models.Manager):
             profile = self.get(user=user)
             profile.set_status(status)
         except self.model.DoesNotExist:
-            raise ValueError('No profile found to set status.')
+            raise ValueError(_('No profile found to set status.'))
     
     def search_by_alias(self, alias):
         return self.filter(alias__istartswith=alias)

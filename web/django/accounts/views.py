@@ -184,7 +184,7 @@ class UserActivateView(PublicView):
             user.code_updated_at = None
             user.save()
             Profile.objects.set_user_status(user, Profile.StatusChoices.ONLINE)
-            response_data = {'message': 'Account verified.', 'redirect': '/home/'}
+            response_data = {'message': _('Account verified.'), 'redirect': '/home/'}
             response = Response(response_data, status=status.HTTP_200_OK)
             login(request, user)
             access_token, refresh_token = set_jwt_cookies_for_user(response, user)
@@ -234,11 +234,11 @@ class PasswordResetView(PublicView):
             uid = force_str(urlsafe_base64_decode(to_decode))
             user = UserModel.objects.filter(id=uid).first()
             if not user:
-                response_data = {'message': 'Invalid url.', 'redirect': '/'}
+                response_data = {'message': _('Invalid url.'), 'redirect': '/'}
                 return Response(response_data, status=status.HTTP_200_OK)
             token_generator = EmailTokenGenerator()
             if not token_generator.check_token(user, token):
-                response_data = {'message': 'Invalid url.', 'redirect': '/'}
+                response_data = {'message': _('Invalid url.'), 'redirect': '/'}
                 return Response(response_data, status=status.HTTP_200_OK)
             response_data = {
                 'message': _('Set your new password.'),
@@ -260,18 +260,18 @@ class PasswordConfirmView(PublicView):
             uid = request.query_params.get('user', None)
             user = UserModel.objects.filter(id=uid).first()
             if not user:
-                response_data = {'message': 'Invalid url.', 'redirect': '/'}
+                response_data = {'message': _('Invalid url.'), 'redirect': '/'}
                 return Response(response_data, status=status.HTTP_200_OK)
             token_generator = EmailTokenGenerator()
             if not token_generator.check_token(user, token):
-                response_data = {'message': 'Invalid url.', 'redirect': '/'}
+                response_data = {'message': _('Invalid url.'), 'redirect': '/'}
                 return Response(response_data, status=status.HTTP_200_OK)
             user.password = make_password(request.data['password'])
             user.code = None
             user.code_updated_at = None
             user.save()
             Profile.objects.set_user_status(user, Profile.StatusChoices.ONLINE)
-            response_data = {'message': 'Password changed.', 'redirect': '/home/'}
+            response_data = {'message': _('Password changed.'), 'redirect': '/home/'}
             response = Response(response_data, status=status.HTTP_200_OK)
             login(request, user)
             access_token, refresh_token = set_jwt_cookies_for_user(response, user)
@@ -298,7 +298,7 @@ class FortyTwoUnlinkView(PrivateView):
     def post(self, request: HttpRequest):
         request.profile.set_avatar_url()
         request.user.update_fortytwo_infos()
-        response_data = {'message': '42 account unlinked.', 'redirect': '/settings/'}
+        response_data = {'message': _('42 account unlinked.'), 'redirect': '/settings/'}
         return Response(response_data, status=status.HTTP_200_OK)
 
 fortytwo_unlink = FortyTwoUnlinkView.as_view()
@@ -369,20 +369,20 @@ class TokenVerify(PublicView):
         access_token = request.COOKIES.get('access_token')
         refresh_token = request.COOKIES.get('refresh_token')
         if not access_token:
-            response_data = {'message': 'Sign in first.', 'redirect': '/login/'}
+            response_data = {'message': _('Sign in first.'), 'redirect': '/login/'}
             response = Response(response_data, status=status.HTTP_200_OK)
             return response
         if is_token_valid(access_token):
-            response_data = {'message': 'Valid tokens.', 'redirect': '/home/'}
+            response_data = {'message': _('Valid tokens.'), 'redirect': '/home/'}
             response = Response(response_data, status=status.HTTP_200_OK)
             return response
         access_token, refresh_token = get_jwt_from_refresh(refresh_token)
         if access_token is None:
-            response_data = {'message': 'Invalid tokens.', 'redirect': '/login/'}
+            response_data = {'message': _('Invalid tokens.'), 'redirect': '/login/'}
             response = Response(response_data, status=status.HTTP_200_OK)
             unset_jwt_cookies(response)
             return response
-        response_data = {'message': 'Refreshed tokens.', 'redirect': '/home/'}
+        response_data = {'message': _('Refreshed tokens.'), 'redirect': '/home/'}
         response = Response(response_data, status=status.HTTP_200_OK)
         set_jwt_as_cookies(response, access_token, refresh_token)
         response.data['access_token'] = access_token
