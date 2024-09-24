@@ -9,22 +9,23 @@
     </head>
 
     <body>
-        <h1 class="d-flex justify-content-center align-items-center">
+        <h1 style="display: flex; justify-content: center; align-items: center;">
             {% translate 'Hi' %} {{ user.username }},
         </h1>
-        <p class="d-flex justify-content-center align-items-center">
+        <p style="display: flex; justify-content: center; align-items: center;">
             {% translate 'Thank you for registering at Transcendence42. Please use the code below to activate your account:' %}
         </p>
-        <h1 class="d-flex justify-content-center align-items-center" style="color: rgb(38,136,234);font-weight: bold;text-shadow: 1px 1px var(--bs-emphasis-color);">
+        <h1 style="display: flex; justify-content: center; align-items: center; color: rgb(38,136,234); font-weight: bold; text-shadow: 1px 1px var(--bs-emphasis-color);">
             {{ user.code }}
         </h1>
-        <p class="text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center" style="margin-top: 16px;font-weight: bold;">
+        <p style="text-align: center; display: flex; justify-content: center; align-items: center; margin-top: 16px; font-weight: bold;">
             {% translate 'This code will expire in 10 minutes.' %}
         </p>
-        <p class="text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center">
+        <hr>
+        <p style="text-align: center; display: flex; justify-content: center; align-items: center;">
             {% translate 'If you did not create an account, please ignore this email.' %}
         </p>
-        <p class="text-center d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center">
+        <p style="text-align: center; display: flex; justify-content: center; align-items: center;">
             {% translate 'Thank you,' %}
             <br />
             {% translate 'The Transcendence42 Team' %}

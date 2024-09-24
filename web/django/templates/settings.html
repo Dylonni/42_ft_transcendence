@@ -458,9 +458,9 @@
 <div class="modal fade" id="modalTwofaEnable" role="dialog" tabindex="-1">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title d-flex d-xxl-flex justify-content-center align-items-center align-items-xxl-center">
-                    <svg class="icon icon-tabler icon-tabler-shield-lock" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" style="color: black;font-size: 40px;margin-right: 5px">
+            <div class="modal-header" style="border-style: none;background: var(--bs-body-color);"">
+                <h4 class="modal-title d-flex d-xxl-flex justify-content-center align-items-center align-items-xxl-center" style="color: var(--bs-body-bg);">
+                    <svg class="icon icon-tabler icon-tabler-shield-lock" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" style="color: var(--bs-body-bg);font-size: 40px;margin-right: 5px">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                         <path d="M12 3a12 12 0 0 0 8.5 3a12 12 0 0 1 -8.5 15a12 12 0 0 1 -8.5 -15a12 12 0 0 0 8.5 -3"></path>
                         <path d="M12 11m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"></path>
@@ -468,17 +468,17 @@
                     </svg>
                     {% translate 'Enable Two Factor Authentication ?' %}
                 </h4>
-                <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button">
+                <button aria-label="Close" class="btn-close btn-close-white" data-bs-dismiss="modal" type="button">
                 </button>
             </div>
-            <div class="modal-body">
-                <p>
+            <div class="modal-body" style="border-style: none;background: var(--bs-body-color);">
+                <p style="color: var(--bs-body-bg);">
                     <strong>
                         {% translate 'Two Factor Authentication will add a security layer to your account by sending you a code via email each time you want to log in. Do you want to enable it ?' %}
                     </strong>
                 </p>
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer" style="border-style: none;background: var(--bs-body-color);">
                 <button class="btn btn-light" data-bs-dismiss="modal" type="button">
                     {% translate 'Cancel' %}
                 </button>
@@ -492,9 +492,9 @@
 <div class="modal fade" id="modalUnlinkFt" role="dialog" tabindex="-1">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title d-flex d-xxl-flex justify-content-center align-items-center align-items-xxl-center">
-                    <svg class="icon icon-tabler icon-tabler-unlink" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="margin-left: 10px;margin-right: 10px;font-size: 40px;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
+            <div class="modal-header" style="border-style: none;background: var(--bs-body-color);border-top-left-radius: 6px;border-top-right-radius: 6px;">
+                <h4 class="modal-title d-flex d-xxl-flex justify-content-center align-items-center align-items-xxl-center" style="color: var(--bs-body-bg);">
+                    <svg class="icon icon-tabler icon-tabler-unlink" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="margin-left: 10px;margin-right: 10px;font-size: 40px;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg" style="color: var(--bs-body-bg);">
                         <path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
                         <path d="M17 22v-2"></path>
                         <path d="M9 15l6 -6"></path>
@@ -506,16 +506,16 @@
                     </svg>
                     {% translate 'Unlink 42 account' %}
                 </h4>
-                <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button">
+                <button aria-label="Close" class="btn-close btn-close-white" data-bs-dismiss="modal" type="button">
                 </button>
             </div>
-            <div class="modal-body">
-                <p>
+            <div class="modal-body" style="border-style: none;background: var(--bs-body-color);">
+                <p style="color: var(--bs-body-bg);">
                     <strong>
                         {% translate 'Unlinking your 42 account will result in these changes:' %}
                     </strong>
                 </p>
-                <ul style="margin-bottom: 0px;">
+                <ul style="margin-bottom: 0px;color: var(--bs-body-bg);">
                     <li>
                         {% translate 'You will not be able to connect using 42 auth on login page.' %}
                     </li>
@@ -524,7 +524,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer" style="border-style: none;background: var(--bs-body-color);">
                 <button class="btn btn-light" data-bs-dismiss="modal" type="button">
                     {% translate 'Cancel' %}
                 </button>
