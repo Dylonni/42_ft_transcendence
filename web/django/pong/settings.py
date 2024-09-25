@@ -170,7 +170,7 @@ LANGUAGES = [
     ('fr', 'French'),
     ('jp', 'Japanese'),
     # ('ja', 'Japanese'),
-
+]
 
 LOCALE_PATHS = [
     os.path.join(BASE_DIR, 'locale'),
