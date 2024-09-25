@@ -342,6 +342,8 @@ class GameRoomView(PrivateView):
         friendships_ids = Friendship.objects.get_friendships_ids(context.get('profile', None))
         context['friends'] = Profile.objects.filter(id__in=friendships_ids)
         context['game'] = game
+        if context['game'].started_at:
+            context['round'] = GameRound.objects.get_current_round(game)
         context['messages'] = GameMessage.objects.get_messages(game, request.profile)
         context['players'] = game.players.all()
         context['available_friends'] = Profile.objects.get_available_friends(request.profile)

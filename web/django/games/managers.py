@@ -102,6 +102,9 @@ class GameManager(models.Manager):
 
 
 class GameRoundManager(models.Manager):
+    def get_current_round(self, game):
+        return self.filter(game=game, order=game.current_order).first()
+
     def get_last_matches(self, player):
         return self.filter(Q(player1=player) | Q(player2=player), ended_at__isnull=False).order_by('-started_at')[:20]
     
