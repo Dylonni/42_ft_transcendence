@@ -198,12 +198,12 @@
 					<ul class="nav nav-tabs" role="tablist" style="border-style: none;border-bottom-width: 2px;border-bottom-style: none;">
 						<li class="nav-item" role="presentation">
 							<a class="nav-link active" data-bs-toggle="tab" href="#tab-1" role="tab" style="background: rgba(255,255,255,0);color: {{ current_profile.user.fortytwo_coalition_color }};">
-								Winrate
+								{% translate 'Winrate' %}
 							</a>
 						</li>
 						<li class="nav-item" role="presentation">
 							<a class="nav-link" data-bs-toggle="tab" href="#tab-2" role="tab" style="color: {{ current_profile.user.fortytwo_coalition_color }};background: rgba(255,255,255,0);">
-								Points
+								{% translate 'Points' %}
 							</a>
 						</li>
 					</ul>
@@ -211,21 +211,21 @@
 						<div class="tab-pane active" id="tab-1" role="tabpanel">
 							<div class="d-flex justify-content-center align-items-center" style="height: 100%;width: 100%;">
 								<div style="width: 100%;height: 100%;">
-									<canvas id="winRate"></canvas>
+									<canvas data-won="{{ current_profile.get_won_games }}" data-lost="{{ current_profile.get_lost_games }}" id="winRate"></canvas>
 								</div>
-								<div class="text-truncate" style="width: 100%;height: 100%;">
-									<h1 class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-xxl-center" style="color: {{ current_profile.user.fortytwo_coalition_color }};font-weight: bold;margin-top: 10px;margin-bottom: 10px;">
+								<div class="text-truncate" style="width: 90%;height: 90%;">
+									<h1 class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-xxl-center" style="color: var(--bs-body-bg);font-weight: bold;margin-top: 10px;margin-bottom: 10px;">
 										{{ current_profile.get_winrate }}%
 									</h1>
-									<h4 class="text-truncate text-start d-flex d-md-flex justify-content-start align-items-center justify-content-md-start align-items-md-center" style="color: var(--bs-body-bg);">
+									<h4 class="text-truncate text-start d-flex d-md-flex justify-content-start align-items-center justify-content-md-start align-items-md-center" style="color: #36a2eb;">
 										{% translate "Wins" %}:
-										<span style="color: {{ current_profile.user.fortytwo_coalition_color }};">
+										<span style="color: #36a2eb; margin-left: 5px;">
 											{{ current_profile.get_won_games }}
 										</span>
 									</h4>
-									<h4 class="text-truncate text-start d-flex d-md-flex justify-content-start align-items-center justify-content-md-start align-items-md-center" style="color: var(--bs-body-bg);margin-bottom: 8px;">
+									<h4 class="text-truncate text-start d-flex d-md-flex justify-content-start align-items-center justify-content-md-start align-items-md-center" style="color: #ff6384;margin-bottom: 8px;">
 										{% translate "Losses" %}:
-										<span style="color: var(--bs-gray-600);">
+										<span style="color: #ff6384; margin-left: 5px;">
 											{{ current_profile.get_lost_games }}
 										</span>
 									</h4>
@@ -239,13 +239,10 @@
 								</div>
 								<div class="text-truncate d-flex flex-column align-items-start flex-wrap align-items-sm-start align-items-md-start" style="width: 100%;height: 100%;">
 									<h1 class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-xxl-center" style="color: {{ current_profile.user.fortytwo_coalition_color }};font-weight: bold;margin-top: 10px;margin-bottom: 10px;">
-										Last 20 Games
+										{% translate 'Last 20 Games' %}
 									</h1>
 									<h4 class="text-truncate text-start d-flex d-md-flex justify-content-start align-items-center justify-content-md-start align-items-md-center" style="color: {{ current_profile.user.fortytwo_coalition_color }};">
 										#Highestpts
-									</h4>
-									<h4 class="text-truncate text-start d-flex d-md-flex justify-content-start align-items-center justify-content-md-start align-items-md-center" style="color: var(--bs-gray-600);margin-bottom: 8px;">
-										#LowestPts
 									</h4>
 								</div>
 							</div>
@@ -499,22 +496,22 @@
 					<div class="tab-content">
 						<div class="tab-pane active" id="tab-1" role="tabpanel">
 							<div class="d-flex justify-content-center align-items-center" style="height: 100%;width: 100%;">
-								<div style="width: 100%;height: 100%;">
+								<div style="width: 90%;height: 90%;">
 									<canvas data-won="{{ current_profile.get_won_games }}" data-lost="{{ current_profile.get_lost_games }}" id="winRate"></canvas>
 								</div>
 								<div class="text-truncate" style="width: 100%;height: 100%;">
-									<h1 class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-xxl-center" style="color: var(--bs-primary-border-subtle);font-weight: bold;margin-top: 10px;margin-bottom: 10px;">
+									<h1 class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-xxl-center" style="color: var(--bs-body-bg);font-weight: bold;margin-top: 10px;margin-bottom: 10px;">
 										{{ current_profile.get_winrate }}%
 									</h1>
-									<h4 class="text-truncate text-start d-flex d-md-flex justify-content-start align-items-center justify-content-md-start align-items-md-center" style="color: var(--bs-body-bg);">
+									<h4 class="text-truncate text-start d-flex d-md-flex justify-content-start align-items-center justify-content-md-start align-items-md-center" style="color: #36a2eb;">
 										{% translate "Wins" %}:
-										<span style="color: var(--bs-primary-border-subtle);">
+										<span style="color: #36a2eb; margin-left: 5px;">
 											{{ current_profile.get_won_games }}
 										</span>
 									</h4>
-									<h4 class="text-truncate text-start d-flex d-md-flex justify-content-start align-items-center justify-content-md-start align-items-md-center" style="color: var(--bs-body-bg);margin-bottom: 8px;">
+									<h4 class="text-truncate text-start d-flex d-md-flex justify-content-start align-items-center justify-content-md-start align-items-md-center" style="color: #ff6384;margin-bottom: 8px;">
 										{% translate "Losses" %}:
-										<span style="color: var(--bs-gray-600);">
+										<span style="color: #ff6384; margin-left: 5px;">
 											{{ current_profile.get_lost_games }}
 										</span>
 									</h4>
@@ -532,9 +529,6 @@
 									</h1>
 									<h4 class="text-truncate text-start d-flex d-md-flex justify-content-start align-items-center justify-content-md-start align-items-md-center" style="color: var(--bs-primary-border-subtle);">
 										#Highestpts
-									</h4>
-									<h4 class="text-truncate text-start d-flex d-md-flex justify-content-start align-items-center justify-content-md-start align-items-md-center" style="color: var(--bs-gray-600);margin-bottom: 8px;">
-										#LowestPts
 									</h4>
 								</div>
 							</div>

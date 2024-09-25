@@ -1282,10 +1282,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 {
                     type: 'pie',
                     data: {
-                        labels: [
-                            'Won',
-                            'Lost',
-                        ],
                         datasets: [{
                             label: 'Winrate',
                             data: data,
