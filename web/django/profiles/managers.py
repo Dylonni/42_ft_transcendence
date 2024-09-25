@@ -34,6 +34,12 @@ class ProfileManager(models.Manager):
         except self.model.DoesNotExist:
             raise ValueError(_('No profile found to set status.'))
     
+    def set_user_lang(self, user, lang):
+        profile = self.filter(user=user).first()
+        if profile:
+            profile.default_lang = lang
+            profile.save()
+    
     def search_by_alias(self, alias):
         return self.filter(alias__istartswith=alias)
     

@@ -60,6 +60,8 @@ class UserLoginView(PublicView):
             Profile.objects.set_user_status(user, Profile.StatusChoices.ONLINE)
             response_data = {'message': _('User logged in.'), 'redirect': '/home/'}
             response = Response(response_data, status=status.HTTP_200_OK)
+            lang = request.COOKIES.get('lang', 'en')
+            Profile.objects.set_user_lang(user, lang)
             login(request, user)
             access_token, refresh_token = set_jwt_cookies_for_user(response, user)
             response.data['access_token'] = access_token
@@ -102,6 +104,8 @@ class UserTwofaView(PublicView):
             Profile.objects.set_user_status(user, Profile.StatusChoices.ONLINE)
             response_data = {'message': _('Connection accepted.'), 'redirect': '/home/'}
             response = Response(response_data, status=status.HTTP_200_OK)
+            lang = request.COOKIES.get('lang', 'en')
+            Profile.objects.set_user_lang(user, lang)
             login(request, user)
             access_token, refresh_token = set_jwt_cookies_for_user(response, user)
             response.data['access_token'] = access_token
@@ -186,6 +190,8 @@ class UserActivateView(PublicView):
             Profile.objects.set_user_status(user, Profile.StatusChoices.ONLINE)
             response_data = {'message': _('Account verified.'), 'redirect': '/home/'}
             response = Response(response_data, status=status.HTTP_200_OK)
+            lang = request.COOKIES.get('lang', 'en')
+            Profile.objects.set_user_lang(user, lang)
             login(request, user)
             access_token, refresh_token = set_jwt_cookies_for_user(response, user)
             response.data['access_token'] = access_token
@@ -273,6 +279,8 @@ class PasswordConfirmView(PublicView):
             Profile.objects.set_user_status(user, Profile.StatusChoices.ONLINE)
             response_data = {'message': _('Password changed.'), 'redirect': '/home/'}
             response = Response(response_data, status=status.HTTP_200_OK)
+            lang = request.COOKIES.get('lang', 'en')
+            Profile.objects.set_user_lang(user, lang)
             login(request, user)
             access_token, refresh_token = set_jwt_cookies_for_user(response, user)
             response.data['access_token'] = access_token
@@ -352,6 +360,8 @@ class FortyTwoCallbackView(APIView):
             )
             Profile.objects.set_user_status(user, Profile.StatusChoices.ONLINE)
             response = redirect('/home/')
+            lang = request.COOKIES.get('lang', 'en')
+            Profile.objects.set_user_lang(user, lang)
             login(request, user)
             set_jwt_cookies_for_user(response, user)
             return response
