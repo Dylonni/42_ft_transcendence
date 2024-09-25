@@ -361,7 +361,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 const readyDiv = document.getElementById('readyDiv');
                 if (readyDiv) {
                     readyDiv.innerHTML = data.ready;
-                    console.log(readyDiv.innerHTML);
                 }
             } else if (data.redirect) {
                 navigateTo(data.redirect);

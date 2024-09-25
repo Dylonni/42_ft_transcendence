@@ -73,6 +73,7 @@ class GameManager(models.Manager):
         consumer = GameChatConsumer()
         async_to_sync(consumer.send_message)(game=game, sender=player, category='Leave')
         async_to_sync(channel_layer.group_send)(f'games_chat_{game.id}', {'type': 'update_header'})
+        async_to_sync(channel_layer.group_send)(f'games_play_{game.id}', {'type': 'set_players'})
     
     def get_next_round(self, game):
         game.current_order += 1

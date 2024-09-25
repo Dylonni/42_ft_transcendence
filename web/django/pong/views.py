@@ -356,6 +356,7 @@ game_room = GameRoomView.as_view()
 class ProfileView(PrivateView):
     def get(self, request):
         context = get_profile_context(request)
+        context['current_profile'] = context['profile']
         context['is_self'] = True
         context['rounds'] = GameRound.objects.get_last_matches(request.profile)
         context = get_notif_context(request, context)
@@ -367,8 +368,9 @@ profile = ProfileView.as_view()
 class ProfileOtherView(PrivateView):
     def get(self, request, profile_id):
         profile = get_object_or_404(Profile, id=profile_id)
-        context = get_profile_context(request, profile_id)
+        context = get_profile_context(request)
         context = get_notif_context(request, context)
+        context['current_profile'] = profile
         context['is_self'] = request.profile.id == profile_id
         context['is_requested'] = FriendRequest.objects.filter(sender=request.profile, receiver=profile).first()
         context['is_friend'] = request.profile.is_friend(context['profile'])
