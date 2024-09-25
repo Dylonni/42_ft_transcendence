@@ -1001,16 +1001,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 event.preventDefault();
                 const gameName = searchGameInput.value;
                 if (gameName) {
-                    // TODO: handle search here -> for example, display only games containing value
-                    // console.log(gameName);
                     if (event.key === 'Enter') {
-                        fetch(`/api/games/search/?name=${alias}`)
-                        .then(response => response.json())
-                        .then(data => {
-                            console.log('Games searched:', data);
-                            // TODO: display search result
-                        })
-                        .catch(error => console.error('Error searching game:', error));
+                        navigateTo(`/home/?name=${gameName}`)
                     }
                 }
             });
@@ -1660,7 +1652,18 @@ document.addEventListener("DOMContentLoaded", () => {
                         },
                         body: formData,
                     })
-                    .then(response => response.json())
+                    .then(response => {
+                        if (!response.ok) {
+                            if (response.status === 413) {
+                                if (errorBsModal) {
+                                    errorModalMsg.textContent = 'File size is too large. Please upload a smaller file.';
+                                    errorBsModal.show();
+                                }
+                                throw new Error('Payload Too Large');
+                            }
+                        }
+                        return response.json();
+                    })
                     .then(data => {
                         if ('error' in data) {
                             if (errorBsModal) {

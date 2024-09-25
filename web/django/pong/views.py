@@ -35,38 +35,6 @@ def get_profile_context(request, profile_id=None):
     except Profile.DoesNotExist:
         return context
 
-def get_friend_context(request):
-    context = get_profile_context(request)
-    try:
-        profile = context.get('profile', None)
-        if profile is None:
-            return context
-        friendships_ids = Friendship.objects.get_friendships_ids(profile)
-        context['friends'] = Profile.objects.filter(id__in=friendships_ids)
-        return context
-    except Profile.DoesNotExist:
-        return context
-
-def get_friendship_context(request):
-    context = get_profile_context(request)
-    try:
-        profile = context.get('profile', None)
-        if profile is None:
-            return context
-        friendships = Friendship.objects.get_friendships(profile)
-        context['friendships'] = friendships
-        return context
-    except Profile.DoesNotExist:
-        return context
-
-def get_game_context(context={}):
-    try:
-        games = Game.objects.filter(started_at__isnull=True)
-        context['games'] = games
-        return context
-    except Game.DoesNotExist:
-        return context
-
 def get_notif_context(request, context={}):
     if not request.profile:
         return context
@@ -74,21 +42,6 @@ def get_notif_context(request, context={}):
     context['notifs'] = notifications
     context['has_unread_notifs'] = notifications.filter(read=False).exists()
     return context
-
-def render_with_sub_template(request, path, title, context={}):
-    sub_template = render_to_string(path, context, request)
-    context = {
-        'sub_template': sub_template,
-        'title': title,
-    }
-    return render(request, 'index.html', context)
-
-def render_response(request, path, title, context={}):
-    if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
-        context['title'] = title
-        html = render_to_string(path, context, request)
-        return HttpResponse(html)
-    return render_with_sub_template(request, path, title, context)
 
 
 class PublicView(RedirectIfAuthenticatedMixin, LangVerificationMixin, APIView):
@@ -346,7 +299,10 @@ class HomeView(PrivateView):
         if request.profile.game:
             return redirect(f'/games/{request.profile.game.id}/', True)
         context = get_profile_context(request)
-        context = get_game_context(context)
+        context['games'] = Game.objects.filter(started_at__isnull=True)
+        name = request.query_params.get('name', None)
+        if name:
+            context['games'] = context['games'].filter(name__icontains=name)
         context = get_notif_context(request, context)
         return render(request, 'home.html', context)
 
@@ -382,7 +338,9 @@ class GameRoomView(PrivateView):
         game = get_object_or_404(Game, id=game_id)
         if request.profile not in game.players.all():
             return redirect('/home/')
-        context = get_friend_context(request)
+        context = get_profile_context(request)
+        friendships_ids = Friendship.objects.get_friendships_ids(context.get('profile', None))
+        context['friends'] = Profile.objects.filter(id__in=friendships_ids)
         context['game'] = game
         context['messages'] = GameMessage.objects.get_messages(game, request.profile)
         context['players'] = game.players.all()
@@ -433,7 +391,8 @@ leaderboard = LeaderboardView.as_view()
 
 class SocialView(PrivateView):
     def get(self, request):
-        context = get_friendship_context(request)
+        context = get_profile_context(request)
+        context['friendships'] = Friendship.objects.get_friendships(context.get('profile', None))
         context = get_notif_context(request, context)
         return render(request, 'friends/social.html', context)
 
@@ -445,7 +404,8 @@ class SocialFriendView(PrivateView):
         friendship = get_object_or_404(Friendship, id=friendship_id)
         if friendship.is_outsider(request.profile):
             return redirect('/home/')
-        context = get_friendship_context(request)
+        context = get_profile_context(request)
+        context['friendships'] = Friendship.objects.get_friendships(context.get('profile', None))
         context['messages'] = FriendMessage.objects.get_messages(friendship, request.profile)
         context['current_friend'] = Friendship.objects.get_other(friendship_id, request.profile)
         context['friendship'] = friendship
