@@ -20,7 +20,7 @@
                 </svg>
             </a>
             <div id="collapseLang" class="collapse collapse-horizontal">
-                <a id="changeLang_fr" href="/api/lang/fr/" style="font-size: 20px;margin-left: 10px;margin-right: 10px;">FR</a><a id="changeLang_en" href="/api/lang/en/" style="font-size: 20px;margin-left: 10px;margin-right: 10px;">EN</a><a id="changeLang_ja" href="/api/lang/jp/" style="font-size: 20px;margin-left: 10px;margin-right: 10px;">JP</a>
+                <a id="changeLang_fr" href="/api/lang/fr/" style="font-size: 20px;margin-left: 10px;margin-right: 10px;">FR</a><a id="changeLang_en" href="/api/lang/en/" style="font-size: 20px;margin-left: 10px;margin-right: 10px;">EN</a><a id="changeLang_ja" href="/api/lang/ja/" style="font-size: 20px;margin-left: 10px;margin-right: 10px;">JP</a>
             </div>
         </div>
 </header>
@@ -37,7 +37,7 @@
                             <form id="registerForm" class="text-center" action="/api/auth/register/" method="post" style="width: 100%;">
                                 {% csrf_token %}
                                 <div class="mb-3 form-floating">
-                                    <input class="form-control form-control" type="text" id="floatingUser-register" maxlength="20" minlength="4" name="username" pattern="^[a-zA-Z0-9_.-]*$" placeholder=" " required="" tabindex="0" data-bs-toggle="popover" data-bs-trigger="focus" title="Username" data-bs-content="{% trans 'Your unique id, which cannot be changed after account creation. Must be 20 characters long maximum and can include letters (a-Z), numbers (0-9), \'-\' (hyphen), \'_\' (underscore) and \'.\' (dot)' %}">
+                                    <input class="form-control form-control" type="text" id="floatingUser-register" maxlength="20" minlength="4" name="username" pattern="^[a-zA-Z0-9_.-]*$" placeholder=" " required="" tabindex="0" data-bs-toggle="popover" data-bs-trigger="focus" title="Username" data-bs-content="{% translate 'Your unique id, which cannot be changed after account creation. Must be 20 characters long maximum and can include letters (a-Z), numbers (0-9), \'-\' (hyphen), \'_\' (underscore) and \'.\' (dot)' %}">
                                     <label class="form-label" for="floatingUser-register">
                                         {% translate 'Username' %}
                                     </label>
