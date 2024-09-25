@@ -13,7 +13,7 @@
             <div class="col-md-12" style="margin-top: 1em;margin-bottom: 3em;">
                 <div class="d-flex flex-column justify-content-center align-items-center" style="padding-top: 1em;margin-top: 3em;padding-bottom: 30px;">
                     <h1 class="d-flex justify-content-center align-items-center justify-content-xxl-center" style="color: var(--bs-body-bg);margin-left: 0px;margin-right: 0px;width: 100%;margin-bottom: 25px;">
-                        Privacy Policy
+                        {% translate "Privacy Policy" %}
                     </h1>
                     <div class="d-flex justify-content-center align-items-center" style="height: 55px;">
                         <a id="navAboutPp" href="/about/" class="d-flex justify-content-center align-items-center aboutBtn" style="padding-left: 15px;padding-right: 15px;border-radius: 19px;box-shadow: 0px 0px 6px 1px var(--bs-body-bg);padding-top: 10px;padding-bottom: 10px;margin-top: 5px;margin-bottom: 5px;">
@@ -25,7 +25,7 @@
                             </svg>
                             <div class="d-flex justify-content-center align-items-center">
                                 <p style="color: var(--bs-body-bg);margin-bottom: 0px;">
-                                    About
+                                    {% translate "About" %}
                                 </p>
                             </div>
                         </a>
@@ -38,8 +38,20 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
+            <h5 class="text-start" style="color: var(--bs-body-bg);">
+                {% translate "Last updated: " %}{% translate "September 2024" %}
+            </h5>
+        </div>
+    </div>
+</div>
+<div class="container">
+    {% blocktrans %}
+    <div class="row">
+        <div class="col-md-12">
             <h5 style="color: var(--bs-body-bg);">
                 This privacy policy will explain how our organization “Transcendence42” uses the personal data we collect from you when you use our website.
+                <br>First, we would like to assure you that at&nbsp;Transcendence42 we take privacy seriously. We will never contact you for marketing purposes. Your email will solely be used for privacy or security concerns.
+                <br>
                 <br>Topics:
             </h5>
             <ul style="color: var(--bs-body-bg);padding-left: 60px;">
@@ -54,9 +66,6 @@
                 </li>
                 <li>
                     <a href="#hDataStore">How do we store your data?</a>
-                </li>
-                <li>
-                    <a href="#marketing">Marketing</a>
                 </li>
                 <li>
                     <a href="#wDataProtection">What are your data protection rights?</a>
@@ -88,14 +97,17 @@
             </ul>
         </div>
     </div>
+    {% endblocktrans %}
 </div>
 <div class="container">
+    {% blocktrans %}
     <div class="row">
         <div class="col">
             <hr>
         </div>
         <div class="col-md-12" id="wDataCollect">
             <h4 style="color: var(--bs-primary-border-subtle);text-decoration: underline;">
+
                 What data do we collect ?
             </h4>
             <p style="color: var(--bs-body-bg);">
@@ -123,6 +135,7 @@
                     Indirectly identifying information (coalition banner and color scheme)
                 </li>
             </ul>
+
         </div>
         <div class="col">
             <hr>
@@ -179,23 +192,15 @@
                 How do we store your data?
             </h4>
             <p style="color: var(--bs-body-bg);">
-                Transcendence42 securely stores your data in SERVERS LOCATED AT BLAH BLAH BLAH / OR “your own computer, if you decide to host locally”
+                Transcendence42 is executed locally on your computer. This mean that all data shared with Transcendence42 is handled on your own computer or server. YOU ARE SOLELY RESPONSIBLE FOR SECURING YOUR OWN NETWORK TO AVOID YOUR DATA BEING EXPOSED ON EXTERNAL NETWORKS.
                 <br>Transcendence42 will keep your email for the whole life of your account. We will delete your data automatically upon deletion of the account.
                 <br>If applicable, Transcendence42 will keep your 42 UID only to complete the 42Auth authentication process. Then we will delete your data automatically.
-                <br>If applicable, Transcendence42 will keep your 42 profile picture, coalition banner and coalition color scheme until you personally and explicitly revoke the 42Auth access. If you decide to revoke the access, we will delete your data automatically. Deletion of your account automatically revokes the 42Auth access.
+                <br>If applicable, Transcendence42 will keep your 42 profile picture, coalition banner and coalition color scheme until you personally and explicitly revoke the 42Auth access. If you decide to revoke the access, we will automatically delete all data retrieved through 42Auth. Deletion of your account automatically revokes the 42Auth access.
                 <br>Your account preferences are stored locally on your computer through the use of cookies, and&nbsp;Transcendence42 has no access to these cookies. You can decide to erase these at any time from your web browser settings.
             </p>
         </div>
         <div class="col">
             <hr>
-        </div>
-        <div class="col-md-12" id="marketing">
-            <h4 style="color: var(--bs-primary-border-subtle);text-decoration: underline;">
-                Marketing
-            </h4>
-            <p style="color: var(--bs-body-bg);">
-                At&nbsp;Transcendence42 we take privacy seriously. We will not contact you for marketing purposes. The email point of contact is solely to be used for privacy or security concerns.
-            </p>
         </div>
         <div class="col">
             <hr>
@@ -228,9 +233,7 @@
                 </li>
             </ul>
             <p style="color: var(--bs-body-bg);">
-                If you make a request, we have one month to respond to you. If you would like to exercise any of these rights, please contact us at our email:
-                <br>
-                <a href="mailto:">contact@transcendence42.rocks</a>
+                If you make a request, we have one month to respond to you. If you would like to exercise any of these rights, please <a href="mailto:{{django_mail_contact}}">contact us </a>
             </p>
         </div>
         <div class="col">
@@ -241,7 +244,7 @@
                 What are cookies
             </h4>
             <p style="color: var(--bs-body-bg);">
-                Cookies are text files placed on your computer to collect standard Internet log information and visitor behavior information. When you visit our websites, we may collect information from you automatically through cookies or similar technology
+                Cookies are text files placed on your computer to collect standard Internet log information and visitor behavior information. When you visit our website, we may collect information from you automatically through cookies or similar technology
                 <br>For further information, visit
                 <br>
                 <a target="_blank" href="https://allaboutcookies.org">allaboutcookies.org</a>
@@ -274,13 +277,8 @@
                 What types of cookies do we use?
             </h4>
             <p style="color: var(--bs-body-bg);">
-                There are a number of different types of cookies, however, our website uses:
+                There are a number of different types of cookies, however, our website uses only "functionality" cookies. Transcendence42 uses these cookies so that we recognize you on our website and remember your previously selected preferences. These could include what language you prefer.
             </p>
-            <ul style="color: var(--bs-body-bg);padding-left: 60px;">
-                <li style="color: var(--bs-body-bg);">
-                    Functionality – Transcendence42 uses these cookies so that we recognize you on our website and remember your previously selected preferences. These could include what language you prefer.
-                </li>
-            </ul>
         </div>
         <div class="col">
             <hr>
@@ -312,7 +310,7 @@
                 Changes to our privacy policy
             </h4>
             <p style="color: var(--bs-body-bg);">
-                Transcendence42 keeps its privacy policy under regular review and places any updates on this web page. You will also be notified by email that an update has occurred. This privacy policy was last updated on 29 August 2024.
+                Transcendence42 keeps its privacy policy under regular review and places any updates on this web page. You will also be notified by email that an update has occurred.
             </p>
         </div>
         <div class="col">
@@ -326,6 +324,8 @@
                 If you have any questions about Transcendence42’s privacy policy, the data we hold on you, or you would like to exercise one of your data protection rights, please do not hesitate to contact us.
                 <br>Email us at:&nbsp;
                 <a href="mailto:">contact@transcendence42.rocks</a>
+                <br>or on&nbsp;
+                <a href="{{discord_invite}}">discord</a>.
             </p>
         </div>
         <div class="col">
@@ -343,5 +343,6 @@
             </p>
         </div>
     </div>
+    {% endblocktrans %}
 </div>
 {% endblock %}

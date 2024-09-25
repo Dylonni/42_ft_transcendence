@@ -1,539 +1,3143 @@
-# SOME DESCRIPTIVE TITLE.
+# FRENCH TRANSLATION FOR TRANSCENDENCE42 PROJECT.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# FIRST AUTHOR <ACLOOS@STUDENT.42.FR>, 2024.
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-23 12:08+0000\n"
+"POT-Creation-Date: 2024-09-25 13:25+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Last-Translator: ALEXANDRA CLOOS <ACLOOS@STUDENT.42.FR>\n"
+"Language-Team: FRENCH <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: accounts/admin.py:11
-msgid "Personal info"
-msgstr "Informations personnelles"
-
-#: accounts/admin.py:13
-msgid "Permissions"
-msgstr "Autorisations"
-
-#: accounts/admin.py:24
-msgid "Important dates"
-msgstr "Dates importantes"
-
-#: accounts/models.py:48
-msgid "id"
-msgstr "id"
-
-#: accounts/models.py:53
-msgid "Unique identifier for the user, automatically generated."
-msgstr "Identifiant unique pour l'utilisateur, généré automatiquement."
-
-#: accounts/models.py:56
-msgid "username"
-msgstr "Nom d'utilisateur"
-
-#: accounts/models.py:60
-msgid "Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only."
-msgstr ""
-"Requis. 150 caractères maximum. Uniquement lettres, chiffres et @/./+/-/_ ."
-
-#: accounts/models.py:64
-msgid "The username must be 150 characters or fewer."
-msgstr "Le nom d'utilisateur doit être de 150 caractères ou moins."
-
-#: accounts/models.py:65
-msgid "This value may contain only letters, numbers, and @/./+/-/_ characters."
-msgstr ""
-"Ce champ peut uniquement contenir : lettres, chiffres et les caractères @/./"
-"+/-/_."
-
-#: accounts/models.py:69
-msgid "email address"
-msgstr "Adresse courriel"
-
-#: accounts/models.py:71
-msgid "Required. A valid email address."
-msgstr "Requis. Une adresse courriel valide."
-
-#: accounts/models.py:73
-msgid "Enter a valid email address."
-msgstr "Saisissez une adresse courriel valide."
-
-#: accounts/models.py:77
-msgid "42 id"
-msgstr "42 id"
-
-#: accounts/models.py:81
-msgid "Unique identifier for the user from 42."
-msgstr "Identifiant unique pour l'utilisateur via 42."
-
-#: accounts/models.py:84
-msgid "42 access token"
-msgstr "Jeton d'accès 42"
-
-#: accounts/models.py:88
-msgid "Access token for 42 API."
-msgstr "Jeton d'accès pour 42 API."
-
-#: accounts/models.py:91
-msgid "42 refresh token"
-msgstr "Jeton de rafraîchissement 42"
-
-#: accounts/models.py:95
-msgid "Refresh token for 42 API."
-msgstr "Jeton de rafraîchissement pour 42 API."
-
-#: accounts/models.py:98
-msgid "date joined"
-msgstr "date d'adhésion"
-
-#: accounts/models.py:100
-msgid "The date and time when the user joined."
-msgstr "La date et l'heure à laquelle l'utilisateur s'est enregistré."
-
-#: accounts/models.py:103
-msgid "staff status"
-msgstr "Statut du personnel"
-
-#: accounts/models.py:105
-msgid "Designates whether the user can log into this admin site."
-msgstr "Indique si l'utilisateur peut se connecter à ce site d'administration."
-
-#: accounts/models.py:108
-msgid "active"
-msgstr "actif"
-
-#: accounts/models.py:111
-msgid ""
-"Designates whether this user should be treated as active. Unselect this "
-"instead of deleting accounts."
-msgstr ""
-"Indique si cet utilisateur doit être traité comme actif. Désélectionnez ceci "
-"au lieu de supprimer des comptes."
-
-#: accounts/models.py:117
-msgid "groups"
-msgstr "groupes"
-
-#: accounts/models.py:120
-msgid ""
-"The groups this user belongs to. A user will get all permissions granted to "
-"each of their groups."
-msgstr ""
-"Les groupes auxquels cet utilisateur appartient. Un utilisateur obtient "
-"toutes les autorisations accordées à chacun de ses groupes."
-
-#: accounts/models.py:128
-msgid "user permissions"
-msgstr "permissions de l'utilisateur"
-
-#: accounts/models.py:130
-msgid "Specific permissions for this user."
-msgstr "Autorisations spécifiques pour cet utilisateur."
-
-#: accounts/models.py:142
-msgid "custom user"
-msgstr "utilisateur personnalisé"
-
-#: accounts/models.py:143
-msgid "custom users"
-msgstr "utilisateurs personnalisés"
-
-#: accounts/serializers.py:18
-msgid "Must include \"username/email\" and \"password\"."
+#: accounts/serializers.py:38 accounts/serializers.py:70
+msgid "Must include username/email and password."
 msgstr "Doit inclure \"nom d'utilisateur/courriel\" et \"mot de passe\"."
 
-#: accounts/serializers.py:27
+#: accounts/serializers.py:46 accounts/serializers.py:51
 msgid "Unable to log in with provided credentials."
 msgstr "Impossible de se connecter avec les identifiants fournis."
 
-#: accounts/views.py:54
-msgid "User logged in!"
-msgstr "Utilisateur connecté!"
+#: accounts/serializers.py:49
+msgid "Check your email and activate your account first."
+msgstr "Pour activer votre compte, veuillez vérifier votre adresse courriel."
 
-#: accounts/views.py:72
-msgid "User logged out!"
-msgstr "Utilisateur déconnecté !"
+#: accounts/serializers.py:53
+msgid "Account is inactive."
+msgstr "Compte désactivé."
 
-#: accounts/views.py:96
-msgid "Account registered! Please check your email to activate your account."
+#: accounts/serializers.py:76
+msgid "Unable to register with provided credentials."
+msgstr "Impossible de se connecter avec les identifiants fournis."
+
+#: accounts/views.py:56
+msgid "Please check your email to sign in."
+msgstr "Vérifiez votre courriel pour vous connecter."
+
+#: accounts/views.py:61
+msgid "User logged in."
+msgstr "Utilisateur connecté."
+
+#: accounts/views.py:69 accounts/views.py:72 templates/settings.html:441
+msgid "Wrong credentials. Please try again"
+msgstr "Identifiants invalides. Veuillez réessayer."
+
+#: accounts/views.py:86 accounts/views.py:90 accounts/views.py:168
+#: accounts/views.py:172 accounts/views.py:237 accounts/views.py:241
+#: accounts/views.py:263 accounts/views.py:267 profiles/views.py:236
+#: profiles/views.py:240
+msgid "Invalid url."
+msgstr "URL invalide"
+
+#: accounts/views.py:94 accounts/views.py:97 accounts/views.py:176
+#: accounts/views.py:179 profiles/views.py:244 profiles/views.py:247
+msgid "Invalid code."
+msgstr "Code invalide"
+
+#: accounts/views.py:103
+msgid "Connection accepted."
+msgstr "Connexion acceptée."
+
+#: accounts/views.py:124
+msgid "User logged out."
+msgstr "Utilisateur déconnecté."
+
+#: accounts/views.py:144
+msgid "Activate your Account"
+msgstr "Activer votre compte"
+
+#: accounts/views.py:149
+msgid "Account registered! Please check your email to activate it."
 msgstr ""
-"Compte enregistré ! Veuillez vérifier votre adresse courriel pour activer "
-"votre compte."
-
-#: accounts/views.py:123
-msgid "Account activated!"
-msgstr "Compte activé !"
-
-#: accounts/views.py:134
-msgid "Activation link is invalid!"
-msgstr "Le lien d'activation est invalide !"
+"Votre compte est enregistré ! Pour l'activer, veuillez vérifier votre "
+"adresse courriel."
 
 #: accounts/views.py:154
-msgid "Please check your email to reset your password."
-msgstr ""
-"Veuillez vérifier votre adresse courriel pour réinitialiser votre mot de "
-"passe."
+msgid "Invalid Username/Email."
+msgstr "Nom d'utilisateur/adresse courriel invalide."
 
-#: accounts/views.py:180
+#: accounts/views.py:187
+msgid "Account verified."
+msgstr "Compte vérifié."
+
+#: accounts/views.py:204
+msgid "Reset your Password"
+msgstr "Réinitialiser votre nouveau mot de passe."
+
+#: accounts/views.py:209 accounts/views.py:220
+msgid "Password reset request sent! Please check your email."
+msgstr ""
+"Vous allez recevoir un lien pour modifier votre mot de passe. Veuillez "
+"surveiller votre courriel."
+
+#: accounts/views.py:244
 msgid "Set your new password."
 msgstr "Entrez votre nouveau mot de passe."
 
-#: accounts/views.py:191
-msgid "Password reset link is invalid!"
-msgstr "Le lien de réinitialisation du mot de passe est invalide !"
+#: accounts/views.py:274 profiles/views.py:194
+msgid "Password changed."
+msgstr "Le mot de passe a été modifié."
 
-#: accounts/views.py:211
-msgid "Password changed!"
-msgstr "Le mot de passe a changé !"
+#: accounts/views.py:301
+msgid "42 account unlinked."
+msgstr "Compte 42 dissocié."
 
-#: accounts/views.py:284
-msgid "Authentication successful!"
-msgstr "Authentification réussie !"
-
-#: accounts/views.py:311
-msgid "Email updated succesfully!"
-msgstr "Adresse courriel mise à jour avec succès!"
-
-#: pong/urls.py:33
-msgid "^login/?$"
-msgstr ""
-
-#: pong/urls.py:34
-msgid "^register/?$"
-msgstr ""
-
-#: pong/urls.py:36
-msgid "^home/?$"
-msgstr ""
-
-#: pong/urls.py:37
-msgid "^profile/?$"
-msgstr ""
-
-#: pong/urls.py:38
-msgid "^social/?$"
-msgstr ""
-
-#: pong/urls.py:39
-msgid "^settings/?$"
-msgstr ""
-
-#: pong/views.py:21
-msgid "Transcendence"
-msgstr "Transcendance"
-
-#: pong/views.py:28
-msgid "Login"
+#: accounts/views.py:372
+msgid "Sign in first."
 msgstr "Connexion"
 
-#: pong/views.py:34 templates/accounts/register.html:37
-#: templates/accounts/register.html:43
-msgid "Register"
-msgstr "S'enregistrer"
+#: accounts/views.py:376
+msgid "Valid tokens."
+msgstr "Jetons valides"
 
-#: pong/views.py:42
-msgid "Home"
-msgstr "Accueil"
+#: accounts/views.py:381
+msgid "Invalid tokens."
+msgstr "Jetons invalides"
 
-#: pong/views.py:50 templates/profile.html:7
-msgid "Profile"
-msgstr "Profil"
-
-#: pong/views.py:58 templates/social.html:8
-msgid "Social"
-msgstr "Clavardage"
-
-#: pong/views.py:66 templates/settings.html:8
-msgid "Settings"
-msgstr "Paramètres"
-
-#: templates/accounts/email_activate.html:5
-msgid "Activate Your Account"
-msgstr "Activer votre compte"
-
-#: templates/accounts/email_activate.html:8
-#, python-format
-msgid "Hi '%(user.username)s'"
-msgstr "Bonjour '%(user.username)s '"
-
-#: templates/accounts/email_activate.html:9
-msgid ""
-"Thank you for registering at Transcendence. Please click the link below to "
-"activate your account:"
+#: accounts/views.py:385
+msgid "Refreshed tokens."
 msgstr ""
-"Merci de vous être inscrit à Transcendance. Veuillez cliquer sur le lien ci-"
-"dessous pour activer votre compte :"
 
-#: templates/accounts/email_activate.html:10
-msgid "Activate your account"
-msgstr "Activer votre compte"
+#: friends/managers.py:37
+msgid "Friendship not found."
+msgstr "Ami introuvable."
 
-#: templates/accounts/email_activate.html:11
-msgid "If you did not create an account, please ignore this email."
-msgstr "Si vous n'avez pas créé de compte, veuillez ignorer ce courriel."
+#: friends/managers.py:53
+msgid "Cannot be friends with yourself."
+msgstr "Vous ne pouvez pas être votre propre ami."
 
-#: templates/accounts/email_activate.html:12
-msgid "Thanks,"
-msgstr "Merci,"
+#: friends/managers.py:62
+msgid "These profiles are already friends."
+msgstr "Ces profiles sont déjà amis."
 
-#: templates/accounts/email_activate.html:12
-msgid "The Transcendence Team"
-msgstr "L'équipe Transcendance"
+#: friends/managers.py:80
+msgid "Profile not part of this friendship."
+msgstr "Vous n'êtes pas ami avec cette personne."
 
-#: templates/accounts/login.html:12 templates/accounts/register.html:12
-msgid "Quick Play"
-msgstr "Partie rapide"
+#: friends/managers.py:83
+msgid "Friendship already removed."
+msgstr "Cette amitié n'existe déjà plus."
 
-#: templates/accounts/login.html:13 templates/accounts/register.html:13
-msgid "My Profile"
-msgstr "Mon profil"
+#: friends/managers.py:112
+msgid "Cannot send a friend request to yourself."
+msgstr "Vous ne pouvez pas être votre propre ami."
 
-#: templates/accounts/login.html:37 templates/accounts/login.html:42
-msgid "Log in"
-msgstr "Connexion"
+#: friends/managers.py:114
+msgid "Friend request already sent."
+msgstr "Vous l'avez déjà demandé en ami."
 
-#: templates/accounts/login.html:38
-msgid "Username / Email"
-msgstr "Nom d'utilisateur / courriel"
+#: friends/managers.py:116
+msgid "Friend request already received."
+msgstr "Vous avez déjà reçu une demande en ami"
 
-#: templates/accounts/login.html:39 templates/accounts/register.html:40
-msgid "Password"
-msgstr "Mot de passe"
+#: friends/managers.py:168
+msgid "Friend message not found."
+msgstr "Nous n'avons pas trouvé ce message."
 
-#: templates/accounts/login.html:40 templates/accounts/register.html:41
-msgid "Show password"
-msgstr "Afficher le mot de passe"
+#: games/managers.py:16 games/managers.py:31 games/managers.py:168
+msgid "Player is already in a game."
+msgstr "Déjà en train de jouer."
 
-#: templates/accounts/login.html:41
-msgid "Forgot your password ?"
-msgstr "Mot de passe oublié ?"
+#: games/managers.py:19
+msgid "Server is full. Try to create a game later."
+msgstr "Le serveur est plein. Veuillez réessayer ultérieurement."
 
-#: templates/accounts/login.html:45
-msgid "Connect with Google"
-msgstr "Connexion avec Google"
+#: games/managers.py:33 games/managers.py:170
+msgid "Game is full. Unable to join."
+msgstr "Il n'y a plus de place dans cette partie."
 
-#: templates/accounts/login.html:46
-msgid "Connect with 42 Auth"
-msgstr "Connexion avec 42 Auth"
+#: games/managers.py:35 games/managers.py:88 games/managers.py:110
+msgid "Game has already started."
+msgstr "La partie a déjà commencé."
 
-#: templates/accounts/login.html:48
-msgid "Not Registered ?"
-msgstr "Pas encore enregistré ?"
+#: games/managers.py:44
+msgid "Player is not in the game."
+msgstr "Ce joueur n'est pas dans cette partie."
 
-#: templates/accounts/login.html:48
-msgid "Create an account"
-msgstr "Créer un compte"
+#: games/managers.py:146
+msgid "Cannot send a game invite to yourself."
+msgstr "Vous ne pouvez pas vous inviter vous-même."
 
-#: templates/accounts/login.html:60 templates/accounts/register.html:57
-msgid "Privacy Policy"
-msgstr "Politique de confidentialité"
+#: games/managers.py:148
+msgid "Sender is not in a game."
+msgstr "Vous n'avez pas encore créé de partie."
 
-#: templates/accounts/login.html:61 templates/accounts/register.html:58
-msgid "Development Team"
-msgstr "Équipe de développement"
+#: games/managers.py:150
+msgid "Game invite already sent."
+msgstr "Invitation déjà envoyée."
 
-#: templates/accounts/register.html:38
-msgid "Username"
-msgstr "Nom d'utilisateur"
+#: games/managers.py:152
+msgid "Game invite already received."
+msgstr "Invitation déjà reçue."
 
-#: templates/accounts/register.html:39 templates/settings.html:67
-msgid "Email"
-msgstr "Courriel"
+#: games/models.py:19 templates/games/game_config.html:139
+#: templates/games/game_config.html:211
+msgid "Small"
+msgstr "Petite"
 
-#: templates/accounts/register.html:44
-msgid "Already Registered ?"
-msgstr "Déjà enregistré ?"
+#: games/models.py:20 templates/games/game_config.html:142
+#: templates/games/game_config.html:214
+msgid "Medium"
+msgstr "Moyenne"
 
-#: templates/accounts/register.html:44
-msgid "Sign in here"
-msgstr "Connectez-vous ici"
+#: games/models.py:21 templates/games/game_config.html:145
+#: templates/games/game_config.html:217
+msgid "Large"
+msgstr "Grande"
 
-#: templates/home.html:14
-msgid "Find a player"
-msgstr "Trouver un joueur"
+#: games/models.py:24 templates/games/game_config.html:172
+msgid "Slow"
+msgstr "Lente"
 
-#: templates/home.html:26 templates/profile.html:21 templates/profile.html:57
-#: templates/profile.html:75 templates/settings.html:28
-msgid "#PlayerName"
-msgstr "Nom du joueur"
+#: games/models.py:25 games/models.py:30 templates/games/game_config.html:175
+#: templates/games/game_config.html:286
+msgid "Normal"
+msgstr "Normale"
 
-#: templates/home.html:28
-msgid "Stats"
-msgstr "Statistiques"
+#: games/models.py:26 templates/games/game_config.html:178
+msgid "Fast"
+msgstr "Rapide"
 
-#: templates/home.html:28
-msgid "Games played:"
-msgstr "Parties jouées :"
+#: games/models.py:29 templates/games/game_config.html:283
+msgid "Easy"
+msgstr "Facile"
 
-#: templates/home.html:33
-msgid "Wins"
-msgstr "Victoires"
+#: games/models.py:31 templates/games/game_config.html:289
+msgid "Hard"
+msgstr "Difficile"
 
-#: templates/home.html:34
-msgid "Loss"
-msgstr "Défaites"
+#: games/models.py:330 templates/accounts/forgot_password.html:61
+msgid "Send"
+msgstr "Envoyer"
 
-#: templates/home.html:37
-msgid "Create GameRoom"
-msgstr "Créer un salon de jeux"
-
-#: templates/home.html:53
-msgid "Find a Game"
-msgstr "Trouver une partie"
-
-#: templates/home.html:67
-msgid "Game Rooms"
-msgstr "Salons de jeux"
-
-#: templates/home.html:72
-msgid "Room Name"
-msgstr "Nom du salon"
-
-#: templates/home.html:73
-msgid "#RoomName"
-msgstr "Nom du salon"
-
-#: templates/home.html:76
-msgid "Created By"
-msgstr "Créé par"
-
-#: templates/home.html:77
-msgid "#CreatorName"
-msgstr "Nom du créateur"
-
-#: templates/home.html:80
-msgid "Room Type"
-msgstr "Type de salon"
-
-#: templates/home.html:81
-msgid "#Classic/Retro"
-msgstr "#Classique/Rétro"
-
-#: templates/home.html:84
-msgid "Current Players"
-msgstr "Parties en cours"
-
-#: templates/home.html:87
+#: games/models.py:331
 msgid "Join"
 msgstr "Rejoindre"
 
-#: templates/home.html:97
-msgid "NO GAMES TO DISPLAY"
-msgstr "AUCUNE PARTIE A AFFICHER"
+#: games/models.py:332 templates/games/game_room.html:227
+msgid "Leave"
+msgstr "Quitter"
 
-#: templates/profile.html:51
-msgid "Recent Games"
-msgstr "Dernières parties"
+#: games/models.py:333
+msgid "Prepare"
+msgstr "Préparer"
 
-#: templates/profile.html:56 templates/profile.html:74
-msgid "Versus"
-msgstr "Adversaire"
+#: games/models.py:334
+msgid "Eliminate"
+msgstr "Éliminer"
 
-#: templates/profile.html:60 templates/profile.html:78
-msgid "Score"
-msgstr "Résultats"
+#: games/models.py:335
+msgid "Win"
+msgstr "Victoires"
 
-#: templates/profile.html:64 templates/profile.html:82
-msgid "Game Duration"
-msgstr "Durée de la partie"
+#: games/views.py:26
+msgid "Game created."
+msgstr "Partie créée."
 
-#: templates/profile.html:68 templates/profile.html:86
-msgid "Date"
-msgstr "Date"
+#: games/views.py:40
+msgid "Game not found."
+msgstr "Partie inexistante"
 
-#: templates/profile.html:98
-msgid "Player Statistics"
-msgstr "Statistiques du joueur"
+#: games/views.py:62
+msgid "Game joined."
+msgstr "Partie rejointe"
 
-#: templates/profile.html:105
-msgid "Total Games"
-msgstr "Nombre de parties"
+#: games/views.py:76
+msgid "Game left."
+msgstr "Partie quittée."
 
-#: templates/profile.html:108 templates/profile.html:116
-msgid "#Won Tournaments"
-msgstr "#Tournois remportés"
+#: games/views.py:91
+msgid "All players must be ready."
+msgstr "Tous les joueurs se tiennent prêts"
 
-#: templates/profile.html:121
-msgid "Won Games"
-msgstr "Parties remportées"
+#: games/views.py:97
+msgid "Game started."
+msgstr "La partie a commencé."
 
-#: templates/profile.html:121
-msgid "#WonGames"
-msgstr "#Partiesremportées"
+#: games/views.py:116 profiles/views.py:511
+msgid "Message sent."
+msgstr "Message envoyé"
 
-#: templates/profile.html:124
-msgid "Lost Games"
-msgstr "Parties perdues"
+#: notifs/models.py:10 templates/notifs/notif_friend_request.html:14
+msgid "Friend Request"
+msgstr "Demande en Ami"
 
-#: templates/profile.html:124
-msgid "#LostGames"
-msgstr "#PartiesPerdues"
+#: notifs/models.py:11
+msgid "Friend Message"
+msgstr "Message"
 
-#: templates/settings.html:23
-#, fuzzy
-#| msgid "My Profile"
-msgid "Profile Card"
-msgstr "Mon profil"
+#: notifs/models.py:12
+msgid "Game Invitation"
+msgstr "Invitation à jouer"
 
-#: templates/settings.html:53
-msgid "Account"
-msgstr "Compte"
+#: notifs/models.py:13
+msgid "Game Message"
+msgstr "Message du jeu"
 
-#: templates/settings.html:61
-msgid "#Username"
-msgstr "#Nom d'utilisateur"
+#: pong/views.py:483
+msgid "Language changed."
+msgstr "Langue mise à jour"
 
-#: templates/settings.html:64
-msgid "Account created on"
-msgstr "Compte créé sur"
+#: profiles/managers.py:35
+msgid "No profile found to set status."
+msgstr ""
 
-#: templates/settings.html:64
-msgid "#Date of Creation"
-msgstr "#DateDeCréation"
+#: profiles/managers.py:91
+msgid "Profile is already blocked."
+msgstr "Le profil est déjà bloqué"
 
-#: templates/settings.html:67
-msgid "Currentmail****@*****.com"
-msgstr "Courriel****@****.com"
-
-#: templates/settings.html:74
-msgid "Modify Email"
-msgstr "Modifier l'adresse courriel"
-
-#: templates/settings.html:74
-msgid "Modify Password"
-msgstr "Modifier le mot de passe"
-
-#: templates/settings.html:80
-msgid "Block list"
-msgstr "Joueurs bloqués"
-
-#: templates/settings.html:89
-msgid "Delete my account"
-msgstr "Supprimer mon compte"
-
-#: templates/social.html:24
-msgid "Friends"
-msgstr "Amis"
-
-#: templates/social.html:37
+#: profiles/models.py:20 templates/friends/social_header.html:16
 msgid "Online"
 msgstr "En ligne"
 
-#: templates/social.html:38
-msgid "#Friendfrrrrrrrrrrrrrrrrrrrr"
-msgstr "#Amis à part"
+#: profiles/models.py:21 templates/friends/social_header.html:34
+msgid "Waiting"
+msgstr "En attente"
 
-#: templates/social.html:84
-msgid "  Send a message"
-msgstr "  Envoyer un message"
+#: profiles/models.py:22 templates/friends/social_header.html:28
+msgid "Playing"
+msgstr "En jeu"
+
+#: profiles/models.py:23 templates/friends/social_header.html:22
+msgid "Offline"
+msgstr "Hors ligne"
+
+#: profiles/models.py:183
+msgid "Unranked"
+msgstr "Non classé"
+
+#: profiles/views.py:46
+msgid "Profile not found."
+msgstr "Profil introuvable."
+
+#: profiles/views.py:61
+msgid "Incorrect password."
+msgstr "Mot de passe erroné."
+
+#: profiles/views.py:68
+msgid "Account deleted."
+msgstr "Compte supprimé."
+
+#: profiles/views.py:80
+msgid "Alias already taken."
+msgstr "Cet alias est déjà pris."
+
+#: profiles/views.py:83
+msgid "Alias updated."
+msgstr "Alias mis à jour."
+
+#: profiles/views.py:103
+msgid "Avatar updated."
+msgstr "Avatar mis à jour."
+
+#: profiles/views.py:113
+msgid "Default language changed."
+msgstr "La langue par défaut a été modifiée."
+
+#: profiles/views.py:129
+msgid "Change your Email"
+msgstr "Modifier votre courriel"
+
+#: profiles/views.py:134
+msgid "Email change request sent! Please check your email."
+msgstr ""
+"Vous allez recevoir un lien pour modifier votre adresse courriel de contact. "
+"Veuillez surveiller votre adresse courriel actuelle."
+
+#: profiles/views.py:146
+msgid "Invalid email."
+msgstr "Adresse courriel invalide."
+
+#: profiles/views.py:149 profiles/views.py:184 profiles/views.py:188
+msgid "Invalid password."
+msgstr "Mot de passe invalide."
+
+#: profiles/views.py:155
+msgid "Email changed."
+msgstr "L'adresse courriel a été modifiée."
+
+#: profiles/views.py:167 templates/accounts/email_change_password.html:7
+msgid "Change your Password"
+msgstr "Modifier votre nouveau mot de passe."
+
+#: profiles/views.py:172
+msgid "Password change request sent! Please check your email."
+msgstr ""
+"Vous allez recevoir un lien pour modifier votre mot de passe. Veuillez "
+"surveiller votre courriel."
+
+#: profiles/views.py:208
+msgid "2FA enabled."
+msgstr "2FA Activée."
+
+#: profiles/views.py:218
+msgid "2FA disabled."
+msgstr "2FA désactivée."
+
+#: profiles/views.py:261
+msgid "Code verified."
+msgstr "Code vérifié."
+
+#: profiles/views.py:291
+msgid "Game invitation sent."
+msgstr "Invitation envoyée."
+
+#: profiles/views.py:312
+msgid "Profile blocked."
+msgstr "Utilisateur bloqué."
+
+#: profiles/views.py:335 profiles/views.py:442
+msgid "Friend request accepted."
+msgstr "La demande en ami a été acceptée."
+
+#: profiles/views.py:338
+msgid "Friend request sent."
+msgstr "La demande en ami a été envoyée."
+
+#: profiles/views.py:390
+msgid "Game invitation accepted."
+msgstr "L'invitation de jeu a été acceptée."
+
+#: profiles/views.py:400
+msgid "Game invitation declined."
+msgstr "L'invitation de jeu a été refusée."
+
+#: profiles/views.py:422
+msgid "Profile unblocked."
+msgstr "Utilisateur debloqué."
+
+#: profiles/views.py:452
+msgid "Friend request declined."
+msgstr "La demande en ami a été refusée."
+
+#: profiles/views.py:492
+msgid "Friend removed."
+msgstr "Amitié supprimée."
+
+#: templates/about/about.html:4 templates/about/dev_team.html:33
+#: templates/about/faq.html:32 templates/about/game_rules.html:34
+#: templates/about/privacy_policy.html:28
+#: templates/about/terms_of_service.html:28
+msgid "About"
+msgstr "À propos"
+
+#: templates/about/about.html:15 templates/footer.html:8
+msgid "About Transcendence42"
+msgstr "À propos de Transcendence42"
+
+#: templates/about/about.html:30
+msgid ""
+"Welcome to this section, here you can learn more about the app and our team"
+msgstr ""
+"Bienvenue! Ici vous en saurez plus sur notre application et notre équipe"
+
+#: templates/about/about.html:43 templates/about/faq.html:20
+msgid "Frequently Asked Questions"
+msgstr "Foire Aux Questions"
+
+#: templates/about/about.html:59 templates/about/game_rules.html:4
+#: templates/about/game_rules.html:22
+msgid "Game Rules"
+msgstr "Règles du jeu"
+
+#: templates/about/about.html:72 templates/about/dev_team.html:21
+msgid "The Dev Team"
+msgstr "L'équipe de développement"
+
+#: templates/about/about.html:89 templates/about/dev_team.html:4
+#: templates/about/faq.html:139 templates/about/privacy_policy.html:4
+#: templates/about/privacy_policy.html:16 templates/accounts/register.html:76
+#: templates/footer.html:7
+msgid "Privacy Policy"
+msgstr "Politique de confidentialité"
+
+#: templates/about/about.html:104 templates/about/terms_of_service.html:4
+#: templates/accounts/register.html:66 templates/footer.html:6
+msgid "Terms of Service"
+msgstr "Conditions d'utilisation"
+
+#: templates/about/dev_team.html:45
+msgid ""
+"This is us, the team behind Transcendence42 project. Check us out below !"
+msgstr "Et voici l'équipe de Transcendence42 !"
+
+#: templates/about/dev_team.html:62
+msgid "Frontend Dev"
+msgstr "Dev Frontend"
+
+#: templates/about/dev_team.html:65
+msgid "UI/UX Design"
+msgstr "Design UI/UX"
+
+#: templates/about/dev_team.html:115
+msgid "Backend Dev"
+msgstr "Dev Backend"
+
+#: templates/about/dev_team.html:118
+msgid "Database Architecture"
+msgstr "Architecture de données"
+
+#: templates/about/dev_team.html:121
+msgid "Game Design"
+msgstr "Design du jeu"
+
+#: templates/about/dev_team.html:136
+msgid "Devops and security"
+msgstr "Devops et sécurité"
+
+#: templates/about/dev_team.html:139
+msgid "GDPR Compliance"
+msgstr "Conformité RGPD"
+
+#: templates/about/dev_team.html:142
+msgid "Localization and Translation"
+msgstr "Traduction et localisation"
+
+#: templates/about/faq.html:4
+msgid "FAQ"
+msgstr "FAQ"
+
+#: templates/about/faq.html:45
+msgid "How does the ranking system and the elo works ?"
+msgstr "Comment fonctionnent le classement et le système d'elo ?"
+
+#: templates/about/faq.html:62 templates/about/faq.html:110
+#: templates/home.html:44 templates/profile.html:106 templates/profile.html:395
+#: templates/profile.html:495
+msgid "Points"
+msgstr "Points"
+
+#: templates/about/faq.html:65
+msgid "are calculated upon victories and defeats and on your opponent&#39;s "
+msgstr ": basés sur le nombre de victoires et défaites, mais aussi le"
+
+#: templates/about/faq.html:73 templates/about/faq.html:98
+#: templates/home.html:32 templates/profile.html:92 templates/profile.html:381
+msgid "Rank"
+msgstr "Classement"
+
+#: templates/about/faq.html:75
+msgid "."
+msgstr "de votre adversaire."
+
+#: templates/about/faq.html:77
+msgid ""
+"If your opponent&#39;s rank is bigger than yours, you will gain more points "
+"on a victory and loose less points on a defeat."
+msgstr ""
+"Si votre adversaire est mieux classé que vous, vous gagnerez plus en cas de "
+"victoire, et perdrez moins en cas de défaite."
+
+#: templates/about/faq.html:79
+msgid "If you decide to leave the game while it&#39;s on, you will get a"
+msgstr "Quitter une partie en cours vous vaudra"
+
+#: templates/about/faq.html:81
+msgid "point penalty"
+msgstr "un point de pénalité"
+
+#: templates/about/faq.html:83
+msgid ""
+"and you will also loose the points you were supposed to loose initially."
+msgstr ", en plus de la perte de points prévue en cas de défaite."
+
+#: templates/about/faq.html:85
+msgid "Winning games in a tournament will "
+msgstr "Les victoires en tournoi"
+
+#: templates/about/faq.html:87
+msgid "grant you"
+msgstr "vous octroient"
+
+#: templates/about/faq.html:89
+msgid "more points."
+msgstr "plus de points."
+
+#: templates/about/faq.html:101
+msgid "is simply based on the"
+msgstr "est tout simplement basé sur"
+
+#: templates/about/faq.html:112
+msgid "you acquired."
+msgstr "que vous avez acquis."
+
+#: templates/about/faq.html:120
+msgid "What data do you store ?"
+msgstr "Que stockez-vous comme données personnelles?"
+
+#: templates/about/faq.html:129
+msgid "Please check our"
+msgstr "Notre"
+
+#: templates/about/faq.html:140
+msgid "page for all relevant info."
+msgstr "contient toutes les informations dont vous avez besoin."
+
+#: templates/about/faq.html:148
+msgid "How does the social aspect works ?"
+msgstr "Comment fonctionne le clavardage / live chat?"
+
+#: templates/about/faq.html:157
+msgid "The"
+msgstr "Le"
+
+#: templates/about/faq.html:167 templates/about/faq.html:198
+#: templates/about/faq.html:279 templates/friends/social.html:4
+#: templates/friends/social.html:13
+msgid "Social"
+msgstr "Clavardage"
+
+#: templates/about/faq.html:171
+msgid ""
+"aspect of the app allows you to discuss with friends and manage your friend "
+"list."
+msgstr ""
+"vous permet de discuter avec des amis, ainsi que de gérer votre liste d'amis."
+
+#: templates/about/faq.html:174
+msgid ""
+"To create a conversation or interact with someone, you must add a player to "
+"your friend list."
+msgstr ""
+"Pour créer une conversation ou intéragir avec d'autres joueurs, vous devez "
+"le(s) ajouter à votre liste d'amis."
+
+#: templates/about/faq.html:176
+msgid ""
+"The friend has to either accept the requested invitation from you, or has to "
+"add you back via your"
+msgstr ""
+"Cette personne peut accepter votre invitation directement, ou encore vous "
+"ajouter à sa propre liste d'amis via votre "
+
+#: templates/about/faq.html:185 templates/about/faq.html:264
+#: templates/profile.html:4
+msgid "Profile"
+msgstr "Profil"
+
+#: templates/about/faq.html:187
+msgid "page."
+msgstr "personnel."
+
+#: templates/about/faq.html:189
+msgid ""
+"When both users have accepted each other, you can see their status in the"
+msgstr ""
+"Lorsque deux joueurs se sont mutellement ajoutés en amis, ils peuvent chacun "
+"voir leur statut sur la page de"
+
+#: templates/about/faq.html:200
+msgid ""
+"page, you can interact with this friend by clicking on them in your friend "
+"list."
+msgstr ""
+". Pour intéragir avec un ami, il suffit de cliquer sur son nom dans la liste."
+
+#: templates/about/faq.html:208
+msgid "What happens when I block someone ?"
+msgstr "Que se passe-t-il quand je bloque quelqu'un?"
+
+#: templates/about/faq.html:224
+msgid "Blocking"
+msgstr "Bloquer"
+
+#: templates/about/faq.html:227
+msgid ""
+"a user will prevent them from sending notifications and messages to you."
+msgstr ""
+"un joueur fait que vous ne recevrez plus de messages ni de notifications de "
+"sa part."
+
+#: templates/about/faq.html:231
+msgid ""
+"If you have blocked someone and play with them in the same game room, you "
+"will not see their messages in the room chat."
+msgstr ""
+"Dans une instance de jeu, vous ne verrez pas les messages en direct des "
+"personnes que vous avez bloquées."
+
+#: templates/about/faq.html:235
+msgid ""
+"If you have blocked a friend, you will still be able to interact with them, "
+"and they will be able to see your requests and messages but you will not see "
+"their replies or requests."
+msgstr ""
+"Vous pouvez continuer à notifier les amis que vous bloquez, et ils verront "
+"vos messages et invitations. Cependant, vous ne pourrez plus voir leurs "
+"réponses ou invitations."
+
+#: templates/about/faq.html:239
+msgid "You can"
+msgstr "Vous pouvez"
+
+#: templates/about/faq.html:250
+msgid "Unblock"
+msgstr "Débloquer"
+
+#: templates/about/faq.html:254
+msgid "a user by going to their"
+msgstr "un utilisateur depuis sa page de"
+
+#: templates/about/faq.html:268
+msgid "page, via the"
+msgstr "via la page de"
+
+#: templates/about/faq.html:283
+msgid "page , or removing them off your blocked list under the"
+msgstr ""
+", ou en les retirant de votre liste d'utilisateurs bloqués depuis la page"
+
+#: templates/about/faq.html:292 templates/settings.html:4
+#: templates/settings.html:13
+msgid "Settings"
+msgstr "Paramètres"
+
+#: templates/about/faq.html:296
+msgid "page"
+msgstr "de votre compte."
+
+#: templates/about/faq.html:305
+msgid "Can i suggest some ideas ?"
+msgstr "Et si j'ai des suggestions?"
+
+#: templates/about/faq.html:314
+msgid ""
+"Yes , we would love to hear about your ideas ! Feel free to share them with "
+"us by contacting us at"
+msgstr ""
+"Nous serons ravis de recevoir vos idées et suggestions! Vous pouvez nous les "
+"envoyer à :"
+
+#: templates/about/game_rules.html:46
+msgid "The rules are simple:"
+msgstr "Les règles sont simples :"
+
+#: templates/about/game_rules.html:48
+msgid ""
+"There are two paddles on each side of the field , you (and your opponent) "
+"have to move your paddles and hit the ball in order to score a point."
+msgstr ""
+"défendez votre côté du terrain avec votre raquette, et marquez un point "
+"chaque fois que l'adversaire n'arrive pas à rattrapper la balle."
+
+#: templates/about/game_rules.html:50
+msgid "The ball is getting faster from each hit."
+msgstr "La vitesse de la balle augmente chaque fois que'elle est renvoyée."
+
+#: templates/about/game_rules.html:52
+msgid ""
+"You have to score as much points as the creator of the game room has defined "
+"to win a game."
+msgstr ""
+"Le score à atteindre pour la victoire est défini par la personne qui crée le "
+"salon de jeu."
+
+#: templates/about/game_rules.html:54
+msgid ""
+"Your side is represented by your name and your avatar above the game , it "
+"also displays the current score of the game."
+msgstr ""
+"Votre côté du terrain est identifiable par votre nom et votre avatar. Il "
+"indique aussi votre score."
+
+#: templates/about/game_rules.html:65 templates/games/game_ready.html:16
+#: templates/games/game_score.html:13
+msgid "Player_1"
+msgstr "Joueur_1"
+
+#: templates/about/game_rules.html:86 templates/games/game_ready.html:33
+#: templates/games/game_score.html:60
+msgid "Player_2"
+msgstr "Joueur_2"
+
+#: templates/about/game_rules.html:102
+msgid "Movement"
+msgstr "Contrôles"
+
+#: templates/about/game_rules.html:105
+msgid "There are 3 ways to move your paddle"
+msgstr "Vous pouvez contrôler la raquette de trois manières :"
+
+#: templates/about/game_rules.html:113
+msgid "You can click and hold to a direction make the paddle going up and down"
+msgstr ""
+"En maintenant le clic gauche de la souris pour la bouger vers le haut ou le "
+"bas"
+
+#: templates/about/game_rules.html:116 templates/about/game_rules.html:132
+msgid "Pressing"
+msgstr "En pressant"
+
+#: templates/about/game_rules.html:123 templates/about/game_rules.html:139
+msgid "or"
+msgstr "ou"
+
+#: templates/about/game_rules.html:129
+msgid "keys will make the paddle going up"
+msgstr "pour faire monter la raquette"
+
+#: templates/about/game_rules.html:145
+msgid "keys will make the paddle going down"
+msgstr "pour faire descendre la raquette"
+
+#: templates/about/game_rules.html:160
+msgid "Points to win a game,"
+msgstr "Le nombre de points pour gagner,"
+
+#: templates/about/game_rules.html:170
+msgid "Players in the room/Players needed and the"
+msgstr "le nombre de Joueurs du salon, et"
+
+#: templates/about/game_rules.html:179
+msgid ""
+"map are defined by the game creator and can be seen in the game rooms "
+"section from the home menu."
+msgstr ""
+"l'arène de jeu sont également définis par le créateur du salon de jeu, "
+"toutes ces informations sont visibles depuis la page d'accueil."
+
+#: templates/about/game_rules.html:181
+msgid ""
+"There are some other settings that the room owner can define , such as the "
+"initial ball speed , or the paddle/ball size."
+msgstr ""
+"D'autres paramètres peuvent être ajustés lors de la création du salon, comme "
+"par exemple la vitesse de la balle en début de partie, la taille de la "
+"raquette et celle de la balle."
+
+#: templates/about/game_rules.html:183
+msgid "These settings cannot be changed once the room is created."
+msgstr "Ces paramètres ne pourront plus être changés une fois le salon créé."
+
+#: templates/about/game_rules.html:190
+msgid "Enjoy your games !"
+msgstr "Amusez-vous bien !"
+
+#: templates/about/privacy_policy.html:42
+#: templates/about/terms_of_service.html:42
+msgid "Last updated: "
+msgstr "Dernière mise à jour : "
+
+#: templates/about/privacy_policy.html:42
+#: templates/about/terms_of_service.html:42
+msgid "September 2024"
+msgstr ""
+
+#: templates/about/privacy_policy.html:48
+msgid ""
+"\n"
+"    <div class=\"row\">\n"
+"        <div class=\"col-md-12\">\n"
+"            <h5 style=\"color: var(--bs-body-bg);\">\n"
+"                This privacy policy will explain how our organization "
+"“Transcendence42” uses the personal data we collect from you when you use "
+"our website.\n"
+"                <br>First, we would like to assure you that at&nbsp;"
+"Transcendence42 we take privacy seriously. We will never contact you for "
+"marketing purposes. Your email will solely be used for privacy or security "
+"concerns.\n"
+"                <br>\n"
+"                <br>Topics:\n"
+"            </h5>\n"
+"            <ul style=\"color: var(--bs-body-bg);padding-left: 60px;\">\n"
+"                <li>\n"
+"                    <a href=\"#wDataCollect\">What data do we collect?</a>\n"
+"                </li>\n"
+"                <li>\n"
+"                    <a href=\"#hDataCollect\">How do we collect your data?</"
+"a>\n"
+"                </li>\n"
+"                <li>\n"
+"                    <a href=\"#hDataUse\">How will we use your data?</a>\n"
+"                </li>\n"
+"                <li>\n"
+"                    <a href=\"#hDataStore\">How do we store your data?</a>\n"
+"                </li>\n"
+"                <li>\n"
+"                    <a href=\"#wDataProtection\">What are your data "
+"protection rights?</a>\n"
+"                </li>\n"
+"                <li>\n"
+"                    <a href=\"#wCookies\">What are cookies?</a>\n"
+"                </li>\n"
+"                <li>\n"
+"                    <a href=\"#hCookiesUse\">How do we use cookies?</a>\n"
+"                </li>\n"
+"                <li>\n"
+"                    <a href=\"#wCookiesType\">What types of cookies do we "
+"use?</a>\n"
+"                </li>\n"
+"                <li>\n"
+"                    <a href=\"#hCookiesManage\">How to manage your cookies</"
+"a>\n"
+"                </li>\n"
+"                <li>\n"
+"                    <a href=\"#privacyOther\">Privacy policies of other "
+"websites</a>\n"
+"                </li>\n"
+"                <li>\n"
+"                    <a href=\"#privacyChanges\">Changes to our privacy "
+"policy</a>\n"
+"                </li>\n"
+"                <li>\n"
+"                    <a href=\"#hContactUs\">How to contact us</a>\n"
+"                </li>\n"
+"                <li>\n"
+"                    <a href=\"#hContactAuthority\">How to contact the "
+"appropriate authority</a>\n"
+"                </li>\n"
+"            </ul>\n"
+"        </div>\n"
+"    </div>\n"
+"    "
+msgstr ""
+
+#: templates/about/privacy_policy.html:103
+#, python-format
+msgid ""
+"\n"
+"    <div class=\"row\">\n"
+"        <div class=\"col\">\n"
+"            <hr>\n"
+"        </div>\n"
+"        <div class=\"col-md-12\" id=\"wDataCollect\">\n"
+"            <h4 style=\"color: var(--bs-primary-border-subtle);text-"
+"decoration: underline;\">\n"
+"\n"
+"                What data do we collect ?\n"
+"            </h4>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                Transcendence42 collects the following data from all users:\n"
+"            </p>\n"
+"            <ul style=\"color: var(--bs-body-bg);padding-left: 60px;\">\n"
+"                <li style=\"color: var(--bs-body-bg);\">\n"
+"                    Personal identification information (email address)\n"
+"                </li>\n"
+"                <li>\n"
+"                    Messages\n"
+"                </li>\n"
+"                <li>\n"
+"                    Account preferences, including lists of \"friends\" "
+"(other users with whom you can exchange private messages) and \"blocked "
+"users\" (users from whom you do not want to receive any interaction)\n"
+"                </li>\n"
+"            </ul>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                Transcendence42 collects the following data for users who "
+"opt in to OAuth services (42Auth):\n"
+"            </p>\n"
+"            <ul style=\"color: var(--bs-body-bg);padding-left: 60px;\">\n"
+"                <li style=\"color: var(--bs-body-bg);\">\n"
+"                    Personal identification information (profile picture, 42 "
+"UID)\n"
+"                </li>\n"
+"                <li>\n"
+"                    Indirectly identifying information (coalition banner and "
+"color scheme)\n"
+"                </li>\n"
+"            </ul>\n"
+"\n"
+"        </div>\n"
+"        <div class=\"col\">\n"
+"            <hr>\n"
+"        </div>\n"
+"        <div class=\"col-md-12\" id=\"hDataCollect\">\n"
+"            <h4 style=\"color: var(--bs-primary-border-subtle);text-"
+"decoration: underline;\">\n"
+"                How do we collect your data?\n"
+"            </h4>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                You directly provide Transcendence42 with most of the data "
+"we collect. We collect data and process data when you:\n"
+"            </p>\n"
+"            <ul style=\"color: var(--bs-body-bg);padding-left: 60px;\">\n"
+"                <li style=\"color: var(--bs-body-bg);\">\n"
+"                    Register online.\n"
+"                </li>\n"
+"                <li>\n"
+"                    Send messages to friends or on tournament live chat "
+"boards.\n"
+"                </li>\n"
+"                <li>\n"
+"                    Voluntarily use the 42Auth service.\n"
+"                </li>\n"
+"                <li>\n"
+"                    Use or view our website via your browser’s cookies.\n"
+"                </li>\n"
+"            </ul>\n"
+"        </div>\n"
+"        <div class=\"col\">\n"
+"            <hr>\n"
+"        </div>\n"
+"        <div class=\"col-md-12\" id=\"hDataUse\">\n"
+"            <h4 style=\"color: var(--bs-primary-border-subtle);text-"
+"decoration: underline;\">\n"
+"                How will we use your data?\n"
+"            </h4>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                Transcendence42 collects your data so that we can:\n"
+"            </p>\n"
+"            <ul style=\"color: var(--bs-body-bg);padding-left: 60px;\">\n"
+"                <li style=\"color: var(--bs-body-bg);\">\n"
+"                    Manage your account (including the list of \"friends\" "
+"and \"blocked users\").\n"
+"                </li>\n"
+"                <li>\n"
+"                    Email you with any safety/security concern (e.g: when "
+"you update your password).\n"
+"                </li>\n"
+"                <li>\n"
+"                    Provide you with a history of exchanged messages.\n"
+"                </li>\n"
+"            </ul>\n"
+"        </div>\n"
+"        <div class=\"col\">\n"
+"            <hr>\n"
+"        </div>\n"
+"        <div class=\"col-md-12\" id=\"hDataStore\">\n"
+"            <h4 style=\"color: var(--bs-primary-border-subtle);text-"
+"decoration: underline;\">\n"
+"                How do we store your data?\n"
+"            </h4>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                Transcendence42 is executed locally on your computer. This "
+"mean that all data shared with Transcendence42 is handled on your own "
+"computer or server. YOU ARE SOLELY RESPONSIBLE FOR SECURING YOUR OWN NETWORK "
+"TO AVOID YOUR DATA BEING EXPOSED ON EXTERNAL NETWORKS.\n"
+"                <br>Transcendence42 will keep your email for the whole life "
+"of your account. We will delete your data automatically upon deletion of the "
+"account.\n"
+"                <br>If applicable, Transcendence42 will keep your 42 UID "
+"only to complete the 42Auth authentication process. Then we will delete your "
+"data automatically.\n"
+"                <br>If applicable, Transcendence42 will keep your 42 profile "
+"picture, coalition banner and coalition color scheme until you personally "
+"and explicitly revoke the 42Auth access. If you decide to revoke the access, "
+"we will automatically delete all data retrieved through 42Auth. Deletion of "
+"your account automatically revokes the 42Auth access.\n"
+"                <br>Your account preferences are stored locally on your "
+"computer through the use of cookies, and&nbsp;Transcendence42 has no access "
+"to these cookies. You can decide to erase these at any time from your web "
+"browser settings.\n"
+"            </p>\n"
+"        </div>\n"
+"        <div class=\"col\">\n"
+"            <hr>\n"
+"        </div>\n"
+"        <div class=\"col\">\n"
+"            <hr>\n"
+"        </div>\n"
+"        <div class=\"col-md-12\" id=\"wDataProtection\">\n"
+"            <h4 style=\"color: var(--bs-primary-border-subtle);text-"
+"decoration: underline;\">\n"
+"                What are your data protection rights?\n"
+"            </h4>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                Transcendence42 would like to make sure you are fully aware "
+"of all of your data protection rights. Every user is entitled to the "
+"following:\n"
+"            </p>\n"
+"            <ul style=\"color: var(--bs-body-bg);padding-left: 60px;\">\n"
+"                <li style=\"color: var(--bs-body-bg);\">\n"
+"                    The right to access – You have the right to request "
+"Transcendence42 for copies of your personal data. We may charge you a small "
+"fee for this service.\n"
+"                </li>\n"
+"                <li>\n"
+"                    The right to rectification – From your account, you can "
+"modify your email address yourself. However, you also have the right to "
+"request directly that Transcendence42 correct any information you believe is "
+"inaccurate. You also have the right to request Transcendence42 to complete "
+"the information you believe is incomplete.\n"
+"                </li>\n"
+"                <li>\n"
+"                    The right to erasure – You have the right to request "
+"that Transcendence42 erase your personal data, under certain conditions.\n"
+"                </li>\n"
+"                <li>\n"
+"                    The right to restrict processing – You have the right to "
+"request that Transcendence42 restrict the processing of your personal data, "
+"under certain conditions.\n"
+"                </li>\n"
+"                <li>\n"
+"                    The right to object to processing – You have the right "
+"to object to Transcendence42’s processing of your personal data, under "
+"certain conditions.\n"
+"                </li>\n"
+"                <li>\n"
+"                    The right to data portability – You have the right to "
+"request that Transcendence42 transfer the data that we have collected to "
+"another organization, or directly to you, under certain conditions.\n"
+"                </li>\n"
+"            </ul>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                If you make a request, we have one month to respond to you. "
+"If you would like to exercise any of these rights, please <a href=\"mailto:"
+"%(django_mail_contact)s\">contact us </a>\n"
+"            </p>\n"
+"        </div>\n"
+"        <div class=\"col\">\n"
+"            <hr>\n"
+"        </div>\n"
+"        <div class=\"col-md-12\" id=\"wCookies\">\n"
+"            <h4 style=\"color: var(--bs-primary-border-subtle);text-"
+"decoration: underline;\">\n"
+"                What are cookies\n"
+"            </h4>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                Cookies are text files placed on your computer to collect "
+"standard Internet log information and visitor behavior information. When you "
+"visit our website, we may collect information from you automatically through "
+"cookies or similar technology\n"
+"                <br>For further information, visit\n"
+"                <br>\n"
+"                <a target=\"_blank\" href=\"https://allaboutcookies."
+"org\">allaboutcookies.org</a>\n"
+"            </p>\n"
+"        </div>\n"
+"        <div class=\"col\">\n"
+"            <hr>\n"
+"        </div>\n"
+"        <div class=\"col-md-12\" id=\"hCookiesUse\">\n"
+"            <h4 style=\"color: var(--bs-primary-border-subtle);text-"
+"decoration: underline;\">\n"
+"                How do we use cookies?\n"
+"            </h4>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                Transcendence42 uses cookies in a range of ways to improve "
+"your experience on our website, including:\n"
+"            </p>\n"
+"            <ul style=\"color: var(--bs-body-bg);padding-left: 60px;\">\n"
+"                <li style=\"color: var(--bs-body-bg);\">\n"
+"                    Keeping you signed in\n"
+"                </li>\n"
+"                <li>\n"
+"                    Managing your account preferences\n"
+"                </li>\n"
+"            </ul>\n"
+"        </div>\n"
+"        <div class=\"col\">\n"
+"            <hr>\n"
+"        </div>\n"
+"        <div class=\"col-md-12\" id=\"wCookiesType\">\n"
+"            <h4 style=\"color: var(--bs-primary-border-subtle);text-"
+"decoration: underline;\">\n"
+"                What types of cookies do we use?\n"
+"            </h4>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                There are a number of different types of cookies, however, "
+"our website uses only \"functionality\" cookies. Transcendence42 uses these "
+"cookies so that we recognize you on our website and remember your previously "
+"selected preferences. These could include what language you prefer.\n"
+"            </p>\n"
+"        </div>\n"
+"        <div class=\"col\">\n"
+"            <hr>\n"
+"        </div>\n"
+"        <div class=\"col-md-12\" id=\"hCookiesManage\">\n"
+"            <h4 style=\"color: var(--bs-primary-border-subtle);text-"
+"decoration: underline;\">\n"
+"                How to manage cookies\n"
+"            </h4>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                You can set your browser not to accept cookies, and the "
+"above website tells you how to remove cookies from your browser. However, in "
+"a few cases, some of our website features may not function as a result.\n"
+"            </p>\n"
+"        </div>\n"
+"        <div class=\"col\">\n"
+"            <hr>\n"
+"        </div>\n"
+"        <div class=\"col-md-12\" id=\"privacyOther\">\n"
+"            <h4 style=\"color: var(--bs-primary-border-subtle);text-"
+"decoration: underline;\">\n"
+"                Privacy policies of other websites\n"
+"            </h4>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                The Transcendence42 website contains links to other "
+"websites. Our privacy policy applies only to our website, so if you click on "
+"a link to another website, you should read their privacy policy.\n"
+"            </p>\n"
+"        </div>\n"
+"        <div class=\"col\">\n"
+"            <hr>\n"
+"        </div>\n"
+"        <div class=\"col-md-12\" id=\"privacyChanges\">\n"
+"            <h4 style=\"color: var(--bs-primary-border-subtle);text-"
+"decoration: underline;\">\n"
+"                Changes to our privacy policy\n"
+"            </h4>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                Transcendence42 keeps its privacy policy under regular "
+"review and places any updates on this web page. You will also be notified by "
+"email that an update has occurred.\n"
+"            </p>\n"
+"        </div>\n"
+"        <div class=\"col\">\n"
+"            <hr>\n"
+"        </div>\n"
+"        <div class=\"col-md-12\" id=\"hContactUs\">\n"
+"            <h4 style=\"color: var(--bs-primary-border-subtle);text-"
+"decoration: underline;\">\n"
+"                How to contact us\n"
+"            </h4>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                If you have any questions about Transcendence42’s privacy "
+"policy, the data we hold on you, or you would like to exercise one of your "
+"data protection rights, please do not hesitate to contact us.\n"
+"                <br>Email us at:&nbsp;\n"
+"                <a href=\"mailto:\">contact@transcendence42.rocks</a>\n"
+"                <br>or on&nbsp;\n"
+"                <a href=\"%(discord_invite)s\">discord</a>.\n"
+"            </p>\n"
+"        </div>\n"
+"        <div class=\"col\">\n"
+"            <hr>\n"
+"        </div>\n"
+"        <div class=\"col-md-12\" id=\"hContactAuthority\" style=\"margin-"
+"bottom: 5rem;\">\n"
+"            <h4 style=\"color: var(--bs-primary-border-subtle);text-"
+"decoration: underline;\">\n"
+"                How to contact the appropriate authority\n"
+"            </h4>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                Should you wish to report a complaint or if you feel that "
+"Transcendence42 has not addressed your concern in a satisfactory manner, you "
+"may contact the French Information Commissioner’s Office:&nbsp;&nbsp;\n"
+"                <a  target=\"_blank\" href=\"https://www.cnil.fr/fr/cnil-"
+"direct/question/adresser-une-reclamation-plainte-la-cnil-quelles-conditions-"
+"et-comment\">\n"
+"                    https://www.cnil.fr/fr/cnil-direct/question/adresser-une-"
+"reclamation-plainte-la-cnil-quelles-conditions-et-comment\n"
+"                </a>\n"
+"            </p>\n"
+"        </div>\n"
+"    </div>\n"
+"    "
+msgstr ""
+
+#: templates/about/terms_of_service.html:16
+msgid "TERMS OF SERVICE"
+msgstr ""
+
+#: templates/about/terms_of_service.html:48
+#, python-format
+msgid ""
+"\n"
+"    <div class=\"row\">\n"
+"        <div class=\"col\">\n"
+"            <hr>\n"
+"        </div>\n"
+"        <div class=\"col-md-12\" id=\"wDataCollect\">\n"
+"            <h4 class=\"text-center\" style=\"color: var(--bs-primary-border-"
+"subtle);\">\n"
+"                1. INTRODUCTION\n"
+"            </h4>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                Welcome to the Transcendence42 website (the \"Website\"). "
+"These Terms of Service (These \"Terms\") are concluded between "
+"Transcendence42, with trade name “Transcendence42” (\"Transcendence42\", "
+"\"we\", \"us\") and the User (\"User\", \"you\" or \"your\") (together, the "
+"\"Parties\"). Transcendence42 provides a web-based gaming platform "
+"(\"Platform\"). A User is a person who visits the Website and/or the "
+"Platform, plays web games, registers via any form available on the Website "
+"and/or the Platform, creates a login, subscribes or enters into a contract "
+"with Transcendence42.\n"
+"            </p>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                THESE TERMS OUTLINE OUR RELATIONSHIP WITH YOU, AS "
+"SUPPLEMENTED BY OUR PRIVACY AND COOKIE POLICY. BY PLAYING WEB GAMES ON OUR "
+"PLATFORM OR OTHERWISE USING THE WEBSITE OR PLATFORM, YOU AGREE TO BE BOUND "
+"BY THE FOLLOWING TERMS AND CONDITIONS AND ALL APPLICABLE LAWS AND "
+"REGULATIONS.\n"
+"            </p>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                Your use of the Website and/or the Platform means that you "
+"are aware of, and agree to, the most recent version of the Terms and our "
+"Privacy Policy as published on the Website. It is your sole responsibility "
+"to ensure that your use of any and all third party websites or content "
+"complies with all third party requirements.\n"
+"            </p>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                We reserve the right to modify these Terms, in part or in "
+"whole, at any time. We will notify you of any material changes by email or "
+"notice on the Website (where deemed necessary) and will note the date of the "
+"last change. If you use the Website or Platform after these updates are "
+"posted, you will be deemed to accept these changes and agree to be bound by "
+"them. These Terms will continue to apply until terminated, either by you or "
+"by us, as described in these Terms.\n"
+"            </p>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                If any provision of these Terms is deemed invalid, illegal "
+"or unenforceable, such provision will be deemed amended to comply with "
+"applicable law and the remaining provisions of the Terms will continue in "
+"full force and effect to the extent permitted by law.\n"
+"            </p>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                These Terms and our Privacy Policy represent the entire "
+"understanding and agreement between the Parties with respect to the subject "
+"matter hereof and supersede all prior or contemporaneous oral or written "
+"communications with respect to the subject matter.\n"
+"            </p>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                Your use of the Website/Platform does not create an "
+"employment, partnership, joint venture or any other relationship beyond that "
+"of a website user governed by these Terms. Transcendence42 cannot be held "
+"responsible in case of default (temporary or otherwise) or in case of "
+"failure to perform any of its obligations as a result of a case of force "
+"majeure or coincidence.\n"
+"            </p>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                These Terms, and any rights and licenses granted hereunder, "
+"may not be transferred or assigned by you, but may be assigned by "
+"Transcendence42 without restriction.\n"
+"            </p>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                Transcendence42' waiver of any term in these Terms does not "
+"imply an ongoing or additional waiver of that term or any other term, and "
+"Transcendence42' failure to enforce a right or provision does not constitute "
+"a waiver of that right or provision.\n"
+"            </p>\n"
+"        </div>\n"
+"        <div class=\"col\">\n"
+"            <hr>\n"
+"        </div>\n"
+"        <div class=\"col-md-12\" id=\"hDataUse\">\n"
+"            <h4 class=\"text-center\" style=\"color: var(--bs-primary-border-"
+"subtle);\">\n"
+"                2. USER LICENSE AND GAMING CONTENT\n"
+"            </h4>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                Summary: Our Platform (and all the available content) is "
+"licensed for your use, but its ownership as a property remains with "
+"Transcendence42. Provided that you comply with all Terms of this Agreement, "
+"Transcendence42 grants you a limited license to use our Platform and play "
+"the available web games for your personal, non-commercial use. You may also "
+"upload videos and stream games from our Platform on third party video "
+"sharing and streaming platforms but only when you follow our rules.\n"
+"            </p>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                Transcendence42 grants you a non-exclusive, limited, non-"
+"sublicensable and non-transferable right to use our Platform, subject to the "
+"limitations set forth in these Terms and any other limitations communicated "
+"by us in writing. Nothing in these Terms prohibits Transcendence42 from "
+"providing our Platform to others.\n"
+"            </p>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                Except for the limited rights expressly granted below, we "
+"reserve all right, title and interest in and to the Website and our "
+"Platform, including all associated intellectual property rights. Any games "
+"available through our Platform are owned by Transcendence42 or its partners. "
+"No rights are granted to you hereunder other than as expressly set forth "
+"herein.\n"
+"            </p>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                YOU AGREE NOT TO REPRODUCE, DUPLICATE, COPY, SELL, RESELL OR "
+"EXPLOIT ANY PART OF THE WEBSITE/PLATFORM, USE OF THE WEBSITE/PLATFORM OR "
+"ACCESS TO THE WEBSITE/PLATFORM WITHOUT OUR EXPRESS WRITTEN CONSENT. YOU MAY "
+"NOT DUPLICATE, COPY OR REUSE ANY PART OF THE VISUAL DESIGN ELEMENTS WITHOUT "
+"OUR EXPRESS WRITTEN CONSENT.\n"
+"            </p>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                Users may livestream and monetise videos on online (live "
+"streaming) websites using gameplay and screenshots from games available on "
+"our Platform (“Gaming Content”), subject to the following conditions: (i) "
+"Transcendence42’ Platform and its logo will be clearly visible and not "
+"obscured, (ii) only monetise such videos and streams in accordance with the "
+"monetisation methods available on such online websites (e.g., Youtube, "
+"Twitch,...), (iii) you do not imply or state that your Gaming Content is "
+"officially affiliated with, sponsored, endorsed or approved by "
+"Transcendence42 (except when we have entered into a partnership with you) "
+"and (iv) the User is responsible for any third party content (e.g. music) "
+"that it uses together with the Gaming Content. Transcendence42 reserves the "
+"right to take action at any time against Gaming Content that Transcendence42 "
+"believes is unlawful, infringing, inappropriate or not in accordance with "
+"these Terms.\n"
+"            </p>\n"
+"        </div>\n"
+"        <div class=\"col\">\n"
+"            <hr>\n"
+"        </div>\n"
+"        <div class=\"col-md-12\" id=\"hDataStore\">\n"
+"            <h4 class=\"text-center\" style=\"color: var(--bs-primary-border-"
+"subtle);\">\n"
+"                3. ACCESS AND USE\n"
+"            </h4>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                Summary: You can access our Platform and play web games with "
+"or without an Account. You should keep your username and password protected "
+"and secure. All activities that occur under your Account or on our Website "
+"are your responsibility. The Account information you provide to us must be "
+"accurate, complete, and your own. We are not responsible for any loss or "
+"damage arising from your failure to comply with these requirements or as a "
+"result of the use of your Account. If you are under 13 years old (or the "
+"applicable minimum age in your country of residence) or do not understand "
+"what this agreement is about, you and your parent or guardian must review "
+"this agreement together. Your right to use our Platform is also subject to "
+"limitations which you will find in section 4 CODE OF CONDUCT.\n"
+"            </p>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                You can access our Platform with an Account. In order to "
+"create your Account, log in to the Website, and participate in the Platform "
+"offered, you must be eligible and agree to the terms and conditions set "
+"forth below. Failure to qualify and continuously comply with any of the "
+"following terms and conditions constitutes a violation of these Terms and "
+"may result in the termination of your Account and permission to use the "
+"Website and Platform. In particular, you agree that:\n"
+"            </p>\n"
+"            <ul style=\"color: var(--bs-body-bg);padding-left: 60px;\">\n"
+"                <li style=\"color: var(--bs-body-bg);margin-top: 15px;margin-"
+"bottom: 15px;\">\n"
+"                    We are not responsible for any hardware, software or "
+"Internet access, quality, suitability or unavailability issues, subject to "
+"any Non-Excludable Rights. We do not provide Internet access, and you are "
+"responsible for all fees relating to telephone and Internet access charges "
+"along with all necessary equipment, servicing, repair or correction incurred "
+"in maintaining connectivity to the servers.\n"
+"                </li>\n"
+"                <li style=\"color: var(--bs-body-bg);margin-top: 15px;margin-"
+"bottom: 15px;\">\n"
+"                    You are either (a) of age to give legal consent or (b) "
+"you are a minor over thirteen (13) years old or the applicable minimum age "
+"in your country, state, or province or (c) have the consent of your parents "
+"(or your legal guardian), to access the Website under the laws of all "
+"jurisdictions applicable to you. We expressly reserve the right (but have no "
+"obligation) to request proof of your age at any time. We do not knowingly "
+"collect or solicit personal information from children under the age of "
+"thirteen (13) (or the applicable minimum age in your country) through our "
+"Platform.\n"
+"                </li>\n"
+"                <li style=\"color: var(--bs-body-bg);margin-top: 15px;margin-"
+"bottom: 15px;\">\n"
+"                    All information you provide to us in your registration "
+"form for the purpose of establishing your Account will be true and correct "
+"and you will promptly notify us of any changes to such information;\n"
+"                </li>\n"
+"                <li style=\"color: var(--bs-body-bg);margin-top: 15px;margin-"
+"bottom: 15px;\">\n"
+"                    Your Account is solely for your use and may not be used "
+"by any third party. You may not allow any third party to use your Account, "
+"password, login or user ID to access or use the Website, the Platform, or "
+"for any other purpose. We take no responsibility for any third party access "
+"to your Account. You must immediately notify us of any unauthorized use of "
+"your password and identification and/or breach. You accept responsibility "
+"for all activities that occur under your Account, username or password and "
+"all such use is deemed authorized by you. You are responsible for the "
+"security of the password you use to access the Platform and for all "
+"activities or actions under your password, whether your password is with our "
+"Platform or with a third party service;\n"
+"                </li>\n"
+"                <li style=\"color: var(--bs-body-bg);margin-top: 15px;margin-"
+"bottom: 15px;\">\n"
+"                    You have verified and determined that your use of the "
+"Website and Platform does not violate any law or regulation in any "
+"jurisdiction applicable to you. It is your sole responsibility to ensure "
+"that this is the case;\n"
+"                </li>\n"
+"                <li style=\"color: var(--bs-body-bg);margin-top: 15px;margin-"
+"bottom: 15px;\">\n"
+"                    You will not use the Website or the Platform for "
+"fraudulent or otherwise illegal purposes;\n"
+"                </li>\n"
+"                <li style=\"color: var(--bs-body-bg);margin-top: 15px;margin-"
+"bottom: 15px;\">\n"
+"                    You will ensure that all use of your Account is in full "
+"compliance with these Terms. We may suspend or terminate your access to the "
+"Website and Platform without notice to you if you do not use the Website or "
+"Platform for an extended period of time.\n"
+"                </li>\n"
+"            </ul>\n"
+"        </div>\n"
+"        <div class=\"col\">\n"
+"            <hr>\n"
+"        </div>\n"
+"        <div class=\"col-md-12\" id=\"marketing\">\n"
+"            <h4 class=\"text-center\" style=\"color: var(--bs-primary-border-"
+"subtle);\">\n"
+"                4. CODE OF CONDUCT\n"
+"            </h4>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                Summary: In general, you should avoid doing anything that "
+"might harm Transcendence42 or anyone else. Among other things, you may not "
+"copy the Platform or use any content in an illegal or harmful manner, make "
+"any misrepresentations of or abuse our services, or otherwise violate "
+"anyone’s rights or any applicable laws. Failure to abide by any of these "
+"rules may bring us to revoke and cancel your Account, and void this "
+"agreement.\n"
+"            </p>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                You agree to not post, transmit or otherwise make available "
+"through or in connection with the Platform any materials that are or may be: "
+"(a) harmful, abusive, threatening, harassing, degrading, hateful, "
+"inflammatory, discriminating or otherwise intimidating an individual or "
+"group of individuals on the basis of religion, gender, sexual orientation, "
+"race, ethnicity, age, or disability, or otherwise fail to respect the rights "
+"and dignity of others, violent or encouraging of violence (including self-"
+"harm), stalking; (b) defamatory, libelous, fraudulent, invasive of another's "
+"privacy or otherwise tortious; (c) obscene, vulgar, endangers or exploits "
+"children, harms children in any way, sexually explicit, pornographic or "
+"otherwise objectionable; Or (d) protected by copyright, trademark, trade "
+"secret, right of publicity or privacy or any other proprietary right, "
+"without the express prior written consent of the applicable owner.\n"
+"            </p>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                Additionally you agree not to take any of the following "
+"actions:\n"
+"            </p>\n"
+"            <ul style=\"color: var(--bs-body-bg);padding-left: 60px;\">\n"
+"                <li style=\"color: var(--bs-body-bg);margin-top: 15px;margin-"
+"bottom: 15px;\">\n"
+"                    Collect, store, publish or otherwise disseminate any "
+"personal data of other users, or any material, non-public information about "
+"companies without the authorization to do so\n"
+"                </li>\n"
+"                <li style=\"color: var(--bs-body-bg);margin-top: 15px;margin-"
+"bottom: 15px;\">\n"
+"                    Upload, post, e-mail, transmit or otherwise make "
+"available any unsolicited or unauthorized advertising, promotional "
+"materials, “junk mail”, “spam”, “chain letters”, “pyramid schemes”, or any "
+"other form of solicitation;\n"
+"                </li>\n"
+"                <li style=\"color: var(--bs-body-bg);margin-top: 15px;margin-"
+"bottom: 15px;\">\n"
+"                    Reverse engineer, derive source code, modify, decompile, "
+"disassemble the Services or any portion thereof, or otherwise determining or "
+"attempting to determine any source code, algorithms, methods or techniques "
+"used or embodied in the Services.\n"
+"                </li>\n"
+"                <li style=\"color: var(--bs-body-bg);margin-top: 15px;margin-"
+"bottom: 15px;\">\n"
+"                    Web Scraping and Automatic Data Collection: You may not, "
+"without our prior written consent, use any robot, spider, scraper, deep link "
+"or other automated data gathering or extraction tools, program, algorithm or "
+"methodology to access, acquire, copy or monitor any portion of the Website/"
+"Platform or its content, including user accounts, user data, or any other "
+"proprietary information or data related to the Website, for any purpose, "
+"including, but not limited to, commercial purposes such as training machine "
+"learning algorithms or artificial intelligence models;\n"
+"                </li>\n"
+"                <li style=\"color: var(--bs-body-bg);margin-top: 15px;margin-"
+"bottom: 15px;\">\n"
+"                    Intentionally distribute worms, Trojan horses, corrupt "
+"files or other items of a destructive or misleading nature or use the "
+"Website and/or Platform for illegal, invasive, infringing, defamatory or "
+"fraudulent purposes;\n"
+"                </li>\n"
+"                <li style=\"color: var(--bs-body-bg);margin-top: 15px;margin-"
+"bottom: 15px;\">\n"
+"                    Use any cheats, hacks, bugs, design flaws, unauthorized "
+"exploits, bots, or third-party software that may modify, temporarily or "
+"permanently, the code or the user experience of the Services, whether "
+"locally on your device or on servers, or using any application, software or "
+"technology that is not expressly authorized by us that enables cheating, "
+"power-leveling, or accomplishing game tasks that cannot be accomplished "
+"without the use of such an application, software or technology.\n"
+"                </li>\n"
+"                <li style=\"color: var(--bs-body-bg);margin-top: 15px;margin-"
+"bottom: 15px;\">\n"
+"                    Use macros, robot play, or any other behavior that "
+"allows you to automatically function or effect any action in a game with or "
+"without your presence.\n"
+"                </li>\n"
+"                <li style=\"color: var(--bs-body-bg);margin-top: 15px;margin-"
+"bottom: 15px;\">\n"
+"                    Impede or disrupt the Service or that negatively affects "
+"or may prohibit other users from enjoying the Website, the Games or any "
+"other aspect of the Service. This includes affecting the normal flow of "
+"gameplay or dialogue in the Game or in Interactive Areas (such as message "
+"boards) in the Service by use of excessive shouting (ALL CAPS), “spamming” "
+"or any other disruptive or detrimental methods in an attempt to disturb "
+"other users;\n"
+"                </li>\n"
+"                <li style=\"color: var(--bs-body-bg);margin-top: 15px;margin-"
+"bottom: 15px;\">\n"
+"                    Take any action that imposes an unreasonable or "
+"disproportionately large load on our network or infrastructure, and that may "
+"disrupt, negatively affect or prohibit users from enjoying the Service\n"
+"                </li>\n"
+"                <li style=\"color: var(--bs-body-bg);margin-top: 15px;margin-"
+"bottom: 15px;\">\n"
+"                    Remove or in any way circumvent technical or other "
+"protection measures on the Website and/or on the Platform;\n"
+"                </li>\n"
+"                <li style=\"color: var(--bs-body-bg);margin-top: 15px;margin-"
+"bottom: 15px;\">\n"
+"                    Impersonate any person or entity or otherwise "
+"misrepresent your affiliation, identity, or the origin of materials you "
+"transmit, or misrepresenting that your statements or actions are endorsed by "
+"Transcendence42. This includes but is not limited to :forge headers or "
+"otherwise manipulate identifiers in order to disguise the origin of any "
+"message transmitted through the Website;\n"
+"                </li>\n"
+"                <li style=\"color: var(--bs-body-bg);margin-top: 15px;margin-"
+"bottom: 15px;\">\n"
+"                    Sublicense, lease, rent, lend, distribute or otherwise "
+"transfer the Website and Platform to any third party;\n"
+"                </li>\n"
+"                <li style=\"color: var(--bs-body-bg);margin-top: 15px;margin-"
+"bottom: 15px;\">\n"
+"                    Removing, altering, or concealing any copyright, "
+"trademark, patent or other proprietary notices, legends, symbols, or labels "
+"(including any watermark or other digital rights management technology or "
+"other information) contained on or within the Services.\n"
+"                </li>\n"
+"                <li style=\"color: var(--bs-body-bg);margin-top: 15px;margin-"
+"bottom: 15px;\">\n"
+"                    Or in general: engaging in any other conduct that, in "
+"Transcendence42 sole judgment, exposes us, any of our users, or any other "
+"third party to any liability, damages, or detriment of any type.\n"
+"                </li>\n"
+"                <li style=\"color: var(--bs-body-bg);margin-top: 15px;margin-"
+"bottom: 15px;\">\n"
+"                    Engage in, encourage, or promote any illegal activity, "
+"or any activity that violates these Terms or the Rules of Conduct;\n"
+"                </li>\n"
+"            </ul>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                Notwithstanding above, you may (a) temporarily store copies "
+"of such materials in RAM, (b) store files that are automatically cached by "
+"your web browser to improve screen display, and (c) print a reasonable "
+"number of pages from the Website; provided that, in each case, you do not "
+"modify or delete any reference to copyright or other proprietary notices "
+"contained in such materials.\n"
+"            </p>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                All content and/or opinions uploaded, expressed or submitted "
+"on any message board, blog, chat room or other publicly accessible part of "
+"the Website or games available on the Platform, and all articles and answers "
+"to questions, other than content provided by Transcendence42, are solely the "
+"opinions and responsibility of the person or entity sharing them and do not "
+"reflect the opinions of Transcendence42. You understand and acknowledge that "
+"you are responsible for the content you share and that you bear full "
+"responsibility for such content, including its legality, reliability and "
+"appropriateness.\n"
+"            </p>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                Violations of system or network security or attempts to "
+"disrupt or undermine the operation of the Services may result in civil or "
+"criminal liability. We may investigate and work with law enforcement "
+"authorities to prosecute users who violate the Terms.\n"
+"            </p>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                You also agree that you will not provide material support to "
+"another user’s violation or attempted violation of this Agreement. This "
+"includes providing financial support; know-how, expertise, or other "
+"assistance; or repeated encouragement to engage in conduct that violates "
+"this Agreement.\n"
+"                <br>\n"
+"            </p>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                WE MAY WITHHOLD, SUSPEND, MODIFY, OR TERMINATE YOUR ACCESS "
+"TO THE SERVICES FOR ANY OR NO REASON AT ANY TIME WITHOUT NOTICE UNLESS "
+"OTHERWISE REQUIRED BY APPLICABLE LAW.\n"
+"            </p>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                If your account is suspended while you are participating in "
+"a tournament or competition, Transcendence42 assumes no liability in the "
+"loss of any potential prizes or recognition related to the tournament or "
+"competition.\n"
+"            </p>\n"
+"        </div>\n"
+"        <div class=\"col\">\n"
+"            <hr>\n"
+"        </div>\n"
+"        <div class=\"col-md-12\" id=\"wDataProtection\">\n"
+"            <h4 class=\"text-center\" style=\"color: var(--bs-primary-border-"
+"subtle);\">\n"
+"                5. VERIFICATION OF ACCOUNT INFORMATION\n"
+"            </h4>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                Summary: We can always check whether your information and "
+"use of the Platform complies with our rules.\n"
+"            </p>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                We reserve the right (but do not assume the obligation) to "
+"conduct an audit at any time to validate your Account information and/or to "
+"ensure that your participation on the Website and use of the Platform does "
+"not violate these Terms and/or any applicable law. You authorize us and our "
+"agents to make any inquiries to you and for us to use and disclose to third "
+"parties that we deem necessary to validate this information. To facilitate "
+"the aforementioned validation, you agree to provide sufficient information "
+"or documentation as we, in our sole discretion, may request. If you do not "
+"provide such information within thirty (30) days of our request, if your "
+"responses are incomplete or otherwise insufficient, or if we are unable to "
+"verify the information applicable to your account, your account may be "
+"terminated.\n"
+"            </p>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                Notwithstanding the above, Transcendence42 reserves the "
+"right to remove the username linked to your Account if it does not comply "
+"with these Terms.\n"
+"            </p>\n"
+"        </div>\n"
+"        <div class=\"col\">\n"
+"            <hr>\n"
+"        </div>\n"
+"        <div class=\"col-md-12\" id=\"wCookies\">\n"
+"            <h4 class=\"text-center\" style=\"color: var(--bs-primary-border-"
+"subtle);\">\n"
+"                6. PRIVACY\n"
+"            </h4>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                <span style=\"color: var(--bs-body-bg);\">\n"
+"                    Summary: Transcendence42's use of your personal data and "
+"our responsibilities in protecting your privacy are described in our Privacy "
+"and Cookie Policy.\n"
+"                </span>\n"
+"            </p>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                You understand and agree that subject to applicable laws we "
+"may access, disclose or retain personal information, including the content "
+"of your communications, in the good faith belief that we are lawfully "
+"authorized or required to do so, or that doing so is reasonably necessary or "
+"appropriate to comply with the law or with legal process or authorities, "
+"respond to any claims, or to protect the rights, property or safety of "
+"Transcendence42, our users, our employees or the public, including without "
+"limitation to protect Transcendence42 or our users from fraudulent, abusive, "
+"inappropriate or unlawful use of our Service.\n"
+"            </p>\n"
+"        </div>\n"
+"        <div class=\"col\">\n"
+"            <hr>\n"
+"        </div>\n"
+"        <div class=\"col-md-12\" id=\"hCookiesUse\">\n"
+"            <h4 class=\"text-center\" style=\"color: var(--bs-primary-border-"
+"subtle);\">\n"
+"                7. THIRD PARTY WEBSITES AND PROMOTIONS\n"
+"            </h4>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                Summary: We don’t control third-party services, and we’re "
+"not liable for any transactions you may perform with them, or for what they "
+"do. When using third-party services, your security is your responsibility. "
+"Please be aware that promotions that are made available through our Platform "
+"may be subject to additional rules.\n"
+"            </p>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                We may provide or make available third-party content through "
+"the Service and may provide links to web pages and content of third parties "
+"(collectively the “Third-Party Content”) as a service to those interested in "
+"this information. We do not monitor or have any control over any Third-Party "
+"Content on third-party websites. We do not endorse or adopt any Third-Party "
+"Content and can make no guarantee as to its accuracy or completeness. We do "
+"not represent or warrant the accuracy of any information contained therein "
+"and undertake no responsibility to update or review any Third-Party Content. "
+"Users use such Third-Party Content contained therein at their own risk.\n"
+"            </p>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                Any sweepstakes, contests, raffles, surveys, games or "
+"similar promotions (collectively, “Promotions”) made available through the "
+"Website may be governed by rules that are separate from these Terms. If you "
+"participate in any Promotions, please review the applicable rules as well as "
+"our Privacy Policy. If the rules for a Promotion conflict with these Terms, "
+"the Promotion rules will govern.\n"
+"            </p>\n"
+"        </div>\n"
+"        <div class=\"col\">\n"
+"            <hr>\n"
+"        </div>\n"
+"        <div class=\"col-md-12\" id=\"wCookiesType\">\n"
+"            <h4 class=\"text-center\" style=\"color: var(--bs-primary-border-"
+"subtle);\">\n"
+"                8. TRADEMARKS, TRADE NAMES AND SERVICE MARKS\n"
+"            </h4>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                Summary: You are not allowed to misuse any logos or names "
+"that are available on the Website.\n"
+"            </p>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                Unless otherwise indicated, all logos, names, packaging "
+"designs and marks on the Website are trademarks or service marks owned or "
+"used under license by us or our business partners. The use or misuse of any "
+"of these marks or other information is strictly prohibited.\n"
+"            </p>\n"
+"        </div>\n"
+"        <div class=\"col\">\n"
+"            <hr>\n"
+"        </div>\n"
+"        <div class=\"col-md-12\" id=\"hCookiesManage\">\n"
+"            <h4 class=\"text-center\" style=\"color: var(--bs-primary-border-"
+"subtle);\">\n"
+"                9. WARRANTIES\n"
+"            </h4>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                Summary: we offer no warranties regarding our services and "
+"the platform, including any regarding their quality, reliability, security, "
+"or compatibility. You warrant that you will abide by and respect these terms "
+"of service and any additional guidelines of our platform. If these cause you "
+"any harm, we will not be held liable.\n"
+"            </p>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                Our services and all materials on the website and platform "
+"are provided \"as is\" and \"as available\" and without warranties of any "
+"kind, express or implied, including implied warranties of merchantability "
+"and fitness for a particular purpose. Transcendence42 makes no "
+"representations or warranties about the accuracy, completeness, or "
+"suitability of any material on the website, or on any website or websites "
+"\"linked\" to the website. Transcendence42 does not warrant that the website "
+"and/or our platform will be available, uninterrupted, error-free, or free of "
+"viruses or other harmful components.\n"
+"                <br>You expressly understand and agree that, subject to and "
+"without limiting any non-excludable rights:\n"
+"            </p>\n"
+"            <ol style=\"color: var(--bs-body-bg);padding-left: 60px;\" "
+"type=\"A\">\n"
+"                <li style=\"margin-top: 15px;margin-bottom: 15px;\">\n"
+"                    The service, the games, the website and all materials "
+"contained therein are provided on an “as is” and “as available” basis "
+"without warranties of any kind, either express or implied. Transcendence42 "
+"and its subsidiaries, affiliates, officers, employees, agents, partners and "
+"licensors disclaim all other warranties, express or implied, including, "
+"without limitation, implied warranties of merchantability, fitness for a "
+"particular purpose, performance or suitability for your intended use, title "
+"and non-infringement, as to the service, the game and the website, including "
+"all information, content and materials contained therein. Without limiting "
+"the foregoing, Transcendence42 does not represent or warrant that the "
+"service, the games, the website or the materials contained therein are "
+"accurate, complete, reliable, available, current or error-free. "
+"Transcendence42 also does not represent or warrant that the games, the "
+"website or its servers are free of viruses, bugs, errors or other harmful "
+"components or defects, transmit data in a secure manner, or function "
+"properly with the service.\n"
+"                </li>\n"
+"                <li style=\"margin-top: 15px;margin-bottom: 15px;\">\n"
+"                    Transcendence42 and its subsidiaries, affiliates, "
+"officers, employees, agents, partners and licensors make no warranty that "
+"(i) the service will meet your requirements; (ii) the website will be "
+"uninterrupted, timely, secure or error-free; or (iii) any errors in the "
+"software will be corrected.\n"
+"                </li>\n"
+"                <li style=\"margin-top: 15px;margin-bottom: 15px;\">\n"
+"                    While Transcendence42 attempts to make your access and "
+"use of the service safe, Transcendence42 cannot and does not represent or "
+"warrant that the service or its server(s) are free of viruses or other "
+"harmful components; therefore, you are responsible for implementing "
+"sufficient procedures and checkpoints to meet your specific requirements for "
+"accuracy of data input and output, and for maintaining a means outside the "
+"website and platform for reconstructing lost data you should use industry-"
+"recognized software to detect and disinfect viruses from any download. Any "
+"material downloaded or otherwise obtained through the use of the website or "
+"service is accessed at your own discretion and risk, and you will be solely "
+"responsible for any damage to your computer system or loss of data that "
+"results from the download of any such material.\n"
+"                </li>\n"
+"                <li style=\"margin-top: 15px;margin-bottom: 15px;\">\n"
+"                    A small percentage of users may experience epileptic "
+"seizures when exposed to certain light patterns or backgrounds on a computer "
+"screen or while using the website or the service. Certain conditions may "
+"induce previously undetected epileptic symptoms even in users who have no "
+"history of prior seizures or epilepsy. If you, or anyone in your family, "
+"have an epileptic condition, consult your physician prior to using the "
+"service. Immediately discontinue use of the service and consult your "
+"physician if you experience any of the following symptoms while using the "
+"service: dizziness, altered vision, eye or muscle twitches, loss of "
+"awareness, disorientation, any involuntary movement, or convulsions.\n"
+"                </li>\n"
+"                <li style=\"margin-top: 15px;margin-bottom: 15px;\">\n"
+"                    Reference to any products, services, processes or other "
+"information, by trade name, trademark, manufacturer, supplier or otherwise "
+"does not constitute or imply endorsement, sponsorship or recommendation "
+"thereof, or any affiliation therewith, by Transcendence42.\n"
+"                </li>\n"
+"            </ol>\n"
+"        </div>\n"
+"        <div class=\"col\">\n"
+"            <hr>\n"
+"        </div>\n"
+"        <div class=\"col-md-12\" id=\"privacyOther\">\n"
+"            <h4 class=\"text-center\" style=\"color: var(--bs-primary-border-"
+"subtle);\">\n"
+"                10. INDEMNIFICATION\n"
+"            </h4>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                Summary: If Transcendence42 is sued or otherwise put in "
+"harm’s way because of something you did, you will bear the associated costs "
+"and damages.\n"
+"            </p>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                You agree to defend, indemnify and hold harmless "
+"Transcendence42 from and against any claims, damages, costs, liabilities and "
+"expenses (including, but not limited to, reasonable attorneys’ fees, "
+"expenses, and court costs) arising out of or related to your User ID, any "
+"User Content you post, store or otherwise transmit on or through the "
+"Website, your violations or breach of these Terms, any conduct, acts, "
+"omissions or misuse of the Service by you that is negligent or in breach of "
+"these Terms, any misrepresentations made by you, or your violation of the "
+"rights of any third party. We reserve the right to assume the exclusive "
+"defense and control of any matter otherwise subject to indemnification by "
+"you, and in such case, you agree to cooperate with our defense of such "
+"claim. You will not settle any claims or losses without, in each instance, "
+"the prior, written consent of an officer of Transcendence42.\n"
+"            </p>\n"
+"        </div>\n"
+"        <div class=\"col\">\n"
+"            <hr>\n"
+"        </div>\n"
+"        <div class=\"col-md-12\" id=\"privacyChanges\">\n"
+"            <h4 class=\"text-center\" style=\"color: var(--bs-primary-border-"
+"subtle);\">\n"
+"                11. TERMINATION OR DELETION OF ACCOUNTS\n"
+"            </h4>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                Summary: You can delete your Account at any time yourself in "
+"our Platform. Furthermore, we can terminate or suspend your access to our "
+"Platform when we believe that you do not follow our rules.\n"
+"            </p>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                Transcendence42 reserves the right to terminate these Terms "
+"and end your access to the Website and/or Platform, or temporarily suspend "
+"all or part of your access, at any time and without prior notice under the "
+"following circumstances:\n"
+"            </p>\n"
+"            <ul style=\"color: var(--bs-body-bg);padding-left: 60px;\">\n"
+"                <li style=\"margin-top: 15px;margin-bottom: 15px;\">\n"
+"                    If we have a reasonable belief that you have violated, "
+"or may potentially violate, any term or provision outlined in these Terms;\n"
+"                </li>\n"
+"                <li style=\"margin-top: 15px;margin-bottom: 15px;\">\n"
+"                    If we determine that termination or suspension of your "
+"access is required by applicable law or legal obligation;\n"
+"                </li>\n"
+"                <li style=\"margin-top: 15px;margin-bottom: 15px;\">\n"
+"                    At our sole discretion, for any other reason we deem "
+"suspension or termination necessary or appropriate;\n"
+"                </li>\n"
+"                <li style=\"margin-top: 15px;margin-bottom: 15px;\">\n"
+"                    We may delete any Account Information or other material "
+"related to your use of the Website and/or our Platform on our servers or "
+"otherwise in our possession. If you feel you have been unfairly warned or "
+"disciplined, please contact us with a full detailed explanation. You "
+"acknowledge that we will not be liable to you or any third party for any "
+"termination of your access to the Website and/or our Platform.\n"
+"                </li>\n"
+"                <li style=\"margin-top: 15px;margin-bottom: 15px;\">\n"
+"                    You can delete your Account at any time by going to "
+"account settings and clicking on “Delete your account”, or request us to "
+"delete your Account by email.\n"
+"                </li>\n"
+"            </ul>\n"
+"        </div>\n"
+"        <div class=\"col\">\n"
+"            <hr>\n"
+"        </div>\n"
+"        <div class=\"col-md-12\" id=\"hContactUs\">\n"
+"            <h4 class=\"text-center\" style=\"color: var(--bs-primary-border-"
+"subtle);\">\n"
+"                12. INFORMATION, COMPLAINTS &amp; COPYRIGHT CLAIMS\n"
+"            </h4>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                Summary: If you have any concerns or complaints, please <a "
+"href=\"mailto:%(django_mail_contact)s\">email us </a> or reach out on <a "
+"href=\"%(discord_invite)s\">discord</a>. When you provide us with Feedback "
+"we are free to use such feedback at our own discretion.\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                If you have a question or complaint regarding the Platform "
+"or Website, please reach out on <a href=\"%(discord_invite)s\">discord</a>.\n"
+"            </p>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                We value your opinion. if you provide us with feedback, "
+"including data, variables, comments, suggestions, ideas, notes, drawings, "
+"graphics, concepts or other information&nbsp;(\"Feedback\"), you are "
+"providing that Feedback, and all of your rights thereto, to us free of "
+"charge, and such Feedback will be treated as non-confidential and non-"
+"proprietary and may be used by us for any purpose, without your consent or "
+"any compensation to you or anyone else. This applies whether you submit such "
+"Feedback to us by email, through a form on the Website, on a bulletin board "
+"or otherwise.\n"
+"            </p>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                If you believe in good faith that materials available on the "
+"Website or Platform infringe your copyright, you (or your agent) may send us "
+"a written notice by courier, mail or e-mail, requesting that we remove such "
+"material or block access to it. If you believe in good faith that someone "
+"has wrongly filed a notice of copyright infringement against you, you can "
+"send us a counter-notice. Notices and counter-notices must be sent out on <a "
+"href=\"%(discord_invite)s\">discord</a>.\n"
+"            </p>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                FOR US RESIDENTS ONLY: If you are a copyright owner or an "
+"agent thereof and believe that your intellectual property rights have been "
+"infringed upon, you may submit a notification pursuant to the Digital "
+"Millennium Copyright Act (“DMCA”) by providing our copyright agent with the "
+"following information in writing (see 17 U.S.C 512(c)(3) for further "
+"detail):\n"
+"            </p>\n"
+"            <ul style=\"color: var(--bs-body-bg);padding-left: 60px;\">\n"
+"                <li style=\"margin-top: 15px;margin-bottom: 15px;\">\n"
+"                    A physical or electronic signature of a person "
+"authorized to act on behalf of the owner of an exclusive right that is "
+"allegedly infringed;\n"
+"                    <br>identification of the copyrighted work claimed to "
+"have been infringed, or, if multiple copyrighted works at a single online "
+"site are covered by a single notification, a representative list of such "
+"works at that site;\n"
+"                </li>\n"
+"                <li style=\"margin-top: 15px;margin-bottom: 15px;\">\n"
+"                    Identification of the material that is claimed to be "
+"infringing or to be the subject of infringing activity and that is to be "
+"removed or access to which is to be disabled and information reasonably "
+"sufficient to permit Transcendence42 to locate the material;\n"
+"                </li>\n"
+"                <li style=\"margin-top: 15px;margin-bottom: 15px;\">\n"
+"                    Information reasonably sufficient to permit "
+"Transcendence42 to contact you, such as an address, telephone number, and, "
+"if available, an e-mail address;\n"
+"                </li>\n"
+"                <li style=\"margin-top: 15px;margin-bottom: 15px;\">\n"
+"                    A statement that you have a good faith belief that use "
+"of the material in the manner complained of is not authorized by the "
+"copyright owner, its agent, or the law;\n"
+"                </li>\n"
+"                <li style=\"margin-top: 15px;margin-bottom: 15px;\">\n"
+"                    And a statement that the information in the notification "
+"is accurate, and under penalty of perjury, that you are authorized to act on "
+"behalf of the owner of an exclusive right that is allegedly infringed.\n"
+"                </li>\n"
+"            </ul>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                You can contact us on <a "
+"href=\"%(discord_invite)s\">discord</a>. Upon receipt of a notification, "
+"Transcendence42 will take whatever action, in its sole discretion, it deems "
+"appropriate, including removal of the challenged content from the Website or "
+"Platform.\n"
+"            </p>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                We suggest that you consult your legal advisor before filing "
+"a notice or counter-notice.\n"
+"            </p>\n"
+"        </div>\n"
+"        <div class=\"col\">\n"
+"            <hr>\n"
+"        </div>\n"
+"        <div class=\"col-md-12\" id=\"hContactAuthority\">\n"
+"            <h4 class=\"text-center\" style=\"color: var(--bs-primary-border-"
+"subtle);\">\n"
+"                13. DISPUTES\n"
+"            </h4>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                Summary: Mindful of the high costs of legal disputes, we "
+"want to try to settle any disputes with you related to the Terms by "
+"initially attempting to resolve the matter in good faith through written "
+"notice.\n"
+"            </p>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                Mindful of the high cost of legal dispute, not only in money "
+"but also in time and energy, both you and Transcendence42 agree to the "
+"following dispute resolution procedure: in the event of any controversy, "
+"claim, action, or dispute arising out of or related to the breach, "
+"enforcement, interpretation, or validity of these Terms or any part of it, "
+"the party asserting the dispute will first try in good faith to settle such "
+"dispute by providing written notice to the other party by registered mail "
+"describing the facts and circumstances (including any relevant "
+"documentation) of the dispute and allowing the receiving party 30 days from "
+"the date of mailing to respond to the dispute. Notice will be sent to us on "
+"<a href=\"%(discord_invite)s\">discord</a>.\n"
+"            </p>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                Unless you indicate otherwise in your notice, "
+"Transcendence42 will respond to your notice using your last-used e-mail "
+"address that we have.\n"
+"            </p>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                In the event that Transcendence42 is unable to resolve the "
+"dispute, you and Transcendence42 both agree that the parties will resolve "
+"their dispute in accordance with section 14 below.\n"
+"            </p>\n"
+"        </div>\n"
+"        <div class=\"col\">\n"
+"            <hr>\n"
+"        </div>\n"
+"        <div class=\"col-md-12\" id=\"hContactAuthority-1\">\n"
+"            <h4 class=\"text-center\" style=\"color: var(--bs-primary-border-"
+"subtle);\">\n"
+"                14. APPLICABLE LAW AND COMPETENT COURT\n"
+"            </h4>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                Summary: As a French-based company, the law that governs "
+"these terms and conditions and our relationship with you is French law. Any "
+"disputes need to be resolved by the competent courts of Paris (France).\n"
+"            </p>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                These Terms will be construed in accordance with French law, "
+"without prejudice to any other imperative provision of law more favorable to "
+"you applicable in your country of habitual residence.\n"
+"            </p>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                The competent courts of Paris will have exclusive "
+"jurisdiction over any dispute or controversy arising from or related to "
+"these Terms or its subject matter. If you are a resident of an EU Member "
+"State or a country or state where this clause is prohibited by local law, "
+"this clause does not apply to you and does not deprive you of the protection "
+"of the mandatory provisions of consumer protection laws in your country. "
+"Transcendence42 nonetheless reserves the right to take legal proceedings in "
+"a country other than France, to protect its interests or to enforce its "
+"rights where it deems it appropriate to do so.\n"
+"            </p>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                To the extent permitted by law, the Parties agree that all "
+"claims and disputes made against the other in your or its individual "
+"capacity, and not as a plaintiff or class member in any purported class "
+"action, class arbitration, or representative proceeding.\n"
+"            </p>\n"
+"        </div>\n"
+"        <div class=\"col\">\n"
+"            <hr>\n"
+"        </div>\n"
+"        <div class=\"col-md-12\" id=\"hContactAuthority-2\">\n"
+"            <h4 class=\"text-center\" style=\"color: var(--bs-primary-border-"
+"subtle);\">\n"
+"                15. UPDATES AND MODIFICATIONS\n"
+"            </h4>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                Summary: We may limit or interrupt access to the Platform in "
+"order to perform any operation on the Services that we deem necessary. We "
+"shall do our best to inform you of the schedule for these events, but are in "
+"no obligation to do so. We are not liable if such events have a negative "
+"impact on your access or use of our Platform and Services.\n"
+"            </p>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                We may provide patches, updates, or upgrades to the "
+"Services, Virtual Items, or your Account that may be required to continue "
+"using the Services, including automatic or “in the background” updates "
+"without notice to you. Such updates are subject to these Conditions unless "
+"other terms are presented with the updates, in which case, those other terms "
+"apply. We are not obligated to make any updates available. We do not "
+"guarantee that we will support the version of the system or device for which "
+"you licensed, obtained, or purchased any part of the Services, unless we "
+"have made claims regarding compatibility. We may from time to time, without "
+"additional cost to you, modify, alter, or suspend, whether in whole in part, "
+"any of our Services, Virtual Items, and/or your Account, for a valid reason. "
+"Valid reasons include, without limitation: improvement of our Services, "
+"Virtual Items, or your Account (such as offering new Services, Virtual "
+"Items, or Content); changes necessary for game balancing, for bug fixing or "
+"to prevent or counter exploits; changes that are necessary due to a new "
+"technical environment or an increased or decreased number of users; "
+"suspected or actual intellectual property infringement; changes in licenses "
+"we hold from third parties or other third-party compliance requirements; "
+"termination of agreements we have with third-parties for whatever reason; "
+"discontinuance of the supply, by a third-party, of a service or feature "
+"which is part or interconnected with our Services, Virtual Item, or your "
+"Account; changes of specific and verifiable open market costs; Necessary "
+"enhancements for the safety of users or other third parties; or other "
+"material, legal, regulatory, or security reasons.\n"
+"            </p>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                We reserve the right to interrupt the Service or any part "
+"thereof from time to time on a regularly scheduled basis or otherwise with "
+"or without prior notice in order to perform maintenance. You agree that we "
+"will not be liable for any interruption of the Service or any part thereof, "
+"delay or failure to perform resulting from any causes whatsoever, subject to "
+"any Non-Excludable Rights.\n"
+"            </p>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                You acknowledge that the Service or any part thereof may be "
+"interrupted for reasons beyond our control, and we cannot guarantee that you "
+"will be able to access the Service whenever you may wish to do so. We shall "
+"not be liable for any interruption of the Service, delay or failure to "
+"perform resulting from any causes whatsoever, subject to any Non-Excludable "
+"Rights.\n"
+"            </p>\n"
+"            <p style=\"color: var(--bs-body-bg);\">\n"
+"                Subject to any applicable law (including any Non-Excludable "
+"Rights), we have the right at any time with or without reason to change and/"
+"or eliminate any aspect(s) of the Service as we see fit in our sole "
+"discretion.\n"
+"            </p>\n"
+"        </div>\n"
+"        <div class=\"col\">\n"
+"            <hr>\n"
+"        </div>\n"
+"        <div class=\"col-md-12\" id=\"hContactAuthority-3\">\n"
+"            <h4 class=\"text-center\" style=\"color: var(--bs-primary-border-"
+"subtle);\">\n"
+"                16. CONTACT US\n"
+"            </h4>\n"
+"            <p class=\"text-center\" style=\"color: var(--bs-body-bg);\">\n"
+"                If you have questions about these Terms, please contact us "
+"as follows:\n"
+"            </p>\n"
+"            <a href=\"%(discord_invite)s\"></a>\n"
+"            <p class=\"text-center\" style=\"color: var(--bs-body-bg);\">\n"
+"                <a href=\"#\">contact@transcendence42.rocks</a>\n"
+"\n"
+"            </p>\n"
+"        </div>\n"
+"    </div>\n"
+"    "
+msgstr ""
+
+#: templates/accounts/email_activate.html:7
+msgid "Activate your account"
+msgstr "Activer votre compte"
+
+#: templates/accounts/email_activate.html:13
+#: templates/accounts/email_change_email.html:13
+#: templates/accounts/email_change_password.html:13
+#: templates/accounts/email_reset_password.html:13
+#: templates/accounts/email_twofa.html:13
+msgid "Hi"
+msgstr "Bonjour"
+
+#: templates/accounts/email_activate.html:16
+msgid ""
+"Thank you for registering at Transcendence42. Please use the code below to "
+"activate your account:"
+msgstr ""
+"Merci pour votre inscription à Transcendence42. Veuillez utiliser le code ci-"
+"dessous pour activer votre compte :"
+
+#: templates/accounts/email_activate.html:22
+#: templates/accounts/email_change_email.html:22
+#: templates/accounts/email_change_password.html:22
+#: templates/accounts/email_reset_password.html:22
+#: templates/accounts/email_twofa.html:22
+msgid "This code will expire in 10 minutes."
+msgstr "Ce code expirera dans 10 minutes"
+
+#: templates/accounts/email_activate.html:25
+msgid "If you did not create an account, please ignore this email."
+msgstr "Si vous n'avez pas créé de compte, veuillez ignorer ce courriel."
+
+#: templates/accounts/email_activate.html:28
+#: templates/accounts/email_change_email.html:28
+#: templates/accounts/email_change_password.html:28
+#: templates/accounts/email_reset_password.html:28
+#: templates/accounts/email_twofa.html:28
+msgid "Thank you,"
+msgstr "Merci,"
+
+#: templates/accounts/email_activate.html:30
+#: templates/accounts/email_change_email.html:30
+#: templates/accounts/email_change_password.html:30
+#: templates/accounts/email_reset_password.html:30
+#: templates/accounts/email_twofa.html:30
+msgid "The Transcendence42 Team"
+msgstr "L'équipe Transcendence42"
+
+#: templates/accounts/email_change_email.html:7
+msgid "Change your email"
+msgstr "Modifier votre courriel"
+
+#: templates/accounts/email_change_email.html:16
+msgid "Please use the code below to change your email:"
+msgstr ""
+"Veuillez utiliser le code ci-dessous pour modifier votre adresse courriel:"
+
+#: templates/accounts/email_change_email.html:25
+msgid "If you have not requested an email change, please ignore this email."
+msgstr "Si vous n'avez pas créé de compte, veuillez ignorer ce courriel."
+
+#: templates/accounts/email_change_password.html:16
+msgid "Please use the code below to change your password:"
+msgstr "Veuillez utilisez le code ci-dessous pour modifier votre mot de passe."
+
+#: templates/accounts/email_change_password.html:25
+msgid "If you have not requested a password change, please ignore this email."
+msgstr ""
+"Si vous n'avez pas demandé à modifier votre mot de passe, vous pouvez "
+"ignorer ce courriel."
+
+#: templates/accounts/email_reset_password.html:7
+msgid "Reset your password"
+msgstr "Réinitialiser votre mot de passe."
+
+#: templates/accounts/email_reset_password.html:16
+msgid "Please use the code below to reset your password:"
+msgstr ""
+"Veuillez utiliser le code ci-dessous pour réinitialiser votre mot de passe."
+
+#: templates/accounts/email_reset_password.html:25
+msgid "If you have not requested a password reset, please ignore this email."
+msgstr ""
+"Si vous n'avez pas demandé à réinitialiser votre mot de passe, vous pouvez "
+"ignorer ce courriel."
+
+#: templates/accounts/email_twofa.html:7
+msgid "New Connection"
+msgstr "Nouvelle connection"
+
+#: templates/accounts/email_twofa.html:16
+msgid "Please use the code below to sign in:"
+msgstr "Veuillez utiliser le code ci-dessous pour vous connecter:"
+
+#: templates/accounts/email_twofa.html:25
+msgid "If you have not attempted to sign in, please ignore this email."
+msgstr ""
+"Si vous n'avez pas essayé de vous connecter, vous pouvez ignorer ce courriel."
+
+#: templates/accounts/forgot_password.html:4
+#: templates/accounts/forgot_password.html:32
+msgid "Forgot Password"
+msgstr "Mot de passe oublié"
+
+#: templates/accounts/forgot_password.html:45
+msgid "Please enter your account e-mail to get a password reset link"
+msgstr ""
+"Veuillez vérifier votre adresse courriel pour recevoir un lien de "
+"réinitialisation de mot de passe"
+
+#: templates/accounts/forgot_password.html:51
+#: templates/accounts/register.html:48 templates/settings.html:160
+msgid "Email"
+msgstr "Courriel"
+
+#: templates/accounts/forgot_password.html:56
+msgid "Wrong email format. Please try again"
+msgstr "Courriel invalide. Veuillez réessayer"
+
+#: templates/accounts/login.html:4 templates/accounts/login.html:60
+msgid "Login"
+msgstr "Connexion"
+
+#: templates/accounts/login.html:34
+msgid "Log in"
+msgstr "Connexion"
+
+#: templates/accounts/login.html:42
+msgid "Username / Email"
+msgstr "Nom d'utilisateur / courriel"
+
+#: templates/accounts/login.html:48 templates/accounts/register.html:52
+#: templates/settings.html:437
+msgid "Password"
+msgstr "Mot de passe"
+
+#: templates/accounts/login.html:53
+#: templates/accounts/modify_credentials.html:104
+#: templates/accounts/register.html:56
+msgid "Show password"
+msgstr "Afficher le mot de passe"
+
+#: templates/accounts/login.html:66
+msgid "Forgot your password ?"
+msgstr "Mot de passe oublié ?"
+
+#: templates/accounts/login.html:74
+msgid "CONNECT WITH"
+msgstr "SE CONNECTER AVEC"
+
+#: templates/accounts/login.html:87
+msgid "Not Registered ?"
+msgstr "Pas encore enregistré ?"
+
+#: templates/accounts/login.html:89
+msgid "Create an account"
+msgstr "Créer un compte"
+
+#: templates/accounts/modify_credentials.html:4
+msgid "Modify Credentials"
+msgstr "Modifier vos identifiants"
+
+#: templates/accounts/modify_credentials.html:37
+msgid "Change Email"
+msgstr "Modifier l'adresse courriel"
+
+#: templates/accounts/modify_credentials.html:54
+msgid "Please enter your new mail"
+msgstr "Veuillez saisir votre nouvelle adresse"
+
+#: templates/accounts/modify_credentials.html:60
+msgid "New Mail"
+msgstr "Nouvelle adresse"
+
+#: templates/accounts/modify_credentials.html:65
+#: templates/accounts/modify_credentials.html:110
+msgid "Confirm Changes"
+msgstr "Veuillez confirmer la modification"
+
+#: templates/accounts/modify_credentials.html:75
+msgid "Change Password"
+msgstr "Modifier le mot de passe"
+
+#: templates/accounts/modify_credentials.html:93
+msgid "Please enter your new password"
+msgstr "Entrez votre nouveau mot de passe."
+
+#: templates/accounts/modify_credentials.html:99
+msgid "New Password"
+msgstr "Nouveau mot de passe"
+
+#: templates/accounts/register.html:4 templates/accounts/register.html:34
+#: templates/accounts/register.html:88
+msgid "Register"
+msgstr "S'enregistrer"
+
+#: templates/accounts/register.html:40
+msgid ""
+"Your unique id, which cannot be changed after account creation. Must be 20 "
+"characters long maximum and can include letters (a-Z), numbers (0-9), \\"
+msgstr ""
+"Votre identifiant. Vous ne pourrez pas le changer après création du compte. "
+"Peut comprendre max 20 caractères, dont lettres (a-Z), chiffres (0-9), "
+"tiret , underscore et point "
+
+#: templates/accounts/register.html:42 templates/settings.html:133
+msgid "Username"
+msgstr "Nom d'utilisateur"
+
+#: templates/accounts/register.html:63
+msgid "I read and agree to the Transcendence42"
+msgstr "J'ai lu et j'accepte les"
+
+#: templates/accounts/register.html:74
+msgid "and"
+msgstr "et la"
+
+#: templates/accounts/register.html:92
+msgid "Already Registered ?"
+msgstr "Déjà enregistré ?"
+
+#: templates/accounts/register.html:94
+msgid "Sign in here"
+msgstr "Connexion"
+
+#: templates/accounts/verify_code.html:4
+msgid "Code Verify"
+msgstr "Vérification du code"
+
+#: templates/accounts/verify_code.html:33
+msgid "Verify Code"
+msgstr "Vérification du code"
+
+#: templates/accounts/verify_code.html:41
+msgid "Enter the received code below"
+msgstr "Veuillez saisir votre code"
+
+#: templates/accounts/verify_code.html:44
+msgid ""
+"Your code was sent to you via email, don't forget to check into your spam "
+"box."
+msgstr ""
+"Votre code a été envoyé par courriel, n'hésitez pas à vérifier vos spams"
+
+#: templates/accounts/verify_code.html:54
+msgid "Verify"
+msgstr "Vérifier"
+
+#: templates/alert_modal.html:14
+msgid "Error"
+msgstr "Erreur"
+
+#: templates/alert_modal.html:23
+msgid "Close"
+msgstr "Fermer"
+
+#: templates/friends/social.html:31
+msgid "Friends"
+msgstr "Amis"
+
+#: templates/friends/social.html:66 templates/games/game_chat.html:20
+msgid "Send a message"
+msgstr "Envoyer un message"
+
+#: templates/friends/social.html:100
+msgid "See Profile"
+msgstr "Voir le profil"
+
+#: templates/friends/social.html:113
+msgid "Unblock Friend"
+msgstr "Débloquer cet ami"
+
+#: templates/friends/social.html:125
+msgid "Block Friend"
+msgstr "Bloquer cet ami"
+
+#: templates/friends/social.html:138
+msgid "Remove Friend"
+msgstr "Supprimer cet ami"
+
+#: templates/friends/social.html:152
+msgid "Invite Friend"
+msgstr "Demander en Ami"
+
+#: templates/friends/social_list.html:17
+msgid "No friends"
+msgstr "Amis"
+
+#: templates/friends/social_section.html:9
+msgid "No message yet, say Hi"
+msgstr "Aucun message, dites 'Coucou'"
+
+#: templates/friends/social_section.html:16
+msgid "Select a conversation"
+msgstr "Sélectionner une conversation"
+
+#: templates/games/game_chat.html:11
+msgid "Chat"
+msgstr "Messages"
+
+#: templates/games/game_config.html:4 templates/games/game_config.html:11
+msgid "Customize your game"
+msgstr "Personnalisez votre partie"
+
+#: templates/games/game_config.html:25
+msgid "Game Options"
+msgstr "Options de jeu"
+
+#: templates/games/game_config.html:44 templates/games/game_room.html:82
+msgid "Players"
+msgstr "Joueurs"
+
+#: templates/games/game_config.html:77 templates/games/game_room.html:101
+msgid "Score to win"
+msgstr "Score à atteindre"
+
+#: templates/games/game_config.html:115 templates/games/game_room.html:125
+msgid "Ball size"
+msgstr "Taille de la balle"
+
+#: templates/games/game_config.html:151
+msgid "Initial ball speed"
+msgstr "Vitesse de la balle"
+
+#: templates/games/game_config.html:184
+msgid "Paddle Size"
+msgstr "Taille des raquettes"
+
+#: templates/games/game_config.html:223
+msgid "AI Difficulty"
+msgstr "Difficulté de l'IA"
+
+#: templates/games/game_config.html:299
+msgid "Arena Options"
+msgstr "Options d'arène"
+
+#: templates/games/game_config.html:309
+msgid "Map"
+msgstr "Arène"
+
+#: templates/games/game_config.html:372
+msgid "Go Back"
+msgstr "Retour"
+
+#: templates/games/game_config.html:380
+msgid "Create Game"
+msgstr "Créer le salon"
+
+#: templates/games/game_message.html:9
+msgid "Me"
+msgstr "Moi"
+
+#: templates/games/game_message.html:56
+msgid "Game Announcement"
+msgstr "Annonces"
+
+#: templates/games/game_message.html:74
+msgid "has joined !"
+msgstr "a rejoint la partie !"
+
+#: templates/games/game_message.html:101
+msgid "Next Match:"
+msgstr "Prochain match :"
+
+#: templates/games/game_message.html:128
+msgid "has been"
+msgstr "a été"
+
+#: templates/games/game_message.html:130
+msgid "eliminated"
+msgstr "éliminé"
+
+#: templates/games/game_message.html:144
+msgid "is the "
+msgstr "est le "
+
+#: templates/games/game_message.html:146
+msgid "ultimate winner"
+msgstr " vainqueur final"
+
+#: templates/games/game_player.html:42
+msgid "Invite Player"
+msgstr "Inviter des Joueurs"
+
+#: templates/games/game_ready.html:4
+msgid "Get Ready !"
+msgstr "Soyez prêts"
+
+#: templates/games/game_ready.html:40
+msgid "Start"
+msgstr "Commencez"
+
+#: templates/games/game_ready.html:54
+msgid "Game will start in"
+msgstr "La partie commence dans"
+
+#: templates/games/game_ready.html:57
+msgid "seconds"
+msgstr "secondes"
+
+#: templates/games/game_room.html:4
+msgid "Game Room"
+msgstr "Salon de jeux"
+
+#: templates/games/game_room.html:34
+msgid "Leave Room"
+msgstr "Quitter la partie"
+
+#: templates/games/game_room.html:63
+msgid "Game Infos"
+msgstr "Infos de la partie"
+
+#: templates/games/game_room.html:77
+msgid "Rules"
+msgstr "Règles"
+
+#: templates/games/game_room.html:142
+msgid "Paddle size"
+msgstr "Taille de la raquette"
+
+#: templates/games/game_room.html:162
+msgid "Initial Ball Speed"
+msgstr "Vitesse de la balle"
+
+#: templates/games/game_room.html:214
+msgid "Do you confirm leaving ?"
+msgstr "Voulez-vous vraiment partir?"
+
+#: templates/games/game_room.html:219
+msgid ""
+"If you have not been eliminated yet, your next game will be considered as a "
+"defeat and you will get a point penalty. You will not be able to join the "
+"room again."
+msgstr ""
+"Si vous êtes encore en lice, votre prochaine partie sera considérée comme "
+"une défaite et vous subirez un point de pénalité. Vous ne pourrez plus "
+"rejoindre cette partie."
+
+#: templates/games/game_room.html:224 templates/settings.html:448
+#: templates/settings.html:483 templates/settings.html:529
+msgid "Cancel"
+msgstr "Rester"
+
+#: templates/games/game_room.html:245 templates/games/game_room.html:265
+msgid "Invite"
+msgstr "Inviter"
+
+#: templates/games/game_room.html:253
+msgid "Invite a random Player"
+msgstr "Inviter un joueur aléatoire"
+
+#: templates/games/game_room.html:270
+msgid "Invite a friend"
+msgstr "Inviter un ami"
+
+#: templates/games/game_room.html:302
+msgid "NO FRIENDS TO INVITE"
+msgstr "AUCUN AMI À INVITER"
+
+#: templates/games/play.html:4
+msgid "Pong"
+msgstr "Pong"
+
+#: templates/home.html:4
+msgid "Home"
+msgstr "Accueil"
+
+#: templates/home.html:65
+msgid "Find a Player"
+msgstr "Trouver un joueur"
+
+#: templates/home.html:75
+msgid "Game Rooms"
+msgstr "Salons de jeux"
+
+#: templates/home.html:89
+msgid "Find a Game"
+msgstr "Trouver une partie"
+
+#: templates/home.html:119
+msgid "Create a Game"
+msgstr "Créer un salon de jeu"
+
+#: templates/home.html:202
+msgid "NO GAMES"
+msgstr "AUCUNE PARTIE À AFFICHER"
+
+#: templates/index.html:9
+msgid "Transcendence42"
+msgstr "Transcendence42"
+
+#: templates/leaderboard.html:5
+msgid "Leaderboard"
+msgstr "Classement"
+
+#: templates/leaderboard.html:15
+msgid "Top 100 Ranking"
+msgstr "Les 100 meilleurs"
+
+#: templates/leaderboard.html:30
+msgid "Your Rank"
+msgstr "Votre classement :"
+
+#: templates/leaderboard.html:44
+msgid "No rankings yet"
+msgstr "Soyez le premier !"
+
+#: templates/modeselect.html:4
+msgid "Mode Selection"
+msgstr "Choix du mode"
+
+#: templates/modeselect.html:13
+msgid "Choose your mode"
+msgstr "Faites votre choix"
+
+#: templates/modeselect.html:29
+msgid "Local Game"
+msgstr "Partie locale"
+
+#: templates/modeselect.html:45
+msgid "Online Game"
+msgstr "Jeu en ligne"
+
+#: templates/notifs/notif_friend_request.html:28
+msgid "wants to be your friend !"
+msgstr "souhaite être votre ami"
+
+#: templates/notifs/notif_friend_request.html:47
+#: templates/notifs/notif_game_invite.html:43
+msgid "Accept"
+msgstr "Accepter"
+
+#: templates/notifs/notif_friend_request.html:50
+#: templates/notifs/notif_game_invite.html:46
+msgid "Decline"
+msgstr "Refuser"
+
+#: templates/notifs/notif_game_invite.html:13
+msgid "Game Invite"
+msgstr "Invitation à jouer"
+
+#: templates/notifs/notif_game_invite.html:24
+msgid "has invited you to play !"
+msgstr "vous invite dans sa partie !"
+
+#: templates/notifs/notif_list.html:19
+msgid "New Message"
+msgstr "Nouveau message"
+
+#: templates/notifs/notif_list.html:28
+msgid "New"
+msgstr "Nouveau"
+
+#: templates/notifs/notif_list.html:31
+msgid "message"
+msgstr "message"
+
+#: templates/notifs/notif_list.html:34
+msgid "from"
+msgstr "de"
+
+#: templates/profile.html:37 templates/profile.html:46
+#: templates/profile.html:326 templates/profile.html:335
+msgid "Add Player"
+msgstr "Ajouter"
+
+#: templates/profile.html:67 templates/profile.html:356
+msgid "Block Player"
+msgstr "Bloquer"
+
+#: templates/profile.html:117 templates/profile.html:406
+msgid "Game History (Last 20 Games)"
+msgstr "Historique de jeu (20 dernières parties)"
+
+#: templates/profile.html:126 templates/profile.html:415
+msgid "WIN"
+msgstr "Victoire"
+
+#: templates/profile.html:145 templates/profile.html:172
+#: templates/profile.html:434 templates/profile.html:461
+msgid "Game Details"
+msgstr "Détails de la partie"
+
+#: templates/profile.html:153 templates/profile.html:442
+msgid "LOSS"
+msgstr "Défaite"
+
+#: templates/profile.html:182 templates/profile.html:471
+msgid "NO GAMES TO SHOW"
+msgstr "AUCUNE PARTIE A AFFICHER"
+
+#: templates/profile.html:192 templates/profile.html:481
+msgid "Player Statistics"
+msgstr "Statistiques du joueur"
+
+#: templates/profile.html:221 templates/profile.html:510
+msgid "Wins"
+msgstr "Victoires"
+
+#: templates/profile.html:227 templates/profile.html:516
+msgid "Losses"
+msgstr "Défaites"
+
+#: templates/profile.html:268 templates/profile.html:557
+msgid "Total Games Played"
+msgstr "Nombre de parties"
+
+#: templates/profile.html:278 templates/profile.html:567
+msgid "Won Tournaments"
+msgstr "Tournois remportés"
+
+#: templates/profile.html:288 templates/profile.html:577
+msgid "Best Winning Streak"
+msgstr "Votre meilleure série"
+
+#: templates/profile.html:490
+msgid "Winrate"
+msgstr "Taux de victoires"
+
+#: templates/profile.html:531
+#, fuzzy
+#| msgid "Lost Games"
+msgid "Last 20 Games"
+msgstr "Parties perdues"
+
+#: templates/settings.html:31
+msgid "Profile Card"
+msgstr "Mon profil"
+
+#: templates/settings.html:55
+msgid "Avatars"
+msgstr "Avatars"
+
+#: templates/settings.html:110
+msgid "Your image must not exceed 500KB in size and 1024x1024 in dimensions"
+msgstr ""
+"Votre fichier doit peser moins de 500KB et mesurer moins de 1024x1024 px"
+
+#: templates/settings.html:118
+msgid "Account"
+msgstr "Compte"
+
+#: templates/settings.html:147
+msgid "Account created on"
+msgstr "Compte créé le"
+
+#: templates/settings.html:167
+msgid "Modify Email"
+msgstr "Modifier l'adresse courriel"
+
+#: templates/settings.html:170
+msgid "Modify Password"
+msgstr "Modifier le mot de passe"
+
+#: templates/settings.html:184
+msgid "Two-Factor Authentication"
+msgstr "Authentification à 2 facteurs"
+
+#: templates/settings.html:190
+msgid "Enabled"
+msgstr "Active"
+
+#: templates/settings.html:200
+msgid "Disable 2FA"
+msgstr "Désactiver la 2FA"
+
+#: templates/settings.html:207
+msgid "Disabled"
+msgstr "Désactivée"
+
+#: templates/settings.html:211
+msgid "Enable 2FA"
+msgstr "Activer la 2FA"
+
+#: templates/settings.html:224
+msgid "Link with 42"
+msgstr "Lien avec 42"
+
+#: templates/settings.html:230
+msgid "Linked"
+msgstr "Associé"
+
+#: templates/settings.html:238
+msgid "Unlink account"
+msgstr "Dissocier le compte"
+
+#: templates/settings.html:245
+msgid "Not Linked"
+msgstr "Pas associé"
+
+#: templates/settings.html:254
+msgid "Link to 42"
+msgstr "Associer à 42"
+
+#: templates/settings.html:261
+msgid "Prefered Language"
+msgstr "Langue"
+
+#: templates/settings.html:287
+msgid "Delete my account"
+msgstr "Supprimer mon compte"
+
+#: templates/settings.html:296
+msgid "Block List"
+msgstr "Joueurs bloqués"
+
+#: templates/settings.html:332
+msgid "BLOCK LIST IS EMPTY"
+msgstr "LISTE VIDE"
+
+#: templates/settings.html:355
+msgid "Delete account"
+msgstr "Supprimer mon compte"
+
+#: templates/settings.html:362
+msgid "Are you sure you want to delete your account ?"
+msgstr "Voulez-vous vraiment supprimer votre compte?"
+
+#: templates/settings.html:364
+msgid "By doing so, you will not be able to :"
+msgstr "Si vous supprimez votre compte, vous ne pourrez plus :"
+
+#: templates/settings.html:368
+msgid "Play against other people online"
+msgstr "jouer en ligne"
+
+#: templates/settings.html:371
+msgid "Access your profile and other players profile"
+msgstr "consulter votre profil ou celui d'autres joueurs"
+
+#: templates/settings.html:374
+msgid "Access the leaderboard and view player rankings"
+msgstr "consulter le classement"
+
+#: templates/settings.html:377
+msgid "Add friends and use the chat"
+msgstr "ajouter d'amis ou utiliser le clavardage"
+
+#: templates/settings.html:381
+msgid "This action will also delete all of your data including :"
+msgstr "Cette actio supprimera aussi toutes vos données, incluant"
+
+#: templates/settings.html:385
+msgid "Your profile (Avatar, Nickname, Username)"
+msgstr "votre profil (avatar, alias, nom d'utilisateur)"
+
+#: templates/settings.html:388
+msgid "Your conversations and your friend list"
+msgstr "vos conversations et votre liste d'amis"
+
+#: templates/settings.html:391
+msgid "Your ranking and your game history"
+msgstr "Votre classement et historique de jeu"
+
+#: templates/settings.html:401
+msgid "If you had linked your account to 42, this will also undo the link."
+msgstr ""
+"si vous aviez asssocié votre compte à votre compte 42, ce sera supprimé."
+
+#: templates/settings.html:408
+msgid "This action is irreversible"
+msgstr "Cette acion est irréversible"
+
+#: templates/settings.html:413
+msgid "Proceed"
+msgstr "Continuer"
+
+#: templates/settings.html:424
+msgid "Confirm Delete"
+msgstr "Confirmer la suppression du compte"
+
+#: templates/settings.html:432
+msgid "Please enter your password to confirm your account deletion"
+msgstr ""
+"Veuillez saisir votre mot de passe pour confirmer la suppression du compte"
+
+#: templates/settings.html:451
+msgid "Confirm"
+msgstr "Confirmer"
+
+#: templates/settings.html:469
+msgid "Enable Two Factor Authentication ?"
+msgstr "Activer l'authentication à double facteur?"
+
+#: templates/settings.html:477
+msgid ""
+"Two Factor Authentication will add a security layer to your account, by "
+"sending you a code via email each time you want to log in. Do you wish to "
+"enable it ?"
+msgstr ""
+"L'authentication à double facteur ajoute un niveau de sécurité à votre "
+"compte, en vous envoyant un code à confirmer chaque fois que vous vous "
+"connectez. Souhaitez-vous l'activer?"
+
+#: templates/settings.html:486
+msgid "Activate 2FA"
+msgstr "Activer la 2FA"
+
+#: templates/settings.html:507
+msgid "Unlink 42 account"
+msgstr "Dissocier votre compte 42"
+
+#: templates/settings.html:515
+msgid "Unlinking your 42 account will result in these changes:"
+msgstr "Dissocier votre compte 42 entrainera les changements suivants:"
+
+#: templates/settings.html:520
+msgid "You will not be able to connect using 42Auth on login page."
+msgstr "Vous ne pourrez plus vous identifier via 42Auth"
+
+#: templates/settings.html:523
+msgid "You will not be able to use your 42 banner and profile image."
+msgstr ""
+"Vous ne verrez plus votre bannière de coalition ni votre photo de profil"
+
+#: templates/settings.html:532
+msgid "Unlink"
+msgstr "Dissocier"
+
+#~ msgid "Username or Email is invalid"
+#~ msgstr "Nom d'utilisateur ou courriel erroné"
+
+#~ msgid "Against AI"
+#~ msgstr "Contre l'IA"
+
+#~ msgid "This user alias is already taken, try another one"
+#~ msgstr "Ce nom d'utilisateur est déjà pris, veuillez en choisir un autre"
+
+#~ msgid "August 2024"
+#~ msgstr "Août 2024"
+
+#~ msgid "Enter your code"
+#~ msgstr "Veuillez saisir votre code"
+
+#~ msgid "Personal info"
+#~ msgstr "Informations personnelles"
+
+#~ msgid "Permissions"
+#~ msgstr "Autorisations"
+
+#~ msgid "id"
+#~ msgstr "id"
+
+#~ msgid "username"
+#~ msgstr "Nom d'utilisateur"
+
+#~ msgid ""
+#~ "Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only."
+#~ msgstr ""
+#~ "Requis. 150 caractères maximum. Uniquement des lettres, chiffres et @/./"
+#~ "+/-/_ ."
+
+#~ msgid "The username must be 150 characters or fewer."
+#~ msgstr "Le nom d'utilisateur doit être de 150 caractères ou moins."
+
+#~ msgid ""
+#~ "This value may contain only letters, numbers, and @/./+/-/_ characters."
+#~ msgstr ""
+#~ "Ce champ peut uniquement contenir : lettres, chiffres et les caractères "
+#~ "@/./+/-/_."
+
+#~ msgid "email address"
+#~ msgstr "Adresse courriel"
+
+#~ msgid "Required. A valid email address."
+#~ msgstr "Requis. Une adresse courriel valide."
+
+#~ msgid "42 id"
+#~ msgstr "42 id"
+
+#~ msgid "active"
+#~ msgstr "actif"
+
+#~ msgid "groups"
+#~ msgstr "groupes"
+
+#~ msgid "custom user"
+#~ msgstr "utilisateur personnalisé"
+
+#~ msgid "custom users"
+#~ msgstr "utilisateurs personnalisés"
+
+#~ msgid "Activation link is invalid!"
+#~ msgstr "Le lien d'activation est invalide !"
+
+#~ msgid "Password reset link is invalid!"
+#~ msgstr "Le lien de réinitialisation du mot de passe est invalide !"
+
+#~ msgid "Authentication successful!"
+#~ msgstr "Authentification réussie !"
+
+#~ msgid "Email updated succesfully!"
+#~ msgstr "Adresse courriel mise à jour avec succès!"
+
+#, python-format
+#~ msgid "Hi '%(user.username)s'"
+#~ msgstr "Bonjour '%(user.username)s '"
+
+#~ msgid "My Profile"
+#~ msgstr "Mon profil"
+
+#~ msgid "Connect with Google"
+#~ msgstr "Connexion avec Google"
+
+#~ msgid "Connect with 42 Auth"
+#~ msgstr "Connexion avec 42 Auth"
+
+#~ msgid "Development Team"
+#~ msgstr "Équipe de développement"
+
+#~ msgid "Stats"
+#~ msgstr "Statistiques"
+
+#~ msgid "Room Name"
+#~ msgstr "Nom du salon"
+
+#~ msgid "#RoomName"
+#~ msgstr "Nom du salon"
+
+#~ msgid "Created By"
+#~ msgstr "Créé par"
+
+#~ msgid "#CreatorName"
+#~ msgstr "Nom du créateur"
+
+#~ msgid "Room Type"
+#~ msgstr "Type de salon"
+
+#~ msgid "#Classic/Retro"
+#~ msgstr "#Classique/Rétro"
+
+#~ msgid "Recent Games"
+#~ msgstr "Dernières parties"
+
+#~ msgid "Versus"
+#~ msgstr "Adversaire"
+
+#~ msgid "Score"
+#~ msgstr "Résultats"
+
+#~ msgid "Date"
+#~ msgstr "Date"
+
+#~ msgid "Won Games"
+#~ msgstr "Parties remportées"
+
+#~ msgid "Currentmail****@*****.com"
+#~ msgstr "Courriel****@****.com"

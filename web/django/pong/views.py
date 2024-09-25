@@ -5,7 +5,7 @@ from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from django.template.loader import render_to_string
 from django.utils import translation
-from django.utils.translation import gettext as _
+from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import AnonymousUser
 from rest_framework import status
 from rest_framework.permissions import AllowAny, IsAuthenticated
@@ -265,6 +265,8 @@ class PrivacyPolicyView(PrivateView):
     def get(self, request):
         context = {
             'profile': request.profile,
+            'discord_invite': settings.DISCORD_INVITE,
+            'django_mail_contact': settings.DJANGO_MAIL_CONTACT,
         }
         return render(request, 'about/privacy_policy.html', context)
 
@@ -273,15 +275,20 @@ privacy_policy_priv = PrivacyPolicyView.as_view()
 
 class PrivacyPolicyView(PublicView):
     def get(self, request):
-        return render(request, 'about/privacy_policy.html')
+        context = {
+            'discord_invite': settings.DISCORD_INVITE,
+            'django_mail_contact': settings.DJANGO_MAIL_CONTACT,
+        }
+        return render(request, 'about/privacy_policy.html', context)
 
 privacy_policy_pub = PrivacyPolicyView.as_view()
-
 
 class TosView(PrivateView):
     def get(self, request):
         context = {
             'profile': request.profile,
+            'discord_invite': settings.DISCORD_INVITE,
+            'django_mail_contact': settings.DJANGO_MAIL_CONTACT,
         }
         return render(request, 'about/terms_of_service.html', context)
 
@@ -289,6 +296,10 @@ terms_of_service_priv = TosView.as_view()
 
 class TosView(PublicView):
     def get(self, request):
+        context = {
+            'discord_invite': settings.DISCORD_INVITE,
+            'django_mail_contact': settings.DJANGO_MAIL_CONTACT,
+        }
         return render(request, 'about/terms_of_service.html')
 
 terms_of_service_pub = TosView.as_view()

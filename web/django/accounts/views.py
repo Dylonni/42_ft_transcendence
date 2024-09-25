@@ -145,12 +145,12 @@ class UserRegisterView(PublicView):
             serializer.is_valid(raise_exception=True)
             user = serializer.save()
             
-            user = UserModel.objects.send_mail(request.data['email'], 'accounts/email_activate.html', 'Activate your Account')
+            user = UserModel.objects.send_mail(request.data['email'], 'accounts/email_activate.html', _('Activate your Account'))
             token_generator = EmailTokenGenerator()
             token = token_generator.make_token(user)
             uid = urlsafe_base64_encode(force_bytes(user.pk))
             response_data = {
-                'message': _('Account registered! Please check your email to activate your account.'),
+                'message': _('Account registered! Please check your email to activate it.'),
                 'redirect': f'/verify-code/?type=activate&token={token}&user={uid}',
             }
             return Response(response_data, status=status.HTTP_201_CREATED)
@@ -207,7 +207,7 @@ user_activate = UserActivateView.as_view()
 class PasswordRequestView(PublicView):
     def post(self, request: HttpRequest):
         try:
-            user = UserModel.objects.send_mail(request.data['email'], 'accounts/email_reset_password.html', 'Reset your Password')
+            user = UserModel.objects.send_mail(request.data['email'], 'accounts/email_reset_password.html', _('Reset your Password'))
             token_generator = EmailTokenGenerator()
             token = token_generator.make_token(user)
             uid = urlsafe_base64_encode(force_bytes(user.pk))

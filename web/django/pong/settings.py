@@ -78,6 +78,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'django.middleware.locale.LocaleMiddleware',
     'django_prometheus.middleware.PrometheusAfterMiddleware',
 ]
 
@@ -167,7 +168,8 @@ USE_TZ = True
 LANGUAGES = [
     ('en', 'English'),
     ('fr', 'French'),
-    ('ja', 'Japanese'),
+    ('jp', 'Japanese'),
+    # ('ja', 'Japanese'),
 ]
 
 LOCALE_PATHS = [
@@ -203,6 +205,11 @@ EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = os.getenv('DJANGO_MAIL')
 EMAIL_HOST_USER = os.getenv('DJANGO_MAIL_USERNAME')
 EMAIL_HOST_PASSWORD = os.getenv('DJANGO_MAIL_PASSWORD')
+
+# Contacts
+
+DISCORD_INVITE = os.getenv('DISCORD_INVITE')
+DJANGO_MAIL_CONTACT = os.getenv('DJANGO_MAIL_CONTACT')
 
 # 42 API
 
@@ -258,6 +265,7 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_REFRESH_SERIALIZER': 'rest_framework_simplejwt.serializers.TokenRefreshSlidingSerializer',
 }
 
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -269,11 +277,11 @@ LOGGING = {
     'loggers': {
         'django': {
             'handlers': ['console'],
+            'level': 'DEBUG', # change to INFO when in production
             'propagate': True,
         },
     },
 }
-
 
 
 # SSL/HTTPS settings

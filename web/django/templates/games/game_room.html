@@ -6,6 +6,7 @@
 {% include "sidebar.html" %}
 {% include "notifs/notifications.html" %}
 {% include "games/game_chat.html" %}
+{% if game %}
 <div class="container" style="padding-top: 0px;padding-bottom: 0px;padding-left: 0px;padding-right: 0px;margin-bottom: 20px;">
 	<div class="row">
 		<div class="col-sm-12 col-md-12 col-xxl-12 d-xl-flex d-xxl-flex flex-column flex-wrap justify-content-xl-center align-items-xl-center align-items-xxl-center" style="border-radius: 20px;margin-top: 0px;margin-bottom: 0px;padding-top: 0px;padding-bottom: 0px;margin-left: 0px;margin-right: 0px;padding-left: 0px;padding-right: 0px;border: 2px none rgb(53,224,248) ;">
@@ -307,4 +308,5 @@
 		</div>
 	</div>
 </div>
+{% endif %}
 {% endblock %}

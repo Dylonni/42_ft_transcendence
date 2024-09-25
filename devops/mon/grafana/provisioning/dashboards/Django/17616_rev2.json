@@ -24,7 +24,9 @@
     {
       "tags": [
         "django",
-        "django-mixin"
+        "django-mixin",
+        "admin views",
+        "API views"
       ],
       "targetBlank": true,
       "title": "Django Dashboards",
@@ -1263,7 +1265,9 @@
   "schemaVersion": 39,
   "tags": [
     "django",
-    "django-mixin"
+    "django-mixin",
+    "admin views",
+    "API views"
   ],
   "templating": {
     "list": [
@@ -1390,7 +1394,7 @@
   },
   "timepicker": {},
   "timezone": "utc",
-  "title": "Django / Requests / Overview for admin and API views",
+  "title": "Django / Overview admin and API views",
   "uid": "django-requests-jkwq",
   "version": 1,
   "weekStart": ""

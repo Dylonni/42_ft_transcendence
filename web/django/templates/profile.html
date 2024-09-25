@@ -34,7 +34,7 @@
 						</button>
 						{% elif is_requested %}
 						<div class="d-xxl-flex justify-content-xxl-center align-items-xxl-center btn disabled" style="box-shadow: 0px 0px;background: rgba(255,255,255,0);color: var(--bs-btn-border-color);width: 20%;margin-left: 5px;margin-right: 5px;border-style: none;">
-							<svg class="icon icon-tabler icon-tabler-user-check text-success" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" data-bs-toggle="tooltip" data-bss-tooltip data-bs-placement="bottom" title="Add Player" style="font-size: 35px;">
+							<svg class="icon icon-tabler icon-tabler-user-check text-success" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" data-bs-toggle="tooltip" data-bss-tooltip data-bs-placement="bottom" title="{% translate 'Add Player' %}" style="font-size: 35px;">
 								<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
 								<path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
 								<path d="M6 21v-2a4 4 0 0 1 4 -4h4"></path>
@@ -43,7 +43,7 @@
 						</div>
 						{% else %}
 						<button data-profile-id="{{ current_profile.id }}" id="addFriendBtn" class="btn btn-primary" style="box-shadow: 0px 0px;background: rgba(255,255,255,0);border-style: none;color: var(--bs-btn-border-color);width: 20%;margin-left: 0px;margin-right: 0px;" type="button">
-							<svg class="icon icon-tabler icon-tabler-user-plus text-success" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" data-bs-toggle="tooltip" data-bss-tooltip data-bs-placement="bottom" title="Add Player" style="font-size: 35px;">
+							<svg class="icon icon-tabler icon-tabler-user-plus text-success" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" data-bs-toggle="tooltip" data-bss-tooltip data-bs-placement="bottom" title="{% translate 'Add Player' %}" style="font-size: 35px;">
 								<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
 								<path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
 								<path d="M16 19h6"></path>
@@ -64,7 +64,7 @@
 						</button>
 						{% else %}
 						<button data-profile-id="{{ current_profile.id }}" id="blockProfileBtn" class="btn btn-primary" type="button" style="background: rgba(255,255,255,0);border-style: none;color: rgb(215,119,50);width: 20%;margin-left: 5px;margin-right: 5px;">
-							<svg class="icon icon-tabler icon-tabler-bell-off" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" data-bs-toggle="tooltip" data-bss-tooltip data-bs-placement="bottom" style="font-size: 35px;" title="Block Player">
+							<svg class="icon icon-tabler icon-tabler-bell-off" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" data-bs-toggle="tooltip" data-bss-tooltip data-bs-placement="bottom" style="font-size: 35px;" title="{% translate 'Block Player' %}">
 								<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
 								<path d="M9.346 5.353c.21 -.129 .428 -.246 .654 -.353a2 2 0 1 1 4 0a7 7 0 0 1 4 6v3m-1 3h-13a4 4 0 0 0 2 -3v-3a6.996 6.996 0 0 1 1.273 -3.707"></path>
 								<path d="M9 17v1a3 3 0 0 0 6 0v-1"></path>
@@ -218,13 +218,13 @@
 										{{ current_profile.get_winrate }}%
 									</h1>
 									<h4 class="text-truncate text-start d-flex d-md-flex justify-content-start align-items-center justify-content-md-start align-items-md-center" style="color: var(--bs-body-bg);">
-										Wins:
+										{% translate "Wins" %}:
 										<span style="color: {{ current_profile.user.fortytwo_coalition_color }};">
 											{{ current_profile.get_won_games }}
 										</span>
 									</h4>
 									<h4 class="text-truncate text-start d-flex d-md-flex justify-content-start align-items-center justify-content-md-start align-items-md-center" style="color: var(--bs-body-bg);margin-bottom: 8px;">
-										Losses:
+										{% translate "Losses" %}:
 										<span style="color: var(--bs-gray-600);">
 											{{ current_profile.get_lost_games }}
 										</span>
@@ -323,7 +323,7 @@
 						</button>
 						{% elif is_requested %}
 						<div class="d-xxl-flex justify-content-xxl-center align-items-xxl-center btn disabled" style="box-shadow: 0px 0px;background: rgba(255,255,255,0);color: var(--bs-btn-border-color);width: 20%;margin-left: 5px;margin-right: 5px;border-style: none;">
-							<svg class="icon icon-tabler icon-tabler-user-check text-success" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" data-bs-toggle="tooltip" data-bss-tooltip data-bs-placement="bottom" title="Add Player" style="font-size: 35px;">
+							<svg class="icon icon-tabler icon-tabler-user-check text-success" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" data-bs-toggle="tooltip" data-bss-tooltip data-bs-placement="bottom" title="{% translate 'Add Player' %}" style="font-size: 35px;">
 								<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
 								<path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
 								<path d="M6 21v-2a4 4 0 0 1 4 -4h4"></path>
@@ -332,7 +332,7 @@
 						</div>
 						{% else %}
 						<button data-profile-id="{{ current_profile.id }}" id="addFriendBtn" class="btn btn-primary" style="box-shadow: 0px 0px;background: rgba(255,255,255,0);border-style: none;color: var(--bs-btn-border-color);width: 20%;margin-left: 0px;margin-right: 0px;" type="button">
-							<svg class="icon icon-tabler icon-tabler-user-plus text-success" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" data-bs-toggle="tooltip" data-bss-tooltip data-bs-placement="bottom" title="Add Player" style="font-size: 35px;">
+							<svg class="icon icon-tabler icon-tabler-user-plus text-success" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" data-bs-toggle="tooltip" data-bss-tooltip data-bs-placement="bottom" title="{% translate 'Add Player' %}" style="font-size: 35px;">
 								<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
 								<path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
 								<path d="M16 19h6"></path>
@@ -353,7 +353,7 @@
 						</button>
 						{% else %}
 						<button data-profile-id="{{ current_profile.id }}" id="blockProfileBtn" class="btn btn-primary" type="button" style="background: rgba(255,255,255,0);border-style: none;color: rgb(215,119,50);width: 20%;margin-left: 5px;margin-right: 5px;">
-							<svg class="icon icon-tabler icon-tabler-bell-off" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" data-bs-toggle="tooltip" data-bss-tooltip data-bs-placement="bottom" style="font-size: 35px;" title="Block Player">
+							<svg class="icon icon-tabler icon-tabler-bell-off" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" data-bs-toggle="tooltip" data-bss-tooltip data-bs-placement="bottom" style="font-size: 35px;" title="{% translate 'Block Player' %}">
 								<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
 								<path d="M9.346 5.353c.21 -.129 .428 -.246 .654 -.353a2 2 0 1 1 4 0a7 7 0 0 1 4 6v3m-1 3h-13a4 4 0 0 0 2 -3v-3a6.996 6.996 0 0 1 1.273 -3.707"></path>
 								<path d="M9 17v1a3 3 0 0 0 6 0v-1"></path>
@@ -507,13 +507,13 @@
 										{{ current_profile.get_winrate }}%
 									</h1>
 									<h4 class="text-truncate text-start d-flex d-md-flex justify-content-start align-items-center justify-content-md-start align-items-md-center" style="color: var(--bs-body-bg);">
-										Wins:
+										{% translate "Wins" %}:
 										<span style="color: var(--bs-primary-border-subtle);">
 											{{ current_profile.get_won_games }}
 										</span>
 									</h4>
 									<h4 class="text-truncate text-start d-flex d-md-flex justify-content-start align-items-center justify-content-md-start align-items-md-center" style="color: var(--bs-body-bg);margin-bottom: 8px;">
-										Losses:
+										{% translate "Losses" %}:
 										<span style="color: var(--bs-gray-600);">
 											{{ current_profile.get_lost_games }}
 										</span>
@@ -528,7 +528,7 @@
 								</div>
 								<div class="text-truncate d-flex flex-column align-items-start flex-wrap align-items-sm-start align-items-md-start" style="width: 100%;height: 100%;">
 									<h1 class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start align-items-xxl-center" style="color: var(--bs-primary-border-subtle);font-weight: bold;margin-top: 10px;margin-bottom: 10px;">
-										Last 20 Games
+										{% translate "Last 20 Games" %}
 									</h1>
 									<h4 class="text-truncate text-start d-flex d-md-flex justify-content-start align-items-center justify-content-md-start align-items-md-center" style="color: var(--bs-primary-border-subtle);">
 										#Highestpts
