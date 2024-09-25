@@ -12,7 +12,7 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from profiles.models import Profile, ProfileBlock
-from friends.models import Friendship, FriendMessage
+from friends.models import Friendship, FriendMessage, FriendRequest
 from games.models import Game, GameRound, GameMessage
 from notifs.models import Notification
 from .mixins import JWTCookieAuthenticationMixin, LangVerificationMixin, RedirectIfAuthenticatedMixin
@@ -312,23 +312,30 @@ class PrivacyPolicyView(PrivateView):
     def get(self, request):
         context = {
             'profile': request.profile,
+            'discord_invite': settings.DISCORD_INVITE,
+            'django_mail_contact': settings.DJANGO_MAIL_CONTACT,
         }
         return render(request, 'about/privacy_policy.html', context)
 
 privacy_policy_priv = PrivacyPolicyView.as_view()
 
 
-class PrivacyPolicyView(PrivateView):
+class PrivacyPolicyView(PublicView):
     def get(self, request):
-        return render(request, 'about/privacy_policy.html')
+        context = {
+            'discord_invite': settings.DISCORD_INVITE,
+            'django_mail_contact': settings.DJANGO_MAIL_CONTACT,
+        }
+        return render(request, 'about/privacy_policy.html', context)
 
 privacy_policy_pub = PrivacyPolicyView.as_view()
-
 
 class TosView(PrivateView):
     def get(self, request):
         context = {
             'profile': request.profile,
+            'discord_invite': settings.DISCORD_INVITE,
+            'django_mail_contact': settings.DJANGO_MAIL_CONTACT,
         }
         return render(request, 'about/terms_of_service.html', context)
 
@@ -336,6 +343,10 @@ terms_of_service_priv = TosView.as_view()
 
 class TosView(PublicView):
     def get(self, request):
+        context = {
+            'discord_invite': settings.DISCORD_INVITE,
+            'django_mail_contact': settings.DJANGO_MAIL_CONTACT,
+        }
         return render(request, 'about/terms_of_service.html')
 
 terms_of_service_pub = TosView.as_view()
@@ -410,6 +421,7 @@ class ProfileOtherView(PrivateView):
         context = get_profile_context(request, profile_id)
         context = get_notif_context(request, context)
         context['is_self'] = request.profile.id == profile_id
+        context['is_requested'] = FriendRequest.objects.filter(sender=request.profile, receiver=profile).first()
         context['is_friend'] = request.profile.is_friend(context['profile'])
         if context['is_friend']:
             context['friendship'] = Friendship.objects.get_friendship(request.profile, profile)

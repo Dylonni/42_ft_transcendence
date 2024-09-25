@@ -66,10 +66,10 @@ class UserLoginView(PublicView):
             response.data['refresh_token'] = refresh_token
             return response
         except ValidationError as e:
-            response_data = {'message': e.detail}
+            response_data = {'error': _('Wrong credentials. Please try again')}
             return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
         except ValueError as e:
-            response_data = {'error': str(e)}
+            response_data = {'error': _('Wrong credentials. Please try again')}
             return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
 
 user_login = UserLoginView.as_view()
@@ -141,17 +141,17 @@ class UserRegisterView(PublicView):
             serializer.is_valid(raise_exception=True)
             user = serializer.save()
             
-            user = UserModel.objects.send_mail(request.data['email'], 'accounts/email_activate.html', 'Activate your Account')
+            user = UserModel.objects.send_mail(request.data['email'], 'accounts/email_activate.html', _('Activate your Account'))
             token_generator = EmailTokenGenerator()
             token = token_generator.make_token(user)
             uid = urlsafe_base64_encode(force_bytes(user.pk))
             response_data = {
-                'message': _('Account registered! Please check your email to activate your account.'),
+                'message': _('Account registered! Please check your email to activate it.'),
                 'redirect': f'/verify-code/?type=activate&token={token}&user={uid}',
             }
             return Response(response_data, status=status.HTTP_201_CREATED)
         except ValidationError as e:
-            response_data = {'error': str(e)}
+            response_data = {'error': _('Invalid Username/Email.')}
             return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
 
 user_register = UserRegisterView.as_view()
@@ -192,7 +192,7 @@ class UserActivateView(PublicView):
             response.data['refresh_token'] = refresh_token
             return response
         except ValueError as e:
-            response_data = {'error': str(e)}
+            response_data = {'error': 'Invalid Code.'}
             return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
 
 user_activate = UserActivateView.as_view()

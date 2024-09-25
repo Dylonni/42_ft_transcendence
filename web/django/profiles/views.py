@@ -1,6 +1,7 @@
 import logging
 from asgiref.sync import async_to_sync
 from django.contrib.auth.hashers import make_password
+from django.core.exceptions import ValidationError
 from django.shortcuts import get_object_or_404
 from django.utils import translation
 from django.utils.encoding import force_bytes, force_str
@@ -42,7 +43,7 @@ class ProfileSearchView(PrivateView):
         alias = request.query_params.get('alias', '')
         profiles = Profile.objects.search_by_alias(alias)
         if not profiles.exists():
-            response_data = {'message': _('Profile not found.')}
+            response_data = {'error': _('Profile not found.')}
             return Response(response_data, status=status.HTTP_200_OK)
         response_data = {'data': ProfileSerializer(profiles, many=True).data}
         return Response(response_data, status=status.HTTP_200_OK)
@@ -93,10 +94,11 @@ class MyAvatarView(PrivateView):
             profile.set_avatar_url(id=img_id, path=request.user.fortytwo_avatar_url)
         else:
             serializer = ProfileSerializer(request.profile, data=request.data, partial=True)
-            if serializer.is_valid():
-                serializer.save()
-            else:
-                response_data = {'error': serializer.errors}
+            try:
+                if serializer.is_valid(raise_exception=True):
+                    serializer.save()
+            except ValidationError as e:
+                response_data = {'error': e.detail}
                 return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
         response_data = {'message': _('Avatar updated.'), 'redirect': '/settings/'}
         return Response(response_data, status=status.HTTP_200_OK)
