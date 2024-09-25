@@ -1,10 +1,4 @@
-
-
-
-
-
-
-# SOME DESCRIPTIVE TITLE.
+# JAPANESE TRANSLATION FOR TRANSCENDENCE42 PROJECT.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <ACLOOS@STUDENT.42.FR>, 2024.
@@ -14,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-25 08:25+0000\n"
+"POT-Creation-Date: 2024-09-25 13:25+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: ALEXANDRA CLOOS <ACLOOS@STUDENT.42.FR>\n"
 "Language-Team: JAPANESE <LL@li.org>\n"
@@ -42,11 +36,11 @@ msgstr "アクティブにアカウント!"
 
 #: accounts/serializers.py:76
 msgid "Unable to register with provided credentials."
-msgstr "提供された認証情報でログインできません。"."
+msgstr "提供された認証情報でログインできません。"
 
 #: accounts/views.py:56
 msgid "Please check your email to sign in."
-msgstr "Vérifiez votre courriel pour vous connecter."
+msgstr "ログインするように、メールをチェックしてください。"
 
 #: accounts/views.py:61
 msgid "User logged in."
@@ -82,7 +76,7 @@ msgstr "アカウントの有効化"
 
 #: accounts/views.py:149
 msgid "Account registered! Please check your email to activate it."
-msgstr "会員登録 口座の有効化は、Eメールアドレスをご確認ください。""
+msgstr "会員登録 口座の有効化は、Eメールアドレスをご確認ください。"
 
 #: accounts/views.py:154
 msgid "Invalid Username/Email."
@@ -130,111 +124,111 @@ msgstr "リフレッシュトークン"
 
 #: friends/managers.py:37
 msgid "Friendship not found."
-msgstr "Ami introuvable."
+msgstr "友達が見つかりません。"
 
 #: friends/managers.py:53
 msgid "Cannot be friends with yourself."
-msgstr "Vous ne pouvez pas être votre propre ami."
+msgstr "自分で友達にすることはできません。"
 
 #: friends/managers.py:62
 msgid "These profiles are already friends."
-msgstr "Ces profiles sont déjà amis."
+msgstr "そのプロフィールは既に友達です。"
 
 #: friends/managers.py:80
 msgid "Profile not part of this friendship."
-msgstr "Vous n'êtes pas ami avec cette personne."
+msgstr "このウーザーとは友ではありませ。"
 
 #: friends/managers.py:83
 msgid "Friendship already removed."
-msgstr "Cette amitié n'existe déjà plus."
+msgstr "既に削除された友達。"
 
 #: friends/managers.py:112
 msgid "Cannot send a friend request to yourself."
-msgstr "Vous ne pouvez pas être votre propre ami."
+msgstr "友達リクエストを自分で送信することはできません。"
 
 #: friends/managers.py:114
 msgid "Friend request already sent."
-msgstr "Vous l'avez déjà demandé en ami."
+msgstr "リクエストもう送信しました。"
 
 #: friends/managers.py:116
 msgid "Friend request already received."
-msgstr "Vous avez déjà reçu une demande en ami"
+msgstr "リクエストもう受け付けています。"
 
 #: friends/managers.py:168
 msgid "Friend message not found."
-msgstr "Nous n'avons pas trouvé ce message."
+msgstr "ともだちからメッセージが見つかりません。"
 
 #: games/managers.py:16 games/managers.py:31 games/managers.py:168
 msgid "Player is already in a game."
-msgstr "Déjà en train de jouer."
+msgstr "プレイヤーはゲーム中。"
 
 #: games/managers.py:19
 msgid "Server is full. Try to create a game later."
-msgstr "Le serveur est plein. Veuillez réessayer ultérieurement."
+msgstr "サーバーがいっぱいです。 後でゲームを作成してみてください。"
 
 #: games/managers.py:33 games/managers.py:170
 msgid "Game is full. Unable to join."
-msgstr "Il n'y a plus de place dans cette partie."
+msgstr "ゲームがいっぱいです。 参加できません。"
 
 #: games/managers.py:35 games/managers.py:88 games/managers.py:110
 msgid "Game has already started."
-msgstr "La partie a déjà commencé."
+msgstr "ゲームは始まりました。"
 
 #: games/managers.py:44
 msgid "Player is not in the game."
-msgstr "Ce joueur n'est pas dans cette partie."
+msgstr "プレイヤーはゲーム内ではありません。"
 
 #: games/managers.py:146
 msgid "Cannot send a game invite to yourself."
-msgstr "Vous ne pouvez pas vous inviter vous-même."
+msgstr "ゲームを自分で送信することはできません。"
 
 #: games/managers.py:148
 msgid "Sender is not in a game."
-msgstr "Vous n'avez pas encore créé de partie."
+msgstr "入札はゲームではありません。"
 
 #: games/managers.py:150
 msgid "Game invite already sent."
-msgstr "Invitation déjà envoyée."
+msgstr "ゲームは既に送信されました。"
 
 #: games/managers.py:152
 msgid "Game invite already received."
-msgstr "Invitation déjà reçue."
+msgstr "既に受け取られたゲーム招待。"
 
 #: games/models.py:19 templates/games/game_config.html:139
 #: templates/games/game_config.html:211
 msgid "Small"
-msgstr "Petite"
+msgstr "小"
 
 #: games/models.py:20 templates/games/game_config.html:142
 #: templates/games/game_config.html:214
 msgid "Medium"
-msgstr "Moyenne"
+msgstr "中"
 
 #: games/models.py:21 templates/games/game_config.html:145
 #: templates/games/game_config.html:217
 msgid "Large"
-msgstr "Grande"
+msgstr "大"
 
 #: games/models.py:24 templates/games/game_config.html:172
 msgid "Slow"
-msgstr "Lente"
+msgstr "遅"
 
 #: games/models.py:25 games/models.py:30 templates/games/game_config.html:175
 #: templates/games/game_config.html:286
 msgid "Normal"
-msgstr "Normale"
+msgstr "普通"
 
 #: games/models.py:26 templates/games/game_config.html:178
 msgid "Fast"
-msgstr "Rapide"
+msgstr "速"
 
 #: games/models.py:29 templates/games/game_config.html:283
 msgid "Easy"
-msgstr "Facile"
+msgstr "簡単"
 
 #: games/models.py:31 templates/games/game_config.html:289
 msgid "Hard"
-msgstr "Difficile"
+msgstr "難"
 
 #: games/models.py:330 templates/accounts/forgot_password.html:61
 msgid "Send"
@@ -246,15 +240,15 @@ msgstr "参加"
 
 #: games/models.py:332 templates/games/game_room.html:227
 msgid "Leave"
-msgstr "Quitter"
+msgstr "退去"
 
 #: games/models.py:333
 msgid "Prepare"
-msgstr "Préparer"
+msgstr "準備"
 
 #: games/models.py:334
 msgid "Eliminate"
-msgstr "Éliminer"
+msgstr "排除する"
 
 #: games/models.py:335
 msgid "Win"
@@ -262,59 +256,59 @@ msgstr "勝ち"
 
 #: games/views.py:26
 msgid "Game created."
-msgstr "Partie créée."
+msgstr "ゲーム作成。"
 
 #: games/views.py:40
 msgid "Game not found."
-msgstr "Partie inexistante"
+msgstr "ゲームが見つかりません。"
 
 #: games/views.py:62
 msgid "Game joined."
-msgstr "Partie rejointe"
+msgstr "ゲーム参加"
 
 #: games/views.py:76
 msgid "Game left."
-msgstr "Partie quittée."
+msgstr "ゲーム退去。"
 
 #: games/views.py:91
 msgid "All players must be ready."
-msgstr "Tous les joueurs se tiennent prêts"
+msgstr "皆は準備が整っている。"
 
 #: games/views.py:97
 msgid "Game started."
-msgstr "La partie a commencé."
+msgstr "ゲームが始まりました。"
 
 #: games/views.py:116 profiles/views.py:511
 msgid "Message sent."
-msgstr "Message envoyé"
+msgstr "メッセージが送信された"
 
 #: notifs/models.py:10 templates/notifs/notif_friend_request.html:14
 msgid "Friend Request"
-msgstr "Demande en Ami"
+msgstr "友人リクエスト"
 
 #: notifs/models.py:11
 msgid "Friend Message"
-msgstr "Message"
+msgstr "友達メッセージ"
 
 #: notifs/models.py:12
 msgid "Game Invitation"
-msgstr "Invitation à jouer"
+msgstr "ゲーム招待"
 
 #: notifs/models.py:13
 msgid "Game Message"
-msgstr "Message du jeu"
+msgstr "ゲームメッセージ"
 
 #: pong/views.py:483
 msgid "Language changed."
-msgstr "Langue mise à jour"
+msgstr "言語変更"
 
 #: profiles/managers.py:35
 msgid "No profile found to set status."
-msgstr ""
+msgstr "プロファイルはないのでステータスを設定できない。"
 
 #: profiles/managers.py:91
 msgid "Profile is already blocked."
-msgstr "Le profil est déjà bloqué"
+msgstr "ウーザーはもうブロックされています。"
 
 #: profiles/models.py:20 templates/friends/social_header.html:16
 msgid "Online"
@@ -322,51 +316,51 @@ msgstr "オンライン"
 
 #: profiles/models.py:21 templates/friends/social_header.html:34
 msgid "Waiting"
-msgstr "En attente"
+msgstr "準備中"
 
 #: profiles/models.py:22 templates/friends/social_header.html:28
 msgid "Playing"
-msgstr "En jeu"
+msgstr "ゲーム中"
 
 #: profiles/models.py:23 templates/friends/social_header.html:22
 msgid "Offline"
-msgstr "Hors ligne"
+msgstr "オフライン"
 
 #: profiles/models.py:183
 msgid "Unranked"
-msgstr "Non classé"
+msgstr "不ランク"
 
 #: profiles/views.py:46
 msgid "Profile not found."
-msgstr "Profil introuvable."
+msgstr "ウーザーが見つかりません。"
 
 #: profiles/views.py:61
 msgid "Incorrect password."
-msgstr "Mot de passe erroné."
+msgstr "パスワードが正しくありません "
 
 #: profiles/views.py:68
 msgid "Account deleted."
-msgstr "Compte supprimé."
+msgstr "アカウントは削除された"
 
 #: profiles/views.py:80
 msgid "Alias already taken."
-msgstr "Cet alias est déjà pris."
+msgstr "ウーザー名は取られた"
 
 #: profiles/views.py:83
 msgid "Alias updated."
-msgstr "Alias mis à jour."
+msgstr "アリアスが更新されました。"
 
 #: profiles/views.py:103
 msgid "Avatar updated."
-msgstr "Avatar mis à jour."
+msgstr "アバターを更新しました。"
 
 #: profiles/views.py:113
 msgid "Default language changed."
-msgstr "La langue par défaut a été modifiée."
+msgstr "デフォルト言語が変更されました。"
 
 #: profiles/views.py:129
 msgid "Change your Email"
-msgstr "Modifier votre courriel"
+msgstr "Eメール変化"
 
 #: profiles/views.py:134
 msgid "Email change request sent! Please check your email."
@@ -376,103 +370,100 @@ msgstr ""
 
 #: profiles/views.py:146
 msgid "Invalid email."
-msgstr "Eメールは無効"
+msgstr "無効なメール"
 
 #: profiles/views.py:149 profiles/views.py:184 profiles/views.py:188
 msgid "Invalid password."
-msgstr "パスワードは無効"
+msgstr "無効なパスワード"
 
 #: profiles/views.py:155
 msgid "Email changed."
-msgstr "L'adresse courriel a été modifiée."
+msgstr "Eメール変更"
 
 #: profiles/views.py:167 templates/accounts/email_change_password.html:7
 msgid "Change your Password"
-msgstr "Modifier votre nouveau mot de passe."
+msgstr "変更する パスワード"
 
 #: profiles/views.py:172
 msgid "Password change request sent! Please check your email."
-msgstr ""
-"Vous allez recevoir un lien pour modifier votre mot de passe. Veuillez "
-"surveiller votre courriel."
+msgstr "パスワード変更送信リクエスト! Eメールをチェックしてください。"
 
 #: profiles/views.py:208
 msgid "2FA enabled."
-msgstr "2FA Activée."
+msgstr "2FA許容"
 
 #: profiles/views.py:218
 msgid "2FA disabled."
-msgstr "2FA désactivée."
+msgstr "2FA非許容"
 
 #: profiles/views.py:261
 msgid "Code verified."
-msgstr "Code vérifié."
+msgstr "認証済みコード"
 
 #: profiles/views.py:291
 msgid "Game invitation sent."
-msgstr "Invitation envoyée."
+msgstr "ゲーム招待が送られました。"
 
 #: profiles/views.py:312
 msgid "Profile blocked."
-msgstr "Utilisateur bloqué."
+msgstr "ウーザーがブロックされた。"
 
 #: profiles/views.py:335 profiles/views.py:442
 msgid "Friend request accepted."
-msgstr "La demande en ami a été acceptée."
+msgstr "友達リクエスト承認。"
 
 #: profiles/views.py:338
 msgid "Friend request sent."
-msgstr "La demande en ami a été envoyée."
+msgstr "友達リクエストが送られました。"
 
 #: profiles/views.py:390
 msgid "Game invitation accepted."
-msgstr "L'invitation de jeu a été acceptée."
+msgstr "ゲーム招待承認。"
 
 #: profiles/views.py:400
 msgid "Game invitation declined."
-msgstr "L'invitation de jeu a été refusée."
+msgstr "ゲーム招待断。"
 
 #: profiles/views.py:422
 msgid "Profile unblocked."
-msgstr "Utilisateur debloqué."
+msgstr "ウーザーがアンブロックされた。"
 
 #: profiles/views.py:452
 msgid "Friend request declined."
-msgstr "La demande en ami a été refusée."
+msgstr "友達リクエスト招待断。"
 
 #: profiles/views.py:492
 msgid "Friend removed."
-msgstr "Amitié supprimée."
+msgstr "友達削除。"
 
 #: templates/about/about.html:4 templates/about/dev_team.html:33
 #: templates/about/faq.html:32 templates/about/game_rules.html:34
 #: templates/about/privacy_policy.html:28
 #: templates/about/terms_of_service.html:28
 msgid "About"
-msgstr "À propos"
+msgstr "お問い合わせ"
 
 #: templates/about/about.html:15 templates/footer.html:8
 msgid "About Transcendence42"
-msgstr "À propos de Transcendence42"
+msgstr "Transcendence42について"
 
 #: templates/about/about.html:30
 msgid ""
 "Welcome to this section, here you can learn more about the app and our team"
-msgstr ""
-"Bienvenue! Ici vous en saurez plus sur notre application et notre équipe"
+msgstr "このセクションへようこそ、ここでアプリと私たちのチームについてもっと学ぶことができます"
 
 #: templates/about/about.html:43 templates/about/faq.html:20
 msgid "Frequently Asked Questions"
-msgstr "Foire Aux Questions"
+msgstr "よくある質問"
 
 #: templates/about/about.html:59 templates/about/game_rules.html:4
 #: templates/about/game_rules.html:22
 msgid "Game Rules"
-msgstr "Règles du jeu"
+msgstr "ゲームルール"
 
 #: templates/about/about.html:72 templates/about/dev_team.html:21
 msgid "The Dev Team"
-msgstr "L'équipe de développement"
+msgstr "デベロッパーチーム"
 
 #: templates/about/about.html:89 templates/about/dev_team.html:4
 #: templates/about/faq.html:139 templates/about/privacy_policy.html:4
@@ -484,132 +475,130 @@ msgstr "プライバシー規約"
 #: templates/about/about.html:104 templates/about/terms_of_service.html:4
 #: templates/accounts/register.html:66 templates/footer.html:6
 msgid "Terms of Service"
-msgstr "Conditions d'utilisation"
+msgstr "利用規約"
 
 #: templates/about/dev_team.html:45
 msgid ""
 "This is us, the team behind Transcendence42 project. Check us out below !"
-msgstr "Et voici l'équipe de Transcendence42 !"
+msgstr "Transcendence42プロジェクトの背後にあるチームです。 お問い合わせ"
 
 #: templates/about/dev_team.html:62
 msgid "Frontend Dev"
-msgstr "Dev Frontend"
+msgstr "フロントエンドデベロッパー"
 
 #: templates/about/dev_team.html:65
 msgid "UI/UX Design"
-msgstr "Design UI/UX"
+msgstr "UI/UXデザイン"
 
 #: templates/about/dev_team.html:115
 msgid "Backend Dev"
-msgstr "Dev Backend"
+msgstr "バックエンドデベロッパー"
 
 #: templates/about/dev_team.html:118
 msgid "Database Architecture"
-msgstr "Architecture de données"
+msgstr "データベースのアーキテクチャ"
 
 #: templates/about/dev_team.html:121
 msgid "Game Design"
-msgstr "Design du jeu"
+msgstr "ゲームデザイン"
 
 #: templates/about/dev_team.html:136
 msgid "Devops and security"
-msgstr "Devops et sécurité"
+msgstr "Devopsとセキュリティ"
 
 #: templates/about/dev_team.html:139
 msgid "GDPR Compliance"
-msgstr "Conformité RGPD"
+msgstr "GDPRについて コンプライアンス"
 
 #: templates/about/dev_team.html:142
 msgid "Localization and Translation"
-msgstr "Traduction et localisation"
+msgstr "翻訳"
 
 #: templates/about/faq.html:4
 msgid "FAQ"
-msgstr "FAQ"
+msgstr "よくある質問"
 
 #: templates/about/faq.html:45
 msgid "How does the ranking system and the elo works ?"
-msgstr "Comment fonctionnent le classement et le système d'elo ?"
+msgstr "ランキングシステムと elo の仕組みは?"
 
 #: templates/about/faq.html:62 templates/about/faq.html:110
-#: templates/home.html:44 templates/profile.html:106 templates/profile.html:395
-#: templates/profile.html:495
+#: templates/home.html:44 templates/profile.html:106
+#: templates/profile.html:395 templates/profile.html:495
 msgid "Points"
-msgstr "Points"
+msgstr "ポイント"
 
 #: templates/about/faq.html:65
 msgid "are calculated upon victories and defeats and on your opponent&#39;s "
-msgstr ": basés sur le nombre de victoires et défaites, mais aussi le"
+msgstr "勝利と敗北と対戦相手に計算されます&#39;s"
 
 #: templates/about/faq.html:73 templates/about/faq.html:98
 #: templates/home.html:32 templates/profile.html:92 templates/profile.html:381
 msgid "Rank"
-msgstr "Classement"
+msgstr "ランキング"
 
 #: templates/about/faq.html:75
 msgid "."
-msgstr "de votre adversaire."
+msgstr "お問い合わせ"
 
 #: templates/about/faq.html:77
 msgid ""
 "If your opponent&#39;s rank is bigger than yours, you will gain more points "
 "on a victory and loose less points on a defeat."
 msgstr ""
-"Si votre adversaire est mieux classé que vous, vous gagnerez plus en cas de "
-"victoire, et perdrez moins en cas de défaite."
+"相手のランクがあなたのよりも大きい場合, あなたは勝利により多くのポイントを獲得し、敗北により少ないポイントを失うことになります."
 
 #: templates/about/faq.html:79
 msgid "If you decide to leave the game while it&#39;s on, you will get a"
-msgstr "Quitter une partie en cours vous vaudra"
+msgstr "もし、の時にゲームを離れることにしたなら、"
 
 #: templates/about/faq.html:81
 msgid "point penalty"
-msgstr "un point de pénalité"
+msgstr "ポイント ペナルティ"
 
-#: templates/about/faq.html:83
 msgid ""
 "and you will also loose the points you were supposed to loose initially."
-msgstr ", en plus de la perte de points prévue en cas de défaite."
+msgstr "また、最初にゆるむべきポイントを緩めます。"
 
 #: templates/about/faq.html:85
 msgid "Winning games in a tournament will "
-msgstr "Les victoires en tournoi"
+msgstr "トーナメントでゲームを獲得する"
 
 #: templates/about/faq.html:87
 msgid "grant you"
-msgstr "vous octroient"
+msgstr "助成金"
 
 #: templates/about/faq.html:89
 msgid "more points."
-msgstr "plus de points."
+msgstr "より多くのポイント。"
 
 #: templates/about/faq.html:101
 msgid "is simply based on the"
-msgstr "est tout simplement basé sur"
+msgstr "単にに基づいている"
 
 #: templates/about/faq.html:112
 msgid "you acquired."
-msgstr "que vous avez acquis."
+msgstr "取得しました。"
 
 #: templates/about/faq.html:120
 msgid "What data do you store ?"
-msgstr "Que stockez-vous comme données personnelles?"
+msgstr "保存するデータ"
 
 #: templates/about/faq.html:129
 msgid "Please check our"
-msgstr "Notre"
+msgstr "お問い合わせ"
 
 #: templates/about/faq.html:140
 msgid "page for all relevant info."
-msgstr "contient toutes les informations dont vous avez besoin."
+msgstr "すべての関連情報のページ。"
 
 #: templates/about/faq.html:148
 msgid "How does the social aspect works ?"
-msgstr "Comment fonctionne le clavardage / live chat?"
+msgstr "社会的側面はどのように機能しますか?"
 
 #: templates/about/faq.html:157
 msgid "The"
-msgstr "Le"
+msgstr "ザ・オブ・ザ・"
 
 #: templates/about/faq.html:167 templates/about/faq.html:198
 #: templates/about/faq.html:279 templates/friends/social.html:4
@@ -621,154 +610,132 @@ msgstr "チャット"
 msgid ""
 "aspect of the app allows you to discuss with friends and manage your friend "
 "list."
-msgstr ""
-"vous permet de discuter avec des amis, ainsi que de gérer votre liste d'amis."
+msgstr "アプリの側面では、友達と話し合い、友人リストを管理することができます。"
 
 #: templates/about/faq.html:174
 msgid ""
 "To create a conversation or interact with someone, you must add a player to "
 "your friend list."
-msgstr ""
-"Pour créer une conversation ou intéragir avec d'autres joueurs, vous devez "
-"le(s) ajouter à votre liste d'amis."
+msgstr "会話を作成するか、誰かとやり取りするには、プレーヤーをフレンドリストに追加する必要があります。"
 
 #: templates/about/faq.html:176
 msgid ""
-"The friend has to either accept the requested invitation from you, or has to "
-"add you back via your"
-msgstr ""
-"Cette personne peut accepter votre invitation directement, ou encore vous "
-"ajouter à sa propre liste d'amis via votre "
+"The friend has to either accept the requested invitation from you, or has to"
+" add you back via your"
+msgstr "友人は、あなたからの要求された招待状を受け入れるか、またはあなたを介して戻ってあなたを追加する必要があります"
 
 #: templates/about/faq.html:185 templates/about/faq.html:264
 #: templates/profile.html:4
 msgid "Profile"
-msgstr "Profil"
+msgstr "プロフィール"
 
 #: templates/about/faq.html:187
 msgid "page."
-msgstr "personnel."
+msgstr "サイトマップ"
 
 #: templates/about/faq.html:189
 msgid ""
 "When both users have accepted each other, you can see their status in the"
-msgstr ""
-"Lorsque deux joueurs se sont mutellement ajoutés en amis, ils peuvent chacun "
-"voir leur statut sur la page de"
+msgstr "どちらのユーザーがお互いに受け入れられているとき、あなたは自分のステータスを見ることができます"
 
 #: templates/about/faq.html:200
 msgid ""
 "page, you can interact with this friend by clicking on them in your friend "
 "list."
-msgstr ""
-". Pour intéragir avec un ami, il suffit de cliquer sur son nom dans la liste."
+msgstr "このページでは、友人リストでクリックして、この友人と対話することができます。"
 
 #: templates/about/faq.html:208
 msgid "What happens when I block someone ?"
-msgstr "Que se passe-t-il quand je bloque quelqu'un?"
+msgstr "誰かをブロックするときはどうなりますか?"
 
 #: templates/about/faq.html:224
 msgid "Blocking"
-msgstr "Bloquer"
+msgstr "ブロック"
 
 #: templates/about/faq.html:227
 msgid ""
 "a user will prevent them from sending notifications and messages to you."
-msgstr ""
-"un joueur fait que vous ne recevrez plus de messages ni de notifications de "
-"sa part."
+msgstr "ユーザーに通知やメッセージの送信を防ぐことができます。"
 
 #: templates/about/faq.html:231
 msgid ""
 "If you have blocked someone and play with them in the same game room, you "
 "will not see their messages in the room chat."
-msgstr ""
-"Dans une instance de jeu, vous ne verrez pas les messages en direct des "
-"personnes que vous avez bloquées."
+msgstr "誰かをブロックして、同じゲームルームで遊ぶと、ルームチャットでメッセージが表示されません。"
 
 #: templates/about/faq.html:235
 msgid ""
 "If you have blocked a friend, you will still be able to interact with them, "
-"and they will be able to see your requests and messages but you will not see "
-"their replies or requests."
+"and they will be able to see your requests and messages but you will not see"
+" their replies or requests."
 msgstr ""
-"Vous pouvez continuer à notifier les amis que vous bloquez, et ils verront "
-"vos messages et invitations. Cependant, vous ne pourrez plus voir leurs "
-"réponses ou invitations."
+"友人をブロックした場合は、まだ彼らとやり取りすることができ、彼らはあなたの要求やメッセージを見ることができますが、あなたは彼らの返信や要求を見ることができません。"
 
 #: templates/about/faq.html:239
 msgid "You can"
-msgstr "Vous pouvez"
+msgstr "お問い合わせ"
 
 #: templates/about/faq.html:250
 msgid "Unblock"
-msgstr "Débloquer"
+msgstr "ブロック解除"
 
 #: templates/about/faq.html:254
 msgid "a user by going to their"
-msgstr "un utilisateur depuis sa page de"
+msgstr "ユーザは、"
 
 #: templates/about/faq.html:268
 msgid "page, via the"
-msgstr "via la page de"
+msgstr "ページ, ビア"
 
 #: templates/about/faq.html:283
 msgid "page , or removing them off your blocked list under the"
-msgstr ""
-", ou en les retirant de votre liste d'utilisateurs bloqués depuis la page"
+msgstr "ページ、またはブロックされたリストから削除する"
 
 #: templates/about/faq.html:292 templates/settings.html:4
 #: templates/settings.html:13
 msgid "Settings"
-msgstr "設定"
+msgstr "コンテンツ"
 
 #: templates/about/faq.html:296
 msgid "page"
-msgstr "de votre compte."
+msgstr "サイトマップ"
 
 #: templates/about/faq.html:305
 msgid "Can i suggest some ideas ?"
-msgstr "Et si j'ai des suggestions?"
+msgstr "いくつかのアイデアを提案できますか?"
 
 #: templates/about/faq.html:314
 msgid ""
 "Yes , we would love to hear about your ideas ! Feel free to share them with "
 "us by contacting us at"
-msgstr ""
-"Nous serons ravis de recevoir vos idées et suggestions! Vous pouvez nous les "
-"envoyer à :"
+msgstr "お問い合わせ お気軽にお問い合わせください。"
 
 #: templates/about/game_rules.html:46
 msgid "The rules are simple:"
-msgstr "Les règles sont simples :"
+msgstr "ルールは簡単です。"
 
 #: templates/about/game_rules.html:48
 msgid ""
 "There are two paddles on each side of the field , you (and your opponent) "
 "have to move your paddles and hit the ball in order to score a point."
 msgstr ""
-"défendez votre côté du terrain avec votre raquette, et marquez un point "
-"chaque fois que l'adversaire n'arrive pas à rattrapper la balle."
+"フィールドの各側面に2つのパドルがあります、あなたは(そしてあなたの相手)あなたのパドルを動かし、ポイントをスコアするためにボールを打つ必要があります。"
 
 #: templates/about/game_rules.html:50
 msgid "The ball is getting faster from each hit."
-msgstr "La vitesse de la balle augmente chaque fois que'elle est renvoyée."
+msgstr "各ヒットからボールがより速くなります。"
 
 #: templates/about/game_rules.html:52
 msgid ""
-"You have to score as much points as the creator of the game room has defined "
-"to win a game."
-msgstr ""
-"Le score à atteindre pour la victoire est défini par la personne qui crée le "
-"salon de jeu."
+"You have to score as much points as the creator of the game room has defined"
+" to win a game."
+msgstr "ゲームルームのクリエイターがゲームに勝つために定義されているので、多くのポイントを獲得する必要があります。"
 
 #: templates/about/game_rules.html:54
 msgid ""
 "Your side is represented by your name and your avatar above the game , it "
 "also displays the current score of the game."
-msgstr ""
-"Votre côté du terrain est identifiable par votre nom et votre avatar. Il "
-"indique aussi votre score."
+msgstr "あなたの側面は、ゲーム上のあなたの名前とあなたのアバターによって表されます、それはまたゲームの現在のスコアを表示します。"
 
 #: templates/about/game_rules.html:65 templates/games/game_ready.html:16
 #: templates/games/game_score.html:13
@@ -778,80 +745,74 @@ msgstr "プレイヤー1"
 #: templates/about/game_rules.html:86 templates/games/game_ready.html:33
 #: templates/games/game_score.html:60
 msgid "Player_2"
-msgstr "プレイヤー2"
+msgstr "プレイヤー_2"
 
 #: templates/about/game_rules.html:102
 msgid "Movement"
-msgstr "Contrôles"
+msgstr "コントロール"
 
 #: templates/about/game_rules.html:105
 msgid "There are 3 ways to move your paddle"
-msgstr "Vous pouvez contrôler la raquette de trois manières :"
+msgstr "あなたのパドルを動かす3つの方法があります"
 
 #: templates/about/game_rules.html:113
-msgid "You can click and hold to a direction make the paddle going up and down"
-msgstr ""
-"En maintenant le clic gauche de la souris pour la bouger vers le haut ou le "
-"bas"
+msgid ""
+"You can click and hold to a direction make the paddle going up and down"
+msgstr "方向にクリックして保持して、パドルを上下にすることができます"
 
 #: templates/about/game_rules.html:116 templates/about/game_rules.html:132
 msgid "Pressing"
-msgstr "En pressant"
+msgstr "プレス加工"
 
 #: templates/about/game_rules.html:123 templates/about/game_rules.html:139
 msgid "or"
-msgstr "ou"
+msgstr "または"
 
 #: templates/about/game_rules.html:129
 msgid "keys will make the paddle going up"
-msgstr "pour faire monter la raquette"
+msgstr "キーはパドルが上がるようにします"
 
 #: templates/about/game_rules.html:145
 msgid "keys will make the paddle going down"
-msgstr "pour faire descendre la raquette"
+msgstr "キーはパドルを下るようになります"
 
 #: templates/about/game_rules.html:160
 msgid "Points to win a game,"
-msgstr "Le nombre de points pour gagner,"
+msgstr "ゲームを獲得するポイント"
 
 #: templates/about/game_rules.html:170
 msgid "Players in the room/Players needed and the"
-msgstr "le nombre de Joueurs du salon, et"
+msgstr "客室/プレイヤーに必要なプレイヤー"
 
 #: templates/about/game_rules.html:179
 msgid ""
 "map are defined by the game creator and can be seen in the game rooms "
 "section from the home menu."
-msgstr ""
-"l'arène de jeu sont également définis par le créateur du salon de jeu, "
-"toutes ces informations sont visibles depuis la page d'accueil."
+msgstr "地図はゲーム作成者によって定義され、ホームメニューからゲーム室セクションで見ることができます。"
 
 #: templates/about/game_rules.html:181
 msgid ""
 "There are some other settings that the room owner can define , such as the "
 "initial ball speed , or the paddle/ball size."
-msgstr ""
-"D'autres paramètres peuvent être ajustés lors de la création du salon, comme "
-"par exemple la vitesse de la balle en début de partie, la taille de la "
-"raquette et celle de la balle."
+msgstr "初期ボールスピードやパドル/ボールサイズなど、部屋の所有者が定義できるその他の設定があります。"
 
 #: templates/about/game_rules.html:183
 msgid "These settings cannot be changed once the room is created."
-msgstr "Ces paramètres ne pourront plus être changés une fois le salon créé."
+msgstr "お部屋が作成されると変更できません。"
 
 #: templates/about/game_rules.html:190
 msgid "Enjoy your games !"
-msgstr "Amusez-vous bien !"
+msgstr "ゲームを楽しみましょう!"
 
 #: templates/about/privacy_policy.html:42
 #: templates/about/terms_of_service.html:42
 msgid "Last updated: "
-msgstr "Dernière mise à jour : "
+msgstr "最近の更新:"
 
 #: templates/about/privacy_policy.html:42
 #: templates/about/terms_of_service.html:42
 msgid "September 2024"
-msgstr ""
+msgstr "2024年9月"
 
 #: templates/about/privacy_policy.html:48
 msgid ""
@@ -1248,7 +1209,7 @@ msgstr ""
 
 #: templates/about/terms_of_service.html:16
 msgid "TERMS OF SERVICE"
-msgstr ""
+msgstr "利用規約"
 
 #: templates/about/terms_of_service.html:48
 #, python-format
@@ -2205,15 +2166,15 @@ msgstr "アカウントの有効化"
 #: templates/accounts/email_reset_password.html:13
 #: templates/accounts/email_twofa.html:13
 msgid "Hi"
-msgstr "Bonjour"
+msgstr "こんにちは!"
 
 #: templates/accounts/email_activate.html:16
 msgid ""
 "Thank you for registering at Transcendence42. Please use the code below to "
 "activate your account:"
 msgstr ""
-"Transcendenceに登録いただきありがとうございます。 下記のコードを使って"
-"アカウントを有効化してください。"
+"Transcendenceに登録いただきありがとうございます。 下記のコードを使ってアカウ"
+"ントを有効化してください。"
 
 #: templates/accounts/email_activate.html:22
 #: templates/accounts/email_change_email.html:22
@@ -2221,7 +2182,7 @@ msgstr ""
 #: templates/accounts/email_reset_password.html:22
 #: templates/accounts/email_twofa.html:22
 msgid "This code will expire in 10 minutes."
-msgstr "Ce code expirera dans 10 minutes"
+msgstr "このコードは10分で期限が切れます。"
 
 #: templates/accounts/email_activate.html:25
 msgid "If you did not create an account, please ignore this email."
@@ -2245,26 +2206,23 @@ msgstr "Transcendence42チーム"
 
 #: templates/accounts/email_change_email.html:7
 msgid "Change your email"
-msgstr "Modifier votre courriel"
+msgstr "Eメール変更"
 
 #: templates/accounts/email_change_email.html:16
 msgid "Please use the code below to change your email:"
-msgstr ""
-"Veuillez utiliser le code ci-dessous pour modifier votre adresse courriel:"
+msgstr "下記のコードを使用してメールを変更してください。"
 
 #: templates/accounts/email_change_email.html:25
 msgid "If you have not requested an email change, please ignore this email."
-msgstr "Si vous n'avez pas créé de compte, veuillez ignorer ce courriel."
+msgstr "メール変更をリクエストされていない場合は、このメールを無視してください。"
 
 #: templates/accounts/email_change_password.html:16
 msgid "Please use the code below to change your password:"
-msgstr "Veuillez utilisez le code ci-dessous pour modifier votre mot de passe."
+msgstr "以下のコードを使用してパスワードを変更してください。"
 
 #: templates/accounts/email_change_password.html:25
 msgid "If you have not requested a password change, please ignore this email."
-msgstr ""
-"Si vous n'avez pas demandé à modifier votre mot de passe, vous pouvez "
-"ignorer ce courriel."
+msgstr "パスワード変更を要求しない場合は、このメールを無視してください。"
 
 #: templates/accounts/email_reset_password.html:7
 msgid "Reset your password"
@@ -2276,21 +2234,18 @@ msgstr "パスワードをリセットするには、下のコードを入力し
 
 #: templates/accounts/email_reset_password.html:25
 msgid "If you have not requested a password reset, please ignore this email."
-msgstr ""
-"Si vous n'avez pas demandé à réinitialiser votre mot de passe, vous pouvez "
-"ignorer ce courriel."
+msgstr "パスワードリセットを要求されていない場合は、このメールを無視してください。"
 
 #: templates/accounts/email_twofa.html:7
 msgid "New Connection"
-msgstr "Nouvelle connection"
+msgstr "新しい接続"
 
 #: templates/accounts/email_twofa.html:16
 msgid "Please use the code below to sign in:"
-msgstr "Veuillez utiliser le code ci-dessous pour vous connecter:"
+msgstr "下記のコードをご入力ください。"
 
 #: templates/accounts/email_twofa.html:25
 msgid "If you have not attempted to sign in, please ignore this email."
-msgstr ""
 msgstr "アカウントにログインしなかった場合は、このメールを無視してください。"
 
 #: templates/accounts/forgot_password.html:4
@@ -2300,9 +2255,7 @@ msgstr "パスワードを忘れた場合"
 
 #: templates/accounts/forgot_password.html:45
 msgid "Please enter your account e-mail to get a password reset link"
-msgstr ""
-"Veuillez vérifier votre adresse courriel pour recevoir un lien de "
-"réinitialisation de mot de passe"
+msgstr "パスワードリセットリンクを取得するには、アカウントメールアドレスを入力してください"
 
 #: templates/accounts/forgot_password.html:51
 #: templates/accounts/register.html:48 templates/settings.html:160
@@ -2342,7 +2295,7 @@ msgstr "パスワードを忘れた場合"
 
 #: templates/accounts/login.html:74
 msgid "CONNECT WITH"
-msgstr "SE CONNECTER AVEC"
+msgstr "接続"
 
 #: templates/accounts/login.html:87
 msgid "Not Registered ?"
@@ -2354,7 +2307,7 @@ msgstr "新規登録"
 
 #: templates/accounts/modify_credentials.html:4
 msgid "Modify Credentials"
-msgstr "Modifier vos identifiants"
+msgstr "資格情報の変更"
 
 #: templates/accounts/modify_credentials.html:37
 msgid "Change Email"
@@ -2362,20 +2315,20 @@ msgstr "Eメールを変更"
 
 #: templates/accounts/modify_credentials.html:54
 msgid "Please enter your new mail"
-msgstr "Veuillez saisir votre nouvelle adresse"
+msgstr "Eメールアドレスを入力してください"
 
 #: templates/accounts/modify_credentials.html:60
 msgid "New Mail"
-msgstr "Nouvelle adresse"
+msgstr "新Eメール"
 
 #: templates/accounts/modify_credentials.html:65
 #: templates/accounts/modify_credentials.html:110
 msgid "Confirm Changes"
-msgstr "Veuillez confirmer la modification"
+msgstr "変更を確認する"
 
 #: templates/accounts/modify_credentials.html:75
 msgid "Change Password"
-msgstr "Modifier le mot de passe"
+msgstr "パスワード変更"
 
 #: templates/accounts/modify_credentials.html:93
 msgid "Please enter your new password"
@@ -2394,10 +2347,7 @@ msgstr "会員登録"
 msgid ""
 "Your unique id, which cannot be changed after account creation. Must be 20 "
 "characters long maximum and can include letters (a-Z), numbers (0-9), \\"
-msgstr ""
-"Votre identifiant. Vous ne pourrez pas le changer après création du compte. "
-"Peut comprendre max 20 caractères, dont lettres (a-Z), chiffres (0-9), "
-"tiret , underscore et point "
+msgstr "アカウント作成後に変更できない一意のID。 文字(a-Z)、数字(0-9)、\\を20文字まで含める必要があります。"
 
 #: templates/accounts/register.html:42 templates/settings.html:133
 msgid "Username"
@@ -2405,11 +2355,11 @@ msgstr "ユーザー名"
 
 #: templates/accounts/register.html:63
 msgid "I read and agree to the Transcendence42"
-msgstr "J'ai lu et j'accepte les"
+msgstr "Transcendence42登録前に、どうぞ読んで同意しして："
 
 #: templates/accounts/register.html:74
 msgid "and"
-msgstr "et la"
+msgstr "と"
 
 #: templates/accounts/register.html:92
 msgid "Already Registered ?"
@@ -2417,38 +2367,37 @@ msgstr "すでにアカウントを持ちですか?"
 
 #: templates/accounts/register.html:94
 msgid "Sign in here"
-msgstr "新規登録はこちら"
+msgstr "ログインはこちら"
 
 #: templates/accounts/verify_code.html:4
 msgid "Code Verify"
-msgstr "Vérification du code"
+msgstr "コード認証済み"
 
 #: templates/accounts/verify_code.html:33
 msgid "Verify Code"
-msgstr "Vérification du code"
+msgstr "コード認証済み"
 
 #: templates/accounts/verify_code.html:41
 msgid "Enter the received code below"
-msgstr "Veuillez saisir votre code"
+msgstr "受信したコードを入力してください。"
 
 #: templates/accounts/verify_code.html:44
 msgid ""
 "Your code was sent to you via email, don't forget to check into your spam "
 "box."
-msgstr ""
-"Votre code a été envoyé par courriel, n'hésitez pas à vérifier vos spams"
+msgstr "あなたのコードは、電子メールを介してあなたに送信されました, あなたのスパムボックスにチェックを忘れないでください."
 
 #: templates/accounts/verify_code.html:54
 msgid "Verify"
-msgstr "Vérifier"
+msgstr "検証"
 
 #: templates/alert_modal.html:14
 msgid "Error"
-msgstr "Erreur"
+msgstr "エラー"
 
 #: templates/alert_modal.html:23
 msgid "Close"
-msgstr "Fermer"
+msgstr "閉める"
 
 #: templates/friends/social.html:31
 msgid "Friends"
@@ -2460,35 +2409,35 @@ msgstr "メッセージ送信"
 
 #: templates/friends/social.html:100
 msgid "See Profile"
-msgstr "Voir le profil"
+msgstr "ウーザーを見る"
 
 #: templates/friends/social.html:113
 msgid "Unblock Friend"
-msgstr "Débloquer cet ami"
+msgstr "ブロックウーザー"
 
 #: templates/friends/social.html:125
 msgid "Block Friend"
-msgstr "Bloquer cet ami"
+msgstr "アンブロックウーザー"
 
 #: templates/friends/social.html:138
 msgid "Remove Friend"
-msgstr "Supprimer cet ami"
+msgstr "友達削除"
 
 #: templates/friends/social.html:152
 msgid "Invite Friend"
-msgstr "Demander en Ami"
+msgstr "友達を招待状"
 
 #: templates/friends/social_list.html:17
 msgid "No friends"
-msgstr "友達"
+msgstr "友達なし"
 
 #: templates/friends/social_section.html:9
 msgid "No message yet, say Hi"
-msgstr "Aucun message, dites 'Coucou'"
+msgstr "メッセージはありません。おはよ！って"
 
 #: templates/friends/social_section.html:16
 msgid "Select a conversation"
-msgstr "Sélectionner une conversation"
+msgstr "会話を選択"
 
 #: templates/games/game_chat.html:11
 msgid "Chat"
@@ -2496,99 +2445,103 @@ msgstr "チャット"
 
 #: templates/games/game_config.html:4 templates/games/game_config.html:11
 msgid "Customize your game"
-msgstr "Personnalisez votre partie"
+msgstr "ゲームをカスタマイズ"
 
 #: templates/games/game_config.html:25
 msgid "Game Options"
-msgstr "Options de jeu"
+msgstr "ゲームオプション"
 
 #: templates/games/game_config.html:44 templates/games/game_room.html:82
 msgid "Players"
-msgstr "Joueurs"
+msgstr "プレイヤー"
 
 #: templates/games/game_config.html:77 templates/games/game_room.html:101
 msgid "Score to win"
-msgstr "Score à atteindre"
+msgstr "勝つためにスコア"
 
 #: templates/games/game_config.html:115 templates/games/game_room.html:125
 msgid "Ball size"
-msgstr "Taille de la balle"
+msgstr "ボール サイズ"
 
 #: templates/games/game_config.html:151
 msgid "Initial ball speed"
-msgstr "Vitesse de la balle"
+msgstr "初期ボール速度"
 
 #: templates/games/game_config.html:184
 msgid "Paddle Size"
-msgstr "Taille des raquettes"
+msgstr "パドルサイズ"
 
 #: templates/games/game_config.html:223
 msgid "AI Difficulty"
-msgstr "Difficulté de l'IA"
+msgstr "AIの難易度"
 
 #: templates/games/game_config.html:299
 msgid "Arena Options"
-msgstr "Options d'arène"
+msgstr "アリーナオプション"
 
 #: templates/games/game_config.html:309
 msgid "Map"
-msgstr "Arène"
+msgstr "マップ"
 
 #: templates/games/game_config.html:372
 msgid "Go Back"
-msgstr "Retour"
+msgstr "戻る"
 
 #: templates/games/game_config.html:380
 msgid "Create Game"
-msgstr "Créer le salon"
+msgstr "ゲーム作成"
+
+#: templates/games/game_message.html:9
+msgid "Me"
+msgstr "私"
 
 #: templates/games/game_message.html:56
 msgid "Game Announcement"
-msgstr "Annonces"
+msgstr "ゲーム発表"
 
 #: templates/games/game_message.html:74
 msgid "has joined !"
-msgstr "a rejoint la partie !"
+msgstr "参加しました!"
 
 #: templates/games/game_message.html:101
 msgid "Next Match:"
-msgstr "Prochain match :"
+msgstr "次のマッチ:"
 
 #: templates/games/game_message.html:128
 msgid "has been"
-msgstr "a été"
+msgstr "は"
 
 #: templates/games/game_message.html:130
 msgid "eliminated"
-msgstr "éliminé"
+msgstr "排除される"
 
 #: templates/games/game_message.html:144
 msgid "is the "
-msgstr "est le "
+msgstr "です。"
 
 #: templates/games/game_message.html:146
 msgid "ultimate winner"
-msgstr " vainqueur final"
+msgstr "究極の勝者"
 
 #: templates/games/game_player.html:42
 msgid "Invite Player"
-msgstr "Inviter des Joueurs"
+msgstr "選手招待"
 
 #: templates/games/game_ready.html:4
 msgid "Get Ready !"
-msgstr "Soyez prêts"
+msgstr "準備して"
 
 #: templates/games/game_ready.html:40
 msgid "Start"
-msgstr "Commencez"
+msgstr "スタート"
 
 #: templates/games/game_ready.html:54
 msgid "Game will start in"
-msgstr "La partie commence dans"
+msgstr "ゲーム始まりまでに"
 
 #: templates/games/game_ready.html:57
 msgid "seconds"
-msgstr "secondes"
+msgstr "秒単位"
 
 #: templates/games/game_room.html:4
 msgid "Game Room"
@@ -2596,58 +2549,55 @@ msgstr "ゲームロビー"
 
 #: templates/games/game_room.html:34
 msgid "Leave Room"
-msgstr "Quitter la partie"
+msgstr "ロビーを退去"
 
 #: templates/games/game_room.html:63
 msgid "Game Infos"
-msgstr "Infos de la partie"
+msgstr "ゲーム情報"
 
 #: templates/games/game_room.html:77
 msgid "Rules"
-msgstr "Règles"
+msgstr "ルール"
 
 #: templates/games/game_room.html:142
 msgid "Paddle size"
-msgstr "Taille de la raquette"
+msgstr "パドルサイズ"
 
 #: templates/games/game_room.html:162
 msgid "Initial Ball Speed"
-msgstr "Vitesse de la balle"
+msgstr "初期ボール速度"
 
 #: templates/games/game_room.html:214
 msgid "Do you confirm leaving ?"
-msgstr "VOulez-vous partir?"
+msgstr "退去確認?"
 
 #: templates/games/game_room.html:219
 msgid ""
 "If you have not been eliminated yet, your next game will be considered as a "
 "defeat and you will get a point penalty. You will not be able to join the "
 "room again."
-msgstr ""
-"Si vous êtes encore en lice, votre prochaine partie sera considérée comme "
-"une défaite et vous subirez un point de pénalité. Vous ne pourrez plus "
-"rejoindre cette partie."
+msgstr "まだ削除されていない場合、次のゲームは敗北とみなされ、ポイントペナルティを取得します。 再びお部屋に参加できません。"
 
 #: templates/games/game_room.html:224 templates/settings.html:448
 #: templates/settings.html:483 templates/settings.html:529
 msgid "Cancel"
-msgstr "Rester"
+msgstr "キャンセル"
 
 #: templates/games/game_room.html:245 templates/games/game_room.html:265
 msgid "Invite"
-msgstr "Inviter"
+msgstr "招待状"
 
 #: templates/games/game_room.html:253
 msgid "Invite a random Player"
-msgstr "Inviter un joueur aléatoire"
+msgstr "ランダムなプレイヤーを招待する"
 
 #: templates/games/game_room.html:270
 msgid "Invite a friend"
-msgstr "Inviter un ami"
+msgstr "友達を招待する"
 
 #: templates/games/game_room.html:302
 msgid "NO FRIENDS TO INVITE"
-msgstr "AUCUN AMI À INVITER"
+msgstr "無限の無限に"
 
 #: templates/games/play.html:4
 msgid "Pong"
@@ -2683,65 +2633,65 @@ msgstr "Transcendence42"
 
 #: templates/leaderboard.html:5
 msgid "Leaderboard"
-msgstr "Classement"
+msgstr "リーダーボード"
 
 #: templates/leaderboard.html:15
 msgid "Top 100 Ranking"
-msgstr "Les 100 meilleurs"
+msgstr "トップ100ランキング"
 
 #: templates/leaderboard.html:30
 msgid "Your Rank"
-msgstr "Votre classement :"
+msgstr "あなたのランク"
 
 #: templates/leaderboard.html:44
 msgid "No rankings yet"
-msgstr "Soyez le premier !"
+msgstr "ランキングはまだありません"
 
 #: templates/modeselect.html:4
 msgid "Mode Selection"
-msgstr "Choix du mode"
+msgstr "モード選択"
 
 #: templates/modeselect.html:13
 msgid "Choose your mode"
-msgstr "Faites votre choix"
+msgstr "モードを選択する"
 
 #: templates/modeselect.html:29
 msgid "Local Game"
-msgstr "Partie locale"
+msgstr "ローカルゲーム"
 
 #: templates/modeselect.html:45
 msgid "Online Game"
-msgstr "Jeu en ligne"
+msgstr "オンラインゲーム"
 
 #: templates/notifs/notif_friend_request.html:28
 msgid "wants to be your friend !"
-msgstr "souhaite être votre ami"
+msgstr "あなたの友達になりたい !"
 
 #: templates/notifs/notif_friend_request.html:47
 #: templates/notifs/notif_game_invite.html:43
 msgid "Accept"
-msgstr "Accepter"
+msgstr "承"
 
 #: templates/notifs/notif_friend_request.html:50
 #: templates/notifs/notif_game_invite.html:46
 msgid "Decline"
-msgstr "Refuser"
+msgstr "断"
 
 #: templates/notifs/notif_game_invite.html:13
 msgid "Game Invite"
-msgstr "Invitation à jouer"
+msgstr "ゲーム招待"
 
 #: templates/notifs/notif_game_invite.html:24
 msgid "has invited you to play !"
-msgstr "vous invite dans sa partie !"
+msgstr "ぜひご参加ください!"
 
 #: templates/notifs/notif_list.html:19
 msgid "New Message"
-msgstr "Nouveau message"
+msgstr "新着情報"
 
 #: templates/notifs/notif_list.html:28
 msgid "New"
-msgstr "Nouveau"
+msgstr "ニュース"
 
 #: templates/notifs/notif_list.html:31
 msgid "message"
@@ -2749,20 +2699,20 @@ msgstr "メッセージ"
 
 #: templates/notifs/notif_list.html:34
 msgid "from"
-msgstr "de"
+msgstr "から"
 
 #: templates/profile.html:37 templates/profile.html:46
 #: templates/profile.html:326 templates/profile.html:335
 msgid "Add Player"
-msgstr "Ajouter"
+msgstr "プレイヤーの追加"
 
 #: templates/profile.html:67 templates/profile.html:356
 msgid "Block Player"
-msgstr "Bloquer"
+msgstr "ブロックプレイヤー"
 
 #: templates/profile.html:117 templates/profile.html:406
 msgid "Game History (Last 20 Games)"
-msgstr "Historique de jeu (20 dernières parties)"
+msgstr "ゲームの歴史(最後の20ゲーム)"
 
 #: templates/profile.html:126 templates/profile.html:415
 msgid "WIN"
@@ -2771,7 +2721,7 @@ msgstr "勝"
 #: templates/profile.html:145 templates/profile.html:172
 #: templates/profile.html:434 templates/profile.html:461
 msgid "Game Details"
-msgstr "Détails de la partie"
+msgstr "ゲームの詳細"
 
 #: templates/profile.html:153 templates/profile.html:442
 msgid "LOSS"
@@ -2803,11 +2753,15 @@ msgstr "トーナメント勝ち"
 
 #: templates/profile.html:288 templates/profile.html:577
 msgid "Best Winning Streak"
-msgstr "Votre meilleure série"
+msgstr "ベスト ウィンニング ストリーク"
 
 #: templates/profile.html:490
 msgid "Winrate"
-msgstr "Taux de victoires"
+msgstr "勝率"
+
+#: templates/profile.html:531
+msgid "Last 20 Games"
+msgstr "最後20ゲーム"
 
 #: templates/settings.html:31
 msgid "Profile Card"
@@ -2815,12 +2769,11 @@ msgstr "プロフィール"
 
 #: templates/settings.html:55
 msgid "Avatars"
-msgstr "Avatars"
+msgstr "アバター"
 
 #: templates/settings.html:110
 msgid "Your image must not exceed 500KB in size and 1024x1024 in dimensions"
-msgstr ""
-"Votre fichier doit peser moins de 500KB et mesurer moins de 1024x1024 px"
+msgstr "画像のサイズと寸法の1024x1024で500KBを超えてはならない"
 
 #: templates/settings.html:118
 msgid "Account"
@@ -2828,7 +2781,7 @@ msgstr "アカウント"
 
 #: templates/settings.html:147
 msgid "Account created on"
-msgstr "Compte créé le"
+msgstr "アカウント作成日"
 
 #: templates/settings.html:167
 msgid "Modify Email"
@@ -2840,47 +2793,47 @@ msgstr "パスワードを変更"
 
 #: templates/settings.html:184
 msgid "Two-Factor Authentication"
-msgstr "Authentification à 2 facteurs"
+msgstr "2要素認証"
 
 #: templates/settings.html:190
 msgid "Enabled"
-msgstr "Active"
+msgstr "許容化"
 
 #: templates/settings.html:200
 msgid "Disable 2FA"
-msgstr "Désactiver la 2FA"
+msgstr "2FA非許容"
 
 #: templates/settings.html:207
 msgid "Disabled"
-msgstr "Désactivée"
+msgstr "非許化"
 
 #: templates/settings.html:211
 msgid "Enable 2FA"
-msgstr "Activer la 2FA"
+msgstr "2FA許容"
 
 #: templates/settings.html:224
 msgid "Link with 42"
-msgstr "Lien avec 42"
+msgstr "42と絆ぐ"
 
 #: templates/settings.html:230
 msgid "Linked"
-msgstr "Associé"
+msgstr "絆いだ"
 
 #: templates/settings.html:238
 msgid "Unlink account"
-msgstr "Dissocier le compte"
+msgstr "42から非絆"
 
 #: templates/settings.html:245
 msgid "Not Linked"
-msgstr "Pas associé"
+msgstr "絆いでない"
 
 #: templates/settings.html:254
 msgid "Link to 42"
-msgstr "Associer à 42"
+msgstr "42と絆ぐ"
 
 #: templates/settings.html:261
 msgid "Prefered Language"
-msgstr "Langue"
+msgstr "言語"
 
 #: templates/settings.html:287
 msgid "Delete my account"
@@ -2892,81 +2845,75 @@ msgstr "ブロックリスト"
 
 #: templates/settings.html:332
 msgid "BLOCK LIST IS EMPTY"
-msgstr "LISTE VIDE"
+msgstr "ブロックリストに誰もいない"
 
 #: templates/settings.html:355
 msgid "Delete account"
-msgstr "Supprimer mon compte"
+msgstr "アカウントの削除"
 
 #: templates/settings.html:362
 msgid "Are you sure you want to delete your account ?"
-msgstr "Voulez-vous vraiment supprimer votre compte?"
+msgstr "アカウントを削除したいですか?"
 
 #: templates/settings.html:364
 msgid "By doing so, you will not be able to :"
-msgstr "Si vous supprimez votre compte, vous ne pourrez plus :"
+msgstr "そうすることで、次のことが出来ません。"
 
 #: templates/settings.html:368
 msgid "Play against other people online"
-msgstr "jouer en ligne"
+msgstr "オンラインで他の人と遊ぶ"
 
 #: templates/settings.html:371
 msgid "Access your profile and other players profile"
-msgstr "consulter votre profil ou celui d'autres joueurs"
+msgstr "あなたのプロフィールおよび他のプレーヤーのプロフィールにアクセスして下さい"
 
 #: templates/settings.html:374
 msgid "Access the leaderboard and view player rankings"
-msgstr "consulter le classement"
+msgstr "リーダーボードにアクセスし、プレーヤーのランキングを表示"
 
 #: templates/settings.html:377
 msgid "Add friends and use the chat"
-msgstr "ajouter d'amis ou utiliser le clavardage"
+msgstr "友達を追加し、チャットを使用する"
 
 #: templates/settings.html:381
 msgid "This action will also delete all of your data including :"
-msgstr "Cette actio supprimera aussi toutes vos données, incluant"
+msgstr "このアクションは、以下のすべてのデータを削除します。"
 
 #: templates/settings.html:385
 msgid "Your profile (Avatar, Nickname, Username)"
-msgstr "votre profil (avatar, alias, nom d'utilisateur)"
+msgstr "あなたのプロフィール(アバター、ニックネーム、ユーザー名)"
 
 #: templates/settings.html:388
 msgid "Your conversations and your friend list"
-msgstr "vos conversations et votre liste d'amis"
+msgstr "会話と友達リスト"
 
 #: templates/settings.html:391
 msgid "Your ranking and your game history"
-msgstr "Votre classement et historique de jeu"
+msgstr "あなたのランキングとゲームの履歴"
 
 #: templates/settings.html:401
 msgid "If you had linked your account to 42, this will also undo the link."
-msgstr ""
-"si vous aviez asssocié votre compte à votre compte 42, ce sera supprimé."
+msgstr "アカウントを42にリンクした場合、リンクを解除します。"
 
 #: templates/settings.html:408
 msgid "This action is irreversible"
-msgstr "Cette acion est irréversible"
+msgstr "このアクションは不可逆です"
 
 #: templates/settings.html:413
 msgid "Proceed"
-msgstr "Continuer"
+msgstr "続く"
 
 #: templates/settings.html:424
-msgid "Confirm Delete"
-msgstr "Confirmer la suppression du compte"
-
-#: templates/settings.html:432
 msgid "Please enter your password to confirm your account deletion"
-msgstr ""
-"Veuillez saisir votre mot de passe pour confirmer la suppression du compte"
+msgstr "パスワードを入力してください。"
 
 #: templates/settings.html:451
 msgid "Confirm"
-msgstr "Confirmer"
+msgstr "確認"
 
 #: templates/settings.html:469
 msgid "Enable Two Factor Authentication ?"
-msgstr "Activer l'authentication à double facteur?"
+msgstr "2FA許容"
 
 #: templates/settings.html:477
 msgid ""
@@ -2974,49 +2921,37 @@ msgid ""
 "sending you a code via email each time you want to log in. Do you wish to "
 "enable it ?"
 msgstr ""
-"L'authentication à double facteur ajoute un niveau de sécurité à votre "
-"compte, en vous envoyant un code à confirmer chaque fois que vous vous "
-"connectez. Souhaitez-vous l'activer?"
+"2つのファクター認証は、ログインするたびに電子メールでコードを送信することにより、アカウントにセキュリティレイヤーを追加します。 有効にしたいですか?"
 
 #: templates/settings.html:486
 msgid "Activate 2FA"
-msgstr "Activer la 2FA"
+msgstr "2FA許容"
 
 #: templates/settings.html:507
 msgid "Unlink 42 account"
-msgstr "Dissocier votre compte 42"
+msgstr "42から非絆"
 
 #: templates/settings.html:515
 msgid "Unlinking your 42 account will result in these changes:"
-msgstr "Dissocier votre compte 42 entrainera les changements suivants:"
+msgstr "42アカウントのリンクを解除すると、これらの変更が発生します。"
 
 #: templates/settings.html:520
 msgid "You will not be able to connect using 42Auth on login page."
-msgstr "Vous ne pourrez plus vousd identifier via 42Auth"
+msgstr "ログインページで42Authを使用して接続することはできません。"
 
 #: templates/settings.html:523
 msgid "You will not be able to use your 42 banner and profile image."
-msgstr ""
-"Vous ne verrez plus votre bannière de coalition ni votre photo de profil"
+msgstr "42枚のバナーやプロフィール画像は使用できません。"
 
 #: templates/settings.html:532
 msgid "Unlink"
-msgstr "Dissocier"
+msgstr "非絆"
 
 #~ msgid "Username or Email is invalid"
 #~ msgstr "ウーザー名やEメールは無効"
 
 #~ msgid "Against AI"
-#~ msgstr "Contre l'IA"
-
-#~ msgid "This user alias is already taken, try another one"
-#~ msgstr "Ce nom d'utilisateur est déjà pris, veuillez en choisir un autre"
-
-#~ msgid "August 2024"
-#~ msgstr "Août 2024"
-
-#~ msgid "Enter your code"
-#~ msgstr "Veuillez saisir votre code"
+#~ msgstr "IA対"
 
 #~ msgid "Personal info"
 #~ msgstr "個人情報について"
@@ -3028,14 +2963,14 @@ msgstr "Dissocier"
 #~ msgstr "ID"
 
 #~ msgid "username"
-#~ "ユーザー名"
+#~ msgstr "ユーザー名"
 
 #~ msgid ""
 #~ "Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only."
 #~ msgstr "必須 150文字以内 文字、数字、@/./+/-/_ のみ。"
 
 #~ msgid "The username must be 150 characters or fewer."
-#~ msgstr "Le nom d'utilisateur doit être de 150 caractères ou moins."
+#~ msgstr "必須 150文字以内 文字、数字、@/./+/-/_ のみ。"
 
 #~ msgid ""
 #~ "This value may contain only letters, numbers, and @/./+/-/_ characters."
@@ -3129,9 +3064,6 @@ msgstr "Dissocier"
 
 #~ msgid "#WonGames"
 #~ msgstr "#ゲーム勝ち"
-
-#~ msgid "Lost Games"
-#~ msgstr "ゲーム負"
 
 #~ msgid "Currentmail****@*****.com"
 #~ msgstr "Currentmail****@*****.com"

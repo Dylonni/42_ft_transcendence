@@ -1,4 +1,4 @@
-# SOME DESCRIPTIVE TITLE.
+# FRENCH TRANSLATION FOR TRANSCENDENCE42 PROJECT.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <ACLOOS@STUDENT.42.FR>, 2024.
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-25 08:25+0000\n"
+"POT-Creation-Date: 2024-09-25 13:25+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: ALEXANDRA CLOOS <ACLOOS@STUDENT.42.FR>\n"
 "Language-Team: FRENCH <LL@li.org>\n"
@@ -2541,6 +2541,10 @@ msgstr "Retour"
 msgid "Create Game"
 msgstr "Créer le salon"
 
+#: templates/games/game_message.html:9
+msgid "Me"
+msgstr "Moi"
+
 #: templates/games/game_message.html:56
 msgid "Game Announcement"
 msgstr "Annonces"
@@ -2615,7 +2619,7 @@ msgstr "Vitesse de la balle"
 
 #: templates/games/game_room.html:214
 msgid "Do you confirm leaving ?"
-msgstr "VOulez-vous partir?"
+msgstr "Voulez-vous vraiment partir?"
 
 #: templates/games/game_room.html:219
 msgid ""
@@ -2808,6 +2812,12 @@ msgstr "Votre meilleure série"
 msgid "Winrate"
 msgstr "Taux de victoires"
 
+#: templates/profile.html:531
+#, fuzzy
+#| msgid "Lost Games"
+msgid "Last 20 Games"
+msgstr "Parties perdues"
+
 #: templates/settings.html:31
 msgid "Profile Card"
 msgstr "Mon profil"
@@ -2991,7 +3001,7 @@ msgstr "Dissocier votre compte 42 entrainera les changements suivants:"
 
 #: templates/settings.html:520
 msgid "You will not be able to connect using 42Auth on login page."
-msgstr "Vous ne pourrez plus vousd identifier via 42Auth"
+msgstr "Vous ne pourrez plus vous identifier via 42Auth"
 
 #: templates/settings.html:523
 msgid "You will not be able to use your 42 banner and profile image."
@@ -3128,9 +3138,6 @@ msgstr "Dissocier"
 
 #~ msgid "Won Games"
 #~ msgstr "Parties remportées"
-
-#~ msgid "Lost Games"
-#~ msgstr "Parties perdues"
 
 #~ msgid "Currentmail****@*****.com"
 #~ msgstr "Courriel****@****.com"
