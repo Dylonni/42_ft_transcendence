@@ -336,7 +336,7 @@ customize_game = CustomizeGameView.as_view()
 class GameRoomView(PrivateView):
     def get(self, request, game_id):
         game = get_object_or_404(Game, id=game_id)
-        if request.profile not in game.players.all():
+        if request.profile not in game.players.all() or game.ended_at:
             return redirect('/home/')
         context = get_profile_context(request)
         friendships_ids = Friendship.objects.get_friendships_ids(context.get('profile', None))
@@ -404,6 +404,8 @@ class SocialFriendView(PrivateView):
         friendship = get_object_or_404(Friendship, id=friendship_id)
         if friendship.is_outsider(request.profile):
             return redirect('/home/')
+        if friendship.removed_by == request.profile:
+            return redirect('/friends/')
         context = get_profile_context(request)
         context['friendships'] = Friendship.objects.get_friendships(context.get('profile', None))
         context['messages'] = FriendMessage.objects.get_messages(friendship, request.profile)
