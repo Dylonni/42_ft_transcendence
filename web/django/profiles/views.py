@@ -126,7 +126,7 @@ my_lang = MyLangView.as_view()
 class MyEmailView(PrivateView):
     def post(self, request):
         try:
-            user = CustomUser.objects.send_mail(request.user.email, 'accounts/email_change_email.html', 'Change your Email')
+            user = CustomUser.objects.send_mail(request.user.email, 'accounts/email_change_email.html', _('Change your Email'))
             token_generator = EmailTokenGenerator()
             token = token_generator.make_token(user)
             uid = urlsafe_base64_encode(force_bytes(user.pk))
@@ -164,7 +164,7 @@ my_email = MyEmailView.as_view()
 class MyPasswordView(PrivateView):
     def post(self, request):
         try:
-            user = CustomUser.objects.send_mail(request.user.email, 'accounts/email_change_password.html', 'Change your Password')
+            user = CustomUser.objects.send_mail(request.user.email, 'accounts/email_change_password.html', _('Change your Password'))
             token_generator = EmailTokenGenerator()
             token = token_generator.make_token(user)
             uid = urlsafe_base64_encode(force_bytes(user.pk))

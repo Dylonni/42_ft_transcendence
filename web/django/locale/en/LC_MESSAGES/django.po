@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-24 15:12+0000\n"
+"POT-Creation-Date: 2024-09-25 08:25+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -42,14 +42,32 @@ msgstr ""
 msgid "Please check your email to sign in."
 msgstr ""
 
+#: accounts/views.py:61
+msgid "User logged in."
+msgstr ""
+
+#: accounts/views.py:69 accounts/views.py:72 templates/settings.html:441
+msgid "Wrong credentials. Please try again"
+msgstr ""
+
 #: accounts/views.py:86 accounts/views.py:90 accounts/views.py:168
-#: accounts/views.py:172 profiles/views.py:234 profiles/views.py:238
+#: accounts/views.py:172 accounts/views.py:237 accounts/views.py:241
+#: accounts/views.py:263 accounts/views.py:267 profiles/views.py:236
+#: profiles/views.py:240
 msgid "Invalid url."
 msgstr ""
 
 #: accounts/views.py:94 accounts/views.py:97 accounts/views.py:176
-#: accounts/views.py:179 profiles/views.py:242 profiles/views.py:245
+#: accounts/views.py:179 profiles/views.py:244 profiles/views.py:247
 msgid "Invalid code."
+msgstr ""
+
+#: accounts/views.py:103
+msgid "Connection accepted."
+msgstr ""
+
+#: accounts/views.py:124
+msgid "User logged out."
 msgstr ""
 
 #: accounts/views.py:144
@@ -60,12 +78,48 @@ msgstr ""
 msgid "Account registered! Please check your email to activate it."
 msgstr ""
 
+#: accounts/views.py:154
+msgid "Invalid Username/Email."
+msgstr ""
+
+#: accounts/views.py:187
+msgid "Account verified."
+msgstr ""
+
+#: accounts/views.py:204
+msgid "Reset your Password"
+msgstr ""
+
 #: accounts/views.py:209 accounts/views.py:220
 msgid "Password reset request sent! Please check your email."
 msgstr ""
 
 #: accounts/views.py:244
 msgid "Set your new password."
+msgstr ""
+
+#: accounts/views.py:274 profiles/views.py:194
+msgid "Password changed."
+msgstr ""
+
+#: accounts/views.py:301
+msgid "42 account unlinked."
+msgstr ""
+
+#: accounts/views.py:372
+msgid "Sign in first."
+msgstr ""
+
+#: accounts/views.py:376
+msgid "Valid tokens."
+msgstr ""
+
+#: accounts/views.py:381
+msgid "Invalid tokens."
+msgstr ""
+
+#: accounts/views.py:385
+msgid "Refreshed tokens."
 msgstr ""
 
 #: friends/managers.py:37
@@ -224,7 +278,7 @@ msgstr ""
 msgid "Game started."
 msgstr ""
 
-#: games/views.py:116 profiles/views.py:509
+#: games/views.py:116 profiles/views.py:511
 msgid "Message sent."
 msgstr ""
 
@@ -244,8 +298,12 @@ msgstr ""
 msgid "Game Message"
 msgstr ""
 
-#: pong/views.py:482
+#: pong/views.py:483
 msgid "Language changed."
+msgstr ""
+
+#: profiles/managers.py:35
+msgid "No profile found to set status."
 msgstr ""
 
 #: profiles/managers.py:91
@@ -268,107 +326,111 @@ msgstr ""
 msgid "Offline"
 msgstr ""
 
-#: profiles/models.py:178
+#: profiles/models.py:183
 msgid "Unranked"
 msgstr ""
 
-#: profiles/views.py:45
+#: profiles/views.py:46
 msgid "Profile not found."
 msgstr ""
 
-#: profiles/views.py:60
+#: profiles/views.py:61
 msgid "Incorrect password."
 msgstr ""
 
-#: profiles/views.py:67
+#: profiles/views.py:68
 msgid "Account deleted."
 msgstr ""
 
-#: profiles/views.py:79
+#: profiles/views.py:80
 msgid "Alias already taken."
 msgstr ""
 
-#: profiles/views.py:82
+#: profiles/views.py:83
 msgid "Alias updated."
 msgstr ""
 
-#: profiles/views.py:101
+#: profiles/views.py:103
 msgid "Avatar updated."
 msgstr ""
 
-#: profiles/views.py:111
+#: profiles/views.py:113
 msgid "Default language changed."
 msgstr ""
 
-#: profiles/views.py:132
+#: profiles/views.py:129
+msgid "Change your Email"
+msgstr ""
+
+#: profiles/views.py:134
 msgid "Email change request sent! Please check your email."
 msgstr ""
 
-#: profiles/views.py:144
+#: profiles/views.py:146
 msgid "Invalid email."
 msgstr ""
 
-#: profiles/views.py:147 profiles/views.py:182 profiles/views.py:186
+#: profiles/views.py:149 profiles/views.py:184 profiles/views.py:188
 msgid "Invalid password."
 msgstr ""
 
-#: profiles/views.py:153
+#: profiles/views.py:155
 msgid "Email changed."
 msgstr ""
 
-#: profiles/views.py:170
+#: profiles/views.py:167 templates/accounts/email_change_password.html:7
+msgid "Change your Password"
+msgstr ""
+
+#: profiles/views.py:172
 msgid "Password change request sent! Please check your email."
 msgstr ""
 
-#: profiles/views.py:192
-msgid "Password changed."
-msgstr ""
-
-#: profiles/views.py:206
+#: profiles/views.py:208
 msgid "2FA enabled."
 msgstr ""
 
-#: profiles/views.py:216
+#: profiles/views.py:218
 msgid "2FA disabled."
 msgstr ""
 
-#: profiles/views.py:259
+#: profiles/views.py:261
 msgid "Code verified."
 msgstr ""
 
-#: profiles/views.py:289
+#: profiles/views.py:291
 msgid "Game invitation sent."
 msgstr ""
 
-#: profiles/views.py:310
+#: profiles/views.py:312
 msgid "Profile blocked."
 msgstr ""
 
-#: profiles/views.py:333 profiles/views.py:440
+#: profiles/views.py:335 profiles/views.py:442
 msgid "Friend request accepted."
 msgstr ""
 
-#: profiles/views.py:336
+#: profiles/views.py:338
 msgid "Friend request sent."
 msgstr ""
 
-#: profiles/views.py:388
+#: profiles/views.py:390
 msgid "Game invitation accepted."
 msgstr ""
 
-#: profiles/views.py:398
+#: profiles/views.py:400
 msgid "Game invitation declined."
 msgstr ""
 
-#: profiles/views.py:420
+#: profiles/views.py:422
 msgid "Profile unblocked."
 msgstr ""
 
-#: profiles/views.py:450
+#: profiles/views.py:452
 msgid "Friend request declined."
 msgstr ""
 
-#: profiles/views.py:490
+#: profiles/views.py:492
 msgid "Friend removed."
 msgstr ""
 
@@ -2147,10 +2209,6 @@ msgstr ""
 msgid "If you have not requested an email change, please ignore this email."
 msgstr ""
 
-#: templates/accounts/email_change_password.html:7
-msgid "Change your Password"
-msgstr ""
-
 #: templates/accounts/email_change_password.html:16
 msgid "Please use the code below to change your password:"
 msgstr ""
@@ -2193,7 +2251,7 @@ msgid "Please enter your account e-mail to get a password reset link"
 msgstr ""
 
 #: templates/accounts/forgot_password.html:51
-#: templates/accounts/register.html:48 templates/settings.html:163
+#: templates/accounts/register.html:48 templates/settings.html:160
 msgid "Email"
 msgstr ""
 
@@ -2201,7 +2259,7 @@ msgstr ""
 msgid "Wrong email format. Please try again"
 msgstr ""
 
-#: templates/accounts/login.html:4 templates/accounts/login.html:67
+#: templates/accounts/login.html:4 templates/accounts/login.html:60
 msgid "Login"
 msgstr ""
 
@@ -2214,7 +2272,7 @@ msgid "Username / Email"
 msgstr ""
 
 #: templates/accounts/login.html:48 templates/accounts/register.html:52
-#: templates/settings.html:440
+#: templates/settings.html:437
 msgid "Password"
 msgstr ""
 
@@ -2224,23 +2282,19 @@ msgstr ""
 msgid "Show password"
 msgstr ""
 
-#: templates/accounts/login.html:60 templates/settings.html:444
-msgid "Wrong credentials. Please try again"
-msgstr ""
-
-#: templates/accounts/login.html:73
+#: templates/accounts/login.html:66
 msgid "Forgot your password ?"
 msgstr ""
 
-#: templates/accounts/login.html:81
+#: templates/accounts/login.html:74
 msgid "CONNECT WITH"
 msgstr ""
 
-#: templates/accounts/login.html:102
+#: templates/accounts/login.html:87
 msgid "Not Registered ?"
 msgstr ""
 
-#: templates/accounts/login.html:104
+#: templates/accounts/login.html:89
 msgid "Create an account"
 msgstr ""
 
@@ -2288,7 +2342,7 @@ msgid ""
 "characters long maximum and can include letters (a-Z), numbers (0-9), \\"
 msgstr ""
 
-#: templates/accounts/register.html:42 templates/settings.html:136
+#: templates/accounts/register.html:42 templates/settings.html:133
 msgid "Username"
 msgstr ""
 
@@ -2301,14 +2355,10 @@ msgid "and"
 msgstr ""
 
 #: templates/accounts/register.html:92
-msgid "Username or Email is invalid"
-msgstr ""
-
-#: templates/accounts/register.html:95
 msgid "Already Registered ?"
 msgstr ""
 
-#: templates/accounts/register.html:97
+#: templates/accounts/register.html:94
 msgid "Sign in here"
 msgstr ""
 
@@ -2517,8 +2567,8 @@ msgid ""
 "room again."
 msgstr ""
 
-#: templates/games/game_room.html:224 templates/settings.html:451
-#: templates/settings.html:486 templates/settings.html:532
+#: templates/games/game_room.html:224 templates/settings.html:448
+#: templates/settings.html:483 templates/settings.html:529
 msgid "Cancel"
 msgstr ""
 
@@ -2595,14 +2645,10 @@ msgid "Choose your mode"
 msgstr ""
 
 #: templates/modeselect.html:29
-msgid "Against AI"
-msgstr ""
-
-#: templates/modeselect.html:45
 msgid "Local Game"
 msgstr ""
 
-#: templates/modeselect.html:61
+#: templates/modeselect.html:45
 msgid "Online Game"
 msgstr ""
 
@@ -2642,6 +2688,15 @@ msgstr ""
 
 #: templates/notifs/notif_list.html:34
 msgid "from"
+msgstr ""
+
+#: templates/profile.html:37 templates/profile.html:46
+#: templates/profile.html:326 templates/profile.html:335
+msgid "Add Player"
+msgstr ""
+
+#: templates/profile.html:67 templates/profile.html:356
+msgid "Block Player"
 msgstr ""
 
 #: templates/profile.html:117 templates/profile.html:406
@@ -2697,189 +2752,185 @@ msgstr ""
 msgid "Profile Card"
 msgstr ""
 
-#: templates/settings.html:51
-msgid "This user alias is already taken, try another one"
-msgstr ""
-
-#: templates/settings.html:58
+#: templates/settings.html:55
 msgid "Avatars"
 msgstr ""
 
-#: templates/settings.html:113
+#: templates/settings.html:110
 msgid "Your image must not exceed 500KB in size and 1024x1024 in dimensions"
 msgstr ""
 
-#: templates/settings.html:121
+#: templates/settings.html:118
 msgid "Account"
 msgstr ""
 
-#: templates/settings.html:150
+#: templates/settings.html:147
 msgid "Account created on"
 msgstr ""
 
-#: templates/settings.html:170
+#: templates/settings.html:167
 msgid "Modify Email"
 msgstr ""
 
-#: templates/settings.html:173
+#: templates/settings.html:170
 msgid "Modify Password"
 msgstr ""
 
-#: templates/settings.html:187
+#: templates/settings.html:184
 msgid "Two-Factor Authentication"
 msgstr ""
 
-#: templates/settings.html:193
+#: templates/settings.html:190
 msgid "Enabled"
 msgstr ""
 
-#: templates/settings.html:203
+#: templates/settings.html:200
 msgid "Disable 2FA"
 msgstr ""
 
-#: templates/settings.html:210
+#: templates/settings.html:207
 msgid "Disabled"
 msgstr ""
 
-#: templates/settings.html:214
+#: templates/settings.html:211
 msgid "Enable 2FA"
 msgstr ""
 
-#: templates/settings.html:227
+#: templates/settings.html:224
 msgid "Link with 42"
 msgstr ""
 
-#: templates/settings.html:233
+#: templates/settings.html:230
 msgid "Linked"
 msgstr ""
 
-#: templates/settings.html:241
+#: templates/settings.html:238
 msgid "Unlink account"
 msgstr ""
 
-#: templates/settings.html:248
+#: templates/settings.html:245
 msgid "Not Linked"
 msgstr ""
 
-#: templates/settings.html:257
+#: templates/settings.html:254
 msgid "Link to 42"
 msgstr ""
 
-#: templates/settings.html:264
+#: templates/settings.html:261
 msgid "Prefered Language"
 msgstr ""
 
-#: templates/settings.html:290
+#: templates/settings.html:287
 msgid "Delete my account"
 msgstr ""
 
-#: templates/settings.html:299
+#: templates/settings.html:296
 msgid "Block List"
 msgstr ""
 
-#: templates/settings.html:335
+#: templates/settings.html:332
 msgid "BLOCK LIST IS EMPTY"
 msgstr ""
 
-#: templates/settings.html:358
+#: templates/settings.html:355
 msgid "Delete account"
 msgstr ""
 
-#: templates/settings.html:365
+#: templates/settings.html:362
 msgid "Are you sure you want to delete your account ?"
 msgstr ""
 
-#: templates/settings.html:367
+#: templates/settings.html:364
 msgid "By doing so, you will not be able to :"
 msgstr ""
 
-#: templates/settings.html:371
+#: templates/settings.html:368
 msgid "Play against other people online"
 msgstr ""
 
-#: templates/settings.html:374
+#: templates/settings.html:371
 msgid "Access your profile and other players profile"
 msgstr ""
 
-#: templates/settings.html:377
+#: templates/settings.html:374
 msgid "Access the leaderboard and view player rankings"
 msgstr ""
 
-#: templates/settings.html:380
+#: templates/settings.html:377
 msgid "Add friends and use the chat"
 msgstr ""
 
-#: templates/settings.html:384
+#: templates/settings.html:381
 msgid "This action will also delete all of your data including :"
 msgstr ""
 
-#: templates/settings.html:388
+#: templates/settings.html:385
 msgid "Your profile (Avatar, Nickname, Username)"
 msgstr ""
 
-#: templates/settings.html:391
+#: templates/settings.html:388
 msgid "Your conversations and your friend list"
 msgstr ""
 
-#: templates/settings.html:394
+#: templates/settings.html:391
 msgid "Your ranking and your game history"
 msgstr ""
 
-#: templates/settings.html:404
+#: templates/settings.html:401
 msgid "If you had linked your account to 42, this will also undo the link."
 msgstr ""
 
-#: templates/settings.html:411
+#: templates/settings.html:408
 msgid "This action is irreversible"
 msgstr ""
 
-#: templates/settings.html:416
+#: templates/settings.html:413
 msgid "Proceed"
 msgstr ""
 
-#: templates/settings.html:427
+#: templates/settings.html:424
 msgid "Confirm Delete"
 msgstr ""
 
-#: templates/settings.html:435
+#: templates/settings.html:432
 msgid "Please enter your password to confirm your account deletion"
 msgstr ""
 
-#: templates/settings.html:454
+#: templates/settings.html:451
 msgid "Confirm"
 msgstr ""
 
-#: templates/settings.html:472
+#: templates/settings.html:469
 msgid "Enable Two Factor Authentication ?"
 msgstr ""
 
-#: templates/settings.html:480
+#: templates/settings.html:477
 msgid ""
 "Two Factor Authentication will add a security layer to your account, by "
 "sending you a code via email each time you want to log in. Do you wish to "
 "enable it ?"
 msgstr ""
 
-#: templates/settings.html:489
+#: templates/settings.html:486
 msgid "Activate 2FA"
 msgstr ""
 
-#: templates/settings.html:510
+#: templates/settings.html:507
 msgid "Unlink 42 account"
 msgstr ""
 
-#: templates/settings.html:518
+#: templates/settings.html:515
 msgid "Unlinking your 42 account will result in these changes:"
 msgstr ""
 
-#: templates/settings.html:523
+#: templates/settings.html:520
 msgid "You will not be able to connect using 42Auth on login page."
 msgstr ""
 
-#: templates/settings.html:526
+#: templates/settings.html:523
 msgid "You will not be able to use your 42 banner and profile image."
 msgstr ""
 
-#: templates/settings.html:535
+#: templates/settings.html:532
 msgid "Unlink"
 msgstr ""
