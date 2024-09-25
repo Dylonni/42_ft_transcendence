@@ -73,6 +73,7 @@ class GameManager(models.Manager):
         consumer = GameChatConsumer()
         async_to_sync(consumer.send_message)(game=game, sender=player, category='Leave')
         async_to_sync(channel_layer.group_send)(f'games_chat_{game.id}', {'type': 'update_header'})
+        async_to_sync(channel_layer.group_send)(f'games_play_{game.id}', {'type': 'set_players'})
     
     def get_next_round(self, game):
         game.current_order += 1
@@ -102,6 +103,9 @@ class GameManager(models.Manager):
 
 
 class GameRoundManager(models.Manager):
+    def get_current_round(self, game):
+        return self.filter(game=game, order=game.current_order).first()
+
     def get_last_matches(self, player):
         return self.filter(Q(player1=player) | Q(player2=player), ended_at__isnull=False).order_by('-started_at')[:20]
     
@@ -193,6 +197,8 @@ class GameMessageManager(models.Manager):
         )
     
     def send_message(self, game, sender=None, content=None, category='Send'):
+        if not content and category == 'Send':
+            return
         game_message = self.create(game=game, sender=sender, content=content, category=category)
         channel_layer = get_channel_layer()
         async_to_sync(channel_layer.group_send)(

@@ -94,12 +94,10 @@ class MyAvatarView(PrivateView):
             profile.set_avatar_url(id=img_id, path=request.user.fortytwo_avatar_url)
         else:
             serializer = ProfileSerializer(request.profile, data=request.data, partial=True)
-            try:
-                if serializer.is_valid(raise_exception=True):
-                    serializer.save()
-            except ValidationError as e:
-                response_data = {'error': e.detail}
+            if not serializer.is_valid():
+                response_data = {'error': serializer.errors['avatar']}
                 return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
+            serializer.save()
         response_data = {'message': _('Avatar updated.'), 'redirect': '/settings/'}
         return Response(response_data, status=status.HTTP_200_OK)
 

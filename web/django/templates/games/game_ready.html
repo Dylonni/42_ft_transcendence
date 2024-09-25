@@ -7,13 +7,13 @@
     <div class="text-nowrap text-truncate d-flex d-lg-flex d-xxl-flex flex-column justify-content-center align-items-center justify-content-lg-center align-items-lg-center justify-content-xxl-center versusCard" style="width: 100%;height: 100%;text-overflow: ellipsis;margin-left: 0px;margin-right: 0px;margin-top: 0px;margin-bottom: 0px;position: relative;padding-left: 0px;padding-right: 0px;padding-top: 5px;padding-bottom: 5px;">
         <div class="d-flex justify-content-center align-items-center" style="width: 80px;height: 80px;border-style: solid;border-radius: 50%;">
             {% if round %}
-            <img src="{{ round.player1.get_avatar_url }}" class="player-ready d-none" style="width: 90%;height: 90%;padding-top: 0px;padding-bottom: 0px;padding-left: 0px;padding-right: 0px;">
+            <img src="{{ round.player1.get_avatar_url }}" class="player-ready" style="width: 90%;height: 90%;padding-top: 0px;padding-bottom: 0px;padding-left: 0px;padding-right: 0px;border-radius: 50%;">
             {% else %}
             <img class="player-ready d-none" style="width: 90%;height: 90%;padding-top: 0px;padding-bottom: 0px;padding-left: 0px;padding-right: 0px;">
             {% endif %}
         </div>
         <h1 class="text-truncate fs-4 text-center" style="width: 100%;text-shadow: 3px 3px 3px var(--bs-emphasis-color);padding-bottom: 0px;border-radius: 50%;">
-            {% translate "Player_1" %}
+            {{ round.player1.alias }}
         </h1>
     </div>
     <div class="d-flex d-lg-flex d-xxl-flex justify-content-center align-items-center justify-content-lg-center align-items-lg-center justify-content-xxl-center" style="width: 30%;height: 100%;margin-bottom: 0px;">
@@ -24,13 +24,13 @@
     <div class="text-nowrap text-truncate d-flex d-lg-flex d-xxl-flex flex-column justify-content-center align-items-center justify-content-lg-center align-items-lg-center justify-content-xxl-center versusCard" style="width: 100%;height: 100%;text-overflow: ellipsis;margin-left: 0px;margin-right: 0px;margin-top: 0px;margin-bottom: 0px;position: relative;padding-left: 0px;padding-right: 0px;padding-top: 5px;padding-bottom: 5px;">
         <div class="d-flex justify-content-center align-items-center" style="width: 80px;height: 80px;border-style: solid;border-radius: 50%;">
             {% if round %}
-            <img src="{{ round.player2.get_avatar_url }}" class="player-ready d-none" style="width: 90%;height: 90%;padding-top: 0px;padding-bottom: 0px;padding-left: 0px;padding-right: 0px; border-radius: 50%;">
+            <img src="{{ round.player2.get_avatar_url }}" class="player-ready" style="width: 90%;height: 90%;padding-top: 0px;padding-bottom: 0px;padding-left: 0px;padding-right: 0px; border-radius: 50%;">
             {% else %}
             <img class="player-ready d-none" style="width: 90%;height: 90%;padding-top: 0px;padding-bottom: 0px;padding-left: 0px;padding-right: 0px; border-radius: 50%;">
             {% endif %}
         </div>
         <h1 class="text-truncate fs-4 text-center" style="width: 100%;text-shadow: 3px 3px 3px var(--bs-emphasis-color);padding-bottom: 0px;">
-            {% translate "Player_2" %}
+            {{ round.player2.alias }}
         </h1>
     </div>
 </div>

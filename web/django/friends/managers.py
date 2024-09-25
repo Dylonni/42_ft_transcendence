@@ -20,8 +20,9 @@ class FriendshipManager(models.Manager):
             latest_created_at=Max('messages__created_at')
         ).values('latest_created_at')[:1]
         friendships = self.filter(
-            Q(profile1=profile) | Q(profile2=profile),
-            removed_by__isnull=True
+            Q(profile1=profile) | Q(profile2=profile)
+        ).exclude(
+            removed_by=profile
         ).annotate(
             last_message_created_at=Subquery(latest_message_created_at_subquery)
         ).order_by('-last_message_created_at')

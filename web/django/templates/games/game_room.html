@@ -52,10 +52,10 @@
 </div>
 <div class="container">
 	<div class="row d-lg-flex d-xl-flex d-xxl-flex justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center">
-		<div id="pongDiv" class="{{ game.started_at|yesno:",d-none d-xxl-none" }} col-md-12 col-lg-12 d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="border-style: none;padding-top: 0px;padding-bottom: 0px;">
+		<div id="pongDiv" class="{{ game.has_current_round_started|yesno:",d-none d-xxl-none" }} col-md-12 col-lg-12 d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="border-style: none;padding-top: 0px;padding-bottom: 0px;">
 			<canvas id="playCanvas" width="1000" height="600" style="background-color: #000;border: 2px solid #fff;"></canvas>
 		</div>
-		<div id="gameInfoDiv" class="col-md-12 col-lg-11 col-xl-11 col-xxl-10 d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="border-style: none;height: 100%;">
+		<div id="gameInfoDiv" class="{{ game.has_current_round_started|yesno:"d-none d-xxl-none," }} col-md-12 col-lg-11 col-xl-11 col-xxl-10 d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="border-style: none;height: 100%;">
 			<div class="card" style="height: 100%;width: 100%;color: var(--bs-body-bg);border-radius: 19px;border-style: none;">
 				<div class="card-body d-flex d-lg-flex d-xl-flex d-xxl-flex flex-column justify-content-start align-items-start justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start" style="background: #121415;backdrop-filter: blur(0px);-webkit-backdrop-filter: blur(0px);width: 100%;height: 100%;padding-top: 0px;padding-bottom: 0px;box-shadow: 0px 0px 10px 2px var(--bs-gray-800);padding-left: 0px;padding-right: 0px;border-radius: 19px;">
 					<div style="width: 100%;">
@@ -175,8 +175,8 @@
 								</div>
 							</div>
 						</div>
-						<div class="d-flex d-xxl-flex flex-column justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="width: 100%;height: 100%;margin-top: 0px;margin-bottom: 0px;padding-left: 0px;padding-right: 0px;padding-top: 0px;padding-bottom: 0px;">
-							<h1 class="fs-4 d-flex justify-content-center align-items-center" style="width: 80%;margin-bottom: 0px;border-top-left-radius: 20px;border-top-right-radius: 20px;backdrop-filter: blur(0px);-webkit-backdrop-filter: blur(0px);">
+						<div class="d-flex d-xxl-flex flex-column justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="width: 100%;height: 100%;">
+							<h1 class="fs-4 d-flex justify-content-center align-items-center" style="width: 80%;margin-bottom: 0px;border-top-left-radius: 20px;border-top-right-radius: 20px;backdrop-filter: blur(0px);-webkit-backdrop-filter: blur(0px);margin-bottom: 2em;">
 								<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-soccer-field" style="font-size: 30px;margin-left: 5px;margin-right: 5px;">
 									<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
 									<path d="M12 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"></path>
@@ -187,13 +187,13 @@
 								</svg>
 								Map
 							</h1>
-							<div class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="width: 80%;height: 50%;">
+							<div class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="width: 100%;height: 100%;">
 								<img src="{% static '/img/resized.webp' %}" width="569" height="245" style="border-radius: 20px;width: 80%;height: auto;">
 							</div>
-							<div id="readyDiv" class="d-flex d-sm-flex d-md-flex d-lg-flex d-xxl-flex flex-column justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xxl-center align-items-xxl-center" style="width: 100%;height: 50%;border-radius: 20px;margin-bottom: 0px;margin-top: 15px;padding-bottom: 0px;padding-top: 0px;opacity: 1;backdrop-filter: blur(0px);-webkit-backdrop-filter: blur(0px);border-style: none;">
-								{% include "games/game_ready.html" %}
-							</div>
 						</div>
+					</div>
+					<div id="readyDiv" class="d-flex d-sm-flex d-md-flex d-lg-flex d-xxl-flex flex-column justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xxl-center align-items-xxl-center" style="width: 100%;height: 50%;border-radius: 20px;margin-bottom: 0px;margin-top: 15px;padding-bottom: 0px;padding-top: 0px;opacity: 1;backdrop-filter: blur(0px);-webkit-backdrop-filter: blur(0px);border-style: none;">
+						{% include "games/game_ready.html" %}
 					</div>
 				</div>
 			</div>
@@ -203,8 +203,8 @@
 <div class="modal fade" id="modalLeave" role="dialog" tabindex="-1">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
-			<div class="modal-header">
-				<h4 class="modal-title d-flex d-xxl-flex justify-content-center justify-content-xxl-center">
+			<div class="modal-header" style="border-style: none;background-color: var(--bs-body-color);">
+				<h4 class="modal-title d-flex d-xxl-flex justify-content-center justify-content-xxl-center" style="color: var(--bs-body-bg);">
 					<svg class="icon icon-tabler icon-tabler-exclamation-circle" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 35px;color: #e8112d;margin-right: 10px;margin-left: 0px;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
 						<path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
 						<path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
@@ -214,12 +214,12 @@
 					{% translate 'Do you confirm leaving ?' %}
 				</h4>
 			</div>
-			<div class="modal-body">
-				<p>
+			<div class="modal-body" style="border-style: none;background-color: var(--bs-body-color);">
+				<p style="color: var(--bs-body-bg);">
 					{% translate 'If you have not been eliminated yet, your next game will be considered as a defeat and you will get a point penalty. You will not be able to join the room again.' %}
 				</p>
 			</div>
-			<div class="modal-footer" style="border-style: none;">
+			<div class="modal-footer" style="border-style: none;background-color: var(--bs-body-color);">
 				<button class="btn btn-light" data-bs-dismiss="modal" type="button">
 					{% translate 'Cancel' %}
 				</button>
@@ -233,8 +233,8 @@
 <div class="modal fade" id="modalInvite" role="dialog" style="color: var(--bs-emphasis-color);" tabindex="-1">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
-			<div class="modal-header">
-				<h4 class="modal-title d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center">
+			<div class="modal-header" style="border-style: none;background-color: var(--bs-body-color);">
+				<h4 class="modal-title d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="color: var(--bs-body-bg);">
 					<svg class="icon icon-tabler icon-tabler-user-plus" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 25px;margin-left: 7px;margin-right: 7px;color: #3a75c4;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
 						<path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
 						<path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
@@ -244,10 +244,10 @@
 					</svg>
 					{% translate 'Invite' %}
 				</h4>
-				<button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button">
+				<button aria-label="Close" class="btn-close btn-close-white" data-bs-dismiss="modal" type="button">
 				</button>
 			</div>
-			<div class="modal-body" style="width: 100%;">
+			<div class="modal-body" style="width: 100%;border-style: none;background-color: var(--bs-body-color);">
 				<div class="fs-4 d-flex d-xl-flex flex-column justify-content-center align-items-center justify-content-xl-center align-items-xl-center" style="width: 100%;height: 100%;background: var(--bs-body-color);border-radius: 20px;margin-top: 10px;margin-bottom: 10px;">
 					<h1 class="fs-5 text-center" style="margin-bottom: 0px;color: var(--bs-body-bg);">
 						{% translate 'Invite a random Player' %}

@@ -110,6 +110,10 @@ class Game(BaseModel):
     
     def get_current_round(self):
         return self.rounds.filter(order=self.current_order).first()
+    
+    def has_current_round_started(self):
+        current_round = self.get_current_round()
+        return current_round and current_round.started_at
 
     def get_ball_size(self):
         if self.ball_size == self.SizeChoices.SMALL:

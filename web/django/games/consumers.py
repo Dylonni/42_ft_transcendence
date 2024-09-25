@@ -75,8 +75,10 @@ class GameChatConsumer(AsyncWebsocketConsumer):
     
     @database_sync_to_async
     def is_blocked(self, message):
-        return self.profile.blocked_profiles.filter(blocked=message.sender).exists() and message.category == 'Send'
-    
+        if message.sender:
+            return self.profile.blocked_profiles.filter(blocked=message.sender).exists() and message.category == 'Send'
+        return False
+
     @database_sync_to_async
     def get_profile(self):
         try:

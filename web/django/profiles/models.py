@@ -28,7 +28,7 @@ class Profile(BaseModel):
         related_name='profile',
     )
     alias = models.CharField(
-        max_length=150,
+        max_length=20,
         unique=True,
     )
     avatar = models.ImageField(
