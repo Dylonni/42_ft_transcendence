@@ -2729,7 +2729,7 @@ msgstr "負"
 
 #: templates/profile.html:182 templates/profile.html:471
 msgid "NO GAMES TO SHOW"
-msgstr "AUCUNE PARTIE A AFFICHER"
+msgstr "ゲームはありません"
 
 #: templates/profile.html:192 templates/profile.html:481
 msgid "Player Statistics"

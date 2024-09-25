@@ -1156,7 +1156,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 ctx = playCanvas.getContext('2d');
                 document.addEventListener('keydown', (event) => {
                     if (playCanvas) {
-                        if (event.key === 'z' || event.key === 'ArrowUp') {
+                        if (event.key === 'w' || event.key === 'ArrowUp') {
                             direction = -1;
                             sendKeyDirection();
                         } else if (event.key === 's' || event.key === 'ArrowDown') {
@@ -1887,7 +1887,7 @@ const pongGame = () => {
     let predictionY = HALFHEIGHT;
 
 	document.addEventListener('keydown', (event) => {
-        if (event.key === 'z') zPressed = true;
+        if (event.key === 'w') zPressed = true;
 		if (event.key === 's') sPressed = true;
 
 		if (event.key === 'ArrowUp') upArrowPressed = true;
@@ -1895,7 +1895,7 @@ const pongGame = () => {
 	});
 
 	document.addEventListener('keyup', (event) => {
-		if (event.key === 'z') zPressed = false;
+		if (event.key === 'w') zPressed = false;
 		if (event.key === 's') sPressed = false;
 
         if (event.key === 'ArrowUp') upArrowPressed = false;

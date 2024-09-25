@@ -40,7 +40,7 @@ secret_response = client.secrets.kv.v2.read_secret_version(path=secret_path)
 SECRET_KEY = secret_response['data']['data']['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = FALSE
+DEBUG = True
 # below, add '*' if issue, to accept all hosts - should be removed in production. also add server host machine IP ?
 ALLOWED_HOSTS = ['localhost', 'django', '127.0.0.1', '*']
 
