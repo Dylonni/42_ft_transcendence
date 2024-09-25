@@ -658,6 +658,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 })
                 .then(response => response.json())
                 .then(data => {
+                    if ('error' in data) {
+                        if (errorBsModal) {
+                            errorModalMsg.textContent = data.error;
+                            errorBsModal.show();
+                        }
+                    }
                     if ('redirect' in data) {
                         navigateTo(data.redirect);
                     }
@@ -1775,7 +1781,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     };
     
-    window.addEventListener('popstate', renderPage);
+    window.addEventListener('popstate', navigateTo(window.location.href));
     window.addEventListener('pushState', renderPage);
     window.addEventListener('replaceState', renderPage);
     

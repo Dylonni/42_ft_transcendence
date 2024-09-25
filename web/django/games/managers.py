@@ -193,6 +193,8 @@ class GameMessageManager(models.Manager):
         )
     
     def send_message(self, game, sender=None, content=None, category='Send'):
+        if not content and category == 'Send':
+            return
         game_message = self.create(game=game, sender=sender, content=content, category=category)
         channel_layer = get_channel_layer()
         async_to_sync(channel_layer.group_send)(
