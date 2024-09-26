@@ -112,8 +112,6 @@ services:
     env_file: .env # NEEDED
     networks:
       - backend
-    volumes:
-      - ./postgres_exporter.yml:/etc/postgres_exporter.yml
     command:
       - '--config.file=/etc/postgres_exporter.yml'
 
