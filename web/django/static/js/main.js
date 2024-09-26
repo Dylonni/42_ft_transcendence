@@ -19,7 +19,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let player = null;
     let direction = 0;
-    let keyDown = 0;
     let isMouseDown = false;
     let mouseDown = 0;
     let mouseY = 0;
@@ -1920,6 +1919,7 @@ const pongGame = () => {
 
     function pressEnter(event) {
         if (event.key === 'Enter') {
+            console.log('ENTER PRESSED');
             resetGame();
         }
     }
@@ -1945,11 +1945,22 @@ const pongGame = () => {
     }
 
     function resetGame() {
+        if (!gameRunning) {
+            gameRunning = true;
+            gameLoop();
+        }
         player1Score = 0;
         player2Score = 0;
+        const playerOneScore = document.getElementById('playerOneScore');
+        if (playerOneScore) {
+            playerOneScore.textContent = player1Score;
+        }
+        const playerTwoScore = document.getElementById('playerTwoScore');
+        if (playerTwoScore) {
+            playerTwoScore.textContent = player2Score;
+        }
         resetBall();
     
-        gameRunning = true;
         message = null;
         document.removeEventListener('keydown', pressEnter);
     }
@@ -2133,6 +2144,7 @@ const pongGame = () => {
 
 	// Reset ball to the center
 	function resetBall() {
+        gameRunning = true;
 		ballX = (WIDTH - ballSize) / 2;
         ballY = (HEIGHT - ballSize) / 2;
 
@@ -2164,5 +2176,4 @@ const pongGame = () => {
 	// Start the game loop
     setDifficulty();
     resetGame();
-	gameLoop();
 };
