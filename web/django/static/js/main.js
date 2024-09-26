@@ -1075,7 +1075,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     fetch('/api/profiles/?excludeself=true')
                     .then(response => response.json())
                     .then(data => {
-                        const connectedProfiles = data.filter(profile => profile.status === 'Online');
+                        const connectedProfiles = data.data.filter((profile) => profile.status === 'Online');
                         if (connectedProfiles.length === 0) {
                             console.error('No connected profiles available to invite.');
                             return;
