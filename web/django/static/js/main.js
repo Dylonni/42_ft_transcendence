@@ -1887,6 +1887,38 @@ const pongGame = () => {
     let lastHitSpdY = null;
     let predictionY = HALFHEIGHT;
 
+    const againstPlayerBtn = document.getElementById('againstPlayerBtn');
+    if (againstPlayerBtn) {
+        againstPlayerBtn.checked = false;
+        againstPlayerBtn.addEventListener('change', (event) =>{
+            if (againstPlayerBtn.checked) {
+                isBot = false;
+            } else {
+                isBot = true;
+            }
+            const playerTwoAlias = document.getElementById('playerTwoAlias')
+            if (playerTwoAlias) {
+                playerTwoAlias.classList.toggle('d-none');
+                playerTwoAlias.classList.toggle('d-xxl-none');
+            }
+            const playerTwoAvatar = document.getElementById('playerTwoAvatar')
+            if (playerTwoAvatar) {
+                playerTwoAvatar.classList.toggle('d-none');
+                playerTwoAvatar.classList.toggle('d-xxl-none');
+            }
+            const botAvatar = document.getElementById('botAvatar')
+            if (botAvatar) {
+                botAvatar.classList.toggle('d-none');
+                botAvatar.classList.toggle('d-xxl-none');
+            }
+            const botAlias = document.getElementById('botAlias')
+            if (botAlias) {
+                botAlias.classList.toggle('d-none');
+                botAlias.classList.toggle('d-xxl-none');
+            }
+        });
+    }
+
 	document.addEventListener('keydown', (event) => {
         if (event.key === 'w') zPressed = true;
 		if (event.key === 's') sPressed = true;
@@ -2075,7 +2107,17 @@ const pongGame = () => {
             }
 			if (player2Score >= winScore) {
                 gameRunning = false;
-                message = 'Player 2 Wins! Press Enter to Retry';
+                if (isBot) {
+                    const botAlias = document.getElementById('botAlias');
+                    if (botAlias) {
+                        message = botAlias.dataset.msg;
+                    }
+                } else {
+                    const playerTwoAlias = document.getElementById('playerTwoAlias');
+                    if (playerTwoAlias) {
+                        message = playerTwoAlias.dataset.msg;
+                    }
+                }
                 document.addEventListener('keydown', pressEnter);
             } else {
                 resetBall();
@@ -2088,7 +2130,10 @@ const pongGame = () => {
             }
 			if (player1Score >= winScore) {
                 gameRunning = false;
-                message = 'Player 1 Wins! Press Enter to Retry';
+                const playerOneAlias = document.getElementById('playerOneAlias');
+                if (playerOneAlias) {
+                    message = playerOneAlias.dataset.msg;
+                }
                 document.addEventListener('keydown', pressEnter);
             } else {
                 resetBall();

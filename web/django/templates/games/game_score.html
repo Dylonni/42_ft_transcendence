@@ -10,7 +10,7 @@
 			</h1>
 			{% else %}
 			<img style="border-radius: 50%;width: 80px;height: 80px;border: 3px solid varvar(--bs-gray-700);" src="{% static '/img/avatar1.webp' %}" width="65" height="65" />
-			<h1 id="playerOneAlias" class="text-truncate fs-4 text-center" style="width: 100%;text-shadow: 3px 3px 3px var(--bs-emphasis-color);padding-bottom: 0px;color: var(--bs-body-bg);">
+			<h1 data-msg="{% translate 'Player_1 Wins! Press Enter to Retry' %}" id="playerOneAlias" class="text-truncate fs-4 text-center" style="width: 100%;text-shadow: 3px 3px 3px var(--bs-emphasis-color);padding-bottom: 0px;color: var(--bs-body-bg);">
 				{% translate "Player_1" %}
 			</h1>
 			{% endif %}
@@ -50,15 +50,14 @@
 			<h1 id="playerTwoAlias" class="text-truncate fs-4 text-center" style="width: 100%;text-shadow: 3px 3px 3px var(--bs-emphasis-color);padding-bottom: 0px;color: var(--bs-body-bg);">
 				{{ round.player2.alias }}
 			</h1>
-			{% elif bot %}
-			<img style="border-radius: 50%;width: 80px;height: 80px;border: 3px solid vavar(--bs-gray-700);" src="{% static 'img/bot.webp' }" width="65" height="65" />
-			<h1 id="playerTwoAlias" class="text-truncate fs-4 text-center" style="width: 100%;text-shadow: 3px 3px 3px var(--bs-emphasis-color);padding-bottom: 0px;color: var(--bs-body-bg);">
-				Bot
-			</h1>
 			{% else %}
-			<img style="border-radius: 50%;width: 80px;height: 80px;border: 3px solid vavar(--bs-gray-700);" src="{% static 'img/player2.webp' }" width="65" height="65" />
-			<h1 id="playerTwoAlias" class="text-truncate fs-4 text-center" style="width: 100%;text-shadow: 3px 3px 3px var(--bs-emphasis-color);padding-bottom: 0px;color: var(--bs-body-bg);">
+			<img id="playerTwoAvatar" class="d-none d-xxl-none" style="border-radius: 50%;width: 80px;height: 80px;border: 3px solid vavar(--bs-gray-700);" src="{% static 'img/avatar1.webp' %}" width="65" height="65" />
+			<h1 data-msg="{% translate 'Player_2 Wins! Press Enter to Retry' %}" id="playerTwoAlias" class="text-truncate fs-4 text-center d-none d-xxl-none" style="width: 100%;text-shadow: 3px 3px 3px var(--bs-emphasis-color);padding-bottom: 0px;color: var(--bs-body-bg);">
 				{% translate "Player_2" %}
+			</h1>
+			<img id="botAvatar" style="border-radius: 50%;width: 80px;height: 80px;border: 3px solid vavar(--bs-gray-700);" src="{% static 'img/bot.webp' %}" width="65" height="65" />
+			<h1 data-msg="{% translate 'A.I Wins! Press Enter to Retry' %}" id="botAlias" class="text-truncate fs-4 text-center" style="width: 100%;text-shadow: 3px 3px 3px var(--bs-emphasis-color);padding-bottom: 0px;color: var(--bs-body-bg);">
+				{% translate "A.I" %}
 			</h1>
 			{% endif %}
 		</div>
