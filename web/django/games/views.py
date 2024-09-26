@@ -88,7 +88,7 @@ class GameStartView(PrivateView):
             game = get_object_or_404(Game, id=game_id)
             player = request.profile
             if not game.can_start(player):
-                response_data = {'error': _('All players must be ready.')}
+                response_data = {'error': _('Need more players.')}
                 return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
             rounds = GameRound.objects.prepare_rounds(game)
             Game.objects.start(game)

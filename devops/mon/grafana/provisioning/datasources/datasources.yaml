@@ -14,3 +14,16 @@ datasources:
     jsonData:
       timeout: 60
       maxLines: 1000
+  # - name: PostgreSQL
+  #   type: postgres
+  #   access: proxy
+  #   url: ${POSTGRES_HOST}:${POSTGRES_PORT}
+  #   database: ${POSTGRES_DB}
+  #   user: ${POSTGRES_USER}
+  #   secureJsonData:
+  #     password: ${POSTGRES_PASSWORD}
+  #     sslmode: require
+  #     sslrootcert: /etc/ssl/certs/ca-certificates.crt
+  #     sslcert: /etc/nginx/ssl/nginx_selfsigned.crt
+  #     sslkey: /etc/nginx/ssl/nginx_selfsigned.key
+  #   editable: true

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-25 13:25+0000\n"
+"POT-Creation-Date: 2024-09-26 14:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -46,119 +46,119 @@ msgstr ""
 msgid "User logged in."
 msgstr ""
 
-#: accounts/views.py:69 accounts/views.py:72 templates/settings.html:441
+#: accounts/views.py:71 accounts/views.py:74 templates/settings.html:441
 msgid "Wrong credentials. Please try again"
 msgstr ""
 
-#: accounts/views.py:86 accounts/views.py:90 accounts/views.py:168
-#: accounts/views.py:172 accounts/views.py:237 accounts/views.py:241
-#: accounts/views.py:263 accounts/views.py:267 profiles/views.py:236
-#: profiles/views.py:240
+#: accounts/views.py:88 accounts/views.py:92 accounts/views.py:172
+#: accounts/views.py:176 accounts/views.py:243 accounts/views.py:247
+#: accounts/views.py:269 accounts/views.py:273 profiles/views.py:237
+#: profiles/views.py:241
 msgid "Invalid url."
 msgstr ""
 
-#: accounts/views.py:94 accounts/views.py:97 accounts/views.py:176
-#: accounts/views.py:179 profiles/views.py:244 profiles/views.py:247
+#: accounts/views.py:96 accounts/views.py:99 accounts/views.py:180
+#: accounts/views.py:183 profiles/views.py:245 profiles/views.py:248
 msgid "Invalid code."
 msgstr ""
 
-#: accounts/views.py:103
+#: accounts/views.py:105
 msgid "Connection accepted."
 msgstr ""
 
-#: accounts/views.py:124
+#: accounts/views.py:128
 msgid "User logged out."
 msgstr ""
 
-#: accounts/views.py:144
+#: accounts/views.py:148
 msgid "Activate your Account"
 msgstr ""
 
-#: accounts/views.py:149
+#: accounts/views.py:153
 msgid "Account registered! Please check your email to activate it."
 msgstr ""
 
-#: accounts/views.py:154
+#: accounts/views.py:158
 msgid "Invalid Username/Email."
 msgstr ""
 
-#: accounts/views.py:187
+#: accounts/views.py:191
 msgid "Account verified."
 msgstr ""
 
-#: accounts/views.py:204
+#: accounts/views.py:210
 msgid "Reset your Password"
 msgstr ""
 
-#: accounts/views.py:209 accounts/views.py:220
+#: accounts/views.py:215 accounts/views.py:226
 msgid "Password reset request sent! Please check your email."
 msgstr ""
 
-#: accounts/views.py:244
+#: accounts/views.py:250
 msgid "Set your new password."
 msgstr ""
 
-#: accounts/views.py:274 profiles/views.py:194
+#: accounts/views.py:280 profiles/views.py:195
 msgid "Password changed."
 msgstr ""
 
-#: accounts/views.py:301
+#: accounts/views.py:309
 msgid "42 account unlinked."
 msgstr ""
 
-#: accounts/views.py:372
+#: accounts/views.py:383
 msgid "Sign in first."
 msgstr ""
 
-#: accounts/views.py:376
+#: accounts/views.py:387
 msgid "Valid tokens."
 msgstr ""
 
-#: accounts/views.py:381
+#: accounts/views.py:392
 msgid "Invalid tokens."
 msgstr ""
 
-#: accounts/views.py:385
+#: accounts/views.py:396
 msgid "Refreshed tokens."
 msgstr ""
 
-#: friends/managers.py:37
+#: friends/managers.py:38
 msgid "Friendship not found."
 msgstr ""
 
-#: friends/managers.py:53
+#: friends/managers.py:54
 msgid "Cannot be friends with yourself."
 msgstr ""
 
-#: friends/managers.py:62
+#: friends/managers.py:63
 msgid "These profiles are already friends."
 msgstr ""
 
-#: friends/managers.py:80
+#: friends/managers.py:81
 msgid "Profile not part of this friendship."
 msgstr ""
 
-#: friends/managers.py:83
+#: friends/managers.py:84
 msgid "Friendship already removed."
 msgstr ""
 
-#: friends/managers.py:112
+#: friends/managers.py:113
 msgid "Cannot send a friend request to yourself."
 msgstr ""
 
-#: friends/managers.py:114
+#: friends/managers.py:115
 msgid "Friend request already sent."
 msgstr ""
 
-#: friends/managers.py:116
+#: friends/managers.py:117
 msgid "Friend request already received."
 msgstr ""
 
-#: friends/managers.py:168
+#: friends/managers.py:169
 msgid "Friend message not found."
 msgstr ""
 
-#: games/managers.py:16 games/managers.py:31 games/managers.py:168
+#: games/managers.py:16 games/managers.py:31 games/managers.py:172
 msgid "Player is already in a game."
 msgstr ""
 
@@ -166,11 +166,11 @@ msgstr ""
 msgid "Server is full. Try to create a game later."
 msgstr ""
 
-#: games/managers.py:33 games/managers.py:170
+#: games/managers.py:33 games/managers.py:174
 msgid "Game is full. Unable to join."
 msgstr ""
 
-#: games/managers.py:35 games/managers.py:88 games/managers.py:110
+#: games/managers.py:35 games/managers.py:89 games/managers.py:114
 msgid "Game has already started."
 msgstr ""
 
@@ -178,19 +178,19 @@ msgstr ""
 msgid "Player is not in the game."
 msgstr ""
 
-#: games/managers.py:146
+#: games/managers.py:150
 msgid "Cannot send a game invite to yourself."
 msgstr ""
 
-#: games/managers.py:148
+#: games/managers.py:152
 msgid "Sender is not in a game."
 msgstr ""
 
-#: games/managers.py:150
+#: games/managers.py:154
 msgid "Game invite already sent."
 msgstr ""
 
-#: games/managers.py:152
+#: games/managers.py:156
 msgid "Game invite already received."
 msgstr ""
 
@@ -230,27 +230,27 @@ msgstr ""
 msgid "Hard"
 msgstr ""
 
-#: games/models.py:330 templates/accounts/forgot_password.html:61
+#: games/models.py:334 templates/accounts/forgot_password.html:56
 msgid "Send"
 msgstr ""
 
-#: games/models.py:331
+#: games/models.py:335
 msgid "Join"
 msgstr ""
 
-#: games/models.py:332 templates/games/game_room.html:227
+#: games/models.py:336 templates/games/game_room.html:227
 msgid "Leave"
 msgstr ""
 
-#: games/models.py:333
+#: games/models.py:337
 msgid "Prepare"
 msgstr ""
 
-#: games/models.py:334
+#: games/models.py:338
 msgid "Eliminate"
 msgstr ""
 
-#: games/models.py:335
+#: games/models.py:339
 msgid "Win"
 msgstr ""
 
@@ -278,7 +278,7 @@ msgstr ""
 msgid "Game started."
 msgstr ""
 
-#: games/views.py:116 profiles/views.py:511
+#: games/views.py:116 profiles/views.py:513
 msgid "Message sent."
 msgstr ""
 
@@ -298,7 +298,7 @@ msgstr ""
 msgid "Game Message"
 msgstr ""
 
-#: pong/views.py:483
+#: pong/views.py:452
 msgid "Language changed."
 msgstr ""
 
@@ -306,7 +306,7 @@ msgstr ""
 msgid "No profile found to set status."
 msgstr ""
 
-#: profiles/managers.py:91
+#: profiles/managers.py:97
 msgid "Profile is already blocked."
 msgstr ""
 
@@ -326,31 +326,31 @@ msgstr ""
 msgid "Offline"
 msgstr ""
 
-#: profiles/models.py:183
+#: profiles/models.py:181
 msgid "Unranked"
 msgstr ""
 
-#: profiles/views.py:46
+#: profiles/views.py:47
 msgid "Profile not found."
 msgstr ""
 
-#: profiles/views.py:61
+#: profiles/views.py:62
 msgid "Incorrect password."
 msgstr ""
 
-#: profiles/views.py:68
+#: profiles/views.py:69
 msgid "Account deleted."
 msgstr ""
 
-#: profiles/views.py:80
+#: profiles/views.py:81
 msgid "Alias already taken."
 msgstr ""
 
-#: profiles/views.py:83
+#: profiles/views.py:84
 msgid "Alias updated."
 msgstr ""
 
-#: profiles/views.py:103
+#: profiles/views.py:102
 msgid "Avatar updated."
 msgstr ""
 
@@ -358,86 +358,86 @@ msgstr ""
 msgid "Default language changed."
 msgstr ""
 
-#: profiles/views.py:129
+#: profiles/views.py:130
 msgid "Change your Email"
 msgstr ""
 
-#: profiles/views.py:134
+#: profiles/views.py:135
 msgid "Email change request sent! Please check your email."
 msgstr ""
 
-#: profiles/views.py:146
+#: profiles/views.py:147
 msgid "Invalid email."
 msgstr ""
 
-#: profiles/views.py:149 profiles/views.py:184 profiles/views.py:188
+#: profiles/views.py:150 profiles/views.py:185 profiles/views.py:189
 msgid "Invalid password."
 msgstr ""
 
-#: profiles/views.py:155
+#: profiles/views.py:156
 msgid "Email changed."
 msgstr ""
 
-#: profiles/views.py:167 templates/accounts/email_change_password.html:7
+#: profiles/views.py:168 templates/accounts/email_change_password.html:7
 msgid "Change your Password"
 msgstr ""
 
-#: profiles/views.py:172
+#: profiles/views.py:173
 msgid "Password change request sent! Please check your email."
 msgstr ""
 
-#: profiles/views.py:208
+#: profiles/views.py:209
 msgid "2FA enabled."
 msgstr ""
 
-#: profiles/views.py:218
+#: profiles/views.py:219
 msgid "2FA disabled."
 msgstr ""
 
-#: profiles/views.py:261
+#: profiles/views.py:262
 msgid "Code verified."
 msgstr ""
 
-#: profiles/views.py:291
+#: profiles/views.py:292
 msgid "Game invitation sent."
 msgstr ""
 
-#: profiles/views.py:312
+#: profiles/views.py:313
 msgid "Profile blocked."
 msgstr ""
 
-#: profiles/views.py:335 profiles/views.py:442
+#: profiles/views.py:336 profiles/views.py:444
 msgid "Friend request accepted."
 msgstr ""
 
-#: profiles/views.py:338
+#: profiles/views.py:339
 msgid "Friend request sent."
 msgstr ""
 
-#: profiles/views.py:390
+#: profiles/views.py:392
 msgid "Game invitation accepted."
 msgstr ""
 
-#: profiles/views.py:400
+#: profiles/views.py:402
 msgid "Game invitation declined."
 msgstr ""
 
-#: profiles/views.py:422
+#: profiles/views.py:424
 msgid "Profile unblocked."
 msgstr ""
 
-#: profiles/views.py:452
+#: profiles/views.py:454
 msgid "Friend request declined."
 msgstr ""
 
-#: profiles/views.py:492
+#: profiles/views.py:494
 msgid "Friend removed."
 msgstr ""
 
-#: templates/about/about.html:4 templates/about/dev_team.html:33
-#: templates/about/faq.html:32 templates/about/game_rules.html:34
-#: templates/about/privacy_policy.html:28
-#: templates/about/terms_of_service.html:28
+#: templates/about/about.html:4 templates/about/dev_team.html:37
+#: templates/about/faq.html:36 templates/about/game_rules.html:38
+#: templates/about/privacy_policy.html:32
+#: templates/about/terms_of_service.html:32
 msgid "About"
 msgstr ""
 
@@ -450,65 +450,65 @@ msgid ""
 "Welcome to this section, here you can learn more about the app and our team"
 msgstr ""
 
-#: templates/about/about.html:43 templates/about/faq.html:20
+#: templates/about/about.html:47 templates/about/faq.html:20
 msgid "Frequently Asked Questions"
 msgstr ""
 
-#: templates/about/about.html:59 templates/about/game_rules.html:4
+#: templates/about/about.html:67 templates/about/game_rules.html:4
 #: templates/about/game_rules.html:22
 msgid "Game Rules"
 msgstr ""
 
-#: templates/about/about.html:72 templates/about/dev_team.html:21
+#: templates/about/about.html:84 templates/about/dev_team.html:21
 msgid "The Dev Team"
 msgstr ""
 
-#: templates/about/about.html:89 templates/about/dev_team.html:4
-#: templates/about/faq.html:139 templates/about/privacy_policy.html:4
+#: templates/about/about.html:105 templates/about/dev_team.html:4
+#: templates/about/faq.html:143 templates/about/privacy_policy.html:4
 #: templates/about/privacy_policy.html:16 templates/accounts/register.html:76
 #: templates/footer.html:7
 msgid "Privacy Policy"
 msgstr ""
 
-#: templates/about/about.html:104 templates/about/terms_of_service.html:4
+#: templates/about/about.html:124 templates/about/terms_of_service.html:4
 #: templates/accounts/register.html:66 templates/footer.html:6
 msgid "Terms of Service"
 msgstr ""
 
-#: templates/about/dev_team.html:45
+#: templates/about/dev_team.html:49
 msgid ""
 "This is us, the team behind Transcendence42 project. Check us out below !"
 msgstr ""
 
-#: templates/about/dev_team.html:62
+#: templates/about/dev_team.html:66
 msgid "Frontend Dev"
 msgstr ""
 
-#: templates/about/dev_team.html:65
+#: templates/about/dev_team.html:69
 msgid "UI/UX Design"
 msgstr ""
 
-#: templates/about/dev_team.html:115
+#: templates/about/dev_team.html:119
 msgid "Backend Dev"
 msgstr ""
 
-#: templates/about/dev_team.html:118
+#: templates/about/dev_team.html:122
 msgid "Database Architecture"
 msgstr ""
 
-#: templates/about/dev_team.html:121
+#: templates/about/dev_team.html:125
 msgid "Game Design"
 msgstr ""
 
-#: templates/about/dev_team.html:136
+#: templates/about/dev_team.html:140
 msgid "Devops and security"
 msgstr ""
 
-#: templates/about/dev_team.html:139
+#: templates/about/dev_team.html:143
 msgid "GDPR Compliance"
 msgstr ""
 
-#: templates/about/dev_team.html:142
+#: templates/about/dev_team.html:146
 msgid "Localization and Translation"
 msgstr ""
 
@@ -516,300 +516,298 @@ msgstr ""
 msgid "FAQ"
 msgstr ""
 
-#: templates/about/faq.html:45
+#: templates/about/faq.html:49
 msgid "How does the ranking system and the elo works ?"
 msgstr ""
 
-#: templates/about/faq.html:62 templates/about/faq.html:110
-#: templates/home.html:44 templates/profile.html:106 templates/profile.html:395
-#: templates/profile.html:495
+#: templates/about/faq.html:66 templates/about/faq.html:114
+#: templates/home.html:44 templates/profile.html:106 templates/profile.html:206
+#: templates/profile.html:392 templates/profile.html:492
 msgid "Points"
 msgstr ""
 
-#: templates/about/faq.html:65
+#: templates/about/faq.html:69
 msgid "are calculated upon victories and defeats and on your opponent&#39;s "
 msgstr ""
 
-#: templates/about/faq.html:73 templates/about/faq.html:98
-#: templates/home.html:32 templates/profile.html:92 templates/profile.html:381
+#: templates/about/faq.html:77 templates/about/faq.html:102
+#: templates/home.html:32 templates/profile.html:92 templates/profile.html:378
 msgid "Rank"
 msgstr ""
 
-#: templates/about/faq.html:75
+#: templates/about/faq.html:79
 msgid "."
 msgstr ""
 
-#: templates/about/faq.html:77
+#: templates/about/faq.html:81
 msgid ""
 "If your opponent&#39;s rank is bigger than yours, you will gain more points "
 "on a victory and loose less points on a defeat."
 msgstr ""
 
-#: templates/about/faq.html:79
+#: templates/about/faq.html:83
 msgid "If you decide to leave the game while it&#39;s on, you will get a"
 msgstr ""
 
-#: templates/about/faq.html:81
+#: templates/about/faq.html:85
 msgid "point penalty"
 msgstr ""
 
-#: templates/about/faq.html:83
+#: templates/about/faq.html:87
 msgid ""
 "and you will also loose the points you were supposed to loose initially."
 msgstr ""
 
-#: templates/about/faq.html:85
+#: templates/about/faq.html:89
 msgid "Winning games in a tournament will "
 msgstr ""
 
-#: templates/about/faq.html:87
+#: templates/about/faq.html:91
 msgid "grant you"
 msgstr ""
 
-#: templates/about/faq.html:89
+#: templates/about/faq.html:93
 msgid "more points."
 msgstr ""
 
-#: templates/about/faq.html:101
+#: templates/about/faq.html:105
 msgid "is simply based on the"
 msgstr ""
 
-#: templates/about/faq.html:112
+#: templates/about/faq.html:116
 msgid "you acquired."
 msgstr ""
 
-#: templates/about/faq.html:120
+#: templates/about/faq.html:124
 msgid "What data do you store ?"
 msgstr ""
 
-#: templates/about/faq.html:129
+#: templates/about/faq.html:133
 msgid "Please check our"
 msgstr ""
 
-#: templates/about/faq.html:140
+#: templates/about/faq.html:144
 msgid "page for all relevant info."
 msgstr ""
 
-#: templates/about/faq.html:148
+#: templates/about/faq.html:152
 msgid "How does the social aspect works ?"
 msgstr ""
 
-#: templates/about/faq.html:157
+#: templates/about/faq.html:161
 msgid "The"
 msgstr ""
 
-#: templates/about/faq.html:167 templates/about/faq.html:198
-#: templates/about/faq.html:279 templates/friends/social.html:4
+#: templates/about/faq.html:171 templates/about/faq.html:202
+#: templates/about/faq.html:283 templates/friends/social.html:4
 #: templates/friends/social.html:13
 msgid "Social"
 msgstr ""
 
-#: templates/about/faq.html:171
+#: templates/about/faq.html:175
 msgid ""
 "aspect of the app allows you to discuss with friends and manage your friend "
 "list."
 msgstr ""
 
-#: templates/about/faq.html:174
+#: templates/about/faq.html:178
 msgid ""
 "To create a conversation or interact with someone, you must add a player to "
 "your friend list."
 msgstr ""
 
-#: templates/about/faq.html:176
+#: templates/about/faq.html:180
 msgid ""
 "The friend has to either accept the requested invitation from you, or has to "
 "add you back via your"
 msgstr ""
 
-#: templates/about/faq.html:185 templates/about/faq.html:264
+#: templates/about/faq.html:189 templates/about/faq.html:268
 #: templates/profile.html:4
 msgid "Profile"
 msgstr ""
 
-#: templates/about/faq.html:187
+#: templates/about/faq.html:191
 msgid "page."
 msgstr ""
 
-#: templates/about/faq.html:189
+#: templates/about/faq.html:193
 msgid ""
 "When both users have accepted each other, you can see their status in the"
 msgstr ""
 
-#: templates/about/faq.html:200
+#: templates/about/faq.html:204
 msgid ""
 "page, you can interact with this friend by clicking on them in your friend "
 "list."
 msgstr ""
 
-#: templates/about/faq.html:208
+#: templates/about/faq.html:212
 msgid "What happens when I block someone ?"
 msgstr ""
 
-#: templates/about/faq.html:224
+#: templates/about/faq.html:228
 msgid "Blocking"
 msgstr ""
 
-#: templates/about/faq.html:227
+#: templates/about/faq.html:231
 msgid ""
 "a user will prevent them from sending notifications and messages to you."
 msgstr ""
 
-#: templates/about/faq.html:231
+#: templates/about/faq.html:235
 msgid ""
 "If you have blocked someone and play with them in the same game room, you "
 "will not see their messages in the room chat."
 msgstr ""
 
-#: templates/about/faq.html:235
+#: templates/about/faq.html:239
 msgid ""
 "If you have blocked a friend, you will still be able to interact with them, "
 "and they will be able to see your requests and messages but you will not see "
 "their replies or requests."
 msgstr ""
 
-#: templates/about/faq.html:239
+#: templates/about/faq.html:243
 msgid "You can"
 msgstr ""
 
-#: templates/about/faq.html:250
+#: templates/about/faq.html:254
 msgid "Unblock"
 msgstr ""
 
-#: templates/about/faq.html:254
+#: templates/about/faq.html:258
 msgid "a user by going to their"
 msgstr ""
 
-#: templates/about/faq.html:268
+#: templates/about/faq.html:272
 msgid "page, via the"
 msgstr ""
 
-#: templates/about/faq.html:283
+#: templates/about/faq.html:287
 msgid "page , or removing them off your blocked list under the"
 msgstr ""
 
-#: templates/about/faq.html:292 templates/settings.html:4
+#: templates/about/faq.html:296 templates/settings.html:4
 #: templates/settings.html:13
 msgid "Settings"
 msgstr ""
 
-#: templates/about/faq.html:296
+#: templates/about/faq.html:300
 msgid "page"
 msgstr ""
 
-#: templates/about/faq.html:305
+#: templates/about/faq.html:309
 msgid "Can i suggest some ideas ?"
 msgstr ""
 
-#: templates/about/faq.html:314
+#: templates/about/faq.html:318
 msgid ""
 "Yes , we would love to hear about your ideas ! Feel free to share them with "
 "us by contacting us at"
 msgstr ""
 
-#: templates/about/game_rules.html:46
+#: templates/about/game_rules.html:50
 msgid "The rules are simple:"
 msgstr ""
 
-#: templates/about/game_rules.html:48
+#: templates/about/game_rules.html:52
 msgid ""
 "There are two paddles on each side of the field , you (and your opponent) "
 "have to move your paddles and hit the ball in order to score a point."
 msgstr ""
 
-#: templates/about/game_rules.html:50
+#: templates/about/game_rules.html:54
 msgid "The ball is getting faster from each hit."
 msgstr ""
 
-#: templates/about/game_rules.html:52
+#: templates/about/game_rules.html:56
 msgid ""
 "You have to score as much points as the creator of the game room has defined "
 "to win a game."
 msgstr ""
 
-#: templates/about/game_rules.html:54
+#: templates/about/game_rules.html:58
 msgid ""
 "Your side is represented by your name and your avatar above the game , it "
 "also displays the current score of the game."
 msgstr ""
 
-#: templates/about/game_rules.html:65 templates/games/game_ready.html:16
-#: templates/games/game_score.html:13
+#: templates/about/game_rules.html:69 templates/games/game_score.html:14
 msgid "Player_1"
 msgstr ""
 
-#: templates/about/game_rules.html:86 templates/games/game_ready.html:33
-#: templates/games/game_score.html:60
+#: templates/about/game_rules.html:90 templates/games/game_score.html:56
 msgid "Player_2"
 msgstr ""
 
-#: templates/about/game_rules.html:102
+#: templates/about/game_rules.html:106
 msgid "Movement"
 msgstr ""
 
-#: templates/about/game_rules.html:105
+#: templates/about/game_rules.html:109
 msgid "There are 3 ways to move your paddle"
 msgstr ""
 
-#: templates/about/game_rules.html:113
+#: templates/about/game_rules.html:117
 msgid "You can click and hold to a direction make the paddle going up and down"
 msgstr ""
 
-#: templates/about/game_rules.html:116 templates/about/game_rules.html:132
+#: templates/about/game_rules.html:120 templates/about/game_rules.html:136
 msgid "Pressing"
 msgstr ""
 
-#: templates/about/game_rules.html:123 templates/about/game_rules.html:139
+#: templates/about/game_rules.html:127 templates/about/game_rules.html:143
 msgid "or"
 msgstr ""
 
-#: templates/about/game_rules.html:129
+#: templates/about/game_rules.html:133
 msgid "keys will make the paddle going up"
 msgstr ""
 
-#: templates/about/game_rules.html:145
+#: templates/about/game_rules.html:149
 msgid "keys will make the paddle going down"
 msgstr ""
 
-#: templates/about/game_rules.html:160
+#: templates/about/game_rules.html:164
 msgid "Points to win a game,"
 msgstr ""
 
-#: templates/about/game_rules.html:170
+#: templates/about/game_rules.html:174
 msgid "Players in the room/Players needed and the"
 msgstr ""
 
-#: templates/about/game_rules.html:179
+#: templates/about/game_rules.html:183
 msgid ""
 "map are defined by the game creator and can be seen in the game rooms "
 "section from the home menu."
 msgstr ""
 
-#: templates/about/game_rules.html:181
+#: templates/about/game_rules.html:185
 msgid ""
 "There are some other settings that the room owner can define , such as the "
 "initial ball speed , or the paddle/ball size."
 msgstr ""
 
-#: templates/about/game_rules.html:183
+#: templates/about/game_rules.html:187
 msgid "These settings cannot be changed once the room is created."
 msgstr ""
 
-#: templates/about/game_rules.html:190
+#: templates/about/game_rules.html:194
 msgid "Enjoy your games !"
 msgstr ""
 
-#: templates/about/privacy_policy.html:42
-#: templates/about/terms_of_service.html:42
+#: templates/about/privacy_policy.html:46
+#: templates/about/terms_of_service.html:46
 msgid "Last updated: "
 msgstr ""
 
-#: templates/about/privacy_policy.html:42
-#: templates/about/terms_of_service.html:42
+#: templates/about/privacy_policy.html:46
+#: templates/about/terms_of_service.html:46
 msgid "September 2024"
 msgstr ""
 
-#: templates/about/privacy_policy.html:48
+#: templates/about/privacy_policy.html:52
 msgid ""
 "\n"
 "    <div class=\"row\">\n"
@@ -878,7 +876,7 @@ msgid ""
 "    "
 msgstr ""
 
-#: templates/about/privacy_policy.html:103
+#: templates/about/privacy_policy.html:107
 #, python-format
 msgid ""
 "\n"
@@ -1206,7 +1204,7 @@ msgstr ""
 msgid "TERMS OF SERVICE"
 msgstr ""
 
-#: templates/about/terms_of_service.html:48
+#: templates/about/terms_of_service.html:52
 #, python-format
 msgid ""
 "\n"
@@ -2177,11 +2175,11 @@ msgstr ""
 msgid "This code will expire in 10 minutes."
 msgstr ""
 
-#: templates/accounts/email_activate.html:25
+#: templates/accounts/email_activate.html:26
 msgid "If you did not create an account, please ignore this email."
 msgstr ""
 
-#: templates/accounts/email_activate.html:28
+#: templates/accounts/email_activate.html:29
 #: templates/accounts/email_change_email.html:28
 #: templates/accounts/email_change_password.html:28
 #: templates/accounts/email_reset_password.html:28
@@ -2189,7 +2187,7 @@ msgstr ""
 msgid "Thank you,"
 msgstr ""
 
-#: templates/accounts/email_activate.html:30
+#: templates/accounts/email_activate.html:31
 #: templates/accounts/email_change_email.html:30
 #: templates/accounts/email_change_password.html:30
 #: templates/accounts/email_reset_password.html:30
@@ -2253,10 +2251,6 @@ msgstr ""
 #: templates/accounts/forgot_password.html:51
 #: templates/accounts/register.html:48 templates/settings.html:160
 msgid "Email"
-msgstr ""
-
-#: templates/accounts/forgot_password.html:56
-msgid "Wrong email format. Please try again"
 msgstr ""
 
 #: templates/accounts/login.html:4 templates/accounts/login.html:60
@@ -2592,8 +2586,36 @@ msgstr ""
 msgid "NO FRIENDS TO INVITE"
 msgstr ""
 
+#: templates/games/game_score.html:13
+msgid "Player_1 Wins! Press Enter to Retry"
+msgstr ""
+
+#: templates/games/game_score.html:55
+msgid "Player_2 Wins! Press Enter to Retry"
+msgstr ""
+
+#: templates/games/game_score.html:59
+msgid "A.I Wins! Press Enter to Retry"
+msgstr ""
+
+#: templates/games/game_score.html:60
+msgid "A.I"
+msgstr ""
+
 #: templates/games/play.html:4
 msgid "Pong"
+msgstr ""
+
+#: templates/games/play.html:17
+msgid "Play against a friend"
+msgstr ""
+
+#: templates/games/play.html:51 templates/games/play.html:80
+msgid "Up"
+msgstr ""
+
+#: templates/games/play.html:64 templates/games/play.html:94
+msgid "Down"
 msgstr ""
 
 #: templates/home.html:4
@@ -2695,65 +2717,65 @@ msgid "from"
 msgstr ""
 
 #: templates/profile.html:37 templates/profile.html:46
-#: templates/profile.html:326 templates/profile.html:335
+#: templates/profile.html:323 templates/profile.html:332
 msgid "Add Player"
 msgstr ""
 
-#: templates/profile.html:67 templates/profile.html:356
+#: templates/profile.html:67 templates/profile.html:353
 msgid "Block Player"
 msgstr ""
 
-#: templates/profile.html:117 templates/profile.html:406
+#: templates/profile.html:117 templates/profile.html:403
 msgid "Game History (Last 20 Games)"
 msgstr ""
 
-#: templates/profile.html:126 templates/profile.html:415
+#: templates/profile.html:126 templates/profile.html:412
 msgid "WIN"
 msgstr ""
 
 #: templates/profile.html:145 templates/profile.html:172
-#: templates/profile.html:434 templates/profile.html:461
+#: templates/profile.html:431 templates/profile.html:458
 msgid "Game Details"
 msgstr ""
 
-#: templates/profile.html:153 templates/profile.html:442
+#: templates/profile.html:153 templates/profile.html:439
 msgid "LOSS"
 msgstr ""
 
-#: templates/profile.html:182 templates/profile.html:471
+#: templates/profile.html:182 templates/profile.html:468
 msgid "NO GAMES TO SHOW"
 msgstr ""
 
-#: templates/profile.html:192 templates/profile.html:481
+#: templates/profile.html:192 templates/profile.html:478
 msgid "Player Statistics"
 msgstr ""
 
-#: templates/profile.html:221 templates/profile.html:510
-msgid "Wins"
-msgstr ""
-
-#: templates/profile.html:227 templates/profile.html:516
-msgid "Losses"
-msgstr ""
-
-#: templates/profile.html:268 templates/profile.html:557
-msgid "Total Games Played"
-msgstr ""
-
-#: templates/profile.html:278 templates/profile.html:567
-msgid "Won Tournaments"
-msgstr ""
-
-#: templates/profile.html:288 templates/profile.html:577
-msgid "Best Winning Streak"
-msgstr ""
-
-#: templates/profile.html:490
+#: templates/profile.html:201 templates/profile.html:487
 msgid "Winrate"
 msgstr ""
 
-#: templates/profile.html:531
+#: templates/profile.html:221 templates/profile.html:507
+msgid "Wins"
+msgstr ""
+
+#: templates/profile.html:227 templates/profile.html:513
+msgid "Losses"
+msgstr ""
+
+#: templates/profile.html:242 templates/profile.html:528
 msgid "Last 20 Games"
+msgstr ""
+
+#: templates/profile.html:265 templates/profile.html:551
+msgid "Total Games Played"
+msgstr ""
+
+#: templates/profile.html:275 templates/profile.html:561
+msgid "Won Tournaments"
+msgstr ""
+
+#: templates/profile.html:285 templates/profile.html:571
+msgid "Best Winning Streak"
 msgstr ""
 
 #: templates/settings.html:31

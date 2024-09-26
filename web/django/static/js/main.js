@@ -1056,17 +1056,6 @@ document.addEventListener("DOMContentLoaded", () => {
             openGameChatWebSocket(gameId);
             openGamePlayWebSocket(gameId);
 
-            new EmojiPicker({
-                trigger: [
-                    {
-                        selector: ['.emojiPickerBtn'],
-                        insertInto: '.gameChatInput'
-                    },
-                ],
-                closeButton: true,
-                closeOnSelect: true,
-            });
-
             const inviteRandomBtn = document.getElementById('inviteRandomBtn');
             if (inviteRandomBtn) {
                 inviteRandomBtn.addEventListener('click', (event) => {
@@ -1147,7 +1136,12 @@ document.addEventListener("DOMContentLoaded", () => {
                     })
                     .then(response => response.json())
                     .then(data => {
-                        if (gamePlaySocket) {
+                        if ('error' in data) {
+                            if (errorBsModal) {
+                                errorModalMsg.textContent = data.error;
+                                errorBsModal.show();
+                            }
+                        } else if (gamePlaySocket) {
                             const message = {action: 'next_round'};
                             gamePlaySocket.send(JSON.stringify(message));
                         }

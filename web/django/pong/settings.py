@@ -40,9 +40,9 @@ secret_response = client.secrets.kv.v2.read_secret_version(path=secret_path)
 SECRET_KEY = secret_response['data']['data']['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 # below, add '*' if issue, to accept all hosts - should be removed in production. also add server host machine IP ?
-ALLOWED_HOSTS = ['localhost', 'django', '127.0.0.1', '10.32.6.12', '*']
+ALLOWED_HOSTS = ['localhost', 'django', '127.0.0.1', '10.32.6.12']
 
 CSRF_TRUSTED_ORIGINS = ['https://localhost:8443', 'http://localhost:8080', 'https://127.0.0.1:8443', 'http://127.0.0.1:8080', 'https://10.32.6.12:8443', 'http://10.32.6.12:8080']
 
@@ -78,7 +78,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # 'django.middleware.locale.LocaleMiddleware',
     'django_prometheus.middleware.PrometheusAfterMiddleware',
 ]
 
@@ -109,7 +108,7 @@ CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            'hosts': [('redis', 6379)],
+            'hosts': [('redis', 6379, '127.0.0.1', '10.32.6.12')],
         },
     },
 }
@@ -188,7 +187,6 @@ STATICFILES_DIRS = [
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
-
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

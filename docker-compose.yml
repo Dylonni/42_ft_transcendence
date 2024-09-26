@@ -29,6 +29,8 @@ services:
       - "9187:9187" # Postgres Exporter - no need to expose
     volumes:
       - shared-certs:/etc/nginx/ssl
+      - static_files:/django/static
+      - media_files:/django/media
 
 # nginx used ports:
       # - "8080:8080" # HTTP -> Django
@@ -79,6 +81,8 @@ services:
     volumes:
       - ./web/django:/django
       - django-token:/django/secrets:ro
+      - static_files:/django/static
+      - media_files:/django/media
 
   redis:
     image: redis:7.4.0-alpine3.20
@@ -161,6 +165,8 @@ volumes:
     name: django-token
   shared-certs:
     name: shared-certs
-
-
+  static_files:
+    name: static_files
+  media_files:
+    name: media_files
 
