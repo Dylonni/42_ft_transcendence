@@ -42,9 +42,9 @@ SECRET_KEY = secret_response['data']['data']['SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 # below, add '*' if issue, to accept all hosts - should be removed in production. also add server host machine IP ?
-ALLOWED_HOSTS = ['localhost', 'django', '127.0.0.1', '*']
+ALLOWED_HOSTS = ['localhost', 'django', '127.0.0.1', '10.32.6.12', '*']
 
-CSRF_TRUSTED_ORIGINS = ['https://localhost:8443', 'http://localhost:8080', 'https://127.0.0.1:8443', 'http://127.0.0.1:8080']
+CSRF_TRUSTED_ORIGINS = ['https://localhost:8443', 'http://localhost:8080', 'https://127.0.0.1:8443', 'http://127.0.0.1:8080', 'https://10.32.6.12:8443', 'http://10.32.6.12:8080']
 
 # Application definition
 
@@ -222,6 +222,14 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
+    'DEFAULT_THROTTLE_CLASSES': [
+        'rest_framework.throttling.AnonRateThrottle',
+        'rest_framework.throttling.UserRateThrottle'
+    ],
+    'DEFAULT_THROTTLE_RATES': {
+        'anon': '2/second',
+        'user': '2/second'
+    }
 }
 
 SIMPLE_JWT = {

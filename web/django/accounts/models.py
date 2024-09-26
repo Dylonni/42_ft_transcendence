@@ -26,6 +26,10 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(
         unique=True,
     )
+    fortytwo_id = models.CharField(
+        null=True,
+        blank=True,
+    )
     fortytwo_avatar_url = models.CharField(
         null=True,
         blank=True,
@@ -92,7 +96,8 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         super().clean()
         self.email = self.__class__.objects.normalize_email(self.email)
     
-    def update_fortytwo_infos(self, avatar_url=None, coalition_cover_url=None, coalition_color=None):
+    def update_fortytwo_infos(self, id=None, avatar_url=None, coalition_cover_url=None, coalition_color=None):
+        self.fortytwo_id = id
         self.fortytwo_avatar_url = avatar_url
         self.fortytwo_coalition_cover_url = coalition_cover_url
         self.fortytwo_coalition_color = coalition_color

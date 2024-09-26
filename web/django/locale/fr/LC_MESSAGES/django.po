@@ -849,7 +849,7 @@ msgstr "Dernière mise à jour : "
 #: templates/about/privacy_policy.html:42
 #: templates/about/terms_of_service.html:42
 msgid "September 2024"
-msgstr ""
+msgstr "Septembre 2024"
 
 #: templates/about/privacy_policy.html:48
 msgid ""
@@ -857,7 +857,7 @@ msgid ""
 "    <div class=\"row\">\n"
 "        <div class=\"col-md-12\">\n"
 "            <h5 style=\"color: var(--bs-body-bg);\">\n"
-"                ＢぁＢぁＢぁＢぁ "
+"                This privacy policy will explain how our organization "
 "“Transcendence42” uses the personal data we collect from you when you use "
 "our website.\n"
 "                <br>First, we would like to assure you that at&nbsp;"

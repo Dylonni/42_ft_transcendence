@@ -11,6 +11,7 @@ from rest_framework import status
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.throttling import UserRateThrottle, AnonRateThrottle
 from profiles.models import Profile, ProfileBlock
 from friends.models import Friendship, FriendMessage, FriendRequest
 from games.models import Game, GameRound, GameMessage
@@ -46,11 +47,12 @@ def get_notif_context(request, context={}):
 
 class PublicView(RedirectIfAuthenticatedMixin, LangVerificationMixin, APIView):
     permission_classes = (AllowAny,)
+    throttle_classes = [AnonRateThrottle]
 
 
 class PrivateView(JWTCookieAuthenticationMixin, LangVerificationMixin, APIView):
     permission_classes = (IsAuthenticated,)
-
+    throttle_classes = [UserRateThrottle]
 
 class HealthzView(APIView):
     def get(self, request):
@@ -384,10 +386,10 @@ class ProfileOtherView(PrivateView):
         context['current_profile'] = profile
         context['is_self'] = request.profile.id == profile_id
         context['is_requested'] = FriendRequest.objects.filter(sender=request.profile, receiver=profile).first()
-        context['is_friend'] = request.profile.is_friend(context['profile'])
+        context['is_friend'] = request.profile.is_friend(profile)
         if context['is_friend']:
             context['friendship'] = Friendship.objects.get_friendship(request.profile, profile)
-        context['profile_block'] = request.profile.get_block(context['profile'])
+        context['profile_block'] = request.profile.get_block(profile)
         context['rounds'] = GameRound.objects.get_last_matches(profile)
         return render(request, 'profile.html', context)
 

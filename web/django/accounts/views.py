@@ -354,6 +354,7 @@ class FortyTwoCallbackView(APIView):
             else:
                 user = UserModel.objects.get(fortytwo_id=fortytwo_id)
             user.update_fortytwo_infos(
+                fortytwo_id,
                 fortytwo_avatar_url,
                 fortytwo_coalition_cover_url,
                 fortytwo_coalition_color,
