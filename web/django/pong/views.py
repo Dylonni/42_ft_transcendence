@@ -195,14 +195,14 @@ class ChangeEmailView(PrivateView):
 change_email = ChangeEmailView.as_view()
 
 
-class AboutView(PrivateView):
+class AboutViewPriv(PrivateView):
     def get(self, request):
         context = {
             'profile': request.profile,
         }
         return render(request, 'about/about.html', context)
 
-about_priv = AboutView.as_view()
+about_priv = AboutViewPriv.as_view()
 
 
 class AboutView(PublicView):
@@ -212,14 +212,14 @@ class AboutView(PublicView):
 about_pub = AboutView.as_view()
 
 
-class DevTeamView(PrivateView):
+class DevTeamViewPriv(PrivateView):
     def get(self, request):
         context = {
             'profile': request.profile,
         }
         return render(request, 'about/dev_team.html', context)
 
-dev_team_priv = DevTeamView.as_view()
+dev_team_priv = DevTeamViewPriv.as_view()
 
 
 class DevTeamView(PublicView):
@@ -229,14 +229,14 @@ class DevTeamView(PublicView):
 dev_team_pub = DevTeamView.as_view()
 
 
-class FaqView(PrivateView):
+class FaqViewPriv(PrivateView):
     def get(self, request):
         context = {
             'profile': request.profile,
         }
         return render(request, 'about/faq.html', context)
 
-faq_priv = FaqView.as_view()
+faq_priv = FaqViewPriv.as_view()
 
 
 class FaqView(PublicView):
@@ -246,14 +246,14 @@ class FaqView(PublicView):
 faq_pub = FaqView.as_view()
 
 
-class GameRulesView(PrivateView):
+class GameRulesViewPriv(PrivateView):
     def get(self, request):
         context = {
             'profile': request.profile,
         }
         return render(request, 'about/game_rules.html', context)
 
-game_rules_priv = GameRulesView.as_view()
+game_rules_priv = GameRulesViewPriv.as_view()
 
 
 class GameRulesView(PublicView):
@@ -263,7 +263,7 @@ class GameRulesView(PublicView):
 game_rules_pub = GameRulesView.as_view()
 
 
-class PrivacyPolicyView(PrivateView):
+class PrivacyPolicyViewPriv(PrivateView):
     def get(self, request):
         context = {
             'profile': request.profile,
@@ -272,7 +272,7 @@ class PrivacyPolicyView(PrivateView):
         }
         return render(request, 'about/privacy_policy.html', context)
 
-privacy_policy_priv = PrivacyPolicyView.as_view()
+privacy_policy_priv = PrivacyPolicyViewPriv.as_view()
 
 
 class PrivacyPolicyView(PublicView):
@@ -285,7 +285,7 @@ class PrivacyPolicyView(PublicView):
 
 privacy_policy_pub = PrivacyPolicyView.as_view()
 
-class TosView(PrivateView):
+class TosViewPriv(PrivateView):
     def get(self, request):
         context = {
             'profile': request.profile,
@@ -294,7 +294,7 @@ class TosView(PrivateView):
         }
         return render(request, 'about/terms_of_service.html', context)
 
-terms_of_service_priv = TosView.as_view()
+terms_of_service_priv = TosViewPriv.as_view()
 
 class TosView(PublicView):
     def get(self, request):
