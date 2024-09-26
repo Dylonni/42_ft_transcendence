@@ -855,8 +855,14 @@ document.addEventListener("DOMContentLoaded", () => {
                         })
                         .then(response => response.json())
                         .then(data => {
-                            acceptGameBtn.parentElement.parentElement.remove();
+                            if ('error' in data) {
+                                if (errorBsModal) {
+                                    errorModalMsg.textContent = data.error;
+                                    errorBsModal.show();
+                                }
+                            }
                             if ('redirect' in data) {
+                                acceptGameBtn.parentElement.parentElement.remove();
                                 navigateTo(data.redirect);
                             }
                         })

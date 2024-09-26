@@ -172,13 +172,13 @@ class GameInviteManager(models.Manager):
             raise ValueError(_('Player is already in a game.'))
         elif game.is_full():
             raise ValueError(_('Game is full. Unable to join.'))
-        player.join_game(game)
         consumer = NotifConsumer()
         async_to_sync(consumer.remove_notification)(
             category='Game Invitation',
             object_id=game_invite.id,
         )
         game_invite.delete()
+        return player
     
     def decline_invite(self, game_invite):
         consumer = NotifConsumer()
