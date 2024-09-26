@@ -16,7 +16,11 @@
                         {% translate "TERMS OF SERVICE" %}
                     </h1>
                     <div class="d-flex justify-content-center align-items-center" style="height: 55px;">
+                        {% if profile %}
+                        <a id="navAboutTos" href="/about_priv/" class="d-flex justify-content-center align-items-center aboutBtn" style="padding-left: 15px;padding-right: 15px;border-radius: 19px;box-shadow: 0px 0px 6px 1px var(--bs-body-bg);padding-top: 10px;padding-bottom: 10px;margin-top: 5px;margin-bottom: 5px;">
+                        {% else %}
                         <a id="navAboutTos" href="/about/" class="d-flex justify-content-center align-items-center aboutBtn" style="padding-left: 15px;padding-right: 15px;border-radius: 19px;box-shadow: 0px 0px 6px 1px var(--bs-body-bg);padding-top: 10px;padding-bottom: 10px;margin-top: 5px;margin-bottom: 5px;">
+                        {% endif %}    
                             <svg class="icon icon-tabler icon-tabler-arrow-left" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" style="font-size: 35px;color: var(--bs-body-bg);margin-right: 5px;">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                                 <path d="M5 12l14 0"></path>
@@ -25,7 +29,7 @@
                             </svg>
                             <div class="d-flex justify-content-center align-items-center">
                                 <p style="color: var(--bs-body-bg);margin-bottom: 0px;">
-                                    {% translate "About" %}
+                                    {% translate 'About' %}
                                 </p>
                             </div>
                         </a>
