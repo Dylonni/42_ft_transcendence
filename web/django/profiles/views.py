@@ -384,8 +384,8 @@ class MyInviteDetailView(PrivateView):
         try:
             invite = get_object_or_404(GameInvite, id=invite_id)
             game_id = invite.game.id
-            player = GameInvite.objects.accept_invite(invite)
-            Game.objects.add_player(player)
+            game, player = GameInvite.objects.accept_invite(invite)
+            Game.objects.add_player(game, player)
             response_data = {'message': _('Game invitation accepted.'), 'redirect': f'/games/{game_id}/'}
             return Response(response_data, status=status.HTTP_200_OK)
         except ValueError as e:

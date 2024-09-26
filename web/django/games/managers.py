@@ -178,7 +178,7 @@ class GameInviteManager(models.Manager):
             object_id=game_invite.id,
         )
         game_invite.delete()
-        return player
+        return game, player
     
     def decline_invite(self, game_invite):
         consumer = NotifConsumer()
