@@ -1,5 +1,6 @@
 import logging
 from asgiref.sync import async_to_sync
+from django.conf import settings
 from django.contrib.auth.hashers import make_password
 from django.core.exceptions import ValidationError
 from django.shortcuts import get_object_or_404
@@ -106,13 +107,15 @@ my_avatar = MyAvatarView.as_view()
 
 class MyLangView(PrivateView):
     def post(self, request, lang):
+        if lang not in dict(settings.LANGUAGES):
+            lang = 'en'
         request.profile.set_default_lang(lang)
-        translation.activate(lang)
         response_data = {'message': _('Default language changed.'), 'redirect': '/settings/'}
         response = Response(response_data, status=status.HTTP_200_OK)
         response.set_cookie(
             key='lang',
             value=lang,
+            httponly=True,
             secure=True,
             samesite='Lax',
         )

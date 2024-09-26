@@ -1,7 +1,7 @@
 import logging
 from django.conf import settings
 from django.contrib.auth import get_user_model, logout
-from django.http import HttpRequest
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect
 from django.utils import translation
 from rest_framework_simplejwt.exceptions import TokenError
@@ -15,16 +15,12 @@ logger = logging.getLogger('django')
 
 class LangVerificationMixin:
     def dispatch(self, request: HttpRequest, *args, **kwargs):
-        response = super().dispatch(request, *args, **kwargs)
         lang = request.COOKIES.get('lang', 'en')
         if lang not in dict(settings.LANGUAGES):
-            response.set_cookie(
-                key='lang',
-                value='en',
-                secure=True,
-                samesite='Lax',
-            )
-            translation.activate(lang)
+            lang = 'en'
+        request.lang = lang
+        translation.activate(lang)
+        response = super().dispatch(request, *args, **kwargs)
         return response
 
 
@@ -60,14 +56,10 @@ class JWTCookieAuthenticationMixin:
                 logger.error('Invalid refresh token.')
                 return self._logout_and_redirect(request)
         
-        change_lang = False
         try:
             user_id = access_token_obj['user_id']
             request.user = UserModel.objects.get(id=user_id)
             request.profile = Profile.objects.get(user__id=user_id)
-            lang = request.profile.default_lang
-            if lang != request.COOKIES.get('lang', 'en') and lang in dict(settings.LANGUAGES):
-                change_lang = True
         except UserModel.DoesNotExist:
             logger.error('User does not exist.')
             return self._logout_and_redirect(request)
@@ -76,14 +68,6 @@ class JWTCookieAuthenticationMixin:
             return self._logout_and_redirect(request)
         request.META['HTTP_AUTHORIZATION'] = f'Bearer {access_token}'
         response = super().dispatch(request, *args, **kwargs)
-        if change_lang:
-            response.set_cookie(
-                key='lang',
-                value=lang,
-                secure=True,
-                samesite='Lax',
-            )
-            translation.activate(lang)
         set_jwt_as_cookies(response, access_token, refresh_token)
         return response
     

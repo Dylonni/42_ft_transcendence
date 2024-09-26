@@ -446,13 +446,15 @@ settings_view = SettingsView.as_view()
 
 class LangReloadView(PublicView):
     def post(self, request, lang):
+        if lang not in dict(settings.LANGUAGES):
+            lang = 'en'
         path = request.data['path']
-        translation.activate(lang)
         response_data = {'message': _('Language changed.'), 'redirect': path}
         response = Response(response_data, status=status.HTTP_200_OK)
         response.set_cookie(
             key='lang',
             value=lang,
+            httponly=True,
             secure=True,
             samesite='Lax',
         )
