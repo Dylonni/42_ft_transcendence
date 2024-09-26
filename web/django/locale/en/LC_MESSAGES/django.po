@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-26 14:05+0000\n"
+"POT-Creation-Date: 2024-09-26 16:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -271,7 +271,7 @@ msgid "Game left."
 msgstr ""
 
 #: games/views.py:91
-msgid "All players must be ready."
+msgid "Need more players."
 msgstr ""
 
 #: games/views.py:97

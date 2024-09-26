@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-26 14:05+0000\n"
+"POT-Creation-Date: 2024-09-26 16:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: ALEXANDRA CLOOS <ACLOOS@STUDENT.42.FR>\n"
 "Language-Team: JAPANESE <LL@li.org>\n"
@@ -271,8 +271,8 @@ msgid "Game left."
 msgstr "ゲーム退去。"
 
 #: games/views.py:91
-msgid "All players must be ready."
-msgstr "皆は準備が整っている。"
+msgid "Need more players."
+msgstr ""
 
 #: games/views.py:97
 msgid "Game started."
@@ -3011,6 +3011,9 @@ msgstr "42枚のバナーやプロフィール画像は使用できません。"
 #: templates/settings.html:532
 msgid "Unlink"
 msgstr "非絆"
+
+#~ msgid "All players must be ready."
+#~ msgstr "皆は準備が整っている。"
 
 #~ msgid "Wrong email format. Please try again"
 #~ msgstr "Eメールは無効。もう一度やり直してください。"
