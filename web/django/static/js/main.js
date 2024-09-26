@@ -2145,12 +2145,16 @@ const pongGame = () => {
 		ctx.fillRect(WIDTH - paddleWidth, player2Y, paddleWidth, paddleHeight); // Right paddle (AI)
 
 		// Draw ball
+        ctx.fillStyle = 'white';
 		ctx.fillRect(ballX, ballY, ballSize, ballSize);
+        ctx.lineWidth = 1; 
+        ctx.strokeStyle = 'black'; 
+        ctx.strokeRect(ballX, ballY, ballSize, ballSize);
 
 		// Draw net
-		for (let i = 0; i < HEIGHT; i += 20) {
-			ctx.fillRect(WIDTH / 2 - 1, i, 2, 10);
-		}
+		// for (let i = 0; i < HEIGHT; i += 20) {
+		// 	ctx.fillRect(WIDTH / 2 - 1, i, 2, 10);
+		// }
 
 		// // Draw scores
 		// ctx.font = '20px Arial';
@@ -2161,14 +2165,14 @@ const pongGame = () => {
             ctx.font = '30px Arial';
             ctx.fillStyle = 'white';
             ctx.textAlign = 'center';
-            ctx.fillText(message, WIDTH / 2, HEIGHT / 2);
+            ctx.fillText(message, WIDTH / 2, HEIGHT / 4);
         }
 
         if (countdown > 0) {
             ctx.font = '50px Arial';
             ctx.fillStyle = 'white';
             ctx.textAlign = 'center';
-            ctx.fillText(countdown, WIDTH / 2, HEIGHT / 2);
+            ctx.fillText(countdown, WIDTH / 2, HEIGHT / 4);
         }
 	}
 
