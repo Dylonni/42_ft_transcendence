@@ -43,24 +43,24 @@ class GameManager(models.Manager):
         if player not in game.players.all():
             raise ValueError(_('Player is not in the game.'))
         player.leave_game()
-        rounds_as_player1 = game.rounds.filter(player1=player, ended_at__isnull=True)
-        rounds_as_player1.update(player1=None)
-        rounds_as_player2 = game.rounds.filter(player2=player, ended_at__isnull=True)
-        rounds_as_player2.update(player2=None)
-        current_round = game.rounds.filter(player1__isnull=True, player2__isnull=True, order=game.current_order)
-        empty_rounds = game.rounds.filter(player1__isnull=True, player2__isnull=True, started_at__isnull=False)
+        current_round = game.rounds.filter(Q(player1=player) | Q(player2=player), order=game.current_order)
+        empty_round = game.rounds.filter(Q(player1=player) | Q(player2=player), started_at__isnull=False)
+        game_terminated = False
         channel_layer = get_channel_layer()
-        if current_round.exists() or empty_rounds.exists():
-            current_round.delete()
-            empty_rounds.delete()
+        if current_round.exists() or empty_round.exists():
             game.ended_at = timezone.now()
             game.host = None
             game.save()
+            for player in game.players.all():
+                self.remove_player(game, player)
             game.messages.all().delete()
             remaining_rounds = game.rounds.filter(order__gt=game.current_order)
             remaining_rounds.delete()
-            for player in game.players.all():
-                self.remove_player(game, player)
+            if empty_round.exists():
+                empty_round.delete()
+            if current_round.exists():
+                current_round.delete()
+            game_terminated = True
             async_to_sync(channel_layer.group_send)(f'games_play_{game.id}', {'type': 'terminate'})
         if game.players.count() == 0:
             if not game.ended_at:
@@ -70,10 +70,11 @@ class GameManager(models.Manager):
             new_host = game.players.first()
             if new_host:
                 game.set_host(new_host)
-        consumer = GameChatConsumer()
-        async_to_sync(consumer.send_message)(game=game, sender=player, category='Leave')
-        async_to_sync(channel_layer.group_send)(f'games_chat_{game.id}', {'type': 'update_header'})
-        async_to_sync(channel_layer.group_send)(f'games_play_{game.id}', {'type': 'set_players'})
+        if not game_terminated:
+            consumer = GameChatConsumer()
+            async_to_sync(consumer.send_message)(game=game, sender=player, category='Leave')
+            async_to_sync(channel_layer.group_send)(f'games_chat_{game.id}', {'type': 'update_header'})
+            async_to_sync(channel_layer.group_send)(f'games_play_{game.id}', {'type': 'set_players'})
     
     def get_next_round(self, game):
         game.current_order += 1
