@@ -183,7 +183,7 @@ class Profile(BaseModel):
             total_games=models.Count('player1_rounds', distinct=True) + models.Count('player2_rounds', distinct=True)
         ).filter(total_games__gt=0, elo__gt=self.elo).count()
         return "#" + str(higher_elo_count + 1)
-    
+
     @staticmethod
     def upload_avatar(instance, filename):
         ext = filename.split('.')[-1]

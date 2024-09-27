@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-27 08:43+0000\n"
+"POT-Creation-Date: 2024-09-27 11:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: ALEXANDRA CLOOS <ACLOOS@STUDENT.42.FR>\n"
 "Language-Team: JAPANESE <LL@li.org>\n"
@@ -158,7 +158,7 @@ msgstr "リクエストもう受け付けています。"
 msgid "Friend message not found."
 msgstr "ともだちからメッセージが見つかりません。"
 
-#: games/managers.py:16 games/managers.py:31 games/managers.py:172
+#: games/managers.py:16 games/managers.py:31 games/managers.py:188
 msgid "Player is already in a game."
 msgstr "プレイヤーはゲーム中。"
 
@@ -166,11 +166,11 @@ msgstr "プレイヤーはゲーム中。"
 msgid "Server is full. Try to create a game later."
 msgstr "サーバーがいっぱいです。 後でゲームを作成してみてください。"
 
-#: games/managers.py:33 games/managers.py:174
+#: games/managers.py:33 games/managers.py:190
 msgid "Game is full. Unable to join."
 msgstr "ゲームがいっぱいです。 参加できません。"
 
-#: games/managers.py:35 games/managers.py:89 games/managers.py:114
+#: games/managers.py:35 games/managers.py:90 games/managers.py:130
 msgid "Game has already started."
 msgstr "ゲームは始まりました。"
 
@@ -178,19 +178,19 @@ msgstr "ゲームは始まりました。"
 msgid "Player is not in the game."
 msgstr "プレイヤーはゲーム内ではありません。"
 
-#: games/managers.py:150
+#: games/managers.py:166
 msgid "Cannot send a game invite to yourself."
 msgstr "ゲームを自分で送信することはできません。"
 
-#: games/managers.py:152
+#: games/managers.py:168
 msgid "Sender is not in a game."
 msgstr "入札はゲームではありません。"
 
-#: games/managers.py:154
+#: games/managers.py:170
 msgid "Game invite already sent."
 msgstr "ゲームは既に送信されました。"
 
-#: games/managers.py:156
+#: games/managers.py:172
 msgid "Game invite already received."
 msgstr "既に受け取られたゲーム招待。"
 
@@ -230,27 +230,27 @@ msgstr "簡単"
 msgid "Hard"
 msgstr "難"
 
-#: games/models.py:334 templates/accounts/forgot_password.html:56
+#: games/models.py:337 templates/accounts/forgot_password.html:56
 msgid "Send"
 msgstr "メッセージ送信"
 
-#: games/models.py:335
+#: games/models.py:338
 msgid "Join"
 msgstr "参加"
 
-#: games/models.py:336 templates/games/game_room.html:227
+#: games/models.py:339 templates/games/game_room.html:214
 msgid "Leave"
 msgstr "退去"
 
-#: games/models.py:337
+#: games/models.py:340
 msgid "Prepare"
 msgstr "準備"
 
-#: games/models.py:338
+#: games/models.py:341
 msgid "Eliminate"
 msgstr "排除する"
 
-#: games/models.py:339
+#: games/models.py:342
 msgid "Win"
 msgstr "勝ち"
 
@@ -762,11 +762,13 @@ msgstr ""
 "あなたの側面は、ゲーム上のあなたの名前とあなたのアバターによって表されます、"
 "それはまたゲームの現在のスコアを表示します。"
 
-#: templates/about/game_rules.html:69 templates/games/game_score.html:14
+#: templates/about/game_rules.html:69 templates/games/game_score.html:15
+#: templates/games/game_score.html:21
 msgid "Player_1"
 msgstr "プレイヤー1"
 
-#: templates/about/game_rules.html:90 templates/games/game_score.html:56
+#: templates/about/game_rules.html:90 templates/games/game_score.html:64
+#: templates/games/game_score.html:70
 msgid "Player_2"
 msgstr "プレイヤー2"
 
@@ -1371,11 +1373,11 @@ msgstr ""
 "class=\"col-md-12\" id=\"wCookiesType\">            <h4 style=\"color: var(--"
 "bs-primary-border-subtle);text-decoration: underline;\">                どの"
 "種類のクッキーを使用しますか？            </h4>            <p style=\"color: "
-"white;\">                クッキーにはさまざまな種類があります"
-"が、当ウェブサイトでは「機能性」クッキーのみを使用しています。Transcendence42"
-"は、これらのクッキーを使用してユーザーを認識し、以前に選択された設定（言語の"
-"好みなど）を記憶します。            </p>        </div>        <div "
-"class=\"col\">            <hr>        </div>        <div class=\"col-md-12\" "
+"white;\">                クッキーにはさまざまな種類がありますが、当ウェブサイ"
+"トでは「機能性」クッキーのみを使用しています。Transcendence42は、これらのクッ"
+"キーを使用してユーザーを認識し、以前に選択された設定（言語の好みなど）を記憶"
+"します。            </p>        </div>        <div class=\"col\">            "
+"<hr>        </div>        <div class=\"col-md-12\" "
 "id=\"hCookiesManage\">            <h4 style=\"color: var(--bs-primary-border-"
 "subtle);text-decoration: underline;\">                クッキーの管理方"
 "法            </h4>            <p style=\"color: var(--bs-body-bg);"
@@ -2766,10 +2768,10 @@ msgstr ""
 "る場合、すべての権利を無償で提供することに同意し、そのフィードバックは機密性"
 "がないものと見なされ、私たちは自由に使用できるものとします。この適用は、メー"
 "ル、ウェブサイト上のフォーム、掲示板などの手段を問わず、提供された場合に適用"
-"されます。        </p>        <p style=\"color: white;"
-"\">            あなたがウェブサイトまたはプラットフォーム上の資料が著作権を侵"
-"害していると善意で信じている場合、私たちに書面で通知することができます。通知"
-"は<a href=\"%(discord_invite)s\">Discord</a>で受け付けています。        </"
+"されます。        </p>        <p style=\"color: white;\">            あなたが"
+"ウェブサイトまたはプラットフォーム上の資料が著作権を侵害していると善意で信じ"
+"ている場合、私たちに書面で通知することができます。通知は<a "
+"href=\"%(discord_invite)s\">Discord</a>で受け付けています。        </"
 "p>        <p style=\"color: var(--bs-body-bg);\">            米国居住者のみ: "
 "あなたが著作権者であり、知的財産権が侵害されたと信じる場合、デジタルミレニア"
 "ム著作権法（「DMCA」）に基づいて通知を行うことができます。        </"
@@ -3174,15 +3176,15 @@ msgstr "ゲームをカスタマイズ"
 msgid "Game Options"
 msgstr "ゲームオプション"
 
-#: templates/games/game_config.html:44 templates/games/game_room.html:82
+#: templates/games/game_config.html:44 templates/games/game_room.html:69
 msgid "Players"
 msgstr "プレイヤー"
 
-#: templates/games/game_config.html:77 templates/games/game_room.html:101
+#: templates/games/game_config.html:77 templates/games/game_room.html:88
 msgid "Score to win"
 msgstr "勝つためにスコア"
 
-#: templates/games/game_config.html:115 templates/games/game_room.html:125
+#: templates/games/game_config.html:115 templates/games/game_room.html:112
 msgid "Ball size"
 msgstr "ボール サイズ"
 
@@ -3206,11 +3208,11 @@ msgstr "アリーナオプション"
 msgid "Map"
 msgstr "マップ"
 
-#: templates/games/game_config.html:372
+#: templates/games/game_config.html:382
 msgid "Go Back"
 msgstr "戻る"
 
-#: templates/games/game_config.html:380
+#: templates/games/game_config.html:390
 msgid "Create Game"
 msgstr "ゲーム作成"
 
@@ -3274,27 +3276,27 @@ msgstr "ゲームロビー"
 msgid "Leave Room"
 msgstr "ロビーを退去"
 
-#: templates/games/game_room.html:63
+#: templates/games/game_room.html:50
 msgid "Game Infos"
 msgstr "ゲーム情報"
 
-#: templates/games/game_room.html:77
+#: templates/games/game_room.html:64
 msgid "Rules"
 msgstr "ルール"
 
-#: templates/games/game_room.html:142
+#: templates/games/game_room.html:129
 msgid "Paddle size"
 msgstr "パドルサイズ"
 
-#: templates/games/game_room.html:162
+#: templates/games/game_room.html:149
 msgid "Initial Ball Speed"
 msgstr "初期ボール速度"
 
-#: templates/games/game_room.html:214
+#: templates/games/game_room.html:201
 msgid "Do you confirm leaving ?"
 msgstr "退去確認?"
 
-#: templates/games/game_room.html:219
+#: templates/games/game_room.html:206
 msgid ""
 "If you have not been eliminated yet, your next game will be considered as a "
 "defeat and you will get a point penalty. You will not be able to join the "
@@ -3303,40 +3305,40 @@ msgstr ""
 "まだ削除されていない場合、次のゲームは敗北とみなされ、ポイントペナルティを取"
 "得します。 再びお部屋に参加できません。"
 
-#: templates/games/game_room.html:224 templates/settings.html:448
+#: templates/games/game_room.html:211 templates/settings.html:448
 #: templates/settings.html:483 templates/settings.html:529
 msgid "Cancel"
 msgstr "キャンセル"
 
-#: templates/games/game_room.html:245 templates/games/game_room.html:265
+#: templates/games/game_room.html:232 templates/games/game_room.html:252
 msgid "Invite"
 msgstr "招待状"
 
-#: templates/games/game_room.html:253
+#: templates/games/game_room.html:240
 msgid "Invite a random Player"
 msgstr "ランダムなプレイヤーを招待する"
 
-#: templates/games/game_room.html:270
+#: templates/games/game_room.html:257
 msgid "Invite a friend"
 msgstr "友達を招待する"
 
-#: templates/games/game_room.html:302
+#: templates/games/game_room.html:285
 msgid "NO FRIENDS TO INVITE"
 msgstr "無限の無限に"
 
-#: templates/games/game_score.html:13
+#: templates/games/game_score.html:14 templates/games/game_score.html:20
 msgid "Player_1 Wins! Press Enter to Retry"
 msgstr "プレイヤー1の勝利！ Enterで再挑戦"
 
-#: templates/games/game_score.html:55
+#: templates/games/game_score.html:63 templates/games/game_score.html:69
 msgid "Player_2 Wins! Press Enter to Retry"
 msgstr "プレイヤー2の勝利！ Enterで再挑戦"
 
-#: templates/games/game_score.html:59
+#: templates/games/game_score.html:73
 msgid "A.I. Wins! Press Enter to Retry"
 msgstr "A.I.の勝利！ Enterで再挑戦"
 
-#: templates/games/game_score.html:60
+#: templates/games/game_score.html:74
 msgid "A.I."
 msgstr "A.I."
 
@@ -3503,6 +3505,10 @@ msgstr "負け"
 #: templates/profile.html:242 templates/profile.html:528
 msgid "Last 20 Games"
 msgstr "最後20ゲーム"
+
+#: templates/profile.html:245 templates/profile.html:531
+msgid "Peak elo"
+msgstr "最高のELO"
 
 #: templates/profile.html:265 templates/profile.html:551
 msgid "Total Games Played"

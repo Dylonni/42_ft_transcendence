@@ -274,7 +274,7 @@ class GamePlayConsumer(AsyncWebsocketConsumer):
     async def prepare_next_round(self):
         await self.set_game_start()
         await self.channel_layer.group_send(self.room_name, {'type': 'set_players'})
-        time = 3
+        time = 10
         countdown = time - self.FPS
         while countdown > 0:
             await self.channel_layer.group_send(
@@ -384,7 +384,7 @@ class GamePlayConsumer(AsyncWebsocketConsumer):
             winner_msg = winner + ' wins!'
             await self.send_win_message()
             await self.update_game_state('countdown', winner_msg)
-            countdown = 3 - self.FPS
+            countdown = 5 - self.FPS
             while countdown > 0:
                 await asyncio.sleep(self.FPS)
                 countdown -= self.FPS

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-27 08:43+0000\n"
+"POT-Creation-Date: 2024-09-27 11:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: ALEXANDRA CLOOS <ACLOOS@STUDENT.42.FR>\n"
 "Language-Team: FRENCH <LL@li.org>\n"
@@ -162,7 +162,7 @@ msgstr "Vous avez déjà reçu une demande en ami"
 msgid "Friend message not found."
 msgstr "Nous n'avons pas trouvé ce message."
 
-#: games/managers.py:16 games/managers.py:31 games/managers.py:172
+#: games/managers.py:16 games/managers.py:31 games/managers.py:188
 msgid "Player is already in a game."
 msgstr "Déjà en train de jouer."
 
@@ -170,11 +170,11 @@ msgstr "Déjà en train de jouer."
 msgid "Server is full. Try to create a game later."
 msgstr "Le serveur est plein. Veuillez réessayer ultérieurement."
 
-#: games/managers.py:33 games/managers.py:174
+#: games/managers.py:33 games/managers.py:190
 msgid "Game is full. Unable to join."
 msgstr "Il n'y a plus de place dans cette partie."
 
-#: games/managers.py:35 games/managers.py:89 games/managers.py:114
+#: games/managers.py:35 games/managers.py:90 games/managers.py:130
 msgid "Game has already started."
 msgstr "La partie a déjà commencé."
 
@@ -182,19 +182,19 @@ msgstr "La partie a déjà commencé."
 msgid "Player is not in the game."
 msgstr "Ce joueur n'est pas dans cette partie."
 
-#: games/managers.py:150
+#: games/managers.py:166
 msgid "Cannot send a game invite to yourself."
 msgstr "Vous ne pouvez pas vous inviter vous-même."
 
-#: games/managers.py:152
+#: games/managers.py:168
 msgid "Sender is not in a game."
 msgstr "Vous n'avez pas encore créé de partie."
 
-#: games/managers.py:154
+#: games/managers.py:170
 msgid "Game invite already sent."
 msgstr "Invitation déjà envoyée."
 
-#: games/managers.py:156
+#: games/managers.py:172
 msgid "Game invite already received."
 msgstr "Invitation déjà reçue."
 
@@ -234,27 +234,27 @@ msgstr "Facile"
 msgid "Hard"
 msgstr "Difficile"
 
-#: games/models.py:334 templates/accounts/forgot_password.html:56
+#: games/models.py:337 templates/accounts/forgot_password.html:56
 msgid "Send"
 msgstr "Envoyer"
 
-#: games/models.py:335
+#: games/models.py:338
 msgid "Join"
 msgstr "Rejoindre"
 
-#: games/models.py:336 templates/games/game_room.html:227
+#: games/models.py:339 templates/games/game_room.html:214
 msgid "Leave"
 msgstr "Quitter"
 
-#: games/models.py:337
+#: games/models.py:340
 msgid "Prepare"
 msgstr "Préparer"
 
-#: games/models.py:338
+#: games/models.py:341
 msgid "Eliminate"
 msgstr "Éliminer"
 
-#: games/models.py:339
+#: games/models.py:342
 msgid "Win"
 msgstr "Victoires"
 
@@ -771,11 +771,13 @@ msgstr ""
 "Votre côté du terrain est identifiable par votre nom et votre avatar. Il "
 "indique aussi votre score."
 
-#: templates/about/game_rules.html:69 templates/games/game_score.html:14
+#: templates/about/game_rules.html:69 templates/games/game_score.html:15
+#: templates/games/game_score.html:21
 msgid "Player_1"
 msgstr "Joueur_1"
 
-#: templates/about/game_rules.html:90 templates/games/game_score.html:56
+#: templates/about/game_rules.html:90 templates/games/game_score.html:64
+#: templates/games/game_score.html:70
 msgid "Player_2"
 msgstr "Joueur_2"
 
@@ -3633,15 +3635,15 @@ msgstr "Personnalisez votre partie"
 msgid "Game Options"
 msgstr "Options de jeu"
 
-#: templates/games/game_config.html:44 templates/games/game_room.html:82
+#: templates/games/game_config.html:44 templates/games/game_room.html:69
 msgid "Players"
 msgstr "Joueurs"
 
-#: templates/games/game_config.html:77 templates/games/game_room.html:101
+#: templates/games/game_config.html:77 templates/games/game_room.html:88
 msgid "Score to win"
 msgstr "Score à atteindre"
 
-#: templates/games/game_config.html:115 templates/games/game_room.html:125
+#: templates/games/game_config.html:115 templates/games/game_room.html:112
 msgid "Ball size"
 msgstr "Taille de la balle"
 
@@ -3665,11 +3667,11 @@ msgstr "Options d'arène"
 msgid "Map"
 msgstr "Arène"
 
-#: templates/games/game_config.html:372
+#: templates/games/game_config.html:382
 msgid "Go Back"
 msgstr "Retour"
 
-#: templates/games/game_config.html:380
+#: templates/games/game_config.html:390
 msgid "Create Game"
 msgstr "Créer le salon"
 
@@ -3733,27 +3735,27 @@ msgstr "Salon de jeux"
 msgid "Leave Room"
 msgstr "Quitter la partie"
 
-#: templates/games/game_room.html:63
+#: templates/games/game_room.html:50
 msgid "Game Infos"
 msgstr "Infos de la partie"
 
-#: templates/games/game_room.html:77
+#: templates/games/game_room.html:64
 msgid "Rules"
 msgstr "Règles"
 
-#: templates/games/game_room.html:142
+#: templates/games/game_room.html:129
 msgid "Paddle size"
 msgstr "Taille de la raquette"
 
-#: templates/games/game_room.html:162
+#: templates/games/game_room.html:149
 msgid "Initial Ball Speed"
 msgstr "Vitesse de la balle"
 
-#: templates/games/game_room.html:214
+#: templates/games/game_room.html:201
 msgid "Do you confirm leaving ?"
 msgstr "Voulez-vous vraiment partir?"
 
-#: templates/games/game_room.html:219
+#: templates/games/game_room.html:206
 msgid ""
 "If you have not been eliminated yet, your next game will be considered as a "
 "defeat and you will get a point penalty. You will not be able to join the "
@@ -3763,40 +3765,40 @@ msgstr ""
 "une défaite et vous subirez un point de pénalité. Vous ne pourrez plus "
 "rejoindre cette partie."
 
-#: templates/games/game_room.html:224 templates/settings.html:448
+#: templates/games/game_room.html:211 templates/settings.html:448
 #: templates/settings.html:483 templates/settings.html:529
 msgid "Cancel"
 msgstr "Rester"
 
-#: templates/games/game_room.html:245 templates/games/game_room.html:265
+#: templates/games/game_room.html:232 templates/games/game_room.html:252
 msgid "Invite"
 msgstr "Inviter"
 
-#: templates/games/game_room.html:253
+#: templates/games/game_room.html:240
 msgid "Invite a random Player"
 msgstr "Inviter un joueur aléatoire"
 
-#: templates/games/game_room.html:270
+#: templates/games/game_room.html:257
 msgid "Invite a friend"
 msgstr "Inviter un ami"
 
-#: templates/games/game_room.html:302
+#: templates/games/game_room.html:285
 msgid "NO FRIENDS TO INVITE"
 msgstr "AUCUN AMI À INVITER"
 
-#: templates/games/game_score.html:13
+#: templates/games/game_score.html:14 templates/games/game_score.html:20
 msgid "Player_1 Wins! Press Enter to Retry"
 msgstr "Victoire pour Joueur_1 ! Touche Entrée pour rejouer"
 
-#: templates/games/game_score.html:55
+#: templates/games/game_score.html:63 templates/games/game_score.html:69
 msgid "Player_2 Wins! Press Enter to Retry"
 msgstr "Victoire pour Joueur_2 ! Touche Entrée pour rejouer"
 
-#: templates/games/game_score.html:59
+#: templates/games/game_score.html:73
 msgid "A.I. Wins! Press Enter to Retry"
 msgstr "Victoire pour l'I.A. ! Touche Entrée pour rejouer"
 
-#: templates/games/game_score.html:60
+#: templates/games/game_score.html:74
 msgid "A.I."
 msgstr "I.A."
 
@@ -3963,6 +3965,10 @@ msgstr "Défaites"
 #: templates/profile.html:242 templates/profile.html:528
 msgid "Last 20 Games"
 msgstr "20 dernières parties"
+
+#: templates/profile.html:245 templates/profile.html:531
+msgid "Peak elo"
+msgstr "Meilleur Elo"
 
 #: templates/profile.html:265 templates/profile.html:551
 msgid "Total Games Played"

@@ -44,7 +44,7 @@ class GameManager(models.Manager):
             raise ValueError(_('Player is not in the game.'))
         player.leave_game()
         current_round = game.rounds.filter(Q(player1=player) | Q(player2=player), order=game.current_order)
-        empty_round = game.rounds.filter(Q(player1=player) | Q(player2=player), started_at__isnull=False)
+        empty_round = game.rounds.filter(Q(player1=player) | Q(player2=player), started_at__isnull=True)
         game_terminated = False
         channel_layer = get_channel_layer()
         if current_round.exists() or empty_round.exists():
@@ -109,7 +109,7 @@ class GameRoundManager(models.Manager):
 
     def get_last_matches(self, player):
         return self.filter(Q(player1=player) | Q(player2=player), ended_at__isnull=False).order_by('-started_at')[:20]
-    
+
     def prepare_rounds(self, game):
         if game.started_at:
             raise ValueError(_('Game has already started.'))
