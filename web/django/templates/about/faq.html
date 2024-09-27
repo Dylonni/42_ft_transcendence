@@ -306,7 +306,7 @@
     <div class="col-sm-10 col-md-10 d-flex justify-content-center align-items-center" style="width: 100%;height: 100%;padding-top: 10px;padding-bottom: 10px;">
         <div style="width: 100%;height: 100%;">
             <a class="btn btn-primary d-flex d-xxl-flex justify-content-center align-items-center align-items-xxl-center" data-bs-toggle="collapse" aria-expanded="false" aria-controls="collapse-2" href="#collapse-2" role="button" style="background: var(--bs-gray-700);border-radius: 10px;font-weight: bold;border-bottom-right-radius: 0px;border-bottom-left-radius: 1px;font-size: 20px;border-color: rgb(73,80,87);border-bottom-style: solid;border-bottom-color: rgb(73,80,87);">
-                {% translate 'Can i suggest some ideas ?' %}
+                {% translate 'Can I suggest some ideas ?' %}
                 <svg class="icon icon-tabler icon-tabler-plus" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" style="font-size: 30px;color: var(--bs-black);margin-left: 12px;">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                     <path d="M12 5l0 14"></path>
@@ -315,8 +315,7 @@
             </a>
             <div id="collapse-2" class="collapse">
                 <p class="flex-wrap" style="color: var(--bs-body-bg);padding-left: 10px;padding-right: 10px;margin-top: 0px;border-bottom-right-radius: 10px;border-bottom-left-radius: 10px;margin-bottom: 0px;border: 2px solid var(--bs-gray-700);border-top-style: solid;border-bottom-style: solid;border-bottom-color: rgb(73, 80, 87);padding-top: 10px;padding-bottom: 10px;">
-                    {% translate 'Yes , we would love to hear about your ideas ! Feel free to share them with us by contacting us at' %} 
-                    <a href="#">transcendence42@rocks.fr</a>
+                    {% blocktrans %}Yes, we would love to hear about your ideas! Feel free to share them with us by contacting us via <a href="mailto:{{ django_mail_contact }}">email</a> or on <a href="{{ discord_invite }}">Discord</a>.{% endblocktrans %}
                 </p>
             </div>
         </div>
