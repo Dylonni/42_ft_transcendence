@@ -21,9 +21,9 @@
 		</div>
 	</div>
 </div>
-<div class="container" style="color: var(--bs-body-bg);margin-bottom: 15px;padding-left: 18px;padding-right: 18px;">
+<div class="container" style="color: var(--bs-body-bg);margin-bottom: 15px;padding-left: 25px;padding-right: 25px;">
 	<div class="row d-lg-flex d-xl-flex d-xxl-flex justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center">
-		<div class="col-12 col-sm-12 col-md-12 col-lg-11 col-xl-11 col-xxl-10 d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-end align-items-sm-center justify-content-md-end align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-end align-items-xl-center justify-content-xxl-end align-items-xxl-center">
+		<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-end align-items-sm-center justify-content-md-end align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-end align-items-xl-center justify-content-xxl-end align-items-xxl-center">
 			<div class="d-flex justify-content-start align-items-center justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start justify-content-xxl-start" style="width: 100%;">
 				<button class="btn btn-danger d-xxl-flex justify-content-xxl-center align-items-xxl-center" type="button" style="border-style: none;" data-bs-target="#modalLeave" data-bs-toggle="modal">
 					<svg class="icon icon-tabler icon-tabler-x" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" style="font-size: 20px;">
@@ -34,26 +34,13 @@
 					{% translate 'Leave Room' %}
 				</button>
 			</div>
-			<div id="gameTimer" class="{{ game.started_at|yesno:",d-none d-xxl-none" }} d-flex justify-content-end align-items-center justify-content-sm-end justify-content-md-end justify-content-lg-end justify-content-xl-end" style="width: 100%;border-radius: 20px;border: 2px none #fcd856;padding-left: 0px;padding-right: 0px;">
-				<h1 class="text-nowrap fs-3 d-xxl-flex justify-content-xxl-end align-items-xxl-center" style="margin-bottom: 0px;margin-left: 5px;margin-right: 5px;">
-					<svg class="icon icon-tabler icon-tabler-hourglass-high" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" style="color: #fcd856;font-size: 25px;">
-						<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-						<path d="M6.5 7h11"></path>
-						<path d="M6 20v-2a6 6 0 1 1 12 0v2a1 1 0 0 1 -1 1h-10a1 1 0 0 1 -1 -1z"></path>
-						<path d="M6 4v2a6 6 0 1 0 12 0v-2a1 1 0 0 0 -1 -1h-10a1 1 0 0 0 -1 1z"></path>
-					</svg>
-				</h1>
-				<span class="fs-5 d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="color: var(--bs-body-bg);font-weight: bold;font-style: italic;">
-					##&#39;##&#39;##
-				</span>
-			</div>
 		</div>
 	</div>
 </div>
 <div class="container">
 	<div class="row d-lg-flex d-xl-flex d-xxl-flex justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center">
 		<div id="pongDiv" class="{{ game.has_current_round_started|yesno:",d-none d-xxl-none" }} col-md-12 col-lg-12 d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="border-style: none;padding-top: 0px;padding-bottom: 0px;">
-			<canvas id="playCanvas" width="1000" height="600" style="background-color: #000;border: 2px solid #fff;"></canvas>
+			<canvas id="playCanvas" width="1000" height="600" style="background: url({{ game.get_map_url }}) center / cover;border: 2px solid #fff;border-radius: 10px"></canvas>
 		</div>
 		<div id="gameInfoDiv" class="{{ game.has_current_round_started|yesno:"d-none d-xxl-none," }} col-md-12 col-lg-11 col-xl-11 col-xxl-10 d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="border-style: none;height: 100%;">
 			<div class="card" style="height: 100%;width: 100%;color: var(--bs-body-bg);border-radius: 19px;border-style: none;">
@@ -188,7 +175,7 @@
 								Map
 							</h1>
 							<div class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="width: 100%;height: 100%;">
-								<img src="{% static '/img/resized.webp' %}" width="569" height="245" style="border-radius: 20px;width: 80%;height: auto;">
+								<img src="{{ game.get_map_url }}" width="569" height="245" style="border-radius: 20px;width: 80%;height: auto;">
 							</div>
 						</div>
 					</div>
@@ -261,7 +248,7 @@
 							<path d="M19 19a2.003 2.003 0 0 0 .914 -3.782a1.98 1.98 0 0 0 -2.414 .483"></path>
 						</svg>
 					</div>
-					<button id="inviteRandomBtn" class="btn btn-primary" style="background: var(--bs-btn-bg);color: var(--bs-btn-disabled-color);margin-top: 6px;margin-bottom: 6px;" type="submit">
+					<button id="inviteRandomBtn" class="btn btn-primary" data-bs-dismiss="modal" style="background: var(--bs-btn-bg);color: var(--bs-btn-disabled-color);margin-top: 6px;margin-bottom: 6px;" type="submit">
 						{% translate 'Invite' %}
 					</button>
 				</div>
@@ -282,17 +269,13 @@
 							</h1>
 						</div>
 						<div class="d-flex justify-content-center align-items-center" style="width: 25%;height: 55px;">
-							<button data-profile-id="{{ friend.id }}" class="invite-friend-btn btn btn-primary d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="background: rgba(120,166,222,0);border-style: none;width: 50%;height: 100%;" type="button">
+							<button data-profile-id="{{ friend.id }}" data-bs-dismiss="modal" class="invite-friend-btn btn btn-primary d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center justify-content-xxl-center align-items-xxl-center" style="background: rgba(120,166,222,0);border-style: none;width: 50%;height: 100%;" type="button">
 								<svg class="icon icon-tabler icon-tabler-plus" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 26px;color: #3a75c4;width: 30px;height: 30px;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
 									<path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
 									<path d="M12 5l0 14"></path>
 									<path d="M5 12l14 0"></path>
 								</svg>
 							</button>
-							<svg class="icon icon-tabler icon-tabler-check" fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="font-size: 26px;color: #0fa341;width: 30px;height: 30px;" viewbox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg">
-								<path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
-								<path d="M5 12l5 5l10 -10"></path>
-							</svg>
 						</div>
 					</div>
 					{% endfor %}

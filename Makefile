@@ -32,7 +32,7 @@ exec:
 
 .PHONY: rebuild
 rebuild:
-	${MAKE} down
+	${MAKE} vclean
 	${MAKE} build
 	${MAKE} up
 

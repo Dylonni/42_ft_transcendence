@@ -312,14 +312,20 @@
                             <div class="d-flex d-xxl-flex flex-column justify-content-center align-items-center align-items-xxl-center" style="background: var(--bs-body-color);border-top-left-radius: 19px;border-top-right-radius: 19px;border-bottom-right-radius: 19px;border-bottom-left-radius: 19px;width: 85%;">
                                 <div class="carousel slide" data-bs-ride="false" id="carousel-1" style="width: 100%;border-radius: 0px;height: 200px;">
                                     <div class="carousel-inner" style="border-radius: 19px;">
-                                        <div class="carousel-item active">
-                                            <img alt="Slide Image" class="w-100 d-block" height="200" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png" width="437"/>
+                                        <div data-index="0" class="carousel-item map-select active">
+                                            <img alt="Slide Image" class="w-100 d-block" height="200" src="{% static '/img/bg_default.webp' %}" width="437"/>
                                         </div>
-                                        <div class="carousel-item">
-                                            <img alt="Slide Image" class="w-100 d-block" height="200" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png" width="437"/>
+                                        <div data-index="1" class="carousel-item map-select">
+                                            <img alt="Slide Image" class="w-100 d-block" height="200" src="{% static '/img/bg_soccer.webp' %}" width="437"/>
                                         </div>
-                                        <div class="carousel-item">
-                                            <img alt="Slide Image" class="w-100 d-block" height="200" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png" width="437"/>
+                                        <div data-index="2" class="carousel-item map-select">
+                                            <img alt="Slide Image" class="w-100 d-block" height="200" src="{% static '/img/bg_tennis.webp' %}" width="437"/>
+                                        </div>
+                                        <div data-index="3" class="carousel-item map-select">
+                                            <img alt="Slide Image" class="w-100 d-block" height="200" src="{% static '/img/bg_bh.gif' %}" width="437"/>
+                                        </div>
+                                        <div data-index="4" class="carousel-item map-select">
+                                            <img alt="Slide Image" class="w-100 d-block" height="200" src="{% static '/img/bg_42coa.webp' %}" width="437"/>
                                         </div>
                                     </div>
                                     <div>
@@ -344,6 +350,10 @@
                                         <button data-bs-slide-to="1" data-bs-target="#carousel-1" type="button">
                                         </button>
                                         <button data-bs-slide-to="2" data-bs-target="#carousel-1" type="button">
+                                        </button>
+                                        <button data-bs-slide-to="3" data-bs-target="#carousel-1" type="button">
+                                        </button>
+                                        <button data-bs-slide-to="4" data-bs-target="#carousel-1" type="button">
                                         </button>
                                     </div>
                                 </div>

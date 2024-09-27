@@ -7,6 +7,13 @@ class GameSerializer(serializers.ModelSerializer):
         model = Game
         fields = '__all__'
 
+    # def validate(self, attrs):
+    #     map_choice = int(attrs.get('mapChoice'))
+    #     if map_choice < 0 or map_choice > 4:
+    #         map_choice = 0
+    #     attrs['mapChoice'] = map_choice
+    #     return attrs        
+
 
 class GameRoundSerializer(serializers.ModelSerializer):
     class Meta:

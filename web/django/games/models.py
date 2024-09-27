@@ -66,19 +66,9 @@ class Game(BaseModel):
         choices=DifficultyChoices.choices,
         default=DifficultyChoices.NORMAL,
     )
-    map_choice = models.PositiveSmallIntegerField(
+    map_choice = models.IntegerField(
         default=0,
-        validators=[MaxValueValidator(2)],
-    )
-    power_ups = models.CharField(
-        max_length=255,
-        null=True,
-        blank=True,
-    )
-    game_events = models.CharField(
-        max_length=255,
-        null=True,
-        blank=True,
+        validators=[MaxValueValidator(4)],
     )
     current_order = models.IntegerField(
         default=-1,
@@ -138,6 +128,19 @@ class Game(BaseModel):
     
     def get_player_count(self):
         return self.players.count()
+    
+    def get_map_url(self):
+        match self.map_choice:
+            case 1:
+                return '/static/img/bg_soccer.webp'
+            case 2:
+                return '/static/img/bg_tennis.webp'
+            case 3:
+                return '/static/img/bg_bh.gif'
+            case 4:
+                return '/static/img/bg_42coa.webp'
+            case _:
+                return '/static/img/bg_default.webp'
     
     def get_rounds(self):
         return self.rounds.all()

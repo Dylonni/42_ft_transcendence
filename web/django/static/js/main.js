@@ -422,10 +422,12 @@ document.addEventListener("DOMContentLoaded", () => {
             ctx.fillRect(playCanvas.width - 10, stateToRender.player2_y, 10, stateToRender.paddle_height);
 
             ctx.fillRect(stateToRender.ball_x, stateToRender.ball_y, stateToRender.ball_size, stateToRender.ball_size);
-
-            for (let i = 0; i < playCanvas.height; i += 20) {
-                ctx.fillRect(playCanvas.width / 2 - 1, i, 2, 10);
-            }
+            ctx.lineWidth = 1; 
+            ctx.strokeStyle = 'black'; 
+            ctx.strokeRect(stateToRender.ball_x, stateToRender.ball_y, stateToRender.ball_size, stateToRender.ball_size);
+            // for (let i = 0; i < playCanvas.height; i += 20) {
+            //     ctx.fillRect(playCanvas.width / 2 - 1, i, 2, 10);
+            // }
 
             // ctx.font = '20px Arial';
             // ctx.fillText(stateToRender.player1_score, playCanvas.width / 4, 30);
@@ -435,7 +437,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 ctx.font = '50px Arial';
                 ctx.fillStyle = 'white';
                 ctx.textAlign = 'center';
-                ctx.fillText(stateToRender.countdown, playCanvas.width / 2, playCanvas.height / 2);
+                ctx.fillText(stateToRender.countdown, playCanvas.width / 2, playCanvas.height / 4);
             }
         };
     };
@@ -752,6 +754,10 @@ document.addEventListener("DOMContentLoaded", () => {
             createGameForm.addEventListener('submit', (event) => {
                 event.preventDefault();
                 const formData = new FormData(event.target);
+                const maps = Array.from(document.querySelectorAll('.map-select'));
+                const activeMap = maps.filter((element) => element.classList.contains('active'));
+                const mapIndex = activeMap.length > 0 ? activeMap[0].dataset.index : 0;
+                formData.append('map_choice', mapIndex);
                 if (createGameForm.hasAttribute('data-game-type')) {
                     saveGameSettings(formData);
                     navigateTo('/play/');
@@ -1776,7 +1782,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     };
     
-    window.addEventListener('popstate', navigateTo(window.location.href));
+    window.addEventListener('popstate', renderPage);
     window.addEventListener('pushState', renderPage);
     window.addEventListener('replaceState', renderPage);
     
@@ -1793,6 +1799,7 @@ const saveGameSettings = (formData) => {
     localStorage.setItem('ballSpeed', formDataObj.ball_speed);
     localStorage.setItem('paddleSize', formDataObj.paddle_size);
     localStorage.setItem('aiDifficulty', formDataObj.ai_difficulty);
+    localStorage.setItem('mapChoice', formDataObj.map_choice);
 };
 
 const loadGameSettings = () => {
@@ -1814,13 +1821,31 @@ const loadGameSettings = () => {
     if (paddleSize === 'Medium') settings.paddleSize = 85;
     if (paddleSize === 'Large') settings.paddleSize = 100;
     settings.aiDifficulty = localStorage.getItem('aiDifficulty') || 'Easy';
+    settings.mapChoice = parseInt(localStorage.getItem('mapChoice')) || 0;
     return settings;
 };
 
 const pongGame = () => {
-	const canvas = document.getElementById('pongCanvas');
-	const ctx = canvas.getContext('2d');
+    const canvas = document.getElementById('pongCanvas');
+	if (!canvas) return;
+    const ctx = canvas.getContext('2d');
     const settings = loadGameSettings();
+    
+    if (settings.mapChoice === 0) {
+        canvas.style.backgroundImage = 'url(/static/img/bg_default.webp)';
+    }
+    if (settings.mapChoice === 1) {
+        canvas.style.backgroundImage = 'url(/static/img/bg_soccer.webp)';
+    }
+    if (settings.mapChoice === 2) {
+        canvas.style.backgroundImage = 'url(/static/img/bg_tennis.webp)';
+    }
+    if (settings.mapChoice === 3) {
+        canvas.style.backgroundImage = 'url(/static/img/bg_bh.gif)';
+    }
+    if (settings.mapChoice === 4) {
+        canvas.style.backgroundImage = 'url(/static/img/bg_42coa.webp)';
+    }
 
 	// Constants
 	const WIDTH = canvas.width;
