@@ -1057,10 +1057,7 @@ msgid ""
 "                <br>Transcendence42 will keep your email for the whole life "
 "of your account. We will delete your data automatically upon deletion of the "
 "account.\n"
-"                <br>If applicable, Transcendence42 will keep your 42 UID "
-"only to complete the 42Auth authentication process. Then we will delete your "
-"data automatically.\n"
-"                <br>If applicable, Transcendence42 will keep your 42 profile "
+"                <br>If applicable, Transcendence42 will keep your 42 UID, 42 profile "
 "picture, coalition banner and coalition color scheme until you personally "
 "and explicitly revoke the 42Auth access. If you decide to revoke the access, "
 "we will automatically delete all data retrieved through 42Auth. Deletion of "
@@ -3150,7 +3147,7 @@ msgstr "友達削除"
 
 #: templates/friends/social.html:152
 msgid "Invite Friend"
-msgstr "友達を招待状"
+msgstr "ゲームに招待状"
 
 #: templates/friends/social_list.html:17
 msgid "No friends"

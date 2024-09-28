@@ -1106,10 +1106,7 @@ msgid ""
 "                <br>Transcendence42 will keep your email for the whole life "
 "of your account. We will delete your data automatically upon deletion of the "
 "account.\n"
-"                <br>If applicable, Transcendence42 will keep your 42 UID "
-"only to complete the 42Auth authentication process. Then we will delete your "
-"data automatically.\n"
-"                <br>If applicable, Transcendence42 will keep your 42 profile "
+"                <br>If applicable, Transcendence42 will keep your 42 UID, 42 profile "
 "picture, coalition banner and coalition color scheme until you personally "
 "and explicitly revoke the 42Auth access. If you decide to revoke the access, "
 "we will automatically delete all data retrieved through 42Auth. Deletion of "
@@ -1428,10 +1425,7 @@ msgstr ""
 "                <br>Transcendence42 conservera votre courriel pendant toute "
 "la durée de vie de votre compte. Nous supprimerons automatiquement vos "
 "données lors de la suppression du compte.\n"
-"                <br>Si applicable, Transcendence42 conservera votre 42 UID "
-"uniquement pour compléter le processus d'authentification 42Auth. Ensuite, "
-"nous supprimerons automatiquement vos données.\n"
-"                <br>Si applicable, Transcendence42 conservera votre photo de "
+"                <br>Si applicable, Transcendence42 conservera votre UID 42, votre photo de "
 "profil issue de l'intra 42, ainsi que la bannière et le schéma de couleur de "
 "votre coalition jusqu'à ce que vous révoquiez explicitement l'accès 42Auth. "
 "Si vous révoquez cet accès, nous supprimerons automatiquement toutes les "
@@ -3609,7 +3603,7 @@ msgstr "Supprimer cet ami"
 
 #: templates/friends/social.html:152
 msgid "Invite Friend"
-msgstr "Demander en Ami"
+msgstr "Inviter à jouer"
 
 #: templates/friends/social_list.html:17
 msgid "No friends"
@@ -4081,31 +4075,31 @@ msgstr "Si vous supprimez votre compte, vous ne pourrez plus :"
 
 #: templates/settings.html:368
 msgid "Play against other people online"
-msgstr "jouer en ligne"
+msgstr "Jouer en ligne"
 
 #: templates/settings.html:371
 msgid "Access your profile and other players profile"
-msgstr "consulter votre profil ou celui d'autres joueurs"
+msgstr "Consulter votre profil ou celui d'autres joueurs"
 
 #: templates/settings.html:374
 msgid "Access the leaderboard and view player rankings"
-msgstr "consulter le classement"
+msgstr "Consulter le classement"
 
 #: templates/settings.html:377
 msgid "Add friends and use the chat"
-msgstr "ajouter d'amis ou utiliser le clavardage"
+msgstr "Ajouter d'amis ou utiliser le clavardage"
 
 #: templates/settings.html:381
 msgid "This action will also delete all of your data including :"
-msgstr "Cette actio supprimera aussi toutes vos données, incluant"
+msgstr "Cette action supprimera aussi toutes vos données, incluant"
 
 #: templates/settings.html:385
 msgid "Your profile (Avatar, Nickname, Username)"
-msgstr "votre profil (avatar, alias, nom d'utilisateur)"
+msgstr "Votre profil (avatar, alias, nom d'utilisateur)"
 
 #: templates/settings.html:388
 msgid "Your conversations and your friend list"
-msgstr "vos conversations et votre liste d'amis"
+msgstr "Vos conversations et votre liste d'amis"
 
 #: templates/settings.html:391
 msgid "Your ranking and your game history"
@@ -4114,7 +4108,7 @@ msgstr "Votre classement et historique de jeu"
 #: templates/settings.html:401
 msgid "If you had linked your account to 42, this will also undo the link."
 msgstr ""
-"si vous aviez asssocié votre compte à votre compte 42, ce sera supprimé."
+"Si vous aviez asssocié votre compte Transcendence42 à votre compte 42, ce lien sera supprimé."
 
 #: templates/settings.html:408
 msgid "This action is irreversible"
