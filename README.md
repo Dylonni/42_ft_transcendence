@@ -7,7 +7,7 @@ The main goal is to create a Single Page Application where users can log, regist
 ### $\textcolor{lime}{\textsf{125/125}}$  🌟 🌟 🌟 </br>
 
 # Completed Modules
-## Web
+ Web
 | Importance | Description | Status |
 | --- | --- | :---: |
 | Major | Usage of a framework to build Backend | ✅ |
@@ -15,13 +15,13 @@ The main goal is to create a Single Page Application where users can log, regist
 | Minor | Usage of a Database | ✅ |
 | Minor | Usage of a framework to build Frontend | ✅ |</br>
 
- ## User Management
+ User Management
 | Importance | Description | Status |
 | --- | --- | :---: |
 | Major | Standard user management, authentication, users across tournaments | ✅ |
 | Major | Implementing a remote authentication | ✅ |
 
-## Gameplay and UX
+ Gameplay and UX
 | Importance | Description | Status |
 | --- | --- | :---: |
 | Major | Remote players | ✅ |
@@ -30,32 +30,32 @@ The main goal is to create a Single Page Application where users can log, regist
 | Major | Live Chat| ✅ |
 | Minor | Customize games | ✅ |
 
-## AI and algorithm
+ AI and algorithm
 | Importance | Description | Status |
 | --- | --- | :---: |
 | Major | AI Opponent | ✅ |
 | Minor | Dashboard with game statistics | ✅ |
 
-## Cybersecurity
+ Cybersecurity
 | Importance | Description | Status |
 | --- | --- | :---: |
 | Major | Implement Modsecurity and HashiCorp Vault | ✅ |
 | Major | Implement 2FA and JWT| ✅ |
 | Minor | GDPR Compliance: anonymization, data management and account deletion | ✅ |
 
-## DevOps
+ DevOps
 | Importance | Description | Status |
 | --- | --- | :---: |
 | Major | Infrastructure setup for log management | 🟧 |
 | Major | Backend as microservices | 🟧 |
 | Minor | Monitoring system | ✅ |
 
-## Graphics
+ Graphics
 | Importance | Description | Status |
 | --- | --- | :---: |
 | Major | Use of advanced 3D techniques  | ❌ |
 
-## Accessibility
+ Accessibility
 | Importance | Description | Status |
 | --- | --- | :---: |
 | Minor | Support on all devices  | 🟧 |
@@ -64,7 +64,7 @@ The main goal is to create a Single Page Application where users can log, regist
 | Minor | Add accessibility for visually impaired users | ❌ |
 | Minor | Server Side Rendering (SSR) Integration  | ✅ |
 
-## Server Side Pong
+ Server Side Pong
 | Importance | Description | Status |
 | --- | --- | :---: |
 | Major | Implement an API and make Server Side Pong  | ✅ |
