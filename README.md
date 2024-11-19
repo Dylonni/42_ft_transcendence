@@ -9,7 +9,7 @@ The main goal is to create a Single Page Application where users can log, regist
 ### ------------------------------------   $\textcolor{lime}{\textsf{125/100}}$    ------------------------------------</br>
 ### ------------------------------------   ⭐  ⭐  ⭐   ------------------------------------</br>
 
-# Completed Modules
+# Modules Completion
 
 Web
 | Importance | Description                                | Status |
