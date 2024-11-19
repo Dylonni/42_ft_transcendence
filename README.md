@@ -15,17 +15,17 @@ The main goal is to create a Single Page Application where users can log, regist
 >**7 Points** are required to validate this project, every major module done gives **1 point**, every minor module gives **0.5 point**.
 
 ## Summary
-| Major Modules | Completed ✅ |
+| Total Major Modules | Completed ✅ |
 |:-------------:|:------------:|
-| 16 | 9 |
+| 16 | **9** |
 
-| Minor Modules | Completed ✅ |
+| Total Minor Modules | Completed ✅ |
 |:-------------:|:------------:|
-| 11 | 9 |
+| 11 | **9** |
 
 | Total Points |
 |:------------:|
-| 13,5 |
+| **13,5** |
 
 ## Categories
 
