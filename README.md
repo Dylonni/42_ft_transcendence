@@ -13,9 +13,9 @@ The main goal is to create a Single Page Application where users can log, regist
 | Major | Usage of a framework to build Backend | ✅ |
 | Major | Store the score of a tournament in the Blockchain| ❌ |
 | Minor | Usage of a Database | ✅ |
-| Minor | Usage of a framework to build Frontend | ✅ |
+| Minor | Usage of a framework to build Frontend | ✅ |</br>
 
-## User Management
+| User Management|
 | Importance | Description | Status |
 | --- | --- | :---: |
 | Major | Standard user management, authentication, users across tournaments | ✅ |
