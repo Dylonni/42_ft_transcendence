@@ -71,6 +71,12 @@ Server Side Pong
 | Major      | Implement an API and make Server Side Pong |   ✅   |
 | Major      | Pong Gameplay via CLI                      |   ❌   |
 
+
+# Screenshots
+
+| ![Alt text](screenshots/login.png) |
+| - |
+
 | ![Alt text](screenshots/lobby.png) |
 | - |
 
