@@ -5,7 +5,7 @@ The main goal is to create a Single Page Application where users can log, regist
 
 ## Final Grade
 ### ---------------- $\textcolor{lime}{\textsf{125/100}}$  </br>
----------------- 🌟  🌟  🌟 </br>
+### ---------------- 🌟  🌟  🌟 </br>
 
 # Completed Modules
 
