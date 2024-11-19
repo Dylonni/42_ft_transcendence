@@ -11,6 +11,20 @@ The main goal is to create a Single Page Application where users can log, regist
 
 # Modules Completion
 
+## Summary
+| Major Modules | Completed ✅ |
+|:-------------:|:------------:|
+| 16 | 9 |
+
+| Minor Modules | Completed ✅ |
+|:-------------:|:------------:|
+| 11 | 9 |
+
+| Total Points (Required 7) |
+|:------------:|
+| 13,5 (9 + (0.5 * 9) |
+
+
 Web
 | Importance | Description                                | Status |
 |------------|--------------------------------------------|:------:|
