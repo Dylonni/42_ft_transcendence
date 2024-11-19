@@ -23,7 +23,7 @@ The main goal is to create a Single Page Application where users can log, regist
 |:-------------:|:------------:|
 | 11 | **9** |
 
-|   Total Points | Total Points Earned |
+| ‎ Total Points ‎ | Total Points Earned |
 |:------------:|:------------:
 | 21.5 | **13.5** |
 
