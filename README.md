@@ -71,6 +71,16 @@ The main goal is to create a Single Page Application where users can log, regist
 | Major      | Implement an API and make Server Side Pong |   ✅   |
 | Major      | Pong Gameplay via CLI                      |   ❌   |
 
+![Alt text](screenshots/lobby.png)
+![Alt text](screenshots/customize.png)
+![Alt text](screenshots/gamelobby.png)
+![Alt text](screenshots/game.png)
+![Alt text](screenshots/profile.png)
+![Alt text](screenshots/social.png)
+![Alt text](screenshots/leaderboard.png)
+![Alt text](screenshots/settings.png)
+![Alt text](screenshots/2fa.png)
+
 
 
 
