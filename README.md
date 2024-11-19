@@ -1,4 +1,4 @@
-# 42_ft_transcendence
+# ft_transcendence
 
 The last project of the 42 School's common core.</br>
 The main goal is to create a Single Page Application where users can log, register, interact with each other via live chat, and most importantly play against each other at the famous 1970's Pong Game ! </br>
