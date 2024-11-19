@@ -9,7 +9,7 @@ The main goal is to create a Single Page Application where users can log, regist
 # Completed Modules
  Web
 | Importance |        Description |       Status |
-| --- | --- | :---: |
+| --- | --------------- | :---: |
 | Major | Usage of a framework to build Backend | ✅ |
 | Major | Store the score of a tournament in the Blockchain| ❌ |
 | Minor | Usage of a Database | ✅ |
