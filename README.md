@@ -98,6 +98,15 @@ Server Side Pong
 | ![Alt text](screenshots/2fa.png) |
 | - |
 
+| ![Alt text](screenshots/about.png) |
+| - |
+
+| ![Alt text](screenshots/tos.png) |
+| - |
+
+| ![Alt text](screenshots/privacy.png) |
+| - |
+
 
 
 
