@@ -1,3 +1,6 @@
+| ![Alt text](screenshots/game_icon_invert.png) |
+| - |
+
 # ft_transcendence
 
 The last project of the 42 School's common core.</br>
