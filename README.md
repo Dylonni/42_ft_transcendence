@@ -4,7 +4,7 @@ The last project of the 42 School's common core.</br>
 The main goal is to create a Single Page Application where users can log, register, interact with each other via live chat, and most importantly play against each other at the famous 1970's Pong Game ! </br>
 
 ## Final Grade
-<span style="color: lightgreen;">Ceci est un texte en vert clair.</span> 🌟 🌟 🌟 </br>
+### +125/125 🌟 🌟 🌟 </br>
 
 # Completed Modules
 ## Web
