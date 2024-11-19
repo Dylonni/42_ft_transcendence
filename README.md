@@ -1,5 +1,4 @@
-| ![Alt text](screenshots/game_icon_invert.png) |
-| - |
+![Alt text](screenshots/game_icon_invert.png)
 
 # ft_transcendence
 
