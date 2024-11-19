@@ -15,7 +15,7 @@ The main goal is to create a Single Page Application where users can log, regist
 | Minor | Usage of a Database | ✅ |
 | Minor | Usage of a framework to build Frontend | ✅ |</br>
 
-| User Management|
+ User Management
 | Importance | Description | Status |
 | --- | --- | :---: |
 | Major | Standard user management, authentication, users across tournaments | ✅ |
